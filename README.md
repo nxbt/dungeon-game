@@ -6,7 +6,6 @@ This is a top-down rouge-like game written in Java using the Libgdx libraries, a
 Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe
 
 #TODO:
-  Add Enemy class (sub of Dynamic; anything the player fights)
   Add Tile class
   Add Floor class (cotains 2d ArrayList of Tiles)
   Add Dungeon class (contains all Floors)
