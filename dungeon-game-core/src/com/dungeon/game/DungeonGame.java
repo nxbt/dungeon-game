@@ -41,5 +41,5 @@ public class DungeonGame extends ApplicationAdapter {
  * Enemy
  * NPC
  * Alive (to implement to entities)
- * 
+ * Projectile
  */
