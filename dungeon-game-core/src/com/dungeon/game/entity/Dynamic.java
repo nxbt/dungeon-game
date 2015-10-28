@@ -1,8 +1,9 @@
 package com.dungeon.game.entity;
 
+//abstract class for dynamic entities, or entities that move and respond to physics.
 public abstract class Dynamic extends Entity {
-	private double dx;
-	private double dy;
+	private float dx;
+	private float dy;
 	
 	private double acel;
 	private double fric;
@@ -29,19 +30,19 @@ public abstract class Dynamic extends Entity {
 		super(name, x, y, solid);
 	}
 	
-	public double getDx() {
+	public float getDx() {
 		return dx;
 	}
 
-	public void setDx(double dx) {
+	public void setDx(float dx) {
 		this.dx = dx;
 	}
 
-	public double getDy() {
+	public float getDy() {
 		return dy;
 	}
 
-	public void setDy(double dy) {
+	public void setDy(float dy) {
 		this.dy = dy;
 	}
 
@@ -101,12 +102,23 @@ public abstract class Dynamic extends Entity {
 		this.inp_rt = inp_rt;
 	}
 
+	//entity update function; called on every frame; before the draw phase.
 	@Override
 	public void update() {
+		norm();
 		calc();
 		phys();
 	}
 	
+	//resets some variables at the start of every update cycles
+	public void norm() {
+		inp_up = false;
+		inp_dn = false;
+		inp_lt = false;
+		inp_rt = false;
+	}
+	
+	//calculates velocity and collisions for object
 	public void phys() {
 		double dirX = 0;
 		double dirY = 0;
@@ -125,12 +137,17 @@ public abstract class Dynamic extends Entity {
 			len = Math.sqrt(dx * dx + dy * dy);
 			
 			if(len > mvel) {
-				dx = dx/len*mvel;
-				dy = dy/len*mvel;
+				dx = (float) (dx/len*mvel);
+				dy = (float) (dy/len*mvel);
 			}
 		}
-		else if(dx != 0 && dy != 0){
+		else if(dx != 0 || dy != 0){
 			len = Math.sqrt(dx * dx + dy * dy);
+			
+			if(len < fric) {
+				dx = 0;
+				dy = 0;
+			}
 			
 			dx -= dx/len*fric;
 			dy -= dy/len*fric;
