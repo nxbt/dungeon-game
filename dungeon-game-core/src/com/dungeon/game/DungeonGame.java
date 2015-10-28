@@ -42,5 +42,4 @@ public class DungeonGame extends ApplicationAdapter {
  * NPC
  * Alive (to implement)
  * 
- * 
  */

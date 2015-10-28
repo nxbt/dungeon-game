@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="output" path="bin"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
-	<classpathentry sourcepath="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.7.0/21b2ce6c57a95b31f341bb416489791fc96ed2bf/gdx-1.7.0-sources.jar" kind="lib" path="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.7.0/1b08c96132448b5ab9c0cc8dea3e985dcf0166fd/gdx-1.7.0.jar" exported="true"/>
-	<classpathentry sourcepath="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.7.0/2b671c9d9bc8b32d7678c894d23e208f01793afe/gdx-box2d-1.7.0-sources.jar" kind="lib" path="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.7.0/a560f1f94b939f2b5ccd4eec752797c3ea6e1c92/gdx-box2d-1.7.0.jar" exported="true"/>
-	<classpathentry sourcepath="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-controllers/1.7.0/c677eff1cb381acd3802130a8c7f7416097f6a77/gdx-controllers-1.7.0-sources.jar" kind="lib" path="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-controllers/1.7.0/2a9fc6b93756eb9377cfa952bd189e21d72f5dde/gdx-controllers-1.7.0.jar" exported="true"/>
-	<classpathentry sourcepath="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.box2dlights/box2dlights/1.4/57a1f15112328706c648a430bd19574118e2d8f4/box2dlights-1.4-sources.jar" kind="lib" path="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.box2dlights/box2dlights/1.4/3d77ad5b4164fb32fc67e2446e35911bb0aaf0bd/box2dlights-1.4.jar" exported="true"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.7.0/1b08c96132448b5ab9c0cc8dea3e985dcf0166fd/gdx-1.7.0.jar" sourcepath="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.7.0/21b2ce6c57a95b31f341bb416489791fc96ed2bf/gdx-1.7.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.7.0/a560f1f94b939f2b5ccd4eec752797c3ea6e1c92/gdx-box2d-1.7.0.jar" sourcepath="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.7.0/2b671c9d9bc8b32d7678c894d23e208f01793afe/gdx-box2d-1.7.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-controllers/1.7.0/2a9fc6b93756eb9377cfa952bd189e21d72f5dde/gdx-controllers-1.7.0.jar" sourcepath="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-controllers/1.7.0/c677eff1cb381acd3802130a8c7f7416097f6a77/gdx-controllers-1.7.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.box2dlights/box2dlights/1.4/3d77ad5b4164fb32fc67e2446e35911bb0aaf0bd/box2dlights-1.4.jar" sourcepath="C:/Users/doreen/.gradle/caches/modules-2/files-2.1/com.badlogicgames.box2dlights/box2dlights/1.4/57a1f15112328706c648a430bd19574118e2d8f4/box2dlights-1.4-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Nxbt/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.7.0/1b08c96132448b5ab9c0cc8dea3e985dcf0166fd/gdx-1.7.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Nxbt/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.7.0/a560f1f94b939f2b5ccd4eec752797c3ea6e1c92/gdx-box2d-1.7.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Nxbt/.gradle/caches/modules-2/files-2.1/com.badlogicgames.box2dlights/box2dlights/1.4/3d77ad5b4164fb32fc67e2446e35911bb0aaf0bd/box2dlights-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Nxbt/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-controllers/1.7.0/2a9fc6b93756eb9377cfa952bd189e21d72f5dde/gdx-controllers-1.7.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
