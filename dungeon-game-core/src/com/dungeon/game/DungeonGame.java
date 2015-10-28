@@ -25,7 +25,7 @@ public class DungeonGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(player.getSprite(), (int)player.getX(), (int)player.getY());
+		batch.draw(player.sprite, (int)player.x, (int)player.y);
 		batch.end();
 	}
 }
@@ -40,6 +40,6 @@ public class DungeonGame extends ApplicationAdapter {
  * Tile
  * Enemy
  * NPC
- * Alive (to implement)
+ * Alive (to implement to entities)
  * 
  */

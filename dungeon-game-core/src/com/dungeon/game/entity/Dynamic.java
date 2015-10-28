@@ -2,17 +2,17 @@ package com.dungeon.game.entity;
 
 //abstract class for dynamic entities, or entities that move and respond to physics.
 public abstract class Dynamic extends Entity {
-	private float dx;
-	private float dy;
+	public float dx;
+	public float dy;
 	
-	private double acel;
-	private double fric;
-	private double mvel;
+	double acel;
+	double fric;
+	double mvel;
 	
-	private boolean inp_up;
-	private boolean inp_dn;
-	private boolean inp_lt;
-	private boolean inp_rt;
+	public boolean inp_up;
+	public boolean inp_dn;
+	public boolean inp_lt;
+	public boolean inp_rt;
 	
 	public Dynamic() {
 		super();
@@ -24,82 +24,6 @@ public abstract class Dynamic extends Entity {
 	
 	public Dynamic(String name, int x, int y) {
 		super(name, x, y);
-	}
-
-	public Dynamic(String name, int x, int y, boolean solid) {
-		super(name, x, y, solid);
-	}
-	
-	public float getDx() {
-		return dx;
-	}
-
-	public void setDx(float dx) {
-		this.dx = dx;
-	}
-
-	public float getDy() {
-		return dy;
-	}
-
-	public void setDy(float dy) {
-		this.dy = dy;
-	}
-
-	public double getAcel() {
-		return acel;
-	}
-
-	public void setAcel(double acel) {
-		this.acel = acel;
-	}
-
-	public double getFric() {
-		return fric;
-	}
-
-	public void setFric(double fric) {
-		this.fric = fric;
-	}
-
-	public double getMvel() {
-		return mvel;
-	}
-
-	public void setMvel(double mvel) {
-		this.mvel = mvel;
-	}
-	
-	public boolean isInp_up() {
-		return inp_up;
-	}
-
-	public void setInp_up(boolean inp_up) {
-		this.inp_up = inp_up;
-	}
-
-	public boolean isInp_dn() {
-		return inp_dn;
-	}
-
-	public void setInp_dn(boolean inp_dn) {
-		this.inp_dn = inp_dn;
-	}
-
-	public boolean isInp_lt() {
-		return inp_lt;
-	}
-
-	public void setInp_lt(boolean inp_lt) {
-		this.inp_lt = inp_lt;
-	}
-
-	public boolean isInp_rt() {
-		return inp_rt;
-	}
-
-	public void setInp_rt(boolean inp_rt) {
-		this.inp_rt = inp_rt;
 	}
 
 	//entity update function; called on every frame; before the draw phase.
@@ -153,8 +77,8 @@ public abstract class Dynamic extends Entity {
 			dy -= dy/len*fric;
 		}
 		
-		setX(getX()+(int)dx);
-		setY(getY()+(int)dy);
+		x += dx;
+		y += dy;
 	}
 }
 

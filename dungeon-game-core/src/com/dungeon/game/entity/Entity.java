@@ -3,14 +3,14 @@ package com.dungeon.game.entity;
 import com.badlogic.gdx.graphics.Texture;
 
 public abstract class Entity {
-	private int x;
-	private int y;
+	public float x;
+	public float y;
 	
-	private boolean solid;
+	boolean solid;
 	
-	private String name;
+	public String name;
 	
-	private Texture sprite;
+	public Texture sprite;
 	
 	public Entity(){
 		this.x = 0;
@@ -18,9 +18,7 @@ public abstract class Entity {
 		
 		this.name = "null";
 		
-		this.solid = false;
-		
-		this.sprite = new Texture("badlogic.jpg");
+		this.init();
 	}
 	
 	public Entity(int x, int y){
@@ -29,9 +27,7 @@ public abstract class Entity {
 		
 		this.name = "null";
 		
-		this.solid = false;
-		
-		this.sprite = new Texture("badlogic.jpg");
+		this.init();
 	}
 	
 	public Entity(String name, int x, int y) {
@@ -40,60 +36,7 @@ public abstract class Entity {
 		
 		this.name = name;
 		
-		this.solid = false;
-		
-		this.sprite = new Texture("badlogic.jpg");
-	}
-	
-	public Entity(String name, int x, int y, boolean solid) {
-		this.x = x;
-		this.y = y;
-		
-		this.name = name;
-		
-		this.solid = solid;
-		
-		this.sprite = new Texture("badlogic.jpg");
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public boolean isSolid() {
-		return solid;
-	}
-
-	public void setSolid(boolean solid) {
-		this.solid = solid;
-	}
-
-	public Texture getSprite() {
-		return sprite;
-	}
-
-	public void setSprite(String sprite) {
-		this.sprite = new Texture(sprite);
+		this.init();
 	}
 	
 	public void update() {
@@ -101,4 +44,6 @@ public abstract class Entity {
 	}
 	
 	public abstract void calc();
+	
+	public abstract void init();
 }
