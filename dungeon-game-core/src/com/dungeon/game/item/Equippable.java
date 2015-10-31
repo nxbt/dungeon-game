@@ -2,14 +2,20 @@ package com.dungeon.game.item;
 
 public abstract class Equippable extends Item {
 
-	public int wear;
-	public int curWear;
+	public int durability;
+	public int curDurability;
 	
-	public Equippable(String name, String desc, int wear) {
+	public Equippable(String name, String desc, int durability) {
 		super(name, desc, 1);
 		
-		this.wear  = wear;
-		curWear = wear;
+		this.durability  = durability;
+		curDurability = durability;
 	}
+	
+	public void use(){
+		curDurability--;
+	}
+	
+	
 
 }

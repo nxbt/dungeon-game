@@ -21,5 +21,13 @@ public class Floor {
 			}
 		}
 	}
+	
+	public Tile[][] getTileMap(){
+		return tm;
+	}
+	
+	public void update(){
+		
+	}
 
 }

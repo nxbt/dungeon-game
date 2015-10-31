@@ -14,5 +14,13 @@ public class Dungeon {
 		
 		System.out.println(seed);
 	}
+	
+	public void createFloor(int width, int height){
+		floors.add(new Floor(width, height));
+	}
+	
+	public Floor getFloor(int level){
+		return floors.get(level);
+	}
 
 }
