@@ -3,7 +3,7 @@ package com.dungeon.game.tilemap;
 import java.util.ArrayList;
 
 public class Dungeon {
-	protected ArrayList<Floor> floors;
+	public ArrayList<Floor> floors;
 	
 	protected int seed;
 	
@@ -14,13 +14,4 @@ public class Dungeon {
 		
 		System.out.println(seed);
 	}
-	
-	public void createFloor(int width, int height){
-		floors.add(new Floor(width, height));
-	}
-	
-	public Floor getFloor(int level){
-		return floors.get(level);
-	}
-
 }

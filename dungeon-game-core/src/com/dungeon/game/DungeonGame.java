@@ -8,9 +8,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.*;
 import com.dungeon.game.tilemap.Dungeon;
+import com.dungeon.game.tilemap.Floor;
+import com.dungeon.game.tilemap.Tile;
 
 public class DungeonGame extends ApplicationAdapter {
-	
+	Dungeon dungeon;
 	Mouse mouse;
 	Camera cam;
 	Cursor cursor;
@@ -24,7 +26,8 @@ public class DungeonGame extends ApplicationAdapter {
 		cam = new Camera();
 		batch = new SpriteBatch();
 		player = new Player(100,50);
-		Dungeon dungeon = new Dungeon();
+		dungeon = new Dungeon();
+		dungeon.floors.add(new Floor(100,100));
 	}
 
 	@Override
@@ -40,6 +43,12 @@ public class DungeonGame extends ApplicationAdapter {
 		batch.setProjectionMatrix(cam.getCam().combined);
 		
 		batch.begin();
+		for(int i = 0; i<dungeon.floors.get(0).tm.length;i++){
+			for(int k = 0; k<dungeon.floors.get(0).tm[i].length;k++){
+				System.out.println(dungeon.floors.get(0).tm[i][k].texture);
+				batch.draw(dungeon.floors.get(0).tm[i][k].texture, i*Tile.TS, k*Tile.TS);
+			}
+		}
 		batch.draw(player.sprite, player.x, player.y, 100, 100);
 		batch.draw(new Texture("badlogic.jpg"), 0, 0, 100, 100);
 		batch.end();
