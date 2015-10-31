@@ -5,16 +5,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Matrix4;
 import com.dungeon.game.entity.*;
 import com.dungeon.game.tilemap.Dungeon;
 
 public class DungeonGame extends ApplicationAdapter {
+	Camera cam;
+	Cursor cursor;
 	SpriteBatch batch;
 	Texture img;
 	Entity player;
 	
 	@Override
 	public void create () {
+		cam = new Camera();
+		cursor = new Cursor();
 		batch = new SpriteBatch();
 		player = new Player(100,50);
 		
@@ -24,11 +29,12 @@ public class DungeonGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		player.update();
-		
+		cam.update(player.x, player.y, (float)1);
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		batch.setProjectionMatrix(cam.getCam().combined);
 		batch.begin();
-		batch.draw(player.sprite, (int)player.x, (int)player.y);
+		batch.draw(player.sprite, (int)player.x, (int)player.y, 100, 100);
 		batch.end();
 	}
 }
