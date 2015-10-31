@@ -37,7 +37,7 @@ public class Floor {
 		//temp: remove once random generator has been created
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
-				tm[i][k] = new Tile(spritesheet,(int)(Math.random()*2));
+				tm[i][k] = new Tile(spritesheet,(int)(Math.random()*3));
 			}
 		}
 	}

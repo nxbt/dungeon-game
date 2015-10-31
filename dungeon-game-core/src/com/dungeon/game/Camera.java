@@ -2,9 +2,13 @@ package com.dungeon.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Camera {
 	OrthographicCamera cam;
+	
+	Viewport view;
 	
 	private final float TWEEN = 0.3f;
 	
@@ -15,7 +19,8 @@ public class Camera {
 		this.x = 0;
 		this.y = 0;
 		
-		cam = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		cam = new OrthographicCamera();
+		view = new FitViewport(640, 360, cam);
 	}
 	
 	public void update(float x, float y, float mouseX, float mouseY, float zoom){
