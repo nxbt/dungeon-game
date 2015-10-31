@@ -14,7 +14,7 @@ public class Player extends Dynamic {
 		mvel = 10;
 		fric = 1;
 		
-		sprite = new Texture("badlogic.jpg");
+		sprite = new Texture("Player.png");
 		
 		solid = true;
 	}

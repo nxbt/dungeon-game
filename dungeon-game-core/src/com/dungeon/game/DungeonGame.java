@@ -29,7 +29,7 @@ public class DungeonGame extends ApplicationAdapter {
 		dungeon = new Dungeon();
 		dungeon.floors.add(new Floor(100,100));
 		
-		Gdx.graphics.setDisplayMode(1920, 1080, false);
+		Gdx.graphics.setDisplayMode(1280, 720, false);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class DungeonGame extends ApplicationAdapter {
 			}
 		}
 		
-		batch.draw(player.sprite, player.x, player.y, 100, 100);
+		batch.draw(player.sprite, player.x, player.y);
 		batch.end();
 	}
 	
