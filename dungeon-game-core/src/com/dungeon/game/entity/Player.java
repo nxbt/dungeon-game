@@ -10,8 +10,8 @@ public class Player extends Dynamic {
 	}
 	
 	public void init() {
-		acel = 3;
-		mvel = 10;
+		acel = 0.5f;
+		mvel = 5;
 		fric = 1;
 		
 		sprite = new Texture("Player.png");
