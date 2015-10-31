@@ -31,12 +31,12 @@ public class DungeonGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		player.update();
-		cam.update(player.x, player.y, (float)1);
+		cam.update(player.x, player.y, 1f);
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(cam.getCam().combined);
 		batch.begin();
-		batch.draw(player.sprite, (int)player.x, (int)player.y, 100, 100);
+		batch.draw(player.sprite, player.x, player.y, 100, 100);
 		batch.end();
 	}
 }
