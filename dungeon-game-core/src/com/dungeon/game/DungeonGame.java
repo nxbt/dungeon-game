@@ -2,16 +2,19 @@ package com.dungeon.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Matrix4;
 import com.dungeon.game.entity.*;
 import com.dungeon.game.tilemap.Dungeon;
 
 public class DungeonGame extends ApplicationAdapter {
+	
 	Camera cam;
-	Cursor cursor;
+//	Cursor cursor;
 	SpriteBatch batch;
 	Texture img;
 	Entity player;
@@ -19,7 +22,6 @@ public class DungeonGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		cam = new Camera();
-		cursor = new Cursor();
 		batch = new SpriteBatch();
 		player = new Player(100,50);
 		
