@@ -13,31 +13,35 @@ import com.dungeon.game.tilemap.Dungeon;
 public class DungeonGame extends ApplicationAdapter {
 	
 	Camera cam;
-	Cursor cursor;
 	SpriteBatch batch;
 	Texture img;
 	Entity player;
+	CursorCtrl cursor;
 	
 	@Override
 	public void create() {
-		cursor = Gdx.graphics.newCursor(new Pixmap(Gdx.files.internal("Crosshair.png")), 0, 0);
-		
+		cursor = new CursorCtrl();
 		cam = new Camera();
 		batch = new SpriteBatch();
 		player = new Player(100,50);
+		
+		Gdx.graphics.setDisplayMode(720, 480, false);
 		
 		Dungeon dungeon = new Dungeon();
 	}
 
 	@Override
 	public void render () {
-		Gdx.graphics.setCursor(cursor);
+		cursor.update();
 		
 		player.update();
 		cam.update(player.x, player.y, 1f);
+		
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
 		batch.setProjectionMatrix(cam.getCam().combined);
+		
 		batch.begin();
 		batch.draw(player.sprite, player.x, player.y, 100, 100);
 		batch.end();
