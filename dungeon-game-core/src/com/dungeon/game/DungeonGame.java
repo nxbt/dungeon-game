@@ -45,9 +45,15 @@ public class DungeonGame extends ApplicationAdapter {
 		batch.setProjectionMatrix(cam.getCam().combined);
 		
 		batch.begin();
-		for(int i = 0; i<dungeon.floors.get(0).tm.length;i++){
-			for(int k = 0; k<dungeon.floors.get(0).tm[i].length;k++){
-				batch.draw(dungeon.floors.get(0).tm[i][k].texture, i*Tile.TS, k*Tile.TS);
+		int startHeight = (int) (cam.y-Gdx.graphics.getHeight()/2)/Tile.TS;
+		startHeight = Math.max(startHeight,0);
+		int endHeight = (int)(cam.y+Gdx.graphics.getHeight()/2)/Tile.TS+1;
+		int startWidth = (int) (cam.x-Gdx.graphics.getWidth()/2)/Tile.TS+1;
+		startWidth = Math.max(startWidth,0);
+		int endWidth = (int)(cam.x+Gdx.graphics.getWidth()/2)/Tile.TS;
+		for(int i = startHeight; i<endHeight&&i<dungeon.floors.get(0).tm.length;i++){
+			for(int k = startWidth; k<endWidth&&k<dungeon.floors.get(0).tm[i].length;k++){
+				batch.draw(dungeon.floors.get(0).tm[i][k].texture, k*Tile.TS, i*Tile.TS);
 			}
 		}
 		batch.draw(player.sprite, player.x, player.y, 100, 100);

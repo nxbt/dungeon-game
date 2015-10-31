@@ -2,7 +2,9 @@ package com.dungeon.game.tilemap;
 
 import java.util.Arrays;
 
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Floor {
@@ -34,12 +36,16 @@ public class Floor {
 			}
 		}
 		
+
 		//temp: remove once random generator has been created
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
 				tm[i][k] = new Tile(spritesheet,(int)(Math.random()*2));
+				
 			}
 		}
+		
+		
 	}
 	public void update(){
 		

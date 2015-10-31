@@ -8,8 +8,8 @@ public class Camera {
 	
 	private final float TWEEN = 0.3f;
 	
-	private float x;
-	private float y;
+	public float x;
+	public float y;
 	
 	public Camera(){
 		this.x = 0;
