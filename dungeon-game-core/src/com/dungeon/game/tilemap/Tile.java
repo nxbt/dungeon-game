@@ -9,10 +9,10 @@ public class Tile {
 	protected int data;
 	public TextureRegion texture;
 	
-	public Tile(Texture texmap, int id) {
+	public Tile(TextureRegion[] spritesheet, int id) {
 		this.id = id;
 		data = 0;
-		TextureRegion[][] tmp = TextureRegion.split(texmap, texmap.getWidth()/TS, texmap.getHeight()/TS);
-		texture =  (new TextureRegion[texmap.getWidth()/TS * texmap.getHeight()/TS])[id];
+		
+		texture = spritesheet[id];
 	}
 }

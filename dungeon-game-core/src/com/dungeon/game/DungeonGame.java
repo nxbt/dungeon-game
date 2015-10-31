@@ -28,6 +28,8 @@ public class DungeonGame extends ApplicationAdapter {
 		player = new Player(100,50);
 		dungeon = new Dungeon();
 		dungeon.floors.add(new Floor(100,100));
+		
+		Gdx.graphics.setDisplayMode(720, 480, false);
 	}
 
 	@Override
@@ -45,7 +47,6 @@ public class DungeonGame extends ApplicationAdapter {
 		batch.begin();
 		for(int i = 0; i<dungeon.floors.get(0).tm.length;i++){
 			for(int k = 0; k<dungeon.floors.get(0).tm[i].length;k++){
-				System.out.println(dungeon.floors.get(0).tm[i][k].texture);
 				batch.draw(dungeon.floors.get(0).tm[i][k].texture, i*Tile.TS, k*Tile.TS);
 			}
 		}
