@@ -2,7 +2,6 @@ package com.dungeon.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -14,13 +13,15 @@ import com.dungeon.game.tilemap.Dungeon;
 public class DungeonGame extends ApplicationAdapter {
 	
 	Camera cam;
-//	Cursor cursor;
+	Cursor cursor;
 	SpriteBatch batch;
 	Texture img;
 	Entity player;
 	
 	@Override
-	public void create () {
+	public void create() {
+		cursor = Gdx.graphics.newCursor(new Pixmap(Gdx.files.internal("Crosshair.png")), 0, 0);
+		
 		cam = new Camera();
 		batch = new SpriteBatch();
 		player = new Player(100,50);
@@ -30,6 +31,8 @@ public class DungeonGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+		Gdx.graphics.setCursor(cursor);
+		
 		player.update();
 		cam.update(player.x, player.y, 1f);
 		Gdx.gl.glClearColor(1, 0, 0, 1);
