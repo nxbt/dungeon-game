@@ -1,11 +1,13 @@
 package com.dungeon.game.world;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.dungeon.game.entity.Entity;
 
 public class Floor {
 	private static final String DEFAULT = "Tilemap.png";
@@ -14,12 +16,16 @@ public class Floor {
 	
 	public Tile[][] tm;
 	
+	public ArrayList<Entity> entities;
+	
 	private int width;
 	private int height;
 	
 	public Floor(int width, int height) {
 		this.width = width;
 		this.height = height;
+		
+		entities = new ArrayList<Entity>();
 		
 		tm = new Tile[height][width];
 		

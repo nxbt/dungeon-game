@@ -32,13 +32,13 @@ public class DungeonGame extends ApplicationAdapter {
 		
 		player = new Player(100,50);
 		
-		entities = new ArrayList<Entity>();
-		
-		entities.add(player);
-		
 		world = new World();
 		dungeon = world.dungeons.get(0);
 		floor = dungeon.floors.get(0);
+		
+		entities = floor.entities;
+		
+		entities.add(player);
 		
 		Gdx.graphics.setDisplayMode(1280, 720, false);
 	}
@@ -46,7 +46,7 @@ public class DungeonGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		for(Entity ent: entities) {
-			ent.update();
+			ent.update(floor);
 		}
 		
 		mouse.update();
