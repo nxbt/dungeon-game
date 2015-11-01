@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Player extends Dynamic {
 	public Player(int x, int y) {
-		super("Player", x, y);
+		super("Player", x, y, 32, 32);
 	}
 	
 	public void init() {

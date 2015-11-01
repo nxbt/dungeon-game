@@ -1,8 +1,10 @@
-package com.dungeon.game.tilemap;
+package com.dungeon.game.world;
 
 import java.util.Arrays;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Floor {
@@ -41,8 +43,27 @@ public class Floor {
 			}
 		}
 	}
-	public void update(){
+	
+	public void update() {
 		
+	}
+	
+	public void draw(SpriteBatch batch, float x, float y) {
+		int startHeight = (int) (y-Gdx.graphics.getHeight()/2)/Tile.TS;
+		int endHeight = (int)(y+Gdx.graphics.getHeight()/2)/Tile.TS+1;
+		int startWidth = (int) (x-Gdx.graphics.getWidth()/2)/Tile.TS+1;
+		int endWidth = (int)(x+Gdx.graphics.getWidth()/2)/Tile.TS;
+		
+		startHeight = Math.max(startHeight,0);
+		endHeight = Math.min(endHeight,tm.length);
+		startWidth = Math.max(startWidth,0);
+		endWidth = Math.min(endWidth,tm[0].length);
+		
+		for(int i = startHeight; i < endHeight; i++){
+			for(int k = startWidth; k < endWidth; k++){
+				batch.draw(tm[i][k].texture, k*Tile.TS, i*Tile.TS);
+			}
+		}
 	}
 
 }

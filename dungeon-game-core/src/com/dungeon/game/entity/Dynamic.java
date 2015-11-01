@@ -14,16 +14,8 @@ public abstract class Dynamic extends Entity {
 	public boolean inp_lt;
 	public boolean inp_rt;
 	
-	public Dynamic() {
-		super();
-	}
-	
-	public Dynamic(int x, int y) {
-		super(x, y);
-	}
-	
-	public Dynamic(String name, int x, int y) {
-		super(name, x, y);
+	public Dynamic(String name, int x, int y, int width, int height) {
+		super(name, x, y, width, height);
 	}
 
 	//entity update function; called on every frame; before the draw phase.

@@ -1,4 +1,4 @@
-package com.dungeon.game.tilemap;
+package com.dungeon.game.world;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

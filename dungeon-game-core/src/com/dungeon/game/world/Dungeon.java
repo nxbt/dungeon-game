@@ -1,4 +1,4 @@
-package com.dungeon.game.tilemap;
+package com.dungeon.game.world;
 
 import java.util.ArrayList;
 
@@ -12,6 +12,6 @@ public class Dungeon {
 		
 		seed = (int) (Math.random()*1000000000);
 		
-		System.out.println(seed);
+		floors.add(new Floor(100, 100));
 	}
 }

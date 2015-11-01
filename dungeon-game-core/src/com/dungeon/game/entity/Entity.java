@@ -1,10 +1,14 @@
 package com.dungeon.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class Entity {
 	public float x;
 	public float y;
+	
+	public float width;
+	public float height;
 	
 	boolean solid;
 	
@@ -12,27 +16,12 @@ public abstract class Entity {
 	
 	public Texture sprite;
 	
-	public Entity(){
-		this.x = 0;
-		this.y = 0;
-		
-		this.name = "null";
-		
-		this.init();
-	}
-	
-	public Entity(int x, int y){
+	public Entity(String name, int x, int y, int width, int height) {
 		this.x = x;
 		this.y = y;
 		
-		this.name = "null";
-		
-		this.init();
-	}
-	
-	public Entity(String name, int x, int y) {
-		this.x = x;
-		this.y = y;
+		this.width = width;
+		this.height = height;
 		
 		this.name = name;
 		
@@ -41,6 +30,10 @@ public abstract class Entity {
 	
 	public void update() {
 		calc();
+	}
+	
+	public void draw(SpriteBatch batch) {
+		batch.draw(sprite, x, y, width, height);
 	}
 	
 	public abstract void calc();
