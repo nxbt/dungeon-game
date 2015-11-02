@@ -6,8 +6,7 @@ This is a top-down rouge-like game written in Java using the Libgdx libraries, a
 Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe
 
 #TODO:
-  Add Tile class,
-  Add Floor class (cotains 2d ArrayList of Tiles),
-  Add Dungeon class (contains all Floors),
-  Add Alive interface (for any entity that can be killed)
+  Create a Hud package for all Hud elements 
+  Static  and Dynamic hud subclasses
+  Mouse static hud class
   
