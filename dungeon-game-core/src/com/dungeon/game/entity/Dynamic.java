@@ -19,8 +19,8 @@ public abstract class Dynamic extends Entity {
 	public boolean inp_lt;
 	public boolean inp_rt;
 	
-	public Dynamic(String name, int x, int y) {
-		super(name, x, y);
+	public Dynamic(int x, int y) {
+		super(x, y);
 	}
 
 	//entity update function; called on every frame; before the draw phase.
@@ -79,8 +79,8 @@ public abstract class Dynamic extends Entity {
 		
 		int tile_lt = (int) (x/Tile.TS);
 		int tile_dn = (int) (y/Tile.TS);
-		int tile_rt = (int) ((x+width-0.001)/Tile.TS);
-		int tile_up = (int) ((y+height-0.001)/Tile.TS);
+		int tile_rt = (int) ((x+width)/Tile.TS);
+		int tile_up = (int) ((y+height)/Tile.TS);
 		
 		boolean dl = floor.tm[tile_dn][tile_lt].data == 1;
 		boolean dr = floor.tm[tile_dn][tile_rt].data == 1;

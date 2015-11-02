@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class Camera {
 	OrthographicCamera cam;
 	
-	Viewport view;
+	public Viewport view;
 	
 	private final float TWEEN = 0.3f;
 	

@@ -20,11 +20,9 @@ public abstract class Entity {
 	
 	public Texture sprite;
 	
-	public Entity(String name, int x, int y) {
+	public Entity(int x, int y) {
 		this.x = x;
 		this.y = y;
-		
-		this.name = name;
 		
 		this.init();
 	}
@@ -37,7 +35,7 @@ public abstract class Entity {
 		batch.draw(sprite, x+d_offx, y+d_offy, d_width, d_height);
 	}
 	
-	public abstract void calc(Floor floor);
-	
 	public abstract void init();
+	
+	public abstract void calc(Floor floor);
 }

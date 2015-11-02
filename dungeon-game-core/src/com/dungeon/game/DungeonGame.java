@@ -40,7 +40,7 @@ public class DungeonGame extends ApplicationAdapter {
 		
 		entities.add(player);
 		
-		Gdx.graphics.setDisplayMode(1280, 720, false);
+		Gdx.graphics.setDisplayMode(640, 360, false);
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class DungeonGame extends ApplicationAdapter {
 		}
 		
 		mouse.update();
-		cam.update(player.x+50, player.y+50, mouse.x, mouse.y, 1f);
+		cam.update(player.x, player.y, mouse.x, mouse.y, 1f);
 		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

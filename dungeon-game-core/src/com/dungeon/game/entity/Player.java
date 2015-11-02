@@ -7,10 +7,12 @@ import com.dungeon.game.world.Floor;
 
 public class Player extends Dynamic {
 	public Player(int x, int y) {
-		super("Player", x, y);
+		super(x, y);
 	}
 	
 	public void init() {
+		name = "Player";
+		
 		acel = 1.5f;
 		mvel = 5;
 		fric = 1;
