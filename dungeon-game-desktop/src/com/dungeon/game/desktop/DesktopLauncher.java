@@ -9,7 +9,5 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.resizable = false;
 		new LwjglApplication(new DungeonGame(), config);
-		
-		config.resizable = false;
 	}
 }
