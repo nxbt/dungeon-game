@@ -57,11 +57,11 @@ public class Floor {
 		
 	}
 	
-	public void draw(SpriteBatch batch, float x, float y) {
-		int startHeight = (int) (y-Gdx.graphics.getHeight()/2)/Tile.TS;
-		int endHeight = (int)(y+Gdx.graphics.getHeight()/2)/Tile.TS+1;
-		int startWidth = (int) (x-Gdx.graphics.getWidth()/2)/Tile.TS-1;
-		int endWidth = (int)(x+Gdx.graphics.getWidth()/2)/Tile.TS+1;
+	public void draw(SpriteBatch batch, World world) {
+		int startHeight = (int) (world.cam.y-world.cam.view.getScreenHeight()/2)/Tile.TS-5;
+		int endHeight = (int)(world.cam.y+world.cam.view.getScreenHeight()/2)/Tile.TS+5;
+		int startWidth = (int) (world.cam.x-world.cam.view.getScreenWidth()/2)/Tile.TS-5;
+		int endWidth = (int)(world.cam.x+world.cam.view.getScreenWidth()/2)/Tile.TS+5;
 		
 		startHeight = Math.max(startHeight,0);
 		endHeight = Math.min(endHeight,tm.length);

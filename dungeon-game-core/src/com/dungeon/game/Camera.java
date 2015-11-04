@@ -20,7 +20,7 @@ public class Camera {
 		this.y = 0;
 		
 		cam = new OrthographicCamera();
-		view = new FitViewport(640, 360, cam);
+		view = new FitViewport(640, 480, cam);
 	}
 	
 	public void update(float x, float y, float mouseX, float mouseY, float zoom){

@@ -16,7 +16,7 @@ public class DungeonGame extends ApplicationAdapter {
 		
 		world = new World();
 		
-		Gdx.graphics.setDisplayMode(1280, 720, false);
+		Gdx.graphics.setDisplayMode(640, 360, false);
 	}
 
 	@Override

@@ -6,12 +6,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.Camera;
-import com.dungeon.game.Mouse;
 import com.dungeon.game.entity.*;
 
 public class World {
-	public Mouse mouse;
+	public SpriteBatch hudBatch;
+	
 	public Camera cam;
+	public Camera hudCam;
 	
 	public ArrayList<Dungeon> dungeons;
 	
@@ -19,10 +20,14 @@ public class World {
 	public Floor curFloor;
 	
 	public ArrayList<Entity> entities;
+	public ArrayList<Entity> hudEntities;
 	
 	public Entity player;
+	public Entity mouse;
 	
 	public World() {
+		hudBatch = new SpriteBatch();
+		
 		dungeons = new ArrayList<Dungeon>();
 		
 		dungeons.add(new Dungeon());
@@ -30,14 +35,19 @@ public class World {
 		curDungeon = dungeons.get(0);
 		curFloor = curDungeon.floors.get(0);
 		
-		mouse = new Mouse();
 		cam = new Camera();
+		hudCam = new Camera();
 		
 		entities = new ArrayList<Entity>();
+		hudEntities = new ArrayList<Entity>();
 		
 		player = new Player(100, 50);
 		
+		mouse = new Mouse(0, 0);
+		
 		entities.add(player);
+		
+		hudEntities.add(mouse);
 	}
 	
 	public void update() {
@@ -45,7 +55,10 @@ public class World {
 			ent.update(this);
 		}
 		
-		mouse.update();
+		for(Entity ent: hudEntities) {
+			ent.update(this);
+		}
+		
 		cam.update(player.x, player.y, mouse.x, mouse.y, 1f);
 	}
 	
@@ -56,11 +69,19 @@ public class World {
 		batch.setProjectionMatrix(cam.cam.combined);
 		
 		batch.begin();
-		curFloor.draw(batch, cam.x, cam.y);
+		curFloor.draw(batch, this);
 		
 		for(Entity ent: entities) {
 			ent.draw(batch);
 		}
 		batch.end();
+		
+		hudBatch.begin();
+		
+		for(Entity ent: hudEntities) {
+			ent.draw(hudBatch);
+		}
+		
+		hudBatch.end();
 	}
 }
