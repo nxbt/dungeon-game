@@ -40,7 +40,7 @@ public class DungeonGame extends ApplicationAdapter {
 		
 		entities.add(player);
 		
-		Gdx.graphics.setDisplayMode(640, 360, false);
+		Gdx.graphics.setDisplayMode(1280, 720, false);
 	}
 
 	@Override

@@ -87,30 +87,6 @@ public abstract class Dynamic extends Entity {
 		boolean ul = floor.tm[tile_up][tile_lt].data == 1;
 		boolean ur = floor.tm[tile_up][tile_rt].data == 1;
 		
-		if(dl && dr) {
-			y = (tile_dn+1) * Tile.TS;
-			dy = 0;
-			dl = false;
-			dr = false;
-		}
-		if(ul && ur) {
-			y = (tile_up * Tile.TS)-height;
-			dy = 0;
-			ul = false;
-			ur = false;
-		}
-		if(ul && dl) {
-			x = (tile_lt+1) * Tile.TS;
-			dx = 0;
-			dl = false;
-			ul = false;
-		}
-		if(ur && dr) {
-			x = (tile_rt * Tile.TS)-width;
-			dx = 0;
-			ur = false;
-			dr = false;
-		}
 		if(dl) {
 			if((tile_lt+1)*Tile.TS - this.x < (tile_dn+1)*Tile.TS - this.y) {
 				x = (tile_lt+1) * Tile.TS;
@@ -120,7 +96,6 @@ public abstract class Dynamic extends Entity {
 				y = (tile_dn+1) * Tile.TS;
 				dy = 0;
 			}
-			dl = false;
 		}
 		if(dr) {
 			if(x+width - tile_rt*Tile.TS < (tile_dn+1)*Tile.TS - this.y) {
@@ -131,7 +106,6 @@ public abstract class Dynamic extends Entity {
 				y = (tile_dn+1) * Tile.TS;
 				dy = 0;
 			}
-			dr = false;
 		}
 		if(ul) {
 			if((tile_lt+1)*Tile.TS - this.x < y+height - tile_up*Tile.TS) {
@@ -142,7 +116,6 @@ public abstract class Dynamic extends Entity {
 				y = (tile_up * Tile.TS)-height;
 				dy = 0;
 			}
-			ul = false;
 		}
 		if(ur) {
 			if(x+width - tile_rt*Tile.TS < y+height - tile_up*Tile.TS) {
@@ -153,7 +126,6 @@ public abstract class Dynamic extends Entity {
 				y = (tile_up * Tile.TS)-height;
 				dy = 0;
 			}
-			ur = false;
 		}
 	}
 }

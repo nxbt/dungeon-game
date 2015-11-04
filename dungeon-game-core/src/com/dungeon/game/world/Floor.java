@@ -42,6 +42,8 @@ public class Floor {
 			}
 		}
 		
+		fixBleeding(spritesheet);
+		
 		//temp: remove once random generator has been created
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
@@ -73,4 +75,22 @@ public class Floor {
 		}
 	}
 
+	public static void fixBleeding(TextureRegion[] region) {
+	        for (TextureRegion texture : region) {
+	            fixBleeding(texture);
+	        }
+	}
+
+	public static void fixBleeding(TextureRegion region) {
+	    float fix = 0.01f;
+
+	    float x = region.getRegionX();
+	    float y = region.getRegionY();
+	    float width = region.getRegionWidth();
+	    float height = region.getRegionHeight();
+	    float invTexWidth = 1f / region.getTexture().getWidth();
+	    float invTexHeight = 1f / region.getTexture().getHeight();
+	    region.setRegion((x + fix) * invTexWidth, (y + fix) * invTexHeight, (x + width - fix) * invTexWidth, (y + height - fix) * invTexHeight); // Trims
+	                                                                                                                                                // region
+	}
 }
