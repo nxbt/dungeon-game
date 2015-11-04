@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Camera {
-	OrthographicCamera cam;
+	public OrthographicCamera cam;
 	
 	public Viewport view;
 	
