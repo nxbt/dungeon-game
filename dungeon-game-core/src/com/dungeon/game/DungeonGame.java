@@ -30,11 +30,12 @@ public class DungeonGame extends ApplicationAdapter {
 		
 		batch = new SpriteBatch();
 		
-		player = new Player(100,50);
 		
 		world = new World();
 		dungeon = world.dungeons.get(0);
 		floor = dungeon.floors.get(0);
+		player = new Player(floor.tm[0].length*Tile.TS/2,floor.tm.length*Tile.TS/2);
+		System.out.println(player.x);
 		
 		entities = floor.entities;
 		
