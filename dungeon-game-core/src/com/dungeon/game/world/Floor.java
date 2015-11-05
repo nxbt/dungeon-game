@@ -66,9 +66,9 @@ public class Floor {
 	}
 	
 	public static int[][] generateStartRoom(int[][] map, ArrayList<Rectangle> riooms, int x, int y){
-		int height = (int) (3+Math.random()*map.length/5);
+		int height = (int) (3+Math.random()*map.length/7);
 		y-=(int) (Math.random()*height);
-		int width = (int) (3+Math.random()*map[0].length/5);
+		int width = (int) (3+Math.random()*map[0].length/7);
 		x-=(int) (Math.random()*width);
 		Rectangle room = new Rectangle(x,y,width,height);
 		int nextX;
@@ -102,9 +102,9 @@ public class Floor {
 	public static int[][] generateBelowRoom(int[][] map, ArrayList<Rectangle> riooms, int x, int y){
 		int doorX = x;
 		int doorY = y-1;
-		int height = (int) (3+Math.random()*map.length/5);
+		int height = (int) (3+Math.random()*map.length/7);
 		y-=1+height;
-		int width = (int) (3+Math.random()*map[0].length/5);
+		int width = (int) (3+Math.random()*map[0].length/7);
 		x-=(int) (Math.random()*width);
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
@@ -139,9 +139,9 @@ public class Floor {
 	public static int[][] generateAboveRoom(int[][] map, ArrayList<Rectangle> riooms, int x, int y){
 		int doorX = x;
 		int doorY = y;
-		int height = (int) (3+Math.random()*map.length/5);
+		int height = (int) (3+Math.random()*map.length/7);
 		y++;
-		int width = (int) (3+Math.random()*map[0].length/5);
+		int width = (int) (3+Math.random()*map[0].length/7);
 		x-=(int) (Math.random()*width);
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
@@ -176,9 +176,9 @@ public class Floor {
 	public static int[][] generateLeftRoom(int[][] map, ArrayList<Rectangle> riooms, int x, int y){
 		int doorX = x-1;
 		int doorY = y;
-		int height = (int) (3+Math.random()*map.length/5);
+		int height = (int) (3+Math.random()*map.length/7);
 		y-=(int)(Math.random()*height);
-		int width = (int) (3+Math.random()*map[0].length/5);
+		int width = (int) (3+Math.random()*map[0].length/7);
 		x-=1+width;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
@@ -213,9 +213,9 @@ public class Floor {
 	public static int[][] generateRightRoom(int[][] map, ArrayList<Rectangle> riooms, int x, int y){
 		int doorX = x;
 		int doorY = y;
-		int height = (int) (3+Math.random()*map.length/5);
+		int height = (int) (3+Math.random()*map.length/7);
 		y-=(int)(Math.random()*height);
-		int width = (int) (3+Math.random()*map[0].length/5);
+		int width = (int) (3+Math.random()*map[0].length/7);
 		x++;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
