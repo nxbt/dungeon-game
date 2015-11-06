@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Matrix4;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.*;
 
@@ -59,16 +60,17 @@ public class World {
 			ent.update(this);
 		}
 		
-		cam.update(player.x, player.y, mouse.x, mouse.y, 1f);
+		cam.update(player.x+player.d_width/2, player.y+player.d_height/2, mouse.x, mouse.y, 1f);
 	}
 	
 	public void draw(SpriteBatch batch) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		batch.begin();
+		
 		batch.setProjectionMatrix(cam.cam.combined);
 		
-		batch.begin();
 		curFloor.draw(batch, this);
 		
 		for(Entity ent: entities) {

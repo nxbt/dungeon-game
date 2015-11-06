@@ -22,8 +22,6 @@ public class Mouse extends Hud {
 
 	@Override
 	public void calc(World world) {
-		d_offx = (int) world.cam.x;
-		d_offy = (int) world.cam.y;
 		
 		x += Gdx.input.getDeltaX();
 		y -= Gdx.input.getDeltaY();

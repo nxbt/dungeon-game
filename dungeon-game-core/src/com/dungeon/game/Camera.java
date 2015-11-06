@@ -22,8 +22,11 @@ public class Camera {
 		this.x = 0;
 		this.y = 0;
 		
-		cam = new OrthographicCamera();
+		cam = new OrthographicCamera(WIDTH, HEIGHT);
+		cam.position.set(this.x+WIDTH/2, this.y+HEIGHT/2, 0);
+		
 		view = new FitViewport(WIDTH, HEIGHT, cam);
+		view.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 	
 	public void update(float x, float y, float mouseX, float mouseY, float zoom){
