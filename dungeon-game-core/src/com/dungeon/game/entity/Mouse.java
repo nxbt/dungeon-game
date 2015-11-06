@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.world.World;
 
-public class Mouse extends Static {
+public class Mouse extends Hud {
 
 	public Mouse(int x, int y) {
 		super(x, y);
@@ -22,18 +22,19 @@ public class Mouse extends Static {
 
 	@Override
 	public void calc(World world) {
+		d_offx = (int) world.cam.x;
+		d_offy = (int) world.cam.y;
+		
 		x += Gdx.input.getDeltaX();
 		y -= Gdx.input.getDeltaY();
 		
-		int screenWidth = (int) world.cam.view.getWorldWidth();
-		int screenHeight = (int) world.cam.view.getWorldHeight();
+		int screenWidth = (int) world.cam.WIDTH;
+		int screenHeight = (int) world.cam.HEIGHT;
 		
 		if(x < 0) x = 0;
 		else if(x > screenWidth) x = screenWidth;
 		if(y < 0) y = 0;
 		else if(y > screenHeight) y = screenHeight;
-		
-		System.out.println(x + ", " + y);
 	}
 
 }

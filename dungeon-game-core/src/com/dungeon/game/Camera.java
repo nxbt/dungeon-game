@@ -15,12 +15,15 @@ public class Camera {
 	public float x;
 	public float y;
 	
+	public final int WIDTH = 640;
+	public final int HEIGHT = 360;
+	
 	public Camera(){
 		this.x = 0;
 		this.y = 0;
 		
 		cam = new OrthographicCamera();
-		view = new FitViewport(640, 480, cam);
+		view = new FitViewport(WIDTH, HEIGHT, cam);
 	}
 	
 	public void update(float x, float y, float mouseX, float mouseY, float zoom){
@@ -30,9 +33,5 @@ public class Camera {
 		cam.position.set(this.x, this.y, 0);
 		cam.zoom = zoom;
 		cam.update();
-	}
-	
-	public OrthographicCamera getCam(){
-		return cam;
 	}
 }

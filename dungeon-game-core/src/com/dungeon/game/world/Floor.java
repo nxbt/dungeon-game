@@ -1,9 +1,6 @@
 package com.dungeon.game.world;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -58,10 +55,10 @@ public class Floor {
 	}
 	
 	public void draw(SpriteBatch batch, World world) {
-		int startHeight = (int) (world.cam.y-world.cam.view.getScreenHeight()/2)/Tile.TS-5;
-		int endHeight = (int)(world.cam.y+world.cam.view.getScreenHeight()/2)/Tile.TS+5;
-		int startWidth = (int) (world.cam.x-world.cam.view.getScreenWidth()/2)/Tile.TS-5;
-		int endWidth = (int)(world.cam.x+world.cam.view.getScreenWidth()/2)/Tile.TS+5;
+		int startHeight = (int) (world.cam.y-world.cam.HEIGHT/2)/Tile.TS;
+		int endHeight = (int)(world.cam.y+world.cam.HEIGHT/2)/Tile.TS+1;
+		int startWidth = (int) (world.cam.x-world.cam.WIDTH/2)/Tile.TS;
+		int endWidth = (int)(world.cam.x+world.cam.WIDTH/2)/Tile.TS+1;
 		
 		startHeight = Math.max(startHeight,0);
 		endHeight = Math.min(endHeight,tm.length);

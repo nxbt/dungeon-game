@@ -2,7 +2,6 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dungeon.game.world.Floor;
 import com.dungeon.game.world.World;
 
 public abstract class Entity {

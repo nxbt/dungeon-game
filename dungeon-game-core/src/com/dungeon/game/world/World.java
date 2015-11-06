@@ -74,14 +74,13 @@ public class World {
 		for(Entity ent: entities) {
 			ent.draw(batch);
 		}
-		batch.end();
 		
-		hudBatch.begin();
+		batch.setProjectionMatrix(hudCam.cam.combined);
 		
 		for(Entity ent: hudEntities) {
-			ent.draw(hudBatch);
+			ent.draw(batch);
 		}
 		
-		hudBatch.end();
+		batch.end();
 	}
 }
