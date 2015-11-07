@@ -242,7 +242,7 @@ public class Rooms {
 		boolean generateHall = true;
 		boolean generateRoom = true;
 		ArrayList<int[]> hallCoordinates = new ArrayList<int[]>();
-		hallCoordinates.add(new int[]{x,y});
+		hallCoordinates.add(new int[]{x,y, dir});
 		int length=5+(int) (Math.random()*15);
 		for(int i = 0; i < length; i++){
 			if(dir == 0)y--;
@@ -251,7 +251,7 @@ public class Rooms {
 			if(dir == 3)x++;
 			if(isValidHallTile(x,y)&&!(hallCoordinates.contains(new int[]{x,y, 0})||hallCoordinates.contains(new int[]{x,y, 1})||hallCoordinates.contains(new int[]{x,y, 2})||hallCoordinates.contains(new int[]{x,y, 3}))){
 				hallCoordinates.add(new int[]{x,y,dir});
-				if(Math.random()>0.6&&justTurned==false){
+				if(Math.random()>0.8&&justTurned==false){
 					justTurned=true;
 					if(dir == 0||dir == 1){
 						dir=2+(int) (Math.random()*2);
@@ -261,7 +261,7 @@ public class Rooms {
 				}else{
 					justTurned = false;
 				}
-			} else{
+			} else if(!(hallCoordinates.contains(new int[]{x,y, 0})||hallCoordinates.contains(new int[]{x,y, 1})||hallCoordinates.contains(new int[]{x,y, 2})||hallCoordinates.contains(new int[]{x,y, 3}))){
 				hallCoordinates.add(new int[]{x,y,dir});
 				if(dir == 0)y--;
 				if(dir == 1)y++;
@@ -276,6 +276,10 @@ public class Rooms {
 					generateHall = false;
 					generateRoom = false;
 				}
+			}else{
+				i=length;
+				generateHall = false;
+				generateRoom = false;
 			}
 		}
 		if(generateRoom&&generateHall){

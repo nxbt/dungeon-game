@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.generator.Castle;
 import com.dungeon.game.generator.Rooms;
 
 public class Floor {
