@@ -18,6 +18,9 @@ public class Mouse extends Hud {
 		
 		d_width = 16;
 		d_height = 16;
+		
+		d_offx = -8;
+		d_offy = -8;
 	}
 
 	@Override
