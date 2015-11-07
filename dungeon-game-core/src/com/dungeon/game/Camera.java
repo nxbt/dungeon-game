@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Camera {
-	OrthographicCamera cam;
+	public OrthographicCamera cam;
 	
 	public Viewport view;
 	
@@ -15,12 +15,18 @@ public class Camera {
 	public float x;
 	public float y;
 	
+	public final int WIDTH = 640;
+	public final int HEIGHT = 360;
+	
 	public Camera(){
 		this.x = 0;
 		this.y = 0;
 		
-		cam = new OrthographicCamera();
-		view = new FitViewport(640, 360, cam);
+		cam = new OrthographicCamera(WIDTH, HEIGHT);
+		cam.position.set(this.x+WIDTH/2, this.y+HEIGHT/2, 0);
+		
+		view = new FitViewport(WIDTH, HEIGHT, cam);
+		view.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 	
 	public void update(float x, float y, float mouseX, float mouseY, float zoom){
@@ -30,9 +36,5 @@ public class Camera {
 		cam.position.set(this.x, this.y, 0);
 		cam.zoom = zoom;
 		cam.update();
-	}
-	
-	public OrthographicCamera getCam(){
-		return cam;
 	}
 }

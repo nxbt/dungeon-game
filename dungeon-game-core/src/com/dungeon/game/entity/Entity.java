@@ -2,7 +2,7 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dungeon.game.world.Floor;
+import com.dungeon.game.world.World;
 
 public abstract class Entity {
 	public float x;
@@ -27,8 +27,8 @@ public abstract class Entity {
 		this.init();
 	}
 	
-	public void update(Floor floor) {
-		calc(floor);
+	public void update(World world) {
+		calc(world);
 	}
 	
 	public void draw(SpriteBatch batch) {
@@ -37,5 +37,5 @@ public abstract class Entity {
 	
 	public abstract void init();
 	
-	public abstract void calc(Floor floor);
+	public abstract void calc(World world);
 }

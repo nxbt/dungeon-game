@@ -1,9 +1,6 @@
 package com.dungeon.game.world;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -44,8 +41,14 @@ public class Floor {
 				spritesheet[i*sheetWidth+k] = new TextureRegion(new Texture(DEFAULT),k*Tile.TS,i*Tile.TS,Tile.TS,Tile.TS);
 			}
 		}
+<<<<<<< HEAD
 		Rooms gen = new Rooms(width, height);
 		int[][] map = gen.getMap();
+=======
+		
+		fixBleeding(spritesheet);
+		
+>>>>>>> refs/remotes/origin/master
 		//temp: remove once random generator has been created
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
@@ -58,11 +61,11 @@ public class Floor {
 		
 	}
 	
-	public void draw(SpriteBatch batch, float x, float y) {
-		int startHeight = (int) (y-Gdx.graphics.getHeight()/2)/Tile.TS;
-		int endHeight = (int)(y+Gdx.graphics.getHeight()/2)/Tile.TS+1;
-		int startWidth = (int) (x-Gdx.graphics.getWidth()/2)/Tile.TS-1;
-		int endWidth = (int)(x+Gdx.graphics.getWidth()/2)/Tile.TS+1;
+	public void draw(SpriteBatch batch, World world) {
+		int startHeight = (int) (world.cam.y-world.cam.HEIGHT/2)/Tile.TS;
+		int endHeight = (int)(world.cam.y+world.cam.HEIGHT/2)/Tile.TS+1;
+		int startWidth = (int) (world.cam.x-world.cam.WIDTH/2)/Tile.TS;
+		int endWidth = (int)(world.cam.x+world.cam.WIDTH/2)/Tile.TS+1;
 		
 		startHeight = Math.max(startHeight,0);
 		endHeight = Math.min(endHeight,tm.length);
@@ -76,4 +79,22 @@ public class Floor {
 		}
 	}
 
+	public static void fixBleeding(TextureRegion[] region) {
+	        for (TextureRegion texture : region) {
+	            fixBleeding(texture);
+	        }
+	}
+
+	public static void fixBleeding(TextureRegion region) {
+	    float fix = 0.01f;
+
+	    float x = region.getRegionX();
+	    float y = region.getRegionY();
+	    float width = region.getRegionWidth();
+	    float height = region.getRegionHeight();
+	    float invTexWidth = 1f / region.getTexture().getWidth();
+	    float invTexHeight = 1f / region.getTexture().getHeight();
+	    region.setRegion((x + fix) * invTexWidth, (y + fix) * invTexHeight, (x + width - fix) * invTexWidth, (y + height - fix) * invTexHeight); // Trims
+	                                                                                                                                                // region
+	}
 }

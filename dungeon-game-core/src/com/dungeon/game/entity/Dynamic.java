@@ -25,10 +25,10 @@ public abstract class Dynamic extends Entity {
 
 	//entity update function; called on every frame; before the draw phase.
 	@Override
-	public void update(Floor floor) {
+	public void update(World world) {
 		norm();
-		calc(floor);
-		phys(floor);
+		calc(world);
+		phys(world);
 	}
 	
 	//resets some variables at the start of every update cycles
@@ -40,7 +40,7 @@ public abstract class Dynamic extends Entity {
 	}
 	
 	//calculates velocity and collisions for object
-	public void phys(Floor floor) {
+	public void phys(World world) {
 		double dirX = 0;
 		double dirY = 0;
 		
@@ -82,35 +82,11 @@ public abstract class Dynamic extends Entity {
 		int tile_rt = (int) ((x+width)/Tile.TS);
 		int tile_up = (int) ((y+height)/Tile.TS);
 		
-		boolean dl = floor.tm[tile_dn][tile_lt].data == 1;
-		boolean dr = floor.tm[tile_dn][tile_rt].data == 1;
-		boolean ul = floor.tm[tile_up][tile_lt].data == 1;
-		boolean ur = floor.tm[tile_up][tile_rt].data == 1;
+		boolean dl = world.curFloor.tm[tile_dn][tile_lt].data == 1;
+		boolean dr = world.curFloor.tm[tile_dn][tile_rt].data == 1;
+		boolean ul = world.curFloor.tm[tile_up][tile_lt].data == 1;
+		boolean ur = world.curFloor.tm[tile_up][tile_rt].data == 1;
 		
-		if(dl && dr) {
-			y = (tile_dn+1) * Tile.TS;
-			dy = 0;
-			dl = false;
-			dr = false;
-		}
-		if(ul && ur) {
-			y = (tile_up * Tile.TS)-height;
-			dy = 0;
-			ul = false;
-			ur = false;
-		}
-		if(ul && dl) {
-			x = (tile_lt+1) * Tile.TS;
-			dx = 0;
-			dl = false;
-			ul = false;
-		}
-		if(ur && dr) {
-			x = (tile_rt * Tile.TS)-width;
-			dx = 0;
-			ur = false;
-			dr = false;
-		}
 		if(dl) {
 			if((tile_lt+1)*Tile.TS - this.x < (tile_dn+1)*Tile.TS - this.y) {
 				x = (tile_lt+1) * Tile.TS;
@@ -120,7 +96,6 @@ public abstract class Dynamic extends Entity {
 				y = (tile_dn+1) * Tile.TS;
 				dy = 0;
 			}
-			dl = false;
 		}
 		if(dr) {
 			if(x+width - tile_rt*Tile.TS < (tile_dn+1)*Tile.TS - this.y) {
@@ -131,7 +106,6 @@ public abstract class Dynamic extends Entity {
 				y = (tile_dn+1) * Tile.TS;
 				dy = 0;
 			}
-			dr = false;
 		}
 		if(ul) {
 			if((tile_lt+1)*Tile.TS - this.x < y+height - tile_up*Tile.TS) {
@@ -142,7 +116,6 @@ public abstract class Dynamic extends Entity {
 				y = (tile_up * Tile.TS)-height;
 				dy = 0;
 			}
-			ul = false;
 		}
 		if(ur) {
 			if(x+width - tile_rt*Tile.TS < y+height - tile_up*Tile.TS) {
@@ -153,7 +126,6 @@ public abstract class Dynamic extends Entity {
 				y = (tile_up * Tile.TS)-height;
 				dy = 0;
 			}
-			ur = false;
 		}
 	}
 }

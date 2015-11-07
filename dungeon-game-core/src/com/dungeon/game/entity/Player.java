@@ -3,7 +3,7 @@ package com.dungeon.game.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.dungeon.game.world.Floor;
+import com.dungeon.game.world.World;
 
 public class Player extends Dynamic {
 	public Player(int x, int y) {
@@ -31,7 +31,7 @@ public class Player extends Dynamic {
 		solid = true;
 	}
 	
-	public void calc(Floor floor) {
+	public void calc(World world) {
 		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)  || Gdx.input.isKeyPressed(Input.Keys.A)) inp_lt = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) inp_rt = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) inp_up = true;
