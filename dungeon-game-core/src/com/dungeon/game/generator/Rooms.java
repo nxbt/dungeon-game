@@ -36,7 +36,7 @@ public class Rooms {
 		int nextY;
 		if(isValidRoom(room)){
 			addRoomToMap(room);
-			for(int i = 0; i<1;i++){
+			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
 				if(dir == 0){
 					nextX = (int) (x+width*Math.random());
@@ -65,14 +65,13 @@ public class Rooms {
 		int doorX = x;
 		int doorY = y-1;
 		int height = (int) (3+Math.random()*map.length/7);
-		y-=1+height;
+		y-=height;
 		int width = (int) (3+Math.random()*map[0].length/7);
 		x-=(int) (Math.random()*width);
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
 		if(isValidRoom(room)){
-			map[doorY][doorX]=0;
 			addRoomToMap(room);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
@@ -103,14 +102,12 @@ public class Rooms {
 		int doorX = x;
 		int doorY = y;
 		int height = (int) (3+Math.random()*map.length/7);
-		y++;
 		int width = (int) (3+Math.random()*map[0].length/7);
 		x-=(int) (Math.random()*width);
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
 		if(isValidRoom(room)){
-			map[doorY][doorX]=0;
 			addRoomToMap(room);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
@@ -143,12 +140,11 @@ public class Rooms {
 		int height = (int) (3+Math.random()*map.length/7);
 		y-=(int)(Math.random()*height);
 		int width = (int) (3+Math.random()*map[0].length/7);
-		x-=1+width;
+		x-=width;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
 		if(isValidRoom(room)){
-			map[doorY][doorX]=0;
 			addRoomToMap(room);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
@@ -181,12 +177,10 @@ public class Rooms {
 		int height = (int) (3+Math.random()*map.length/7);
 		y-=(int)(Math.random()*height);
 		int width = (int) (3+Math.random()*map[0].length/7);
-		x++;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
 		if(isValidRoom(room)){
-			map[doorY][doorX]=0;
 			addRoomToMap(room);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
@@ -225,7 +219,7 @@ public class Rooms {
 			if(dir == 2)x--;
 			if(dir == 3)x++;
 			if(isValidHallTile(x,y)&&!hallCoordinates.contains(new int[]{x,y})){
-				hallCoordinates.add(new int[]{x,y});
+				hallCoordinates.add(new int[]{x,y,dir});
 				if(Math.random()>0.6){
 					if(dir == 0||dir == 1){
 						dir=2+(int) (Math.random()*2);
@@ -246,14 +240,14 @@ public class Rooms {
 			}
 		}
 		if(generateRoom&&generateHall){
-			if(dir == 0){
-				generateHall=generateBelowRoom(x, y--);
-			}else if(dir == 1){
-				generateHall=generateAboveRoom(x, y++);
-			}else if(dir == 2){
-				generateHall=generateLeftRoom(x--, y);
-			}else if(dir == 3){
-				generateHall=generateRightRoom(x++, y);
+			if(hallCoordinates.get(hallCoordinates.size()-1)[2] == 0){
+				generateHall=generateBelowRoom(x, y);
+			}else if(hallCoordinates.get(hallCoordinates.size()-1)[2] == 1){
+				generateHall=generateAboveRoom(x, y+1);
+			}else if(hallCoordinates.get(hallCoordinates.size()-1)[2] == 2){
+				generateHall=generateLeftRoom(x, y);
+			}else if(hallCoordinates.get(hallCoordinates.size()-1)[2] == 3){
+				generateHall=generateRightRoom(x+1, y);
 			}
 		}
 		if(generateHall){
@@ -261,6 +255,8 @@ public class Rooms {
 			for(int i=0;i<hallCoordinates.size();i++){
 				System.out.println("Hall Made: "+hallCoordinates.get(i)[0]+", "+hallCoordinates.get(i)[1]);
 				map[hallCoordinates.get(i)[1]][hallCoordinates.get(i)[0]]=0;
+				if(i==0)map[hallCoordinates.get(i)[1]][hallCoordinates.get(i)[0]]=3;
+				if(i==hallCoordinates.size()-1)map[hallCoordinates.get(i)[1]][hallCoordinates.get(i)[0]]=3;
 			}
 		}
 	}
