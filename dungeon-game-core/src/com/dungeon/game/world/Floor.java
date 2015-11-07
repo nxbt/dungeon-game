@@ -41,14 +41,11 @@ public class Floor {
 				spritesheet[i*sheetWidth+k] = new TextureRegion(new Texture(DEFAULT),k*Tile.TS,i*Tile.TS,Tile.TS,Tile.TS);
 			}
 		}
-<<<<<<< HEAD
 		Rooms gen = new Rooms(width, height);
 		int[][] map = gen.getMap();
-=======
 		
 		fixBleeding(spritesheet);
-		
->>>>>>> refs/remotes/origin/master
+
 		//temp: remove once random generator has been created
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){

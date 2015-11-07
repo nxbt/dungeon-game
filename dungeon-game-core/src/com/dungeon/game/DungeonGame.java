@@ -14,18 +14,7 @@ public class DungeonGame extends ApplicationAdapter {
 	public void create() {
 		batch = new SpriteBatch();
 		
-<<<<<<< HEAD
-		
 		world = new World();
-		dungeon = world.dungeons.get(0);
-		floor = dungeon.floors.get(0);
-		player = new Player(floor.tm[0].length*Tile.TS/2,floor.tm.length*Tile.TS/2);
-		System.out.println(player.x);
-		
-		entities = floor.entities;
-=======
-		world = new World();
->>>>>>> refs/remotes/origin/master
 		
 		Gdx.graphics.setDisplayMode(1280, 720, false);
 	}
