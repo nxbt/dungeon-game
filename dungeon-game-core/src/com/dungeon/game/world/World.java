@@ -42,7 +42,7 @@ public class World {
 		entities = new ArrayList<Entity>();
 		hudEntities = new ArrayList<Entity>();
 		
-		player = new Player(100, 50);
+		player = new Player(curFloor.tm[0].length/2*Tile.TS, curFloor.tm.length/2*Tile.TS);
 		
 		mouse = new Mouse(0, 0);
 		
