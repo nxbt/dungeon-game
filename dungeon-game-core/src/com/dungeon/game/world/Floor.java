@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.generator.Rooms;
 
 public class Floor {
 	private static final String DEFAULT = "Tilemap.png";
@@ -38,14 +41,15 @@ public class Floor {
 				spritesheet[i*sheetWidth+k] = new TextureRegion(new Texture(DEFAULT),k*Tile.TS,i*Tile.TS,Tile.TS,Tile.TS);
 			}
 		}
+		Rooms gen = new Rooms(width, height);
+		int[][] map = gen.getMap();
 		
 		fixBleeding(spritesheet);
-		
+
 		//temp: remove once random generator has been created
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
-				if(i==0||k==0||i==tm.length-1||k==tm[i].length-1)tm[i][k] = new Tile(spritesheet,2);
-				else tm[i][k] = new Tile(spritesheet,(int)(Math.random()*3));
+				tm[i][k] = new Tile(spritesheet,map[i][k]);
 			}
 		}
 	}
