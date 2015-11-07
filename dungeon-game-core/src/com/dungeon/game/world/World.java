@@ -23,7 +23,7 @@ public class World {
 	public ArrayList<Entity> entities;
 	public ArrayList<Entity> hudEntities;
 	
-	public Entity player;
+	public Player player;
 	public Entity mouse;
 	
 	public World() {
@@ -48,7 +48,8 @@ public class World {
 		
 		entities.add(player);
 		
-		hudEntities.add(mouse);
+//		hudEntities.add(mouse);
+		hudEntities.add(player.inv.graphic);
 	}
 	
 	public void update() {
@@ -59,6 +60,8 @@ public class World {
 		for(Entity ent: hudEntities) {
 			ent.update(this);
 		}
+		
+		mouse.update(this);
 		
 		cam.update(player.x+player.d_width/2, player.y+player.d_height/2, mouse.x, mouse.y, 1f);
 	}
@@ -82,6 +85,8 @@ public class World {
 		for(Entity ent: hudEntities) {
 			ent.draw(batch);
 		}
+		
+		mouse.draw(batch);
 		
 		batch.end();
 	}

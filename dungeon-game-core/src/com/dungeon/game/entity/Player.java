@@ -7,14 +7,24 @@ import com.dungeon.game.item.*;
 import com.dungeon.game.world.World;
 
 public class Player extends Dynamic {
-	Inventory inv;
+	public Inventory inv;
 	
 	public Player(int x, int y) {
 		super(x, y);
 		
-		inv = new Inventory(10);
-		
-		inv.slot[0].item = new Crap();
+		int[][] invLayout = new int[][] {
+			new int[] {0, 0, 0},
+			new int[] {0, 40, 0},
+			new int[] {0, 80, 0},
+			new int[] {0, 120, 0},
+			new int[] {0, 160, 0},
+			new int[] {0, 0, 40},
+			new int[] {0, 40, 40},
+			new int[] {0, 80, 40},
+			new int[] {0, 120, 40},
+			new int[] {0, 160, 40}
+		};
+		inv = new Inventory(invLayout);
 	}
 	
 	public void init() {
@@ -39,6 +49,9 @@ public class Player extends Dynamic {
 	}
 	
 	public void calc(World world) {
+		inv.slot[(int)(Math.random()*10)].item = null;
+		inv.slot[(int)(Math.random()*10)].item = new Crap();
+		
 		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)  || Gdx.input.isKeyPressed(Input.Keys.A)) inp_lt = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) inp_rt = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) inp_up = true;

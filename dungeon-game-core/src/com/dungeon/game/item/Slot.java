@@ -8,10 +8,16 @@ public class Slot {
 	
 	public int type;
 	
-	public Slot(int type) {
+	public int x;
+	public int y;
+	
+	public Slot(int[] data) {
 		this.item = null;
 		
-		this.type = type;
+		this.type = data[0];
+		
+		this.x = data[1];
+		this.y = data[2];
 	}
 	
 	public void swap(Slot that) {
@@ -21,7 +27,7 @@ public class Slot {
 		this.item = temp;
 	}
 	
-	public void draw(SpriteBatch batch, int x, int y) {
-		if(item != null) batch.draw(item.sprite, x, y);
+	public void draw(SpriteBatch batch, int xoff, int yoff) {
+		if(item != null) batch.draw(item.sprite, x+xoff, y+yoff);
 	}
 }
