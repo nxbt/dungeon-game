@@ -43,19 +43,19 @@ public class Rooms {
 				if(dir == 0){
 					nextX = (int) (x+width*Math.random());
 					nextY = y;
-					generateHallWay(nextX, nextY-1, dir);
+					generateHallWay(nextX, nextY-1, dir, room);
 				}else if(dir == 1){
 					nextX = (int) (x+width*Math.random());
 					nextY = y+height;
-					generateHallWay(nextX, nextY, dir);
+					generateHallWay(nextX, nextY, dir, room);
 				}else if(dir == 2){
 					nextX = x;
 					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX-1, nextY, dir);
+					generateHallWay(nextX-1, nextY, dir, room);
 				}else if(dir == 3){
 					nextX = x+width;
 					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX, nextY, dir);
+					generateHallWay(nextX, nextY, dir, room);
 				}
 			}
 			return true;
@@ -86,19 +86,19 @@ public class Rooms {
 				if(dir == 0){
 					nextX = (int) (x+width*Math.random());
 					nextY = y;
-					generateHallWay(nextX, nextY-1, dir);
+					generateHallWay(nextX, nextY-1, dir, room);
 				}else if(dir == 1){
 					nextX = (int) (x+width*Math.random());
 					nextY = y+height;
-					generateHallWay(nextX, nextY, dir);
+					generateHallWay(nextX, nextY, dir, room);
 				}else if(dir == 2){
 					nextX = x;
 					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX-1, nextY, dir);
+					generateHallWay(nextX-1, nextY, dir, room);
 				}else if(dir == 3){
 					nextX = x+width;
 					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX, nextY, dir);
+					generateHallWay(nextX, nextY, dir, room);
 				}
 			}
 			return true;
@@ -129,19 +129,19 @@ public class Rooms {
 				if(dir == 0){
 					nextX = (int) (x+width*Math.random());
 					nextY = y;
-					generateHallWay(nextX, nextY-1, dir);
+					generateHallWay(nextX, nextY-1, dir, room);
 				}else if(dir == 1){
 					nextX = (int) (x+width*Math.random());
 					nextY = y+height;
-					generateHallWay(nextX, nextY, dir);
+					generateHallWay(nextX, nextY, dir, room);
 				}else if(dir == 2){
 					nextX = x;
 					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX-1, nextY, dir);
+					generateHallWay(nextX-1, nextY, dir, room);
 				}else if(dir == 3){
 					nextX = x+width;
 					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX, nextY, dir);
+					generateHallWay(nextX, nextY, dir, room);
 				}
 			}
 			return true;
@@ -173,19 +173,19 @@ public class Rooms {
 				if(dir == 0){
 					nextX = (int) (x+width*Math.random());
 					nextY = y;
-					generateHallWay(nextX, nextY-1, dir);
+					generateHallWay(nextX, nextY-1, dir, room);
 				}else if(dir == 1){
 					nextX = (int) (x+width*Math.random());
 					nextY = y+height;
-					generateHallWay(nextX, nextY, dir);
+					generateHallWay(nextX, nextY, dir, room);
 				}else if(dir == 2){
 					nextX = x;
 					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX-1, nextY, dir);
+					generateHallWay(nextX-1, nextY, dir, room);
 				}else if(dir == 3){
 					nextX = x+width;
 					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX, nextY, dir);
+					generateHallWay(nextX, nextY, dir, room);
 				}
 			}
 			return true;
@@ -216,19 +216,19 @@ public class Rooms {
 				if(dir == 0){
 					nextX = (int) (x+width*Math.random());
 					nextY = y;
-					generateHallWay(nextX, nextY-1, dir);
+					generateHallWay(nextX, nextY-1, dir, room);
 				}else if(dir == 1){
 					nextX = (int) (x+width*Math.random());
 					nextY = y+height;
-					generateHallWay(nextX, nextY, dir);
+					generateHallWay(nextX, nextY, dir, room);
 				}else if(dir == 2){
 					nextX = x;
 					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX-1, nextY, dir);
+					generateHallWay(nextX-1, nextY, dir, room);
 				}else if(dir == 3){
 					nextX = x+width;
 					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX, nextY, dir);
+					generateHallWay(nextX, nextY, dir, room);
 				}
 			}
 			return true;
@@ -237,7 +237,7 @@ public class Rooms {
 		return false;
 	}
 	
-	public void generateHallWay(int x, int y, int dir){
+	public void generateHallWay(int x, int y, int dir, Rectangle room){
 		boolean justTurned = true;
 		boolean generateHall = true;
 		boolean generateRoom = true;
@@ -249,7 +249,7 @@ public class Rooms {
 			if(dir == 1)y++;
 			if(dir == 2)x--;
 			if(dir == 3)x++;
-			if(isValidHallTile(x,y)&&!(hallCoordinates.contains(new int[]{x,y, 0})||hallCoordinates.contains(new int[]{x,y, 1})||hallCoordinates.contains(new int[]{x,y, 2})||hallCoordinates.contains(new int[]{x,y, 3}))){
+			if(isValidHallTile(x,y)&&(hallCoordinates.indexOf(new int[]{x,y, 0})==-1&&hallCoordinates.indexOf(new int[]{x,y, 1})==-1&&hallCoordinates.indexOf(new int[]{x,y, 2})==-1&&hallCoordinates.indexOf(new int[]{x,y, 3})==-1)){
 				hallCoordinates.add(new int[]{x,y,dir});
 				if(Math.random()>0.8&&justTurned==false){
 					justTurned=true;
@@ -267,7 +267,7 @@ public class Rooms {
 				if(dir == 1)y++;
 				if(dir == 2)x--;
 				if(dir == 3)x++;
-				if(isTileInRoom(x,y)){
+				if(isTileInRoom(x,y, room)){
 					i=length;
 					generateRoom = false;
 					generateHall = true;
@@ -349,14 +349,16 @@ public class Rooms {
 		return result;
 	}
 	
-	public boolean isTileInRoom(int x, int y){
+	public boolean isTileInRoom(int x, int y, Rectangle room){
 		boolean result = false;
 		for(Rectangle i: rooms){
 			boolean xInter = false;
 			boolean yInter = false;
-			if(x>=i.getX()&&x<i.getX()+i.getWidth())xInter = true;
-			if(y>=i.getY()&&y<i.getY()+i.getHeight())yInter = true;
-			if(xInter&&yInter)result = true;
+			if(i!=room){
+				if(x>=i.getX()&&x<i.getX()+i.getWidth())xInter = true;
+				if(y>=i.getY()&&y<i.getY()+i.getHeight())yInter = true;
+				if(xInter&&yInter)result = true;
+			}
 		}
 		return result;
 	}
