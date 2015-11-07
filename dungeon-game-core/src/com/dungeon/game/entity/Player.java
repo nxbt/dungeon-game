@@ -3,11 +3,18 @@ package com.dungeon.game.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.dungeon.game.item.*;
 import com.dungeon.game.world.World;
 
 public class Player extends Dynamic {
+	Inventory inv;
+	
 	public Player(int x, int y) {
 		super(x, y);
+		
+		inv = new Inventory(10);
+		
+		inv.slot[0].item = new Crap();
 	}
 	
 	public void init() {

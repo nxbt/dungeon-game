@@ -6,7 +6,7 @@ public abstract class Equippable extends Item {
 	public int curDurability;
 	
 	public Equippable(String name, String desc, int durability) {
-		super(name, desc, 1);
+		super();
 		
 		this.durability  = durability;
 		curDurability = durability;

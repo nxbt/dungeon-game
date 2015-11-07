@@ -295,7 +295,6 @@ public class Rooms {
 			}
 		}
 		if(generateHall&&Math.random()>0.9&&hallCoordinates.size()>=5){
-			System.out.println(hallCoordinates.size());
 			halls.add(hallCoordinates);
 			for(int i=0;i<hallCoordinates.size();i++){
 				map[hallCoordinates.get(i)[1]][hallCoordinates.get(i)[0]]=0;
