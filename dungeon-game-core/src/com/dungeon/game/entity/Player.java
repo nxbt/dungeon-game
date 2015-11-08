@@ -13,22 +13,27 @@ public class Player extends Dynamic {
 		super(x, y);
 		
 		int[][] invLayout = new int[][] {
-			new int[] {0, 0, 0},
-			new int[] {0, 40, 0},
-			new int[] {0, 80, 0},
-			new int[] {0, 120, 0},
-			new int[] {0, 160, 0},
-			new int[] {0, 0, 40},
-			new int[] {0, 40, 40},
-			new int[] {0, 80, 40},
-			new int[] {0, 120, 40},
-			new int[] {0, 160, 40}
+			new int[] {0, 8, 8},
+			new int[] {0, 48, 8},
+			new int[] {0, 88, 8},
+			new int[] {0, 128, 8},
+			new int[] {0, 168, 8},
+			new int[] {0, 8, 48},
+			new int[] {0, 48, 48},
+			new int[] {0, 88, 48},
+			new int[] {0, 128, 48},
+			new int[] {0, 168, 48},
+			new int[] {0, 8, 88},
+			new int[] {0, 48, 88},
+			new int[] {0, 88, 88},
+			new int[] {0, 128, 88},
+			new int[] {0, 168, 88}
 		};
-		inv = new Inventory(invLayout);
+		inv = new Inventory(invLayout, "invBack.png");
 		
-		inv.slot[(int)(Math.random()*10)].item = new Crap();
-		inv.slot[(int)(Math.random()*10)].item = new Crap();
-		inv.slot[(int)(Math.random()*10)].item = new Crap();
+		inv.slot[(int)(Math.random()*15)].item = new Crap();
+		inv.slot[(int)(Math.random()*15)].item = new Crap();
+		inv.slot[(int)(Math.random()*15)].item = new Crap();
 	}
 	
 	public void init() {

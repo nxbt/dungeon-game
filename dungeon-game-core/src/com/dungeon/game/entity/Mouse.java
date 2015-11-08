@@ -2,10 +2,16 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.item.Crap;
+import com.dungeon.game.item.Item;
+import com.dungeon.game.item.Slot;
 import com.dungeon.game.world.World;
 
 public class Mouse extends Hud {
-
+	
+	public Slot slot;
+	
 	public Mouse(int x, int y) {
 		super(x, y);
 	}
@@ -21,6 +27,10 @@ public class Mouse extends Hud {
 		
 		d_offx = -8;
 		d_offy = -8;
+		
+		slot = new Slot(new int[] {0, 0, 0}, null);
+		
+		slot.item = new Crap();
 	}
 
 	@Override
@@ -38,4 +48,8 @@ public class Mouse extends Hud {
 		else if(y > screenHeight) y = screenHeight;
 	}
 
+	public void draw(SpriteBatch batch) {
+		if(slot.item != null) batch.draw(slot.item.sprite, x-Item.SIZE/2, y-Item.SIZE/2, Item.SIZE, Item.SIZE);
+		else batch.draw(sprite, x+d_offx, y+d_offy, d_width, d_height);
+	}
 }

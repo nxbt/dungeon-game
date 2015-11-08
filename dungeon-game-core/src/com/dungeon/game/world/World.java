@@ -24,7 +24,7 @@ public class World {
 	public ArrayList<Entity> hudEntities;
 	
 	public Player player;
-	public Entity mouse;
+	public Mouse mouse;
 	
 	public World() {
 		hudBatch = new SpriteBatch();
