@@ -18,8 +18,8 @@ public class InvGraphic extends Hud {
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
-		
+		x = 10;
+		y = 100;
 	}
 
 	@Override

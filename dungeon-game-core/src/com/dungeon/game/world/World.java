@@ -48,8 +48,7 @@ public class World {
 		
 		entities.add(player);
 		
-//		hudEntities.add(mouse);
-		hudEntities.add(player.inv.graphic);
+//		hudEntities.add(player.inv.graphic);
 	}
 	
 	public void update() {
