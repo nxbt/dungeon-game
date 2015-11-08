@@ -8,7 +8,7 @@ public class Stick extends Item {
 
 	@Override
 	public void init() {
-		type = 0;
+		type = DEFAULT;
 		
 		name = "Wooden stick";
 		desc = "As opossed to a stone stick.";

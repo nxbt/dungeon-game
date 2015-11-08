@@ -23,6 +23,5 @@ public class Biospheres extends Generation {
 		int nextX;
 		int nextY;
 		return false;
-		
 	}
 }

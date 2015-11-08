@@ -13,11 +13,13 @@ public class Player extends Dynamic {
 		super(x, y);
 		
 		int[][] invLayout = new int[][] {
-			new int[] {0, 8, 8},
-			new int[] {0, 48, 8},
-			new int[] {0, 88, 8},
-			new int[] {0, 128, 8},
-			new int[] {0, 168, 8},
+			//consumables
+			new int[] {1, 8, 8},
+			new int[] {1, 48, 8},
+			new int[] {1, 88, 8},
+			new int[] {1, 128, 8},
+			new int[] {1, 168, 8},
+			//inventory
 			new int[] {0, 8, 48},
 			new int[] {0, 48, 48},
 			new int[] {0, 88, 48},
@@ -27,11 +29,41 @@ public class Player extends Dynamic {
 			new int[] {0, 48, 88},
 			new int[] {0, 88, 88},
 			new int[] {0, 128, 88},
-			new int[] {0, 168, 88}
+			new int[] {0, 168, 88},
+			new int[] {0, 8, 128},
+			new int[] {0, 48, 128},
+			new int[] {0, 88, 128},
+			new int[] {0, 128, 128},
+			new int[] {0, 168, 128},
+			new int[] {0, 8, 168},
+			new int[] {0, 48, 168},
+			new int[] {0, 88, 168},
+			new int[] {0, 128, 168},
+			new int[] {0, 168, 168},
+			new int[] {0, 8, 208},
+			new int[] {0, 48, 208},
+			new int[] {0, 88, 208},
+			new int[] {0, 128, 208},
+			new int[] {0, 168, 208},
+			//weapons
+			new int[] {2, 208, 8},
+			new int[] {2, 248, 8},
+			//Armor
+			new int[] {7, 208, 48},
+			new int[] {6, 208, 88},
+			new int[] {5, 208, 128},
+			new int[] {4, 208, 168},
+			new int[] {3, 208, 208},
+			//Rings and Amulet
+			new int[] {9, 248, 48},
+			new int[] {9, 248, 88},
+			new int[] {9, 248, 128},
+			new int[] {9, 248, 168},
+			new int[] {8, 248, 208},
 		};
 		inv = new Inventory(invLayout, "invBack.png");
 		
-		inv.slot[0].item = new Crap();
+		inv.slot[0].item = new Hat();
 		inv.slot[1].item = new Crap();
 		inv.slot[2].item = new Crap();
 		inv.slot[3].item = new Crap();

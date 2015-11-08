@@ -8,7 +8,7 @@ public class Crap extends Item {
 
 	@Override
 	public void init() {
-		type = 0;
+		type = DEFAULT;
 		
 		name = "Pile of crap";
 		desc = "A large lump of human excrement. Why would you pick this up? \n\n Attack Damage: depends \n Range: depends";
