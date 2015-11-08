@@ -24,7 +24,6 @@ public class InvGraphic extends Hud {
 
 	@Override
 	public void calc(World world) {
-		// TODO Auto-generated method stub
 		
 	}
 	

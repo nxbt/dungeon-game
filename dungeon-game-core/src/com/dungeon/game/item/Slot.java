@@ -28,6 +28,6 @@ public class Slot {
 	}
 	
 	public void draw(SpriteBatch batch, int xoff, int yoff) {
-		if(item != null) batch.draw(item.sprite, x+xoff, y+yoff);
+		if(item != null) batch.draw(item.sprite, x+xoff, y+yoff, Item.SIZE, Item.SIZE);
 	}
 }

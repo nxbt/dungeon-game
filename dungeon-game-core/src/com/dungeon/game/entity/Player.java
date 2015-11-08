@@ -25,6 +25,10 @@ public class Player extends Dynamic {
 			new int[] {0, 160, 40}
 		};
 		inv = new Inventory(invLayout);
+		
+		inv.slot[(int)(Math.random()*10)].item = new Crap();
+		inv.slot[(int)(Math.random()*10)].item = new Crap();
+		inv.slot[(int)(Math.random()*10)].item = new Crap();
 	}
 	
 	public void init() {
@@ -49,8 +53,12 @@ public class Player extends Dynamic {
 	}
 	
 	public void calc(World world) {
-		inv.slot[(int)(Math.random()*10)].item = null;
-		inv.slot[(int)(Math.random()*10)].item = new Crap();
+		if(Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+			if(world.hudEntities.indexOf(inv.graphic) == -1) {
+				world.hudEntities.add(inv.graphic);
+			}
+			else world.hudEntities.remove(inv.graphic);
+		}
 		
 		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)  || Gdx.input.isKeyPressed(Input.Keys.A)) inp_lt = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) inp_rt = true;

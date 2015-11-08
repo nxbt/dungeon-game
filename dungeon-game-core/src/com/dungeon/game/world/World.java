@@ -47,8 +47,6 @@ public class World {
 		mouse = new Mouse(0, 0);
 		
 		entities.add(player);
-		
-//		hudEntities.add(player.inv.graphic);
 	}
 	
 	public void update() {
