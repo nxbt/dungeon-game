@@ -16,4 +16,13 @@ public class Biospheres extends Generation {
 		int x = width/2;
 		int y = height/2;
 	}
+	
+	public boolean generateStartSphere(int x, int y){
+		int radius = (int) (Math.random()*10);
+		Circle room = new Circle(x,y,radius);
+		int nextX;
+		int nextY;
+		return false;
+		
+	}
 }

@@ -246,9 +246,9 @@ public class Rooms extends Generation {
 			if(dir == 1)y++;
 			if(dir == 2)x--;
 			if(dir == 3)x++;
-			if(isValidHallTile(x,y)&&(hallCoordinates.indexOf(new int[]{x,y, 0})==-1&&hallCoordinates.indexOf(new int[]{x,y, 1})==-1&&hallCoordinates.indexOf(new int[]{x,y, 2})==-1&&hallCoordinates.indexOf(new int[]{x,y, 3})==-1)){
+			if(isValidHallTile(x,y, hallCoordinates)){
 				hallCoordinates.add(new int[]{x,y,dir});
-				if(Math.random()>0.8&&justTurned==false){
+				if(Math.random()>0.2&&justTurned==false){
 					justTurned=true;
 					if(dir == 0||dir == 1){
 						dir=2+(int) (Math.random()*2);
@@ -258,7 +258,7 @@ public class Rooms extends Generation {
 				}else{
 					justTurned = false;
 				}
-			} else if((hallCoordinates.indexOf(new int[]{x,y, 0})==-1&&hallCoordinates.indexOf(new int[]{x,y, 1})==-1&&hallCoordinates.indexOf(new int[]{x,y, 2})==-1&&hallCoordinates.indexOf(new int[]{x,y, 3})==-1)){
+			} else{
 				hallCoordinates.add(new int[]{x,y,dir});
 				if(dir == 0)y--;
 				if(dir == 1)y++;
@@ -275,10 +275,6 @@ public class Rooms extends Generation {
 					generateHall = false;
 					generateRoom = false;
 				}
-			}else{
-				i=length;
-				generateHall = false;
-				generateRoom = false;
 			}
 		}
 		if(generateRoom&&generateHall){
@@ -327,7 +323,7 @@ public class Rooms extends Generation {
 		return result;
 	}
 	
-	public boolean isValidHallTile(int x, int y){
+	public boolean isValidHallTile(int x, int y, ArrayList<int[]> otherTiles){
 		boolean result = true;
 		for(Rectangle i: rooms){
 			boolean xInter = false;
@@ -346,6 +342,9 @@ public class Rooms extends Generation {
 				if(x == k[0]&&y-1==k[1])result = false;
 			}
 		}
+		for(int[] i: otherTiles){
+			if(i[0]==x&&i[1]==y)result = false;
+		}
 		return result;
 	}
 	
@@ -362,7 +361,7 @@ public class Rooms extends Generation {
 		return null;
 	}
 	
-	private boolean isHallTaken(Rectangle roomOne, Rectangle roomTwo) {
+	public boolean isHallTaken(Rectangle roomOne, Rectangle roomTwo) {
 		for(Rectangle[] i: hallEnds){
 			if(roomOne == i[0]&&roomTwo==i[1])return true;
 			if(roomOne == i[1]&&roomTwo==i[0])return true;
