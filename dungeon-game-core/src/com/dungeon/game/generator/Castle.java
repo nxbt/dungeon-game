@@ -5,25 +5,16 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 
-public class Castle {
-	private int width;
-	private int height;
-	private int[][] map;
+public class Castle extends Generation {
 	private ArrayList<Rectangle> rooms;
 	
 	public Castle(int width, int height){
-		this.width = width;
-		this.height = height;
-		map = new int[height][width];
+		super(width, height);
 		rooms = new ArrayList<Rectangle>();
 		generateClearDungeon();
 		int x = height/2;
 		int y = width/2;
 		generateStartRoom(x, y);
-	}
-	
-	public int[][] getMap(){
-		return map;
 	}
 	
 	public void generateStartRoom(int x, int y){
@@ -228,14 +219,6 @@ public class Castle {
 			}
 			y++;
 			x-=width;
-		}
-	}
-	
-	public void generateClearDungeon(){
-		for(int i = 0; i<map.length;i++){
-			for(int k = 0; k<map[i].length;k++){
-				map[i][k]=2;
-			}
 		}
 	}
 }

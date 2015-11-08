@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.generator.Castle;
+import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.Rooms;
 
 public class Floor {
@@ -42,7 +43,7 @@ public class Floor {
 				spritesheet[i*sheetWidth+k] = new TextureRegion(new Texture(DEFAULT),k*Tile.TS,i*Tile.TS,Tile.TS,Tile.TS);
 			}
 		}
-		Rooms gen = new Rooms(width, height);
+		Generation gen = new Castle(width, height);
 		int[][] map = gen.getMap();
 		
 		fixBleeding(spritesheet);
