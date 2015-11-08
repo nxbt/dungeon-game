@@ -10,6 +10,9 @@ import com.dungeon.game.world.World;
 
 public class Mouse extends Hud {
 	
+	public boolean pressed;
+	private boolean down;
+	
 	public Slot slot;
 	
 	public Mouse(int x, int y) {
@@ -46,6 +49,17 @@ public class Mouse extends Hud {
 		else if(x > screenWidth) x = screenWidth;
 		if(y < 0) y = 0;
 		else if(y > screenHeight) y = screenHeight;
+		
+		if(Gdx.input.isButtonPressed(0) && !down) {
+			down = true;
+			pressed = true;
+		}
+		else if(!Gdx.input.isButtonPressed(0)) {
+			down = false;
+		}
+		else {
+			pressed = false;
+		}
 	}
 
 	public void draw(SpriteBatch batch) {

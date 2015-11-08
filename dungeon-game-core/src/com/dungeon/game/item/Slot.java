@@ -34,7 +34,7 @@ public class Slot {
 	}
 	
 	public void calc(World world) {
-		if(Gdx.input.isButtonPressed(0) && world.mouse.x > x+inv.graphic.x && world.mouse.x < x+Item.SIZE+inv.graphic.x && world.mouse.y > y+inv.graphic.y && world.mouse.y < y+Item.SIZE+inv.graphic.y) {
+		if(world.mouse.pressed && world.mouse.x > x+inv.graphic.x && world.mouse.x < x+Item.SIZE+inv.graphic.x && world.mouse.y > y+inv.graphic.y && world.mouse.y < y+Item.SIZE+inv.graphic.y) {
 			swap(world.mouse.slot);
 		}
 	}
