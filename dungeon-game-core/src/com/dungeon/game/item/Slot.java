@@ -1,6 +1,5 @@
 package com.dungeon.game.item;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -42,16 +41,24 @@ public class Slot {
 		
 		if(world.mouse.x > x+inv.graphic.x && world.mouse.x < x+Item.SIZE+inv.graphic.x && world.mouse.y > y+inv.graphic.y && world.mouse.y < y+Item.SIZE+inv.graphic.y) {
 			if(world.mouse.lb_pressed) {
-				if(item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(item.name) && item.stack < item.maxStack) {
-					item.stack+=world.mouse.slot.item.stack;
-					world.mouse.slot.item = null;
+				if(item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(item.name)) {
+					if(item.stack + world.mouse.slot.item.stack <= item.maxStack) {
+						item.stack+=world.mouse.slot.item.stack;
+						world.mouse.slot.item = null;
+					}
+					else {
+						world.mouse.slot.item.stack = item.stack+world.mouse.slot.item.stack-item.maxStack;
+						item.stack = item.maxStack;
+					}
 				}
 				else swap(world.mouse.slot);
 			}
 			else if(world.mouse.rb_pressed) {
-				if(item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(item.name) && world.mouse.slot.item.stack < item.maxStack) {
-					item.stack--;
-					world.mouse.slot.item.stack++;
+				if(item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(item.name)) {
+					if(world.mouse.slot.item.stack < item.maxStack) {
+						item.stack--;
+						world.mouse.slot.item.stack++;
+					}
 				}
 				else if(item != null && world.mouse.slot.item == null) {
 					item.stack--;
@@ -92,7 +99,7 @@ public class Slot {
 				font.setColor(Color.LIGHT_GRAY);
 				font.getData().setScale(1f);
 				
-				font.draw(batch, Integer.toString(item.stack), x+xoff+Item.SIZE-font.getScaleX()*8, y+yoff+font.getScaleY()*12+1);
+				font.draw(batch, Integer.toString(item.stack), (float) (x+xoff+Item.SIZE-font.getScaleX()*(Math.floor(Math.log10(item.stack))+ 1)*7)-2, y+yoff+font.getScaleY()*12+1);
 			}
 		}
 	}

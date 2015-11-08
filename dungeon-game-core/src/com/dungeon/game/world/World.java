@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.*;
+import com.dungeon.game.item.Slot;
 
 public class World {
 	public SpriteBatch hudBatch;
@@ -47,18 +48,23 @@ public class World {
 		mouse = new Mouse(0, 0);
 		
 		entities.add(player);
+		entities.add(new Drop(curFloor.tm[0].length/2*Tile.TS, curFloor.tm.length/2*Tile.TS, new Slot(new int[] {0,0,0}, null)));
 	}
 	
 	public void update() {
-		for(Entity ent: entities) {
-			ent.update(this);
+		mouse.update(this);
+		
+		for(int i = 0; i < entities.size(); i++) {
+			entities.get(i).update(this);
+			if(entities.get(i).killMe) {
+				entities.remove(i);
+				i--;
+			}
 		}
 		
 		for(Entity ent: hudEntities) {
 			ent.update(this);
 		}
-		
-		mouse.update(this);
 		
 		cam.update(player.x+player.d_width/2, player.y+player.d_height/2, mouse.x, mouse.y, 1f);
 	}

@@ -8,6 +8,8 @@ public abstract class Entity {
 	public float x;
 	public float y;
 	
+	public boolean killMe;
+	
 	public int d_width;
 	public int d_height;
 	
@@ -23,6 +25,8 @@ public abstract class Entity {
 	public Entity(int x, int y) {
 		this.x = x;
 		this.y = y;
+		
+		this.killMe = false;
 		
 		this.init();
 	}

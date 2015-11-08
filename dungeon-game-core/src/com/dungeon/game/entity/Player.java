@@ -40,6 +40,11 @@ public class Player extends Dynamic {
 		inv.slot[6].item = new Crap();
 		inv.slot[7].item = new Stick();
 		inv.slot[8].item = new Stick();
+		inv.slot[9].item = new Crap();
+		inv.slot[10].item = new Crap();
+		inv.slot[11].item = new Crap();
+		inv.slot[12].item = new Crap();
+		inv.slot[13].item = new Crap();
 	}
 	
 	public void init() {

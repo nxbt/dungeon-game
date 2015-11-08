@@ -62,12 +62,12 @@ public class Mouse extends Hud {
 			down = true;
 			rb_pressed = true;
 		}
-		else if(!(Gdx.input.isButtonPressed(0) || Gdx.input.isButtonPressed(1))) {
-			down = false;
-		}
 		else {
 			lb_pressed = false;
 			rb_pressed = false;
+		}
+		if(!(Gdx.input.isButtonPressed(0) || Gdx.input.isButtonPressed(1))) {
+			down = false;
 		}
 	}
 

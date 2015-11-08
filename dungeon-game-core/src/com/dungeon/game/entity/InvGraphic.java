@@ -19,6 +19,9 @@ public class InvGraphic extends Hud {
 		this.sprite = new Texture(sprite);
 		
 		this.inv = inv;
+		
+		d_width = this.sprite.getWidth();
+		d_height = this.sprite.getHeight();
 	}
 
 	@Override
@@ -34,7 +37,7 @@ public class InvGraphic extends Hud {
 	
 	@Override
 	public void draw(SpriteBatch batch) {
-		batch.draw(sprite, x, y);
+		batch.draw(sprite, x, y, d_width, d_height);
 		
 		for(Slot s: slot) {
 			s.draw(batch, (int)x, (int)y);
