@@ -8,12 +8,13 @@ import com.badlogic.gdx.math.Rectangle;
 public class Rooms extends Generation {
 	private ArrayList<Rectangle> rooms;
 	private ArrayList<ArrayList<int[]>> halls;
+	private ArrayList<Rectangle[]> hallEnds;
 	
 	public Rooms(int width, int height){
 		super(width, height);
 		rooms = new ArrayList<Rectangle>();
 		halls = new ArrayList<ArrayList<int[]>>();
-		generateClearDungeon();
+		hallEnds = new ArrayList<Rectangle[]>();
 		int x = height/2;
 		int y = width/2;
 		generateStartRoom(x, y);
@@ -54,7 +55,7 @@ public class Rooms extends Generation {
 		return false;
 	}
 	
-	public boolean generateBelowRoom(int x, int y, ArrayList<int[]> hall){
+	public boolean generateBelowRoom(int x, int y, ArrayList<int[]> hall, Rectangle lastRoom){
 		int doorX = x;
 		int doorY = y-1;
 		int height = (int) (3+Math.random()*map.length/7);
@@ -66,6 +67,7 @@ public class Rooms extends Generation {
 		int nextY;
 		halls.add(hall);
 		if(isValidRoom(room)){
+			hallEnds.add(new Rectangle[]{room, lastRoom});
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=0;
 				if(i==0)map[hall.get(i)[1]][hall.get(i)[0]]=3;
@@ -98,7 +100,7 @@ public class Rooms extends Generation {
 		return false;
 	}
 	
-	public boolean generateAboveRoom(int x, int y, ArrayList<int[]> hall){
+	public boolean generateAboveRoom(int x, int y, ArrayList<int[]> hall, Rectangle lastRoom){
 		int doorX = x;
 		int doorY = y;
 		int height = (int) (3+Math.random()*map.length/7);
@@ -109,6 +111,7 @@ public class Rooms extends Generation {
 		int nextY;
 		halls.add(hall);
 		if(isValidRoom(room)){
+			hallEnds.add(new Rectangle[]{room, lastRoom});
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=0;
 				if(i==0)map[hall.get(i)[1]][hall.get(i)[0]]=3;
@@ -141,7 +144,7 @@ public class Rooms extends Generation {
 		return false;
 	}
 	
-	public boolean generateLeftRoom(int x, int y, ArrayList<int[]> hall){
+	public boolean generateLeftRoom(int x, int y, ArrayList<int[]> hall, Rectangle lastRoom){
 		int doorX = x-1;
 		int doorY = y;
 		int height = (int) (3+Math.random()*map.length/7);
@@ -153,6 +156,7 @@ public class Rooms extends Generation {
 		int nextY;
 		halls.add(hall);
 		if(isValidRoom(room)){
+			hallEnds.add(new Rectangle[]{room, lastRoom});
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=0;
 				if(i==0)map[hall.get(i)[1]][hall.get(i)[0]]=3;
@@ -185,7 +189,7 @@ public class Rooms extends Generation {
 		return false;
 	}
 	
-	public boolean generateRightRoom(int x, int y, ArrayList<int[]> hall){
+	public boolean generateRightRoom(int x, int y, ArrayList<int[]> hall, Rectangle lastRoom){
 		int doorX = x;
 		int doorY = y;
 		int height = (int) (3+Math.random()*map.length/7);
@@ -196,6 +200,7 @@ public class Rooms extends Generation {
 		int nextY;
 		halls.add(hall);
 		if(isValidRoom(room)){
+			hallEnds.add(new Rectangle[]{room, lastRoom});
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=0;
 				if(i==0)map[hall.get(i)[1]][hall.get(i)[0]]=3;
@@ -229,6 +234,7 @@ public class Rooms extends Generation {
 	}
 	
 	public void generateHallWay(int x, int y, int dir, Rectangle room){
+		Rectangle hallDest = null;
 		boolean justTurned = true;
 		boolean generateHall = true;
 		boolean generateRoom = true;
@@ -258,10 +264,12 @@ public class Rooms extends Generation {
 				if(dir == 1)y++;
 				if(dir == 2)x--;
 				if(dir == 3)x++;
-				if(isTileInRoom(x,y, room)){
+				if(isTileInRoom(x,y, room)!=null){
 					i=length;
 					generateRoom = false;
 					generateHall = true;
+					hallDest = isTileInRoom(x,y,room);
+					if(isHallTaken(room, hallDest))generateHall = false;
 				}else{
 					i=length;
 					generateHall = false;
@@ -276,16 +284,17 @@ public class Rooms extends Generation {
 		if(generateRoom&&generateHall){
 			generateHall=false;
 			if(hallCoordinates.get(hallCoordinates.size()-1)[2] == 0){
-				generateBelowRoom(x, y, hallCoordinates);
+				generateBelowRoom(x, y, hallCoordinates, room);
 			}else if(hallCoordinates.get(hallCoordinates.size()-1)[2] == 1){
-				generateAboveRoom(x, y+1, hallCoordinates);
+				generateAboveRoom(x, y+1, hallCoordinates, room);
 			}else if(hallCoordinates.get(hallCoordinates.size()-1)[2] == 2){
-				generateLeftRoom(x, y, hallCoordinates);
+				generateLeftRoom(x, y, hallCoordinates, room);
 			}else if(hallCoordinates.get(hallCoordinates.size()-1)[2] == 3){
-				generateRightRoom(x+1, y, hallCoordinates);
+				generateRightRoom(x+1, y, hallCoordinates, room);
 			}
 		}
 		if(generateHall&&Math.random()>0.9&&hallCoordinates.size()>=5){
+			hallEnds.add(new Rectangle[]{room,hallDest});
 			halls.add(hallCoordinates);
 			for(int i=0;i<hallCoordinates.size();i++){
 				map[hallCoordinates.get(i)[1]][hallCoordinates.get(i)[0]]=0;
@@ -294,7 +303,7 @@ public class Rooms extends Generation {
 			}
 		}
 	}
-	
+
 	public boolean isValidRoom(Rectangle room){
 		boolean result = true;
 		for(Rectangle i: rooms){
@@ -340,18 +349,25 @@ public class Rooms extends Generation {
 		return result;
 	}
 	
-	public boolean isTileInRoom(int x, int y, Rectangle room){
-		boolean result = false;
+	public Rectangle isTileInRoom(int x, int y, Rectangle room){
 		for(Rectangle i: rooms){
 			boolean xInter = false;
 			boolean yInter = false;
 			if(i!=room){
 				if(x>=i.getX()&&x<i.getX()+i.getWidth())xInter = true;
 				if(y>=i.getY()&&y<i.getY()+i.getHeight())yInter = true;
-				if(xInter&&yInter)result = true;
+				if(xInter&&yInter)return i;
 			}
 		}
-		return result;
+		return null;
+	}
+	
+	private boolean isHallTaken(Rectangle roomOne, Rectangle roomTwo) {
+		for(Rectangle[] i: hallEnds){
+			if(roomOne == i[0]&&roomTwo==i[1])return true;
+			if(roomOne == i[1]&&roomTwo==i[0])return true;
+		}
+		return false;
 	}
 	
 	public void addRoomToMap(Rectangle room){

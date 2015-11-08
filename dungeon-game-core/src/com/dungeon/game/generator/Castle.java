@@ -11,7 +11,6 @@ public class Castle extends Generation {
 	public Castle(int width, int height){
 		super(width, height);
 		rooms = new ArrayList<Rectangle>();
-		generateClearDungeon();
 		int x = height/2;
 		int y = width/2;
 		generateStartRoom(x, y);

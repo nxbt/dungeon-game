@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.generator.Biospheres;
 import com.dungeon.game.generator.Castle;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.Rooms;
@@ -43,7 +44,8 @@ public class Floor {
 				spritesheet[i*sheetWidth+k] = new TextureRegion(new Texture(DEFAULT),k*Tile.TS,i*Tile.TS,Tile.TS,Tile.TS);
 			}
 		}
-		Generation gen = new Castle(width, height);
+		
+		Generation gen = new Rooms(width, height);
 		int[][] map = gen.getMap();
 		
 		fixBleeding(spritesheet);
