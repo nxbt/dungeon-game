@@ -31,9 +31,15 @@ public class Player extends Dynamic {
 		};
 		inv = new Inventory(invLayout, "invBack.png");
 		
-		inv.slot[(int)(Math.random()*15)].item = new Crap();
-		inv.slot[(int)(Math.random()*15)].item = new Crap();
-		inv.slot[(int)(Math.random()*15)].item = new Crap();
+		inv.slot[0].item = new Crap();
+		inv.slot[1].item = new Crap();
+		inv.slot[2].item = new Crap();
+		inv.slot[3].item = new Crap();
+		inv.slot[4].item = new Crap();
+		inv.slot[5].item = new Crap();
+		inv.slot[6].item = new Crap();
+		inv.slot[7].item = new Stick();
+		inv.slot[8].item = new Stick();
 	}
 	
 	public void init() {

@@ -1,6 +1,8 @@
 package com.dungeon.game.item;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.world.World;
 
@@ -34,8 +36,31 @@ public class Slot {
 	}
 	
 	public void calc(World world) {
-		if(world.mouse.pressed && world.mouse.x > x+inv.graphic.x && world.mouse.x < x+Item.SIZE+inv.graphic.x && world.mouse.y > y+inv.graphic.y && world.mouse.y < y+Item.SIZE+inv.graphic.y) {
-			swap(world.mouse.slot);
+		if(world.mouse.lb_pressed && world.mouse.x > x+inv.graphic.x && world.mouse.x < x+Item.SIZE+inv.graphic.x && world.mouse.y > y+inv.graphic.y && world.mouse.y < y+Item.SIZE+inv.graphic.y) {
+			if(item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(item.name) && item.stack < item.maxStack) {
+				item.stack+=world.mouse.slot.item.stack;
+				world.mouse.slot.item = null;
+			}
+			else swap(world.mouse.slot);
+		}
+		else if(world.mouse.rb_pressed && world.mouse.x > x+inv.graphic.x && world.mouse.x < x+Item.SIZE+inv.graphic.x && world.mouse.y > y+inv.graphic.y && world.mouse.y < y+Item.SIZE+inv.graphic.y) {
+			if(item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(item.name) && world.mouse.slot.item.stack < item.maxStack) {
+				item.stack--;
+				world.mouse.slot.item.stack++;
+			}
+			else if(item != null && world.mouse.slot.item == null) {
+				item.stack--;
+				world.mouse.slot.item = (Item) item.clone();
+				world.mouse.slot.item.stack = 1;
+			}
+			else if(item == null && world.mouse.slot.item != null) {
+				world.mouse.slot.item.stack--;
+				item = (Item) world.mouse.slot.item.clone();
+				item.stack = 1;
+			}
+			else swap(world.mouse.slot);
+			if(item != null && item.stack == 0) item = null;
+			if(world.mouse.slot.item != null && world.mouse.slot.item.stack == 0) world.mouse.slot.item = null;
 		}
 	}
 	
@@ -44,6 +69,16 @@ public class Slot {
 	}
 	
 	public void draw(SpriteBatch batch, int xoff, int yoff) {
-		if(item != null) batch.draw(item.sprite, x+xoff, y+yoff, Item.SIZE, Item.SIZE);
+		if(item != null) {
+			batch.draw(item.sprite, x+xoff, y+yoff, Item.SIZE, Item.SIZE);
+			
+			if(item.stack > 1) {
+				BitmapFont font = new BitmapFont();
+				font.setColor(Color.LIGHT_GRAY);
+				font.getData().setScale(1f);
+				
+				font.draw(batch, Integer.toString(item.stack), x+xoff+Item.SIZE-font.getScaleX()*8, y+yoff+font.getScaleY()*12+1);
+			}
+		}
 	}
 }
