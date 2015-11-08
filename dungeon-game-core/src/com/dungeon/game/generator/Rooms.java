@@ -261,7 +261,7 @@ public class Rooms {
 				}else{
 					justTurned = false;
 				}
-			} else if(!(hallCoordinates.contains(new int[]{x,y, 0})||hallCoordinates.contains(new int[]{x,y, 1})||hallCoordinates.contains(new int[]{x,y, 2})||hallCoordinates.contains(new int[]{x,y, 3}))){
+			} else if((hallCoordinates.indexOf(new int[]{x,y, 0})==-1&&hallCoordinates.indexOf(new int[]{x,y, 1})==-1&&hallCoordinates.indexOf(new int[]{x,y, 2})==-1&&hallCoordinates.indexOf(new int[]{x,y, 3})==-1)){
 				hallCoordinates.add(new int[]{x,y,dir});
 				if(dir == 0)y--;
 				if(dir == 1)y++;
