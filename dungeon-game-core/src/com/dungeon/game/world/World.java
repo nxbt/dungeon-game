@@ -48,6 +48,7 @@ public class World {
 		mouse = new Mouse(0, 0);
 		
 		entities.add(player);
+		entities.add(new Chest(curFloor.tm[0].length/2*Tile.TS, curFloor.tm.length/2*Tile.TS));
 	}
 	
 	public void update() {

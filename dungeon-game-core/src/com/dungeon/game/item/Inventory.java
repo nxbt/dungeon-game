@@ -8,14 +8,14 @@ public class Inventory {
 	
 	public InvGraphic graphic;
 	
-	public Inventory(int[][] layout, String graphic) {
+	public Inventory(int[][] layout, String graphic, int x, int y) {
 		slot = new Slot[layout.length];
 		
 		for(int i = 0; i < slot.length; i++) {
 			slot[i] = new Slot(layout[i], this);
 		}
 		
-		this.graphic = new InvGraphic(graphic, this);
+		this.graphic = new InvGraphic(graphic, this, x, y);
 	}
 	
 	public void calc(World world) {

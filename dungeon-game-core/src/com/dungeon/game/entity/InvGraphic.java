@@ -11,8 +11,8 @@ public class InvGraphic extends Hud {
 	
 	Inventory inv;
 	
-	public InvGraphic(String sprite, Inventory inv) {
-		super(0, 0);
+	public InvGraphic(String sprite, Inventory inv, int x, int y) {
+		super(x, y);
 		
 		this.slot = inv.slot;
 		
@@ -26,8 +26,6 @@ public class InvGraphic extends Hud {
 
 	@Override
 	public void init() {
-		x = 10;
-		y = 100;
 	}
 
 	@Override
