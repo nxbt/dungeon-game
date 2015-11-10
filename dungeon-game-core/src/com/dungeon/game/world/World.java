@@ -48,7 +48,6 @@ public class World {
 		mouse = new Mouse(0, 0);
 		
 		entities.add(player);
-		entities.add(new Drop(curFloor.tm[0].length/2*Tile.TS, curFloor.tm.length/2*Tile.TS, new Slot(new int[] {0,0,0}, null)));
 	}
 	
 	public void update() {
@@ -79,8 +78,8 @@ public class World {
 		
 		curFloor.draw(batch, this);
 		
-		for(Entity ent: entities) {
-			ent.draw(batch);
+		for(int i = entities.size()-1; i >= 0; i--) {
+			entities.get(i).draw(batch);
 		}
 		
 		batch.setProjectionMatrix(hudCam.cam.combined);

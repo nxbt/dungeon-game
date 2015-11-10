@@ -7,6 +7,8 @@ import com.dungeon.game.item.*;
 import com.dungeon.game.world.World;
 
 public class Player extends Dynamic {
+	public final int REACH = 96;
+	
 	public Inventory inv;
 	
 	public Player(int x, int y) {

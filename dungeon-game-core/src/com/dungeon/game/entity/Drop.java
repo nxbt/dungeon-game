@@ -16,8 +16,6 @@ public class Drop extends Static {
 		
 		this.slot.swap(slot);
 		
-		this.slot.item = new Crap();
-		
 		sprite = this.slot.item.sprite;
 
 		d_width = sprite.getWidth();
@@ -29,7 +27,7 @@ public class Drop extends Static {
 
 	@Override
 	public void calc(World world) {
-		if(world.mouse.x > x-world.cam.x+world.cam.WIDTH/2 && world.mouse.x < x+Item.SIZE-world.cam.x+world.cam.WIDTH/2 && world.mouse.y > y-world.cam.y+world.cam.HEIGHT/2 && world.mouse.y < y+Item.SIZE-world.cam.y+world.cam.HEIGHT/2) {
+		if(world.mouse.canPickup && world.mouse.x > x-world.cam.x+world.cam.WIDTH/2 && world.mouse.x < x+Item.SIZE-world.cam.x+world.cam.WIDTH/2 && world.mouse.y > y-world.cam.y+world.cam.HEIGHT/2 && world.mouse.y < y+Item.SIZE-world.cam.y+world.cam.HEIGHT/2) {
 			if(world.mouse.lb_pressed) {
 				if(slot.item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(slot.item.name)) {
 					if(slot.item.stack + world.mouse.slot.item.stack <= slot.item.maxStack) {
