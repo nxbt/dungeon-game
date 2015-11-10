@@ -5,10 +5,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.item.Crap;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.Slot;
 import com.dungeon.game.item.Stick;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Mouse extends Hud {
@@ -80,7 +84,14 @@ public class Mouse extends Hud {
 		}
 		
 		canPickup = (!onHud &&  Math.sqrt(Math.pow((x+world.cam.x-world.cam.WIDTH/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+world.cam.y-world.cam.HEIGHT/2) - (world.player.y + world.player.d_height/2), 2)) <= world.player.REACH);
-		
+		for(int i = 0; i< world.curFloor.tm.length;i++){
+			for(int k = 0; k <world.curFloor.tm[i].length;k++){
+				if(world.curFloor.tm[k][i].data==1){
+					float[] verticies = new float[]{i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,(i)*Tile.TS,(k+1)*Tile.TS};
+					if(Intersector.intersectSegmentPolygon(new Vector2(x+world.cam.x-world.cam.WIDTH/2,y+world.cam.y-world.cam.HEIGHT/2), new Vector2(world.player.x + world.player.d_width/2,world.player.y + world.player.d_height/2), new Polygon(verticies))) canPickup = false;
+				}
+			}
+		}
 		canPlace = canPickup;
 		if(canPlace) {
 			for(Entity ent: world.entities) {
