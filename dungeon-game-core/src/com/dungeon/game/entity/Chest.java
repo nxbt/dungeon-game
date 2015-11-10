@@ -13,7 +13,6 @@ public class Chest extends Static {
 	public Inventory inv;
 	public Chest(int x, int y) {
 		super(x, y);
-		System.out.println("FUCk");
 	}
 
 	@Override
@@ -56,7 +55,6 @@ public class Chest extends Static {
 	@Override
 	public void calc(World world) {
 		if(world.mouse.rb_pressed&&world.mouse.x > x-world.cam.x+world.cam.WIDTH/2 && world.mouse.x < x+Item.SIZE-world.cam.x+world.cam.WIDTH/2 && world.mouse.y > y-world.cam.y+world.cam.HEIGHT/2 && world.mouse.y < y+Item.SIZE-world.cam.y+world.cam.HEIGHT/2){
-			System.out.println("clicked");
 			if(world.hudEntities.contains(inv.graphic)){
 				world.hudEntities.remove(inv.graphic);
 			}else{

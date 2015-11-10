@@ -2,7 +2,6 @@ package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Entity;
-import com.dungeon.game.entity.Player;
 import com.dungeon.game.world.World;
 
 public class Hat extends Equipable {
@@ -24,6 +23,6 @@ public class Hat extends Equipable {
 
 	@Override
 	public void calc(World world, Entity ent) {
-		
+		System.out.println("Swag");
 	}
 }
