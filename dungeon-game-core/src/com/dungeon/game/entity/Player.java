@@ -4,10 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.item.*;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Player extends Dynamic {
-	public final int REACH = 96;
+	public final int REACH = 4*Tile.TS;
 	
 	public Inventory inv;
 	
@@ -65,20 +66,21 @@ public class Player extends Dynamic {
 		};
 		inv = new Inventory(invLayout, "invBack.png");
 		
-		inv.slot[0].item = new Hat();
-		inv.slot[1].item = new Crap();
-		inv.slot[2].item = new Crap();
-		inv.slot[3].item = new Crap();
-		inv.slot[4].item = new Crap();
-		inv.slot[5].item = new Crap();
+		inv.slot[5].item = new Hat();
 		inv.slot[6].item = new Crap();
-		inv.slot[7].item = new Stick();
-		inv.slot[8].item = new Stick();
+		inv.slot[7].item = new Crap();
+		inv.slot[8].item = new Crap();
 		inv.slot[9].item = new Crap();
 		inv.slot[10].item = new Crap();
 		inv.slot[11].item = new Crap();
 		inv.slot[12].item = new Crap();
-		inv.slot[13].item = new Crap();
+		inv.slot[13].item = new Stick();
+		inv.slot[14].item = new Stick();
+		inv.slot[15].item = new Crap();
+		inv.slot[16].item = new Crap();
+		inv.slot[17].item = new Crap();
+		inv.slot[18].item = new Crap();
+		inv.slot[19].item = new Crap();
 	}
 	
 	public void init() {
