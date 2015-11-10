@@ -45,7 +45,7 @@ public class Floor {
 			}
 		}
 		
-		Generation gen = new Biospheres(width, height);
+		Generation gen = new Rooms(width, height);
 		int[][] map = gen.getMap();
 		
 		fixBleeding(spritesheet);
