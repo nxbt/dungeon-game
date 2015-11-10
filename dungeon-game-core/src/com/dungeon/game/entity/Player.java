@@ -14,16 +14,37 @@ public class Player extends Dynamic {
 	
 	public Player(int x, int y) {
 		super(x, y);
+	}
+	
+	public void init() {
+		name = "Player";
+		
+		acel = 1.5f;
+		mvel = 5;
+		fric = 1;
+		
+		width = 26;
+		height = 26;
+		
+		d_width = 32;
+		d_height = 32;
+		
+		d_offx = -3;
+		d_offy = -3;
+		
+		sprite = new Texture("Player.png");
+		
+		solid = true;
 		
 		int[][] invLayout = new int[][] {
 			//consumables
-			new int[] {1, 8, 8},
+			new int[] {1, 8, 8}, //0
 			new int[] {1, 48, 8},
 			new int[] {1, 88, 8},
 			new int[] {1, 128, 8},
 			new int[] {1, 168, 8},
 			//inventory
-			new int[] {0, 8, 48},
+			new int[] {0, 8, 48}, //5
 			new int[] {0, 48, 48},
 			new int[] {0, 88, 48},
 			new int[] {0, 128, 48},
@@ -49,10 +70,10 @@ public class Player extends Dynamic {
 			new int[] {0, 128, 208},
 			new int[] {0, 168, 208},
 			//weapons
-			new int[] {2, 208, 8},
+			new int[] {2, 208, 8}, //30
 			new int[] {2, 248, 8},
 			//Armor
-			new int[] {7, 208, 48},
+			new int[] {7, 208, 48}, //32
 			new int[] {6, 208, 88},
 			new int[] {5, 208, 128},
 			new int[] {4, 208, 168},
@@ -64,6 +85,7 @@ public class Player extends Dynamic {
 			new int[] {9, 248, 168},
 			new int[] {8, 248, 208},
 		};
+		
 		inv = new Inventory(invLayout, "invBack.png");
 		
 		inv.slot[5].item = new Hat();
@@ -83,28 +105,9 @@ public class Player extends Dynamic {
 		inv.slot[19].item = new Crap();
 	}
 	
-	public void init() {
-		name = "Player";
-		
-		acel = 1.5f;
-		mvel = 5;
-		fric = 1;
-		
-		width = 26;
-		height = 26;
-		
-		d_width = 32;
-		d_height = 32;
-		
-		d_offx = -3;
-		d_offy = -3;
-		
-		sprite = new Texture("Player.png");
-		
-		solid = true;
-	}
-	
 	public void calc(World world) {
+		if(inv.slot[35].item != null) ((Equipable) inv.slot[35].item).update(world, this);
+		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.E)) {
 			if(world.hudEntities.indexOf(inv.graphic) == -1) {
 				world.hudEntities.add(inv.graphic);
