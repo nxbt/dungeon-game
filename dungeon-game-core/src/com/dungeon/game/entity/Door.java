@@ -14,9 +14,15 @@ public class Door extends Static {
 	public int dir; 
 	public Door(int x, int y, int dir) {
 		super(x, y);
-		
 		open = false;
 		this.dir = dir;
+		if(dir == 0){
+			d_offx = 0;
+			d_offy = 14;
+		}else {
+			d_offx = 18;
+			d_offy = 0;
+		}
 	}
 
 	@Override
@@ -25,20 +31,29 @@ public class Door extends Static {
 		solid = true;
 		d_width = 32;
 		d_height = 4;
-		d_offx = 0;
-		d_offy = 12;
 		
 	}
 	
 	private void open(){
 		open = !open;
-		if(open){
+		if(dir==0){
+			if(open){
 
-			d_offx = 4;
-			d_offy = 12;
-		}else{
-			d_offx = 0;
-			d_offy = 12;
+				d_offx = 4;
+				d_offy = 14;
+			}else{
+				d_offx = 0;
+				d_offy = 14;
+			}
+		}else {
+			if(open){
+
+				d_offx = 14;
+				d_offy = 0;
+			}else{
+				d_offx = 18;
+				d_offy = 0;
+			}
 		}
 	}
 
@@ -67,8 +82,13 @@ public class Door extends Static {
 	
 	@Override
 	public void draw(SpriteBatch batch) {
-		if(!open)batch.draw(sprite, x+d_offx, y+d_offy, d_width, d_height);
-		else batch.draw(sprite, x+d_offx, y+d_offy, 0, 0, d_width, d_height, 1, 1, 90, 0, 0, sprite.getWidth(), sprite.getHeight(), false, false);
+		if(dir ==0){
+			if(!open)batch.draw(sprite, x+d_offx, y+d_offy, d_width, d_height);
+			else batch.draw(sprite, x+d_offx, y+d_offy, 0, 0, d_width, d_height, 1, 1, 90, 0, 0, sprite.getWidth(), sprite.getHeight(), false, false);
+		}else {
+			if(!open)batch.draw(sprite, x+d_offx, y+d_offy, 0, 0, d_width, d_height, 1, 1, 90, 0, 0, sprite.getWidth(), sprite.getHeight(), false, false);
+			else batch.draw(sprite, x+d_offx, y+d_offy, d_width, d_height);
+		}
 	}
 
 }

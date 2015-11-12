@@ -47,6 +47,7 @@ public class Floor {
 		
 		Generation gen = new Rooms(width, height);
 		int[][] map = gen.getMap();
+		entities = gen.getEntities();
 		
 		fixBleeding(spritesheet);
 

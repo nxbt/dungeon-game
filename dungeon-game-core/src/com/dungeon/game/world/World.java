@@ -46,10 +46,10 @@ public class World {
 		player = new Player(curFloor.tm[0].length/2*Tile.TS, curFloor.tm.length/2*Tile.TS);
 		
 		mouse = new Mouse(0, 0);
-		
-		entities.add(player);
+		entities = curFloor.entities;
+		System.out.println(entities.size());
+		entities.add(0,player);
 		entities.add(new Chest(curFloor.tm[0].length/2*Tile.TS, curFloor.tm.length/2*Tile.TS));
-		entities.add(new Door(curFloor.tm[0].length/2*Tile.TS, (curFloor.tm.length/2+1)*Tile.TS,0));
 	}
 	
 	public void update() {
