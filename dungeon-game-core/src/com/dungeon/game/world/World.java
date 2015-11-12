@@ -49,6 +49,7 @@ public class World {
 		
 		entities.add(player);
 		entities.add(new Chest(curFloor.tm[0].length/2*Tile.TS, curFloor.tm.length/2*Tile.TS));
+		entities.add(new Door(curFloor.tm[0].length/2*Tile.TS, (curFloor.tm.length/2+1)*Tile.TS,0));
 	}
 	
 	public void update() {
