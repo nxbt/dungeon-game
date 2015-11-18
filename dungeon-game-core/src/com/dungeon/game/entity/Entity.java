@@ -8,6 +8,9 @@ public abstract class Entity {
 	public float x;
 	public float y;
 	
+	public float width;
+	public float height;
+	
 	public boolean killMe;
 	
 	public int d_width;

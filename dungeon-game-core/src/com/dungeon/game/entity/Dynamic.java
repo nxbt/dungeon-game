@@ -7,9 +7,6 @@ public abstract class Dynamic extends Entity {
 	public float dx;
 	public float dy;
 	
-	public float width;
-	public float height;
-	
 	double acel;
 	double fric;
 	double mvel;
@@ -156,6 +153,73 @@ public abstract class Dynamic extends Entity {
 				dy = 0;
 			}
 		}
+		
+		for(Entity e: world.entities){
+			if(!this.equals(e) && e.solid && e.x+e.width > x && e.x < x+width &&
+			   e.y+e.height > y && e.y < y+height) {
+				
+				int dir_x = dx < 0 ? -1:dx > 0? 1:0;
+				int dir_y = dy < 0 ? -1:dy > 0? 1:0;
+
+				if(dir_x == 1 && dir_y == 0) {
+					x = e.x - width;
+					dx = 0;
+				}
+				else if(dir_x == -1 && dir_y == 0) {
+					x = e.x + e.width;
+					dx = 0;
+				}
+				else if(dir_x == 0 && dir_y == 1) {
+					y = e.y - height;
+					dy = 0;
+				}
+				else if(dir_x == 0 && dir_y == -1) {
+					y = e.y + e.height;
+					dy = 0;
+				}
+				else if(dir_x == 1 && dir_y == 1) {
+					if(x+width - e.x < y+height - e.y) {
+						x = e.x - width;
+						dx = 0;
+					}
+					else {
+						y = e.y - height;
+						dy = 0;
+					}
+				}
+				else if(dir_x == -1 && dir_y == 1) {
+					if(e.x+e.width - x < y+height - e.y) {
+						x = e.x + e.width;
+						dx = 0;
+					}
+					else {
+						y = e.y - height;
+						dy = 0;
+					}
+				}
+				else if(dir_x == 1 && dir_y == -1) {
+					if(x+width - e.x < e.y+e.height - y) {
+						x = e.x - width;
+						dx = 0;
+					}
+					else {
+						y = e.y + e.height;
+						dy = 0;
+					}
+				}
+				else if(dir_x == -1 && dir_y == -1) {
+					if(e.x+e.width - x < e.y+e.height - y) {
+						x = e.x + e.width;
+						dx = 0;
+					}
+					else {
+						y = e.y + e.height;
+						dy = 0;
+					}
+				}
+			}
+		}
+
 	}
 }
 

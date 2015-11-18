@@ -47,9 +47,12 @@ public class Chest extends Static {
 		inv = new Inventory(invLayout, "chestBackground.png", 400, 140);
 		sprite = new Texture("chest.png");
 		solid = true;
+		
 		d_width = 32;
 		d_height = 32;
 		
+		width = 32;
+		height = 32;
 	}
 
 	@Override

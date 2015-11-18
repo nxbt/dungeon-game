@@ -32,6 +32,8 @@ public class Door extends Static {
 		d_width = 32;
 		d_height = 4;
 		
+		width = 32;
+		height = 4;
 	}
 	
 	private void open(){
