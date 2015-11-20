@@ -7,6 +7,7 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 
 ##TODO:
 * Change cursor when in inventory
+* Add mouse sensitivity
 * Add Enemies
 * Populate rooms with drops
 * Add Description Box
