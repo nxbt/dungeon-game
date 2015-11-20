@@ -6,7 +6,8 @@ This is a top-down rouge-like game written in Java using the Libgdx libraries, a
 Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 
 ##TODO:
-*  Add Enemies
-*  Populate rooms with drops
-*  Add Description Box
-*  Add Lighting
+* Change cursor when in inventory
+* Add Enemies
+* Populate rooms with drops
+* Add Description Box
+* Add Lighting
