@@ -13,6 +13,8 @@ import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Mouse extends Hud {
+	public final Texture CROSS = new Texture("Crosshair.png");
+	public final Texture ARROW = new Texture("Inven.png");
 	
 	public boolean lb_pressed;
 	public boolean rb_pressed;
@@ -32,7 +34,7 @@ public class Mouse extends Hud {
 	public void init() {
 		Gdx.input.setCursorCatched(true);
 		
-		sprite = new Texture("Crosshair.png");
+		sprite = CROSS;
 		
 		d_width = 16;
 		d_height = 16;
@@ -116,6 +118,19 @@ public class Mouse extends Hud {
 				
 				
 			}
+		}
+		
+		if (onHud) {
+			sprite = ARROW;
+			
+			d_offx = 0;
+			d_offy = -16;
+		}
+		else {
+			sprite = CROSS;
+			
+			d_offx = -8;
+			d_offy = -8;
 		}
 	}
 
