@@ -16,6 +16,15 @@ public abstract class Enemy extends Dynamic {
 				mapData[i][k] = map[i][k].data;
 			}
 		}
-		pathfinder.findPath(new int[]{(int) (x/Tile.TS), (int) (y/Tile.TS)},new int[]{(int) (target[0]/Tile.TS), (int) (target[1]/Tile.TS)});
+		pathfinder.setMap(mapData);
+		int[] targetTile = pathfinder.findPath(new int[]{(int) ((x+width/2)/Tile.TS), (int) ((y+height/2)/Tile.TS)},new int[]{(int) (target[0]/Tile.TS), (int) (target[1]/Tile.TS)});
+		int targetX = targetTile[0]*Tile.TS;
+		int targetY = targetTile[1]*Tile.TS;
+		System.out.println(x+" vXs "+targetX);
+		System.out.println(y+" vYs "+targetY);
+		if(x+d_offx<targetX)inp_rt=true;
+		if(x+d_offx>targetX)inp_lt=true;
+		if(y+d_offy<targetY)inp_up=true;
+		if(y+d_offy>targetY)inp_dn=true;
 	}
 }

@@ -49,7 +49,7 @@ public class World {
 		entities = curFloor.entities;
 		System.out.println(entities.size());
 		entities.add(0,player);
-		entities.add(new Chest(curFloor.tm[0].length/2*Tile.TS, curFloor.tm.length/2*Tile.TS));
+		entities.add(new Chest((curFloor.tm[0].length/2+1)*Tile.TS, curFloor.tm.length/2*Tile.TS));
 	}
 	
 	public void update() {
