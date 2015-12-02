@@ -76,6 +76,9 @@ public class Slot {
 			if(world.mouse.slot.item == null) hovered = true;
 		}
 		
+		if(hovered && item != null) {
+			world.descBox.text = item.name + "\n\n" + item.desc;
+		}
 	}
 	
 	public void update(World world) {
@@ -86,13 +89,6 @@ public class Slot {
 		if(item != null) {
 			batch.draw(item.sprite, x+xoff, y+yoff, Item.SIZE, Item.SIZE);
 			
-//			if(hovered) {
-//				BitmapFont desc = new BitmapFont();
-//				desc.setColor(Color.LIGHT_GRAY);
-//				desc.getData().setScale(1f);
-//				
-//				desc.draw(batch, item.name, x+xoff, y+yoff+Item.SIZE);
-//			}
 			if(item.stack > 1) {
 				BitmapFont font = new BitmapFont();
 				font.setColor(Color.LIGHT_GRAY);

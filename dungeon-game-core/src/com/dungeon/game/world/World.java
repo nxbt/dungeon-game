@@ -27,6 +27,8 @@ public class World {
 	public Player player;
 	public Mouse mouse;
 	
+	public DescBox descBox;
+	
 	public World() {
 		hudBatch = new SpriteBatch();
 		
@@ -46,6 +48,8 @@ public class World {
 		player = new Player(curFloor.tm[0].length/2*Tile.TS, curFloor.tm.length/2*Tile.TS);
 		
 		mouse = new Mouse(0, 0);
+		descBox = new DescBox();
+		
 		entities = curFloor.entities;
 		System.out.println(entities.size());
 		entities.add(0,player);
@@ -54,6 +58,7 @@ public class World {
 	
 	public void update() {
 		mouse.update(this);
+		descBox.update(this);
 		
 		for(int i = 0; i < entities.size(); i++) {
 			entities.get(i).update(this);
@@ -91,6 +96,7 @@ public class World {
 		}
 		
 		mouse.draw(batch);
+		descBox.draw(batch);
 		
 		batch.end();
 	}
