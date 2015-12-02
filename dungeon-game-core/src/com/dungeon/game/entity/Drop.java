@@ -95,6 +95,7 @@ public class Drop extends Static {
 				y = (tile_up * Tile.TS)-Item.SIZE;
 			}
 		}
+		
 		if(world.mouse.canPickup && world.mouse.x > x-world.cam.x+world.cam.WIDTH/2 && world.mouse.x < x+Item.SIZE-world.cam.x+world.cam.WIDTH/2 && world.mouse.y > y-world.cam.y+world.cam.HEIGHT/2 && world.mouse.y < y+Item.SIZE-world.cam.y+world.cam.HEIGHT/2) {
 			if(world.mouse.lb_pressed) {
 				if(slot.item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(slot.item.name)) {

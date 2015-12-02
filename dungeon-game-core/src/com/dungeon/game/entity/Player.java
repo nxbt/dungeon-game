@@ -114,6 +114,15 @@ public class Player extends Dynamic {
 			else world.hudEntities.remove(inv.graphic);
 		}
 		
+		if(world.mouse.x > x-world.cam.x+world.cam.WIDTH/2 && world.mouse.x < x+width-world.cam.x+world.cam.WIDTH/2 && world.mouse.y > y-world.cam.y+world.cam.HEIGHT/2 && world.mouse.y < y+height-world.cam.y+world.cam.HEIGHT/2) {
+			if(world.mouse.rb_pressed) {
+				if(world.hudEntities.indexOf(inv.graphic) == -1) {
+					world.hudEntities.add(inv.graphic);
+				}
+				else world.hudEntities.remove(inv.graphic);
+			}
+		}
+		
 		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)  || Gdx.input.isKeyPressed(Input.Keys.A)) inp_lt = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) inp_rt = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) inp_up = true;
