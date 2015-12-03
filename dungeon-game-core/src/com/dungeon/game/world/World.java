@@ -51,7 +51,6 @@ public class World {
 		descBox = new DescBox();
 		
 		entities = curFloor.entities;
-		System.out.println(entities.size());
 		entities.add(0,player);
 		entities.add(new Chest((curFloor.tm[0].length/2+1)*Tile.TS, curFloor.tm.length/2*Tile.TS));
 	}

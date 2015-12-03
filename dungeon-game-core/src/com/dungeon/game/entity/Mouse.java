@@ -86,8 +86,8 @@ public class Mouse extends Hud {
 		canPickup = (!onHud &&  Math.sqrt(Math.pow((x+world.cam.x-world.cam.WIDTH/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+world.cam.y-world.cam.HEIGHT/2) - (world.player.y + world.player.d_height/2), 2)) <= world.player.REACH);
 		for(int i = 0; i< world.curFloor.tm.length;i++){
 			for(int k = 0; k <world.curFloor.tm[i].length;k++){
-				if(world.curFloor.tm[k][i].data==1){
-					float[] verticies = new float[]{i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,(i)*Tile.TS,(k+1)*Tile.TS};
+				if(world.curFloor.tm[i][k].data==1){
+					float[] verticies = new float[]{k*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS,(k)*Tile.TS,(i+1)*Tile.TS};
 					if(Intersector.intersectSegmentPolygon(new Vector2(x+world.cam.x-world.cam.WIDTH/2,y+world.cam.y-world.cam.HEIGHT/2), new Vector2(world.player.x + world.player.d_width/2,world.player.y + world.player.d_height/2), new Polygon(verticies))) canPickup = false;
 				}
 			}

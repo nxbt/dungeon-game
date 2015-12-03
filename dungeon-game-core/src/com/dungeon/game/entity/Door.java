@@ -28,7 +28,7 @@ public class Door extends Static {
 	@Override
 	public void init() {
 		sprite = new Texture("door.png");
-		solid = true;
+		solid = false;
 		d_width = 32;
 		d_height = 4;
 		
@@ -79,7 +79,7 @@ public class Door extends Static {
 				}
 			}
 		}
-		solid = !open;
+//		solid = !open;
 	}
 	
 	@Override

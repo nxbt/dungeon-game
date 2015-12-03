@@ -1,5 +1,7 @@
 package com.dungeon.game.entity;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.world.World;
 
@@ -35,7 +37,10 @@ public class Goon extends Enemy {
 
 	@Override
 	public void calc(World world) {
-		findPath(world.curFloor.tm, new float[]{world.player.x+world.player.width/2,world.player.y+world.player.height/2});
+		ArrayList<Entity> entities = (ArrayList<Entity>) world.entities.clone();
+		entities.remove(world.player);
+		entities.remove(this);
+		findPath(world.curFloor.tm,entities, new float[]{world.player.x+world.player.width/2,world.player.y+world.player.height/2});
 	
 	}
 
