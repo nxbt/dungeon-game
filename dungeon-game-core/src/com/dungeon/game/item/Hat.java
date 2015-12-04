@@ -11,8 +11,8 @@ public class Hat extends Equipable {
 	public void init() {
 		type = HELM;
 		
-		name = "A hat";
-		desc = "As opossed to The Hat.";
+		name = "Inconspicuous Hat";
+		desc = "Not conspicuos.";
 		
 		sprite = new Texture("hat.png");
 		
@@ -23,6 +23,6 @@ public class Hat extends Equipable {
 
 	@Override
 	public void calc(World world, Entity ent) {
-		System.out.println("Swag");
+		
 	}
 }

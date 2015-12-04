@@ -1,6 +1,5 @@
 package com.dungeon.game.entity;
 
-import com.dungeon.game.item.Crap;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.Slot;
 import com.dungeon.game.world.Tile;

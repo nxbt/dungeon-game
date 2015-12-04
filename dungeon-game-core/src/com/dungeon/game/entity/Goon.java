@@ -3,6 +3,7 @@ package com.dungeon.game.entity;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.dungeon.game.item.Hat;
 import com.dungeon.game.world.World;
 
 public class Goon extends Enemy {
@@ -40,7 +41,7 @@ public class Goon extends Enemy {
 		ArrayList<Entity> entities = (ArrayList<Entity>) world.entities.clone();
 		entities.remove(world.player);
 		entities.remove(this);
-		findPath(world.curFloor.tm,entities, new float[]{world.player.x+world.player.width/2,world.player.y+world.player.height/2});
+		if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(world.curFloor.tm,entities, new float[]{world.player.x+world.player.width/2,world.player.y+world.player.height/2});
 	
 	}
 

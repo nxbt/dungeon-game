@@ -12,6 +12,8 @@ public class Player extends Dynamic {
 	
 	public Inventory inv;
 	
+	public Item hat;
+	
 	public Player(int x, int y) {
 		super(x, y);
 	}
@@ -85,7 +87,10 @@ public class Player extends Dynamic {
 			new int[] {9, 248, 168},
 			new int[] {8, 248, 208},
 		};
+		
 		inv = new Inventory(invLayout, "invBack.png", 10, 100);
+		
+		hat = inv.slot[35].item; 
 		
 		inv.slot[5].item = new Hat();
 		inv.slot[6].item = new Crap();
