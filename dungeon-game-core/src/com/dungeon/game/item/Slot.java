@@ -1,5 +1,6 @@
 package com.dungeon.game.item;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,6 +17,8 @@ public class Slot {
 	
 	private boolean hovered;
 	
+	private BitmapFont font;
+	
 	private Inventory inv;
 	
 	public Slot(int[] data, Inventory inv) {
@@ -25,6 +28,9 @@ public class Slot {
 		
 		this.x = data[1];
 		this.y = data[2];
+		
+		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
+		font.setColor(Color.LIGHT_GRAY);
 		
 		this.inv = inv;
 	}
@@ -90,11 +96,8 @@ public class Slot {
 			batch.draw(item.sprite, x+xoff, y+yoff, Item.SIZE, Item.SIZE);
 			
 			if(item.stack > 1) {
-				BitmapFont font = new BitmapFont();
-				font.setColor(Color.LIGHT_GRAY);
-				font.getData().setScale(1f);
 				
-				font.draw(batch, Integer.toString(item.stack), (float) (x+xoff+Item.SIZE-font.getScaleX()*(Math.floor(Math.log10(item.stack))+ 1)*7)-2, y+yoff+font.getScaleY()*12+1);
+				font.draw(batch, Integer.toString(item.stack), (float) (x+xoff+Item.SIZE-font.getScaleX()*(Math.floor(Math.log10(item.stack))+ 1)*7)-4, y+yoff+font.getScaleY()*12+1);
 			}
 		}
 	}

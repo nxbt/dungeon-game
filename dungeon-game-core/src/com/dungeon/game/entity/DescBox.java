@@ -1,5 +1,7 @@
 package com.dungeon.game.entity;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -31,7 +33,7 @@ public class DescBox extends Hud {
 		
 		text = "";
 		
-		desc = new BitmapFont();
+		desc = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		desc.setColor(Color.LIGHT_GRAY);
 		desc.getData().setScale(1f);
 	}
