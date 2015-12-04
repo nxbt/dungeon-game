@@ -88,11 +88,33 @@ public class Pathfinder {
 		int[] target = path.get(1);
 		for(int i = 0;i<path.size();i++){
 			boolean changeTarget = true;
+			float[] verticiesPath = null;
+			boolean toRight = false;
+			boolean toLeft = false;
+			boolean toAbove = false;
+			boolean toBelow = false;
+			if(y+height>=(path.get(i)[1]+1)*Tile.TS)toBelow = true;
+			if(y<=(path.get(i)[1])*Tile.TS)toAbove = true;
+			if(x+width>=(path.get(i)[0]+1)*Tile.TS)toLeft = true;
+			if(x<=(path.get(i)[0])*Tile.TS)toRight = true;
+			if(toRight){
+				if(toAbove)verticiesPath=new float[]{x+1,y+height-1,x+1,y+1,x+width-1,y+1,(path.get(i)[0]+1)*Tile.TS-1,(path.get(i)[1])*Tile.TS+1,(path.get(i)[0]+1)*Tile.TS-1,(path.get(i)[1]+1)*Tile.TS-1,(path.get(i)[0])*Tile.TS+1,(path.get(i)[1]+1)*Tile.TS-1};
+				else if(toBelow)verticiesPath=new float[]{x+width-1,y+height-1,x+1,y+height-1,x+1,y+1,(path.get(i)[0])*Tile.TS+1,(path.get(i)[1]+1)*Tile.TS-1,(path.get(i)[0])*Tile.TS+1,(path.get(i)[1])*Tile.TS+1,(path.get(i)[0]+1)*Tile.TS-1,(path.get(i)[1])*Tile.TS+1};
+				else verticiesPath=new float[]{x+1,y+height-1,x+1,y+1,(path.get(i)[0]+1)*Tile.TS-1,(path.get(i)[1])*Tile.TS+1,(path.get(i)[0]+1)*Tile.TS-1,(path.get(i)[1]+1)*Tile.TS-1};
+			}else if(toLeft){
+				if(toAbove)verticiesPath=new float[]{x+1,y+1,x+width-1,y+1,x+width-1,y+height-1,(path.get(i)[0]+1)*Tile.TS-1,(path.get(i)[1]+1)*Tile.TS-1,(path.get(i)[0])*Tile.TS+1,(path.get(i)[1]+1)*Tile.TS-1,(path.get(i)[0])*Tile.TS+1,(path.get(i)[1])*Tile.TS+1};
+				else if(toBelow)verticiesPath=new float[]{x+width-1,y+1,x+width-1,y+height-1,x+1,y+height-1,(path.get(i)[0])*Tile.TS+1,(path.get(i)[1]+1)*Tile.TS-1,(path.get(i)[0])*Tile.TS+1,(path.get(i)[1])*Tile.TS+1,(path.get(i)[0]+1)*Tile.TS-1,(path.get(i)[1])*Tile.TS+1};
+				else verticiesPath=new float[]{x+width-1,y+1,x+width-1,y+width-1,(path.get(i)[0])*Tile.TS+1,(path.get(i)[1]+1)*Tile.TS-1,(path.get(i)[0])*Tile.TS+1,(path.get(i)[1])*Tile.TS+1};
+			}else if(toAbove) verticiesPath=new float[]{x+1,y+1,x+width-1,y+1,(path.get(i)[0]+1)*Tile.TS-1,(path.get(i)[1]+1)*Tile.TS-1,(path.get(i)[0])*Tile.TS+1,(path.get(i)[1]+1)*Tile.TS-1};
+			else if(toBelow) verticiesPath=new float[]{x+width-1,y+height-1,x+1,y+height-1,(path.get(i)[0])*Tile.TS+1,(path.get(i)[1])*Tile.TS+1,(path.get(i)[0]+1)*Tile.TS-1,(path.get(i)[1])*Tile.TS+1};
 			for(int k = 0; k< map.length;k++){
 				for(int j = 0; j <map[k].length;j++){
 					if(map[k][j]==1){
-						float[] verticies = new float[]{j*Tile.TS,k*Tile.TS,(j+1)*Tile.TS,k*Tile.TS,(j+1)*Tile.TS,(k+1)*Tile.TS,(j)*Tile.TS,(k+1)*Tile.TS};
-						if(Intersector.intersectSegmentPolygon(new Vector2(x+width/2,y+height/2), new Vector2(path.get(i)[0]*Tile.TS+Tile.TS/2,path.get(i)[1]*Tile.TS+Tile.TS/2), new Polygon(verticies))){
+						float[] verticiesTile = new float[]{j*Tile.TS,k*Tile.TS,(j+1)*Tile.TS,k*Tile.TS,(j+1)*Tile.TS,(k+1)*Tile.TS,(j)*Tile.TS,(k+1)*Tile.TS};
+//						if(Intersector.intersectSegmentPolygon(new Vector2(x+width/2,y+height/2), new Vector2(path.get(i)[0]*Tile.TS+Tile.TS/2,path.get(i)[1]*Tile.TS+Tile.TS/2), new Polygon(verticiesTile))){
+						new Polygon(verticiesTile);
+						new Polygon(verticiesPath);
+						if(Intersector.overlapConvexPolygons(new Polygon(verticiesTile), new Polygon(verticiesPath), null)){	
 							changeTarget = false;
 						}
 					}
@@ -100,6 +122,7 @@ public class Pathfinder {
 			}
 			if(changeTarget){
 				target = path.get(i);
+				System.out.println("NEW TARGET AQUIRED!");
 			}
 		}
 		return target;
