@@ -83,7 +83,7 @@ public class Slot {
 		}
 		
 		if(hovered && item != null) {
-			world.descBox.text = item.name + "\n\n" + item.desc;
+			world.descBox.updateText(item.name + "\n\n" + item.desc);
 		}
 	}
 	
