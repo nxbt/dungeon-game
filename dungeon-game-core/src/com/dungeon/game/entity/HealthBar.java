@@ -13,6 +13,7 @@ public class HealthBar extends StatusBar {
 
 	@Override
 	public void calc(World world) {
-		percent = 1*world.player.life/world.player.maxLife;
+		cur = world.player.life;
+		max = world.player.maxLife;
 	}
 }

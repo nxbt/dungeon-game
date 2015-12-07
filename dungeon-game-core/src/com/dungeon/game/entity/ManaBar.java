@@ -13,6 +13,7 @@ public class ManaBar extends StatusBar {
 
 	@Override
 	public void calc(World world) {
-		percent = 1*world.player.mana/world.player.maxMana;
+		cur = world.player.mana;
+		max = world.player.maxMana;
 	}
 }

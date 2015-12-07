@@ -22,11 +22,11 @@ public class Player extends Dynamic {
 		name = "Player";
 		
 		maxLife = 100;
-		maxStanima = 100;
+		maxStamina = 100;
 		maxMana = 100;
 		
 		life = 33;
-		stanima = 66;
+		stamina = 66;
 		mana = 50;
 		
 		acel = 1.5f;

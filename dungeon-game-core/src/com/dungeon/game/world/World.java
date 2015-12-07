@@ -52,7 +52,7 @@ public class World {
 		entities.add(0,player);
 		entities.add(new Chest((curFloor.tm[0].length/2+1)*Tile.TS, curFloor.tm.length/2*Tile.TS));
 		hudEntities.add(new HealthBar(100,20));
-		hudEntities.add(new StanimaBar(220,20));
+		hudEntities.add(new StaminaBar(220,20));
 		hudEntities.add(new ManaBar(340,20));
 	}
 	

@@ -5,14 +5,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.dungeon.game.world.World;
 
-public class StanimaBar extends StatusBar {
-	public StanimaBar(int x, int y){
+public class StaminaBar extends StatusBar {
+	public StaminaBar(int x, int y){
 		super(x, y);
 		filler = new TiledDrawable(new TextureRegion(new Texture("energy.png")));
 	}
 
 	@Override
 	public void calc(World world) {
-		percent = 1*world.player.stanima/world.player.maxStanima;
+		cur = world.player.stamina;
+		max = world.player.maxStamina;
 	}
 }
