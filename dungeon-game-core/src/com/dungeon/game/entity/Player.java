@@ -21,6 +21,14 @@ public class Player extends Dynamic {
 	public void init() {
 		name = "Player";
 		
+		maxLife = 100;
+		maxStanima = 100;
+		maxMana = 100;
+		
+		life = 33;
+		stanima = 66;
+		mana = 50;
+		
 		acel = 1.5f;
 		mvel = 5;
 		fric = 1;

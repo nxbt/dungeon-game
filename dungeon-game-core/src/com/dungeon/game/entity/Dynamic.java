@@ -16,6 +16,14 @@ public abstract class Dynamic extends Entity {
 	public boolean inp_lt;
 	public boolean inp_rt;
 	
+	public float maxLife;
+	public float maxStanima;
+	public float maxMana;
+	
+	public float life;
+	public float stanima;
+	public float mana;
+	
 	public Dynamic(int x, int y) {
 		super(x, y);
 	}
