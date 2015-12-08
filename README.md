@@ -12,3 +12,4 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 * Finish Description Box
 * Add Lighting
 * Create Backstory
+* Hud element ordering and dragging
