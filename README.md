@@ -13,3 +13,4 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 * Add Lighting
 * Create Backstory
 * Hud element ordering and dragging
+* Visibily (VS > 1)
