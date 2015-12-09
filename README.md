@@ -9,8 +9,8 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 * Add mouse sensitivity
 * Add More Enemies
 * Populate rooms with drops
-* Finish Description Box
-* Add Lighting
 * Create Backstory
 * Hud element ordering and dragging
-* Visibily (V+S >= 1)
+* Visibility (V+S >= 1)
+* Visibility polygonss (created from triangles)
+* Lighting using a similar algorithm to visibility polygons.
