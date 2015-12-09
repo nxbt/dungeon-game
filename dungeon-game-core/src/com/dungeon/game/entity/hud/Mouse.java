@@ -79,10 +79,18 @@ public class Mouse extends Hud {
 		}
 		
 		onHud = false;
-		
-		for(Entity ent: world.hudEntities) {
-			if(x > ent.x && x < ent.x+ent.d_width && y > ent.y && y < ent.y+ent.d_height) onHud = true;
+		int toMoveToFront=0;
+		for(int i = 0; i < world.hudEntities.size(); i++) {
+			Entity ent = world.hudEntities.get(i);
+			if(x > ent.x && x < ent.x+ent.d_width && y > ent.y && y < ent.y+ent.d_height){
+				if(lb_pressed||rb_pressed)toMoveToFront = i;
+//				ent.hovered(world);
+				onHud = true;
+				break;
+			}
 		}
+		world.hudEntities.add(0,world.hudEntities.get(toMoveToFront));
+		world.hudEntities.remove(toMoveToFront+1);
 		
 		canPickup = (!onHud &&  Math.sqrt(Math.pow((x+world.cam.x-world.cam.WIDTH/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+world.cam.y-world.cam.HEIGHT/2) - (world.player.y + world.player.d_height/2), 2)) <= world.player.REACH);
 		for(int i = 0; i< world.curFloor.tm.length;i++){

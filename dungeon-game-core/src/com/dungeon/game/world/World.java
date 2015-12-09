@@ -73,8 +73,8 @@ public class World {
 			}
 		}
 		
-		for(Entity ent: hudEntities) {
-			ent.update(this);
+		for(int i = hudEntities.size()-1;i>=0;i--) {
+			hudEntities.get(i).update(this);
 		}
 		
 		cam.update(player.x+player.d_width/2, player.y+player.d_height/2, mouse.x, mouse.y, 1f);
@@ -96,8 +96,8 @@ public class World {
 		
 		batch.setProjectionMatrix(hudCam.cam.combined);
 		
-		for(Entity ent: hudEntities) {
-			ent.draw(batch);
+		for(int i = hudEntities.size()-1;i>=0;i--) {
+			hudEntities.get(i).draw(batch);
 		}
 		
 		mouse.draw(batch);
