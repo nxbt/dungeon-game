@@ -1,4 +1,6 @@
-package com.dungeon.game.entity;
+package com.dungeon.game.entity.hud;
+
+import com.dungeon.game.entity.Static;
 
 public abstract class Hud extends Static {
 

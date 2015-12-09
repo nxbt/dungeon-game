@@ -123,7 +123,6 @@ public class Pathfinder {
 			}
 			if(changeTarget){
 				target = path.get(i);
-				System.out.println("NEW TARGET AQUIRED!");
 			}
 		}
 		return target;

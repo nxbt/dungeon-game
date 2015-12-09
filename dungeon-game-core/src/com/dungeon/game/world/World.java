@@ -7,6 +7,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.*;
+import com.dungeon.game.entity.hud.DescBox;
+import com.dungeon.game.entity.hud.HealthBar;
+import com.dungeon.game.entity.hud.ManaBar;
+import com.dungeon.game.entity.hud.Mouse;
+import com.dungeon.game.entity.hud.StaminaBar;
 
 public class World {
 	public SpriteBatch hudBatch;

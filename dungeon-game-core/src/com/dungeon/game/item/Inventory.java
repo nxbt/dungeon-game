@@ -1,6 +1,6 @@
 package com.dungeon.game.item;
 
-import com.dungeon.game.entity.InvGraphic;
+import com.dungeon.game.entity.hud.InvGraphic;
 import com.dungeon.game.world.World;
 
 public class Inventory {

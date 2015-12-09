@@ -1,4 +1,4 @@
-package com.dungeon.game.entity;
+package com.dungeon.game.entity.hud;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

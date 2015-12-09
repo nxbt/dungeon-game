@@ -1,4 +1,4 @@
-package com.dungeon.game.entity;
+package com.dungeon.game.entity.hud;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -55,7 +55,6 @@ public class Floor {
 		
 		fixBleeding(spritesheet);
 
-		//temp: remove once random generator has been created
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
 				tm[i][k] = new Tile(spritesheet,map[i][k]);
@@ -65,14 +64,16 @@ public class Floor {
 		for(int i = 1; i < tm.length;i++){
 			for(int k = 1; k < tm[i].length; k++){
 				int val = 0;
-				if(tm[i][k].data==1)val++;
+				if(tm[i][k].data==1)val+=1;
 				if(tm[i-1][k-1].data==1)val+=2;
 				if(tm[i][k-1].data==1)val+=4;
 				if(tm[i-1][k].data==1)val+=8;
-				if(val!=15&&val!=0&&val!=5&&val!=6&&val!=9&&val!=10)corners.add(new int[]{i*Tile.TS,k*Tile.TS});
+				
+				if(val != 15 && val !=0 && val !=5 && val!=6 && val!=9 && val!=10) corners.add(new int[]{i*Tile.TS,k*Tile.TS});
 					
 			}
 		}
+		System.out.println(corners.size());
 	}
 	
 	public void update() {
