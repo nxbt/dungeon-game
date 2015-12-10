@@ -20,7 +20,10 @@ public class Mouse extends Hud {
 	
 	public boolean lb_pressed;
 	public boolean rb_pressed;
-	private boolean down;
+	public boolean lb_released;
+	public boolean rb_released;
+	public boolean rb_down;
+	public boolean lb_down;
 	
 	public boolean onHud;
 	public boolean canPickup;
@@ -62,21 +65,50 @@ public class Mouse extends Hud {
 		if(y < 0) y = 0;
 		else if(y > screenHeight) y = screenHeight;
 		
-		if(Gdx.input.isButtonPressed(0) && !down) {
-			down = true;
+		//Check status of Left button
+		if(Gdx.input.isButtonPressed(0)&&!lb_down){
+			lb_down = true;
 			lb_pressed = true;
+			lb_released = false;
 		}
-		else if(Gdx.input.isButtonPressed(1) && !down) {
-			down = true;
-			rb_pressed = true;
-		}
-		else {
+		else if(!Gdx.input.isButtonPressed(0)&&lb_down){
+			lb_down = false;
+			lb_released = true;
 			lb_pressed = false;
+		}else{
+			lb_pressed = false;
+			lb_released = false;
+		}
+		
+		//Check status of Right button
+		if(Gdx.input.isButtonPressed(1)&&!rb_down){
+			rb_down = true;
+			rb_pressed = true;
+			rb_released = false;
+		}
+		else if(!Gdx.input.isButtonPressed(1)&&rb_down){
+			rb_down = false;
+			rb_released = true;
 			rb_pressed = false;
+		}else{
+			rb_pressed = false;
+			rb_released = false;
 		}
-		if(!(Gdx.input.isButtonPressed(0) || Gdx.input.isButtonPressed(1))) {
-			down = false;
-		}
+//		if(Gdx.input.isButtonPressed(0) && !down) {
+//			down = true;
+//			lb_pressed = true;
+//		}
+//		else if(Gdx.input.isButtonPressed(1) && !down) {
+//			down = true;
+//			rb_pressed = true;
+//		}
+//		else {
+//			lb_pressed = false;
+//			rb_pressed = false;
+//		}
+//		if(!(Gdx.input.isButtonPressed(0) || Gdx.input.isButtonPressed(1))) {
+//			down = false;
+//		}
 		
 		onHud = false;
 		int toMoveToFront=0;

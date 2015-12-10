@@ -9,7 +9,7 @@ public class Inventory {
 	
 	public InvGraphic graphic;
 	
-	public Inventory(int[][] layout, String graphic, int x, int y) {
+	public Inventory(int[][] layout, String graphic, int x, int y, int dragX, int dragY, int dragWidth, int dragHeight) {
 		
 		slot = new Slot[layout.length];
 		
@@ -17,7 +17,7 @@ public class Inventory {
 			slot[i] = new Slot(layout[i], this);
 		}
 		
-		this.graphic = new InvGraphic(graphic, this, x, y);
+		this.graphic = new InvGraphic(graphic, this, x, y, dragX, dragY, dragWidth, dragHeight);
 	}
 	
 	public void hovered(World world) {

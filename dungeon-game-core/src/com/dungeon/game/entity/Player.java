@@ -96,7 +96,7 @@ public class Player extends Dynamic {
 			new int[] {8, 248, 208},
 		};
 		
-		inv = new Inventory(invLayout, "invBack.png", 10, 100);
+		inv = new Inventory(invLayout, "invBack.png", 10, 100, 0, 240, 288, 16);
 		
 		hat = inv.slot[35].item; 
 		

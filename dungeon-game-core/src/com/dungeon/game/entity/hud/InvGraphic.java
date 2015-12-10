@@ -11,7 +11,15 @@ public class InvGraphic extends Hud {
 	
 	Inventory inv;
 	
-	public InvGraphic(String sprite, Inventory inv, int x, int y) {
+	private int dragBar_x;
+	private int dragBar_y;
+	private int dragBar_width;
+	private int dragBar_height;
+	private boolean drag;
+	private int dragOff_x;
+	private int dragOff_y;
+	
+	public InvGraphic(String sprite, Inventory inv, int x, int y, int dragX, int dragY, int dragWidth, int dragHeight) {
 		super(x, y);
 		
 		this.slot = inv.slot;
@@ -22,6 +30,10 @@ public class InvGraphic extends Hud {
 		
 		d_width = this.sprite.getWidth();
 		d_height = this.sprite.getHeight();
+		dragBar_x = dragX;
+		dragBar_y = dragY;
+		dragBar_width = dragWidth;
+		dragBar_height = dragHeight;
 	}
 
 	@Override
@@ -30,12 +42,26 @@ public class InvGraphic extends Hud {
 
 	@Override
 	public void calc(World world) {
+		if(drag){
+			x = world.mouse.x-dragOff_x;
+			y = world.mouse.y-dragOff_y;
+		}
 		inv.update(world);
 	}
 	
 	@Override
 	public void hovered(World world) {
+		if(world.mouse.x>x+dragBar_x&&world.mouse.x<x+dragBar_x+dragBar_width&&world.mouse.y>y+dragBar_y&&world.mouse.y<y+dragBar_y+dragBar_height&&world.mouse.lb_pressed){
+			dragOff_x = (int) (world.mouse.x-x);
+			dragOff_y = (int) (world.mouse.y-y);
+			drag = true;
+		}
+		else{
+			if(world.mouse.lb_released){
+				drag = false;
+			}
 		inv.hovered(world);
+		}
 	}
 	
 	@Override
