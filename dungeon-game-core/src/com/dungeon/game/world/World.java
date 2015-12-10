@@ -9,6 +9,7 @@ import com.dungeon.game.Camera;
 import com.dungeon.game.entity.*;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.HealthBar;
+import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.ManaBar;
 import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.StaminaBar;
@@ -25,7 +26,7 @@ public class World {
 	public Floor curFloor;
 	
 	public ArrayList<Entity> entities;
-	public ArrayList<Entity> hudEntities;
+	public ArrayList<Hud> hudEntities;
 	
 	public Player player;
 	public Mouse mouse;
@@ -46,7 +47,7 @@ public class World {
 		hudCam = new Camera();
 		
 		entities = new ArrayList<Entity>();
-		hudEntities = new ArrayList<Entity>();
+		hudEntities = new ArrayList<Hud>();
 		
 		player = new Player(curFloor.tm[0].length/2*Tile.TS, curFloor.tm.length/2*Tile.TS);
 		

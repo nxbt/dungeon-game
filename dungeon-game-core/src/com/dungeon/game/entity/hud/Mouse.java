@@ -81,10 +81,10 @@ public class Mouse extends Hud {
 		onHud = false;
 		int toMoveToFront=0;
 		for(int i = 0; i < world.hudEntities.size(); i++) {
-			Entity ent = world.hudEntities.get(i);
+			Hud ent = world.hudEntities.get(i);
 			if(x > ent.x && x < ent.x+ent.d_width && y > ent.y && y < ent.y+ent.d_height){
 				if(lb_pressed||rb_pressed)toMoveToFront = i;
-//				ent.hovered(world);
+				ent.hovered(world);
 				onHud = true;
 				break;
 			}

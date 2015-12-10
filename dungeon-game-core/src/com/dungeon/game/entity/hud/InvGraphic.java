@@ -34,6 +34,11 @@ public class InvGraphic extends Hud {
 	}
 	
 	@Override
+	public void hovered(World world) {
+		inv.hovered(world);
+	}
+	
+	@Override
 	public void draw(SpriteBatch batch) {
 		batch.draw(sprite, x, y, d_width, d_height);
 		

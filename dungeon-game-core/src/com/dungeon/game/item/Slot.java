@@ -15,8 +15,6 @@ public class Slot {
 	public int x;
 	public int y;
 	
-	private boolean hovered;
-	
 	private BitmapFont font;
 	
 	private Inventory inv;
@@ -42,9 +40,8 @@ public class Slot {
 		this.item = temp;
 	}
 	
-	public void calc(World world) {
-		hovered = false;
-		if(world.mouse.x > x+inv.graphic.x && world.mouse.x < x+Item.SIZE+inv.graphic.x && world.mouse.y > y+inv.graphic.y && world.mouse.y < y+Item.SIZE+inv.graphic.y&&((world.mouse.slot.item==null?true:world.mouse.slot.item.type==type)||type==0)) {
+	public void hovered(World world) {
+		if(((world.mouse.slot.item==null?true:world.mouse.slot.item.type==type)||type==0)) {
 			if(world.mouse.lb_pressed) {
 				if(item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(item.name)) {
 					if(item.stack + world.mouse.slot.item.stack <= item.maxStack) {
@@ -79,12 +76,12 @@ public class Slot {
 				if(item != null && item.stack == 0) item = null;
 				if(world.mouse.slot.item != null && world.mouse.slot.item.stack == 0) world.mouse.slot.item = null;
 			}
-			if(world.mouse.slot.item == null) hovered = true;
 		}
+		if(item != null)world.descBox.updateText(item.name + "\n\n" + item.desc);
+	}
+	
+	public void calc(World world) {
 		
-		if(hovered && item != null) {
-			world.descBox.updateText(item.name + "\n\n" + item.desc);
-		}
 	}
 	
 	public void update(World world) {

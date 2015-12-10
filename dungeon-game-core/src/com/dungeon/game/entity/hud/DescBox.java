@@ -46,8 +46,6 @@ public class DescBox extends Hud {
 
 	@Override
 	public void calc(World world) {
-		text = "";
-		
 		x = world.mouse.x;
 		y = world.mouse.y;
 		
@@ -91,6 +89,8 @@ public class DescBox extends Hud {
 			DESC_BOX.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
 			
 			desc.draw(batch, text, x+6, y+d_height-6);
+			
+			text = "";
 		}
 	}
 }
