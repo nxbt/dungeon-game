@@ -10,7 +10,6 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 * Add More Enemies
 * Populate rooms with drops
 * Create Backstory
-* Hud element ordering and dragging
 * Visibility (V+S >= 1)
 * Visibility polygonss (created from triangles)
 * Lighting using a similar algorithm to visibility polygons.
