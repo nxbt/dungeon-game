@@ -8,6 +8,4 @@ public abstract class Hud extends Static {
 	public Hud(int x, int y) {
 		super(x, y);
 	}
-	
-	public void hovered(World world) {}
 }

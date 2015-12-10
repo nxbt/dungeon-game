@@ -45,4 +45,6 @@ public abstract class Entity {
 	public abstract void init();
 	
 	public abstract void calc(World world);
+	
+	public void hovered(World world){};
 }

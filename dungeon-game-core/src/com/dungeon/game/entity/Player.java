@@ -122,7 +122,7 @@ public class Player extends Dynamic {
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.E)) {
 			if(world.hudEntities.indexOf(inv.graphic) == -1) {
-				world.hudEntities.add(inv.graphic);
+				world.hudEntities.add(0,inv.graphic);
 			}
 			else world.hudEntities.remove(inv.graphic);
 		}
@@ -130,7 +130,7 @@ public class Player extends Dynamic {
 		if(world.mouse.x > x-world.cam.x+world.cam.WIDTH/2 && world.mouse.x < x+width-world.cam.x+world.cam.WIDTH/2 && world.mouse.y > y-world.cam.y+world.cam.HEIGHT/2 && world.mouse.y < y+height-world.cam.y+world.cam.HEIGHT/2) {
 			if(world.mouse.rb_pressed) {
 				if(world.hudEntities.indexOf(inv.graphic) == -1) {
-					world.hudEntities.add(inv.graphic);
+					world.hudEntities.add(0,inv.graphic);
 				}
 				else world.hudEntities.remove(inv.graphic);
 			}

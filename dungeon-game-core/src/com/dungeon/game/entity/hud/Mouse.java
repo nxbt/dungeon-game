@@ -89,19 +89,6 @@ public class Mouse extends Hud {
 				break;
 			}
 		}
-
-		world.hudEntities.add(0,world.hudEntities.get(toMoveToFront));
-		world.hudEntities.remove(toMoveToFront+1);
-		for(int i = 0; i < world.entities.size(); i++) {
-			Entity ent = world.entities.get(i);
-			if(x > ent.x && x < ent.x+ent.d_width && y > ent.y && y < ent.y+ent.d_height){
-//				if(ent.isClickable==true){
-//					ent.clicked(world);
-					onHud = true;
-					break;
-//				}
-			}
-		}
 		
 		canPickup = (!onHud &&  Math.sqrt(Math.pow((x+world.cam.x-world.cam.WIDTH/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+world.cam.y-world.cam.HEIGHT/2) - (world.player.y + world.player.d_height/2), 2)) <= world.player.REACH);
 		for(int i = 0; i< world.curFloor.tm.length;i++){
@@ -113,11 +100,19 @@ public class Mouse extends Hud {
 			}
 		}
 		canPlace = canPickup;
-		if(canPlace) {
-			for(Entity ent: world.entities) {
-				if(x > ent.x-world.cam.x+world.cam.WIDTH/2 && x < ent.x+ent.d_width-world.cam.x+world.cam.WIDTH/2 && y > ent.y-world.cam.y+world.cam.HEIGHT/2 && y < ent.y+ent.d_height-world.cam.y+world.cam.HEIGHT/2) canPlace = false;
+
+		world.hudEntities.add(0,world.hudEntities.get(toMoveToFront));
+		world.hudEntities.remove(toMoveToFront+1);
+		for(int i = 0; i < world.entities.size(); i++) {
+			Entity ent = world.entities.get(i);
+			if(x + world.cam.x-world.cam.WIDTH/2 > ent.x && x + world.cam.x-world.cam.WIDTH/2 < ent.x+ent.d_width && y + world.cam.y-world.cam.HEIGHT/2 > ent.y && y + world.cam.y-world.cam.HEIGHT/2 < ent.y+ent.d_height){
+				ent.hovered(world);
+				canPlace = false;
+				break;
 			}
 		}
+		
+		
 		
 		if(slot.item != null && canPlace) {
 			if(lb_pressed) {

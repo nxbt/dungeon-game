@@ -61,7 +61,7 @@ public class Chest extends Static {
 			if(world.hudEntities.contains(inv.graphic)){
 				world.hudEntities.remove(inv.graphic);
 			}else{
-				world.hudEntities.add(inv.graphic);
+				world.hudEntities.add(0,inv.graphic);
 			}
 		}
 		if(Math.sqrt(Math.pow((x+d_width/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+d_height/2) - (world.player.y + world.player.d_height/2), 2)) >= world.player.REACH){
