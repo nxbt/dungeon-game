@@ -45,6 +45,11 @@ public class InvGraphic extends Hud {
 		if(drag){
 			x = world.mouse.x-dragOff_x;
 			y = world.mouse.y-dragOff_y;
+			
+			if(world.hudEntities.indexOf(this) != 0) {
+				world.hudEntities.remove(this);
+				world.hudEntities.add(0, this);
+			}
 		}
 		inv.update(world);
 	}
@@ -62,6 +67,15 @@ public class InvGraphic extends Hud {
 			}
 		inv.hovered(world);
 		}
+	}
+	
+	public void open(World world) {
+		world.hudEntities.add(0, this);
+	}
+	
+	public void close(World world) {
+		world.hudEntities.remove(this);
+		drag = false;
 	}
 	
 	@Override

@@ -59,19 +59,18 @@ public class Chest extends Static {
 	public void calc(World world) {
 		if(world.mouse.rb_pressed&&world.mouse.x > x-world.cam.x+world.cam.WIDTH/2 && world.mouse.x < x+Item.SIZE-world.cam.x+world.cam.WIDTH/2 && world.mouse.y > y-world.cam.y+world.cam.HEIGHT/2 && world.mouse.y < y+Item.SIZE-world.cam.y+world.cam.HEIGHT/2){
 			if(world.hudEntities.contains(inv.graphic)){
-				world.hudEntities.remove(inv.graphic);
-			}else{
-				world.hudEntities.add(0,inv.graphic);
+				inv.graphic.close(world);
 			}
+			else inv.graphic.open(world);
 		}
 		if(Math.sqrt(Math.pow((x+d_width/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+d_height/2) - (world.player.y + world.player.d_height/2), 2)) >= world.player.REACH){
-			world.hudEntities.remove(inv.graphic);
+			inv.graphic.close(world);
 		}
 		for(int i = 0; i< world.curFloor.tm.length;i++){
 			for(int k = 0; k <world.curFloor.tm[i].length;k++){
 				if(world.curFloor.tm[k][i].data==1){
 					float[] verticies = new float[]{i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,(i)*Tile.TS,(k+1)*Tile.TS};
-					if(Intersector.intersectSegmentPolygon(new Vector2(x+d_width/2,y+d_height/2), new Vector2(world.player.x + world.player.d_width/2,world.player.y + world.player.d_height/2), new Polygon(verticies))) world.hudEntities.remove(inv.graphic);
+					if(Intersector.intersectSegmentPolygon(new Vector2(x+d_width/2,y+d_height/2), new Vector2(world.player.x + world.player.d_width/2,world.player.y + world.player.d_height/2), new Polygon(verticies))) inv.graphic.close(world);
 				}
 			}
 		}

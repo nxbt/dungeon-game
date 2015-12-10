@@ -34,10 +34,11 @@ public abstract class StatusBar extends Hud {
 		calc(world);
 		
 		percent = 1*cur/max;
-		
-		if(world.mouse.x > x && world.mouse.x < x+d_width && world.mouse.y > y && world.mouse.y < y+d_height) {
-			world.descBox.updateText((int)cur + "/" + (int)max);
-		}
+	}
+	
+	@Override
+	public void hovered(World world) {
+		world.descBox.updateText((int)cur + "/" + (int)max);
 	}
 	
 	@Override

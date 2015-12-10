@@ -73,7 +73,6 @@ public class Floor {
 					
 			}
 		}
-		System.out.println(corners.size());
 	}
 	
 	public void update() {

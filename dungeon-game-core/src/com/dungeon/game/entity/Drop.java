@@ -27,7 +27,6 @@ public class Drop extends Static {
 	
 	@Override
 	public void hovered(World world){
-		System.out.println("DROP HOVERED");
 		if(world.mouse.canPickup) {
 			if(world.mouse.lb_pressed) {
 				if(slot.item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(slot.item.name)) {

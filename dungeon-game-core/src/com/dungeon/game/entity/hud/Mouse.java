@@ -65,7 +65,7 @@ public class Mouse extends Hud {
 		if(y < 0) y = 0;
 		else if(y > screenHeight) y = screenHeight;
 		
-		//Check status of Left button
+		//Check status of left mouse button
 		if(Gdx.input.isButtonPressed(0)&&!lb_down){
 			lb_down = true;
 			lb_pressed = true;
@@ -80,7 +80,7 @@ public class Mouse extends Hud {
 			lb_released = false;
 		}
 		
-		//Check status of Right button
+		//Check status of right mouse button
 		if(Gdx.input.isButtonPressed(1)&&!rb_down){
 			rb_down = true;
 			rb_pressed = true;
@@ -94,21 +94,6 @@ public class Mouse extends Hud {
 			rb_pressed = false;
 			rb_released = false;
 		}
-//		if(Gdx.input.isButtonPressed(0) && !down) {
-//			down = true;
-//			lb_pressed = true;
-//		}
-//		else if(Gdx.input.isButtonPressed(1) && !down) {
-//			down = true;
-//			rb_pressed = true;
-//		}
-//		else {
-//			lb_pressed = false;
-//			rb_pressed = false;
-//		}
-//		if(!(Gdx.input.isButtonPressed(0) || Gdx.input.isButtonPressed(1))) {
-//			down = false;
-//		}
 		
 		onHud = false;
 		int toMoveToFront=0;
