@@ -107,6 +107,7 @@ public class World {
 		Pixmap tempMap = darkness.getTextureData().consumePixmap();
 		Pixmap lightMap = new Pixmap(cam.WIDTH,cam.HEIGHT,Pixmap.Format.RGBA8888);
 		lightMap.drawPixmap(tempMap, 0, 0, tempMap.getWidth(), tempMap.getHeight(), 0, 0, lightMap.getWidth(), lightMap.getHeight());
+		Texture finalLightMap = new Texture(cam.WIDTH,cam.HEIGHT,Pixmap.Format.RGBA8888);
 		Texture light = new Texture("light.png");
 		if (!light.getTextureData().isPrepared()) {
 			light.getTextureData().prepare();
