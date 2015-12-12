@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.dungeon.game.Camera;
+import com.dungeon.game.LightMap;
 import com.dungeon.game.entity.*;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.HealthBar;
@@ -37,6 +38,8 @@ public class World {
 	public Mouse mouse;
 	
 	public DescBox descBox;
+	
+	public LightMap lightMap;
 	
 	public World() {
 		hudBatch = new SpriteBatch();
@@ -65,6 +68,8 @@ public class World {
 		hudEntities.add(new HealthBar(100,20));
 		hudEntities.add(new StaminaBar(220,20));
 		hudEntities.add(new ManaBar(340,20));
+		
+		lightMap = new LightMap(cam.WIDTH,cam.HEIGHT);
 	}
 	
 	public void update() {
@@ -84,6 +89,8 @@ public class World {
 		}
 		
 		cam.update(player.x+player.d_width/2, player.y+player.d_height/2, mouse.x, mouse.y, 1f);
+		
+		lightMap.update(this);
 	}
 	
 	public void draw(SpriteBatch batch) {
@@ -99,30 +106,10 @@ public class World {
 		for(int i = entities.size()-1; i >= 0; i--) {
 			entities.get(i).draw(batch);
 		}
-		//temp code to generate blackness
-		Texture darkness = new Texture("darkness.png");
-		if (!darkness.getTextureData().isPrepared()) {
-			darkness.getTextureData().prepare();
-		}
-		Pixmap tempMap = darkness.getTextureData().consumePixmap();
-		Pixmap lightMap = new Pixmap(cam.WIDTH,cam.HEIGHT,Pixmap.Format.RGBA8888);
-		lightMap.drawPixmap(tempMap, 0, 0, tempMap.getWidth(), tempMap.getHeight(), 0, 0, lightMap.getWidth(), lightMap.getHeight());
-		Texture finalLightMap = new Texture(cam.WIDTH,cam.HEIGHT,Pixmap.Format.RGBA8888);
-		Texture light = new Texture("light.png");
-		if (!light.getTextureData().isPrepared()) {
-			light.getTextureData().prepare();
-		}
-		Pixmap lightBall = light.getTextureData().consumePixmap();
-		lightMap.drawPixmap(lightBall,(int) (player.x+player.width/2-cam.x+cam.WIDTH/2-lightBall.getWidth()/2),(int) (curFloor.tm.length-(player.y+player.height/2-cam.y+cam.HEIGHT/2-lightBall.getHeight()/2)));
-		darkness = new Texture(lightMap);
-		batch.setBlendFunction(GL20.GL_DST_COLOR, GL20.GL_SRC_COLOR);
-//		temp.setPosition(player.x+player.width/2-temp.getWidth()/2, player.y+player.height/2-temp.getHeight()/2);
-//		temp.draw(batch, 100);
-		batch.draw(darkness, cam.x-cam.WIDTH/2, cam.y-cam.HEIGHT/2);
-		
-		batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		
 		batch.setProjectionMatrix(hudCam.cam.combined);
+		
+		lightMap.draw(batch);
 		
 		for(int i = hudEntities.size()-1;i>=0;i--) {
 			hudEntities.get(i).draw(batch);
