@@ -17,7 +17,7 @@ public class LightMap {
 	public LightMap(int width, int height) {
 		lightMap = new Pixmap(width,height,Pixmap.Format.RGBA8888);
 		
-		float alpha = 0.05f;
+		float alpha = 0;
 		
 		lightMap.setColor(alpha,alpha,alpha,1);
 		
@@ -29,8 +29,8 @@ public class LightMap {
 	public void update(World world) {
 		lightMap.fillRectangle(0, 0, lightMap.getWidth(), lightMap.getHeight());
 		
-		lightMap.drawPixmap(light,(int) (world.player.x+world.player.width/2-world.cam.x+world.cam.WIDTH/2-light.getWidth()/2),(int) (world.curFloor.tm.length-(world.player.y+world.player.height/2-world.cam.y+world.cam.HEIGHT/2-light.getHeight()/2)));
-		lightMap.drawPixmap(light,(int) (world.curFloor.tm[0].length/2*Tile.TS-world.cam.x+world.cam.WIDTH/2-light.getWidth()/2),(int) (world.curFloor.tm.length-(world.curFloor.tm.length/2*Tile.TS-world.cam.y+world.cam.HEIGHT/2-light.getHeight()/2)));
+		lightMap.drawPixmap(light, (int) (world.player.x+world.player.width/2-world.cam.x+world.cam.WIDTH/2-light.getWidth()/2),(int) (world.curFloor.tm.length-(world.player.y+world.player.height/2-world.cam.y+world.cam.HEIGHT/2-light.getHeight()/2)));
+//		lightMap.drawPixmap(light,(int) (world.curFloor.tm[0].length/2*Tile.TS-world.cam.x+world.cam.WIDTH/2-light.getWidth()/2),(int) (world.curFloor.tm.length-(world.curFloor.tm.length/2*Tile.TS-world.cam.y+world.cam.HEIGHT/2-light.getHeight()/2)));
 
 		lightMapTex = new Texture(lightMap);
 	}
