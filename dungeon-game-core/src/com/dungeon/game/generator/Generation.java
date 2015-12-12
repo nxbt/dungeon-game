@@ -31,7 +31,7 @@ public abstract class Generation {
 	public void generateClearDungeon(){
 		for(int i = 0; i<map.length;i++){
 			for(int k = 0; k<map[i].length;k++){
-				map[i][k]=2;
+				map[i][k]=1;
 			}
 		}
 	}

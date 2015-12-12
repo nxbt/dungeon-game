@@ -12,7 +12,7 @@ public class Tile {
 	private static HashMap<Integer, Integer> tileData;
 	public Tile(TextureRegion[] spritesheet, int id) {
 		this.id = id;
-		data = id==2 ? 1:0;
+		data = id==1 ? 1:0;
 		
 		texture = spritesheet[id];
 	}
