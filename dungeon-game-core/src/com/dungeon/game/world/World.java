@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.dungeon.game.Camera;
-import com.dungeon.game.LightMap;
 import com.dungeon.game.entity.*;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.HealthBar;
@@ -19,6 +18,7 @@ import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.ManaBar;
 import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.StaminaBar;
+import com.dungeon.game.light.LightMap;
 
 public class World {
 	public SpriteBatch hudBatch;

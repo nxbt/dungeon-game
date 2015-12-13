@@ -1,37 +1,41 @@
-package com.dungeon.game;
+package com.dungeon.game.light;
+
+import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.entity.Entity;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class LightMap {
 
 	Pixmap lightMap;
-	Pixmap light;
 	
 	Texture lightMapTex;
+	
+	ArrayList<Light> lights;
 	
 	public LightMap(int width, int height) {
 		lightMap = new Pixmap(width,height,Pixmap.Format.RGBA8888);
 		
-		float alpha = 0;
+		lightMap.setColor(0,0,0,1);
 		
-		lightMap.setColor(alpha,alpha,alpha,1);
-		
-		Texture tempLight = new Texture("light.png");
-		tempLight.getTextureData().prepare();
-		light = tempLight.getTextureData().consumePixmap();
+		lights = new ArrayList<Light>();
 	}
 
 	public void update(World world) {
 		lightMap.fillRectangle(0, 0, lightMap.getWidth(), lightMap.getHeight());
 		
-		lightMap.drawPixmap(light, (int) (world.player.x+world.player.width/2-world.cam.x+world.cam.WIDTH/2-light.getWidth()/2),(int) (world.curFloor.tm.length-(world.player.y+world.player.height/2-world.cam.y+world.cam.HEIGHT/2-light.getHeight()/2)));
-		lightMap.drawPixmap(light,(int) (world.curFloor.tm[0].length/2*Tile.TS-world.cam.x+world.cam.WIDTH/2-light.getWidth()/2),(int) (world.curFloor.tm.length-(world.curFloor.tm.length/2*Tile.TS-world.cam.y+world.cam.HEIGHT/2-light.getHeight()/2)));
-
+		for(Entity ent: world.entities) {
+			if(ent.light != null) {
+				ent.light.update(world);
+				ent.light.draw(lightMap);
+			}
+		}
+		
 		lightMapTex = new Texture(lightMap);
 	}
 	
@@ -42,5 +46,4 @@ public class LightMap {
 		
 		batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 	}
-	
 }

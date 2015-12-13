@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.item.*;
+import com.dungeon.game.light.Light;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -115,6 +116,8 @@ public class Player extends Dynamic {
 		inv.slot[17].item = new Crap();
 		inv.slot[18].item = new Crap();
 		inv.slot[19].item = new Crap();
+		
+		light = new Light(this, 1);
 	}
 	
 	public void calc(World world) {

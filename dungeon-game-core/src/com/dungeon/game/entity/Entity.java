@@ -2,6 +2,7 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
 
 public abstract class Entity {
@@ -24,6 +25,8 @@ public abstract class Entity {
 	public String name;
 	
 	public Texture sprite;
+	
+	public Light light;
 	
 	public Entity(int x, int y) {
 		this.x = x;
