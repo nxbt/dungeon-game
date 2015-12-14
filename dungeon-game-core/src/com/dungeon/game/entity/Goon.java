@@ -35,7 +35,7 @@ public class Goon extends Enemy {
 		
 		solid = true;
 		
-		light = new Light(this, 100);
+		light = new Light(this, 0.5f);
 	}
 
 	@Override

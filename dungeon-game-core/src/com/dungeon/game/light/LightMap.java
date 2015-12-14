@@ -40,7 +40,7 @@ public class LightMap {
 	}
 	
 	public void draw(SpriteBatch batch) {
-		batch.setBlendFunction(GL20.GL_DST_COLOR, GL20.GL_SRC_COLOR);
+		batch.setBlendFunction(GL20.GL_ZERO, GL20.GL_SRC_COLOR);
 		
 		batch.draw(lightMapTex, 0, 0);
 		

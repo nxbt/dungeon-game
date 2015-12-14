@@ -117,7 +117,7 @@ public class Player extends Dynamic {
 		inv.slot[18].item = new Crap();
 		inv.slot[19].item = new Crap();
 		
-		light = new Light(this, 100);
+		light = new Light(this, 1);
 	}
 	
 	public void calc(World world) {
