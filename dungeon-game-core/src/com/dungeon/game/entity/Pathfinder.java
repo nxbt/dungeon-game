@@ -33,10 +33,10 @@ public class Pathfinder {
 			if(count>1000)return null;
 			ArrayList<int[]> toAdd = new ArrayList<int[]>();
 			//Find hard crash: out of bounds exception 100.
-			if(!(queue.get(i)[0]+1>map[0].length||map[queue.get(i)[1]][queue.get(i)[0]+1]==1))toAdd.add(new int[]{queue.get(i)[0]+1,queue.get(i)[1],count});
-			if(!(queue.get(i)[1]+1>map.length||map[queue.get(i)[1]+1][queue.get(i)[0]]==1))toAdd.add(new int[]{queue.get(i)[0],queue.get(i)[1]+1,count});
-			if(!(queue.get(i)[0]-1<0||map[queue.get(i)[1]][queue.get(i)[0]-1]==1))toAdd.add(new int[]{queue.get(i)[0]-1,queue.get(i)[1],count});
-			if(!(queue.get(i)[1]+1>map.length||map[queue.get(i)[1]-1][queue.get(i)[0]]==1))toAdd.add(new int[]{queue.get(i)[0],queue.get(i)[1]-1,count});
+			if(!(queue.get(i)[0]+1>map[0].length-1||map[queue.get(i)[1]][queue.get(i)[0]+1]==1))toAdd.add(new int[]{queue.get(i)[0]+1,queue.get(i)[1],queue.get(i)[2]+1});
+			if(!(queue.get(i)[1]+1>map.length-1||map[queue.get(i)[1]+1][queue.get(i)[0]]==1))toAdd.add(new int[]{queue.get(i)[0],queue.get(i)[1]+1,queue.get(i)[2]+1});
+			if(!(queue.get(i)[0]-1<0||map[queue.get(i)[1]][queue.get(i)[0]-1]==1))toAdd.add(new int[]{queue.get(i)[0]-1,queue.get(i)[1],queue.get(i)[2]+1});
+			if(!(queue.get(i)[1]-1<0||map[queue.get(i)[1]-1][queue.get(i)[0]]==1))toAdd.add(new int[]{queue.get(i)[0],queue.get(i)[1]-1,queue.get(i)[2]+1});
 			for(int k = toAdd.size()-1; k>=0;k--){
 				for(int[] e: queue){
 					toAdd.get(k);
