@@ -18,6 +18,7 @@ public class Light {
 	public Light(Entity ent, float radius) {
 		Texture tempLight = new Texture("light.png");
 		tempLight.getTextureData().prepare();
+		tempLight.dispose();
 		light = tempLight.getTextureData().consumePixmap();
 		
 		this.ent = ent;

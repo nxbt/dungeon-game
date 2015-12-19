@@ -39,7 +39,7 @@ public class World {
 	
 	public DescBox descBox;
 	
-	public LightMap lightMap;
+//	public LightMap lightMap;
 	
 	public World() {
 		hudBatch = new SpriteBatch();
@@ -69,7 +69,7 @@ public class World {
 		hudEntities.add(new StaminaBar(220,20));
 		hudEntities.add(new ManaBar(340,20));
 		
-		lightMap = new LightMap(cam.WIDTH,cam.HEIGHT);
+//		lightMap = new LightMap(cam.WIDTH,cam.HEIGHT);
 	}
 	
 	public void update() {
@@ -90,7 +90,7 @@ public class World {
 		
 		cam.update(player.x+player.d_width/2, player.y+player.d_height/2, mouse.x, mouse.y, 1f);
 		
-		lightMap.update(this);
+//		lightMap.update(this);
 	}
 	
 	public void draw(SpriteBatch batch) {
@@ -109,7 +109,7 @@ public class World {
 		
 		batch.setProjectionMatrix(hudCam.cam.combined);
 		
-		lightMap.draw(batch);
+//		lightMap.draw(batch);
 		
 		for(int i = hudEntities.size()-1;i>=0;i--) {
 			hudEntities.get(i).draw(batch);

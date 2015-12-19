@@ -380,8 +380,8 @@ public class Rooms extends Generation {
 		}
 		if(room.x<1)result = false;
 		if(room.y<1)result = false;
-		if(room.y+room.height>map.length-1)result = false;
-		if(room.x+room.width>map[0].length-1)result = false;
+		if(room.y+room.height>map.length-2)result = false;
+		if(room.x+room.width>map[0].length-2)result = false;
 		return result;
 	}
 	
@@ -394,7 +394,7 @@ public class Rooms extends Generation {
 			if(y>=i.getY()-1&&y<i.getY()+i.getHeight()+1)yInter = true;
 			if(xInter&&yInter)result = false;
 		}
-		if(x<1||y<1||y>map.length-1||x>map[0].length-1)result = false;
+		if(x<1||y<1||y>map.length-2||x>map[0].length-2)result = false;
 		for(ArrayList<int[]> i: halls){
 			for(int[] k: i){
 				if(x == k[0]&&y==k[1])result = false;
