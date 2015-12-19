@@ -1,4 +1,4 @@
-package com.dungeon.game.entity;
+package com.dungeon.game.pathing;
 
 import java.util.ArrayList;
 

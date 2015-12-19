@@ -3,6 +3,7 @@ package com.dungeon.game.entity;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.dungeon.game.pathing.Pathfinder;
 import com.dungeon.game.world.Tile;
 
 public abstract class Enemy extends Dynamic {
