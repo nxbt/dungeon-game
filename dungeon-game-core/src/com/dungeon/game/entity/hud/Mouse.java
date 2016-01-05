@@ -29,6 +29,8 @@ public class Mouse extends Hud {
 	public boolean canPickup;
 	private boolean canPlace;
 	
+	private float sensitivity;
+	
 	public Slot slot;
 	
 	public Mouse(int x, int y) {
@@ -47,6 +49,8 @@ public class Mouse extends Hud {
 		d_offx = -8;
 		d_offy = -8;
 		
+		sensitivity = 0.5f;
+		
 		slot = new Slot(new int[] {0, 0, 0}, null);
 		
 		slot.item = new Stick();
@@ -54,8 +58,8 @@ public class Mouse extends Hud {
 
 	@Override
 	public void calc(World world) {
-		x += Gdx.input.getDeltaX();
-		y -= Gdx.input.getDeltaY();
+		x += Gdx.input.getDeltaX() * sensitivity;
+		y -= Gdx.input.getDeltaY() * sensitivity;
 		
 		int screenWidth = (int) world.cam.WIDTH;
 		int screenHeight = (int) world.cam.HEIGHT;
