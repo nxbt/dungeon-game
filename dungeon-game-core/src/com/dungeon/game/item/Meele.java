@@ -1,13 +1,14 @@
 package com.dungeon.game.item;
 
-import com.dungeon.game.entity.WeaponHitbox;
+import com.badlogic.gdx.graphics.Texture;
+import com.dungeon.game.entity.WeaponGraphic;
 
 public abstract class Meele extends Weapon {
 
-	private WeaponHitbox hitbox;
+	private WeaponGraphic hitbox;
 	private int swingTimer;
-	public Meele(int damage, int cooldown) {
-		super(damage, cooldown);
+	public Meele(int damage, int cooldown, Texture texture) {
+		super(damage, cooldown, texture);
 		// TODO Auto-generated constructor stub
 	}
 	

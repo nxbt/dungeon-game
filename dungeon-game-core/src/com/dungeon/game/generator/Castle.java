@@ -213,7 +213,7 @@ public class Castle extends Generation {
 		float height = room.height;
 		for(int i = 0; i<height; i++){
 			for(int k = 0; k<width; k++){
-				map[y][x]=1;
+				map[y][x]=2;
 				x++;
 			}
 			y++;

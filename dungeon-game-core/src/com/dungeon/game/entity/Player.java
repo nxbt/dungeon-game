@@ -3,6 +3,7 @@ package com.dungeon.game.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.item.*;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.Tile;
@@ -14,7 +15,9 @@ public class Player extends Dynamic {
 	public Inventory inv;
 	
 	public Item hat;
-	
+
+	private boolean leftEquiped;
+	private boolean rightEquiped;
 	public Player(int x, int y) {
 		super(x, y);
 	}
@@ -122,6 +125,12 @@ public class Player extends Dynamic {
 	}
 	
 	public void calc(World world) {
+		angle = (float) (180/Math.PI*Math.atan2(world.mouse.y+world.cam.y-world.cam.HEIGHT/2-(y+height/2), world.mouse.x+world.cam.x-world.cam.WIDTH/2-(x+width/2)));
+		if(inv.slot[30].item!=null)leftEquiped = true;
+		else leftEquiped = false;
+		if(inv.slot[31].item!=null)rightEquiped = true;
+		else rightEquiped = false;
+		
 		if(inv.slot[35].item != null) ((Equipable) inv.slot[35].item).update(world, this);
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.E)) {
@@ -139,10 +148,29 @@ public class Player extends Dynamic {
 				else inv.graphic.close(world);
 			}
 		}
+		if(leftEquiped){
+			((Weapon)(inv.slot[30].item)).graphic.x=x;
+
+			((Weapon)(inv.slot[30].item)).graphic.y=y+d_width/2;
+
+			((Weapon)(inv.slot[30].item)).graphic.angle=angle-135;
+
+			((Weapon)(inv.slot[30].item)).graphic.originX = x;
+
+			((Weapon)(inv.slot[30].item)).graphic.originY=y;
+			System.out.println("fuck");
+		}
 		
 		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)  || Gdx.input.isKeyPressed(Input.Keys.A)) inp_lt = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) inp_rt = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) inp_up = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) inp_dn = true;
 	}
+	
+	public void draw(SpriteBatch batch) {
+		batch.draw(/*Texture*/ sprite,/*x*/ x+d_offx,/*y*/ y+d_offy,/*originX*/d_width/2,/*originY*/d_height/2,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
+		if(leftEquiped)((Weapon)(inv.slot[30].item)).graphic.draw(batch);
+
+	}
 }
+

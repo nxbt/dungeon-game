@@ -20,6 +20,7 @@ public abstract class Entity {
 	public int d_offx;
 	public int d_offy;
 	
+	public float angle;
 	boolean solid;
 	
 	public String name;
@@ -42,7 +43,7 @@ public abstract class Entity {
 	}
 	
 	public void draw(SpriteBatch batch) {
-		batch.draw(sprite, x+d_offx, y+d_offy, d_width, d_height);
+		batch.draw(/*Texture*/ sprite,/*x*/ x+d_offx,/*y*/ y+d_offy,/*originX*/d_width/2,/*originY*/d_height/2,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
 	}
 	
 	public abstract void init();
