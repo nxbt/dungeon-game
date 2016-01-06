@@ -6,9 +6,10 @@ import com.dungeon.game.entity.WeaponGraphic;
 public abstract class Weapon extends Item{
 	protected int damage;
 	protected int cooldown;
+	protected int speed;
 	public WeaponGraphic graphic;
 	
-	public Weapon(int damage, int cooldown, Texture texture){
+	public Weapon(int damage, int cooldown, int speed, Texture texture){
 		super();
 		this.damage = damage;
 		this.cooldown = cooldown;
