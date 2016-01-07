@@ -30,6 +30,8 @@ public class Player extends Dynamic {
 	public void init() {
 		name = "Player";
 		
+		torq = 10;
+		
 		maxLife = 100;
 		maxStamina = 100;
 		maxMana = 100;
@@ -130,7 +132,10 @@ public class Player extends Dynamic {
 	}
 	
 	public void calc(World world) {
-		angle = (float) (180/Math.PI*Math.atan2(world.mouse.y+world.cam.y-world.cam.HEIGHT/2-(y+height/2), world.mouse.x+world.cam.x-world.cam.WIDTH/2-(x+width/2)));
+		target_angle = (float) (180/Math.PI*Math.atan2(world.mouse.y+world.cam.y-world.cam.HEIGHT/2-(y+height/2), world.mouse.x+world.cam.x-world.cam.WIDTH/2-(x+width/2)));
+		
+		System.out.println(angle +", " + target_angle);
+		
 		if(inv.slot[30].item!=null)leftEquiped = true;
 		else leftEquiped = false;
 		if(inv.slot[31].item!=null)rightEquiped = true;
@@ -162,9 +167,16 @@ public class Player extends Dynamic {
 		if(leftEquiped){
 			if(((Meele) inv.slot[30].item).isInUse())attacking = true;
 			leftPos = ((Meele) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
+			((Weapon)inv.slot[30].item).graphic.calc(world);
+			}
+		if(attacking){
+			mvel = 2.5;
+			torq = 3;
 		}
-		if(attacking)mvel = 2.5;
-		else mvel = 5;
+		else{
+			mvel = 5;
+			torq = 10;
+		}
 	}
 	
 	public void draw(SpriteBatch batch) {

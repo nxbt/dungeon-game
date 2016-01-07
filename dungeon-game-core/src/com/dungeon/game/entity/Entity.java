@@ -21,6 +21,7 @@ public abstract class Entity {
 	public int d_offy;
 	
 	public float angle;
+	
 	boolean solid;
 	
 	public String name;

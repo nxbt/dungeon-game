@@ -10,11 +10,14 @@ public abstract class Dynamic extends Entity {
 	double acel;
 	double fric;
 	double mvel;
+	double torq;
 	
 	public boolean inp_up;
 	public boolean inp_dn;
 	public boolean inp_lt;
 	public boolean inp_rt;
+	
+	public float target_angle;
 	
 	public float maxLife;
 	public float maxStamina;
@@ -46,6 +49,53 @@ public abstract class Dynamic extends Entity {
 	
 	//calculates velocity and collisions for object
 	public void phys(World world) {
+		
+		if(angle != target_angle) {
+			boolean turnRight = true;
+			float tempAngle = angle+180;
+			float tempTargetAngle = target_angle+180;
+			
+			if(tempAngle>180&&tempTargetAngle>180){
+				if(tempTargetAngle<tempAngle)turnRight = false;
+				else turnRight = true;
+			}else if(tempAngle<180&&tempTargetAngle<180){
+				if(tempAngle>tempTargetAngle)turnRight = false;
+				else turnRight = true;
+			}else if(tempAngle>180&&tempTargetAngle<180){
+				if(tempTargetAngle<tempAngle-180)turnRight = true;
+				else turnRight = false;
+			}else if(tempAngle<180&&tempTargetAngle>180){
+				if(tempTargetAngle-180>tempAngle)turnRight = false;
+				else turnRight = true;
+			}
+			
+			
+			if(turnRight)angle+=torq;
+			else angle-=torq;
+			float difference = 0;
+			float angleModifier1 = 0;
+			float angleModifier2 = 0;
+			if(tempAngle > tempTargetAngle){
+				angleModifier1 = tempAngle;
+				angleModifier2 = tempTargetAngle;
+			}else{
+				if(tempAngle == tempTargetAngle)difference = 0;
+				else{
+					angleModifier1 = tempTargetAngle;
+					angleModifier2 = tempAngle;
+				}
+			}
+			if(angleModifier1-180<angleModifier2){
+				difference = angleModifier1-angleModifier2;
+			}else{
+				difference = angleModifier2+Math.abs(angleModifier1-360);
+			}
+			if(difference < torq) angle = target_angle;
+				
+			if(angle > 180) angle -= 360;
+			if(angle < -180) angle += 360;
+		}
+		
 		double dirX = 0;
 		double dirY = 0;
 		
