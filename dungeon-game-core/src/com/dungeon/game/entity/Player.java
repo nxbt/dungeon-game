@@ -20,6 +20,9 @@ public class Player extends Dynamic {
 	private boolean rightEquiped;
 	
 	private int[] leftPos;
+	
+	private boolean attacking;
+	
 	public Player(int x, int y) {
 		super(x, y);
 	}
@@ -155,9 +158,13 @@ public class Player extends Dynamic {
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) inp_rt = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) inp_up = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) inp_dn = true;
+		attacking = false;
 		if(leftEquiped){
-			leftPos = ((Sword) inv.slot[30].item).getPos(world.mouse.lb_down);
+			if(((Meele) inv.slot[30].item).isInUse())attacking = true;
+			leftPos = ((Meele) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
 		}
+		if(attacking)mvel = 2.5;
+		else mvel = 5;
 	}
 	
 	public void draw(SpriteBatch batch) {

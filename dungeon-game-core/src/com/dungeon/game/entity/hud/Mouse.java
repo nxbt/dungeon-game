@@ -53,7 +53,6 @@ public class Mouse extends Hud {
 		
 		slot = new Slot(new int[] {0, 0, 0}, null);
 		
-		slot.item = new Stick();
 	}
 
 	@Override

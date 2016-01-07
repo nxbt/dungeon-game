@@ -7,7 +7,7 @@ public abstract class Meele extends Weapon {
 
 	private WeaponGraphic hitbox;
 	
-	protected int stage;
+	public int stage;
 	
 	protected int stageTimer;
 	
@@ -16,6 +16,8 @@ public abstract class Meele extends Weapon {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public abstract int[] getPos(boolean mousedown, boolean mousepressed);
 	
+	public abstract boolean isInUse();
 
 }
