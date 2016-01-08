@@ -32,7 +32,8 @@ public class WeaponGraphic extends Static {
 		//hitBox should be changed to a global private variable and set in the constructor!
 		Polygon hitBoxSword = new Polygon(new int[]{x+width*0.6,y+height*0.2,x+width*0.8,y+height*0.4,x,y+height*1.1,x-width*0.1,y+height});
 		hitBoxSword.setOrigin(x+width*0.9;y+height*0.1);
-		hitBoxSword.rotate(angle);
+		hitBoxSword.rotate(angle)
+		hitBoxSword.dirty();
 		hitBoxSword = new Polygon(hitBoxSword.getTransformedVertices());
 		Polygon hitBoxEntity;
 		for(Entity e: world.entities){
