@@ -39,7 +39,7 @@ public class WeaponGraphic extends Static {
 		for(Entity e: world.entities){
 			hitBoxEntity = new Polygon(new float[]{e.x,e.y,e.x+e.width,e.y,e.x+e.width,e.y+e.height,e.x,e.y+e.height});
 			if(Intersector.overlapConvexPolygons(hitBoxSword, hitBoxEntity)){
-				//target has been hit
+				((Dynamic) e).physdamage(weapon.damage);
 			}
 		}
 	}
