@@ -284,14 +284,14 @@ public abstract class Dynamic extends Entity {
 
 	}
 	
-	public int physdamage(float value /*Add an array of Effects*/){
-		amount = Math.max(0, life - (life-value))
+	public float physdamage(float value /*Add an array of Effects*/){
+		float amount = life - Math.max(life-value,0);
 		life-=value;
 		return amount;
 	}
 	
-	public int magicdamage(float value /*Add an array of Effects*/){
-		amount = Math.max(0, life - (life-value))
+	public float magicdamage(float value /*Add an array of Effects*/){
+		float amount = life - Math.max(life-value,0);
 		life-=value;
 		return amount;
 	}
