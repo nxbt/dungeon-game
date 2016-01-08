@@ -3,7 +3,7 @@ package com.dungeon.game.item;
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Dynamic;
 
-public class Sword extends Meele {
+public class Sword extends Melee {
 
 	private final int REST = 0;
 	private final int WINDUP1 = 1;
@@ -24,10 +24,10 @@ public class Sword extends Meele {
 	public Sword(int damage, int cooldown, int speed) {
 		super(damage, cooldown,speed, new Texture("Sword.png"));
 		desc = "Real sword I swear! \n\n Damage: "+damage+"\n Cooldown: "+cooldown;
-		knockratio = 0.6f;
+		knockratio = 0f;
 		knockstr = 10;
 		dmgMult = new float[]{0.7f,1,1.5f};
-		knockMult = new float[]{0.7f,1,1};
+		knockMult = new float[]{1,1.3f,0.7f};
 	}
 
 	@Override
@@ -202,7 +202,6 @@ public class Sword extends Meele {
 	public void hit(Dynamic e) {
 		hasHit = true;
 		float weaponangle = graphic.angle+135;
-		System.out.println(weaponangle);
 		float angleModifier;
 		float cur_dmgMult = 0;
 		float cur_knockMult = 0;
@@ -223,15 +222,16 @@ public class Sword extends Meele {
 			cur_knockMult = knockMult[2];
 		}
 		if(e.damage(damage*cur_dmgMult)>0){
-			float xSword = (float) (Math.cos((weaponangle+angleModifier)/180*Math.PI)*knockstr);
-			float ySword = (float) (Math.sin((weaponangle+angleModifier)/180*Math.PI)*knockstr);
+			
+			float xSword = (float) (Math.cos((weaponangle+angleModifier)/180f*Math.PI)*knockstr);
+			float ySword = (float) (Math.sin((weaponangle+angleModifier)/180f*Math.PI)*knockstr);
 			float xOwner = (float) (Math.cos((weaponangle)/180*Math.PI)*knockstr);
 			float yOwner = (float) (Math.sin((weaponangle)/180*Math.PI)*knockstr);
 			float xknock = xSword*(1-knockratio)+xOwner*(knockratio);
 			float yknock = ySword*(1-knockratio)+yOwner*(knockratio);
-			cur_knockback=new float[]{xknock*cur_knockMult,yknock*cur_knockMult};
-			e.dx += cur_knockback[0];
-			e.dy += cur_knockback[1];
+			float[] cur_knockback=new float[]{xknock*cur_knockMult,yknock*cur_knockMult};
+			e.dx = cur_knockback[0];
+			e.dy = cur_knockback[1];
 		}
 	}
 }

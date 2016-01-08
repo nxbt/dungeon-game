@@ -164,8 +164,8 @@ public class Player extends Dynamic {
 		if(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) inp_dn = true;
 		attacking = false;
 		if(leftEquiped){
-			if(((Meele) inv.slot[30].item).isInUse())attacking = true;
-			leftPos = ((Meele) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
+			if(((Melee) inv.slot[30].item).isInUse())attacking = true;
+			leftPos = ((Melee) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
 			((Weapon)inv.slot[30].item).graphic.calc(world);
 			}
 		if(attacking){
