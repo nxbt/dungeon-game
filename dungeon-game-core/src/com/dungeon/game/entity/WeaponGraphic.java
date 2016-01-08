@@ -29,9 +29,14 @@ public class WeaponGraphic extends Static {
 
 	@Override
 	public void calc(World world) {
-		Polygon hitBoxSword;
+		//hitBox should be changed to a global private variable and set in the constructor!
+		Polygon hitBoxSword = new Polygon(new int[]{x+width*0.6,y+height*0.2,x+width*0.8,y+height*0.4,x,y+height*1.1,x-width*0.1,y+height});
+		hitBoxSword.setOrigin(x+width*0.9;y+height*0.1);
+		hitBoxSword.rotate(angle);
+		hitBoxSword = new Polygon(hitBoxSword.getTransformedVertices());
 		Polygon hitBoxEntity;
 		for(Entity e: world.entities){
+			hitBoxEntity = new Polygon(new int[]{e.x,e.y,e.x+e.width,e.y,e.x+e.width,e.y+e.height,e.x,e.y+e.height});
 			if(Intersector.overlapConvexPolygons(hitBoxSword, hitBoxEntity)){
 				//target has been hit
 			}
