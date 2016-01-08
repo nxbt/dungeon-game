@@ -13,7 +13,7 @@ public class StaminaBar extends StatusBar {
 
 	@Override
 	public void calc(World world) {
-		cur = world.player.stamina;
-		max = world.player.maxStamina;
+		cur = world.player.stam;
+		max = world.player.maxStam;
 	}
 }

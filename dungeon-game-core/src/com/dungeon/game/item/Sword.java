@@ -1,6 +1,7 @@
 package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.dungeon.game.entity.Dynamic;
 
 public class Sword extends Meele {
 
@@ -15,15 +16,20 @@ public class Sword extends Meele {
 	private final int WINDDOWN2 = 8;
 	private final int WINDDOWN3 = 9;
 	
+	public boolean hasHit;
+	
 	public Sword(int damage, int cooldown, int speed) {
 		super(damage, cooldown,speed, new Texture("Sword.png"));
 		desc = "Real sword I swear! \n\n Damage: "+damage+"\n Cooldown: "+cooldown;
+		knockratio = 0.6f;
+		knockstr = 10;
 	}
 
 	@Override
 	public void init() {
 		name = "Sword";
 		
+		hasHit = false;
 	}
 	
 	public int[] getPos(boolean mousedown, boolean mousepressed){
@@ -54,6 +60,7 @@ public class Sword extends Meele {
 			if(index>10 && !mousedown){
 				stageTimer = 0;
 				stage = SWING1;
+				if(hasHit) hasHit = false;
 			}
 			break;
 		case SWING1:
@@ -62,6 +69,7 @@ public class Sword extends Meele {
 				polarAngle = (int) (-90*(index/30f))+30; // -60
 				angle = (int) (-95*(index/30f))+55; // -40
 			}else{
+				if(!hasHit) hasHit = true;
 				distance = 30;
 				polarAngle = -60;
 				angle = -40;
@@ -97,6 +105,7 @@ public class Sword extends Meele {
 			if(index>10 && !mousedown){
 				stageTimer = 0;
 				stage = SWING2;
+				if(hasHit) hasHit = false;
 			}
 			break;
 		case SWING2:
@@ -105,6 +114,7 @@ public class Sword extends Meele {
 				polarAngle = (int) (115*(index/30f))-80; // 35
 				angle = (int) (100*(index/30f))-60; // 40
 			}else{
+				if(!hasHit) hasHit = true;
 				distance = 5;
 				polarAngle = 35;
 				angle = 40;
@@ -140,6 +150,7 @@ public class Sword extends Meele {
 			if(index>30 && !mousedown){
 				stageTimer = 0;
 				stage = SWING3;
+				if(hasHit) hasHit = false;
 			}
 			break;
 		case SWING3:
@@ -147,7 +158,9 @@ public class Sword extends Meele {
 				distance = (int) (10*((index)/10f))+20; //30
 				polarAngle = (int) (20*((index)/10f))-50; //-30
 				angle = (int) (0*((index)/10f))+10; //10
+				
 			}else{
+				if(!hasHit) hasHit = true;
 				distance = 30;
 				polarAngle = -30;
 				angle = 10;
@@ -178,6 +191,26 @@ public class Sword extends Meele {
 	}
 
 	public boolean inAttack() {
-		return stage == SWING1 || stage == SWING2 || stage == SWING3;
+		return !hasHit && (stage == SWING1 || stage == SWING2 || stage == SWING3);
+	}
+	
+	public void hit(Dynamic e) {
+		hasHit = true;
+
+		float weaponangle = graphic.angle+135;
+		System.out.println(weaponangle);
+		float angleModifier;
+		if(stage == SWING1)angleModifier = -90;
+		else if(stage == SWING2)angleModifier = 90;
+		else angleModifier = 0;
+		float xSword = (float) (Math.cos((weaponangle+angleModifier)/180*Math.PI)*knockstr);
+		float ySword = (float) (Math.sin((weaponangle+angleModifier)/180*Math.PI)*knockstr);
+		float xOwner = (float) (Math.cos((weaponangle)/180*Math.PI)*knockstr);
+		float yOwner = (float) (Math.sin((weaponangle)/180*Math.PI)*knockstr);
+		float xknock = xSword*(1-knockratio)+xOwner*(knockratio);
+		float yknock = ySword*(1-knockratio)+yOwner*(knockratio);
+		cur_knockback=new float[]{xknock,yknock};
+		e.dx += cur_knockback[0];
+		e.dy += cur_knockback[1];
 	}
 }

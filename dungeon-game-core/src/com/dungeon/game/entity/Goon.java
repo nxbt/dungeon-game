@@ -19,11 +19,11 @@ public class Goon extends Enemy {
 		name = "Goon";
 		
 		maxLife = 100;
-		maxStamina = 100;
+		maxStam = 100;
 		maxMana = 100;
 		
 		life = maxLife;
-		stamina = maxStamina;
+		stam = maxStam;
 		mana = maxMana;
 		
 		acel = 1.5f;

@@ -20,19 +20,41 @@ public abstract class Dynamic extends Entity {
 	public float target_angle;
 	
 	public float maxLife;
-	public float maxStamina;
+	public float maxStam;
 	public float maxMana;
 	
 	public float life;
-	public float stamina;
+	public float stam;
 	public float mana;
 	
-	public float armor;
-	public float magicResistance;
+	public float immunityTimer;
+	public float immunityTime;
 	
+	public boolean immune;
+	
+	public boolean immortal;
+	
+	public float physc_resist;
+	public float arcan_resist;
+	public float flame_resist;
+	public float ligtn_resist;
+	public float poisn_resist;
+	
+	public float base_physc_resist;
+	public float base_arcan_resist;
+	public float base_flame_resist;
+	public float base_ligtn_resist;
+	public float base_poisn_resist;
 	
 	public Dynamic(int x, int y) {
 		super(x, y);
+		
+		solid = true;
+		
+		immune = true;
+		immortal = false;
+		
+		immunityTime = 10;
 	}
 
 	//entity update function; called on every frame; before the draw phase.
@@ -53,6 +75,9 @@ public abstract class Dynamic extends Entity {
 	
 	//calculates velocity and collisions for object
 	public void phys(World world) {
+		
+		if(immunityTimer > 0) immunityTimer--;
+		else if(!immortal && immune && immunityTimer == 0) immune = false;
 		
 		if(angle != target_angle) {
 			boolean turnRight = true;
@@ -284,22 +309,27 @@ public abstract class Dynamic extends Entity {
 
 	}
 	
-	public float physdamage(float value /*Add an array of Effects*/){
+	public float damage(float value /*Add an array of Effects*/){
+		if(immune) return 0;
+		
 		float amount = life - Math.max(life-value,0);
 		life-=value;
+		
 		if(life <= 0) killMe = true;
+		
+		immunityTimer = immunityTime;
+		immune = true;
+		
+		System.out.println(name + " took " + amount + " damage.");
+		
 		return amount;
 	}
 	
-	public float magicdamage(float value /*Add an array of Effects*/){
-		float amount = life - Math.max(life-value,0);
-		life-=value;
-		if(life <= 0) killMe = true;
+	public float heal(float value /*Add an array of Effects*/){
+		float amount = Math.max(maxLife, life+value)-life;
+		life = Math.max(maxLife, life+value);
+		
 		return amount;
-	}
-	
-	public int healing(float value /*Add an array of Effects*/){
-		return 0;
 	}
 }
 

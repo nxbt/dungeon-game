@@ -2,6 +2,7 @@ package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.WeaponGraphic;
 
 public abstract class Weapon extends Item{
@@ -12,6 +13,7 @@ public abstract class Weapon extends Item{
 	
 	public Weapon(int damage, int cooldown, int speed, Texture texture){
 		super();
+		maxStack = 1;
 		this.damage = damage;
 		this.cooldown = cooldown;
 		type = WEAPON;

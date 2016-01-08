@@ -33,11 +33,11 @@ public class Player extends Dynamic {
 		torq = 10;
 		
 		maxLife = 100;
-		maxStamina = 100;
+		maxStam = 100;
 		maxMana = 100;
 		
 		life = maxLife;
-		stamina = maxStamina;
+		stam = maxStam;
 		mana = maxMana;
 		
 		acel = 1.5f;
@@ -126,7 +126,8 @@ public class Player extends Dynamic {
 		inv.slot[17].item = new Crap();
 		inv.slot[18].item = new Crap();
 		inv.slot[19].item = new Crap();
-		inv.slot[30].item = new Sword(10, 10,10);
+		inv.slot[30].item = new RubberSword();
+		inv.slot[31].item = new Sword(10, 10,10);
 		
 		light = new Light(this, 1);
 	}
