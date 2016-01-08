@@ -27,8 +27,8 @@ public abstract class Dynamic extends Entity {
 	public float stam;
 	public float mana;
 	
-	public float immunityTimer;
-	public float immunityTime;
+	public int immunityTimer;
+	public int immunityTime;
 	
 	public boolean immune;
 	
@@ -45,6 +45,9 @@ public abstract class Dynamic extends Entity {
 	public float base_flame_resist;
 	public float base_ligtn_resist;
 	public float base_poisn_resist;
+	
+	public int stunTimer;
+	public boolean stun;
 	
 	public Dynamic(int x, int y) {
 		super(x, y);
@@ -75,6 +78,8 @@ public abstract class Dynamic extends Entity {
 	
 	//calculates velocity and collisions for object
 	public void phys(World world) {
+		if(stunTimer > 0) stunTimer--;
+		else if(stun) stun = false;
 		
 		if(immunityTimer > 0) immunityTimer--;
 		else if(!immortal && immune && immunityTimer == 0) immune = false;
@@ -134,28 +139,24 @@ public abstract class Dynamic extends Entity {
 		if(inp_lt) dirX--;
 		
 		double len = Math.sqrt(dirX * dirX + dirY * dirY);
+		double vel = Math.sqrt(dx * dx + dy * dy);
 		
-		if(len != 0) {
-			dx += dirX/len*acel;
-			dy += dirY/len*acel;
-			
-			len = Math.sqrt(dx * dx + dy * dy);
-			
-			if(len > mvel) {
-				dx = (float) (dx/len*mvel);
-				dy = (float) (dy/len*mvel);
+		if(!stun && len != 0) {
+			if(vel < mvel) {
+				dx += dirX/len*acel;
+				dy += dirY/len*acel;
 			}
 		}
 		if(dx != 0 || dy != 0){
-			len = Math.sqrt(dx * dx + dy * dy);
+			vel = Math.sqrt(dx * dx + dy * dy);
 			
-			if(len < fric) {
+			if(vel < fric) {
 				dx = 0;
 				dy = 0;
 			}
 			
-			dx -= dx/len*fric;
-			dy -= dy/len*fric;
+			dx -= dx/vel*fric;
+			dy -= dy/vel*fric;
 		}
 		
 		x += dx;
@@ -319,6 +320,9 @@ public abstract class Dynamic extends Entity {
 		
 		immunityTimer = immunityTime;
 		immune = true;
+		
+		stunTimer = 20;
+		stun = true;
 		
 		System.out.println(name + " took " + amount + " damage.");
 		

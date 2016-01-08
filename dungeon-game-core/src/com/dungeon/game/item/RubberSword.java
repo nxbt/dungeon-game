@@ -7,7 +7,7 @@ public class RubberSword extends Sword {
 		name = "Rubber Sword";
 		desc = "The Blade of Knocking! \n Has 'other' uses. ;) \n\n Damage: "+damage+"\n Cooldown: "+cooldown;
 		knockratio = 0.6f;
-		knockstr = 40;
+		knockstr = 20;
 	}
 
 }

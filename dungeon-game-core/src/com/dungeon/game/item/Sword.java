@@ -18,11 +18,16 @@ public class Sword extends Meele {
 	
 	public boolean hasHit;
 	
+	protected float[] dmgMult;
+	protected float[] knockMult;
+	
 	public Sword(int damage, int cooldown, int speed) {
 		super(damage, cooldown,speed, new Texture("Sword.png"));
 		desc = "Real sword I swear! \n\n Damage: "+damage+"\n Cooldown: "+cooldown;
 		knockratio = 0.6f;
 		knockstr = 10;
+		dmgMult = new float[]{0.7f,1,1.5f};
+		knockMult = new float[]{0.7f,1,1};
 	}
 
 	@Override
@@ -196,21 +201,37 @@ public class Sword extends Meele {
 	
 	public void hit(Dynamic e) {
 		hasHit = true;
-
 		float weaponangle = graphic.angle+135;
 		System.out.println(weaponangle);
 		float angleModifier;
-		if(stage == SWING1)angleModifier = -90;
-		else if(stage == SWING2)angleModifier = 90;
-		else angleModifier = 0;
-		float xSword = (float) (Math.cos((weaponangle+angleModifier)/180*Math.PI)*knockstr);
-		float ySword = (float) (Math.sin((weaponangle+angleModifier)/180*Math.PI)*knockstr);
-		float xOwner = (float) (Math.cos((weaponangle)/180*Math.PI)*knockstr);
-		float yOwner = (float) (Math.sin((weaponangle)/180*Math.PI)*knockstr);
-		float xknock = xSword*(1-knockratio)+xOwner*(knockratio);
-		float yknock = ySword*(1-knockratio)+yOwner*(knockratio);
-		cur_knockback=new float[]{xknock,yknock};
-		e.dx += cur_knockback[0];
-		e.dy += cur_knockback[1];
+		float cur_dmgMult = 0;
+		float cur_knockMult = 0;
+		float knock = 0;
+		if(stage == SWING1){
+			angleModifier = -90;
+			cur_dmgMult = dmgMult[0];
+			cur_knockMult = knockMult[0];
+		}
+		else if(stage == SWING2){
+			angleModifier = 90;
+			cur_dmgMult = dmgMult[1];
+			cur_knockMult = knockMult[1];
+		}
+		else{
+			angleModifier = 0;
+			cur_dmgMult = dmgMult[2];
+			cur_knockMult = knockMult[2];
+		}
+		if(e.damage(damage*cur_dmgMult)>0){
+			float xSword = (float) (Math.cos((weaponangle+angleModifier)/180*Math.PI)*knockstr);
+			float ySword = (float) (Math.sin((weaponangle+angleModifier)/180*Math.PI)*knockstr);
+			float xOwner = (float) (Math.cos((weaponangle)/180*Math.PI)*knockstr);
+			float yOwner = (float) (Math.sin((weaponangle)/180*Math.PI)*knockstr);
+			float xknock = xSword*(1-knockratio)+xOwner*(knockratio);
+			float yknock = ySword*(1-knockratio)+yOwner*(knockratio);
+			cur_knockback=new float[]{xknock*cur_knockMult,yknock*cur_knockMult};
+			e.dx += cur_knockback[0];
+			e.dy += cur_knockback[1];
+		}
 	}
 }

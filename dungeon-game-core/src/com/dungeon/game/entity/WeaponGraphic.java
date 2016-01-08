@@ -60,7 +60,7 @@ public class WeaponGraphic extends Static {
 				hitBoxEntity = new Polygon(new float[]{e.x,e.y,e.x+e.width,e.y,e.x+e.width,e.y+e.height,e.x,e.y+e.height});
 				
 				if(!e.equals(world.player) && e instanceof Dynamic && Intersector.overlapConvexPolygons(temp_hitbox, hitBoxEntity)){
-					if(((Dynamic) e).damage(weapon.damage) != 0) ((Meele) weapon).hit((Dynamic) e);
+					((Meele) weapon).hit((Dynamic) e);
 					
 				}
 			}
