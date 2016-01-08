@@ -27,6 +27,10 @@ public abstract class Dynamic extends Entity {
 	public float stamina;
 	public float mana;
 	
+	public float armor;
+	public float magicResistance;
+	
+	
 	public Dynamic(int x, int y) {
 		super(x, y);
 	}
