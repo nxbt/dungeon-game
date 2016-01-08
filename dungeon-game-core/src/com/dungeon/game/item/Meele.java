@@ -17,7 +17,6 @@ public abstract class Meele extends Weapon {
 	}
 	
 	public abstract int[] getPos(boolean mousedown, boolean mousepressed);
-	
-	public abstract boolean isInUse();
 
+	public abstract boolean inAttack();
 }

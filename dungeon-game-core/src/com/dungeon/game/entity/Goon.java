@@ -18,6 +18,14 @@ public class Goon extends Enemy {
 	public void init() {
 		name = "Goon";
 		
+		maxLife = 100;
+		maxStamina = 100;
+		maxMana = 100;
+		
+		life = maxLife;
+		stamina = maxStamina;
+		mana = maxMana;
+		
 		acel = 1.5f;
 		mvel = 5;
 		fric = 1;

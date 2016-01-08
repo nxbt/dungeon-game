@@ -5,20 +5,38 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.item.Item;
+import com.dungeon.game.item.Meele;
+import com.dungeon.game.item.Ranged;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.World;
 
 public class WeaponGraphic extends Static {
-	public float originX;
-	public float originY;
+	public float d_originX;
+	public float d_originY;
+	
+	private float originX;
+	private float originY;
+	
+	private Polygon hitbox;
+	
 	private Weapon weapon;
-	public WeaponGraphic(Texture texture,int width, int height, Weapon weapon){
+	
+	public WeaponGraphic(Texture texture,int width, int height, Weapon weapon, Polygon hitbox, float originX, float originY){
 		super(height, height);
+		
+		this.sprite = texture;
+		
 		this.width = width;
 		this.height = height;
-		this.sprite = texture;
+		
 		this.d_width = sprite.getWidth();
 		this.d_height = sprite.getHeight();
+		
+		this.originX = originX;
+		this.originY = originY;
+		
+		this.hitbox = hitbox;
+		
 		this.weapon = weapon;
 	}
 
@@ -29,22 +47,26 @@ public class WeaponGraphic extends Static {
 
 	@Override
 	public void calc(World world) {
-		//hitBox should be changed to a global private variable and set in the constructor!
-		Polygon hitBoxSword = new Polygon(new float[]{x+width*0.6f,y+height*0.2f,x+width*0.8f,y+height*0.4f,x,y+height*1.1f,x-width*0.1f,y+height});
-		hitBoxSword.setOrigin(x+width*0.9f,y+height*0.1f);
-		hitBoxSword.rotate(angle);
-		hitBoxSword.dirty();
-		hitBoxSword = new Polygon(hitBoxSword.getTransformedVertices());
-		Polygon hitBoxEntity;
-		for(Entity e: world.entities){
-			hitBoxEntity = new Polygon(new float[]{e.x,e.y,e.x+e.width,e.y,e.x+e.width,e.y+e.height,e.x,e.y+e.height});
-			if(Intersector.overlapConvexPolygons(hitBoxSword, hitBoxEntity)){
-				((Dynamic) e).physdamage(weapon.damage);
+		if(!(weapon instanceof Ranged) && ((Meele) weapon).inAttack()) {
+			Polygon temp_hitbox = new Polygon(hitbox.getVertices());
+			
+			temp_hitbox.setOrigin(width*originX, height*originY);
+			temp_hitbox.rotate(angle);
+			temp_hitbox.translate(x, y);
+			
+			Polygon hitBoxEntity;
+			
+			for(Entity e: world.entities){
+				hitBoxEntity = new Polygon(new float[]{e.x,e.y,e.x+e.width,e.y,e.x+e.width,e.y+e.height,e.x,e.y+e.height});
+				
+				if(!e.equals(world.player) && e instanceof Dynamic && Intersector.overlapConvexPolygons(temp_hitbox, hitBoxEntity)){
+					((Dynamic) e).physdamage(weapon.damage);
+				}
 			}
 		}
 	}
 	@Override
 	public void draw(SpriteBatch batch) {
-		batch.draw(/*Texture*/ sprite,/*x*/ x+d_offx,/*y*/ y+d_offy,/*originX*/originX,/*originY*/originY,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
+		batch.draw(/*Texture*/ sprite,/*x*/ x+d_offx,/*y*/ y+d_offy,/*originX*/d_originX,/*originY*/d_originY,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
 	}
 }

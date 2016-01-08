@@ -36,9 +36,9 @@ public class Player extends Dynamic {
 		maxStamina = 100;
 		maxMana = 100;
 		
-		life = 33;
-		stamina = 66;
-		mana = 50;
+		life = maxLife;
+		stamina = maxStamina;
+		mana = maxMana;
 		
 		acel = 1.5f;
 		mvel = 5;
@@ -134,8 +134,6 @@ public class Player extends Dynamic {
 	public void calc(World world) {
 		target_angle = (float) (180/Math.PI*Math.atan2(world.mouse.y+world.cam.y-world.cam.HEIGHT/2-(y+height/2), world.mouse.x+world.cam.x-world.cam.WIDTH/2-(x+width/2)));
 		
-		System.out.println(angle +", " + target_angle);
-		
 		if(inv.slot[30].item!=null)leftEquiped = true;
 		else leftEquiped = false;
 		if(inv.slot[31].item!=null)rightEquiped = true;
@@ -189,9 +187,9 @@ public class Player extends Dynamic {
 
 			((Weapon)(inv.slot[30].item)).graphic.angle=angle-145+leftPos[2];
 
-			((Weapon)(inv.slot[30].item)).graphic.originX = Item.SIZE*1f;
+			((Weapon)(inv.slot[30].item)).graphic.d_originX = Item.SIZE*1f;
 
-			((Weapon)(inv.slot[30].item)).graphic.originY = Item.SIZE*0f;
+			((Weapon)(inv.slot[30].item)).graphic.d_originY = Item.SIZE*0f;
 		}
 		if(leftEquiped)((Weapon)(inv.slot[30].item)).graphic.draw(batch);
 		batch.draw(/*Texture*/ sprite,/*x*/ x+d_offx,/*y*/ y+d_offy,/*originX*/d_width/2,/*originY*/d_height/2,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);

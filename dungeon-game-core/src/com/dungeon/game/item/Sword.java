@@ -174,8 +174,10 @@ public class Sword extends Meele {
 
 	@Override
 	public boolean isInUse() {
-		if(stage == WINDUP1||stage == WINDUP2||stage == WINDUP3||stage == SWING1||stage == SWING2||stage == SWING3)return true;
-		return false;
+		return stage == WINDUP1||stage == WINDUP2||stage == WINDUP3||stage == SWING1||stage == SWING2||stage == SWING3;
 	}
 
+	public boolean inAttack() {
+		return stage == SWING1 || stage == SWING2 || stage == SWING3;
+	}
 }
