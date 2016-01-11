@@ -15,16 +15,8 @@ public class MeleeGraphic extends WeaponGraphic {
 	private Polygon hitbox;
 	
 	
-	public MeleeGraphic(Texture texture,int width, int height, Weapon weapon, Polygon hitbox, float originX, float originY){
-		super();
-		
-		this.sprite = texture;
-		
-		this.width = width;
-		this.height = height;
-		
-		this.d_width = sprite.getWidth();
-		this.d_height = sprite.getHeight();
+	public MeleeGraphic(Weapon weapon, Polygon hitbox, float originX, float originY){
+		super(weapon);
 		
 		this.originX = originX;
 		this.originY = originY;

@@ -125,9 +125,10 @@ public class Player extends Dynamic {
 		inv.slot[16].item = new Crap();
 		inv.slot[17].item = new Crap();
 		inv.slot[18].item = new Crap();
-		inv.slot[19].item = new Crap();
-		inv.slot[30].item = new RubberSword();
+		inv.slot[19].item = new Arrow();
+		inv.slot[20].item = new RubberSword();
 		inv.slot[31].item = new Sword(10, 10,10);
+		inv.slot[30].item = new  Bow(10, 10, 10);
 		
 		light = new Light(this, 1);
 	}
@@ -164,8 +165,8 @@ public class Player extends Dynamic {
 		if(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) inp_dn = true;
 		attacking = false;
 		if(leftEquiped){
-			if(((Melee) inv.slot[30].item).isInUse())attacking = true;
-			leftPos = ((Melee) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
+			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
+			leftPos = ((Weapon) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
 			((Weapon)inv.slot[30].item).graphic.calc(world);
 			}
 		if(attacking){
