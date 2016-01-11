@@ -11,6 +11,8 @@ public class ArrowGraphic extends Projectile {
 		
 		d_width = sprite.getWidth();
 		d_height = sprite.getHeight();
+		d_originX = sprite.getWidth();
+		d_originY = 0;
 	}
 
 }

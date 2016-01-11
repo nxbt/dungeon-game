@@ -24,7 +24,7 @@ public class RangedGraphic extends WeaponGraphic {
 		if(toFire) {
 			System.out.println("PEW PEW");
 			toFire = false;
-			world.entities.add(new ArrowGraphic((int)x,(int)y,angle,10));
+			world.entities.add(new ArrowGraphic((int)x,(int)y,angle,100));
 		}
 	}
 
