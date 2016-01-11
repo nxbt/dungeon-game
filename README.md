@@ -13,3 +13,4 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 * Visibility (V+S >= 1)
 * Visibility polygonss (created from triangles)
 * Lighting using a similar algorithm to visibility polygons.
+* Rework Pathing. Use limited Vision in pathfinding?
