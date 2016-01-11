@@ -14,3 +14,4 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 * Visibility polygonss (created from triangles)
 * Lighting using a similar algorithm to visibility polygons.
 * Rework Pathing. Use limited Vision in pathfinding?
+* Add a System of known Entities for each Dynamic Entity.
