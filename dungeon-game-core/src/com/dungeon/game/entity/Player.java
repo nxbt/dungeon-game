@@ -111,7 +111,7 @@ public class Player extends Dynamic {
 		
 		hat = inv.slot[35].item; 
 		
-		inv.slot[5].item = new Hat();
+		inv.slot[35].item = new Hat();
 		inv.slot[6].item = new Crap();
 		inv.slot[7].item = new Crap();
 		inv.slot[8].item = new Crap();

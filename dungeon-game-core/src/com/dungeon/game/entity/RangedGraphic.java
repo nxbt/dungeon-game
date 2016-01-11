@@ -1,7 +1,9 @@
 package com.dungeon.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.item.Arrow;
+import com.dungeon.game.item.Item;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.World;
 
@@ -26,7 +28,8 @@ public class RangedGraphic extends WeaponGraphic {
 		if(toFire) {
 			System.out.println("PEW PEW");
 			toFire = false;
-			world.entities.add(new ArrowGraphic((int)x,(int)y,angle,power));
+			Polygon projectileHitBox = new Polygon(new float[]{Item.SIZE*0.6f,Item.SIZE*0.2f,Item.SIZE*0.8f,Item.SIZE*0.4f,0,Item.SIZE*1.1f,Item.SIZE*0.1f,Item.SIZE});
+			world.entities.add(new ArrowGraphic((int)x,(int)y,angle,power, projectileHitBox, 1, 0));
 		}
 	}
 
