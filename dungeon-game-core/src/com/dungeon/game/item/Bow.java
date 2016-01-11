@@ -19,6 +19,7 @@ public class Bow extends Ranged {
 
 	public Bow(int damage, int cooldown, int speed) {
 		super(damage, cooldown, speed, new Texture("Bow.png"));
+		strength = 10;
 		texturePath = "Bow.png";
 		Texture tempSheet = new Texture(texturePath);
 		
@@ -86,7 +87,7 @@ public class Bow extends Ranged {
 			break;
 			
 		case WINDUP:
-			if(index<15){
+			if(index<45){
 				if(!sprite.equals(textures[1])){
 					changeSprite(textures[1]);
 				}
@@ -100,7 +101,7 @@ public class Bow extends Ranged {
 			if(!mousedown){
 				stageTimer = 0;
 				stage = FIRE;
-				((RangedGraphic) graphic).fire();
+				((RangedGraphic) graphic).fire(strength*Math.min(index, 45)/45);
 			}
 			break;
 		case FIRE:

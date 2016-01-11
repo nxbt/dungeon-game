@@ -5,18 +5,21 @@ import com.dungeon.game.world.World;
 
 public abstract class Projectile extends Dynamic {
 	
+	private static int OFFSET = 40;
+	
 	protected float d_originX;
 	protected float d_originY;
 	public Projectile(int x, int y, float angle, float power) {
-		super(x, y);
-		dx = (float) Math.cos((angle+135)/180*Math.PI);
-		dy = (float) Math.sin((angle+135)/180*Math.PI);
+		super((int) (x+Math.cos((angle+135)/180*Math.PI)*OFFSET), (int) (y+Math.sin((angle+135)/180*Math.PI)*OFFSET));
+		dx = (float) Math.cos((angle+135)/180*Math.PI)*power;
+		dy = (float) Math.sin((angle+135)/180*Math.PI)*power;
 		this.angle = angle;
 		
 	}
 
 	@Override
 	public void init() {
+		solid = false;
 		// TODO Auto-generated method stub
 
 	}

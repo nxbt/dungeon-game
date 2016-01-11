@@ -66,6 +66,7 @@ public abstract class Dynamic extends Entity {
 		norm();
 		calc(world);
 		phys(world);
+		
 	}
 	
 	//resets some variables at the start of every update cycles
@@ -307,6 +308,7 @@ public abstract class Dynamic extends Entity {
 				}
 			}
 		}
+		if(x<0||y<0||x+width>(world.curFloor.tm[0].length-1)*Tile.TS||y+height>(world.curFloor.tm.length-1)*Tile.TS)killMe = true;
 
 	}
 	

@@ -9,6 +9,8 @@ public class RangedGraphic extends WeaponGraphic {
 	
 	private boolean toFire;
 	
+	private float power;
+	
 	public RangedGraphic(Weapon weapon){
 		super(weapon);
 	}
@@ -24,11 +26,12 @@ public class RangedGraphic extends WeaponGraphic {
 		if(toFire) {
 			System.out.println("PEW PEW");
 			toFire = false;
-			world.entities.add(new ArrowGraphic((int)x,(int)y,angle,100));
+			world.entities.add(new ArrowGraphic((int)x,(int)y,angle,power));
 		}
 	}
 
-	public void fire() {
+	public void fire(float power) {
 		toFire = true;
+		this.power = power;
 	}
 }

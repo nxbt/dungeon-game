@@ -13,6 +13,8 @@ public class ArrowGraphic extends Projectile {
 		d_height = sprite.getHeight();
 		d_originX = sprite.getWidth();
 		d_originY = 0;
+		
+		fric = 0.2;
 	}
 
 }
