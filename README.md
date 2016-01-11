@@ -15,3 +15,4 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 * Lighting using a similar algorithm to visibility polygons.
 * Rework Pathing. Use limited Vision in pathfinding?
 * Add a System of known Entities for each Dynamic Entity.
+* Add "Sounds" that entities can pick up.
