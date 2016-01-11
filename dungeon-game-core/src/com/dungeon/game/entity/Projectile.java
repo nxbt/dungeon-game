@@ -57,9 +57,9 @@ public abstract class Projectile extends Dynamic {
 
 	}
 	
-	private void phys(){
-		
-	}
+//	public void phys(World world){
+//		
+//	}
 	
 	public void draw(SpriteBatch batch) {
 		batch.draw(/*Texture*/ sprite,/*x*/ x+d_offx,/*y*/ y+d_offy,/*originX*/d_originX,/*originY*/d_originY,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
