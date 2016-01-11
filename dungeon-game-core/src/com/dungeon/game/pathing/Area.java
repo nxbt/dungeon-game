@@ -9,12 +9,17 @@ public class Area {
 	private ArrayList<int[]> points; //Array of all tiles in this area
 	private ArrayList<int[]> edgePoints; //Array of all edges of this area.
 	private ArrayList<Area> adjacentAreas; //Holds reference to all adjacent Areas
-	private ArrayList<int[][]> Edges; //Holds points where this Area Borders other Areas
+	private ArrayList<ArrayList<int[]>> edges; //Holds points where this Area Borders other Areas
 	private ArrayList<int[][][][]> minPaths; //Holds information for the minimum viable paths from one edge to another;
-	private Tile[][] tm; //contains tile data for the area; 
 	private ArrayList<Entity> entities; //contains data for all entities in the area;
 	
 	public Area(){
+		points = new ArrayList<int[]>();
+		edgePoints = new ArrayList<int[]>();
+		adjacentAreas = new ArrayList<Area>();
+		edges = new ArrayList<ArrayList<int[]>>();
+		minPaths = new ArrayList<int[][][][]>();
+		entities = new ArrayList<Entity>();
 		
 	}
 	
