@@ -164,31 +164,33 @@ public abstract class Dynamic extends Entity {
 		
 		Rectangle bBox = getBoundingBox();
 		Polygon hBox = getHitbox();
-		
-		int tile_lt = (int) (bBox.x)/Tile.TS;
-		int tile_rt = (int) (bBox.x+bBox.width)/Tile.TS;
-		int tile_dn = (int) (bBox.y)/Tile.TS;
-		int tile_up = (int) (bBox.y+bBox.height)/Tile.TS;
-		
-//		for(int i = 0; i < world.curFloor.tm[0].length; i++) {
-//			for(int k = 0; k < world.curFloor.tm.length; k++) {
-		for(int i = tile_lt-1; i <= tile_rt+1; i++) {
-			for(int k = tile_dn-1; k <= tile_up+1; k++) {
-				if(world.curFloor.tm[i][k].data == 1) {
+		int tile_lt = ((int) (bBox.x))/Tile.TS;
+		int tile_rt = ((int) (bBox.x+bBox.width))/Tile.TS;
+		int tile_dn = ((int) (bBox.y))/Tile.TS;
+		int tile_up = ((int) (bBox.y+bBox.height))/Tile.TS;
+		float xChange = 0;
+		float yChange = 0;
+		System.out.println("New");
+		for(int i = tile_lt; i <= tile_rt; i++) {
+			for(int k = tile_dn; k <= tile_up; k++) {
+				if(world.curFloor.tm[k][i].data == 1) {
 					Intersector.MinimumTranslationVector mtv = new Intersector.MinimumTranslationVector();
-					Polygon tile_hBox = new Polygon(new float[] {k*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS,k*Tile.TS,(i+1)*Tile.TS});
+					Polygon tile_hBox = new Polygon(new float[] {i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS});
 					
 					if(Intersector.overlapConvexPolygons(hBox, tile_hBox, mtv)) {
-						x += mtv.normal.x;
-						y += mtv.normal.y;
-						
-						if(mtv.normal.x != 0) dx = 0;
-						if(mtv.normal.y != 0) dy = 0;
-						
-						break;
+						if(Math.abs(xChange)<Math.abs(mtv.normal.x*mtv.depth))xChange = mtv.normal.x*mtv.depth;
+						if(Math.abs(yChange)<Math.abs(mtv.normal.y*mtv.depth))yChange = mtv.normal.y*mtv.depth;
 					}
 				}
 			}
+		}
+		if(xChange != 0){
+			dx = 0;
+			x+=xChange;
+		}
+		if(yChange != 0){
+			dy = 0;
+			y+=yChange;
 		}
 		
 //		int tile_lt = (int) (x/Tile.TS);
@@ -202,7 +204,7 @@ public abstract class Dynamic extends Entity {
 //		boolean ur = world.curFloor.tm[tile_up][tile_rt].data == 1;
 //		
 //		if(dl && dr) {
-//			y = (tile_dn+1) * Tile.TS;
+//			y = (tile_dn+1) * Tile.TS;-
 //			dy = 0;
 //			
 //			dl = false;
@@ -366,17 +368,3 @@ public abstract class Dynamic extends Entity {
 		return amount;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -51,7 +51,7 @@ public abstract class Entity {
 	}
 	
 	public void draw(SpriteBatch batch) {
-		batch.draw(/*Texture*/ sprite,/*x*/ x+sprite.getWidth()/2+d_offx,/*y*/ y+sprite.getHeight()/2+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
+		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_x+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
 	}
 	
 	public abstract void init();
@@ -64,7 +64,8 @@ public abstract class Entity {
 		Polygon temp_hitbox = new Polygon(hitbox.getVertices());
 		
 		temp_hitbox.setOrigin(origin_x, origin_y);
-		temp_hitbox.rotate(angle);
+		temp_hitbox.translate(-origin_x, -origin_y);
+//		temp_hitbox.rotate(angle);
 		temp_hitbox.translate(x, y);
 		
 		return temp_hitbox;

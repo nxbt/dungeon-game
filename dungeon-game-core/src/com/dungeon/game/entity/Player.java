@@ -53,8 +53,8 @@ public class Player extends Dynamic {
 		d_width = 32;
 		d_height = 32;
 		
-		d_offx = -3;
-		d_offy = -3;
+		d_offx = 0;
+		d_offy = 0;
 		
 		sprite = new Texture("Person.png");
 		
@@ -137,7 +137,7 @@ public class Player extends Dynamic {
 	}
 	
 	public void calc(World world) {
-		target_angle = (float) (180/Math.PI*Math.atan2(world.mouse.y+world.cam.y-world.cam.HEIGHT/2-(y+origin_y), world.mouse.x+world.cam.x-world.cam.WIDTH/2-(x+origin_x)));
+		target_angle = (float) (180/Math.PI*Math.atan2(world.mouse.y+world.cam.y-world.cam.HEIGHT/2-(y), world.mouse.x+world.cam.x-world.cam.WIDTH/2-(x)));
 		
 		if(inv.slot[30].item!=null)leftEquiped = true;
 		else leftEquiped = false;
@@ -212,7 +212,7 @@ public class Player extends Dynamic {
 			((Weapon)(inv.slot[30].item)).graphic.d_originY = Item.SIZE*0f;
 		}
 		if(leftEquiped)((Weapon)(inv.slot[30].item)).graphic.draw(batch);
-		batch.draw(/*Texture*/ sprite,/*x*/ x+d_offx,/*y*/ y+d_offy,/*originX*/d_width/2,/*originY*/d_height/2,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
+		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_x+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
 	}
 }
 

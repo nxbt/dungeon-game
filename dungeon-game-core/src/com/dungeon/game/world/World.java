@@ -88,7 +88,7 @@ public class World {
 			hudEntities.get(i).update(this);
 		}
 		
-		cam.update(player.x+player.d_width/2, player.y+player.d_height/2, mouse.x, mouse.y, 1f);
+		cam.update(player.x, player.y, mouse.x, mouse.y, 1f);
 		
 //		lightMap.update(this);
 	}
