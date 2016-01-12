@@ -16,4 +16,18 @@ public class AreaMap {
 	public void addArea(Area area){
 		areas.add(area);
 	}
+	
+	public void calculateBorders(){
+		for(Area area: areas){
+			for(Area a: areas){
+				if(!area.equals(area))area.calculateBorders(a);
+			}
+		}
+	}
+	
+	public void calculateMinPaths(){
+		for(Area area: areas){
+			area.calculateMinPaths(tm);
+		}
+	}
 }
