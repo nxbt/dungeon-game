@@ -12,10 +12,12 @@ public abstract class Dynamic extends Entity {
 	double mvel;
 	double torq;
 	
-	public boolean inp_up;
-	public boolean inp_dn;
-	public boolean inp_lt;
-	public boolean inp_rt;
+//	public boolean inp_up;
+//	public boolean inp_dn;
+//	public boolean inp_lt;
+//	public boolean inp_rt;
+	
+	public double move_angle;
 	
 	public float target_angle;
 	
@@ -71,10 +73,7 @@ public abstract class Dynamic extends Entity {
 	
 	//resets some variables at the start of every update cycles
 	public void norm() {
-		inp_up = false;
-		inp_dn = false;
-		inp_lt = false;
-		inp_rt = false;
+		move_angle = 361;
 	}
 	
 	//calculates velocity and collisions for object
@@ -110,42 +109,41 @@ public abstract class Dynamic extends Entity {
 			float difference = 0;
 			float angleModifier1 = 0;
 			float angleModifier2 = 0;
+			
 			if(tempAngle > tempTargetAngle){
 				angleModifier1 = tempAngle;
 				angleModifier2 = tempTargetAngle;
-			}else{
+			}
+			else {
 				if(tempAngle == tempTargetAngle)difference = 0;
-				else{
+				else {
 					angleModifier1 = tempTargetAngle;
 					angleModifier2 = tempAngle;
 				}
 			}
+			
 			if(angleModifier1-180<angleModifier2){
 				difference = angleModifier1-angleModifier2;
-			}else{
+			}
+			else {
 				difference = angleModifier2+Math.abs(angleModifier1-360);
 			}
+			
 			if(difference < torq) angle = target_angle;
 				
 			if(angle > 180) angle -= 360;
 			if(angle < -180) angle += 360;
 		}
 		
-		double dirX = 0;
-		double dirY = 0;
+//		double dirX = 0;
+//		double dirY = 0;
 		
-		if(inp_up) dirY++;
-		if(inp_dn) dirY--;
-		if(inp_rt) dirX++;
-		if(inp_lt) dirX--;
-		
-		double len = Math.sqrt(dirX * dirX + dirY * dirY);
 		double vel = Math.sqrt(dx * dx + dy * dy);
 		
-		if(!stun && len != 0) {
+		if(!stun && move_angle != 361) {
 			if(vel < mvel) {
-				dx += dirX/len*acel;
-				dy += dirY/len*acel;
+				dx += Math.cos(move_angle*Math.PI/180)*acel;
+				dy += Math.sin(move_angle*Math.PI/180)*acel;
 			}
 		}
 		if(dx != 0 || dy != 0){

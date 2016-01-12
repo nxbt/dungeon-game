@@ -47,7 +47,6 @@ public class MeleeGraphic extends WeaponGraphic {
 				
 				if(!e.equals(world.player) && e instanceof Dynamic && Intersector.overlapConvexPolygons(temp_hitbox, hitBoxEntity)){
 					((Melee) weapon).hit((Dynamic) e);
-					
 				}
 			}
 		}

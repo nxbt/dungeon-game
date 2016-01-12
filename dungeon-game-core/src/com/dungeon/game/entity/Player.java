@@ -159,10 +159,25 @@ public class Player extends Dynamic {
 			}
 		}
 		
+		boolean inp_lt = false;
+		boolean inp_rt = false;
+		boolean inp_up = false;
+		boolean inp_dn = false;
+		
 		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)  || Gdx.input.isKeyPressed(Input.Keys.A)) inp_lt = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) inp_rt = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) inp_up = true;
 		if(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) inp_dn = true;
+		
+		if(inp_up && inp_rt) move_angle = 45;
+		else if(inp_up && inp_lt) move_angle = 135;
+		else if(inp_dn && inp_rt) move_angle = -45;
+		else if(inp_dn && inp_lt) move_angle = -135;
+		else if(inp_up) move_angle = 90;
+		else if(inp_dn) move_angle = -90;
+		else if(inp_rt) move_angle = 0;
+		else if(inp_lt) move_angle = 180;
+		
 		attacking = false;
 		if(leftEquiped){
 			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
