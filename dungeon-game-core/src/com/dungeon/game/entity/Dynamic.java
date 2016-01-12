@@ -1,5 +1,8 @@
 package com.dungeon.game.entity;
 
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.world.*;
 
 //abstract class for dynamic entities, or entities that move and respond to physics.
@@ -31,9 +34,7 @@ public abstract class Dynamic extends Entity {
 	
 	public int immunityTimer;
 	public int immunityTime;
-	
 	public boolean immune;
-	
 	public boolean immortal;
 	
 	public float physc_resist;
@@ -161,152 +162,181 @@ public abstract class Dynamic extends Entity {
 		x += dx;
 		y += dy;
 		
-		int tile_lt = (int) (x/Tile.TS);
-		int tile_dn = (int) (y/Tile.TS);
-		int tile_rt = (int) ((x+width)/Tile.TS);
-		int tile_up = (int) ((y+height)/Tile.TS);
+		Rectangle bBox = getBoundingBox();
+		Polygon hBox = getHitbox();
 		
-		boolean dl = world.curFloor.tm[tile_dn][tile_lt].data == 1;
-		boolean dr = world.curFloor.tm[tile_dn][tile_rt].data == 1;
-		boolean ul = world.curFloor.tm[tile_up][tile_lt].data == 1;
-		boolean ur = world.curFloor.tm[tile_up][tile_rt].data == 1;
+		int tile_lt = (int) (bBox.x)/Tile.TS;
+		int tile_rt = (int) (bBox.x+bBox.width)/Tile.TS;
+		int tile_dn = (int) (bBox.y)/Tile.TS;
+		int tile_up = (int) (bBox.y+bBox.height)/Tile.TS;
 		
-		if(dl && dr) {
-			y = (tile_dn+1) * Tile.TS;
-			dy = 0;
-			
-			dl = false;
-			dr = false;
-		}
-		if(ul && ur) {
-			y = (tile_up * Tile.TS)-height;
-			dy = 0;
-			
-			ul = false;
-			ur = false;
-		}
-		if(dl && ul) {
-			x = (tile_lt+1) * Tile.TS;
-			dx = 0;
-			
-			dl = false;
-			ul = false;
-		}
-		if(dr && ur) {
-			x = (tile_rt * Tile.TS)-width;
-			dx = 0;
-			
-			ul = false;
-			ur = false;
-		}
-		
-		if(dl) {
-			if((tile_lt+1)*Tile.TS - this.x < (tile_dn+1)*Tile.TS - this.y) {
-				x = (tile_lt+1) * Tile.TS;
-				dx = 0;
-			}
-			else {
-				y = (tile_dn+1) * Tile.TS;
-				dy = 0;
-			}
-		}
-		if(dr) {
-			if(x+width - tile_rt*Tile.TS < (tile_dn+1)*Tile.TS - this.y) {
-				x = (tile_rt * Tile.TS)-width;
-				dx = 0;
-			}
-			else {
-				y = (tile_dn+1) * Tile.TS;
-				dy = 0;
-			}
-		}
-		if(ul) {
-			if((tile_lt+1)*Tile.TS - this.x < y+height - tile_up*Tile.TS) {
-				x = (tile_lt+1) * Tile.TS;
-				dx = 0;
-			}
-			else {
-				y = (tile_up * Tile.TS)-height;
-				dy = 0;
-			}
-		}
-		if(ur) {
-			if(x+width - tile_rt*Tile.TS < y+height - tile_up*Tile.TS) {
-				x = (tile_rt * Tile.TS)-width;
-				dx = 0;
-			}
-			else {
-				y = (tile_up * Tile.TS)-height;
-				dy = 0;
+//		for(int i = 0; i < world.curFloor.tm[0].length; i++) {
+//			for(int k = 0; k < world.curFloor.tm.length; k++) {
+		for(int i = tile_lt-1; i <= tile_rt+1; i++) {
+			for(int k = tile_dn-1; k <= tile_up+1; k++) {
+				if(world.curFloor.tm[i][k].data == 1) {
+					Intersector.MinimumTranslationVector mtv = new Intersector.MinimumTranslationVector();
+					Polygon tile_hBox = new Polygon(new float[] {k*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS,k*Tile.TS,(i+1)*Tile.TS});
+					
+					if(Intersector.overlapConvexPolygons(hBox, tile_hBox, mtv)) {
+						x += mtv.normal.x;
+						y += mtv.normal.y;
+						
+						if(mtv.normal.x != 0) dx = 0;
+						if(mtv.normal.y != 0) dy = 0;
+						
+						break;
+					}
+				}
 			}
 		}
 		
-		for(Entity e: world.entities){
-			if(!this.equals(e) && e.solid && e.x+e.width > x && e.x < x+width &&
-			   e.y+e.height > y && e.y < y+height) {
-				
-				int dir_x = dx < 0 ? -1:dx > 0? 1:0;
-				int dir_y = dy < 0 ? -1:dy > 0? 1:0;
-
-				if(dir_x == 1 && dir_y == 0) {
-					x = e.x - width;
-					dx = 0;
-				}
-				else if(dir_x == -1 && dir_y == 0) {
-					x = e.x + e.width;
-					dx = 0;
-				}
-				else if(dir_x == 0 && dir_y == 1) {
-					y = e.y - height;
-					dy = 0;
-				}
-				else if(dir_x == 0 && dir_y == -1) {
-					y = e.y + e.height;
-					dy = 0;
-				}
-				else if(dir_x == 1 && dir_y == 1) {
-					if(x+width - e.x < y+height - e.y) {
-						x = e.x - width;
-						dx = 0;
-					}
-					else {
-						y = e.y - height;
-						dy = 0;
-					}
-				}
-				else if(dir_x == -1 && dir_y == 1) {
-					if(e.x+e.width - x < y+height - e.y) {
-						x = e.x + e.width;
-						dx = 0;
-					}
-					else {
-						y = e.y - height;
-						dy = 0;
-					}
-				}
-				else if(dir_x == 1 && dir_y == -1) {
-					if(x+width - e.x < e.y+e.height - y) {
-						x = e.x - width;
-						dx = 0;
-					}
-					else {
-						y = e.y + e.height;
-						dy = 0;
-					}
-				}
-				else if(dir_x == -1 && dir_y == -1) {
-					if(e.x+e.width - x < e.y+e.height - y) {
-						x = e.x + e.width;
-						dx = 0;
-					}
-					else {
-						y = e.y + e.height;
-						dy = 0;
-					}
-				}
-			}
-		}
-		if(x<0||y<0||x+width>(world.curFloor.tm[0].length-1)*Tile.TS||y+height>(world.curFloor.tm.length-1)*Tile.TS)killMe = true;
+//		int tile_lt = (int) (x/Tile.TS);
+//		int tile_dn = (int) (y/Tile.TS);
+//		int tile_rt = (int) ((x+width)/Tile.TS);
+//		int tile_up = (int) ((y+height)/Tile.TS);
+//		
+//		boolean dl = world.curFloor.tm[tile_dn][tile_lt].data == 1;
+//		boolean dr = world.curFloor.tm[tile_dn][tile_rt].data == 1;
+//		boolean ul = world.curFloor.tm[tile_up][tile_lt].data == 1;
+//		boolean ur = world.curFloor.tm[tile_up][tile_rt].data == 1;
+//		
+//		if(dl && dr) {
+//			y = (tile_dn+1) * Tile.TS;
+//			dy = 0;
+//			
+//			dl = false;
+//			dr = false;
+//		}
+//		if(ul && ur) {
+//			y = (tile_up * Tile.TS)-height;
+//			dy = 0;
+//			
+//			ul = false;
+//			ur = false;
+//		}
+//		if(dl && ul) {
+//			x = (tile_lt+1) * Tile.TS;
+//			dx = 0;
+//			
+//			dl = false;
+//			ul = false;
+//		}
+//		if(dr && ur) {
+//			x = (tile_rt * Tile.TS)-width;
+//			dx = 0;
+//			
+//			ul = false;
+//			ur = false;
+//		}
+//		
+//		if(dl) {
+//			if((tile_lt+1)*Tile.TS - this.x < (tile_dn+1)*Tile.TS - this.y) {
+//				x = (tile_lt+1) * Tile.TS;
+//				dx = 0;
+//			}
+//			else {
+//				y = (tile_dn+1) * Tile.TS;
+//				dy = 0;
+//			}
+//		}
+//		if(dr) {
+//			if(x+width - tile_rt*Tile.TS < (tile_dn+1)*Tile.TS - this.y) {
+//				x = (tile_rt * Tile.TS)-width;
+//				dx = 0;
+//			}
+//			else {
+//				y = (tile_dn+1) * Tile.TS;
+//				dy = 0;
+//			}
+//		}
+//		if(ul) {
+//			if((tile_lt+1)*Tile.TS - this.x < y+height - tile_up*Tile.TS) {
+//				x = (tile_lt+1) * Tile.TS;
+//				dx = 0;
+//			}
+//			else {
+//				y = (tile_up * Tile.TS)-height;
+//				dy = 0;
+//			}
+//		}
+//		if(ur) {
+//			if(x+width - tile_rt*Tile.TS < y+height - tile_up*Tile.TS) {
+//				x = (tile_rt * Tile.TS)-width;
+//				dx = 0;
+//			}
+//			else {
+//				y = (tile_up * Tile.TS)-height;
+//				dy = 0;
+//			}
+//		}
+//		
+//		for(Entity e: world.entities){
+//			if(!this.equals(e) && e.solid && e.x+e.width > x && e.x < x+width &&
+//			   e.y+e.height > y && e.y < y+height) {
+//				
+//				int dir_x = dx < 0 ? -1:dx > 0? 1:0;
+//				int dir_y = dy < 0 ? -1:dy > 0? 1:0;
+//
+//				if(dir_x == 1 && dir_y == 0) {
+//					x = e.x - width;
+//					dx = 0;
+//				}
+//				else if(dir_x == -1 && dir_y == 0) {
+//					x = e.x + e.width;
+//					dx = 0;
+//				}
+//				else if(dir_x == 0 && dir_y == 1) {
+//					y = e.y - height;
+//					dy = 0;
+//				}
+//				else if(dir_x == 0 && dir_y == -1) {
+//					y = e.y + e.height;
+//					dy = 0;
+//				}
+//				else if(dir_x == 1 && dir_y == 1) {
+//					if(x+width - e.x < y+height - e.y) {
+//						x = e.x - width;
+//						dx = 0;
+//					}
+//					else {
+//						y = e.y - height;
+//						dy = 0;
+//					}
+//				}
+//				else if(dir_x == -1 && dir_y == 1) {
+//					if(e.x+e.width - x < y+height - e.y) {
+//						x = e.x + e.width;
+//						dx = 0;
+//					}
+//					else {
+//						y = e.y - height;
+//						dy = 0;
+//					}
+//				}
+//				else if(dir_x == 1 && dir_y == -1) {
+//					if(x+width - e.x < e.y+e.height - y) {
+//						x = e.x - width;
+//						dx = 0;
+//					}
+//					else {
+//						y = e.y + e.height;
+//						dy = 0;
+//					}
+//				}
+//				else if(dir_x == -1 && dir_y == -1) {
+//					if(e.x+e.width - x < e.y+e.height - y) {
+//						x = e.x + e.width;
+//						dx = 0;
+//					}
+//					else {
+//						y = e.y + e.height;
+//						dy = 0;
+//					}
+//				}
+//			}
+//		}
+//		if(x<0||y<0||x+width>(world.curFloor.tm[0].length-1)*Tile.TS||y+height>(world.curFloor.tm.length-1)*Tile.TS)killMe = true;
 
 	}
 	
@@ -336,7 +366,6 @@ public abstract class Dynamic extends Entity {
 		return amount;
 	}
 }
-
 
 
 

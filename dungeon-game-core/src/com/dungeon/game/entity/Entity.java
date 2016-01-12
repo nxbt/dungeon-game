@@ -2,6 +2,8 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
 
@@ -9,8 +11,13 @@ public abstract class Entity {
 	public float x;
 	public float y;
 	
-	public float width;
-	public float height;
+//	public float width;
+//	public float height;
+	
+	public float origin_x;
+	public float origin_y;
+	
+	public Polygon hitbox;
 	
 	public boolean killMe;
 	
@@ -44,7 +51,7 @@ public abstract class Entity {
 	}
 	
 	public void draw(SpriteBatch batch) {
-		batch.draw(/*Texture*/ sprite,/*x*/ x+d_offx,/*y*/ y+d_offy,/*originX*/d_width/2,/*originY*/d_height/2,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
+		batch.draw(/*Texture*/ sprite,/*x*/ x+sprite.getWidth()/2+d_offx,/*y*/ y+sprite.getHeight()/2+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
 	}
 	
 	public abstract void init();
@@ -52,4 +59,18 @@ public abstract class Entity {
 	public abstract void calc(World world);
 	
 	public void hovered(World world){};
+	
+	public Polygon getHitbox() {
+		Polygon temp_hitbox = new Polygon(hitbox.getVertices());
+		
+		temp_hitbox.setOrigin(origin_x, origin_y);
+		temp_hitbox.rotate(angle);
+		temp_hitbox.translate(x, y);
+		
+		return temp_hitbox;
+	}
+	
+	public Rectangle getBoundingBox() {
+		return getHitbox().getBoundingRectangle();
+	}
 }

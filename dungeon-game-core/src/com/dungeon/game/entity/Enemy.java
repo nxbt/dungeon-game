@@ -22,14 +22,14 @@ public abstract class Enemy extends Dynamic {
 				Rectangle entity;
 				for(Entity e: entities){
 					if(e.solid){
-						entity = new Rectangle(e.x,e.y,e.width,e.height);
+						entity = e.getBoundingBox();
 						if(tile.overlaps(entity))mapData[i][k]=1;
 					}
 				}
 			}
 		}
-		pathfinder.setData(mapData,width,height);
-		int[] targetTile = pathfinder.findPath(new int[]{(int) ((x+width/2)/Tile.TS), (int) ((y+height/2)/Tile.TS)},new int[]{(int) (target[0]/Tile.TS), (int) (target[1]/Tile.TS)},x,y);
+		pathfinder.setData(mapData);
+		int[] targetTile = pathfinder.findPath(new int[]{(int) ((x)/Tile.TS), (int) ((y)/Tile.TS)},new int[]{(int) (target[0]/Tile.TS), (int) (target[1]/Tile.TS)},x,y);
 		if(targetTile!=null){
 			int targetX = targetTile[0]*Tile.TS;
 			int targetY = targetTile[1]*Tile.TS;

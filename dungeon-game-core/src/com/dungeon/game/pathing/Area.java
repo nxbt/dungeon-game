@@ -49,7 +49,7 @@ public class Area {
 		}
 	}
 	public void calculateBorders(Area a){ //find the borders between this area and another one.
-		ArrayList<int[]> borders = new ArrayList<int>();
+		ArrayList<int[]> borders = new ArrayList<int[]>();
 		for(int[] i:edgePoints){
 			for(int[] k: a.edgePoints){
 				if(i[0]-1==k[0]&&i[1]==k[1])borders.add(new int[]{i[0], k[0]});
@@ -93,5 +93,6 @@ public class Area {
 			//finish Pathfinding code here
 			
 		}
+		return queue;
 	}
 }

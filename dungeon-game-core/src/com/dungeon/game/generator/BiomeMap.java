@@ -20,7 +20,7 @@ public class BiomeMap {
     private static final int GRID = 6;
     private static final int CAVES = 7;
     
-    class BiomeMap(int width, int height){
+    public BiomeMap(int width, int height){
     
     }
 }

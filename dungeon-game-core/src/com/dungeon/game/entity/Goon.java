@@ -3,6 +3,7 @@ package com.dungeon.game.entity;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.item.Hat;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
@@ -30,8 +31,10 @@ public class Goon extends Enemy {
 		mvel = 5;
 		fric = 1;
 		
-		width = 32;
-		height = 32;
+		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
+		
+		origin_x = 16;
+		origin_y = 16;
 		
 		d_width = 32;
 		d_height = 32;
@@ -51,7 +54,7 @@ public class Goon extends Enemy {
 		ArrayList<Entity> entities = (ArrayList<Entity>) world.entities.clone();
 		entities.remove(world.player);
 		entities.remove(this);
-		if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(world.curFloor.tm,entities, new float[]{world.player.x+world.player.width/2,world.player.y+world.player.height/2});
+		if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(world.curFloor.tm,entities, new float[]{world.player.x,world.player.y});
 	
 	}
 
