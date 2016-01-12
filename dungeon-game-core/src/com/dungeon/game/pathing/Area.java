@@ -29,6 +29,9 @@ public class Area {
 				points.add(new int[]{x,y});
 			}
 		}
+		recalculateEdges();
+	}
+	private void recalculateEdges() { //recalculates the edges of this area;
 		edgePoints = new ArrayList<int[]>();
 		for(int[] i: points){
 			boolean topFound = false;
