@@ -11,15 +11,12 @@ public abstract class Entity {
 	public float x;
 	public float y;
 	
-//	public float width;
-//	public float height;
-	
 	public float origin_x;
 	public float origin_y;
 	
-	public Polygon hitbox;
+	public float angle;
 	
-	public boolean killMe;
+	public Polygon hitbox;
 	
 	public int d_width;
 	public int d_height;
@@ -27,9 +24,9 @@ public abstract class Entity {
 	public int d_offx;
 	public int d_offy;
 	
-	public float angle;
-	
 	boolean solid;
+	
+	public boolean killMe;
 	
 	public String name;
 	
@@ -54,12 +51,6 @@ public abstract class Entity {
 		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_x+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
 	}
 	
-	public abstract void init();
-	
-	public abstract void calc(World world);
-	
-	public void hovered(World world){};
-	
 	public Polygon getHitbox() {
 		Polygon temp_hitbox = new Polygon(hitbox.getVertices());
 		
@@ -74,4 +65,10 @@ public abstract class Entity {
 	public Rectangle getBoundingBox() {
 		return getHitbox().getBoundingRectangle();
 	}
+	
+	public void hovered(World world) {} //optional method called when the mouse hovers over an entity
+	
+	public abstract void init(); //called when an entity is created, but after the constructor is called
+	
+	public abstract void calc(World world); //called at the beginning of an update cycle
 }

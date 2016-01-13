@@ -141,6 +141,7 @@ public class Player extends Dynamic {
 		
 		if(inv.slot[30].item!=null)leftEquiped = true;
 		else leftEquiped = false;
+		
 		if(inv.slot[31].item!=null)rightEquiped = true;
 		else rightEquiped = false;
 		
@@ -152,15 +153,6 @@ public class Player extends Dynamic {
 			}
 			else inv.graphic.close(world);
 		}
-		
-//		if(world.mouse.x > x-world.cam.x+world.cam.WIDTH/2 && world.mouse.x < x+width-world.cam.x+world.cam.WIDTH/2 && world.mouse.y > y-world.cam.y+world.cam.HEIGHT/2 && world.mouse.y < y+height-world.cam.y+world.cam.HEIGHT/2) {
-//			if(world.mouse.rb_pressed) {
-//				if(world.hudEntities.indexOf(inv.graphic) == -1) {
-//					inv.graphic.open(world);
-//				}
-//				else inv.graphic.close(world);
-//			}
-//		}
 		
 		boolean inp_lt = false;
 		boolean inp_rt = false;
@@ -182,11 +174,12 @@ public class Player extends Dynamic {
 		else if(inp_lt) move_angle = 180;
 		
 		attacking = false;
+		
 		if(leftEquiped){
 			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
 			leftPos = ((Weapon) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
 			((Weapon)inv.slot[30].item).graphic.calc(world);
-			}
+		}
 		if(attacking){
 			mvel = 2.5;
 			torq = 3;
@@ -201,17 +194,19 @@ public class Player extends Dynamic {
 		if(leftEquiped){
 			float xMove = (float) (Math.cos((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
 			float yMove = (float) (Math.sin((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
-			((Weapon)(inv.slot[30].item)).graphic.x=(float) (x+d_offx-d_width/2+(Math.cos((angle+90)/180*Math.PI)*d_width*0.5))+xMove;
+			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x+d_offx-d_width/2+(Math.cos((angle+90)/180*Math.PI)*d_width*0.5))+xMove;
 
-			((Weapon)(inv.slot[30].item)).graphic.y=(float) (y+d_offy+d_height/2+(Math.sin((angle+90)/180*Math.PI)*d_height*0.5))+yMove;
+			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y+d_offy+d_height/2+(Math.sin((angle+90)/180*Math.PI)*d_height*0.5))+yMove;
 
-			((Weapon)(inv.slot[30].item)).graphic.angle=angle-145+leftPos[2];
+			((Weapon)(inv.slot[30].item)).graphic.angle = angle-145+leftPos[2];
 
 			((Weapon)(inv.slot[30].item)).graphic.d_originX = Item.SIZE*1f;
 
 			((Weapon)(inv.slot[30].item)).graphic.d_originY = Item.SIZE*0f;
 		}
+		
 		if(leftEquiped)((Weapon)(inv.slot[30].item)).graphic.draw(batch);
+		
 		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_x+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
 	}
 }

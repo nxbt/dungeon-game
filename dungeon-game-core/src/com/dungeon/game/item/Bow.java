@@ -19,7 +19,9 @@ public class Bow extends Ranged {
 
 	public Bow(int damage, int cooldown, int speed) {
 		super(damage, cooldown, speed, new Texture("Bow.png"));
+		
 		strength = 10;
+		
 		texturePath = "Bow.png";
 		Texture tempSheet = new Texture(texturePath);
 		
