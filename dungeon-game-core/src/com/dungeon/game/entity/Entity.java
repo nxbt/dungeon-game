@@ -65,7 +65,7 @@ public abstract class Entity {
 		
 		temp_hitbox.setOrigin(origin_x, origin_y);
 		temp_hitbox.translate(-origin_x, -origin_y);
-//		temp_hitbox.rotate(angle);
+		temp_hitbox.rotate(angle);
 		temp_hitbox.translate(x, y);
 		
 		return temp_hitbox;
