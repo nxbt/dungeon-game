@@ -161,7 +161,7 @@ public abstract class Dynamic extends Entity {
 		
 		x += dx;
 		y += dy;
-		
+		//Yayyyyy collision code all works, now just need to prevent rotation in the event that it would cause a collision!
 		Rectangle bBox = getBoundingBox();
 		Polygon hBox = getHitbox();
 		int center_x = ((int) (x))/Tile.TS;
@@ -176,7 +176,6 @@ public abstract class Dynamic extends Entity {
 		boolean collide_rt = false;
 		boolean collide_dn = false;
 		boolean collide_up = false;
-		System.out.println("New");
 		for(int i = tile_lt; i <= tile_rt; i++) {
 			for(int k = tile_dn; k <= tile_up; k++) {
 				if(world.curFloor.tm[k][i].data == 1) {
@@ -184,93 +183,129 @@ public abstract class Dynamic extends Entity {
 					Polygon tile_hBox = new Polygon(new float[] {i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS});
 					
 					if(Intersector.overlapConvexPolygons(hBox, tile_hBox, mtv)) {
-						float x_diff = Math.abs(i*Tile.TS-x);
-						float y_diff = Math.abs(k*Tile.TS-y);
 						if(center_x>i){
 							if(center_y>k){ //Tile is to the bottom left
 								if(world.curFloor.tm[k+1][i].data==1){
 									collide_lt = true;
-									if(world.curFloor.tm[k][i+1].data==1)collide_dn = true;
+									xChange = Math.max(xChange, mtv.depth);
+									if(world.curFloor.tm[k][i+1].data==1){
+										collide_dn = true;
+										yChange = Math.max(yChange, mtv.depth);
+									}
 								}else if(world.curFloor.tm[k][i+1].data==1){
 									collide_dn = true;
+									yChange = Math.max(yChange, mtv.depth);
 								}else{
-									if(Math.abs(mtv.normal.y)>Math.abs(mtv.normal.x))collide_dn = true;
-									else collide_lt = true;
+									if(Math.abs(mtv.normal.y)>Math.abs(mtv.normal.x)){
+										collide_dn = true;
+										yChange = Math.max(yChange, mtv.depth);
+									}
+									else {
+										collide_lt = true;
+										xChange = Math.max(xChange, mtv.depth);
+									}
 								}
 							}else if(center_y<k){ //Tile is to the top left
 								if(world.curFloor.tm[k-1][i].data==1){
 									collide_lt = true;
-									if(world.curFloor.tm[k][i+1].data==1)collide_up = true;
+									xChange = Math.max(xChange, mtv.depth);
+									if(world.curFloor.tm[k][i+1].data==1){
+										collide_up = true;
+										yChange = Math.max(yChange, mtv.depth);
+									}
 								}else if(world.curFloor.tm[k][i+1].data==1){
 									collide_up = true;
+									yChange = Math.max(yChange, mtv.depth);
 								}else{
-									if(Math.abs(mtv.normal.y)>Math.abs(mtv.normal.x))collide_up = true;
-									else collide_lt = true;
+									if(Math.abs(mtv.normal.y)>Math.abs(mtv.normal.x)){
+										collide_up = true;
+										yChange = Math.max(yChange, mtv.depth);
+									}
+									else{
+										collide_lt = true;
+										xChange = Math.max(xChange, mtv.depth);
+									}
 								}
 							}else{ //Tile is to the left
 								collide_lt = true;
+								xChange = Math.max(xChange, mtv.depth);
 							}
 						}else if(center_x<i){
 							if(center_y>k){ //Tile is the the bottom right
 								if(world.curFloor.tm[k+1][i].data==1){
 									collide_rt = true;
-									if(world.curFloor.tm[k][i-1].data==1)collide_dn = true;
+									xChange = Math.max(xChange, mtv.depth);
+									if(world.curFloor.tm[k][i-1].data==1){
+										collide_dn = true;
+										yChange = Math.max(yChange, mtv.depth);
+									}
 								}else if(world.curFloor.tm[k][i-1].data==1){
 									collide_dn = true;
+									yChange = Math.max(yChange, mtv.depth);
 								}else{
-									if(Math.abs(mtv.normal.y)>Math.abs(mtv.normal.x))collide_dn = true;
-									else collide_rt = true;
+									if(Math.abs(mtv.normal.y)>Math.abs(mtv.normal.x)){
+										collide_dn = true;
+										yChange = Math.max(yChange, mtv.depth);
+									}
+									else{
+										collide_rt = true;
+										xChange = Math.max(xChange, mtv.depth);
+									}
 								}
 							}else if(center_y<k){ //Tile is to the top right
 								if(world.curFloor.tm[k-1][i].data==1){
 									collide_rt = true;
-									if(world.curFloor.tm[k][i-1].data==1)collide_up = true;
+									xChange = Math.max(xChange, mtv.depth);
+									if(world.curFloor.tm[k][i-1].data==1){
+										collide_up = true;
+										yChange = Math.max(yChange, mtv.depth);
+									}
 								}else if(world.curFloor.tm[k][i-1].data==1){
 									collide_up = true;
+									yChange = Math.max(yChange, mtv.depth);
 								}else{
-									if(Math.abs(mtv.normal.y)>Math.abs(mtv.normal.x))collide_up = true;
-									else collide_rt = true;
+									if(Math.abs(mtv.normal.y)>Math.abs(mtv.normal.x)){
+										collide_up = true;
+										yChange = Math.max(yChange, mtv.depth);
+									}
+									else{
+										collide_rt = true;
+										xChange = Math.max(xChange, mtv.depth);
+									}
 								}
 							}else{ //Tile is to the right
 								collide_rt = true;
+								xChange = Math.max(xChange, mtv.depth);
 							}
 						}else if(center_y>k){ //Tile is the bottom
 							collide_dn = true;
+							yChange = Math.max(yChange, mtv.depth);
 						}else if(center_y<k){ //Tile is to the top
 							collide_up = true;
+							yChange = Math.max(yChange, mtv.depth);
 						}else{ //Tile is the same as the one the entity is in
-							
+							//add something here for small entities?
 						}
-//						if(Math.abs(xChange)<Math.abs(mtv.normal.x*mtv.depth))xChange = mtv.normal.x*mtv.depth;
-//						if(Math.abs(yChange)<Math.abs(mtv.normal.y*mtv.depth))yChange = mtv.normal.y*mtv.depth;
 					}
 				}
 			}
 		}
 		if(collide_lt){
-			x=(center_x)*Tile.TS+bBox.width/2;
+			x+=xChange;
 			dx = 0;
 		}
 		if(collide_rt){
-			x=(center_x+1)*Tile.TS-bBox.width/2;
+			x-=xChange;
 			dx = 0;
 		}
 		if(collide_dn){
-			y=(center_y)*Tile.TS+bBox.height/2;
+			y+=yChange;
 			dy = 0;
 		}
 		if(collide_up){
-			y=(center_y+1)*Tile.TS-bBox.height/2;
+			y-=yChange;
 			dy = 0;
 		}
-//		if(xChange != 0){
-//			dx = 0;
-//			x+=xChange;
-//		}
-//		if(yChange != 0){
-//			dy = 0;
-//			y+=yChange;
-//		}
 		
 //		int tile_lt = (int) (x/Tile.TS);
 //		int tile_dn = (int) (y/Tile.TS);
