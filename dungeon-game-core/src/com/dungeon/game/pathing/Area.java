@@ -70,18 +70,25 @@ public class Area {
 	}
 	
 	public void calculateMinPaths(Tile[][] tm){ //calculates the shortest path between any two edges of this area;
-		minPaths = new ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>();
+		listFromStartArea = new ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>>();
 		//need to properly arrange data here :(
-		
 		for(ArrayList<int[]> startArea: edges){
-			for(int<[]> startPoint: startArea){
-				for(ArrayList<int[]> endArea: edges){
+			ArrayList<ArrayList<ArrayList<ArrayList<<int[]>>>> listFromEndArea = new ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>();
+			for(int<[]> endArea: edges){
+				ArrayList<ArrayList<ArrayList<int[]>>>> listFromStartPoint = new ArrayList<ArrayList<ArrayList<int[]>>();
+				for(ArrayList<int[]> startPoint: startArea){
+					ArrayList<ArrayList<int[]>>> listFromEndPoint = new ArrayList<ArrayList<int[]>>();
 					for(int<[]> endPoint: endArea){
-						ArrayList<int[]> path = findPath(tm, startPoint, endPoint);
+						path path = findPath(tm, startPoint, endPoint);
+						listFromEndPoint.add(path);
 					}
+					listFromStartPoint.add(listFromEndPoint);
 				}	
+				listFromEndArea.add(listFromStartPoint);
 			}
+			listFromStartArea.add(listFromEndArea);
 		}
+		minPaths = listFromStartArea;
 	}
 	
 	public ArrayList<int[]> findPath(Tile[][] tm, int[] start, int[] end){ //uses A* to find a path within from one edge to another
