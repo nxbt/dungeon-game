@@ -90,9 +90,57 @@ public class Area {
 		
 		for(int i = 0; i < queue.size(); i++){
 			ArrayList<int[]> toAdd = new ArrayList<int[]>();
-			//finish Pathfinding code here
-			
+			if(queue[i][0]+1=k[0]&&queue[i][1]=k[1]&&tm[queue[i][1]][queue[i][0]]!=1)toAdd.add(new int[]{queue[i][0]+1,queue[i][1], queue[i][2]+1});
+			if(queue[i][0]-1=k[0]&&queue[i][1]=k[1]&&tm[queue[i][1]][queue[i][0]]!=1)toAdd.add(new int[]{queue[i][0]-1,queue[i][1], queue[i][2]+1});
+			if(queue[i][0]=k[0]&&queue[i][1]+1=k[1]&&tm[queue[i][1]][queue[i][0]]!=1)toAdd.add(new int[]{queue[i][0],queue[i][1]+1, queue[i][2]+1});
+			if(queue[i][0]=k[0]&&queue[i][1]-1=k[1]&&tm[queue[i][1]][queue[i][0]]!=1)toAdd.add(new int[]{queue[i][0],queue[i][1]-1, queue[i][2]+1});
+			for(int k = toAdd.size()-1; k>=0;k--){
+				for(int[] j: queue){
+					if(toAdd.get(k)[0]==j[0]&&toAdd.get(k)[1]==j[1]){
+						toAdd.remove(toAdd.get(k));
+						break;
+					}
+				}
+			}
+			for(int[] k: toAdd){
+				queue.add(k);
+				if(k[0] == start[0]&&k[1] == start[1])endQueue = true;
+			}
+			if(endQueue)break;
 		}
-		return queue;
+		//find path here with queue;
+		ArrayList<int[]> path = new ArrayList<int[]>();
+		boolean gotToTarget = false;
+		int[] curTile = new int[]{start[0],start[1]};
+		int curCount=queue[queue.size()-1][2]; // Do we even need this????
+		while(!gotToTarget){
+			path.add(curTile);
+			if(curTile[0]==end[0]&&curTile[1]==end[1])gotToTarget=true;
+			
+			else{
+				for(int[] i: queue){
+					int curCount = 0;
+					int[] workingTile = new int[]{0,0};
+					if(curTile[0]+1==i[0]&&curTile[1]==i[1]){
+						curCount = i[2];
+						workingTile = new int[]{i[0],i[1]};
+					}
+					if(curTile[0]-1==i[0]&&curTile[1]==i[1]&&i[2]<=curCount){ //Will prioratize left over right;
+						curCount = i[2];
+						workingTile = new int[]{i[0],i[1]};
+					}
+					if(curTile[0]==i[0]&&curTile[1]+1==i[1]&&i[2]<=curCount){ // Will prioratize up over left or right;
+						curCount = i[2];
+						workingTile = new int[]{i[0],i[1]};
+					}
+					if(curTile[0]==i[0]&&curTile[1]-1==i[1]&&i[2]<=curCount){ // will always prioratize down over all other directions
+						curCount = i[2];
+						workingTile = new int[]{i[0],i[1]};
+					}
+					curTile = workingTile;
+				}
+			}
+		}
+		return path;
 	}
 }
