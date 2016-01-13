@@ -70,12 +70,14 @@ public class Area {
 	}
 	
 	public void calculateMinPaths(Tile[][] tm){ //calculates the shortest path between any two edges of this area;
+		minPaths = new ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>();
 		for(int i = 0; i < edges.size();i++){
 			for(int k = 0; k <edges.size();k++){
 				if(i!=k){
 					for(int[] start: edges.get(i)){
 						for(int[] end: edges.get(k)){
 							//pathfind from start to end and add that to the array minPaths
+							ArrayList<int[]> path = findPath(tm, start, end);
 						}
 					}
 				}
