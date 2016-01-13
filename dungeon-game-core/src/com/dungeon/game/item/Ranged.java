@@ -22,7 +22,6 @@ public abstract class Ranged extends Weapon {
 	
 	public Ranged(int damage, int cooldown, int speed, Texture texture) {
 		super(damage, cooldown, speed, texture);
-		graphic = new RangedGraphic(this);
 		projectiles = new ArrayList<Projectile>();
 	}
 

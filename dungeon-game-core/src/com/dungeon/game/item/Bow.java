@@ -23,6 +23,9 @@ public class Bow extends Ranged {
 		strength = 10;
 		
 		texturePath = "Bow.png";
+
+		graphic = new RangedGraphic(this,16,16);
+		
 		Texture tempSheet = new Texture(texturePath);
 		
 		int sheetWidth = tempSheet.getWidth()/Item.SIZE;

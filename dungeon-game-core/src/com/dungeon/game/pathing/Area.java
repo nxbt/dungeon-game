@@ -92,10 +92,12 @@ public class Area {
 		
 		for(int i = 0; i < queue.size(); i++){
 			ArrayList<int[]> toAdd = new ArrayList<int[]>();
-			if(queue[i][0]+1=k[0]&&queue[i][1]=k[1]&&tm[queue[i][1]][queue[i][0]]!=1)toAdd.add(new int[]{queue[i][0]+1,queue[i][1], queue[i][2]+1});
-			if(queue[i][0]-1=k[0]&&queue[i][1]=k[1]&&tm[queue[i][1]][queue[i][0]]!=1)toAdd.add(new int[]{queue[i][0]-1,queue[i][1], queue[i][2]+1});
-			if(queue[i][0]=k[0]&&queue[i][1]+1=k[1]&&tm[queue[i][1]][queue[i][0]]!=1)toAdd.add(new int[]{queue[i][0],queue[i][1]+1, queue[i][2]+1});
-			if(queue[i][0]=k[0]&&queue[i][1]-1=k[1]&&tm[queue[i][1]][queue[i][0]]!=1)toAdd.add(new int[]{queue[i][0],queue[i][1]-1, queue[i][2]+1});
+			for(int[] k: points){
+				if(queue.get(i)[0]+1==k[0]&&queue.get(i)[1]==k[1]&&tm[queue.get(i)[1]][queue.get(i)[0]].data!=1)toAdd.add(new int[]{queue.get(i)[0]+1,queue.get(i)[1], queue.get(i)[2]+1});
+				if(queue.get(i)[0]-1==k[0]&&queue.get(i)[1]==k[1]&&tm[queue.get(i)[1]][queue.get(i)[0]].data!=1)toAdd.add(new int[]{queue.get(i)[0]-1,queue.get(i)[1], queue.get(i)[2]+1});
+				if(queue.get(i)[0]==k[0]&&queue.get(i)[1]+1==k[1]&&tm[queue.get(i)[1]][queue.get(i)[0]].data!=1)toAdd.add(new int[]{queue.get(i)[0],queue.get(i)[1]+1, queue.get(i)[2]+1});
+				if(queue.get(i)[0]==k[0]&&queue.get(i)[1]-1==k[1]&&tm[queue.get(i)[1]][queue.get(i)[0]].data!=1)toAdd.add(new int[]{queue.get(i)[0],queue.get(i)[1]-1, queue.get(i)[2]+1});
+			}
 			for(int k = toAdd.size()-1; k>=0;k--){
 				for(int[] j: queue){
 					if(toAdd.get(k)[0]==j[0]&&toAdd.get(k)[1]==j[1]){
@@ -114,7 +116,6 @@ public class Area {
 		ArrayList<int[]> path = new ArrayList<int[]>();
 		boolean gotToTarget = false;
 		int[] curTile = new int[]{start[0],start[1]};
-		int curCount=queue[queue.size()-1][2]; // Do we even need this????
 		while(!gotToTarget){
 			path.add(curTile);
 			if(curTile[0]==end[0]&&curTile[1]==end[1])gotToTarget=true;

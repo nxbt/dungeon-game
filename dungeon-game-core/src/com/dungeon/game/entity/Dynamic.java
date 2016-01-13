@@ -78,9 +78,38 @@ public abstract class Dynamic extends Entity {
 		
 		if(immunityTimer > 0) immunityTimer--;
 		else if(!immortal && immune && immunityTimer == 0) immune = false;
+
 		
+		
+//		double dirX = 0;
+//		double dirY = 0;
+		float[] originalPos = new float[]{x,y};
+		
+		double vel = Math.sqrt(dx * dx + dy * dy);
+		
+		if(!stun && move_angle != 361) {
+			if(vel < mvel) {
+				dx += Math.cos(move_angle*Math.PI/180)*acel;
+				dy += Math.sin(move_angle*Math.PI/180)*acel;
+			}
+		}
+		if(dx != 0 || dy != 0){
+			vel = Math.sqrt(dx * dx + dy * dy);
+			
+			if(vel < fric) {
+				dx = 0;
+				dy = 0;
+			}
+			
+			dx -= dx/vel*fric;
+			dy -= dy/vel*fric;
+		}
+		
+		x += dx;
+		y += dy;
+		boolean turnRight = true;
+		float originalAngle = angle;
 		if(angle != target_angle) {
-			boolean turnRight = true;
 			float tempAngle = angle+180;
 			float tempTargetAngle = target_angle+180;
 			
@@ -129,33 +158,14 @@ public abstract class Dynamic extends Entity {
 			if(angle > 180) angle -= 360;
 			if(angle < -180) angle += 360;
 		}
-		
-//		double dirX = 0;
-//		double dirY = 0;
-		
-		double vel = Math.sqrt(dx * dx + dy * dy);
-		
-		if(!stun && move_angle != 361) {
-			if(vel < mvel) {
-				dx += Math.cos(move_angle*Math.PI/180)*acel;
-				dy += Math.sin(move_angle*Math.PI/180)*acel;
-			}
-		}
-		if(dx != 0 || dy != 0){
-			vel = Math.sqrt(dx * dx + dy * dy);
-			
-			if(vel < fric) {
-				dx = 0;
-				dy = 0;
-			}
-			
-			dx -= dx/vel*fric;
-			dy -= dy/vel*fric;
-		}
-		
-		x += dx;
-		y += dy;
 		//Yayyyyy collision code all works, now just need to prevent rotation in the event that it would cause a collision!
+		col(world,true,originalPos);
+	}
+	
+	public int col(World world, boolean move, float[] originalPos){
+		final int TILE_COL = 1; 
+		final int ENTITY_COL = 2;
+		int collisionType = 0;
 		Rectangle bBox = getBoundingBox();
 		Polygon hBox = getHitbox();
 		
@@ -195,7 +205,7 @@ public abstract class Dynamic extends Entity {
 									collide_dn = true;
 									yChange = Math.max(yChange, mtv.depth);
 								}else{
-									if(Math.abs(mtv.normal.y)>Math.abs(mtv.normal.x)){
+									if(Math.abs(k*Tile.TS-originalPos[1])>Math.abs(i*Tile.TS-originalPos[0])){
 										collide_dn = true;
 										yChange = Math.max(yChange, mtv.depth);
 									}
@@ -216,7 +226,7 @@ public abstract class Dynamic extends Entity {
 									collide_up = true;
 									yChange = Math.max(yChange, mtv.depth);
 								}else{
-									if(Math.abs(mtv.normal.y)>Math.abs(mtv.normal.x)){
+									if(Math.abs(k*Tile.TS-originalPos[1])>Math.abs(i*Tile.TS-originalPos[0])){
 										collide_up = true;
 										yChange = Math.max(yChange, mtv.depth);
 									}
@@ -242,7 +252,7 @@ public abstract class Dynamic extends Entity {
 									collide_dn = true;
 									yChange = Math.max(yChange, mtv.depth);
 								}else{
-									if(Math.abs(mtv.normal.y)>Math.abs(mtv.normal.x)){
+									if(Math.abs(k*Tile.TS-originalPos[1])>Math.abs(i*Tile.TS-originalPos[0])){
 										collide_dn = true;
 										yChange = Math.max(yChange, mtv.depth);
 									}
@@ -263,7 +273,7 @@ public abstract class Dynamic extends Entity {
 									collide_up = true;
 									yChange = Math.max(yChange, mtv.depth);
 								}else{
-									if(Math.abs(mtv.normal.y)>Math.abs(mtv.normal.x)){
+									if(Math.abs(k*Tile.TS-originalPos[1])>Math.abs(i*Tile.TS-originalPos[0])){
 										collide_up = true;
 										yChange = Math.max(yChange, mtv.depth);
 									}
@@ -289,22 +299,32 @@ public abstract class Dynamic extends Entity {
 				}
 			}
 		}
-		if(collide_lt){
-			x+=xChange;
-			dx = 0;
+		if(move){
+			if(collide_lt){
+				x+=xChange;
+//				x=center_x*Tile.TS+bBox.width/2;
+				dx = 0;
+			}
+			if(collide_rt){
+				x-=xChange;
+//				x=(center_x+1)*Tile.TS-bBox.width/2;
+				dx = 0;
+			}
+			if(collide_dn){
+				y+=yChange;
+//				y=center_y*Tile.TS+bBox.height/2;
+				dy = 0;
+			}
+			if(collide_up){
+				y-=yChange;
+//				y=(center_y+1)*Tile.TS-bBox.height/2;
+				dy = 0;
+			}
 		}
-		if(collide_rt){
-			x-=xChange;
-			dx = 0;
+		if(collide_lt||collide_rt||collide_dn||collide_up){
+			collisionType+=TILE_COL;
 		}
-		if(collide_dn){
-			y+=yChange;
-			dy = 0;
-		}
-		if(collide_up){
-			y-=yChange;
-			dy = 0;
-		}
+		return collisionType;
 	}
 	
 	//===HELPER METHODS===//

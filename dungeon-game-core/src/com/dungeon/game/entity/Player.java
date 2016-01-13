@@ -56,7 +56,7 @@ public class Player extends Dynamic {
 		d_offx = 0;
 		d_offy = 0;
 		
-		sprite = new Texture("Person.png");
+		sprite = new Texture("person.png");
 		
 		solid = true;
 		
@@ -194,15 +194,11 @@ public class Player extends Dynamic {
 		if(leftEquiped){
 			float xMove = (float) (Math.cos((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
 			float yMove = (float) (Math.sin((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
-			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x+d_offx-d_width/2+(Math.cos((angle+90)/180*Math.PI)*d_width*0.5))+xMove;
+			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x);//+xMove;
 
-			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y+d_offy+d_height/2+(Math.sin((angle+90)/180*Math.PI)*d_height*0.5))+yMove;
+			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y);//+yMove;
 
-			((Weapon)(inv.slot[30].item)).graphic.angle = angle-145+leftPos[2];
-
-			((Weapon)(inv.slot[30].item)).graphic.d_originX = Item.SIZE*1f;
-
-			((Weapon)(inv.slot[30].item)).graphic.d_originY = Item.SIZE*0f;
+			((Weapon)(inv.slot[30].item)).graphic.angle = angle;//-145+leftPos[2];
 		}
 		
 		if(leftEquiped)((Weapon)(inv.slot[30].item)).graphic.draw(batch);
