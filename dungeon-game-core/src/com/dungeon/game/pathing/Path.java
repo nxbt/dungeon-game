@@ -36,8 +36,20 @@ public class Path {
 	}
 	
 	
-	public getTiles(){
-		
+	public ArrayList<int[]> getTiles(){
+		ArrayList<int[]> Tiles = new ArrayList<int[]>();
+		//find tiles in 3 stages
+		//start point to edge
+		//intermediate areas
+		for(Area area: areas){
+			if((!area.equals(startArea)||area.equals(endArea))){
+			}
+		}
+		//edge to end point
+	}
+	
+	public int getLength(){
+		return getTiles.size();
 	}
 	
 	
