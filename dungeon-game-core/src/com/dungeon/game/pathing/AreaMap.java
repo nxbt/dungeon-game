@@ -63,10 +63,10 @@ public class AreaMap {
     		
     		Path shortestPath = paths.get(0);
     		for(Path path: paths){
-    			if(path.getLength()<shortestPath.getLength())shortestPath = path;
+    			if(path.getLength(tm)<shortestPath.getLength(tm))shortestPath = path;
     		}
     		
-    		return shortestPath.getTiles();
+    		return shortestPath.getTiles(tm);
     		
 	}
 }
