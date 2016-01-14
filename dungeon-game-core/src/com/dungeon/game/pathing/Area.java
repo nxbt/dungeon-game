@@ -76,6 +76,30 @@ public class Area {
 		return false;
 	}
 	
+	public ArrayList<int[]> getMinPath(Tile[][] tm, int[] startPoint, Area start, Area end){
+		ArrayList<ArrayList<int[]>> minPathCandidates;
+		ArrayList<int[]> minPath;
+		if(start==null){
+			minPathCandidates = new ArrayList<ArrayList<int[]>>();
+			int endAreaIndex = adjacentAreas.indexOf(end);
+			for(int[] edge: edges.get(endAreaIndex)){
+				minPathCandidates.add(findPath(tm, start, edge));
+			}
+			
+		}else{
+			int startAreaIndex = adjacentAreas.indexOf(start);
+			int endAreaIndex = adjacentAreas.indexOf(end);
+			int startPointIndex = edges.get(start).indexOf(startPoint);
+			minPathCandidates = minPaths.get(startAreaIndex).get(endAreaIndex).get(startPointIndex);
+			
+		}
+		minPath = minPathCandidates.get(0);
+		for(ArrayList<int[]> path: minPathCandidates){
+			if(path.size()<minPath.size())minPath = path;
+		}	
+		return minPath;
+	}
+	
 	public void calculateMinPaths(Tile[][] tm){ //calculates the shortest path between any two edges of this area;
 		ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>> listFromStartArea = new ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>>();
 		//need to properly arrange data here :(
