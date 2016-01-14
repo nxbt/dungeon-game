@@ -36,7 +36,7 @@ public class Path {
 	}
 	
 	
-	public ArrayList<int[]> getTiles(){
+	public ArrayList<int[]> getTiles(Tile[][] tm){
 		ArrayList<int[]> Tiles = new ArrayList<int[]>();
 		Tiles.add(start);
 		//find tiles in 3 stages
@@ -45,19 +45,22 @@ public class Path {
 		for(Area area: areas){
 			ArrayList<int[]> subPath;
 			if(area.equals(areas.get(0))){
-				
+				subPath = area.getMinPath(tm, Tiles.get(Tiles.size()-1),null, areas.indeOf(area+1));
 			}else if(area.equals(getLastArea())){
-				
+				subPath = area.findPath(tm, Tile.get(Tiles.size()-1), end);
 			}else {
-				
+				subPath = area.getMinPath(tm, Tiles.get(Tiles.size()-1),areas.indexOf(area)-1, areas.indeOf(area+1));
+	
 			}
+			
+			Tiles.addAll(subPath);
 		}
 		//edge to end point
-		return null;
+		return Tiles;
 	}
 	
-	public int getLength(){
-		return getTiles().size();
+	public int getLength(Tile[][] tm){
+		return getTiles(tm).size();
 	}
 	
 	
