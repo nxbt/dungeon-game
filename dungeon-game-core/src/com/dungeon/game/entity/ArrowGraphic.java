@@ -13,7 +13,7 @@ public class ArrowGraphic extends Projectile {
 		d_width = sprite.getWidth();
 		d_height = sprite.getHeight();
 		
-		fric = 0.2;
+		fric = 0.2f;
 		solid = false;
 		name = "arrow";
 	}

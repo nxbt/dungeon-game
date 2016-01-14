@@ -177,8 +177,6 @@ public abstract class Dynamic extends Entity {
 		
 		col(world,true,originalPos);
 		
-		if (name.equals("Player")) System.out.println("dx: " + dx + " dy: " + dy);
-		
 	}
 	
 	public int col(World world, boolean move, float[] originalPos){ //TODO add entity collision
