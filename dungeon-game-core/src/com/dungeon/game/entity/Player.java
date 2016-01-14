@@ -55,7 +55,7 @@ public class Player extends Dynamic {
 		
 		sprite = new Texture("Person.png");
 		
-		solid = true;
+		solid = false;
 		
 		int[][] invLayout = new int[][] {
 			//consumables
