@@ -14,7 +14,7 @@ public class RangedGraphic extends WeaponGraphic {
 	public RangedGraphic(Weapon weapon, float originX, float originY){
 		super(weapon);
 		this.origin_x = originX;
-		this.origin_x = originY;
+		this.origin_y = originY;
 	}
 	
 	@Override

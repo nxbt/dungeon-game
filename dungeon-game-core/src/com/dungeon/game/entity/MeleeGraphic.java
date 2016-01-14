@@ -12,7 +12,7 @@ public class MeleeGraphic extends WeaponGraphic {
 		super(weapon);
 		
 		this.origin_x = originX;
-		this.origin_x = originY;
+		this.origin_y = originY;
 		
 		this.hitbox = hitbox;
 		

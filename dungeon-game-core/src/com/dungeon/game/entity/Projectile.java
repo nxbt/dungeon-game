@@ -8,7 +8,7 @@ public abstract class Projectile extends Dynamic {
 	
 	private static int OFFSET = 0;
 	public Projectile(int x, int y, float angle, float power, Polygon hitbox, float originX, float originY) {
-		super((int) (x+Math.cos((angle+135)/180*Math.PI)*OFFSET), (int) (y+Math.sin((angle+135)/180*Math.PI)*OFFSET));
+		super(x, y);
 		dx = (float) Math.cos((angle+135)/180*Math.PI)*power;
 		dy = (float) Math.sin((angle+135)/180*Math.PI)*power;
 		this.angle = angle;
@@ -16,7 +16,7 @@ public abstract class Projectile extends Dynamic {
 		this.hitbox = hitbox;
 		
 		this.origin_x = originX;
-		this.origin_x = originY;
+		this.origin_y = originY;
 		
 	}
 

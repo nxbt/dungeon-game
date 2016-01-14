@@ -50,7 +50,16 @@ public abstract class Entity {
 	}
 	
 	public void draw(SpriteBatch batch) {
-		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_x+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
+		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_y+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
+	}
+	
+	public float[] getDrawCenter(){
+//		float temp_angle = (float) (Math.atan(origin_y/origin_x)*180/Math.PI+angle);
+		float temp_angle = 45+angle;
+		float temp_len = (float) Math.sqrt(origin_x*origin_x+origin_y*origin_y);
+		float temp_x = (float) (Math.cos(temp_angle/180*Math.PI)*temp_len);
+		float temp_y = (float) (Math.sin(temp_angle/180*Math.PI)*temp_len);
+		return new float[]{temp_x,temp_y};
 	}
 	
 	public Polygon getHitbox() {

@@ -194,16 +194,16 @@ public class Player extends Dynamic {
 		if(leftEquiped){
 			float xMove = (float) (Math.cos((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
 			float yMove = (float) (Math.sin((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
-			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x);//+xMove;
+			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x)+xMove;
 
-			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y);//+yMove;
+			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y)+yMove;
 
-			((Weapon)(inv.slot[30].item)).graphic.angle = angle;//-145+leftPos[2];
+			((Weapon)(inv.slot[30].item)).graphic.angle = angle-145+leftPos[2];
 		}
 		
 		if(leftEquiped)((Weapon)(inv.slot[30].item)).graphic.draw(batch);
 		
-		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_x+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
+		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_y+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
 	
 		if(name.equals("Player")){
 			for(int[] i: collisions){

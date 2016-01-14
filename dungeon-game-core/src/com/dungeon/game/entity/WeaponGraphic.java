@@ -15,9 +15,5 @@ public abstract class WeaponGraphic extends Static {
 		this.d_width = Item.SIZE;
 		this.d_height = Item.SIZE;
 	}
-	
-//	public void draw(SpriteBatch batch) {
-//		batch.draw(/*Texture*/ sprite,/*x*/ x+d_offx,/*y*/ y+d_offy,/*originX*/d_originX,/*originY*/d_originY,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
-//	}
 
 }

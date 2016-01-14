@@ -24,7 +24,7 @@ public class Bow extends Ranged {
 		
 		texturePath = "Bow.png";
 
-		graphic = new RangedGraphic(this,16,16);
+		graphic = new RangedGraphic(this,4,28);
 		
 		Texture tempSheet = new Texture(texturePath);
 		
@@ -74,8 +74,8 @@ public class Bow extends Ranged {
 
 	@Override
 	public int[] getPos(boolean mousedown, boolean mousepressed) {
-		int distance=0;
-		int polarAngle= 0;
+		int distance=30;
+		int polarAngle= 10;
 		int angle=0;
 		stageTimer++;
 		int constant=2;
@@ -119,7 +119,6 @@ public class Bow extends Ranged {
 			}
 			break;
 		}
-
 		return new int[]{distance,polarAngle,angle};
 	}
 
