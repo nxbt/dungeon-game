@@ -170,10 +170,6 @@ public abstract class Dynamic extends Entity {
 			if(angle < -180) angle += 360;
 		}
 		//Yayyyyy collision code all works, now just need to prevent rotation in the event that it would cause a collision!
-
-		if(col(world,false,originalPos)>0){
-			angle = originalAngle;
-		}
 		col(world,true,originalPos);
 		
 	}
@@ -209,7 +205,6 @@ public abstract class Dynamic extends Entity {
 					Polygon tile_hBox = new Polygon(new float[] {i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS});
 					
 					if(Intersector.overlapConvexPolygons(hBox, tile_hBox, mtv)) {
-						if(name.equals("Player"))System.out.println(mtv.depth);
 						collisions.add(new int[]{i,k});
 						if(center_x>i){
 							if(center_y>k){ //Tile is to the bottom left
