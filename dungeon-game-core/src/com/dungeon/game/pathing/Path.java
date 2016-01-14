@@ -12,7 +12,7 @@ public class Path {
 		this.start = start;
 		this.end = end;
 	}
-	public Path(Area area, Path path){ //constructor used to create paths
+	public Path(Path path, Area area){ //constructor used to create paths
 		areas = new ArrayList<Area>(path.areas);
 		areas.add(area);
 		start = new int[]{area.start[0],area.start[1]};
