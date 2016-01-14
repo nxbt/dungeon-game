@@ -14,10 +14,10 @@ public abstract class Dynamic extends Entity {
 	public float dx;
 	public float dy;
 	
-	double acel;
-	double fric;
-	double mvel;
-	double torq;
+	float acel;
+	float fric;
+	float mvel;
+	float torq;
 	
 	public float move_angle;
 	public float target_angle;
@@ -90,30 +90,35 @@ public abstract class Dynamic extends Entity {
 		if(immunityTimer > 0) immunityTimer--;
 		else if(!immortal && immune && immunityTimer == 0) immune = false;
 
-		
-		
-//		double dirX = 0;
-//		double dirY = 0;
 		float[] originalPos = new float[]{x,y};
 		
-		double vel = Math.sqrt(dx * dx + dy * dy);
+		float vel = (float) Math.sqrt(dx * dx + dy * dy);
 		
 		if(!stun && move_angle != 361) {
 			if(vel < mvel) {
 				dx += Math.cos(move_angle*Math.PI/180)*acel;
 				dy += Math.sin(move_angle*Math.PI/180)*acel;
+				
+				vel = (float) Math.sqrt(dx * dx + dy * dy);
+				
+				if(vel + acel > mvel) {
+					dx = dx/vel*mvel;
+					dy = dy/vel*mvel;
+				}
 			}
-		}
-		if(dx != 0 || dy != 0){
-			vel = Math.sqrt(dx * dx + dy * dy);
 			
+			vel = (float) Math.sqrt(dx * dx + dy * dy);
+		}
+		
+		if(dx != 0 || dy != 0){
 			if(vel < fric) {
 				dx = 0;
 				dy = 0;
 			}
-			
-			dx -= dx/vel*fric;
-			dy -= dy/vel*fric;
+			else {
+				dx -= dx/vel*fric;
+				dy -= dy/vel*fric;
+			}
 		}
 		
 		x += dx;
@@ -169,15 +174,19 @@ public abstract class Dynamic extends Entity {
 			if(angle > 180) angle -= 360;
 			if(angle < -180) angle += 360;
 		}
-		//Yayyyyy collision code all works, now just need to prevent rotation in the event that it would cause a collision!
+		
 		col(world,true,originalPos);
+		
+		if (name.equals("Player")) System.out.println("dx: " + dx + " dy: " + dy);
 		
 	}
 	
-	public int col(World world, boolean move, float[] originalPos){
+	public int col(World world, boolean move, float[] originalPos){ //TODO add entity collision
 		collisions = new ArrayList<int[]>();
+		
 		final int TILE_COL = 1; 
 		final int ENTITY_COL = 2;
+		
 		int collisionType = 0;
 		Rectangle bBox = getBoundingBox();
 		Polygon hBox = getHitbox();
@@ -318,37 +327,21 @@ public abstract class Dynamic extends Entity {
 				x+=xChange;
 //				x=center_x*Tile.TS+bBox.width/2;
 				dx = 0;
-				if(name.equals("Player")){
-					System.out.println("Collide Left");
-					System.out.println(xChange);
-				}
 			}
 			if(collide_rt){
 				x-=xChange+0.0001f;
 //				x=(center_x+1)*Tile.TS-bBox.width/2-0.001f;
 				dx = 0;
-				if(name.equals("Player")){
-					System.out.println("Collide Right");
-					System.out.println(xChange);
-				}
 			}
 			if(collide_dn){
 				y+=yChange;
 //				y=center_y*Tile.TS+bBox.height/2;
 				dy = 0;
-				if(name.equals("Player")){
-					System.out.println("Collide Down");
-					System.out.println(yChange);
-				}
 			}
 			if(collide_up){
 				y-=yChange+0.0001f;
 //				y=(center_y+1)*Tile.TS-bBox.height/2-0.001f;
 				dy = 0;
-				if(name.equals("Player")){
-					System.out.println("Collide Up");
-					System.out.println(yChange);
-				}
 			}
 		}
 		if(collide_lt||collide_rt||collide_dn||collide_up){

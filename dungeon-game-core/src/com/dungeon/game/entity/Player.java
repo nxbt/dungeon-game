@@ -43,7 +43,7 @@ public class Player extends Dynamic {
 		
 		acel = 1.5f;
 		mvel = 5;
-		fric = 1;
+		fric = 0.5f;
 		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		
@@ -181,7 +181,7 @@ public class Player extends Dynamic {
 			((Weapon)inv.slot[30].item).graphic.calc(world);
 		}
 		if(attacking){
-			mvel = 2.5;
+			mvel = 2.5f;
 			torq = 3;
 		}
 		else{
