@@ -198,7 +198,7 @@ public class Player extends Dynamic {
 
 			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y)+yMove;
 
-			((Weapon)(inv.slot[30].item)).graphic.angle = angle-145+leftPos[2];
+			((Weapon)(inv.slot[30].item)).graphic.angle = angle-135+leftPos[2];
 		}
 		
 		if(leftEquiped)((Weapon)(inv.slot[30].item)).graphic.draw(batch);

@@ -314,7 +314,10 @@ public abstract class Dynamic extends Entity {
 							collide_up = true;
 							yChange = Math.max(yChange, mtv.depth);
 						}else{ //Tile is the same as the one the entity is in
-							//add something here for small entities?
+							collide_lt = true;
+							collide_rt = true;
+							collide_dn = true;
+							collide_up = true;
 						}
 					}
 				}

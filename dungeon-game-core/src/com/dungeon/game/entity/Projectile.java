@@ -2,6 +2,7 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public abstract class Projectile extends Dynamic {
@@ -46,18 +47,11 @@ public abstract class Projectile extends Dynamic {
 			dy -= dy/vel*fric;
 		}
 		
-//		Polygon hitboxTile;
-//		for(int  i = 0; i < world.curFloor.tm.length;i++){
-//			for(int k = 0; k <world.curFloor.tm[i].length; k++){
-//				if(world.curFloor.tm[i][k].data == 1){
-//					hitboxTile = new Polygon(new float[]{k*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS,k*Tile.TS,(i+1)*Tile.TS});
-//					if(Intersector.overlapConvexPolygons(hitboxTile,temp_hitbox)){
-//						dx = 0;
-//						dy = 0;
-//					}
-//				}
-//			}
-//		}
+		Polygon hitboxTile;
+		if(col(world,false, new float[]{0,0})==1){
+			dx = 0;
+			dy = 0;
+		}
 		
 		x+=dx;
 		y+=dy;
