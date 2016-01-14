@@ -69,6 +69,13 @@ public class Area {
 		}
 	}
 	
+	public boolean containsPoint(int[] point){
+		for(int[] i: points){
+			if(point[0] == i[0]&&point[1] == i[1]) return true;
+		}
+		return false;
+	}
+	
 	public void calculateMinPaths(Tile[][] tm){ //calculates the shortest path between any two edges of this area;
 		ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>> listFromStartArea = new ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>>();
 		//need to properly arrange data here :(
