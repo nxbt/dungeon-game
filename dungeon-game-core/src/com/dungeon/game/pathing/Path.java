@@ -38,11 +38,18 @@ public class Path {
 	
 	public ArrayList<int[]> getTiles(){
 		ArrayList<int[]> Tiles = new ArrayList<int[]>();
+		Tiles.add(start);
 		//find tiles in 3 stages
 		//start point to edge
 		//intermediate areas
 		for(Area area: areas){
-			if((!area.equals(areas.get(0))||area.equals(getLastArea()))){
+			ArrayList<int[]> subPath;
+			if(area.equals(areas.get(0))){
+				
+			}else if(area.equals(getLastArea())){
+				
+			}else {
+				
 			}
 		}
 		//edge to end point
