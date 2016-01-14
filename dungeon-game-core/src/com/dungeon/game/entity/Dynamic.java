@@ -1,5 +1,9 @@
 package com.dungeon.game.entity;
 
+import java.util.ArrayList;
+
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
@@ -46,6 +50,10 @@ public abstract class Dynamic extends Entity {
 	public float base_ligtn_resist;
 	public float base_poisn_resist;
 	
+	//temp variable
+	
+	public ArrayList<int[]> collisions;
+	
 	public Dynamic(int x, int y) {
 		super(x, y);
 		
@@ -55,6 +63,9 @@ public abstract class Dynamic extends Entity {
 		immortal = false;
 		
 		immunityTime = 10;
+		
+
+		collisions = new ArrayList<int[]>();
 	}
 
 	//entity update function called on every frame before the draw phase.
@@ -159,10 +170,16 @@ public abstract class Dynamic extends Entity {
 			if(angle < -180) angle += 360;
 		}
 		//Yayyyyy collision code all works, now just need to prevent rotation in the event that it would cause a collision!
+
+		if(col(world,false,originalPos)>0){
+			angle = originalAngle;
+		}
 		col(world,true,originalPos);
+		
 	}
 	
 	public int col(World world, boolean move, float[] originalPos){
+		collisions = new ArrayList<int[]>();
 		final int TILE_COL = 1; 
 		final int ENTITY_COL = 2;
 		int collisionType = 0;
@@ -192,6 +209,8 @@ public abstract class Dynamic extends Entity {
 					Polygon tile_hBox = new Polygon(new float[] {i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS});
 					
 					if(Intersector.overlapConvexPolygons(hBox, tile_hBox, mtv)) {
+						if(name.equals("Player"))System.out.println(mtv.depth);
+						collisions.add(new int[]{i,k});
 						if(center_x>i){
 							if(center_y>k){ //Tile is to the bottom left
 								if(world.curFloor.tm[k+1][i].data==1){
@@ -226,7 +245,7 @@ public abstract class Dynamic extends Entity {
 									collide_up = true;
 									yChange = Math.max(yChange, mtv.depth);
 								}else{
-									if(Math.abs(k*Tile.TS-originalPos[1])>Math.abs(i*Tile.TS-originalPos[0])){
+									if(Math.abs((k+1)*Tile.TS-originalPos[1])>Math.abs(i*Tile.TS-originalPos[0])){
 										collide_up = true;
 										yChange = Math.max(yChange, mtv.depth);
 									}
@@ -252,7 +271,7 @@ public abstract class Dynamic extends Entity {
 									collide_dn = true;
 									yChange = Math.max(yChange, mtv.depth);
 								}else{
-									if(Math.abs(k*Tile.TS-originalPos[1])>Math.abs(i*Tile.TS-originalPos[0])){
+									if(Math.abs(k*Tile.TS-originalPos[1])>Math.abs((i+1)*Tile.TS-originalPos[0])){
 										collide_dn = true;
 										yChange = Math.max(yChange, mtv.depth);
 									}
@@ -273,7 +292,7 @@ public abstract class Dynamic extends Entity {
 									collide_up = true;
 									yChange = Math.max(yChange, mtv.depth);
 								}else{
-									if(Math.abs(k*Tile.TS-originalPos[1])>Math.abs(i*Tile.TS-originalPos[0])){
+									if(Math.abs((k+1)*Tile.TS-originalPos[1])>Math.abs((i+1)*Tile.TS-originalPos[0])){
 										collide_up = true;
 										yChange = Math.max(yChange, mtv.depth);
 									}
@@ -304,21 +323,37 @@ public abstract class Dynamic extends Entity {
 				x+=xChange;
 //				x=center_x*Tile.TS+bBox.width/2;
 				dx = 0;
+				if(name.equals("Player")){
+					System.out.println("Collide Left");
+					System.out.println(xChange);
+				}
 			}
 			if(collide_rt){
-				x-=xChange;
-//				x=(center_x+1)*Tile.TS-bBox.width/2;
+				x-=xChange+0.0001f;
+//				x=(center_x+1)*Tile.TS-bBox.width/2-0.001f;
 				dx = 0;
+				if(name.equals("Player")){
+					System.out.println("Collide Right");
+					System.out.println(xChange);
+				}
 			}
 			if(collide_dn){
 				y+=yChange;
 //				y=center_y*Tile.TS+bBox.height/2;
 				dy = 0;
+				if(name.equals("Player")){
+					System.out.println("Collide Down");
+					System.out.println(yChange);
+				}
 			}
 			if(collide_up){
-				y-=yChange;
-//				y=(center_y+1)*Tile.TS-bBox.height/2;
+				y-=yChange+0.0001f;
+//				y=(center_y+1)*Tile.TS-bBox.height/2-0.001f;
 				dy = 0;
+				if(name.equals("Player")){
+					System.out.println("Collide Up");
+					System.out.println(yChange);
+				}
 			}
 		}
 		if(collide_lt||collide_rt||collide_dn||collide_up){

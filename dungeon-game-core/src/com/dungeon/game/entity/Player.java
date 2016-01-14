@@ -204,6 +204,12 @@ public class Player extends Dynamic {
 		if(leftEquiped)((Weapon)(inv.slot[30].item)).graphic.draw(batch);
 		
 		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_x+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
+	
+		if(name.equals("Player")){
+			for(int[] i: collisions){
+				batch.draw(new Texture("Goon.png"), i[0]*Tile.TS, i[1]*Tile.TS);
+			}
+		}
 	}
 }
 

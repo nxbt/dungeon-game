@@ -15,6 +15,7 @@ public class ArrowGraphic extends Projectile {
 		
 		fric = 0.2;
 		solid = false;
+		name = "arrow";
 	}
 
 }
