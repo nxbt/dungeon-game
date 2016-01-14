@@ -35,4 +35,38 @@ public class AreaMap {
 		calculateMinPaths();
 		calculateBorders();
 	}
+	
+	public Area findArea(int[] point){
+		for(Area area: areas){
+			if(area.containsPoint(point))return Area;
+		}
+		return null;
+	}
+	
+	public ArrayList<int[]> findPath(int[] start, int[] end){
+    		Area startArea = findArea(start);
+    		Area endArea = findArea(end);
+    		if(startArea.equals(endArea))return startArea.findPath();
+    		
+    		ArrayList<Path> paths = new ArrayList<Path>();
+    		paths.add(new Path(startRoom,start,end));
+    		for(int i = 0; i < paths.length; i ++){
+    			path = paths.get(i);
+    			if(path.getLastArea()!=endArea){
+    				for(Area area: path.getExpandAreas()){
+    					paths.add(new Path(path, area));
+    				}
+    				paths.remove(path);
+    				i--;
+    			}
+    		}
+    		
+    		Path shortestPath = paths.get(0);
+    		for(Path path: paths){
+    			if(path.getLength()<shortestPath.getLength())shortestPath = path;
+    		}
+    		
+    		return shortestPath.getTiles();
+    		
+	}
 }
