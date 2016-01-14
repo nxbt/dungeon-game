@@ -38,7 +38,7 @@ public class AreaMap {
 	
 	public Area findArea(int[] point){
 		for(Area area: areas){
-			if(area.containsPoint(point))return Area;
+			if(area.containsPoint(point))return area;
 		}
 		return null;
 	}
@@ -46,12 +46,12 @@ public class AreaMap {
 	public ArrayList<int[]> findPath(int[] start, int[] end){
     		Area startArea = findArea(start);
     		Area endArea = findArea(end);
-    		if(startArea.equals(endArea))return startArea.findPath();
+    		if(startArea.equals(endArea))return startArea.findPath(tm, start, end);
     		
     		ArrayList<Path> paths = new ArrayList<Path>();
-    		paths.add(new Path(startRoom,start,end));
-    		for(int i = 0; i < paths.length; i ++){
-    			path = paths.get(i);
+    		paths.add(new Path(startArea,start,end));
+    		for(int i = 0; i < paths.size(); i ++){
+    			Path path = paths.get(i);
     			if(path.getLastArea()!=endArea){
     				for(Area area: path.getExpandAreas()){
     					paths.add(new Path(path, area));

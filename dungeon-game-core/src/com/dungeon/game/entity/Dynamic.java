@@ -175,7 +175,7 @@ public abstract class Dynamic extends Entity {
 			if(angle < -180) angle += 360;
 		}
 		
-		col(world,true,originalPos);
+		if(dx != 0 || dy != 0)col(world,true,originalPos);
 		
 	}
 	

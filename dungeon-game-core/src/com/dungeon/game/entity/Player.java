@@ -20,7 +20,8 @@ public class Player extends Dynamic {
 	private boolean leftEquiped;
 	private boolean rightEquiped;
 	
-	private int[] leftPos;
+	private float[] leftPos;
+	private float[] rightPos;
 	
 	private boolean attacking;
 	
@@ -130,8 +131,8 @@ public class Player extends Dynamic {
 		inv.slot[18].item = new Crap();
 		inv.slot[19].item = new Arrow();
 		inv.slot[20].item = new RubberSword();
-		inv.slot[31].item = new Sword(10, 10,10);
-		inv.slot[30].item = new  Bow(10, 10, 10);
+		inv.slot[30].item = new Sword(10, 10,10);
+		inv.slot[31].item = new  Bow(10, 10, 10);
 		
 		light = new Light(this, 1);
 	}

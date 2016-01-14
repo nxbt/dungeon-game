@@ -14,6 +14,7 @@ public abstract class WeaponGraphic extends Static {
 		sprite = weapon.sprite;
 		this.d_width = Item.SIZE;
 		this.d_height = Item.SIZE;
+		name = "Graphic";
 	}
 
 }

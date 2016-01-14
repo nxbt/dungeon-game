@@ -15,8 +15,8 @@ public class Path {
 	public Path(Path path, Area area){ //constructor used to create paths
 		areas = new ArrayList<Area>(path.areas);
 		areas.add(area);
-		start = new int[]{area.start[0],area.start[1]};
-		end = new int[]{area.end[0],area.end[1]};
+		start = new int[]{path.start[0],path.start[1]};
+		end = new int[]{path.end[0],path.end[1]};
 	}
 	
 	public Area getLastArea(){
@@ -24,12 +24,12 @@ public class Path {
 	}
 	
 	public boolean isAreaOnPath(Area area){
-		return areas.contains(area)
+		return areas.contains(area);
 	}
 	
 	public ArrayList<Area> getExpandAreas(){
 		ArrayList<Area>  expandAreas = new ArrayList<Area>();
-		for(Area area: getLastArea.adjacentAreas()){
+		for(Area area: getLastArea().adjacentAreas){
 			if(!isAreaOnPath(area))expandAreas.add(area);
 		}
 		return expandAreas;
@@ -42,14 +42,15 @@ public class Path {
 		//start point to edge
 		//intermediate areas
 		for(Area area: areas){
-			if((!area.equals(startArea)||area.equals(endArea))){
+			if((!area.equals(areas.get(0))||area.equals(getLastArea()))){
 			}
 		}
 		//edge to end point
+		return null;
 	}
 	
 	public int getLength(){
-		return getTiles.size();
+		return getTiles().size();
 	}
 	
 	

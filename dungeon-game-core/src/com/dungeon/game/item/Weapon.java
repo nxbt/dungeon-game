@@ -29,6 +29,6 @@ public abstract class Weapon extends Item{
 		graphic.sprite = sprite;
 	}
 	
-	public abstract int[] getPos(boolean mousedown, boolean mousepressed);
+	public abstract float[] getPos(boolean mousedown, boolean mousepressed);
 	public abstract boolean isInUse();
 }

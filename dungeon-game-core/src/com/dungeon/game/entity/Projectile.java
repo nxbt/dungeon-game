@@ -30,7 +30,7 @@ public abstract class Projectile extends Dynamic {
 	@Override
 	public void calc(World world) {
 		for(Entity e: world.entities){
-			if(e.name!="Player"&&e instanceof Dynamic && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
+			if(e.name!="Player"&& e.solid && e instanceof Dynamic && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
 //				killMe=true;
 			}
 		}
@@ -48,7 +48,7 @@ public abstract class Projectile extends Dynamic {
 		}
 		
 		Polygon hitboxTile;
-		if(col(world,false, new float[]{0,0})==1){
+		if((dx != 0 || dy != 0) && col(world,false, new float[]{0,0})==1){
 			dx = 0;
 			dy = 0;
 		}
