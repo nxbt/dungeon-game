@@ -10,7 +10,7 @@ public class Area {
 	private ArrayList<int[]> edgePoints; //Array of all edges of this area.
 	private ArrayList<Area> adjacentAreas; //Holds reference to all adjacent Areas
 	private ArrayList<ArrayList<int[]>> edges; //Holds points where this Area Borders other Areas
-	private ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>> minPaths; //Holds information for the minimum viable paths from one edge to another;
+	private ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>> minPaths; //Holds information for the minimum viable paths from one edge to another;
 	private ArrayList<Entity> entities; //contains data for all entities in the area;
 	
 	public Area(){
@@ -18,7 +18,7 @@ public class Area {
 		edgePoints = new ArrayList<int[]>();
 		adjacentAreas = new ArrayList<Area>();
 		edges = new ArrayList<ArrayList<int[]>>();
-		minPaths = new ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>();
+		minPaths = new ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>>();
 		entities = new ArrayList<Entity>();
 		
 	}
@@ -70,16 +70,16 @@ public class Area {
 	}
 	
 	public void calculateMinPaths(Tile[][] tm){ //calculates the shortest path between any two edges of this area;
-		listFromStartArea = new ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>>();
+		ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>> listFromStartArea = new ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>>();
 		//need to properly arrange data here :(
 		for(ArrayList<int[]> startArea: edges){
-			ArrayList<ArrayList<ArrayList<ArrayList<<int[]>>>> listFromEndArea = new ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>();
-			for(int<[]> endArea: edges){
-				ArrayList<ArrayList<ArrayList<int[]>>>> listFromStartPoint = new ArrayList<ArrayList<ArrayList<int[]>>();
-				for(ArrayList<int[]> startPoint: startArea){
-					ArrayList<ArrayList<int[]>>> listFromEndPoint = new ArrayList<ArrayList<int[]>>();
-					for(int<[]> endPoint: endArea){
-						path path = findPath(tm, startPoint, endPoint);
+			ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>> listFromEndArea = new ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>();
+			for(ArrayList<int[]> endArea: edges){
+				ArrayList<ArrayList<ArrayList<int[]>>> listFromStartPoint = new ArrayList<ArrayList<ArrayList<int[]>>>();
+				for(int[] startPoint: startArea){
+					ArrayList<ArrayList<int[]>> listFromEndPoint = new ArrayList<ArrayList<int[]>>();
+					for(int[] endPoint: endArea){
+						ArrayList<int[]> path = findPath(tm, startPoint, endPoint);
 						listFromEndPoint.add(path);
 					}
 					listFromStartPoint.add(listFromEndPoint);
