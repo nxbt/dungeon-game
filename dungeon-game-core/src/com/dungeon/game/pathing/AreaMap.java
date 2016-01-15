@@ -17,11 +17,18 @@ public class AreaMap {
 		areas.add(area);
 	}
 	
+	private void calculateEdges(){
+		for(Area area: areas){
+			area.calculateEdges();
+		}
+	}
+	
 	private void calculateBorders(){
 		for(Area area: areas){
 			for(Area a: areas){
-				if(!area.equals(area))area.calculateBorders(a);
+				if(!area.equals(a))area.calculateBorders(a);
 			}
+			System.out.println();
 		}
 	}
 	
@@ -32,8 +39,9 @@ public class AreaMap {
 	}
 	
 	public void prepAreas(){
-		calculateMinPaths();
+		calculateEdges();
 		calculateBorders();
+		calculateMinPaths();
 	}
 	
 	public Area findArea(int[] point){
@@ -50,7 +58,7 @@ public class AreaMap {
     		
     		ArrayList<Path> paths = new ArrayList<Path>();
     		paths.add(new Path(startArea,start,end));
-    		for(int i = 0; i < paths.size(); i ++){
+    		for(int i = 0; i < paths.size(); i++){
     			Path path = paths.get(i);
     			if(path.getLastArea()!=endArea){
     				for(Area area: path.getExpandAreas()){

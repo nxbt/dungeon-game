@@ -19,6 +19,7 @@ import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.ManaBar;
 import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.StaminaBar;
+import com.dungeon.game.pathing.AreaMap;
 
 public class World {
 	public SpriteBatch hudBatch;
@@ -40,6 +41,8 @@ public class World {
 	
 	public DescBox descBox;
 	
+	public AreaMap areaMap;
+	
 //	public LightMap lightMap;
 	
 	public World() {
@@ -53,6 +56,9 @@ public class World {
 		
 		curDungeon = dungeons.get(0);
 		curFloor = curDungeon.floors.get(0);
+
+		
+		areaMap = curFloor.areaMap;
 		
 		cam = new Camera();
 		hudCam = new Camera();

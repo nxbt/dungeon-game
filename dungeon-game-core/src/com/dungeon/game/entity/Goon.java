@@ -53,7 +53,7 @@ public class Goon extends Enemy {
 		ArrayList<Entity> entities = (ArrayList<Entity>) world.entities.clone();
 		entities.remove(world.player);
 		entities.remove(this);
-		if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(world.curFloor.tm,entities, new float[]{world.player.x,world.player.y});
+		if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(world,entities, new float[]{world.player.x,world.player.y});
 	
 	}
 

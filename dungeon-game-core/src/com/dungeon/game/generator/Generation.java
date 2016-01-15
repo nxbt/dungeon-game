@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.dungeon.game.entity.Chest;
 import com.dungeon.game.entity.Door;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.pathing.Area;
+import com.dungeon.game.pathing.AreaMap;
 import com.dungeon.game.world.Tile;
 
 public abstract class Generation {
@@ -12,7 +14,9 @@ public abstract class Generation {
 	private int height;
 	protected int[][] map;
 	protected ArrayList<Entity> entities;
+	public ArrayList<Area> areas;
 	public Generation(int width, int height){
+		areas = new ArrayList<Area>();
 		this.height = height;
 		this.width = width;
 		this.map = new int[height][width];
@@ -40,4 +44,6 @@ public abstract class Generation {
 		if(dir==0)entities.add(new Door(x*Tile.TS,y*Tile.TS,0));
 		if(dir==1)entities.add(new Door(x*Tile.TS,y*Tile.TS,1));
 	}
+	
+	public abstract void generateAreas();
 }

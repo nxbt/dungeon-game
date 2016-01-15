@@ -220,4 +220,10 @@ public class Castle extends Generation {
 			x-=width;
 		}
 	}
+
+	@Override
+	public void generateAreas() {
+		// TODO Auto-generated method stub
+		
+	}
 }

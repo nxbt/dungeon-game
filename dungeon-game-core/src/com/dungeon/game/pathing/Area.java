@@ -25,13 +25,16 @@ public class Area {
 	
 	public void addRectangleToArea(int x, int y, int width, int height){ //adds a rectangle of points to the Area.
 		for(int i = x; i < x+width; i++){
-			for(int k = y; k< y+height; k++){
-				points.add(new int[]{x,y});
+			for(int k = y; k < y+height; k++){
+				points.add(new int[]{i,k});
 			}
 		}
-		calculateEdges();
 	}
-	private void calculateEdges() { //recalculates the edges of this area;
+	
+	public void addPointToArea(int[] point){
+		points.add(point);
+	}
+	public void calculateEdges() { //recalculates the edges of this area;
 		edgePoints = new ArrayList<int[]>();
 		for(int[] i: points){
 			boolean topFound = false;
@@ -47,26 +50,23 @@ public class Area {
 			
 			if(!(topFound&&botFound&&leftFound&&rightFound))edgePoints.add(i);
 		}
+		System.out.println("Edges: "+edgePoints.size());
 	}
 	public void calculateBorders(Area a){ //find the borders between this area and another one.
 		ArrayList<int[]> borders = new ArrayList<int[]>();
 		for(int[] i:edgePoints){
 			for(int[] k: a.edgePoints){
-				if(i[0]-1==k[0]&&i[1]==k[1])borders.add(new int[]{i[0], k[0]});
-				else if(i[0]+1==k[0]&&i[1]==k[1])borders.add(new int[]{i[0], k[0]});
-				else if(i[0]==k[0]&&i[1]-1==k[1])borders.add(new int[]{i[0], k[0]});
-				else if(i[0]==k[0]&&i[1]+1==k[1])borders.add(new int[]{i[0], k[0]});
+				if(i[0]-1==k[0]&&i[1]==k[1])borders.add(new int[]{i[0], i[1]});
+				else if(i[0]+1==k[0]&&i[1]==k[1])borders.add(new int[]{i[0], i[1]});
+				else if(i[0]==k[0]&&i[1]-1==k[1])borders.add(new int[]{i[0], i[1]});
+				else if(i[0]==k[0]&&i[1]+1==k[1])borders.add(new int[]{i[0], i[1]});
 			}
 		}
 		if(borders.size()>0){
-			int indexOfArea = 0;
-			if(adjacentAreas.indexOf(a)==-1){
-				adjacentAreas.add(a);
-			}
-			indexOfArea = adjacentAreas.indexOf(a);
-			
-			edges.set(indexOfArea, borders);
+			adjacentAreas.add(a);
+			edges.add(borders);
 		}
+		System.out.println("adjacentAreas: "+adjacentAreas.size());
 	}
 	
 	public boolean containsPoint(int[] point){
@@ -74,6 +74,17 @@ public class Area {
 			if(point[0] == i[0]&&point[1] == i[1]) return true;
 		}
 		return false;
+	}
+	
+	public int[] findAdjacentEdge(int[] point){
+		for(int[] edge:edgePoints){
+			if(point[0]+1==edge[0]&&point[1]==edge[1])return edge;
+			if(point[0]-1==edge[0]&&point[1]==edge[1])return edge;
+			if(point[0]==edge[0]&&point[1]+1==edge[1])return edge;
+			if(point[0]==edge[0]&&point[1]-1==edge[1])return edge;
+		}
+		return new int[]{0,0};
+		
 	}
 	
 	public ArrayList<int[]> getMinPath(Tile[][] tm, int[] startPoint, Area start, Area end){
@@ -89,7 +100,22 @@ public class Area {
 		}else{
 			int startAreaIndex = adjacentAreas.indexOf(start);
 			int endAreaIndex = adjacentAreas.indexOf(end);
-			int startPointIndex = edges.get(startAreaIndex).indexOf(startPoint);
+			int startPointIndex = 0;
+			for(int i = 0; i <edges.get(startAreaIndex).size();i++){
+				if(startPoint[0]==edges.get(startAreaIndex).get(i)[0]&&startPoint[1]==edges.get(startAreaIndex).get(i)[1])startPointIndex = i;
+			}
+//			int startPointIndex = edges.get(startAreaIndex).indexOf(startPoint);
+//			int startPointIndex = 0;
+			System.out.println(startPoint[0]);
+			System.out.println(startPoint[1]);
+			System.out.println(edges.get(startAreaIndex).get(0)[0]);
+			System.out.println(edges.get(startAreaIndex).get(0)[1]);
+			
+			System.out.println("Is Present? "+(edgePoints.indexOf(startPoint)!=-1));
+					
+			System.out.println(startAreaIndex);
+			System.out.println(endAreaIndex);
+			System.out.println(startPointIndex);
 			minPathCandidates = minPaths.get(startAreaIndex).get(endAreaIndex).get(startPointIndex);
 			
 		}
@@ -110,6 +136,7 @@ public class Area {
 				for(int[] startPoint: startArea){
 					ArrayList<ArrayList<int[]>> listFromEndPoint = new ArrayList<ArrayList<int[]>>();
 					for(int[] endPoint: endArea){
+						System.out.println("minpathed");
 						ArrayList<int[]> path = findPath(tm, startPoint, endPoint);
 						listFromEndPoint.add(path);
 					}
@@ -123,11 +150,14 @@ public class Area {
 	}
 	
 	public ArrayList<int[]> findPath(Tile[][] tm, int[] start, int[] end){ //uses A* to find a path within from one edge to another
+
+		
 		ArrayList<int[]> queue = new ArrayList<int[]>();
 		queue.add(new int[]{end[0],end[1],0});
 		boolean endQueue = false;
 		
 		for(int i = 0; i < queue.size(); i++){
+			if(queue.get(i)[0]==start[0]&&queue.get(i)[1]==start[1])break;
 			ArrayList<int[]> toAdd = new ArrayList<int[]>();
 			for(int[] k: points){
 				if(queue.get(i)[0]+1==k[0]&&queue.get(i)[1]==k[1]&&tm[queue.get(i)[1]][queue.get(i)[0]].data!=1)toAdd.add(new int[]{queue.get(i)[0]+1,queue.get(i)[1], queue.get(i)[2]+1});
@@ -145,7 +175,6 @@ public class Area {
 			}
 			for(int[] k: toAdd){
 				queue.add(k);
-				if(k[0] == start[0]&&k[1] == start[1])endQueue = true;
 			}
 			if(endQueue)break;
 		}
@@ -153,15 +182,16 @@ public class Area {
 		ArrayList<int[]> path = new ArrayList<int[]>();
 		boolean gotToTarget = false;
 		int[] curTile = new int[]{start[0],start[1]};
-		while(!gotToTarget){
+		int count = 0;
+		while(!gotToTarget&&count<100){
+			count++;
 			path.add(curTile);
 			if(curTile[0]==end[0]&&curTile[1]==end[1])gotToTarget=true;
-			
 			else{
+				int[] workingTile = new int[]{0,0};
+				int curCount = Integer.MAX_VALUE;
 				for(int[] i: queue){
-					int curCount = 0;
-					int[] workingTile = new int[]{0,0};
-					if(curTile[0]+1==i[0]&&curTile[1]==i[1]){
+					if(curTile[0]+1==i[0]&&curTile[1]==i[1]&&i[2]<=curCount){
 						curCount = i[2];
 						workingTile = new int[]{i[0],i[1]};
 					}
@@ -177,8 +207,8 @@ public class Area {
 						curCount = i[2];
 						workingTile = new int[]{i[0],i[1]};
 					}
-					curTile = workingTile;
 				}
+				curTile = workingTile;
 			}
 		}
 		return path;

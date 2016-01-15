@@ -40,22 +40,35 @@ public class Path {
 	
 	public ArrayList<int[]> getTiles(Tile[][] tm){
 		ArrayList<int[]> Tiles = new ArrayList<int[]>();
-		Tiles.add(start);
 		//find tiles in 3 stages
 		//start point to edge
 		//intermediate areas
 		for(Area area: areas){
+			System.out.println();
 			ArrayList<int[]> subPath;
 			if(area.equals(areas.get(0))){
-				subPath = area.getMinPath(tm, Tiles.get(Tiles.size()-1),null, areas.get(areas.indexOf(area)+1));
+				subPath = area.getMinPath(tm, start,null, areas.get(areas.indexOf(area)+1));
 			}else if(area.equals(getLastArea())){
-				subPath = area.findPath(tm, Tiles.get(Tiles.size()-1), end);
+				System.out.println("prestartPointX: "+Tiles.get(Tiles.size()-1)[0]);
+				System.out.println("prestartPointY: "+Tiles.get(Tiles.size()-1)[1]);
+				System.out.println("isAlreadyThere?: "+area.containsPoint(Tiles.get(Tiles.size()-1)));
+				int[] startPoint = area.findAdjacentEdge(Tiles.get(Tiles.size()-1));
+				System.out.println("startPointX: "+startPoint[0]);
+				System.out.println("startPointY: "+startPoint[1]);
+				subPath = area.findPath(tm, startPoint, end);
 			}else {
-				subPath = area.getMinPath(tm, Tiles.get(Tiles.size()-1),areas.get(areas.indexOf(area)-1), areas.get(areas.indexOf(area)+1));
+				System.out.println("prestartPointX: "+Tiles.get(Tiles.size()-1)[0]);
+				System.out.println("prestartPointY: "+Tiles.get(Tiles.size()-1)[1]);
+				System.out.println("isAlreadyThere?: "+area.containsPoint(Tiles.get(Tiles.size()-1)));
+				int[] startPoint = area.findAdjacentEdge(Tiles.get(Tiles.size()-1));
+				System.out.println("startPointX: "+startPoint[0]);
+				System.out.println("startPointY: "+startPoint[1]);
+				subPath = area.getMinPath(tm, startPoint,areas.get(areas.indexOf(area)-1), areas.get(areas.indexOf(area)+1));
 	
 			}
-			
-			Tiles.addAll(subPath);
+			for(int[] point: subPath){
+				Tiles.add(point);
+			}
 		}
 		//edge to end point
 		return Tiles;
