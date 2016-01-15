@@ -12,10 +12,6 @@ public abstract class Equipable extends Item {
 		
 	}
 	
-	public void update(World world, Entity ent) {
-		calc(world, ent);
-	}
-	
-	public abstract void calc(World world, Entity ent);
+	public void update(World world, Entity ent) {}
 	
 }

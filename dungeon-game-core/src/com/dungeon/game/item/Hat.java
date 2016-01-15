@@ -20,9 +20,4 @@ public class Hat extends Equipable {
 		
 		stack = 1;
 	}
-
-	@Override
-	public void calc(World world, Entity ent) {
-		
-	}
 }

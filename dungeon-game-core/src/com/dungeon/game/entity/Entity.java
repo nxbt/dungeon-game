@@ -2,11 +2,9 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.light.Light;
-import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public abstract class Entity {
@@ -64,7 +62,6 @@ public abstract class Entity {
 	}
 	
 	public Polygon getHitbox() {
-		System.out.println(name);
 		Polygon temp_hitbox = new Polygon(hitbox.getVertices());
 		
 		temp_hitbox.setOrigin(origin_x, origin_y);

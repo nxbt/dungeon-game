@@ -3,27 +3,22 @@ package com.dungeon.game.world;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.EarClippingTriangulator;
 import com.dungeon.game.Camera;
-import com.dungeon.game.entity.*;
+import com.dungeon.game.entity.Chest;
+import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.Player;
+import com.dungeon.game.entity.WeaponGraphic;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.HealthBar;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.ManaBar;
 import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.StaminaBar;
-import com.dungeon.game.light.LightMap;
 
 public class World {
 	public SpriteBatch hudBatch;
@@ -123,7 +118,7 @@ public class World {
 		for(Entity e: entities){
 				if(e.solid) shapeRenderer.setColor(Color.RED);
 				else if(e instanceof WeaponGraphic) shapeRenderer.setColor(Color.GREEN);
-				else shapeRenderer.setColor(Color.BLUE);
+				else shapeRenderer.setColor(Color.CYAN);
 				shapeRenderer.polygon(e.getHitbox().getVertices());	
 		}
 		

@@ -28,7 +28,7 @@ public class MeleeGraphic extends WeaponGraphic {
 	public void calc(World world) {
 		if(((Melee) weapon).inAttack()) {
 			for(Entity e: world.entities){
-				if(!e.equals(world.player) && e instanceof Dynamic && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
+				if(!e.equals(weapon.owner) && e instanceof Dynamic && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
 					((Melee) weapon).hit((Dynamic) e);
 				}
 			}

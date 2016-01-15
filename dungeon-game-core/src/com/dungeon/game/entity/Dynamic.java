@@ -2,12 +2,13 @@ package com.dungeon.game.entity;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
-import com.dungeon.game.world.*;
+import com.dungeon.game.item.Item;
+import com.dungeon.game.item.Weapon;
+import com.dungeon.game.world.Tile;
+import com.dungeon.game.world.World;
 
 //abstract class for dynamic entities, or entities that move and respond to physics.
 public abstract class Dynamic extends Entity {
@@ -57,8 +58,6 @@ public abstract class Dynamic extends Entity {
 	public Dynamic(int x, int y) {
 		super(x, y);
 		
-		solid = true;
-		
 		immune = true;
 		immortal = false;
 		
@@ -101,7 +100,7 @@ public abstract class Dynamic extends Entity {
 				
 				vel = (float) Math.sqrt(dx * dx + dy * dy);
 				
-				if(vel + acel > mvel) {
+				if(vel > mvel) {
 					dx = dx/vel*mvel;
 					dy = dy/vel*mvel;
 				}
@@ -367,7 +366,7 @@ public abstract class Dynamic extends Entity {
 		stunTimer = 20;
 		stun = true;
 		
-		System.out.println(name + " took " + amount + " damage.");
+		System.out.println(name + " took " + amount + " damage" + (life<=0? " and was killed.":"."));
 		
 		return amount;
 	}
@@ -379,5 +378,17 @@ public abstract class Dynamic extends Entity {
 		System.out.println(name + " gained " + amount + " life.");
 		
 		return amount;
+	}
+	
+	public void equip(World world, Weapon weapon) {
+		world.entities.add(weapon.graphic);
+		
+		weapon.owner = this;
+	}
+	
+	public void unequip(World world, Weapon weapon) {
+		world.entities.remove(weapon.graphic);
+		
+		weapon.owner = null;
 	}
 }

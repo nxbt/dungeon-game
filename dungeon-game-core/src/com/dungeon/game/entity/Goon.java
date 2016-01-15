@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.item.Hat;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
 
@@ -45,8 +44,6 @@ public class Goon extends Enemy {
 		d_offy = 0;
 		
 		sprite = new Texture("goon.png");
-		
-		solid = true;
 		
 		light = new Light(this, 0.5f);
 	}

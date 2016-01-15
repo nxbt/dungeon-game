@@ -2,7 +2,6 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public abstract class Projectile extends Dynamic {

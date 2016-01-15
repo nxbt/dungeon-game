@@ -15,8 +15,6 @@ public class Crap extends Item {
 		
 		sprite = new Texture("Crap.png");
 		
-		stack = 1;
-		
 		maxStack = 10;
 	}
 

@@ -1,12 +1,10 @@
 package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.Dynamic;
-import com.dungeon.game.entity.MeleeGraphic;
 import com.dungeon.game.entity.WeaponGraphic;
 
-public abstract class Weapon extends Item{
+public abstract class Weapon extends Equipable{
 	public int damage;
 	protected int cooldown;
 	protected int speed;
@@ -14,6 +12,8 @@ public abstract class Weapon extends Item{
 	
 	public int stage;
 	protected int stageTimer;
+	
+	public Dynamic owner;
 	
 	public Weapon(int damage, int cooldown, int speed, Texture texture){
 		super();
