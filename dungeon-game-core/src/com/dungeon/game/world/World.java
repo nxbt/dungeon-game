@@ -130,7 +130,7 @@ public class World {
 		for(Entity e: entities){
 				if(e.solid) shapeRenderer.setColor(Color.RED);
 				else shapeRenderer.setColor(Color.GREEN);
-//				shapeRenderer.polygon(e.getHitbox().getVertices());	
+				shapeRenderer.polygon(e.getHitbox().getVertices());	
 		}
 		
 		shapeRenderer.end();

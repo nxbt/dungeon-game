@@ -204,10 +204,11 @@ public abstract class Dynamic extends Entity {
 		boolean collide_dn = false;
 		boolean collide_up = false;
 		
+		Intersector.MinimumTranslationVector mtv = new Intersector.MinimumTranslationVector();
+		
 		for(int i = tile_lt; i <= tile_rt; i++) {
 			for(int k = tile_dn; k <= tile_up; k++) {
 				if(world.curFloor.tm[k][i].data == 1) {
-					Intersector.MinimumTranslationVector mtv = new Intersector.MinimumTranslationVector();
 					Polygon tile_hBox = new Polygon(new float[] {i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS});
 					
 					if(Intersector.overlapConvexPolygons(hBox, tile_hBox, mtv)) {
@@ -322,6 +323,21 @@ public abstract class Dynamic extends Entity {
 				}
 			}
 		}
+		
+		for(Entity e: world.entities) {
+			if(e.solid && !e.equals(this) && Intersector.overlaps(bBox, e.getBoundingBox()) && Intersector.overlapConvexPolygons(hBox, e.getHitbox(),mtv)) {
+				xChange = Math.max(xChange, Math.abs(mtv.normal.x*mtv.depth));
+				yChange = Math.max(yChange, Math.abs(mtv.normal.y*mtv.depth));
+				
+				move = true;
+				
+				if(mtv.normal.x > 0) collide_lt = true;
+				if(mtv.normal.x < 0) collide_rt = true;
+				if(mtv.normal.y > 0) collide_dn = true;
+				if(mtv.normal.y < 0) collide_up = true;
+			}
+		}
+		
 		if(move){
 			if(collide_lt){
 				x+=xChange;
