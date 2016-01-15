@@ -73,6 +73,7 @@ public abstract class Dynamic extends Entity {
 		norm();
 		calc(world);
 		phys(world);
+		post(world);
 	}
 	
 	//resets some variables at the start of every update cycles

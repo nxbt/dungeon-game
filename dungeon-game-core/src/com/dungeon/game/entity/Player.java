@@ -55,7 +55,7 @@ public class Player extends Dynamic {
 		mvel = 5;
 		fric = 0.5f;
 		
-		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
+		hitbox = new Polygon(new float[]{30,16,28,23,23,28,16,30,9,28,4,23,2,16,4,9,9,4,16,2,23,4,28,9});
 		
 		origin_x = 16;
 		origin_y = 16;
@@ -220,13 +220,6 @@ public class Player extends Dynamic {
 			leftPos = ((Weapon) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
 			((Weapon)inv.slot[30].item).graphic.calc(world);
 			
-			float xMove = (float) (Math.cos((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
-			float yMove = (float) (Math.sin((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
-			
-			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x)+xMove;
-			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y)+yMove;
-			((Weapon)(inv.slot[30].item)).graphic.angle = angle-135+leftPos[2];
-			
 		}
 		if(attacking){
 			mvel = 2.5f;
@@ -240,8 +233,14 @@ public class Player extends Dynamic {
 
 	@Override
 	public void post(World world) {
-		// TODO Auto-generated method stub
-		
+		if(leftEquiped != null){
+			float xMove = (float) (Math.cos((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
+			float yMove = (float) (Math.sin((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
+			
+			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x)+xMove;
+			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y)+yMove;
+			((Weapon)(inv.slot[30].item)).graphic.angle = angle-135+leftPos[2];
+		}
 	}
 }
 
