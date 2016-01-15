@@ -51,7 +51,6 @@ public class Floor {
 				spritesheet[i*sheetWidth+k] = new TextureRegion(new Texture(DEFAULT),k*Tile.TS,i*Tile.TS,Tile.TS,Tile.TS);
 			}
 		}
-		
 		Generation gen = new Rooms(width, height);
 		int[][] map = gen.getMap();
 		entities = gen.getEntities();

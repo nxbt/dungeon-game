@@ -22,6 +22,7 @@ public class AreaMap {
 	private void calculateEdges(){
 		for(Area area: areas){
 			area.calculateEdges();
+			System.out.println("Calculating Area Edges... "+(int)((areas.indexOf(area)+1)/(float)areas.size()*100)+"%");
 		}
 	}
 	
@@ -30,6 +31,8 @@ public class AreaMap {
 			for(Area a: areas){
 				if(!area.equals(a))area.calculateBorders(a);
 			}
+
+			System.out.println("Finding Adjacent Areas... "+(int)((areas.indexOf(area)+1)/(float)areas.size()*100)+"%");
 		}
 	}
 	
@@ -37,6 +40,8 @@ public class AreaMap {
 		for(Area area: areas){
 			area.begin();
 			area.calculateMinPaths(tm);
+
+			System.out.println("Finding Min Paths Across Areas... "+(int)((areas.indexOf(area)+1)/(float)areas.size()*100)+"%");
 		}
 	}
 	
@@ -51,6 +56,7 @@ public class AreaMap {
 				}
 				minPaths.get(minPaths.size()-1).add(minPath);
 			}
+			System.out.println("Finding Min Paths Between Areas... "+(int)((areas.indexOf(area)+1)/(float)areas.size()*100)+"%");
 		}
 	}
 	
@@ -76,9 +82,7 @@ public class AreaMap {
 		
 		ArrayList<Path> paths = new ArrayList<Path>();
 		paths.add(new Path(startArea,start,end));
-		System.out.println("Started Pathing");
 		for(int i = 0; i < paths.size(); i++){
-			System.out.println(paths.size());
 			Path path = paths.get(i);
 			if(path.getLastArea()!=endArea){
 				for(Area area: path.getExpandAreas()){
@@ -86,7 +90,7 @@ public class AreaMap {
 					Path p = new Path(path, area);
 					for(Path pth: paths){
 						if(pth.isAreaOnPath(p.getLastArea())){
-							if(path.getLength(tm)<pth.getLengthUpTo(tm, path.getLastArea())){
+							if(p.getLength(tm)>=pth.getLengthUpTo(tm, p.getLastArea())){
 								toAdd = false;
 								break;
 							}
@@ -98,13 +102,9 @@ public class AreaMap {
 				i--;
 			}
 		}
-		System.out.println(paths.size());
-		Path shortestPath = paths.get(0);
-		for(Path path: paths){
-			if(path.getLength(tm)<shortestPath.getLength(tm))shortestPath = path;
-		}
+		System.out.println("Possible Paths: "+paths.size());
 		
-		return shortestPath;
+		return paths.get(0);
 	}
 	public Path findAreaPath(int[] start, int[] end){
     		Area startArea = findArea(start);
@@ -112,38 +112,6 @@ public class AreaMap {
     		Path path = minPaths.get(areas.indexOf(startArea)).get(areas.indexOf(endArea));
     		path.start = start;
     		path.end = end;
-//    		startArea.begin();
-//    		endArea.begin();
-//    		
-//    		ArrayList<Path> paths = new ArrayList<Path>();
-//    		paths.add(new Path(startArea,start,end));
-//    		System.out.println("Started Pathing");
-//    		for(int i = 0; i < paths.size(); i++){
-//    			System.out.println(paths.size());
-//    			Path path = paths.get(i);
-//    			if(path.getLastArea()!=endArea){
-//    				for(Area area: path.getExpandAreas()){
-//    					boolean toAdd = true;
-//    					Path p = new Path(path, area);
-//    					for(Path pth: paths){
-//    						if(pth.isAreaOnPath(p.getLastArea())){
-//    							if(path.getLength(tm)<pth.getLengthUpTo(tm, path.getLastArea())){
-//    								toAdd = false;
-//    								break;
-//    							}
-//    						}
-//    					}
-//    					if(toAdd)paths.add(p);
-//    				}
-//    				paths.remove(path);
-//    				i--;
-//    			}
-//    		}
-//    		System.out.println(paths.size());
-//    		Path shortestPath = paths.get(0);
-//    		for(Path path: paths){
-//    			if(path.getLength(tm)<shortestPath.getLength(tm))shortestPath = path;
-//    		}
     		
     		return path;
     		
