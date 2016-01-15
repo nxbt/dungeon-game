@@ -64,7 +64,7 @@ public abstract class Entity {
 	}
 	
 	public Polygon getHitbox() {
-		
+		System.out.println(name);
 		Polygon temp_hitbox = new Polygon(hitbox.getVertices());
 		
 		temp_hitbox.setOrigin(origin_x, origin_y);
