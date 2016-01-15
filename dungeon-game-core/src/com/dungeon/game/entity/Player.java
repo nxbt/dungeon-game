@@ -237,5 +237,11 @@ public class Player extends Dynamic {
 			torq = 10;
 		}
 	}
+
+	@Override
+	public void post(World world) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
