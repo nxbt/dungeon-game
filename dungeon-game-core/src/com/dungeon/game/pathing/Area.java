@@ -6,8 +6,8 @@ import com.dungeon.game.entity.Entity;
 import com.dungeon.game.world.Tile;
 
 public class Area {
-	private ArrayList<int[]> points; //Array of all tiles in this area
-	private ArrayList<int[]> edgePoints; //Array of all edges of this area.
+	protected ArrayList<int[]> points; //Array of all tiles in this area
+	protected ArrayList<int[]> edgePoints; //Array of all edges of this area.
 	protected ArrayList<Area> adjacentAreas; //Holds reference to all adjacent Areas
 	private ArrayList<ArrayList<int[]>> edges; //Holds points where this Area Borders other Areas
 	private ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>> minPaths; //Holds information for the minimum viable paths from one edge to another;
@@ -51,7 +51,6 @@ public class Area {
 			
 			if(!(topFound&&botFound&&leftFound&&rightFound))edgePoints.add(i);
 		}
-		System.out.println("Edges: "+edgePoints.size());
 	}
 	public void calculateBorders(Area a){ //find the borders between this area and another one.
 		ArrayList<int[]> borders = new ArrayList<int[]>();
@@ -67,7 +66,6 @@ public class Area {
 			adjacentAreas.add(a);
 			edges.add(borders);
 		}
-		System.out.println("adjacentAreas: "+adjacentAreas.size());
 	}
 	
 	public boolean containsPoint(int[] point){
@@ -111,16 +109,6 @@ public class Area {
 			}
 //			int startPointIndex = edges.get(startAreaIndex).indexOf(startPoint);
 //			int startPointIndex = 0;
-			System.out.println(startPoint[0]);
-			System.out.println(startPoint[1]);
-			System.out.println(edges.get(startAreaIndex).get(0)[0]);
-			System.out.println(edges.get(startAreaIndex).get(0)[1]);
-			
-			System.out.println("Is Present? "+(edgePoints.indexOf(startPoint)!=-1));
-					
-			System.out.println(startAreaIndex);
-			System.out.println(endAreaIndex);
-			System.out.println(startPointIndex);
 			minPathCandidates = minPaths.get(startAreaIndex).get(endAreaIndex).get(startPointIndex);
 			
 		}
@@ -141,7 +129,6 @@ public class Area {
 				for(int[] startPoint: startArea){
 					ArrayList<ArrayList<int[]>> listFromEndPoint = new ArrayList<ArrayList<int[]>>();
 					for(int[] endPoint: endArea){
-						System.out.println("minpathed");
 						ArrayList<int[]> path = findPath(tm, startPoint, endPoint);
 						listFromEndPoint.add(path);
 					}
@@ -156,7 +143,9 @@ public class Area {
 	
 	public ArrayList<int[]> findPath(Tile[][] tm, int[] start, int[] end){ //uses A* to find a path within from one edge to another
 		for(ArrayList<int[]> path: foundPaths){
-			if(path.get(0)[0]==start[0]&&path.get(0)[1]==start[1]&&path.get(path.size()-1)[0]==end[0]&&path.get(path.size()-1)[1]==end[1])return path;
+			if(path.get(0)[0]==start[0]&&path.get(0)[1]==start[1]&&path.get(path.size()-1)[0]==end[0]&&path.get(path.size()-1)[1]==end[1]){
+				return path;
+			}
 		}
 		
 		ArrayList<int[]> queue = new ArrayList<int[]>();

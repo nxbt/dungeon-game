@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import com.dungeon.game.world.Tile;
 
 public class Path {
-	private int[] start; //start position of the path
-	private int[] end; //end position of the path
+	protected int[] start; //start position of the path
+	protected int[] end; //end position of the path
 	ArrayList<Area> areas; //areas along the path
 	public Path(Area area, int[] start, int[] end){ // constructor used to create initial path
 		areas = new ArrayList<Area>();
@@ -32,7 +32,9 @@ public class Path {
 	public ArrayList<Area> getExpandAreas(){
 		ArrayList<Area>  expandAreas = new ArrayList<Area>();
 		for(Area area: getLastArea().adjacentAreas){
-			if(!isAreaOnPath(area))expandAreas.add(area);
+			if(!isAreaOnPath(area)){
+				expandAreas.add(area);
+			}
 		}
 		return expandAreas;
 	}
@@ -44,25 +46,14 @@ public class Path {
 		//start point to edge
 		//intermediate areas
 		for(Area area: areas){
-			System.out.println();
 			ArrayList<int[]> subPath;
 			if(area.equals(areas.get(0))){
 				subPath = area.getMinPath(tm, start,null, areas.get(areas.indexOf(area)+1));
 			}else if(area.equals(getLastArea())){
-				System.out.println("prestartPointX: "+Tiles.get(Tiles.size()-1)[0]);
-				System.out.println("prestartPointY: "+Tiles.get(Tiles.size()-1)[1]);
-				System.out.println("isAlreadyThere?: "+area.containsPoint(Tiles.get(Tiles.size()-1)));
 				int[] startPoint = area.findAdjacentEdge(Tiles.get(Tiles.size()-1));
-				System.out.println("startPointX: "+startPoint[0]);
-				System.out.println("startPointY: "+startPoint[1]);
 				subPath = area.findPath(tm, startPoint, end);
 			}else {
-				System.out.println("prestartPointX: "+Tiles.get(Tiles.size()-1)[0]);
-				System.out.println("prestartPointY: "+Tiles.get(Tiles.size()-1)[1]);
-				System.out.println("isAlreadyThere?: "+area.containsPoint(Tiles.get(Tiles.size()-1)));
 				int[] startPoint = area.findAdjacentEdge(Tiles.get(Tiles.size()-1));
-				System.out.println("startPointX: "+startPoint[0]);
-				System.out.println("startPointY: "+startPoint[1]);
 				subPath = area.getMinPath(tm, startPoint,areas.get(areas.indexOf(area)-1), areas.get(areas.indexOf(area)+1));
 	
 			}
@@ -76,6 +67,16 @@ public class Path {
 	
 	public int getLength(Tile[][] tm){
 		return getTiles(tm).size();
+	}
+	public int getLengthUpTo(Tile[][] tm, Area lastArea) {
+		Path path = new Path(this.areas.get(0), this.start, this.end);
+		for(Area area: areas){
+			if(areas.indexOf(area)!=0){
+				path = new Path(path, area);
+				if(area == lastArea)break;
+			}
+		}
+		return path.getLength(tm);
 	}
 	
 	
