@@ -93,7 +93,7 @@ public class Area {
 	public ArrayList<int[]> getMinPath(Tile[][] tm, int[] startPoint, Area start, Area end){
 		ArrayList<ArrayList<int[]>> minPathCandidates;
 		ArrayList<int[]> minPath;
-		if(start==null){
+		if(start == null){
 			minPathCandidates = new ArrayList<ArrayList<int[]>>();
 			int endAreaIndex = adjacentAreas.indexOf(end);
 			for(int[] edge: edges.get(endAreaIndex)){

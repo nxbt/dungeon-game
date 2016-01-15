@@ -84,7 +84,7 @@ public class AreaMap {
 		paths.add(new Path(startArea,start,end));
 		for(int i = 0; i < paths.size(); i++){
 			Path path = paths.get(i);
-			if(path.getLastArea()!=endArea){
+			if(!path.getLastArea().equals(endArea)){
 				for(Area area: path.getExpandAreas()){
 					boolean toAdd = true;
 					Path p = new Path(path, area);
@@ -102,9 +102,15 @@ public class AreaMap {
 				i--;
 			}
 		}
-		System.out.println("Possible Paths: "+paths.size());
+		//WHY IS THIS MORE THAN 1???
+		Path shortestPath = paths.get(0);
+		if(paths.size()>2){
+			for(Path path: paths){
+				if(path.getLength(tm)<shortestPath.getLength(tm))shortestPath = path;
+			}
+		}
 		
-		return paths.get(0);
+		return shortestPath;
 	}
 	public Path findAreaPath(int[] start, int[] end){
     		Area startArea = findArea(start);
