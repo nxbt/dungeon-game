@@ -11,7 +11,8 @@ public class Area {
 	protected ArrayList<Area> adjacentAreas; //Holds reference to all adjacent Areas
 	private ArrayList<ArrayList<int[]>> edges; //Holds points where this Area Borders other Areas
 	private ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<int[]>>>>> minPaths; //Holds information for the minimum viable paths from one edge to another;
-	private ArrayList<Entity> entities; //contains data for all entities in the area;
+	private ArrayList<Entity> entities; //contains data for all entities in the area.
+	private ArrayList<ArrayList<int[]>> foundPaths; //saves data for start and end paths each pathfind.
 	
 	public Area(){
 		points = new ArrayList<int[]>();
@@ -87,6 +88,10 @@ public class Area {
 		
 	}
 	
+	public void begin(){
+		foundPaths = new ArrayList<ArrayList<int[]>>();
+	}
+	
 	public ArrayList<int[]> getMinPath(Tile[][] tm, int[] startPoint, Area start, Area end){
 		ArrayList<ArrayList<int[]>> minPathCandidates;
 		ArrayList<int[]> minPath;
@@ -150,7 +155,9 @@ public class Area {
 	}
 	
 	public ArrayList<int[]> findPath(Tile[][] tm, int[] start, int[] end){ //uses A* to find a path within from one edge to another
-
+		for(ArrayList<int[]> path: foundPaths){
+			if(path.get(0)[0]==start[0]&&path.get(0)[1]==start[1]&&path.get(path.size()-1)[0]==end[0]&&path.get(path.size()-1)[1]==end[1])return path;
+		}
 		
 		ArrayList<int[]> queue = new ArrayList<int[]>();
 		queue.add(new int[]{end[0],end[1],0});
@@ -211,6 +218,7 @@ public class Area {
 				curTile = workingTile;
 			}
 		}
+		foundPaths.add(path);
 		return path;
 	}
 }

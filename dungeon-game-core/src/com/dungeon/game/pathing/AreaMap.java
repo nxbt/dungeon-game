@@ -54,6 +54,8 @@ public class AreaMap {
 	public ArrayList<int[]> findPath(int[] start, int[] end){
     		Area startArea = findArea(start);
     		Area endArea = findArea(end);
+    		startArea.begin();
+    		endArea.begin();
     		if(startArea.equals(endArea))return startArea.findPath(tm, start, end);
     		
     		ArrayList<Path> paths = new ArrayList<Path>();
