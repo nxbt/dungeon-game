@@ -63,14 +63,24 @@ public class Slot {
 					}
 				}
 				else if(item != null && world.mouse.slot.item == null) {
-					item.stack--;
-					world.mouse.slot.item = (Item) item.clone();
-					world.mouse.slot.item.stack = 1;
+					if(item.stack == 1) {
+						swap(world.mouse.slot);
+					}
+					else {
+						item.stack--;
+						world.mouse.slot.item = (Item) item.clone();
+						world.mouse.slot.item.stack = 1;
+					}
 				}
 				else if(item == null && world.mouse.slot.item != null) {
-					world.mouse.slot.item.stack--;
-					item = (Item) world.mouse.slot.item.clone();
-					item.stack = 1;
+					if(world.mouse.slot.item.stack == 1) {
+						swap(world.mouse.slot);
+					}
+					else {
+						world.mouse.slot.item.stack--;
+						item = (Item) world.mouse.slot.item.clone();
+						item.stack = 1;
+					}
 				}
 				else swap(world.mouse.slot);
 				if(item != null && item.stack == 0) item = null;

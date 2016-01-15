@@ -2,15 +2,20 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.item.Melee;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.World;
 
 public abstract class Projectile extends Dynamic {
 	private Weapon weapon;
+	
 	public float power;
+	
 	private static int OFFSET = 0;
+	
 	public float range;
+	
+	public Dynamic owner;
+	
 	public Projectile(int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, Weapon weapon) {
 		super(x, y);
 		dx = (float) Math.cos((angle+135)/180*Math.PI)*power;
@@ -20,14 +25,14 @@ public abstract class Projectile extends Dynamic {
 		
 		rotate = true;
 		
+		this.owner = weapon.owner;
+		
 		this.hitbox = hitbox;
 		
 		this.origin_x = originX;
 		this.origin_y = originY;
 		this.weapon = weapon;
 		this.power = power;
-		
-		
 	}
 
 	@Override
@@ -39,7 +44,7 @@ public abstract class Projectile extends Dynamic {
 	@Override
 	public void calc(World world) {
 		for(Entity e: world.entities){
-			if(!e.equals(weapon.owner)&& e.solid && e instanceof Dynamic && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
+			if(!e.equals(owner)&& e.solid && e instanceof Dynamic && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
 				weapon.hit((Dynamic) e,this);
 				killMe = true;
 			}

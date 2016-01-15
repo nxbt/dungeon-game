@@ -23,7 +23,7 @@ public class Bow extends Ranged {
 		super(damage, cooldown, speed, new Texture("Bow.png"));
 		
 		strength = 10;
-		knockstr = 10;
+		knockstr = 15;
 		
 		texturePath = "Bow.png";
 
@@ -127,7 +127,6 @@ public class Bow extends Ranged {
 
 	@Override
 	public void hit(Dynamic e, Projectile projectile) {
-		System.out.println("SNIPE");
 		if(e.damage(damage*projectile.power/10)>0){
 			float xknock = projectile.dx/strength*knockstr;
 			float yknock = projectile.dy/strength*knockstr;
