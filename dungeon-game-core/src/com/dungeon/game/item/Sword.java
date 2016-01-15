@@ -73,7 +73,7 @@ public class Sword extends Melee {
 		knockstr = 10;
 		dmgMult = new float[]{0.7f,1,1.5f};
 		knockMult = new float[]{1,1.3f,0.7f};		
-		graphic = new MeleeGraphic(this, new Polygon(new float[]{Item.SIZE*0.6f,Item.SIZE*0.2f,Item.SIZE*0.8f,Item.SIZE*0.4f,0,Item.SIZE*1.1f,Item.SIZE*0.1f,Item.SIZE}), 30, 2);
+		graphic = new MeleeGraphic(this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 
 	}
 

@@ -64,7 +64,6 @@ public abstract class Entity {
 	}
 	
 	public Polygon getHitbox() {
-		System.out.println(name);
 		
 		Polygon temp_hitbox = new Polygon(hitbox.getVertices());
 		
@@ -72,8 +71,10 @@ public abstract class Entity {
 		temp_hitbox.translate(-origin_x, -origin_y);
 //		temp_hitbox.rotate(angle);
 		temp_hitbox.translate(x, y);
+		temp_hitbox.dirty();
 		
-		return temp_hitbox;
+		
+		return new Polygon(temp_hitbox.getTransformedVertices());
 	}
 	
 	public Rectangle getBoundingBox() {

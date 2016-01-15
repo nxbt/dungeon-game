@@ -83,13 +83,13 @@ public class Area {
 			minPathCandidates = new ArrayList<ArrayList<int[]>>();
 			int endAreaIndex = adjacentAreas.indexOf(end);
 			for(int[] edge: edges.get(endAreaIndex)){
-				minPathCandidates.add(findPath(tm, start, edge));
+				minPathCandidates.add(findPath(tm, startPoint, edge));
 			}
 			
 		}else{
 			int startAreaIndex = adjacentAreas.indexOf(start);
 			int endAreaIndex = adjacentAreas.indexOf(end);
-			int startPointIndex = edges.get(start).indexOf(startPoint);
+			int startPointIndex = edges.get(startAreaIndex).indexOf(startPoint);
 			minPathCandidates = minPaths.get(startAreaIndex).get(endAreaIndex).get(startPointIndex);
 			
 		}

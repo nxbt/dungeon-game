@@ -34,4 +34,17 @@ public class MeleeGraphic extends WeaponGraphic {
 			}
 		}
 	}
+	public Polygon getHitbox() {
+		
+		Polygon temp_hitbox = new Polygon(hitbox.getVertices());
+		
+		temp_hitbox.setOrigin(origin_x, origin_y);
+		temp_hitbox.translate(-origin_x, -origin_y);
+		temp_hitbox.rotate(angle);
+		temp_hitbox.translate(x, y);
+		temp_hitbox.dirty();
+		
+		
+		return new Polygon(temp_hitbox.getTransformedVertices());
+	}
 }

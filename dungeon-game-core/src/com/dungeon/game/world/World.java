@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,6 +12,8 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.EarClippingTriangulator;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.*;
@@ -24,6 +27,7 @@ import com.dungeon.game.light.LightMap;
 
 public class World {
 	public SpriteBatch hudBatch;
+	public ShapeRenderer shapeRenderer;
 	
 	public Camera cam;
 	public Camera hudCam;
@@ -45,6 +49,8 @@ public class World {
 	
 	public World() {
 		hudBatch = new SpriteBatch();
+		
+		shapeRenderer = new ShapeRenderer();
 		
 		dungeons = new ArrayList<Dungeon>();
 		
@@ -121,5 +127,12 @@ public class World {
 		descBox.draw(batch);
 		
 		batch.end();
+		shapeRenderer.begin(ShapeType.Line);
+		shapeRenderer.setColor(Color.RED);
+		shapeRenderer.setProjectionMatrix(cam.cam.combined);
+		for(Entity e: entities){
+				shapeRenderer.polygon(e.getHitbox().getVertices());	
+		}
+		shapeRenderer.end();
 	}
 }

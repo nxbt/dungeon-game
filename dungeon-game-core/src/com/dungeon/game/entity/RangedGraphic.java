@@ -15,6 +15,8 @@ public class RangedGraphic extends WeaponGraphic {
 		super(weapon);
 		this.origin_x = originX;
 		this.origin_y = originY;
+
+		hitbox = new Polygon(new float[]{0,0,0,0,0,0});
 	}
 	
 	@Override

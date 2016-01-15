@@ -2,6 +2,8 @@ package com.dungeon.game.pathing;
 
 import java.util.ArrayList;
 
+import com.dungeon.game.world.Tile;
+
 public class Path {
 	private int[] start; //start position of the path
 	private int[] end; //end position of the path
@@ -45,11 +47,11 @@ public class Path {
 		for(Area area: areas){
 			ArrayList<int[]> subPath;
 			if(area.equals(areas.get(0))){
-				subPath = area.getMinPath(tm, Tiles.get(Tiles.size()-1),null, areas.indeOf(area+1));
+				subPath = area.getMinPath(tm, Tiles.get(Tiles.size()-1),null, areas.get(areas.indexOf(area)+1));
 			}else if(area.equals(getLastArea())){
-				subPath = area.findPath(tm, Tile.get(Tiles.size()-1), end);
+				subPath = area.findPath(tm, Tiles.get(Tiles.size()-1), end);
 			}else {
-				subPath = area.getMinPath(tm, Tiles.get(Tiles.size()-1),areas.indexOf(area)-1, areas.indeOf(area+1));
+				subPath = area.getMinPath(tm, Tiles.get(Tiles.size()-1),areas.get(areas.indexOf(area)-1), areas.get(areas.indexOf(area)+1));
 	
 			}
 			

@@ -180,6 +180,16 @@ public class Player extends Dynamic {
 			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
 			leftPos = ((Weapon) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
 			((Weapon)inv.slot[30].item).graphic.calc(world);
+			float xMove = (float) (Math.cos((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
+			float yMove = (float) (Math.sin((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
+			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x)+xMove;
+
+			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y)+yMove;
+
+			((Weapon)(inv.slot[30].item)).graphic.angle = angle-135+leftPos[2];
+			if(world.entities.indexOf(((Weapon)inv.slot[30].item).graphic)==-1){
+				world.entities.add(((Weapon)inv.slot[30].item).graphic);
+			}
 		}
 		if(attacking){
 			mvel = 2.5f;
@@ -189,28 +199,6 @@ public class Player extends Dynamic {
 			mvel = 5;
 			torq = 10;
 		}
-	}
-	
-	public void draw(SpriteBatch batch) {
-		if(leftEquiped){
-			float xMove = (float) (Math.cos((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
-			float yMove = (float) (Math.sin((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
-			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x)+xMove;
-
-			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y)+yMove;
-
-			((Weapon)(inv.slot[30].item)).graphic.angle = angle-135+leftPos[2];
-		}
-		
-		if(leftEquiped)((Weapon)(inv.slot[30].item)).graphic.draw(batch);
-		
-		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_y+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
-	
-//		if(name.equals("Player")){
-//			for(int[] i: collisions){
-//				batch.draw(new Texture("Goon.png"), i[0]*Tile.TS, i[1]*Tile.TS);
-//			}
-//		}
 	}
 }
 

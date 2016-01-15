@@ -9,7 +9,7 @@ public abstract class WeaponGraphic extends Static {
 	
 	protected Weapon weapon;
 	
-	public WeaponGraphic(Weapon weapon) {
+	public WeaponGraphic(Weapon weapon/*, Entity owner*/) {
 		super(0, 0); // x and y don't matter, they are set every frame
 		sprite = weapon.sprite;
 		this.d_width = Item.SIZE;
