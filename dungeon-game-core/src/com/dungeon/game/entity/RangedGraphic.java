@@ -36,4 +36,7 @@ public class RangedGraphic extends WeaponGraphic {
 		toFire = true;
 		this.power = power;
 	}
+
+	@Override
+	public void post(World world) {}
 }

@@ -117,8 +117,7 @@ public class World {
 		
 		for(Entity e: entities){
 				if(e.solid) shapeRenderer.setColor(Color.RED);
-				else if(e instanceof WeaponGraphic) shapeRenderer.setColor(Color.GREEN);
-				else shapeRenderer.setColor(Color.CYAN);
+				else shapeRenderer.setColor(Color.GREEN);
 				shapeRenderer.polygon(e.getHitbox().getVertices());	
 		}
 		

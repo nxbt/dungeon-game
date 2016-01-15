@@ -28,7 +28,7 @@ public class Sword extends Melee {
 	private final float WINDUP1_PANG = 70;
 	private final float WINDUP1_ANGL = 35;
 	
-	private final float SWING1_TIME = 15;
+	private final float SWING1_TIME = 12;
 	private final float SWING1_DIST = 14;
 	private final float SWING1_PANG = -55;
 	private final float SWING1_ANGL = -50;
@@ -54,7 +54,7 @@ public class Sword extends Melee {
 	private final float WINDUP3_PANG = 30;
 	private final float WINDUP3_ANGL = -7;
 	
-	private final float SWING3_TIME = 10;
+	private final float SWING3_TIME = 4;
 	private final float SWING3_DIST = 28;
 	private final float SWING3_PANG = 6;
 	private final float SWING3_ANGL = -3;
@@ -241,7 +241,7 @@ public class Sword extends Melee {
 
 	@Override
 	public boolean isInUse() {
-		return stage == WINDUP1||stage == WINDUP2||stage == WINDUP3||stage == SWING1||stage == SWING2||stage == SWING3;
+		return stage == WINDUP1||stage == WINDUP2||stage == WINDUP3||stage == SWING1||stage == SWING2||stage == SWING3||stage == WINDDOWN1||stage == WINDDOWN2||stage == WINDDOWN3;
 	}
 
 	public boolean inAttack() {

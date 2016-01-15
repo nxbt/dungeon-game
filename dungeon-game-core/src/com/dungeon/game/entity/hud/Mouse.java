@@ -176,4 +176,6 @@ public class Mouse extends Hud {
 		}
 		else batch.draw(sprite, x+d_offx, y+d_offy, d_width, d_height);
 	}
+	
+	public void post(World world) {}
 }
