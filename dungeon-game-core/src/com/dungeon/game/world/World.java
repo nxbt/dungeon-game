@@ -114,6 +114,22 @@ public class World {
 		for(int i = entities.size()-1; i >= 0; i--) {
 			entities.get(i).draw(batch);
 		}
+		batch.end();
+		
+		shapeRenderer.begin(ShapeType.Line);
+		
+		shapeRenderer.setProjectionMatrix(cam.cam.combined);
+		
+		for(Entity e: entities){
+				if(e.solid) shapeRenderer.setColor(Color.RED);
+				else if(e instanceof WeaponGraphic) shapeRenderer.setColor(Color.GREEN);
+				else shapeRenderer.setColor(Color.BLUE);
+				shapeRenderer.polygon(e.getHitbox().getVertices());	
+		}
+		
+		shapeRenderer.end();
+		
+		batch.begin();
 		
 		batch.setProjectionMatrix(hudCam.cam.combined);
 		
@@ -127,12 +143,5 @@ public class World {
 		descBox.draw(batch);
 		
 		batch.end();
-		shapeRenderer.begin(ShapeType.Line);
-		shapeRenderer.setColor(Color.RED);
-		shapeRenderer.setProjectionMatrix(cam.cam.combined);
-		for(Entity e: entities){
-				shapeRenderer.polygon(e.getHitbox().getVertices());	
-		}
-		shapeRenderer.end();
 	}
 }

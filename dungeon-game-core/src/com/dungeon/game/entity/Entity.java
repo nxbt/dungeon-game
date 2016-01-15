@@ -26,7 +26,7 @@ public abstract class Entity {
 	public int d_offx;
 	public int d_offy;
 	
-	boolean solid;
+	public boolean solid;
 	
 	public boolean killMe;
 	
