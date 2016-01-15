@@ -16,3 +16,4 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 * Rework Pathing. Use limited Vision in pathfinding?
 * Add a System of known Entities for each Dynamic Entity.
 * Add "Sounds" that entities can pick up.
+* Adjust collision to work with entities greater than 1 tile.
