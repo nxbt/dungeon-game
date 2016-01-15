@@ -3,8 +3,18 @@ package com.dungeon.game.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dungeon.game.item.*;
+import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.item.Arrow;
+import com.dungeon.game.item.Bow;
+import com.dungeon.game.item.Crap;
+import com.dungeon.game.item.Equipable;
+import com.dungeon.game.item.Hat;
+import com.dungeon.game.item.Inventory;
+import com.dungeon.game.item.Item;
+import com.dungeon.game.item.RubberSword;
+import com.dungeon.game.item.Stick;
+import com.dungeon.game.item.Sword;
+import com.dungeon.game.item.Weapon;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -16,10 +26,11 @@ public class Player extends Dynamic {
 	
 	public Item hat;
 
-	private boolean leftEquiped;
-	private boolean rightEquiped;
+	private Weapon leftEquiped;
+	private Weapon rightEquiped;
 	
-	private int[] leftPos;
+	private float[] leftPos;
+	private float[] rightPos;
 	
 	private boolean attacking;
 	
@@ -42,18 +53,21 @@ public class Player extends Dynamic {
 		
 		acel = 1.5f;
 		mvel = 5;
-		fric = 1;
+		fric = 0.5f;
 		
-		width = 26;
-		height = 26;
+//		hitbox = new Polygon(new float[]{30,16,28,23,23,28,16,30,9,28,4,23,2,16,4,9,9,4,16,2,23,4,28,9});
+		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
+		
+		origin_x = 16;
+		origin_y = 16;
 		
 		d_width = 32;
 		d_height = 32;
 		
-		d_offx = -3;
-		d_offy = -3;
+		d_offx = 0;
+		d_offy = 0;
 		
-		sprite = new Texture("Person.png");
+		sprite = new Texture("person.png");
 		
 		solid = true;
 		
@@ -127,19 +141,50 @@ public class Player extends Dynamic {
 		inv.slot[18].item = new Crap();
 		inv.slot[19].item = new Arrow();
 		inv.slot[20].item = new RubberSword();
-		inv.slot[31].item = new Sword(10, 10,10);
-		inv.slot[30].item = new  Bow(10, 10, 10);
+		inv.slot[21].item = new Sword(10, 10,10);
+		inv.slot[22].item = new  Bow(10, 10, 10);
 		
 		light = new Light(this, 1);
 	}
 	
 	public void calc(World world) {
-		target_angle = (float) (180/Math.PI*Math.atan2(world.mouse.y+world.cam.y-world.cam.HEIGHT/2-(y+height/2), world.mouse.x+world.cam.x-world.cam.WIDTH/2-(x+width/2)));
+		target_angle = (float) (180/Math.PI*Math.atan2(world.mouse.y+world.cam.y-world.cam.HEIGHT/2-(y), world.mouse.x+world.cam.x-world.cam.WIDTH/2-(x)));
 		
-		if(inv.slot[30].item!=null)leftEquiped = true;
-		else leftEquiped = false;
-		if(inv.slot[31].item!=null)rightEquiped = true;
-		else rightEquiped = false;
+		if(leftEquiped != null && inv.slot[30].item==null) {
+			unequip(world, leftEquiped);
+			
+			leftEquiped = null;
+		}
+		else if(leftEquiped == null && inv.slot[30].item != null) {
+			leftEquiped = (Weapon) inv.slot[30].item;
+			
+			equip(world, leftEquiped);
+		}
+		else if(leftEquiped != inv.slot[30].item) {
+			unequip(world, leftEquiped);
+			
+			leftEquiped = (Weapon) inv.slot[30].item;
+			
+			equip(world, leftEquiped);
+		}
+		
+		if(rightEquiped != null && inv.slot[31].item==null) {
+			unequip(world, rightEquiped);
+			
+			rightEquiped = null;
+		}
+		else if(rightEquiped == null && inv.slot[31].item != null) {
+			rightEquiped = (Weapon) inv.slot[31].item;
+			
+			equip(world, rightEquiped);
+		}
+		else if(rightEquiped != inv.slot[31].item) {
+			unequip(world, rightEquiped);
+			
+			rightEquiped = (Weapon) inv.slot[31].item;
+			
+			equip(world, rightEquiped);
+		}
 		
 		if(inv.slot[35].item != null) ((Equipable) inv.slot[35].item).update(world, this);
 		
@@ -148,15 +193,6 @@ public class Player extends Dynamic {
 				inv.graphic.open(world);
 			}
 			else inv.graphic.close(world);
-		}
-		
-		if(world.mouse.x > x-world.cam.x+world.cam.WIDTH/2 && world.mouse.x < x+width-world.cam.x+world.cam.WIDTH/2 && world.mouse.y > y-world.cam.y+world.cam.HEIGHT/2 && world.mouse.y < y+height-world.cam.y+world.cam.HEIGHT/2) {
-			if(world.mouse.rb_pressed) {
-				if(world.hudEntities.indexOf(inv.graphic) == -1) {
-					inv.graphic.open(world);
-				}
-				else inv.graphic.close(world);
-			}
 		}
 		
 		boolean inp_lt = false;
@@ -179,13 +215,15 @@ public class Player extends Dynamic {
 		else if(inp_lt) move_angle = 180;
 		
 		attacking = false;
-		if(leftEquiped){
+		
+		if(leftEquiped != null){
 			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
 			leftPos = ((Weapon) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
 			((Weapon)inv.slot[30].item).graphic.calc(world);
-			}
+			
+		}
 		if(attacking){
-			mvel = 2.5;
+			mvel = 2.5f;
 			torq = 3;
 		}
 		else{
@@ -193,23 +231,17 @@ public class Player extends Dynamic {
 			torq = 10;
 		}
 	}
-	
-	public void draw(SpriteBatch batch) {
-		if(leftEquiped){
+
+	@Override
+	public void post(World world) {
+		if(leftEquiped != null){
 			float xMove = (float) (Math.cos((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
 			float yMove = (float) (Math.sin((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
-			((Weapon)(inv.slot[30].item)).graphic.x=(float) (x+d_offx-d_width/2+(Math.cos((angle+90)/180*Math.PI)*d_width*0.5))+Item.SIZE*0f+xMove;
-
-			((Weapon)(inv.slot[30].item)).graphic.y=(float) (y+d_offy+d_height/2+(Math.sin((angle+90)/180*Math.PI)*d_height*0.5))-Item.SIZE*0f+yMove;
-
-			((Weapon)(inv.slot[30].item)).graphic.angle=angle-145+leftPos[2];
-
-			((Weapon)(inv.slot[30].item)).graphic.d_originX = Item.SIZE*1f;
-
-			((Weapon)(inv.slot[30].item)).graphic.d_originY = Item.SIZE*0f;
+			
+			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x)+xMove;
+			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y)+yMove;
+			((Weapon)(inv.slot[30].item)).graphic.angle = angle-135+leftPos[2];
 		}
-		if(leftEquiped)((Weapon)(inv.slot[30].item)).graphic.draw(batch);
-		batch.draw(/*Texture*/ sprite,/*x*/ x+d_offx,/*y*/ y+d_offy,/*originX*/d_width/2,/*originY*/d_height/2,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
 	}
 }
 

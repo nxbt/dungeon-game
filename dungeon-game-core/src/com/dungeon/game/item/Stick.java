@@ -16,8 +16,6 @@ public class Stick extends Item {
 		sprite = new Texture("stick.png");
 		
 		maxStack = 10;
-		
-		stack = 1;
 	}
 
 }

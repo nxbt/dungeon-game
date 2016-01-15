@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Door;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Tile;
 
 public class Rooms extends Generation {
@@ -476,5 +477,21 @@ public class Rooms extends Generation {
 			y++;
 			x-=width;
 		}
+	}
+	
+	public void generateAreas(){
+		for(Rectangle room: rooms){
+			Area area = new Area();
+			area.addRectangleToArea((int)room.x, (int)room.y, (int)room.width, (int)room.height);
+			areas.add(area);
+		}
+		for(ArrayList<int[]> hall: halls){
+			Area area = new Area();
+			for(int[] point: hall){
+				area.addPointToArea(point);
+			}
+			areas.add(area);
+		}
+		System.out.println(areas.size());
 	}
 }

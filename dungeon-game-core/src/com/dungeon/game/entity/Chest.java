@@ -17,6 +17,7 @@ public class Chest extends Static {
 
 	@Override
 	public void init() {
+		name = "chest";
 		int[][] invLayout = new int[][]{
 			new int[] {0, 8, 8},
 			new int[] {0, 48, 8},
@@ -50,9 +51,7 @@ public class Chest extends Static {
 		
 		d_width = 32;
 		d_height = 32;
-		
-		width = 32;
-		height = 32;
+		hitbox = new Polygon(new float[]{0,0,32,0,32,32,0,32});
 	}
 
 	@Override
@@ -76,5 +75,5 @@ public class Chest extends Static {
 		}
 	}
 		
-
+	public void post(World world) {}
 }

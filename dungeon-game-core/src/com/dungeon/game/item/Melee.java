@@ -14,9 +14,7 @@ public abstract class Melee extends Weapon {
 	
 	public Melee(int damage, int cooldown,int speed, Texture texture) {
 		super(damage, cooldown, speed, texture);
-		graphic = new MeleeGraphic(this, new Polygon(new float[]{Item.SIZE*0.6f,Item.SIZE*0.2f,Item.SIZE*0.8f,Item.SIZE*0.4f,0,Item.SIZE*1.1f,Item.SIZE*0.1f,Item.SIZE}), 0.9f, 0.1f);
 	}
 
 	public abstract boolean inAttack();
-	public abstract void hit(Dynamic e);
 }

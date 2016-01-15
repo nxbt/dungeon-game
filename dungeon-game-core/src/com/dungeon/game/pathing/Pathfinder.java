@@ -16,10 +16,8 @@ public class Pathfinder {
 		
 	}
 	
-	public void setData(int[][] map, float width, float height){
+	public void setData(int[][] map){
 		this.map = map;
-		this.width = width;
-		this.height = height;
 	}
 	
 	public int[] findPath(int[] start, int[] end, float x, float y){

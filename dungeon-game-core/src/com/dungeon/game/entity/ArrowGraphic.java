@@ -2,25 +2,24 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.item.Weapon;
+import com.dungeon.game.world.World;
 
 public class ArrowGraphic extends Projectile {
 
-	public ArrowGraphic(int x, int y, float angle, float power, Polygon hitbox, float originX, float originY) {
-		super(x, y, angle, power, hitbox, originX, originY);
+	public ArrowGraphic(int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, Weapon weapon) {
+		super(x, y, angle, power, hitbox, originX, originY, weapon);
 		
 		this.sprite = new Texture("Arrow.png");
 		
 		d_width = sprite.getWidth();
 		d_height = sprite.getHeight();
 		
-		width = sprite.getWidth();
-		height = sprite.getHeight();
-		
-		d_originX = sprite.getWidth();
-		d_originY = 0;
-		
-		fric = 0.2;
+		fric = 0.1f;
 		solid = false;
+		name = "arrow";
+		this.power = power;
 	}
 
+	public void post(World world) {}
 }

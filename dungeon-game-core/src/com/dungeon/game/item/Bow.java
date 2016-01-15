@@ -3,6 +3,8 @@ package com.dungeon.game.item;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.dungeon.game.entity.Dynamic;
+import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.RangedGraphic;
 import com.dungeon.game.world.Tile;
 
@@ -19,8 +21,14 @@ public class Bow extends Ranged {
 
 	public Bow(int damage, int cooldown, int speed) {
 		super(damage, cooldown, speed, new Texture("Bow.png"));
+		
 		strength = 10;
+		knockstr = 15;
+		
 		texturePath = "Bow.png";
+
+		graphic = new RangedGraphic(this,4,28);
+		
 		Texture tempSheet = new Texture(texturePath);
 		
 		int sheetWidth = tempSheet.getWidth()/Item.SIZE;
@@ -68,9 +76,9 @@ public class Bow extends Ranged {
 	}
 
 	@Override
-	public int[] getPos(boolean mousedown, boolean mousepressed) {
-		int distance=0;
-		int polarAngle= 0;
+	public float[] getPos(boolean mousedown, boolean mousepressed) {
+		int distance=30;
+		int polarAngle= 10;
 		int angle=0;
 		stageTimer++;
 		int constant=2;
@@ -114,8 +122,19 @@ public class Bow extends Ranged {
 			}
 			break;
 		}
+		return new float[]{distance,polarAngle,angle};
+	}
 
-		return new int[]{distance,polarAngle,angle};
+	@Override
+	public void hit(Dynamic e, Projectile projectile) {
+		if(e.damage(damage*projectile.power/10)>0){
+			float xknock = projectile.dx/strength*knockstr;
+			float yknock = projectile.dy/strength*knockstr;
+			float[] cur_knockback=new float[]{xknock,yknock};
+			e.dx = cur_knockback[0];
+			e.dy = cur_knockback[1];
+		}
+		
 	}
 
 }

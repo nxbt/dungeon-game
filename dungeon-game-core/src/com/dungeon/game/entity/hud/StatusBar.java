@@ -21,8 +21,6 @@ public abstract class StatusBar extends Hud {
 	
 	@Override
 	public void init() {
-		width = 100;
-		height = 20;
 		d_width = 100;
 		d_height = 10;
 		percent = 1;

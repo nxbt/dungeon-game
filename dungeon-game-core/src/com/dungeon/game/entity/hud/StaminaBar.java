@@ -16,4 +16,6 @@ public class StaminaBar extends StatusBar {
 		cur = world.player.stam;
 		max = world.player.maxStam;
 	}
+	
+	public void post(World world) {}
 }

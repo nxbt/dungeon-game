@@ -30,6 +30,8 @@ public abstract class Item implements Cloneable {
 	public Texture sprite;
 	
 	public Item() {
+		stack = 1;
+		
 		init();
 	}
 	

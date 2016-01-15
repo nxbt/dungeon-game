@@ -12,6 +12,8 @@ import com.dungeon.game.generator.Biospheres;
 import com.dungeon.game.generator.Castle;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.Rooms;
+import com.dungeon.game.pathing.Area;
+import com.dungeon.game.pathing.AreaMap;
 
 public class Floor {
 	private static final String DEFAULT = "Tilemap.png";
@@ -26,6 +28,8 @@ public class Floor {
 	
 	private int width;
 	private int height;
+
+	public AreaMap areaMap;
 	
 	public Floor(int width, int height) {
 		this.width = width;
@@ -73,6 +77,12 @@ public class Floor {
 					
 			}
 		}
+		gen.generateAreas();
+		areaMap = new AreaMap(tm);
+		for(Area area: gen.areas){
+			areaMap.addArea(area);
+		}
+		areaMap.prepAreas();
 	}
 	
 	public void update() {

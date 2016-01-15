@@ -28,12 +28,15 @@ public class Door extends Static {
 	@Override
 	public void init() {
 		sprite = new Texture("door.png");
+		name = "door";
 		solid = false;
 		d_width = 32;
 		d_height = 4;
 		
-		width = 32;
-		height = 4;
+		hitbox = new Polygon(new float[]{0,0,0,0,0,0,0,0});
+		
+		origin_x = 0;
+		origin_y = 0;
 	}
 	
 	private void open(){
@@ -93,4 +96,5 @@ public class Door extends Static {
 		}
 	}
 
+	public void post(World world) {}
 }

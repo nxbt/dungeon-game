@@ -2,6 +2,8 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
 
@@ -9,10 +11,12 @@ public abstract class Entity {
 	public float x;
 	public float y;
 	
-	public float width;
-	public float height;
+	public float origin_x;
+	public float origin_y;
 	
-	public boolean killMe;
+	public float angle;
+	
+	public Polygon hitbox;
 	
 	public int d_width;
 	public int d_height;
@@ -20,9 +24,11 @@ public abstract class Entity {
 	public int d_offx;
 	public int d_offy;
 	
-	public float angle;
+	public boolean solid;
 	
-	boolean solid;
+	public boolean rotate;
+	
+	public boolean killMe;
 	
 	public String name;
 	
@@ -41,15 +47,45 @@ public abstract class Entity {
 	
 	public void update(World world) {
 		calc(world);
+		post(world);
 	}
 	
 	public void draw(SpriteBatch batch) {
-		batch.draw(/*Texture*/ sprite,/*x*/ x+d_offx,/*y*/ y+d_offy,/*originX*/d_width/2,/*originY*/d_height/2,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
+		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_y+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
+		
 	}
 	
-	public abstract void init();
+	public float[] getDrawCenter(){
+//		float temp_angle = (float) (Math.atan(origin_y/origin_x)*180/Math.PI+angle);
+		float temp_angle = 45+angle;
+		float temp_len = (float) Math.sqrt(origin_x*origin_x+origin_y*origin_y);
+		float temp_x = (float) (Math.cos(temp_angle/180*Math.PI)*temp_len);
+		float temp_y = (float) (Math.sin(temp_angle/180*Math.PI)*temp_len);
+		return new float[]{temp_x,temp_y};
+	}
 	
-	public abstract void calc(World world);
+	public Polygon getHitbox() {
+		Polygon temp_hitbox = new Polygon(hitbox.getVertices());
+		
+		temp_hitbox.setOrigin(origin_x, origin_y);
+		temp_hitbox.translate(-origin_x, -origin_y);
+		if(rotate)temp_hitbox.rotate(angle);
+		temp_hitbox.translate(x, y);
+		temp_hitbox.dirty();
+		
+		
+		return new Polygon(temp_hitbox.getTransformedVertices());
+	}
 	
-	public void hovered(World world){};
+	public Rectangle getBoundingBox() {
+		return getHitbox().getBoundingRectangle();
+	}
+	
+	public void hovered(World world) {} //optional method called when the mouse hovers over an entity
+	
+	public abstract void init(); //called when an entity is created, but after the constructor is called
+	
+	public abstract void calc(World world); //called at the beginning of an update cycle
+	
+	public abstract void post(World world); //called at the end of an update cycle
 }

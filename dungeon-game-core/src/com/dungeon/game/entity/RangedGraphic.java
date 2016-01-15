@@ -1,9 +1,6 @@
 package com.dungeon.game.entity;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.item.Arrow;
-import com.dungeon.game.item.Item;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.World;
 
@@ -13,23 +10,25 @@ public class RangedGraphic extends WeaponGraphic {
 	
 	private float power;
 	
-	public RangedGraphic(Weapon weapon){
+	public RangedGraphic(Weapon weapon, float originX, float originY){
 		super(weapon);
+		this.origin_x = originX;
+		this.origin_y = originY;
+
+		hitbox = new Polygon(new float[]{0,0,0,0,0,0});
 	}
+	
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void calc(World world) {
-		// TODO Auto-generated method stub
 		if(toFire) {
-			System.out.println("PEW PEW");
 			toFire = false;
-			Polygon projectileHitBox = new Polygon(new float[]{Item.SIZE*0.6f,Item.SIZE*0.2f,Item.SIZE*0.8f,Item.SIZE*0.4f,0,Item.SIZE*1.1f,Item.SIZE*0.1f,Item.SIZE});
-			world.entities.add(new ArrowGraphic((int)x,(int)y,angle,power, projectileHitBox, 1, 0));
+			Polygon projectileHitBox = new Polygon(new float[]{1,28,4,31,0,32});
+			world.entities.add(new ArrowGraphic((int)x,(int)y,angle,power, projectileHitBox, 2, 30, weapon));
 		}
 	}
 
@@ -37,4 +36,7 @@ public class RangedGraphic extends WeaponGraphic {
 		toFire = true;
 		this.power = power;
 	}
+
+	@Override
+	public void post(World world) {}
 }

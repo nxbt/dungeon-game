@@ -86,4 +86,6 @@ public class InvGraphic extends Hud {
 			s.draw(batch, (int)x, (int)y);
 		}
 	}
+	
+	public void post(World world) {}
 }
