@@ -57,4 +57,5 @@ public class Goon extends Enemy {
 	
 	}
 
+	public void post(World world) {}
 }

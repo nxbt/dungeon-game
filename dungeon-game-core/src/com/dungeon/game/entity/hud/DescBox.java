@@ -93,4 +93,6 @@ public class DescBox extends Hud {
 			text = "";
 		}
 	}
+	
+	public void post(World world) {}
 }

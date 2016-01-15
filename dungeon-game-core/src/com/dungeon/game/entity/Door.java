@@ -96,4 +96,5 @@ public class Door extends Static {
 		}
 	}
 
+	public void post(World world) {}
 }

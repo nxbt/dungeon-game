@@ -142,4 +142,5 @@ public class Drop extends Static {
 		}
 	}
 
+	public void post(World world) {}
 }

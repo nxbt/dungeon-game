@@ -32,4 +32,6 @@ public class MeleeGraphic extends WeaponGraphic {
 			}
 		}
 	}
+	
+	public void post(World world) {}
 }

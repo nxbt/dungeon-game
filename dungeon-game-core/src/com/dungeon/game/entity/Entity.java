@@ -16,8 +16,6 @@ public abstract class Entity {
 	
 	public float angle;
 	
-	public boolean rotate;
-	
 	public Polygon hitbox;
 	
 	public int d_width;
@@ -27,6 +25,8 @@ public abstract class Entity {
 	public int d_offy;
 	
 	public boolean solid;
+	
+	public boolean rotate;
 	
 	public boolean killMe;
 	
@@ -47,6 +47,7 @@ public abstract class Entity {
 	
 	public void update(World world) {
 		calc(world);
+		post(world);
 	}
 	
 	public void draw(SpriteBatch batch) {
@@ -85,4 +86,6 @@ public abstract class Entity {
 	public abstract void init(); //called when an entity is created, but after the constructor is called
 	
 	public abstract void calc(World world); //called at the beginning of an update cycle
+	
+	public abstract void post(World world); //called at the end of an update cycle
 }

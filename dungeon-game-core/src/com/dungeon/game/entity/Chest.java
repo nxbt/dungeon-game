@@ -75,5 +75,5 @@ public class Chest extends Static {
 		}
 	}
 		
-
+	public void post(World world) {}
 }
