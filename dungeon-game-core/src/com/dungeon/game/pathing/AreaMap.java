@@ -34,6 +34,7 @@ public class AreaMap {
 	
 	private void calculateMinPaths(){
 		for(Area area: areas){
+			area.begin();
 			area.calculateMinPaths(tm);
 		}
 	}
