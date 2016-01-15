@@ -55,7 +55,7 @@ public class Player extends Dynamic {
 		mvel = 5;
 		fric = 0.5f;
 		
-		hitbox = new Polygon(new float[]{16,-4,36,16,16,36,-4,16});
+		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		
 		origin_x = 16;
 		origin_y = 16;

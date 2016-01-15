@@ -28,7 +28,7 @@ public class RangedGraphic extends WeaponGraphic {
 		if(toFire) {
 			toFire = false;
 			Polygon projectileHitBox = new Polygon(new float[]{0,30,2,32,0,32});
-			world.entities.add(new ArrowGraphic((int)x,(int)y,angle,power, projectileHitBox, 2, 30));
+			world.entities.add(new ArrowGraphic((int)x,(int)y,angle,power, projectileHitBox, 2, 30, weapon));
 		}
 	}
 

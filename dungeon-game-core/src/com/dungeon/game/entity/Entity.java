@@ -16,6 +16,8 @@ public abstract class Entity {
 	
 	public float angle;
 	
+	public boolean rotate;
+	
 	public Polygon hitbox;
 	
 	public int d_width;
@@ -66,7 +68,7 @@ public abstract class Entity {
 		
 		temp_hitbox.setOrigin(origin_x, origin_y);
 		temp_hitbox.translate(-origin_x, -origin_y);
-//		temp_hitbox.rotate(angle);
+		if(rotate)temp_hitbox.rotate(angle);
 		temp_hitbox.translate(x, y);
 		temp_hitbox.dirty();
 		

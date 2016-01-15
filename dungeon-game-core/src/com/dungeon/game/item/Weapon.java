@@ -2,6 +2,7 @@ package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Dynamic;
+import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.WeaponGraphic;
 
 public abstract class Weapon extends Equipable{
@@ -31,4 +32,5 @@ public abstract class Weapon extends Equipable{
 	
 	public abstract float[] getPos(boolean mousedown, boolean mousepressed);
 	public abstract boolean isInUse();
+	public abstract void hit(Dynamic e, Projectile projectile);
 }

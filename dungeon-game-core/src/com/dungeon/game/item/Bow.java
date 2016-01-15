@@ -3,6 +3,8 @@ package com.dungeon.game.item;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.dungeon.game.entity.Dynamic;
+import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.RangedGraphic;
 import com.dungeon.game.world.Tile;
 
@@ -21,6 +23,7 @@ public class Bow extends Ranged {
 		super(damage, cooldown, speed, new Texture("Bow.png"));
 		
 		strength = 10;
+		knockstr = 10;
 		
 		texturePath = "Bow.png";
 
@@ -120,6 +123,19 @@ public class Bow extends Ranged {
 			break;
 		}
 		return new float[]{distance,polarAngle,angle};
+	}
+
+	@Override
+	public void hit(Dynamic e, Projectile projectile) {
+		System.out.println("SNIPE");
+		if(e.damage(damage*projectile.power/10)>0){
+			float xknock = projectile.dx/strength*knockstr;
+			float yknock = projectile.dy/strength*knockstr;
+			float[] cur_knockback=new float[]{xknock,yknock};
+			e.dx = cur_knockback[0];
+			e.dy = cur_knockback[1];
+		}
+		
 	}
 
 }

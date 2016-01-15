@@ -13,6 +13,8 @@ public abstract class WeaponGraphic extends Static {
 		this.d_width = Item.SIZE;
 		this.d_height = Item.SIZE;
 		name = "Graphic";
+		this.weapon = weapon;
+		rotate = true;
 	}
 
 }

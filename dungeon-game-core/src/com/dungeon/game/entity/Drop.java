@@ -1,5 +1,6 @@
 package com.dungeon.game.entity;
 
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.Slot;
 import com.dungeon.game.world.Tile;
@@ -20,6 +21,8 @@ public class Drop extends Static {
 
 		d_width = sprite.getWidth();
 		d_height = sprite.getHeight();
+		
+		hitbox = new Polygon(new float[]{4,4,28,4,28,28,4,28});
 	}
 
 	@Override

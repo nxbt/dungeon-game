@@ -17,5 +17,4 @@ public abstract class Melee extends Weapon {
 	}
 
 	public abstract boolean inAttack();
-	public abstract void hit(Dynamic e);
 }

@@ -2,21 +2,31 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.item.Melee;
+import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.World;
 
 public abstract class Projectile extends Dynamic {
-	
+	private Weapon weapon;
+	public float power;
 	private static int OFFSET = 0;
-	public Projectile(int x, int y, float angle, float power, Polygon hitbox, float originX, float originY) {
+	public float range;
+	public Projectile(int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, Weapon weapon) {
 		super(x, y);
 		dx = (float) Math.cos((angle+135)/180*Math.PI)*power;
 		dy = (float) Math.sin((angle+135)/180*Math.PI)*power;
+		range = 35;
 		this.angle = angle;
+		
+		rotate = true;
 		
 		this.hitbox = hitbox;
 		
 		this.origin_x = originX;
 		this.origin_y = originY;
+		this.weapon = weapon;
+		this.power = power;
+		
 		
 	}
 
@@ -29,8 +39,9 @@ public abstract class Projectile extends Dynamic {
 	@Override
 	public void calc(World world) {
 		for(Entity e: world.entities){
-			if(e.name!="Player"&& e.solid && e instanceof Dynamic && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
-//				killMe=true;
+			if(!e.equals(weapon.owner)&& e.solid && e instanceof Dynamic && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
+				weapon.hit((Dynamic) e,this);
+				killMe = true;
 			}
 		}
 
@@ -38,12 +49,13 @@ public abstract class Projectile extends Dynamic {
 	
 	public void phys(World world){
 		float vel = (float) Math.sqrt(dx*dx+dy*dy);
-		if(vel<fric){
-			dx=0;
-			dy=0;
-		}else if(vel!=0){
-			dx -= dx/vel*fric;
-			dy -= dy/vel*fric;
+		range--;
+		if(range<0||vel<fric){
+			dx = 0;
+			dy = 0;
+		}else{
+			dx-=dx/vel*fric;
+			dy-=dy/vel*fric;
 		}
 		
 		Polygon hitboxTile;

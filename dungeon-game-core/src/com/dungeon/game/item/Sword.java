@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.MeleeGraphic;
+import com.dungeon.game.entity.Projectile;
 
 public class Sword extends Melee {
 
@@ -247,7 +248,7 @@ public class Sword extends Melee {
 		return !hasHit && (stage == SWING1 || stage == SWING2 || stage == SWING3);
 	}
 	
-	public void hit(Dynamic e) {
+	public void hit(Dynamic e, Projectile projectile) {
 		hasHit = true;
 		float weaponangle = graphic.angle+135;
 		float angleModifier;
