@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.dungeon.game.entity.Chest;
 import com.dungeon.game.entity.Door;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.Goon;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
 import com.dungeon.game.world.Tile;

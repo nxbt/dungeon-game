@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Door;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.Goon;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Tile;
 
@@ -467,8 +468,8 @@ public class Rooms extends Generation {
 		rooms.add(room);
 		int x = (int) room.x;
 		int y = (int) room.y;
-		float width = room.width;
-		float height = room.height;
+		int width = (int) room.width;
+		int height = (int) room.height;
 		for(int i = 0; i<height; i++){
 			for(int k = 0; k<width; k++){
 				map[y][x]=0;
@@ -477,6 +478,8 @@ public class Rooms extends Generation {
 			y++;
 			x-=width;
 		}
+
+		entities.add(new Goon((x+width/2)*Tile.TS+Tile.TS/2, (y-height/2)*Tile.TS+Tile.TS/2));
 	}
 	
 	public void generateAreas(){
