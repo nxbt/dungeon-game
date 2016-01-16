@@ -11,6 +11,7 @@ import com.dungeon.game.item.Equipable;
 import com.dungeon.game.item.Hat;
 import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.Item;
+import com.dungeon.game.item.OneTaper;
 import com.dungeon.game.item.RubberSword;
 import com.dungeon.game.item.Stick;
 import com.dungeon.game.item.Sword;
@@ -143,6 +144,7 @@ public class Player extends Dynamic {
 		inv.slot[20].item = new RubberSword();
 		inv.slot[21].item = new Sword(10, 10,10);
 		inv.slot[22].item = new  Bow(10, 10, 10);
+		inv.slot[23].item = new OneTaper();
 		
 		light = new Light(this, 1);
 	}

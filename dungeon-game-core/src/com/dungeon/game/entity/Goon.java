@@ -12,7 +12,7 @@ public class Goon extends Enemy {
 
 	public Goon(int x, int y) {
 		super(x, y);
-		vision = 10;
+		vision = 5;
 
 	}
 
