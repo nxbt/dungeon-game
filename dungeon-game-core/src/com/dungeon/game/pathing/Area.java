@@ -86,6 +86,22 @@ public class Area {
 		
 	}
 	
+	public int[] getCenter(){
+		float x = 0;
+		float y = 0;
+		for(int[] point: points){
+			x+=point[0];
+			y+=point[1];
+		}
+		x /=points.size();
+		y /=points.size();
+		int[] closestPoint = points.get(0);
+		for(int[] point: points){
+			if(Math.sqrt(((float)point[0]-x)*((float)point[0]-x)+((float)point[1]-x)*((float)point[1]-x))<Math.sqrt(((float)closestPoint[0]-x)*((float)closestPoint[0]-x)+((float)closestPoint[1]-x)*((float)closestPoint[1]-x)))closestPoint = point;
+		}
+		return closestPoint;
+	}
+	
 	public void begin(){
 		foundPaths = new ArrayList<ArrayList<int[]>>();
 	}

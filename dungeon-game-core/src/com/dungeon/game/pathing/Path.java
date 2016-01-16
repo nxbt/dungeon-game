@@ -69,7 +69,7 @@ public class Path {
 		return getTiles(tm).size();
 	}
 	public int getLengthUpTo(Tile[][] tm, Area lastArea) {
-		Path path = new Path(this.areas.get(0), this.start, lastArea.points.get(0));
+		Path path = new Path(this.areas.get(0), this.start, lastArea.getCenter());
 		for(Area area: areas){
 			if(areas.indexOf(area)!=0){
 				path = new Path(path, area);

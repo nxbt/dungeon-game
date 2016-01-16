@@ -55,7 +55,7 @@ public class AreaMap {
 			for(Area a: areas){
 				Path minPath = null;
 				if(!area.equals(a)){
-					minPath = findMinPath(area.points.get(2), a.points.get(2));
+					minPath = findMinPath(area.getCenter(), a.getCenter());
 				}
 				minPaths.get(minPaths.size()-1).add(minPath);
 			}
@@ -137,18 +137,27 @@ public class AreaMap {
 			path = findAreaPath(start, end).getTiles(tm);
 		}
 		if(path.size()==1)return path.get(0);
-		Vector2 startPoint = new Vector2(path.get(0)[0]*Tile.TS+Tile.TS/2,path.get(0)[1]*Tile.TS+Tile.TS/2);
-		Vector2 endPoint;
+		Vector2 startPoint_bl = new Vector2(path.get(0)[0]*Tile.TS,path.get(0)[1]*Tile.TS);
+		Vector2 startPoint_br = new Vector2(path.get(0)[0]*Tile.TS+Tile.TS,path.get(0)[1]*Tile.TS);
+		Vector2 startPoint_tl = new Vector2(path.get(0)[0]*Tile.TS,path.get(0)[1]*Tile.TS+Tile.TS);
+		Vector2 startPoint_tr = new Vector2(path.get(0)[0]*Tile.TS+Tile.TS,path.get(0)[1]*Tile.TS+Tile.TS);
+		Vector2 endPoint_bl;
+		Vector2 endPoint_br;
+		Vector2 endPoint_tl;
+		Vector2 endPoint_tr;
 		boolean changeDestination;
 		int[] destination = path.get(1);
 		Polygon tilePolygon;
 		for(int[] point: path){
 			changeDestination = true;
-			endPoint = new Vector2(point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
+			endPoint_bl = new Vector2(point[0]*Tile.TS,point[1]*Tile.TS);
+			endPoint_br = new Vector2(point[0]*Tile.TS+Tile.TS,point[1]*Tile.TS);
+			endPoint_tl = new Vector2(point[0]*Tile.TS,point[1]*Tile.TS+Tile.TS);
+			endPoint_tr = new Vector2(point[0]*Tile.TS+Tile.TS,point[1]*Tile.TS+Tile.TS);
 			for(int i = Math.min(path.get(0)[1], point[1]); i <= Math.max(path.get(0)[1], point[1]);i++){
 				for(int k = Math.min(path.get(0)[0], point[0]); k<= Math.max(path.get(0)[0], point[0]);k++){	
 					tilePolygon = new Polygon(new float[]{k*Tile.TS, i*Tile.TS,(k+1)*Tile.TS, i*Tile.TS,(k+1)*Tile.TS, (i+1)*Tile.TS, k*Tile.TS, (i+1)*Tile.TS});
-					if(tm[i][k].data==1&&Intersector.intersectSegmentPolygon(startPoint, endPoint, tilePolygon)){
+					if(tm[i][k].data==1&&(Intersector.intersectSegmentPolygon(startPoint_bl, endPoint_bl, tilePolygon)||Intersector.intersectSegmentPolygon(startPoint_br, endPoint_br, tilePolygon)||Intersector.intersectSegmentPolygon(startPoint_tl, endPoint_tl, tilePolygon)||Intersector.intersectSegmentPolygon(startPoint_tr, endPoint_tr, tilePolygon))){
 						changeDestination = false;
 					}
 				}

@@ -99,7 +99,7 @@ public class Sword extends Melee {
 			polarAngle = REST_PANG;
 			angle = REST_ANGL;
 			
-			if(mousepressed){
+			if(mousedown){
 				stage=WINDUP1;
 				stageTimer = 0;
 			}

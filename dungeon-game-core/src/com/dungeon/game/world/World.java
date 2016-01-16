@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.Chest;
+import com.dungeon.game.entity.Enemy;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Player;
 import com.dungeon.game.entity.WeaponGraphic;
@@ -130,7 +131,14 @@ public class World {
 		for(Entity e: entities){
 				if(e.solid) shapeRenderer.setColor(Color.RED);
 				else shapeRenderer.setColor(Color.GREEN);
-				shapeRenderer.polygon(e.getHitbox().getVertices());	
+				shapeRenderer.polygon(e.getHitbox().getVertices());
+				shapeRenderer.setColor(Color.BLUE);
+				if(e instanceof Enemy){
+					if(((Enemy)e).moveTo!=null){
+						shapeRenderer.rect(((Enemy)e).moveTo[0]*Tile.TS, ((Enemy)e).moveTo[1]*Tile.TS, Tile.TS, Tile.TS);
+						shapeRenderer.line(e.x, e.y, ((Enemy)e).moveTo[0]*Tile.TS+Tile.TS/2, ((Enemy)e).moveTo[1]*Tile.TS+Tile.TS/2);
+					}
+				}
 		}
 		
 		shapeRenderer.end();
