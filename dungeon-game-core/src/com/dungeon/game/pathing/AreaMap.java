@@ -136,18 +136,18 @@ public class AreaMap {
 		else{
 			path = findAreaPath(start, end).getTiles(tm);
 		}
-		
 		if(path.size()==1)return path.get(0);
 		Vector2 startPoint = new Vector2(path.get(0)[0]*Tile.TS+Tile.TS/2,path.get(0)[1]*Tile.TS+Tile.TS/2);
 		Vector2 endPoint;
 		boolean changeDestination;
-		int[] destination = path.get(0);
+		int[] destination = path.get(1);
 		Polygon tilePolygon;
 		for(int[] point: path){
 			changeDestination = true;
 			endPoint = new Vector2(point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
-			for(int i = 0; i <tm.length;i++){
-				for(int k = 0; k<tm[i].length;k++){	
+			//this can be optimized by only looping for tiles that can collide with the line.
+			for(int i = Math.min(path.get(0)[1], point[1]); i <= Math.max(path.get(0)[1], point[1]);i++){
+				for(int k = Math.min(path.get(0)[0], point[0]); k<= Math.max(path.get(0)[0], point[0]);k++){	
 					tilePolygon = new Polygon(new float[]{k*Tile.TS, i*Tile.TS,(k+1)*Tile.TS, i*Tile.TS,(k+1)*Tile.TS, (i+1)*Tile.TS, k*Tile.TS, (i+1)*Tile.TS});
 					if(tm[i][k].data==1&&Intersector.intersectSegmentPolygon(startPoint, endPoint, tilePolygon)){
 						changeDestination = false;
