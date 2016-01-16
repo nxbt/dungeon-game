@@ -26,6 +26,9 @@ public class Bow extends Ranged {
 		knockstr = 15;
 		
 		texturePath = "Bow.png";
+		
+
+		desc = "For the purpose of shooting...  \n\n Damage: "+damage+"\n Cooldown: "+cooldown;
 
 		graphic = new RangedGraphic(this,4,28);
 		

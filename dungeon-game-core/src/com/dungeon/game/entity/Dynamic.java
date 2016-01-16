@@ -51,8 +51,10 @@ public abstract class Dynamic extends Entity {
 	public float base_ligtn_resist;
 	public float base_poisn_resist;
 	
-	//temp variable
+	protected float vision;
 	
+	protected ArrayList<Entity> knownEntities;
+		
 	public ArrayList<int[]> collisions;
 	
 	public Dynamic(int x, int y) {
@@ -65,6 +67,10 @@ public abstract class Dynamic extends Entity {
 		
 
 		collisions = new ArrayList<int[]>();
+		
+		vision = 0;
+		
+		knownEntities = new ArrayList<Entity>();
 	}
 
 	//entity update function called on every frame before the draw phase.
@@ -74,6 +80,7 @@ public abstract class Dynamic extends Entity {
 		calc(world);
 		phys(world);
 		post(world);
+		sight(world);
 	}
 	
 	//resets some variables at the start of every update cycles
@@ -364,6 +371,15 @@ public abstract class Dynamic extends Entity {
 			collisionType+=TILE_COL;
 		}
 		return collisionType;
+	}
+	
+	public void sight(World world){
+		for(Entity e: world.entities){
+			if(!knownEntities.contains(e)){
+				float dist = (float) Math.sqrt(Math.abs(x-e.x)*Math.abs(x-e.x)+Math.abs(y-e.y)*Math.abs(y-e.y));
+				if(dist < vision*Tile.TS)knownEntities.add(e);
+			}
+		}
 	}
 	
 	//===HELPER METHODS===//

@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.light.Light;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Goon extends Enemy {
 
 	public Goon(int x, int y) {
 		super(x, y);
+		vision = 10;
 
 	}
 
@@ -46,6 +48,7 @@ public class Goon extends Enemy {
 		sprite = new Texture("goon.png");
 		
 		light = new Light(this, 0.5f);
+		
 	}
 
 	@Override
@@ -53,7 +56,7 @@ public class Goon extends Enemy {
 		ArrayList<Entity> entities = (ArrayList<Entity>) world.entities.clone();
 		entities.remove(world.player);
 		entities.remove(this);
-		if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(world,entities, new float[]{world.player.x,world.player.y});
+		if(knownEntities.contains(world.player)&&!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(world,entities, new float[]{world.player.x,world.player.y});
 	
 	}
 
