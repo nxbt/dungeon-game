@@ -145,7 +145,6 @@ public class AreaMap {
 		for(int[] point: path){
 			changeDestination = true;
 			endPoint = new Vector2(point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
-			//this can be optimized by only looping for tiles that can collide with the line.
 			for(int i = Math.min(path.get(0)[1], point[1]); i <= Math.max(path.get(0)[1], point[1]);i++){
 				for(int k = Math.min(path.get(0)[0], point[0]); k<= Math.max(path.get(0)[0], point[0]);k++){	
 					tilePolygon = new Polygon(new float[]{k*Tile.TS, i*Tile.TS,(k+1)*Tile.TS, i*Tile.TS,(k+1)*Tile.TS, (i+1)*Tile.TS, k*Tile.TS, (i+1)*Tile.TS});
