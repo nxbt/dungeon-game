@@ -62,8 +62,6 @@ public class Sword extends Melee {
 
 	private final float WINDDOWN3_TIME = 14;
 	
-	public boolean hasHit;
-	
 	protected float[] dmgMult;
 	protected float[] knockMult;
 	
