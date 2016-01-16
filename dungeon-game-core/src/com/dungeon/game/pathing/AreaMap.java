@@ -13,6 +13,8 @@ public class AreaMap {
 	
 	private ArrayList<ArrayList<Path>> minPaths;
 	
+	public ArrayList<int[]> lastPath;
+	
 	public AreaMap(Tile[][] tm){
 		areas = new ArrayList<Area>();
 		this.tm = tm;
@@ -136,6 +138,7 @@ public class AreaMap {
 		else{
 			path = findAreaPath(start, end).getTiles(tm);
 		}
+		lastPath = path;
 		if(path.size()==1)return path.get(0);
 		Vector2 startPoint_bl = new Vector2(path.get(0)[0]*Tile.TS,path.get(0)[1]*Tile.TS);
 		Vector2 startPoint_br = new Vector2(path.get(0)[0]*Tile.TS+Tile.TS,path.get(0)[1]*Tile.TS);

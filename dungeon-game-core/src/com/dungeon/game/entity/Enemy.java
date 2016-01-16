@@ -10,6 +10,7 @@ import com.dungeon.game.world.World;
 
 public abstract class Enemy extends Dynamic {
 	public int[] moveTo;
+	public ArrayList<int[]> path;
 	public Enemy(int x, int y) {
 		super(x, y);
 	}
@@ -31,7 +32,8 @@ public abstract class Enemy extends Dynamic {
 //		}
 //		pathfinder.setData(mapData);
 		int[] targetTile = world.areaMap.findPath(new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (world.player.x/Tile.TS),(int) (world.player.y/Tile.TS)});
-			if(targetTile!=null){
+		path = world.areaMap.lastPath;
+		if(targetTile!=null){
 				moveTo = targetTile;
 				float targetX = targetTile[0]*Tile.TS+Tile.TS/2;
 				float targetY = targetTile[1]*Tile.TS+Tile.TS/2;

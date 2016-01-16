@@ -132,11 +132,19 @@ public class World {
 				if(e.solid) shapeRenderer.setColor(Color.RED);
 				else shapeRenderer.setColor(Color.GREEN);
 				shapeRenderer.polygon(e.getHitbox().getVertices());
-				shapeRenderer.setColor(Color.BLUE);
 				if(e instanceof Enemy){
-					if(((Enemy)e).moveTo!=null){
+					if(((Enemy)e).moveTo!=null&&((Enemy)e).path!=null){
+						shapeRenderer.setColor(Color.BLUE);
 						shapeRenderer.rect(((Enemy)e).moveTo[0]*Tile.TS, ((Enemy)e).moveTo[1]*Tile.TS, Tile.TS, Tile.TS);
 						shapeRenderer.line(e.x, e.y, ((Enemy)e).moveTo[0]*Tile.TS+Tile.TS/2, ((Enemy)e).moveTo[1]*Tile.TS+Tile.TS/2);
+						int[] prePoint = new int[]{0,0};
+						shapeRenderer.setColor(Color.YELLOW);
+						for(int[] point:((Enemy)e).path){
+							if(((Enemy)e).path.indexOf(point)>0){
+								shapeRenderer.line(prePoint[0]*Tile.TS+Tile.TS/2, prePoint[1]*Tile.TS+Tile.TS/2,point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
+							}
+							prePoint = point;
+						}
 					}
 				}
 		}
