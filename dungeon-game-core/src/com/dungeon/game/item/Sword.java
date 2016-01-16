@@ -131,7 +131,7 @@ public class Sword extends Melee {
 				polarAngle = SWING1_PANG;
 				angle = SWING1_ANGL;
 			}
-			if(index>SWING1_TIME&&mousepressed){
+			if(index>SWING1_TIME&&mousedown){
 				stageTimer = 0;
 				stage = WINDUP2;
 			}
@@ -175,7 +175,7 @@ public class Sword extends Melee {
 				polarAngle = SWING2_PANG;
 				angle = SWING2_ANGL;
 			}
-			if(index>SWING2_TIME&&mousepressed){
+			if(index>SWING2_TIME&&mousedown){
 				stageTimer = 0;
 				stage = WINDUP3;
 			}

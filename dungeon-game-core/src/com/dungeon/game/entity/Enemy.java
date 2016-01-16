@@ -31,9 +31,7 @@ public abstract class Enemy extends Dynamic {
 //			}
 //		}
 //		pathfinder.setData(mapData);
-		ArrayList<int[]> path = world.areaMap.findPath(new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (world.player.x/Tile.TS),(int) (world.player.y/Tile.TS)});
-		if(path.size()>1){
-			int[] targetTile = path.get(1);
+		int[] targetTile = world.areaMap.findPath(new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (world.player.x/Tile.TS),(int) (world.player.y/Tile.TS)});
 			if(targetTile!=null){
 				float targetX = targetTile[0]*Tile.TS+Tile.TS/2;
 				float targetY = targetTile[1]*Tile.TS+Tile.TS/2;
@@ -43,10 +41,10 @@ public abstract class Enemy extends Dynamic {
 				boolean inp_up = false;
 				boolean inp_dn = false;
 				
-				if(x<targetX)inp_rt=true;
-				if(x>targetX)inp_lt=true;
-				if(y<targetY)inp_up=true;
-				if(y>targetY)inp_dn=true;
+				if(x+2<targetX)inp_rt=true;
+				if(x-2>targetX)inp_lt=true;
+				if(y+2<targetY)inp_up=true;
+				if(y-2>targetY)inp_dn=true;
 				
 				if(inp_up && inp_rt) move_angle = 45;
 				else if(inp_up && inp_lt) move_angle = 135;
@@ -56,7 +54,6 @@ public abstract class Enemy extends Dynamic {
 				else if(inp_dn) move_angle = -90;
 				else if(inp_rt) move_angle = 0;
 				else if(inp_lt) move_angle = 180;
-		}
 		}
 	}
 }

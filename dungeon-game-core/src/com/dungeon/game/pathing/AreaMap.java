@@ -2,6 +2,9 @@ package com.dungeon.game.pathing;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.world.Tile;
 
 public class AreaMap {
@@ -123,10 +126,37 @@ public class AreaMap {
     		
 	}
 	
-	public ArrayList<int[]> findPath(int[] start, int[] end){
+	public int[] findPath(int[] start, int[] end){
+		ArrayList<int[]> path;
 		Area startArea = findArea(start);
 		Area endArea = findArea(end);
-		if(startArea.equals(endArea))return startArea.findPath(tm, start, end);
-		return findAreaPath(start, end).getTiles(tm);
+		if(startArea.equals(endArea)){
+			path = startArea.findPath(tm, start, end);
+		}
+		else{
+			path = findAreaPath(start, end).getTiles(tm);
+		}
+		
+		if(path.size()==1)return path.get(0);
+		Vector2 startPoint = new Vector2(path.get(0)[0]*Tile.TS+Tile.TS/2,path.get(0)[1]*Tile.TS+Tile.TS/2);
+		Vector2 endPoint;
+		boolean changeDestination;
+		int[] destination = path.get(0);
+		Polygon tilePolygon;
+		for(int[] point: path){
+			changeDestination = true;
+			endPoint = new Vector2(point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
+			for(int i = 0; i <tm.length;i++){
+				for(int k = 0; k<tm[i].length;k++){	
+					tilePolygon = new Polygon(new float[]{k*Tile.TS, i*Tile.TS,(k+1)*Tile.TS, i*Tile.TS,(k+1)*Tile.TS, (i+1)*Tile.TS, k*Tile.TS, (i+1)*Tile.TS});
+					if(tm[i][k].data==1&&Intersector.intersectSegmentPolygon(startPoint, endPoint, tilePolygon)){
+						changeDestination = false;
+					}
+				}
+			}
+			if(changeDestination)destination = point;
+			else break;
+		}
+		return destination;
 	}
 }
