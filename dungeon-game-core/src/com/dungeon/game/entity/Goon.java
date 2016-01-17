@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.item.Arrow;
+import com.dungeon.game.item.Bow;
 import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.item.Weapon;
@@ -12,6 +14,8 @@ import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Goon extends Enemy {
+	
+	boolean ranged;
 
 	public Goon(int x, int y) {
 		super(x, y);
@@ -106,8 +110,17 @@ public class Goon extends Enemy {
 		};
 		
 		inv = new Inventory(invLayout, "invBack.png", 10, 100, 0, 240, 288, 16);
-		
-		inv.slot[30].item = new Sword(10, 10,10);
+
+		inv.slot[20].item = new Arrow();
+		inv.slot[20].item.stack = 12;
+		if(Math.random()>0.5){
+			inv.slot[30].item = new Bow(10, 10,10);
+			ranged = true;
+		}
+		else {
+			inv.slot[30].item = new Sword(10, 10,10);
+			ranged = false;
+		}
 		
 	}
 
@@ -153,7 +166,7 @@ public class Goon extends Enemy {
 		entities.remove(this);
 		if(knownEntities.contains(world.player)){
 			if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(world,entities, new float[]{world.player.x,world.player.y});
-			target_angle = (float) (180/Math.PI*Math.atan2((world.player.y-y),(world.player.x-x)));
+			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
 		}
 		attacking = false;
 		
@@ -161,9 +174,14 @@ public class Goon extends Enemy {
 			boolean attack = false;
 			boolean down = true;
 			boolean click = false;
-			if(knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<80){
+			if(ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<300){
 				click = true;
-				down = Math.random()>0.5;
+				down = Math.random()>0.02;
+				attack = true;
+			}
+			if(!ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<300){
+				click = true;
+				down = Math.random()>0.9;
 				attack = true;
 			}
 			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
