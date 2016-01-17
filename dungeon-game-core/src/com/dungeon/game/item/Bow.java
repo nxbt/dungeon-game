@@ -91,7 +91,7 @@ public class Bow extends Ranged {
 		if(!sprite.equals(textures[0])){
 			changeSprite(textures[0]);
 		}
-			if(mousepressed && owner.inv.contains(new Arrow()) != null){
+			if(mousepressed && owner.inv.contains(new Arrow()) != null&&owner.consume_stam(10)){
 				owner.inv.contains(new Arrow()).consume();
 				stage=WINDUP;
 				stageTimer = 0;
@@ -131,6 +131,7 @@ public class Bow extends Ranged {
 
 	@Override
 	public void hit(Dynamic e, Projectile projectile) {
+		e.knownEntities.add(projectile.owner);
 		if(e.damage(damage*projectile.power/10)>0){
 			float xknock = projectile.dx/strength*knockstr;
 			float yknock = projectile.dy/strength*knockstr;

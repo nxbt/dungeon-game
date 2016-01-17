@@ -3,6 +3,7 @@ package com.dungeon.game.entity;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.dungeon.game.item.Weapon;
 import com.dungeon.game.pathing.AreaMap;
 import com.dungeon.game.pathing.Pathfinder;
 import com.dungeon.game.world.Tile;
@@ -11,6 +12,17 @@ import com.dungeon.game.world.World;
 public abstract class Enemy extends Dynamic {
 	public int[] moveTo;
 	public ArrayList<int[]> path;
+	
+
+	protected Weapon leftEquiped;
+	protected Weapon rightEquiped;
+	
+	protected float[] leftPos;
+	protected float[] rightPos;
+	
+	protected boolean attacking;
+	
+	
 	public Enemy(int x, int y) {
 		super(x, y);
 	}
@@ -43,11 +55,10 @@ public abstract class Enemy extends Dynamic {
 				boolean inp_up = false;
 				boolean inp_dn = false;
 				
-				if(x+2<targetX)inp_rt=true;
-				if(x-2>targetX)inp_lt=true;
-				if(y+2<targetY)inp_up=true;
-				if(y-2>targetY)inp_dn=true;
-				
+				if(x+3<targetX)inp_rt=true;
+				if(x-3>targetX)inp_lt=true;
+				if(y+3<targetY)inp_up=true;
+				if(y-3>targetY)inp_dn=true;
 				if(inp_up && inp_rt) move_angle = 45;
 				else if(inp_up && inp_lt) move_angle = 135;
 				else if(inp_dn && inp_rt) move_angle = -45;

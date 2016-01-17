@@ -50,6 +50,9 @@ public class Player extends Dynamic {
 		stam = maxStam;
 		mana = maxMana;
 		
+		stamRegen = 0.2f;
+		manaRegen = 0.2f;
+		
 		acel = 1.5f;
 		mvel = 5;
 		fric = 0.5f;
@@ -243,6 +246,10 @@ public class Player extends Dynamic {
 			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x)+xMove;
 			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y)+yMove;
 			((Weapon)(inv.slot[30].item)).graphic.angle = angle-135+leftPos[2];
+		}
+		if(killMe){
+			if(leftEquiped!=null)unequip(world, leftEquiped);
+			if(rightEquiped!=null)unequip(world, rightEquiped);
 		}
 	}
 }

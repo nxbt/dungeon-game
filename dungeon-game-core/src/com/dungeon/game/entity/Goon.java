@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.item.Inventory;
+import com.dungeon.game.item.Sword;
+import com.dungeon.game.item.Weapon;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -30,6 +33,9 @@ public class Goon extends Enemy {
 		stam = maxStam;
 		mana = maxMana;
 		
+		stamRegen = 0.3f;
+		manaRegen = 0.3f;
+		
 		acel = 1.5f;
 		mvel = 5;
 		fric = 1;
@@ -49,16 +55,144 @@ public class Goon extends Enemy {
 		
 		light = new Light(this, 0.5f);
 		
+		int[][] invLayout = new int[][] {
+			//consumables
+			new int[] {1, 8, 8},
+			new int[] {1, 48, 8},
+			new int[] {1, 88, 8},
+			new int[] {1, 128, 8},
+			new int[] {1, 168, 8},
+			//inventory
+			new int[] {0, 8, 48},
+			new int[] {0, 48, 48},
+			new int[] {0, 88, 48},
+			new int[] {0, 128, 48},
+			new int[] {0, 168, 48},
+			new int[] {0, 8, 88},
+			new int[] {0, 48, 88},
+			new int[] {0, 88, 88},
+			new int[] {0, 128, 88},
+			new int[] {0, 168, 88},
+			new int[] {0, 8, 128},
+			new int[] {0, 48, 128},
+			new int[] {0, 88, 128},
+			new int[] {0, 128, 128},
+			new int[] {0, 168, 128},
+			new int[] {0, 8, 168},
+			new int[] {0, 48, 168},
+			new int[] {0, 88, 168},
+			new int[] {0, 128, 168},
+			new int[] {0, 168, 168},
+			new int[] {0, 8, 208},
+			new int[] {0, 48, 208},
+			new int[] {0, 88, 208},
+			new int[] {0, 128, 208},
+			new int[] {0, 168, 208},
+			//weapons
+			new int[] {2, 208, 8},
+			new int[] {2, 248, 8},
+			//Armor
+			new int[] {7, 208, 48},
+			new int[] {6, 208, 88},
+			new int[] {5, 208, 128},
+			new int[] {4, 208, 168},
+			new int[] {3, 208, 208},
+			//Rings and Amulet
+			new int[] {9, 248, 48},
+			new int[] {9, 248, 88},
+			new int[] {9, 248, 128},
+			new int[] {9, 248, 168},
+			new int[] {8, 248, 208},
+		};
+		
+		inv = new Inventory(invLayout, "invBack.png", 10, 100, 0, 240, 288, 16);
+		
+		inv.slot[30].item = new Sword(10, 10,10);
+		
 	}
 
 	@Override
 	public void calc(World world) {
+		if(leftEquiped != null && inv.slot[30].item==null) {
+			unequip(world, leftEquiped);
+			
+			leftEquiped = null;
+		}
+		else if(leftEquiped == null && inv.slot[30].item != null) {
+			leftEquiped = (Weapon) inv.slot[30].item;
+			
+			equip(world, leftEquiped);
+		}
+		else if(leftEquiped != inv.slot[30].item) {
+			unequip(world, leftEquiped);
+			
+			leftEquiped = (Weapon) inv.slot[30].item;
+			
+			equip(world, leftEquiped);
+		}
+		
+		if(rightEquiped != null && inv.slot[31].item==null) {
+			unequip(world, rightEquiped);
+			
+			rightEquiped = null;
+		}
+		else if(rightEquiped == null && inv.slot[31].item != null) {
+			rightEquiped = (Weapon) inv.slot[31].item;
+			
+			equip(world, rightEquiped);
+		}
+		else if(rightEquiped != inv.slot[31].item) {
+			unequip(world, rightEquiped);
+			
+			rightEquiped = (Weapon) inv.slot[31].item;
+			
+			equip(world, rightEquiped);
+		}
 		ArrayList<Entity> entities = (ArrayList<Entity>) world.entities.clone();
 		entities.remove(world.player);
 		entities.remove(this);
-		if(knownEntities.contains(world.player)&&!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(world,entities, new float[]{world.player.x,world.player.y});
-	
+		if(knownEntities.contains(world.player)){
+			if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(world,entities, new float[]{world.player.x,world.player.y});
+			target_angle = (float) (180/Math.PI*Math.atan2((world.player.y-y),(world.player.x-x)));
+		}
+		attacking = false;
+		
+		if(leftEquiped != null){
+			boolean attack = false;
+			boolean down = true;
+			boolean click = false;
+			if(knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<80){
+				click = true;
+				down = Math.random()>0.5;
+				attack = true;
+			}
+			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
+			leftPos = ((Weapon) inv.slot[30].item).getPos(down&&attack, click&&attack);
+			((Weapon)inv.slot[30].item).graphic.calc(world);
+			
+		}
+		if(attacking){
+			mvel = 2.5f;
+			torq = 3;
+		}
+		else{
+			mvel = 5;
+			torq = 10;
+		}
 	}
 
-	public void post(World world) {}
-}
+	public void post(World world) {
+		if(leftEquiped != null){
+			float xMove = (float) (Math.cos((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
+			float yMove = (float) (Math.sin((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
+			
+			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x)+xMove;
+			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y)+yMove;
+			((Weapon)(inv.slot[30].item)).graphic.angle = angle-135+leftPos[2];
+		}
+		if(killMe){
+			if(leftEquiped!=null)unequip(world, leftEquiped);
+			if(rightEquiped!=null)unequip(world, rightEquiped);
+		}
+	}
+	}

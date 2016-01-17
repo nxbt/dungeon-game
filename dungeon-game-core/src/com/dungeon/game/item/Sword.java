@@ -128,6 +128,9 @@ public class Sword extends Melee {
 				polarAngle = (int) ((SWING1_PANG-WINDUP1_PANG)*(index/SWING1_TIME))+WINDUP1_PANG;
 				angle = (int) ((SWING1_ANGL-WINDUP1_ANGL)*(index/SWING1_TIME))+WINDUP1_ANGL;
 			} else {
+				if(!hasHit){
+					hasHit = true;
+				}
 				distance = SWING1_DIST;
 				polarAngle = SWING1_PANG;
 				angle = SWING1_ANGL;
@@ -160,7 +163,7 @@ public class Sword extends Melee {
 				polarAngle = WINDUP2_PANG;
 				angle = WINDUP2_ANGL;
 			}
-			if(index>WINDUP2_TIME){
+			if(index>WINDUP2_TIME && !mousedown){
 				stageTimer = 0;
 				stage = SWING2;
 				if(hasHit) hasHit = false;
@@ -172,6 +175,9 @@ public class Sword extends Melee {
 				polarAngle = (int) ((SWING2_PANG-WINDUP2_PANG)*(index/SWING2_TIME))+WINDUP2_PANG;
 				angle = (int) ((SWING2_ANGL-WINDUP2_ANGL)*(index/SWING2_TIME))+WINDUP2_ANGL;
 			} else {
+				if(!hasHit){
+					hasHit = true;
+				}
 				distance = SWING2_DIST;
 				polarAngle = SWING2_PANG;
 				angle = SWING2_ANGL;
@@ -216,6 +222,9 @@ public class Sword extends Melee {
 				polarAngle = (int) ((SWING3_PANG-WINDUP3_PANG)*(index/SWING3_TIME))+WINDUP3_PANG;
 				angle = (int) ((SWING3_ANGL-WINDUP3_ANGL)*(index/SWING3_TIME))+WINDUP3_ANGL;
 			} else {
+				if(!hasHit){
+					hasHit = true;
+				}
 				distance = SWING3_DIST;
 				polarAngle = SWING3_PANG;
 				angle = SWING3_ANGL;
@@ -250,6 +259,8 @@ public class Sword extends Melee {
 	}
 	
 	public void hit(Dynamic e, Projectile projectile) {
+		
+		e.knownEntities.add(owner);
 		hasHit = true;
 		float weaponangle = graphic.angle+135;
 		float angleModifier;

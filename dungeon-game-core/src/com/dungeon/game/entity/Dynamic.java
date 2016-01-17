@@ -31,6 +31,9 @@ public abstract class Dynamic extends Entity {
 	public float stam;
 	public float mana;
 	
+	public float stamRegen;
+	public float manaRegen;
+	
 	public int immunityTimer;
 	public int immunityTime;
 	public boolean immune;
@@ -53,7 +56,7 @@ public abstract class Dynamic extends Entity {
 	
 	protected float vision;
 	
-	protected ArrayList<Entity> knownEntities;
+	public ArrayList<Entity> knownEntities;
 		
 	public ArrayList<int[]> collisions;
 	
@@ -82,6 +85,8 @@ public abstract class Dynamic extends Entity {
 		calc(world);
 		phys(world);
 		post(world);
+		stam_regen();
+		mana_regen();
 		sight(world);
 	}
 	
@@ -187,7 +192,7 @@ public abstract class Dynamic extends Entity {
 		
 	}
 	
-	public int col(World world, boolean move, float[] originalPos){ //TODO add entity collision
+	public int col(World world, boolean move, float[] originalPos){
 		collisions = new ArrayList<int[]>();
 		
 		final int TILE_COL = 1; 
@@ -423,10 +428,6 @@ public abstract class Dynamic extends Entity {
 		return false;
 	}
 	
-	public void stam_regen() {
-		
-	}
-	
 	public boolean consume_mana(float value) {
 		if(mana >= value) {
 			mana -= value;
@@ -434,6 +435,14 @@ public abstract class Dynamic extends Entity {
 		}
 		
 		return false;
+	}
+	
+	public void stam_regen() {
+		if(stam<maxStam)stam = (float) Math.min(stam+stamRegen,maxStam);
+	}
+	
+	public void mana_regen() {
+		if(mana<maxMana)mana = (float) Math.min(mana+manaRegen,maxMana);
 	}
 	
 	public void equip(World world, Weapon weapon) {
