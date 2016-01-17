@@ -50,8 +50,8 @@ public class Player extends Dynamic {
 		stam = maxStam;
 		mana = maxMana;
 		
-		stamRegen = 0.2f;
-		manaRegen = 0.2f;
+		stamRegen = 0.1f;
+		manaRegen = 0.1f;
 		
 		acel = 1.5f;
 		mvel = 5;

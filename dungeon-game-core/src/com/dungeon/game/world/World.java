@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.Chest;
+import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Enemy;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Player;

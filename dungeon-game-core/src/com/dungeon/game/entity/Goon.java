@@ -37,8 +37,8 @@ public class Goon extends Enemy {
 		stam = maxStam;
 		mana = maxMana;
 		
-		stamRegen = 0.3f;
-		manaRegen = 0.3f;
+		stamRegen = 0.1f;
+		manaRegen = 0.1f;
 		
 		acel = 1.5f;
 		mvel = 5;
@@ -179,7 +179,7 @@ public class Goon extends Enemy {
 				down = Math.random()>0.02;
 				attack = true;
 			}
-			if(!ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<300){
+			if(!ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<60){
 				click = true;
 				down = Math.random()>0.9;
 				attack = true;
