@@ -22,9 +22,9 @@ public class Goon extends Enemy {
 		
 		solid = true;
 		
-		maxLife = 100;
+		maxLife = 20;
 		maxStam = 100;
-		maxMana = 100;
+		maxMana = 0;
 		
 		life = maxLife;
 		stam = maxStam;

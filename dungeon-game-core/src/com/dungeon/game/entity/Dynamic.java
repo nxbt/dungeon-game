@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
-import com.dungeon.game.item.Item;
+import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -56,6 +56,8 @@ public abstract class Dynamic extends Entity {
 	protected ArrayList<Entity> knownEntities;
 		
 	public ArrayList<int[]> collisions;
+	
+	public Inventory inv;
 	
 	public Dynamic(int x, int y) {
 		super(x, y);
@@ -410,6 +412,28 @@ public abstract class Dynamic extends Entity {
 		System.out.println(name + " gained " + amount + " life.");
 		
 		return amount;
+	}
+	
+	public boolean consume_stam(float value) {
+		if(stam >= value) {
+			stam -= value;
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public void stam_regen() {
+		
+	}
+	
+	public boolean consume_mana(float value) {
+		if(mana >= value) {
+			mana -= value;
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public void equip(World world, Weapon weapon) {

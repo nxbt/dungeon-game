@@ -3,6 +3,7 @@ package com.dungeon.game.world;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -47,6 +48,8 @@ public class World {
 	
 	private BitmapFont fps;
 	
+	boolean debug;
+	
 //	public LightMap lightMap;
 	
 	public World() {
@@ -85,6 +88,8 @@ public class World {
 		fps = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		fps.setColor(Color.RED);
 		
+		debug = false;
+		
 //		lightMap = new LightMap(cam.WIDTH,cam.HEIGHT);
 	}
 	
@@ -106,6 +111,8 @@ public class World {
 		
 		cam.update(player.x, player.y, mouse.x, mouse.y, 1f);
 		
+		if(Gdx.input.isKeyJustPressed(Input.Keys.F9)) debug = !debug;
+		
 //		lightMap.update(this);
 	}
 	
@@ -124,32 +131,34 @@ public class World {
 		}
 		batch.end();
 		
-		shapeRenderer.begin(ShapeType.Line);
-		
-		shapeRenderer.setProjectionMatrix(cam.cam.combined);
-		
-		for(Entity e: entities){
-				if(e.solid) shapeRenderer.setColor(Color.RED);
-				else shapeRenderer.setColor(Color.GREEN);
-				shapeRenderer.polygon(e.getHitbox().getVertices());
-				if(e instanceof Enemy){
-					if(((Enemy)e).moveTo!=null&&((Enemy)e).path!=null){
-						shapeRenderer.setColor(Color.BLUE);
-						shapeRenderer.rect(((Enemy)e).moveTo[0]*Tile.TS, ((Enemy)e).moveTo[1]*Tile.TS, Tile.TS, Tile.TS);
-						shapeRenderer.line(e.x, e.y, ((Enemy)e).moveTo[0]*Tile.TS+Tile.TS/2, ((Enemy)e).moveTo[1]*Tile.TS+Tile.TS/2);
-						int[] prePoint = new int[]{0,0};
-						shapeRenderer.setColor(Color.YELLOW);
-						for(int[] point:((Enemy)e).path){
-							if(((Enemy)e).path.indexOf(point)>0){
-								shapeRenderer.line(prePoint[0]*Tile.TS+Tile.TS/2, prePoint[1]*Tile.TS+Tile.TS/2,point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
+		if(debug) {
+			shapeRenderer.begin(ShapeType.Line);
+			
+			shapeRenderer.setProjectionMatrix(cam.cam.combined);
+			
+			for(Entity e: entities){
+					if(e.solid) shapeRenderer.setColor(Color.RED);
+					else shapeRenderer.setColor(Color.GREEN);
+					shapeRenderer.polygon(e.getHitbox().getVertices());
+					if(e instanceof Enemy){
+						if(((Enemy)e).moveTo!=null&&((Enemy)e).path!=null){
+							shapeRenderer.setColor(Color.BLUE);
+							shapeRenderer.rect(((Enemy)e).moveTo[0]*Tile.TS, ((Enemy)e).moveTo[1]*Tile.TS, Tile.TS, Tile.TS);
+							shapeRenderer.line(e.x, e.y, ((Enemy)e).moveTo[0]*Tile.TS+Tile.TS/2, ((Enemy)e).moveTo[1]*Tile.TS+Tile.TS/2);
+							int[] prePoint = new int[]{0,0};
+							shapeRenderer.setColor(Color.YELLOW);
+							for(int[] point:((Enemy)e).path){
+								if(((Enemy)e).path.indexOf(point)>0){
+									shapeRenderer.line(prePoint[0]*Tile.TS+Tile.TS/2, prePoint[1]*Tile.TS+Tile.TS/2,point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
+								}
+								prePoint = point;
 							}
-							prePoint = point;
 						}
 					}
-				}
+			}
+			
+			shapeRenderer.end();
 		}
-		
-		shapeRenderer.end();
 		
 		batch.begin();
 		
@@ -164,7 +173,7 @@ public class World {
 		mouse.draw(batch);
 		descBox.draw(batch);
 		
-		fps.draw(batch, ""+Gdx.graphics.getFramesPerSecond(), 8f, cam.HEIGHT-8f);
+		if(debug) fps.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 8f, cam.HEIGHT-8f);
 		
 		batch.end();
 	}

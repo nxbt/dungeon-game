@@ -91,7 +91,8 @@ public class Bow extends Ranged {
 		if(!sprite.equals(textures[0])){
 			changeSprite(textures[0]);
 		}
-			if(mousepressed){
+			if(mousepressed && owner.inv.contains(new Arrow()) != null){
+				owner.inv.contains(new Arrow()).consume();
 				stage=WINDUP;
 				stageTimer = 0;
 			}

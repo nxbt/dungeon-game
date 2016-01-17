@@ -35,4 +35,12 @@ public class Inventory {
 	public void update(World world) {
 		calc(world);
 	}
+	
+	public Slot contains(Item item) {
+		for(Slot s: slot) {
+			if(s.item != null && s.item.getClass().equals(item.getClass())) return s;
+		}
+		
+		return null;
+	}
 }

@@ -23,8 +23,6 @@ import com.dungeon.game.world.World;
 public class Player extends Dynamic {
 	public final int REACH = 4*Tile.TS;
 	
-	public Inventory inv;
-	
 	public Item hat;
 
 	private Weapon leftEquiped;
@@ -145,6 +143,8 @@ public class Player extends Dynamic {
 		inv.slot[21].item = new Sword(10, 10,10);
 		inv.slot[22].item = new  Bow(10, 10, 10);
 		inv.slot[23].item = new OneTaper();
+		
+		inv.slot[19].item.stack = 12;
 		
 		light = new Light(this, 1);
 	}

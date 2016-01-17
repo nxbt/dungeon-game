@@ -33,6 +33,7 @@ public class Sword extends Melee {
 	private final float SWING1_PANG = -55;
 	private final float SWING1_ANGL = -50;
 	private final float SWING1_CDWN = 30;
+	private final float SWING1_STAM = 10;
 	
 	private final float WINDDOWN1_TIME = 20;
 	
@@ -46,6 +47,7 @@ public class Sword extends Melee {
 	private final float SWING2_PANG = 80;
 	private final float SWING2_ANGL = 45;
 	private final float SWING2_CDWN = 30;
+	private final float SWING2_STAM = 15;
 	
 	private final float WINDDOWN2_TIME = 14;
 	
@@ -59,6 +61,7 @@ public class Sword extends Melee {
 	private final float SWING3_PANG = 6;
 	private final float SWING3_ANGL = -3;
 	private final float SWING3_CDWN = 20;
+	private final float SWING3_STAM = 7;
 
 	private final float WINDDOWN3_TIME = 14;
 	
@@ -97,7 +100,7 @@ public class Sword extends Melee {
 			polarAngle = REST_PANG;
 			angle = REST_ANGL;
 			
-			if(mousedown){
+			if(mousedown && owner.consume_stam(SWING1_STAM)){
 				stage=WINDUP1;
 				stageTimer = 0;
 			}
@@ -129,11 +132,11 @@ public class Sword extends Melee {
 				polarAngle = SWING1_PANG;
 				angle = SWING1_ANGL;
 			}
-			if(index>SWING1_TIME&&mousedown){
+			if(index>SWING1_TIME && mousedown && owner.consume_stam(SWING2_STAM)){
 				stageTimer = 0;
 				stage = WINDUP2;
 			}
-			if(index>SWING1_CDWN + SWING1_TIME){
+			if(index>SWING1_CDWN + SWING1_TIME ){
 				stageTimer = 0;
 				stage = WINDDOWN1;
 			}
@@ -157,7 +160,7 @@ public class Sword extends Melee {
 				polarAngle = WINDUP2_PANG;
 				angle = WINDUP2_ANGL;
 			}
-			if(index>WINDUP2_TIME && !mousedown){
+			if(index>WINDUP2_TIME){
 				stageTimer = 0;
 				stage = SWING2;
 				if(hasHit) hasHit = false;
@@ -173,7 +176,7 @@ public class Sword extends Melee {
 				polarAngle = SWING2_PANG;
 				angle = SWING2_ANGL;
 			}
-			if(index>SWING2_TIME&&mousedown){
+			if(index>SWING2_TIME && mousedown && owner.consume_stam(SWING3_STAM)){
 				stageTimer = 0;
 				stage = WINDUP3;
 			}

@@ -108,4 +108,9 @@ public class Slot {
 			}
 		}
 	}
+	
+	public void consume() {
+		item.stack--;
+		if(item.stack == 0) item = null;
+	}
 }
