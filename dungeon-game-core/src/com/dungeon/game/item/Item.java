@@ -29,6 +29,8 @@ public abstract class Item implements Cloneable {
 	
 	public Texture sprite;
 	
+	public float dropChance;
+	
 	public Item() {
 		stack = 1;
 		

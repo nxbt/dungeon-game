@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.item.Arrow;
 import com.dungeon.game.item.Bow;
 import com.dungeon.game.item.Inventory;
+import com.dungeon.game.item.Item;
+import com.dungeon.game.item.Slot;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.light.Light;
@@ -111,14 +113,17 @@ public class Goon extends Enemy {
 		
 		inv = new Inventory(invLayout, "invBack.png", 10, 100, 0, 240, 288, 16);
 
-		inv.slot[20].item = new Arrow();
-		inv.slot[20].item.stack = 12;
 		if(Math.random()>0.5){
 			inv.slot[30].item = new Bow(10, 10,10);
+			inv.slot[30].item.dropChance = 0.2f;
+			inv.slot[20].item = new Arrow();
+			inv.slot[20].item.stack = 12;
+			inv.slot[20].item.dropChance = 0.5f;
 			ranged = true;
 		}
 		else {
 			inv.slot[30].item = new Sword(10, 10,10);
+			inv.slot[30].item.dropChance = 0.2f;
 			ranged = false;
 		}
 		
@@ -179,7 +184,7 @@ public class Goon extends Enemy {
 				down = Math.random()>0.02;
 				attack = true;
 			}
-			if(!ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<60){
+			if(!ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<90){
 				click = true;
 				down = Math.random()>0.9;
 				attack = true;
@@ -213,4 +218,13 @@ public class Goon extends Enemy {
 			if(rightEquiped!=null)unequip(world, rightEquiped);
 		}
 	}
+	
+	public void dead(World world){
+		ArrayList<Item> drops = inv.getDrops();
+		for(Item item: drops){
+			Slot slot = new Slot(new int[]{0, 0, 0}, null);
+			slot.item = item;
+			world.entities.add(new Drop((int)x, (int)y, slot));
+		}
 	}
+}

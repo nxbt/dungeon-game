@@ -55,10 +55,10 @@ public abstract class Enemy extends Dynamic {
 				boolean inp_up = false;
 				boolean inp_dn = false;
 				
-				if(x+3<targetX)inp_rt=true;
-				if(x-3>targetX)inp_lt=true;
-				if(y+3<targetY)inp_up=true;
-				if(y-3>targetY)inp_dn=true;
+				if(x+2<targetX)inp_rt=true;
+				if(x-2>targetX)inp_lt=true;
+				if(y+2<targetY)inp_up=true;
+				if(y-2>targetY)inp_dn=true;
 				if(inp_up && inp_rt) move_angle = 45;
 				else if(inp_up && inp_lt) move_angle = 135;
 				else if(inp_dn && inp_rt) move_angle = -45;

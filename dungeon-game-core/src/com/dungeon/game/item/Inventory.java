@@ -1,5 +1,7 @@
 package com.dungeon.game.item;
 
+import java.util.ArrayList;
+
 import com.dungeon.game.entity.hud.InvGraphic;
 import com.dungeon.game.world.World;
 
@@ -68,5 +70,20 @@ public class Inventory {
 		}
 		
 		return item;
+	}
+	
+	public ArrayList<Item> getDrops(){
+		ArrayList<Item> drops = new ArrayList<Item>();
+		for(Slot s: slot){
+			if(s.item!=null){
+				Item item = s.item.clone();
+				item.stack = 0;
+				for(int i = 0; i < s.item.stack;i++){
+					if(Math.random()<s.item.dropChance)item.stack++;
+				}
+				if(item.stack>0)drops.add(item);
+			}
+		}
+		return drops;
 	}
 }

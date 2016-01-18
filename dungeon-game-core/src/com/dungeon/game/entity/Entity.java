@@ -82,10 +82,14 @@ public abstract class Entity {
 	}
 	
 	public void hovered(World world) {} //optional method called when the mouse hovers over an entity
+
+	public void dead(World world){};
 	
 	public abstract void init(); //called when an entity is created, but after the constructor is called
 	
 	public abstract void calc(World world); //called at the beginning of an update cycle
 	
 	public abstract void post(World world); //called at the end of an update cycle
+	
+	
 }
