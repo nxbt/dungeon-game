@@ -2,6 +2,8 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.item.Arrow;
+import com.dungeon.game.item.Slot;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.World;
 
@@ -19,6 +21,8 @@ public class ArrowGraphic extends Projectile {
 		solid = false;
 		name = "arrow";
 		this.power = power;
+		slot.item = new Arrow();
+		
 	}
 
 	public void post(World world) {}

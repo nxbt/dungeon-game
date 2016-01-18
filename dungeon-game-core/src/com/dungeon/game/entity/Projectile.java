@@ -2,6 +2,7 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.item.Slot;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.World;
 
@@ -15,6 +16,8 @@ public abstract class Projectile extends Dynamic {
 	public float range;
 	
 	public Dynamic owner;
+	
+	protected Slot slot;
 	
 	public Projectile(int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, Weapon weapon) {
 		super(x, y);
@@ -33,6 +36,8 @@ public abstract class Projectile extends Dynamic {
 		this.origin_y = originY;
 		this.weapon = weapon;
 		this.power = power;
+		
+		slot = new Slot(new int[] {0, 0, 0}, null);
 	}
 
 	@Override
@@ -58,6 +63,12 @@ public abstract class Projectile extends Dynamic {
 		if(range<0||vel<fric){
 			dx = 0;
 			dy = 0;
+			killMe = true;
+			if(slot.item!=null){
+				Drop drop = new Drop((int)x, (int)y, slot);
+				drop.angle = angle;
+				world.entities.add(drop);
+			}
 		}else{
 			dx-=dx/vel*fric;
 			dy-=dy/vel*fric;
