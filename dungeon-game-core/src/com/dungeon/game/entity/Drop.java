@@ -35,6 +35,9 @@ public class Drop extends Static {
 	@Override
 	public void hovered(World world){
 		if(world.mouse.canPickup) {
+			if(world.mouse.shift_down) {
+				world.descBox.updateText(slot.item);
+			}
 			if(world.mouse.lb_pressed) {
 				if(world.mouse.shift_down) {
 					slot.item = world.player.inv.addItem(slot.item);

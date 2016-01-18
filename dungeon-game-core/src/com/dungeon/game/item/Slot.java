@@ -87,7 +87,7 @@ public class Slot {
 				if(world.mouse.slot.item != null && world.mouse.slot.item.stack == 0) world.mouse.slot.item = null;
 			}
 		}
-		if(item != null)world.descBox.updateText(item.name + "\n\n" + item.desc);
+		if(item != null)world.descBox.updateText(item);
 	}
 	
 	public void calc(World world) {

@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dungeon.game.Camera;
+import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
 public class DescBox extends Hud {
@@ -51,6 +51,10 @@ public class DescBox extends Hud {
 		
 		screenWidth = world.cam.WIDTH;
 		screenHeight = world.cam.HEIGHT;
+	}
+	
+	public void updateText(Item item) {
+		updateText(item.name + "\n\n" + item.desc);
 	}
 	
 	public void updateText(String text) {

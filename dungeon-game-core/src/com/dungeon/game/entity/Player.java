@@ -129,18 +129,6 @@ public class Player extends Dynamic {
 		
 		inv.slot[35].item = new Hat();
 		inv.slot[6].item = new Crap();
-		inv.slot[7].item = new Crap();
-		inv.slot[8].item = new Crap();
-		inv.slot[9].item = new Crap();
-		inv.slot[10].item = new Crap();
-		inv.slot[11].item = new Crap();
-		inv.slot[12].item = new Crap();
-		inv.slot[13].item = new Stick();
-		inv.slot[14].item = new Stick();
-		inv.slot[15].item = new Crap();
-		inv.slot[16].item = new Crap();
-		inv.slot[17].item = new Crap();
-		inv.slot[18].item = new Crap();
 		inv.slot[19].item = new Arrow();
 		inv.slot[20].item = new RubberSword();
 		inv.slot[21].item = new Sword(10, 10,10);
@@ -148,6 +136,7 @@ public class Player extends Dynamic {
 		inv.slot[23].item = new OneTaper();
 		
 		inv.slot[19].item.stack = 12;
+		inv.slot[6].item.stack = 10;
 		
 		light = new Light(this, 1);
 	}

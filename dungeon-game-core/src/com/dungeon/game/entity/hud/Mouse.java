@@ -120,7 +120,7 @@ public class Mouse extends Hud {
 			for(int k = 0; k <world.curFloor.tm[i].length;k++){
 				if(world.curFloor.tm[i][k].data==1){
 					float[] verticies = new float[]{k*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS,(k)*Tile.TS,(i+1)*Tile.TS};
-					if(Intersector.intersectSegmentPolygon(new Vector2(x+world.cam.x-world.cam.WIDTH/2,y+world.cam.y-world.cam.HEIGHT/2), new Vector2(world.player.x + world.player.d_width/2,world.player.y + world.player.d_height/2), new Polygon(verticies))) canPickup = false;
+					if(Intersector.intersectSegmentPolygon(new Vector2(x+world.cam.x-world.cam.WIDTH/2,y+world.cam.y-world.cam.HEIGHT/2), new Vector2(world.player.x,world.player.y), new Polygon(verticies))) canPickup = false;
 				}
 			}
 		}
@@ -137,8 +137,6 @@ public class Mouse extends Hud {
 				break;
 			}
 		}
-		
-		
 		
 		if(slot.item != null && canPlace) {
 			if(lb_pressed) {
@@ -162,7 +160,7 @@ public class Mouse extends Hud {
 			}
 		}
 		
-		if (onHud) {
+		if (!world.player.fight_mode) {
 			sprite = ARROW;
 			
 			d_offx = 0;
