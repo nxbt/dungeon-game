@@ -48,6 +48,9 @@ public abstract class Projectile extends Dynamic {
 
 	@Override
 	public void calc(World world) { //TODO: make projectile turn into pickupable items
+		if(owner != null)System.out.println(owner.name);
+		else System.out.println("null");
+		
 		for(Entity e: world.entities){
 			if(!e.equals(owner)&& e.solid && e instanceof Dynamic && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
 				weapon.hit((Dynamic) e,this);

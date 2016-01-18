@@ -3,6 +3,8 @@ package com.dungeon.game.entity;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.dungeon.game.item.Item;
+import com.dungeon.game.item.Slot;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.pathing.AreaMap;
 import com.dungeon.game.pathing.Pathfinder;
@@ -67,6 +69,18 @@ public abstract class Enemy extends Dynamic {
 				else if(inp_dn) move_angle = -90;
 				else if(inp_rt) move_angle = 0;
 				else if(inp_lt) move_angle = 180;
+		}
+	}
+	
+	public void dead(World world){
+		if(leftEquiped!=null)unequip(world, leftEquiped);
+		if(rightEquiped!=null)unequip(world, rightEquiped);
+		
+		ArrayList<Item> drops = inv.getDrops();
+		for(Item item: drops){
+			Slot slot = new Slot(new int[]{0, 0, 0}, null);
+			slot.item = item;
+			world.entities.add(new Drop((int)x, (int)y, slot));
 		}
 	}
 }

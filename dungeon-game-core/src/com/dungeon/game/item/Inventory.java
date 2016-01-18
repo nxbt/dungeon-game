@@ -76,12 +76,19 @@ public class Inventory {
 		ArrayList<Item> drops = new ArrayList<Item>();
 		for(Slot s: slot){
 			if(s.item!=null){
-				Item item = s.item.clone();
-				item.stack = 0;
+				int stack = 0;
 				for(int i = 0; i < s.item.stack;i++){
-					if(Math.random()<s.item.dropChance)item.stack++;
+					if(Math.random()<s.item.dropChance) stack++;
 				}
-				if(item.stack>0)drops.add(item);
+				
+				s.item.stack = stack;
+				
+				if(s.item.stack>0) {
+					if(s.item instanceof Weapon) {
+						((Weapon) s.item).owner = null;
+					}
+					drops.add(s.item);
+				}
 			}
 		}
 		return drops;

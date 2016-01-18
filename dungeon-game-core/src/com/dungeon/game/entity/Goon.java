@@ -213,18 +213,5 @@ public class Goon extends Enemy {
 			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y)+yMove;
 			((Weapon)(inv.slot[30].item)).graphic.angle = angle-135+leftPos[2];
 		}
-		if(killMe){
-			if(leftEquiped!=null)unequip(world, leftEquiped);
-			if(rightEquiped!=null)unequip(world, rightEquiped);
-		}
-	}
-	
-	public void dead(World world){
-		ArrayList<Item> drops = inv.getDrops();
-		for(Item item: drops){
-			Slot slot = new Slot(new int[]{0, 0, 0}, null);
-			slot.item = item;
-			world.entities.add(new Drop((int)x, (int)y, slot));
-		}
 	}
 }

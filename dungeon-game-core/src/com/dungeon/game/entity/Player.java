@@ -258,7 +258,7 @@ public class Player extends Dynamic {
 
 	@Override
 	public void post(World world) {
-		if(leftEquiped != null){
+		if(leftEquiped != null && fight_mode){
 			float xMove = (float) (Math.cos((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
 			float yMove = (float) (Math.sin((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
 			
