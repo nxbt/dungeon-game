@@ -63,7 +63,7 @@ public class Inventory {
 		}
 		if(item != null) for(Slot s: slot) {
 			if(s.item == null && s.type == 0) {
-				s.item = item.clone();
+				s.item = item;
 				item = null;
 				break;
 			}
