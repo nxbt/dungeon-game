@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.WeaponGraphic;
+import com.dungeon.game.world.World;
 
 public abstract class Weapon extends Equipable{
 	public int damage;
@@ -33,4 +34,16 @@ public abstract class Weapon extends Equipable{
 	public abstract float[] getPos(boolean mousedown, boolean mousepressed);
 	public abstract boolean isInUse();
 	public abstract void hit(Dynamic e, Projectile projectile);
+	
+	public void equip(World world, Dynamic e){
+		this.owner = e;
+		System.out.println(owner.name);
+		System.out.println(graphic.weapon.owner);
+		world.entities.add(this.graphic);
+	}
+	
+	public void unequip(World world, Dynamic e){
+		this.owner = null;
+		world.entities.remove(this.graphic);
+	}
 }

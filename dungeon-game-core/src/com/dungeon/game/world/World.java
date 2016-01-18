@@ -100,6 +100,9 @@ public class World {
 		
 		for(int i = 0; i < entities.size(); i++) {
 			entities.get(i).update(this);
+		}
+		
+		for(int i = 0; i < entities.size(); i++) {
 			if(entities.get(i).killMe) {
 				entities.get(i).dead(this);
 				entities.remove(i);

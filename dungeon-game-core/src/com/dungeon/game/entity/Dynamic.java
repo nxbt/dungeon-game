@@ -447,15 +447,12 @@ public abstract class Dynamic extends Entity {
 	}
 	
 	public void equip(World world, Weapon weapon) {
-		
-		weapon.owner = this;
-		world.entities.add(weapon.graphic);
+		weapon.equip(world, this);
 		System.out.println("equip: "+weapon.owner.name);
 	}
 	
 	public void unequip(World world, Weapon weapon) {
-		world.entities.remove(weapon.graphic);
 		System.out.println("unequip: "+weapon.owner.name);
-		weapon.owner = null;
+		weapon.unequip(world, this);
 	}
 }
