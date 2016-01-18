@@ -120,12 +120,13 @@ public class Mouse extends Hud {
 			}
 		}
 		canPlace = canPickup;
-
+				
 		world.hudEntities.add(0,world.hudEntities.get(toMoveToFront));
 		world.hudEntities.remove(toMoveToFront+1);
 		for(int i = 0; i < world.entities.size(); i++) {
 			Entity ent = world.entities.get(i);
-			if(x + world.cam.x-world.cam.WIDTH/2 > ent.x && x + world.cam.x-world.cam.WIDTH/2 < ent.x+ent.d_width && y + world.cam.y-world.cam.HEIGHT/2 > ent.y && y + world.cam.y-world.cam.HEIGHT/2 < ent.y+ent.d_height){
+			Polygon itemHBox = ent.getHitbox();
+			if(Intersector.isPointInPolygon(itemHBox.getVertices(), 0,itemHBox.getVertices().length,x+world.cam.x-world.cam.WIDTH/2,y+world.cam.y-world.cam.HEIGHT/2)){
 				ent.hovered(world);
 				canPlace = false;
 				break;
@@ -136,7 +137,7 @@ public class Mouse extends Hud {
 		
 		if(slot.item != null && canPlace) {
 			if(lb_pressed) {
-				world.entities.add(new Drop((int)(x + world.cam.x-world.cam.WIDTH/2-Item.SIZE/2), (int)(y+ world.cam.y-world.cam.HEIGHT/2-Item.SIZE/2), slot));
+				world.entities.add(new Drop((int)(x + world.cam.x-world.cam.WIDTH/2-Item.SIZE/2+16), (int)(y+ world.cam.y-world.cam.HEIGHT/2-Item.SIZE/2+16), slot));
 				lb_pressed = false;
 			}
 			else if(rb_pressed) {
@@ -149,7 +150,7 @@ public class Mouse extends Hud {
 				
 				if(slot.item.stack == 0) slot.item = null;
 				
-				world.entities.add(new Drop((int)(x + world.cam.x-world.cam.WIDTH/2-Item.SIZE/2), (int)(y+ world.cam.y-world.cam.HEIGHT/2-Item.SIZE/2), temp));
+				world.entities.add(new Drop((int)(x + world.cam.x-world.cam.WIDTH/2-Item.SIZE/2+16), (int)(y+ world.cam.y-world.cam.HEIGHT/2-Item.SIZE/2+16), temp));
 				rb_pressed = false;
 				
 				
