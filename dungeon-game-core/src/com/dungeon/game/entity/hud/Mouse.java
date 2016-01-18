@@ -83,6 +83,7 @@ public class Mouse extends Hud {
 			lb_down = false;
 			lb_released = true;
 			lb_pressed = false;
+			System.out.println("Release");
 		}else{
 			lb_pressed = false;
 			lb_released = false;

@@ -51,6 +51,11 @@ public class InvGraphic extends Hud {
 				world.hudEntities.add(0, this);
 			}
 		}
+		
+		if(world.mouse.lb_released){
+			drag = false;
+			System.out.println("Stop drag");
+		}
 		inv.update(world);
 	}
 	
@@ -62,10 +67,7 @@ public class InvGraphic extends Hud {
 			drag = true;
 		}
 		else{
-			if(world.mouse.lb_released){
-				drag = false;
-			}
-		inv.hovered(world);
+			inv.hovered(world);
 		}
 	}
 	
