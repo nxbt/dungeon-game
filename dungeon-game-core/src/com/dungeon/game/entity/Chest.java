@@ -52,6 +52,8 @@ public class Chest extends Static {
 		d_width = 32;
 		d_height = 32;
 		hitbox = new Polygon(new float[]{0,0,32,0,32,32,0,32});
+		origin_x = 16;
+		origin_y = 16;
 	}
 
 	@Override

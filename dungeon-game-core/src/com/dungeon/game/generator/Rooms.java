@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.dungeon.game.entity.Chest;
 import com.dungeon.game.entity.Door;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Goon;
+import com.dungeon.game.item.Sword;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Tile;
 
@@ -79,12 +81,12 @@ public class Rooms extends Generation {
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=0;
 				if(i == 0){
-					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
-					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
+//					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
+//					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
 				}
 				if(i==hall.size()-1){
-					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
-					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
+//					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
+//					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
 				}
 			}
 			addRoomToMap(room);
@@ -132,12 +134,12 @@ public class Rooms extends Generation {
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=0;
 				if(i == 0){
-					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
-					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
+//					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
+//					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
 				}
 				if(i==hall.size()-1){
-					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
-					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
+//					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
+//					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
 				}
 			}
 			addRoomToMap(room);
@@ -186,12 +188,12 @@ public class Rooms extends Generation {
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=0;
 				if(i == 0){
-					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
-					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
+//					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
+//					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
 				}
 				if(i==hall.size()-1){
-					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
-					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
+//					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
+//					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
 				}
 			}
 			addRoomToMap(room);
@@ -239,12 +241,12 @@ public class Rooms extends Generation {
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=0;
 				if(i == 0){
-					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
-					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
+//					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
+//					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
 				}
 				if(i==hall.size()-1){
-					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
-					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
+//					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
+//					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
 				}
 			}
 			addRoomToMap(room);
@@ -352,12 +354,12 @@ public class Rooms extends Generation {
 			for(int i=0;i<hallCoordinates.size();i++){
 				map[hallCoordinates.get(i)[1]][hallCoordinates.get(i)[0]]=0;
 				if(i==0){
-					if(hallCoordinates.get(0)[2] == 0||hallCoordinates.get(0)[2] == 1)addDoor(hallCoordinates.get(0)[0],hallCoordinates.get(0)[1],0);
-					if(hallCoordinates.get(0)[2] == 2||hallCoordinates.get(0)[2] == 3)addDoor(hallCoordinates.get(0)[0],hallCoordinates.get(0)[1],1);
+//					if(hallCoordinates.get(0)[2] == 0||hallCoordinates.get(0)[2] == 1)addDoor(hallCoordinates.get(0)[0],hallCoordinates.get(0)[1],0);
+//					if(hallCoordinates.get(0)[2] == 2||hallCoordinates.get(0)[2] == 3)addDoor(hallCoordinates.get(0)[0],hallCoordinates.get(0)[1],1);
 				}
 				if(addHallToArrayList&&i==hallCoordinates.size()-1){
-					if(hallCoordinates.get(hallCoordinates.size()-1)[2] == 0||hallCoordinates.get(hallCoordinates.size()-1)[2] == 1)addDoor(hallCoordinates.get(hallCoordinates.size()-1)[0],hallCoordinates.get(hallCoordinates.size()-1)[1],0);
-					if(hallCoordinates.get(hallCoordinates.size()-1)[2] == 2||hallCoordinates.get(hallCoordinates.size()-1)[2] == 3)addDoor(hallCoordinates.get(hallCoordinates.size()-1)[0],hallCoordinates.get(hallCoordinates.size()-1)[1],1);
+//					if(hallCoordinates.get(hallCoordinates.size()-1)[2] == 0||hallCoordinates.get(hallCoordinates.size()-1)[2] == 1)addDoor(hallCoordinates.get(hallCoordinates.size()-1)[0],hallCoordinates.get(hallCoordinates.size()-1)[1],0);
+//					if(hallCoordinates.get(hallCoordinates.size()-1)[2] == 2||hallCoordinates.get(hallCoordinates.size()-1)[2] == 3)addDoor(hallCoordinates.get(hallCoordinates.size()-1)[0],hallCoordinates.get(hallCoordinates.size()-1)[1],1);
 				}
 			}
 			
@@ -465,6 +467,7 @@ public class Rooms extends Generation {
 	}
 	
 	public void addRoomToMap(Rectangle room){
+		boolean addedChest = false;
 		rooms.add(room);
 		int x = (int) room.x;
 		int y = (int) room.y;
@@ -474,6 +477,10 @@ public class Rooms extends Generation {
 			for(int k = 0; k<width; k++){
 				map[y][x]=0;
 				x++;
+				if(!addedChest&&Math.random()>0.95){
+					entities.add(LootGenerator.getChest(1,x,y));
+					addedChest = true;
+				}
 			}
 			y++;
 			x-=width;
