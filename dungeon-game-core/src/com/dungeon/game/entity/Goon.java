@@ -122,7 +122,7 @@ public class Goon extends Enemy {
 			ranged = true;
 		}
 		else {
-			inv.slot[30].item = new Sword(10, 10,10);
+			inv.slot[30].item = new Sword((int) (7 + Math.random()*6), 10,10);
 			inv.slot[30].item.dropChance = 0.2f;
 			ranged = false;
 		}

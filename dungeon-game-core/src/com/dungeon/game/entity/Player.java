@@ -155,45 +155,64 @@ public class Player extends Dynamic {
 	public void calc(World world) {
 		target_angle = (float) (180/Math.PI*Math.atan2(world.mouse.y+world.cam.y-world.cam.HEIGHT/2-(y), world.mouse.x+world.cam.x-world.cam.WIDTH/2-(x)));
 		
-		if(leftEquiped != null && inv.slot[30].item==null) {
-			unequip(world, leftEquiped);
+		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !attacking && world.mouse.slot.item == null) {
+			fight_mode = !fight_mode;
 			
-			leftEquiped = null;
-		}
-		else if(leftEquiped == null && inv.slot[30].item != null) {
-			leftEquiped = (Weapon) inv.slot[30].item;
-			
-			equip(world, leftEquiped);
-		}
-		else if(leftEquiped != inv.slot[30].item) {
-			unequip(world, leftEquiped);
-			
-			leftEquiped = (Weapon) inv.slot[30].item;
-			
-			equip(world, leftEquiped);
+			if(fight_mode) {
+				if(leftEquiped != null) equip(world, leftEquiped);
+				if(rightEquiped != null) equip(world, rightEquiped);
+				
+				if(world.hudEntities.indexOf(inv.graphic) > -1) {
+					inv.graphic.close(world);
+				}
+			}
+			else {
+				if(leftEquiped != null) unequip(world, leftEquiped);
+				if(rightEquiped != null) unequip(world, rightEquiped);
+			}
 		}
 		
-		if(rightEquiped != null && inv.slot[31].item==null) {
-			unequip(world, rightEquiped);
+		if(fight_mode) {
+			if(leftEquiped != null && inv.slot[30].item==null) {
+				unequip(world, leftEquiped);
+				
+				leftEquiped = null;
+			}
+			else if(leftEquiped == null && inv.slot[30].item != null) {
+				leftEquiped = (Weapon) inv.slot[30].item;
+				
+				equip(world, leftEquiped);
+			}
+			else if(leftEquiped != inv.slot[30].item) {
+				unequip(world, leftEquiped);
+				
+				leftEquiped = (Weapon) inv.slot[30].item;
+				
+				equip(world, leftEquiped);
+			}
 			
-			rightEquiped = null;
-		}
-		else if(rightEquiped == null && inv.slot[31].item != null) {
-			rightEquiped = (Weapon) inv.slot[31].item;
-			
-			equip(world, rightEquiped);
-		}
-		else if(rightEquiped != inv.slot[31].item) {
-			unequip(world, rightEquiped);
-			
-			rightEquiped = (Weapon) inv.slot[31].item;
-			
-			equip(world, rightEquiped);
+			if(rightEquiped != null && inv.slot[31].item==null) {
+				unequip(world, rightEquiped);
+				
+				rightEquiped = null;
+			}
+			else if(rightEquiped == null && inv.slot[31].item != null) {
+				rightEquiped = (Weapon) inv.slot[31].item;
+				
+				equip(world, rightEquiped);
+			}
+			else if(rightEquiped != inv.slot[31].item) {
+				unequip(world, rightEquiped);
+				
+				rightEquiped = (Weapon) inv.slot[31].item;
+				
+				equip(world, rightEquiped);
+			}
 		}
 		
 		if(inv.slot[35].item != null) ((Equipable) inv.slot[35].item).update(world, this);
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+		if(Gdx.input.isKeyJustPressed(Input.Keys.E) && !fight_mode) {
 			if(world.hudEntities.indexOf(inv.graphic) == -1) {
 				inv.graphic.open(world);
 			}
@@ -221,7 +240,7 @@ public class Player extends Dynamic {
 		
 		attacking = false;
 		
-		if(leftEquiped != null){
+		if(leftEquiped != null && fight_mode){
 			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
 			leftPos = ((Weapon) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
 			((Weapon)inv.slot[30].item).graphic.calc(world);

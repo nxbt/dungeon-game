@@ -42,6 +42,8 @@ public abstract class Dynamic extends Entity {
 	public int stunTimer;
 	public boolean stun;
 	
+	public boolean fight_mode;
+	
 	public float physc_resist;
 	public float arcan_resist;
 	public float flame_resist;
@@ -70,7 +72,6 @@ public abstract class Dynamic extends Entity {
 		
 		immunityTime = 10;
 		
-
 		collisions = new ArrayList<int[]>();
 		
 		vision = 0;
