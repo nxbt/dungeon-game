@@ -24,6 +24,7 @@ public class MeleeGraphic extends WeaponGraphic {
 
 	@Override
 	public void calc(World world) { //TODO: make weapons prioritize closest enemies
+//		if(weapon.owner == null)System.out.println("null");
 		if(((Melee) weapon).inAttack()) {
 			for(Entity e: world.entities){
 				if(!((Melee)weapon).hasHit&&!e.equals(weapon.owner) && e instanceof Dynamic && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){

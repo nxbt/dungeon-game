@@ -152,7 +152,7 @@ public class Player extends Dynamic {
 		light = new Light(this, 1);
 	}
 	
-	public void calc(World world) {
+	public void calc(World world) { //TODO: complete rework of owner code!
 		target_angle = (float) (180/Math.PI*Math.atan2(world.mouse.y+world.cam.y-world.cam.HEIGHT/2-(y), world.mouse.x+world.cam.x-world.cam.WIDTH/2-(x)));
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !attacking && world.mouse.slot.item == null) {

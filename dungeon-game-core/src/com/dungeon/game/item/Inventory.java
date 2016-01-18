@@ -85,7 +85,7 @@ public class Inventory {
 				
 				if(s.item.stack>0) {
 					if(s.item instanceof Weapon) {
-						((Weapon) s.item).owner = null;
+						System.out.println(((Weapon) s.item).owner == null);
 					}
 					drops.add(s.item);
 				}

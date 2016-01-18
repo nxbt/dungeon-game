@@ -115,7 +115,7 @@ public class Goon extends Enemy {
 
 		if(Math.random()>0.5){
 			inv.slot[30].item = new Bow(10, 10,10);
-			inv.slot[30].item.dropChance = 0.2f;
+			inv.slot[30].item.dropChance = 0.5f;
 			inv.slot[20].item = new Arrow();
 			inv.slot[20].item.stack = 12;
 			inv.slot[20].item.dropChance = 0.5f;
@@ -123,7 +123,7 @@ public class Goon extends Enemy {
 		}
 		else {
 			inv.slot[30].item = new Sword((int) (7 + Math.random()*6), 10,10);
-			inv.slot[30].item.dropChance = 0.2f;
+			inv.slot[30].item.dropChance = 0.5f;
 			ranged = false;
 		}
 		

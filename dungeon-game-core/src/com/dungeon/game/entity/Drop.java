@@ -3,6 +3,7 @@ package com.dungeon.game.entity;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.Slot;
+import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
