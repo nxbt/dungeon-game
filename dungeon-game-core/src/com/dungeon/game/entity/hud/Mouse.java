@@ -1,6 +1,7 @@
 package com.dungeon.game.entity.hud;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
@@ -29,6 +30,8 @@ public class Mouse extends Hud {
 	public boolean canPickup;
 	private boolean canPlace;
 	
+	public boolean shift_down;
+	
 	private float sensitivity;
 	
 	public Slot slot;
@@ -52,7 +55,6 @@ public class Mouse extends Hud {
 		sensitivity = 0.5f;
 		
 		slot = new Slot(new int[] {0, 0, 0}, null);
-		
 	}
 
 	@Override
@@ -67,6 +69,9 @@ public class Mouse extends Hud {
 		else if(x > screenWidth) x = screenWidth;
 		if(y < 0) y = 0;
 		else if(y > screenHeight) y = screenHeight;
+		
+		if(!shift_down && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) shift_down = true;
+		else if(shift_down && !Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) shift_down = false;
 		
 		//Check status of left mouse button
 		if(Gdx.input.isButtonPressed(0)&&!lb_down){

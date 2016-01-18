@@ -35,7 +35,10 @@ public class Drop extends Static {
 	public void hovered(World world){
 		if(world.mouse.canPickup) {
 			if(world.mouse.lb_pressed) {
-				if(slot.item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(slot.item.name)) {
+				if(world.mouse.shift_down) {
+					slot.item = world.player.inv.addItem(slot.item);
+				}
+				else if(slot.item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(slot.item.name)) {
 					if(slot.item.stack + world.mouse.slot.item.stack <= slot.item.maxStack) {
 						slot.item.stack+=world.mouse.slot.item.stack;
 						world.mouse.slot.item = null;

@@ -43,4 +43,30 @@ public class Inventory {
 		
 		return null;
 	}
+	
+	public Item addItem(Item item) {
+		for(Slot s: slot) {
+			if(s.item != null && s.item.getClass().equals(item.getClass()) && s.item.stack < s.item.maxStack) {
+				if(s.item.stack + item.stack > s.item.maxStack) {
+					item.stack -= s.item.maxStack-s.item.stack;
+					s.item.stack = s.item.maxStack;
+				}
+				else {
+					s.item.stack += item.stack;
+					item = null;
+					break;
+				}
+				
+			}
+		}
+		if(item != null) for(Slot s: slot) {
+			if(s.item == null && s.type == 0) {
+				s.item = item.clone();
+				item = null;
+				break;
+			}
+		}
+		
+		return item;
+	}
 }
