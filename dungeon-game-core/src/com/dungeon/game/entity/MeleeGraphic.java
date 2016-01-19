@@ -23,14 +23,20 @@ public class MeleeGraphic extends WeaponGraphic {
 	}
 
 	@Override
-	public void calc(World world) { //TODO: make weapons prioritize closest enemies
+	public void calc(World world) {
+		float distance = Integer.MAX_VALUE;
+		Dynamic target = null;
 		if(((Melee) weapon).inAttack()) {
 			for(Entity e: world.entities){
 				if(!((Melee)weapon).hasHit&&!e.equals(weapon.owner) && e instanceof Dynamic && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
-					weapon.hit((Dynamic) e,null);
+					if(Math.sqrt((x-e.x)*(x-e.x)+(y-e.y)*(y-e.y))<distance){
+						target = (Dynamic) e;
+						distance = (float) Math.sqrt((x-e.x)*(x-e.x)+(y-e.y)*(y-e.y));
+					}
 				}
 			}
 		}
+		if(target!=null)weapon.hit((Dynamic) target,null);
 	}
 	
 	public void post(World world) {}
