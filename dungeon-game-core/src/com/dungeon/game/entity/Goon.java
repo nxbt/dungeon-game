@@ -7,12 +7,9 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.item.Arrow;
 import com.dungeon.game.item.Bow;
 import com.dungeon.game.item.Inventory;
-import com.dungeon.game.item.Item;
-import com.dungeon.game.item.Slot;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.light.Light;
-import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Goon extends Enemy {

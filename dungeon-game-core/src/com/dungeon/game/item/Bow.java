@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.RangedGraphic;
-import com.dungeon.game.world.Tile;
 
 public class Bow extends Ranged {
 	

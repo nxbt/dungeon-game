@@ -460,8 +460,6 @@ public class Rooms extends Generation {
 				if(k == roomTwo)roomTwoFound = true;
 				if(roomOneFound&&roomTwoFound)return true;
 			}
-//			if(roomOne == i[0]&&roomTwo==i[1])return true;
-//			if(roomOne == i[1]&&roomTwo==i[0])return true;
 		}
 		return false;
 	}

@@ -11,7 +11,6 @@ import com.dungeon.game.entity.Drop;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.Slot;
-import com.dungeon.game.item.Stick;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -20,11 +19,16 @@ public class Mouse extends Hud {
 	public final Texture ARROW = new Texture("Inven.png");
 	
 	public boolean lb_pressed;
-	public boolean rb_pressed;
 	public boolean lb_released;
+	public boolean lb_down;
+	
+	public boolean rb_pressed;
 	public boolean rb_released;
 	public boolean rb_down;
-	public boolean lb_down;
+	
+	public boolean mb_pressed;
+	public boolean mb_released;
+	public boolean mb_down;
 	
 	public boolean onHud;
 	public boolean canPickup;
@@ -101,6 +105,21 @@ public class Mouse extends Hud {
 		}else{
 			rb_pressed = false;
 			rb_released = false;
+		}
+		
+		//Check status of middle mouse button
+		if(Gdx.input.isButtonPressed(2)&&!mb_down){
+			mb_down = true;
+			mb_pressed = true;
+			mb_released = false;
+		}
+		else if(!Gdx.input.isButtonPressed(2)&&mb_down){
+			mb_down = false;
+			mb_released = true;
+			mb_pressed = false;
+		}else{
+			mb_pressed = false;
+			mb_released = false;
 		}
 		
 		onHud = false;

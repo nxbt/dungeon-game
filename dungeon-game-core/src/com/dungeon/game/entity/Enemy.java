@@ -2,12 +2,9 @@ package com.dungeon.game.entity;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.Slot;
 import com.dungeon.game.item.Weapon;
-import com.dungeon.game.pathing.AreaMap;
-import com.dungeon.game.pathing.Pathfinder;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 

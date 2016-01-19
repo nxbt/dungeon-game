@@ -87,6 +87,11 @@ public class Slot {
 				if(item != null && item.stack == 0) item = null;
 				if(world.mouse.slot.item != null && world.mouse.slot.item.stack == 0) world.mouse.slot.item = null;
 			}
+			else if(world.mouse.mb_pressed) {
+				if(item != null && item instanceof Consumable) {
+					consume(world, world.player);
+				}
+			}
 		}
 		if(item != null)world.descBox.updateText(item);
 	}
