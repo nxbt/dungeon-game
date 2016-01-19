@@ -11,9 +11,9 @@ import com.dungeon.game.item.Equipable;
 import com.dungeon.game.item.Hat;
 import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.Item;
+import com.dungeon.game.item.LifePotion;
 import com.dungeon.game.item.OneTaper;
 import com.dungeon.game.item.RubberSword;
-import com.dungeon.game.item.Stick;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.light.Light;
@@ -126,7 +126,8 @@ public class Player extends Dynamic {
 		inv = new Inventory(invLayout, "invBack.png", 10, 100, 0, 240, 288, 16);
 		
 		hat = inv.slot[35].item; 
-		
+		inv.slot[0].item = new LifePotion();
+		inv.slot[0].item.stack = 10;
 		inv.slot[35].item = new Hat();
 		inv.slot[6].item = new Crap();
 		inv.slot[19].item = new Arrow();
@@ -142,6 +143,8 @@ public class Player extends Dynamic {
 	}
 	
 	public void calc(World world) { //TODO: complete rework of owner code!
+		
+		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1))inv.slot[0].consume(world, this);
 		target_angle = (float) (180/Math.PI*Math.atan2(world.mouse.y+world.cam.y-world.cam.HEIGHT/2-(y), world.mouse.x+world.cam.x-world.cam.WIDTH/2-(x)));
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !attacking && world.mouse.slot.item == null) {

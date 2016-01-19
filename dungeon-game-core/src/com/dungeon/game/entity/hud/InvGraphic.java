@@ -54,7 +54,6 @@ public class InvGraphic extends Hud {
 		
 		if(world.mouse.lb_released){
 			drag = false;
-			System.out.println("Stop drag");
 		}
 		inv.update(world);
 	}

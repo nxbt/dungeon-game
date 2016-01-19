@@ -412,8 +412,8 @@ public abstract class Dynamic extends Entity {
 	}
 	
 	public float heal(float value /*Add an array of Effects*/){
-		float amount = Math.max(maxLife, life+value)-life;
-		life = Math.max(maxLife, life+value);
+		float amount = Math.min(maxLife, life+value)-life;
+		life = Math.min(maxLife, life+value);
 		
 		System.out.println(name + " gained " + amount + " life.");
 		
