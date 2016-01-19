@@ -474,17 +474,19 @@ public class Rooms extends Generation {
 		for(int i = 0; i<height; i++){
 			for(int k = 0; k<width; k++){
 				map[y][x]=0;
-				x++;
-				if(!addedChest&&i>0&&k>-1&&i<height-1&&k<width-2&&Math.random()>0.95){
+				if(!addedChest&&i>0&&k>0&&i<height-1&&k<width-1&&Math.random()>0.9){
 					entities.add(LootGenerator.getChest(1,x,y));
 					addedChest = true;
 				}
+				if(i>-1&&k>-1&&i<height&&k<width&&Math.random()>0.9){
+
+					entities.add(new Goon(x*Tile.TS+Tile.TS/2, y*Tile.TS+Tile.TS/2));
+				}
+				x++;
 			}
 			y++;
 			x-=width;
 		}
-
-		entities.add(new Goon((x+width/2)*Tile.TS+Tile.TS/2, (y-height/2)*Tile.TS+Tile.TS/2));
 	}
 	
 	public void generateAreas(){

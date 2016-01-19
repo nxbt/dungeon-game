@@ -193,6 +193,8 @@ public abstract class Dynamic extends Entity {
 		
 	}
 	
+	//fix collision to stop gliching into walls
+	
 	public int col(World world, boolean move, float[] originalPos){
 		collisions = new ArrayList<int[]>();
 		

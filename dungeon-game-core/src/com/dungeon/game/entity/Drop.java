@@ -25,6 +25,9 @@ public class Drop extends Static {
 		
 		origin_x =16;
 		origin_y = 16;
+		
+
+		angle = (float) (180f-Math.random()*360);
 	}
 
 	@Override

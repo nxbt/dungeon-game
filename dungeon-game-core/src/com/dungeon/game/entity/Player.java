@@ -145,6 +145,10 @@ public class Player extends Dynamic {
 	public void calc(World world) { //TODO: complete rework of owner code!
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1))inv.slot[0].consume(world, this);
+		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2))inv.slot[1].consume(world, this);
+		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3))inv.slot[2].consume(world, this);
+		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4))inv.slot[3].consume(world, this);
+		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5))inv.slot[4].consume(world, this);
 		target_angle = (float) (180/Math.PI*Math.atan2(world.mouse.y+world.cam.y-world.cam.HEIGHT/2-(y), world.mouse.x+world.cam.x-world.cam.WIDTH/2-(x)));
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !attacking && world.mouse.slot.item == null) {

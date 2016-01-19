@@ -77,7 +77,8 @@ public abstract class Enemy extends Dynamic {
 		for(Item item: drops){
 			Slot slot = new Slot(new int[]{0, 0, 0}, null);
 			slot.item = item;
-			world.entities.add(new Drop((int)x, (int)y, slot));
+			Drop drop = new Drop((int)x, (int)y, slot);
+			world.entities.add(drop);
 		}
 	}
 }
