@@ -41,7 +41,7 @@ public class Goon extends Enemy {
 		
 		acel = 1.5f;
 		mvel = 5;
-		fric = 1;
+		fric = 0.5f;
 		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		

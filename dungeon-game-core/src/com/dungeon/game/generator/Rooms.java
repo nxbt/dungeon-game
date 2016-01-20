@@ -478,7 +478,7 @@ public class Rooms extends Generation {
 					entities.add(LootGenerator.getChest(1,x,y));
 					addedChest = true;
 				}
-				if(i>-1&&k>-1&&i<height&&k<width&&Math.random()>0.9){
+				if(i>-1&&k>-1&&i<height&&k<width&&Math.random()>0.96){
 
 					entities.add(new Goon(x*Tile.TS+Tile.TS/2, y*Tile.TS+Tile.TS/2));
 				}

@@ -2,6 +2,7 @@ package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.MeleeGraphic;
 import com.dungeon.game.entity.Projectile;
@@ -288,11 +289,10 @@ public class Sword extends Melee {
 			float ySword = (float) (Math.sin((weaponangle+angleModifier)/180f*Math.PI)*knockstr);
 			float xOwner = (float) (Math.cos((weaponangle)/180*Math.PI)*knockstr);
 			float yOwner = (float) (Math.sin((weaponangle)/180*Math.PI)*knockstr);
-			float xknock = xSword*(1-knockratio)+xOwner*(knockratio);
-			float yknock = ySword*(1-knockratio)+yOwner*(knockratio);
-			float[] cur_knockback=new float[]{xknock*cur_knockMult,yknock*cur_knockMult};
-			e.dx = cur_knockback[0];
-			e.dy = cur_knockback[1];
+			Vector2 knockVec = new Vector2();
+			knockVec.x = (xSword*(1-knockratio)+xOwner*(knockratio))*cur_knockMult;
+			knockVec.y = (ySword*(1-knockratio)+yOwner*(knockratio))*cur_knockMult;
+			e.acel(knockVec, false);
 		}
 	}
 }

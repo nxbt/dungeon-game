@@ -37,8 +37,6 @@ public abstract class Weapon extends Equipable{
 	
 	public void equip(World world, Dynamic e){
 		this.owner = e;
-		System.out.println(owner.name);
-		System.out.println(graphic.weapon.owner);
 		world.entities.add(this.graphic);
 	}
 	

@@ -3,6 +3,7 @@ package com.dungeon.game.item;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.RangedGraphic;
@@ -132,11 +133,10 @@ public class Bow extends Ranged {
 	public void hit(Dynamic e, Projectile projectile) {
 		e.knownEntities.add(projectile.owner);
 		if(e.damage(damage*projectile.power/10)>0){
-			float xknock = projectile.dx/strength*knockstr;
-			float yknock = projectile.dy/strength*knockstr;
-			float[] cur_knockback=new float[]{xknock,yknock};
-			e.dx = cur_knockback[0];
-			e.dy = cur_knockback[1];
+			Vector2 knockVec = new Vector2();
+			knockVec.x = projectile.moveVec.x/strength*knockstr;
+			knockVec.y = projectile.moveVec.y/strength*knockstr;
+			e.acel(knockVec, false);
 		}
 		
 	}

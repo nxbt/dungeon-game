@@ -2,6 +2,7 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.item.Slot;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.World;
@@ -21,8 +22,10 @@ public abstract class Projectile extends Dynamic {
 	
 	public Projectile(int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, Weapon weapon) {
 		super(x, y);
-		dx = (float) Math.cos((angle+135)/180*Math.PI)*power;
-		dy = (float) Math.sin((angle+135)/180*Math.PI)*power;
+		Vector2 acelVec = new Vector2();
+		acelVec.x = (float) Math.cos((angle+135)/180*Math.PI)*power;
+		acelVec.y = (float) Math.sin((angle+135)/180*Math.PI)*power;
+		acel(acelVec,false);
 		range = 35;
 		this.angle = angle;
 		
@@ -59,11 +62,9 @@ public abstract class Projectile extends Dynamic {
 	}
 	
 	public void phys(World world){
-		float vel = (float) Math.sqrt(dx*dx+dy*dy);
+		float vel = getVel();
 		range--;
 		if(range<0||vel<fric){
-			dx = 0;
-			dy = 0;
 			killMe = true;
 			if(slot.item!=null){
 				Drop drop = new Drop((int)x, (int)y, slot);
@@ -71,18 +72,18 @@ public abstract class Projectile extends Dynamic {
 				world.entities.add(drop);
 			}
 		}else{
-			dx-=dx/vel*fric;
-			dy-=dy/vel*fric;
+			moveVec.x-=moveVec.x/vel*fric;
+			moveVec.y-=moveVec.y/vel*fric;
 		}
 		
 		Polygon hitboxTile;
-		if((dx != 0 || dy != 0) && col(world,false, new float[]{0,0})==1){
-			dx = 0;
-			dy = 0;
+		if((moveVec.x != 0 || moveVec.y != 0) && col(world,false, new float[]{0,0})==1){
+			moveVec.x = 0;
+			moveVec.y = 0;
 		}
 		
-		x+=dx;
-		y+=dy;
+		x+=moveVec.x;
+		y+=moveVec.y;
 	}
 
 }

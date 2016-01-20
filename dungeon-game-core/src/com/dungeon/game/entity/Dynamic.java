@@ -5,20 +5,21 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
-//abstract class for dynamic entities, or entities that move and respond to physics.
+//abstract class for moveVec.ynamic entities, or entities that move and respond to physics.
 public abstract class Dynamic extends Entity {
-	public float dx;
-	public float dy;
 	
-	float acel;
-	float fric;
-	float mvel;
-	float torq;
+	public float acel;
+	public float fric;
+	public float mvel;
+	public float torq;
+	
+	public Vector2 moveVec;
 	
 	public float move_angle;
 	public float target_angle;
@@ -77,6 +78,8 @@ public abstract class Dynamic extends Entity {
 		vision = 0;
 		
 		knownEntities = new ArrayList<Entity>();
+		
+		moveVec = new Vector2(0,0);
 	}
 
 	//entity update function called on every frame before the draw phase.
@@ -106,37 +109,57 @@ public abstract class Dynamic extends Entity {
 
 		float[] originalPos = new float[]{x,y};
 		
-		float vel = (float) Math.sqrt(dx * dx + dy * dy);
+		Vector2 acelVec = new Vector2();
+		acelVec.x = (float) (Math.cos(move_angle*Math.PI/180)*acel);
+		acelVec.y = (float) (Math.sin(move_angle*Math.PI/180)*acel);
+		if(!stun && move_angle != 361)acel(acelVec, true);
 		
-		if(!stun && move_angle != 361) {
-			if(vel < mvel) {
-				dx += Math.cos(move_angle*Math.PI/180)*acel;
-				dy += Math.sin(move_angle*Math.PI/180)*acel;
-				
-				vel = (float) Math.sqrt(dx * dx + dy * dy);
-				
-				if(vel > mvel) {
-					dx = dx/vel*mvel;
-					dy = dy/vel*mvel;
-				}
-			}
-			
-			vel = (float) Math.sqrt(dx * dx + dy * dy);
-		}
-		
-		if(dx != 0 || dy != 0){
+		float vel = getVel();
+		if(moveVec.x != 0 || moveVec.y != 0){
 			if(vel < fric) {
-				dx = 0;
-				dy = 0;
+				moveVec.x = 0;
+				moveVec.y = 0;
 			}
 			else {
-				dx -= dx/vel*fric;
-				dy -= dy/vel*fric;
+				moveVec.x -= moveVec.x/vel*fric;
+				moveVec.y -= moveVec.y/vel*fric;
 			}
 		}
-		
-		x += dx;
-		y += dy;
+
+			
+			
+//		float vel = (float) Math.sqrt(moveVec.x * moveVec.x + moveVec.y * moveVec.y);
+//		
+//		if(!stun && move_angle != 361) {
+//			if(vel < mvel) {
+//				moveVec.x += Math.cos(move_angle*Math.PI/180)*acel;
+//				moveVec.y += Math.sin(move_angle*Math.PI/180)*acel;
+//				
+//				vel = (float) Math.sqrt(moveVec.x * moveVec.x + moveVec.y * moveVec.y);
+//				
+//				if(vel > mvel) {
+//					moveVec.x = moveVec.x/vel*mvel;
+//					moveVec.y = moveVec.y/vel*mvel;
+//				}
+//			}
+//			
+//			vel = (float) Math.sqrt(moveVec.x * moveVec.x + moveVec.y * moveVec.y);
+//		}
+//		
+//		if(moveVec.x != 0 || moveVec.y != 0){
+//			if(vel < fric) {
+//				moveVec.x = 0;
+//				moveVec.y = 0;
+//			}
+//			else {
+//				moveVec.x -= moveVec.x/vel*fric;
+//				moveVec.y -= moveVec.y/vel*fric;
+//			}
+//		}
+		if(name.equals("Player"))System.out.println("dx: "+moveVec.x);
+		if(name.equals("Player"))System.out.println("dy: "+moveVec.y);
+		x += moveVec.x;
+		y += moveVec.y;
 		boolean turnRight = true;
 		float originalAngle = angle;
 		if(angle != target_angle) {
@@ -189,7 +212,7 @@ public abstract class Dynamic extends Entity {
 			if(angle < -180) angle += 360;
 		}
 		
-		if(dx != 0 || dy != 0)col(world,true,originalPos);
+		if(moveVec.x != 0 || moveVec.y != 0)col(world,true,originalPos);
 		
 	}
 	
@@ -359,28 +382,50 @@ public abstract class Dynamic extends Entity {
 			if(collide_lt){
 				x+=xChange;
 //				x=center_x*Tile.TS+bBox.width/2;
-				dx = 0;
+				moveVec.x = 0;
 			}
 			if(collide_rt){
 				x-=xChange+0.0001f;
 //				x=(center_x+1)*Tile.TS-bBox.width/2-0.001f;
-				dx = 0;
+				moveVec.x = 0;
 			}
 			if(collide_dn){
 				y+=yChange;
 //				y=center_y*Tile.TS+bBox.height/2;
-				dy = 0;
+				moveVec.y = 0;
 			}
 			if(collide_up){
 				y-=yChange+0.0001f;
 //				y=(center_y+1)*Tile.TS-bBox.height/2-0.001f;
-				dy = 0;
+				moveVec.y = 0;
 			}
 		}
 		if(collide_lt||collide_rt||collide_dn||collide_up){
 			collisionType+=TILE_COL;
 		}
 		return collisionType;
+	}
+	
+	public void acel(Vector2 vector, boolean trim){
+		double velPre = getVel();
+//		moveVec.add(vector);	
+		moveVec.x+=vector.x;
+		moveVec.y+=vector.y;
+		double velAft = getVel();
+		if(trim&&velAft>mvel){
+			if(velPre<mvel){
+
+				moveVec.x = (float) (moveVec.x/velAft*mvel);
+				moveVec.y = (float) (moveVec.y/velAft*mvel);
+			}else{
+				moveVec.x = (float) (moveVec.x/velAft*velPre);
+				moveVec.y = (float) (moveVec.y/velAft*velPre);
+			}
+		}
+	}
+	
+	public float getVel(){
+		return (float) Math.sqrt(moveVec.x*moveVec.x+moveVec.y*moveVec.y);
 	}
 	
 	public void sight(World world){
@@ -450,11 +495,9 @@ public abstract class Dynamic extends Entity {
 	
 	public void equip(World world, Weapon weapon) {
 		weapon.equip(world, this);
-		System.out.println("equip: "+weapon.owner.name);
 	}
 	
 	public void unequip(World world, Weapon weapon) {
-		System.out.println("unequip: "+weapon.owner.name);
 		weapon.unequip(world, this);
 	}
 }
