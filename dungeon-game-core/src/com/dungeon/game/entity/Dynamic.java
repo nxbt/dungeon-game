@@ -21,61 +21,10 @@ public abstract class Dynamic extends Entity {
 	
 	public Vector2 moveVec;
 	
-//	public float move_angle;
-//	public float target_angle;
-//	
-//	public float maxLife;
-//	public float maxStam;
-//	public float maxMana;
-//	
-//	public float life;
-//	public float stam;
-//	public float mana;
-//	
-//	public float stamRegen;
-//	public float manaRegen;
-//	
-//	public int immunityTimer;
-//	public int immunityTime;
-//	public boolean immune;
-//	public boolean immortal;
-//
-//	public int stunTimer;
-//	public boolean stun;
-//	
-//	public boolean fight_mode;
-//	
-//	public float physc_resist;
-//	public float arcan_resist;
-//	public float flame_resist;
-//	public float ligtn_resist;
-//	public float poisn_resist;
-//	
-//	public float base_physc_resist;
-//	public float base_arcan_resist;
-//	public float base_flame_resist;
-//	public float base_ligtn_resist;
-//	public float base_poisn_resist;
-//	
-//	protected float vision;
-//	
-//	public ArrayList<Entity> knownEntities;
-//		
-//	public Inventory inv;
-	
 	public ArrayList<int[]> collisions;
 	
 	public Dynamic(int x, int y) {
 		super(x, y);
-		
-//		immune = true;
-//		immortal = false;
-//		
-//		immunityTime = 10;
-//		
-//		vision = 0;
-//		
-//		knownEntities = new ArrayList<Entity>();
 		
 		collisions = new ArrayList<int[]>();
 		
@@ -89,31 +38,13 @@ public abstract class Dynamic extends Entity {
 		calc(world);
 		phys(world);
 		post(world);
-//		stam_regen();
-//		mana_regen();
-//		sight(world);
 	}
 	
 	//resets some variables at the start of every update cycles
-	public void norm() {
-//		move_angle = 361;
-	}
+	public void norm() {}
 	
 	//calculates velocity and collisions for object
 	public void phys(World world) {
-//		if(stunTimer > 0) stunTimer--;
-//		else if(stun) stun = false;
-//		
-//		if(immunityTimer > 0) immunityTimer--;
-//		else if(!immortal && immune && immunityTimer == 0) immune = false;
-//
-//		float[] originalPos = new float[]{x,y};
-//		
-//		Vector2 acelVec = new Vector2();
-//		acelVec.x = (float) (Math.cos(move_angle*Math.PI/180)*acel);
-//		acelVec.y = (float) (Math.sin(move_angle*Math.PI/180)*acel);
-//		if(!stun && move_angle != 361)acel( acelVec, true );
-		
 		float[] originalPos = new float[]{x,y};
 		
 		float vel = getVel();
@@ -127,95 +58,11 @@ public abstract class Dynamic extends Entity {
 				moveVec.y -= moveVec.y/vel*fric;
 			}
 		}
-
-			
-			
-//		float vel = (float) Math.sqrt(moveVec.x * moveVec.x + moveVec.y * moveVec.y);
-//		
-//		if(!stun && move_angle != 361) {
-//			if(vel < mvel) {
-//				moveVec.x += Math.cos(move_angle*Math.PI/180)*acel;
-//				moveVec.y += Math.sin(move_angle*Math.PI/180)*acel;
-//				
-//				vel = (float) Math.sqrt(moveVec.x * moveVec.x + moveVec.y * moveVec.y);
-//				
-//				if(vel > mvel) {
-//					moveVec.x = moveVec.x/vel*mvel;
-//					moveVec.y = moveVec.y/vel*mvel;
-//				}
-//			}
-//			
-//			vel = (float) Math.sqrt(moveVec.x * moveVec.x + moveVec.y * moveVec.y);
-//		}
-//		
-//		if(moveVec.x != 0 || moveVec.y != 0){
-//			if(vel < fric) {
-//				moveVec.x = 0;
-//				moveVec.y = 0;
-//			}
-//			else {
-//				moveVec.x -= moveVec.x/vel*fric;
-//				moveVec.y -= moveVec.y/vel*fric;
-//			}
-//		}
 		
 		x += moveVec.x;
 		y += moveVec.y;
 		
-//		boolean turnRight = true;
-//		float originalAngle = angle;
-//		if(angle != target_angle) {
-//			float tempAngle = angle+180;
-//			float tempTargetAngle = target_angle+180;
-//			
-//			if(tempAngle>180&&tempTargetAngle>180){
-//				if(tempTargetAngle<tempAngle)turnRight = false;
-//				else turnRight = true;
-//			}else if(tempAngle<180&&tempTargetAngle<180){
-//				if(tempAngle>tempTargetAngle)turnRight = false;
-//				else turnRight = true;
-//			}else if(tempAngle>180&&tempTargetAngle<180){
-//				if(tempTargetAngle<tempAngle-180)turnRight = true;
-//				else turnRight = false;
-//			}else if(tempAngle<180&&tempTargetAngle>180){
-//				if(tempTargetAngle-180>tempAngle)turnRight = false;
-//				else turnRight = true;
-//			}
-//			
-//			if(turnRight)angle+=torq;
-//			else angle-=torq;
-//			
-//			float difference = 0;
-//			float angleModifier1 = 0;
-//			float angleModifier2 = 0;
-//			
-//			if(tempAngle > tempTargetAngle){
-//				angleModifier1 = tempAngle;
-//				angleModifier2 = tempTargetAngle;
-//			}
-//			else {
-//				if(tempAngle == tempTargetAngle)difference = 0;
-//				else {
-//					angleModifier1 = tempTargetAngle;
-//					angleModifier2 = tempAngle;
-//				}
-//			}
-//			
-//			if(angleModifier1-180<angleModifier2){
-//				difference = angleModifier1-angleModifier2;
-//			}
-//			else {
-//				difference = angleModifier2+Math.abs(angleModifier1-360);
-//			}
-//			
-//			if(difference < torq) angle = target_angle;
-//				
-//			if(angle > 180) angle -= 360;
-//			if(angle < -180) angle += 360;
-//		}
-		
 		if(moveVec.x != 0 || moveVec.y != 0)col(world,true,originalPos);
-		
 	}
 	
 	//fix collision to stop gliching into walls
@@ -383,22 +230,18 @@ public abstract class Dynamic extends Entity {
 		if(move){
 			if(collide_lt){
 				x+=xChange;
-//				x=center_x*Tile.TS+bBox.width/2;
 				moveVec.x = 0;
 			}
 			if(collide_rt){
 				x-=xChange+0.0001f;
-//				x=(center_x+1)*Tile.TS-bBox.width/2-0.001f;
 				moveVec.x = 0;
 			}
 			if(collide_dn){
 				y+=yChange;
-//				y=center_y*Tile.TS+bBox.height/2;
 				moveVec.y = 0;
 			}
 			if(collide_up){
 				y-=yChange+0.0001f;
-//				y=(center_y+1)*Tile.TS-bBox.height/2-0.001f;
 				moveVec.y = 0;
 			}
 		}
@@ -410,7 +253,6 @@ public abstract class Dynamic extends Entity {
 	
 	public void acel(Vector2 vector, boolean trim){
 		double velPre = getVel();
-//		moveVec.add(vector);	
 		moveVec.x+=vector.x;
 		moveVec.y+=vector.y;
 		double velAft = getVel();
@@ -429,77 +271,4 @@ public abstract class Dynamic extends Entity {
 	public float getVel(){
 		return (float) Math.sqrt(moveVec.x*moveVec.x+moveVec.y*moveVec.y);
 	}
-	
-//	public void sight(World world){
-//		for(Entity e: world.entities){
-//			if(!knownEntities.contains(e)){
-//				float dist = (float) Math.sqrt(Math.abs(x-e.x)*Math.abs(x-e.x)+Math.abs(y-e.y)*Math.abs(y-e.y));
-//				if(dist < vision*Tile.TS)knownEntities.add(e);
-//			}
-//		}
-//	}
-	
-	//===HELPER METHODS===//
-	
-//	public float damage(float value /*Add an array of Effects*/){
-//		if(immune) return 0;
-//		
-//		float amount = life - Math.max(life-value,0);
-//		life-=value;
-//		
-//		if(life <= 0) killMe = true;
-//		
-//		immunityTimer = immunityTime;
-//		immune = true;
-//		
-//		stunTimer = 20;
-//		stun = true;
-//		
-//		System.out.println(name + " took " + amount + " damage" + (life<=0? " and was killed.":"."));
-//		
-//		return amount;
-//	}
-//	
-//	public float heal(float value /*Add an array of Effects*/){
-//		float amount = Math.min(maxLife, life+value)-life;
-//		life = Math.min(maxLife, life+value);
-//		
-//		System.out.println(name + " gained " + amount + " life.");
-//		
-//		return amount;
-//	}
-//	
-//	public boolean consume_stam(float value) {
-//		if(stam >= value) {
-//			stam -= value;
-//			return true;
-//		}
-//		
-//		return false;
-//	}
-//	
-//	public boolean consume_mana(float value) {
-//		if(mana >= value) {
-//			mana -= value;
-//			return true;
-//		}
-//		
-//		return false;
-//	}
-//	
-//	public void stam_regen() {
-//		if(stam<maxStam)stam = (float) Math.min(stam+stamRegen,maxStam);
-//	}
-//	
-//	public void mana_regen() {
-//		if(mana<maxMana)mana = (float) Math.min(mana+manaRegen,maxMana);
-//	}
-//	
-//	public void equip(World world, Weapon weapon) {
-//		weapon.equip(world, this);
-//	}
-//	
-//	public void unequip(World world, Weapon weapon) {
-//		weapon.unequip(world, this);
-//	}
 }
