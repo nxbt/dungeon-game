@@ -8,7 +8,7 @@ public class PotionSick extends Effect {
 
 	public PotionSick( int duration, Consumable potion) {
 		super("Potion Sickness", duration);
-		// TODO Auto-generated constructor stub
+		
 		this.potion = potion;
 	}
 
