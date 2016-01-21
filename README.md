@@ -6,10 +6,8 @@ This is a top-down rouge-like game written in Java using the Libgdx libraries, a
 Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 
 ##TODO high priority:
-* Add Character class
 * Add more weapons
 * Add Spells
-* Add Effects
 
 ##TODO:
 * Add More Enemies
