@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
+import com.dungeon.game.effect.Immune;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.Weapon;
@@ -24,9 +25,6 @@ public abstract class Character extends Dynamic {
 	
 	public float stamRegen;
 	public float manaRegen;
-	
-	public int immunityTimer;
-	public int immunityTime;
 	public boolean immune;
 	public boolean immortal;
 	public boolean stun;
@@ -56,10 +54,8 @@ public abstract class Character extends Dynamic {
 	public Character(int x, int y) {
 		super(x, y);
 		
-		immune = true;
+		immune = false;
 		immortal = false;
-		
-		immunityTime = 10;
 		
 		vision = 0;
 		
@@ -85,9 +81,6 @@ public abstract class Character extends Dynamic {
 	}
 
 	public void move(World world) {
-		
-		if(immunityTimer > 0) immunityTimer--;
-		else if(!immortal && immune && immunityTimer == 0) immune = false;
 		
 		Vector2 acelVec = new Vector2();
 		acelVec.x = (float) (Math.cos(move_angle*Math.PI/180)*acel);
@@ -184,10 +177,9 @@ public abstract class Character extends Dynamic {
 		
 		if(life <= 0) killMe = true;
 		
-		immunityTimer = immunityTime;
-		immune = true;
+		addEffect(new Immune(10));
 		
-		addEffect(new Stun(100));
+		addEffect(new Stun(20));
 		
 		System.out.println(name + " took " + amount + " damage" + (life<=0? " and was killed.":"."));
 		
