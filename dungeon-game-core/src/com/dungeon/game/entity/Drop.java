@@ -63,14 +63,10 @@ public class Drop extends Static {
 					}
 				}
 				else if(slot.item != null && world.mouse.slot.item == null) {
+					world.mouse.slot.item = slot.item;
+					slot.item = world.mouse.slot.item.clone();
 					slot.item.stack--;
-					world.mouse.slot.item = (Item) slot.item.clone();
 					world.mouse.slot.item.stack = 1;
-				}
-				else if(slot.item == null && world.mouse.slot.item != null) {
-					world.mouse.slot.item.stack--;
-					slot.item = (Item) world.mouse.slot.item.clone();
-					slot.item.stack = 1;
 				}
 				else slot.swap(world.mouse.slot);
 				if(slot.item != null && slot.item.stack == 0) slot.item = null;

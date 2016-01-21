@@ -3,6 +3,8 @@ package com.dungeon.game.entity;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
+import com.dungeon.game.effect.Effect;
+import com.dungeon.game.effect.Stun;
 import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.Tile;
@@ -27,8 +29,6 @@ public abstract class Character extends Dynamic {
 	public int immunityTime;
 	public boolean immune;
 	public boolean immortal;
-
-	public int stunTimer;
 	public boolean stun;
 	
 	public boolean fight_mode;
@@ -48,6 +48,8 @@ public abstract class Character extends Dynamic {
 	protected float vision;
 	
 	public ArrayList<Entity> knownEntities;
+	
+	public ArrayList<Effect> effects;
 		
 	public Inventory inv;
 	
@@ -62,6 +64,8 @@ public abstract class Character extends Dynamic {
 		vision = 0;
 		
 		knownEntities = new ArrayList<Entity>();
+		
+		effects = new ArrayList<Effect>();
 	}
 
 	public void norm() {
@@ -72,16 +76,15 @@ public abstract class Character extends Dynamic {
 		norm();
 		calc(world);
 		move(world);
+		effect();
 		phys(world);
 		post(world);
 		stam_regen();
 		mana_regen();
 		sight(world);
 	}
-	
+
 	public void move(World world) {
-		if(stunTimer > 0) stunTimer--;
-		else if(stun) stun = false;
 		
 		if(immunityTimer > 0) immunityTimer--;
 		else if(!immortal && immune && immunityTimer == 0) immune = false;
@@ -153,6 +156,26 @@ public abstract class Character extends Dynamic {
 		}
 	}
 	
+	public void addEffect(Effect effect){
+		effects.add(effect);
+		effect.begin(this);
+	}
+	
+
+	
+	private void effect() {
+		for(Effect effect: effects){
+			effect.update(this);
+		}
+		for(int i = 0; i <effects.size();i++){
+			if(effects.get(i).killMe){
+				effects.get(i).end(this);
+				effects.remove(i);
+				i--;
+			}
+		}
+	}
+	
 	public float damage(float value /*Add an array of Effects*/){
 		if(immune) return 0;
 		
@@ -164,8 +187,7 @@ public abstract class Character extends Dynamic {
 		immunityTimer = immunityTime;
 		immune = true;
 		
-		stunTimer = 20;
-		stun = true;
+		addEffect(new Stun(100));
 		
 		System.out.println(name + " took " + amount + " damage" + (life<=0? " and was killed.":"."));
 		
