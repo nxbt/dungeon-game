@@ -8,15 +8,13 @@ public class Stun extends Effect {
 		super("Stun", duration);
 	}
 	
-	public void begin(Character character){
+	public void begin(Character character) {
 		character.stun = true;
 	}
 	
-	public void end(Character character){
-		for(Effect effect: character.effects){
-			if(effect instanceof Stun&&!effect.equals(this)){
-				return;
-			}
+	public void end(Character character) {
+		for(Effect effect: character.effects) {
+			if(effect instanceof Stun&&!effect.equals(this)) return;
 		}
 		character.stun = false;
 	}
