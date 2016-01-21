@@ -132,7 +132,7 @@ public class Player extends Character {
 		inv.slot[6].item = new Crap();
 		inv.slot[19].item = new Arrow();
 		inv.slot[20].item = new RubberSword();
-		inv.slot[21].item = new Sword(1, 10,10);
+		inv.slot[21].item = new Sword(10, 10,10);
 		inv.slot[22].item = new  Bow(10, 10, 10);
 		inv.slot[23].item = new OneTaper();
 		
