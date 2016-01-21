@@ -25,8 +25,8 @@ public abstract class Character extends Dynamic {
 	
 	public float stamRegen;
 	public float manaRegen;
+	
 	public boolean immune;
-	public boolean immortal;
 	public boolean stun;
 	
 	public boolean fight_mode;
@@ -55,7 +55,6 @@ public abstract class Character extends Dynamic {
 		super(x, y);
 		
 		immune = false;
-		immortal = false;
 		
 		vision = 0;
 		
@@ -75,8 +74,8 @@ public abstract class Character extends Dynamic {
 		effect();
 		phys(world);
 		post(world);
-		stam_regen();
-		mana_regen();
+		regen_stam();
+		regen_mana();
 		sight(world);
 	}
 
@@ -213,11 +212,11 @@ public abstract class Character extends Dynamic {
 		return false;
 	}
 	
-	public void stam_regen() {
+	public void regen_stam() {
 		if(stam<maxStam)stam = (float) Math.min(stam+stamRegen,maxStam);
 	}
 	
-	public void mana_regen() {
+	public void regen_mana() {
 		if(mana<maxMana)mana = (float) Math.min(mana+manaRegen,maxMana);
 	}
 	
