@@ -1,10 +1,10 @@
 package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.WeaponGraphic;
 import com.dungeon.game.world.World;
+import com.dungeon.game.entity.Character;
 
 public abstract class Weapon extends Equipable{
 	public int damage;
@@ -15,7 +15,7 @@ public abstract class Weapon extends Equipable{
 	public int stage;
 	protected int stageTimer;
 	
-	public Dynamic owner;
+	public Character owner;
 	
 	public Weapon(int damage, int cooldown, int speed, Texture texture){
 		super();
@@ -33,14 +33,14 @@ public abstract class Weapon extends Equipable{
 	
 	public abstract float[] getPos(boolean mousedown, boolean mousepressed);
 	public abstract boolean isInUse();
-	public abstract void hit(Dynamic e, Projectile projectile);
+	public abstract void hit(Character e, Projectile projectile);
 	
-	public void equip(World world, Dynamic e){
+	public void equip(World world, Character e){
 		this.owner = e;
 		world.entities.add(this.graphic);
 	}
 	
-	public void unequip(World world, Dynamic e){
+	public void unequip(World world, Character e){
 		this.owner = null;
 		world.entities.remove(this.graphic);
 	}

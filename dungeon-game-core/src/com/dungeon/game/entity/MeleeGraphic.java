@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.item.Melee;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.World;
+import com.dungeon.game.entity.Character;
 
 public class MeleeGraphic extends WeaponGraphic {
 	
@@ -36,7 +37,7 @@ public class MeleeGraphic extends WeaponGraphic {
 				}
 			}
 		}
-		if(target!=null)weapon.hit((Dynamic) target,null);
+		if(target!=null)weapon.hit((Character) target,null);
 	}
 	
 	public void post(World world) {}

@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dungeon.game.entity.Dynamic;
+import com.dungeon.game.entity.Character;
 import com.dungeon.game.world.World;
 
 public class Slot {
@@ -115,7 +115,7 @@ public class Slot {
 		}
 	}
 	
-	public void consume(World world, Dynamic user) {
+	public void consume(World world, Character user) {
 		if(item!=null){
 			item.stack--;
 			if(item instanceof Consumable)((Consumable)item).use(world, user);

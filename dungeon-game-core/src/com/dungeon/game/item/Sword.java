@@ -3,9 +3,9 @@ package com.dungeon.game.item;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
-import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.MeleeGraphic;
 import com.dungeon.game.entity.Projectile;
+import com.dungeon.game.entity.Character;
 
 public class Sword extends Melee {
 
@@ -259,7 +259,7 @@ public class Sword extends Melee {
 		return !hasHit && (stage == SWING1 || stage == SWING2 || stage == SWING3);
 	}
 	
-	public void hit(Dynamic e, Projectile projectile) {
+	public void hit(Character e, Projectile projectile) {
 		
 		e.knownEntities.add(owner);
 		hasHit = true;

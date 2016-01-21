@@ -20,7 +20,7 @@ import com.dungeon.game.light.Light;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
-public class Player extends Dynamic {
+public class Player extends Character {
 	public final int REACH = 4*Tile.TS;
 	
 	public Item hat;

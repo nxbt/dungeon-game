@@ -4,9 +4,9 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.RangedGraphic;
+import com.dungeon.game.entity.Character;
 
 public class Bow extends Ranged {
 	
@@ -130,7 +130,7 @@ public class Bow extends Ranged {
 	}
 
 	@Override
-	public void hit(Dynamic e, Projectile projectile) {
+	public void hit(Character e, Projectile projectile) {
 		e.knownEntities.add(projectile.owner);
 		if(e.damage(damage*projectile.power/10)>0){
 			Vector2 knockVec = new Vector2();

@@ -3,6 +3,7 @@ package com.dungeon.game.item;
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.world.World;
+import com.dungeon.game.entity.Character;
 
 public class LifePotion extends Consumable {
 
@@ -21,7 +22,7 @@ public class LifePotion extends Consumable {
 
 
 	@Override
-	public void use(World world, Dynamic user) {
+	public void use(World world, Character user) {
 		user.heal(30);
 
 	}

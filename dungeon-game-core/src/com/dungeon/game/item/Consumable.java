@@ -1,6 +1,6 @@
 package com.dungeon.game.item;
 
-import com.dungeon.game.entity.Dynamic;
+import com.dungeon.game.entity.Character;
 import com.dungeon.game.world.World;
 
 public abstract class Consumable extends Item {
@@ -12,5 +12,5 @@ public abstract class Consumable extends Item {
 		this.name = name;
 	}
 
-	public abstract void use(World world, Dynamic user);
+	public abstract void use(World world, Character user);
 }

@@ -8,7 +8,7 @@ import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
-public abstract class Enemy extends Dynamic {
+public abstract class Enemy extends Character {
 	public int[] moveTo;
 	public ArrayList<int[]> path;
 	

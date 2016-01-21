@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.item.Slot;
+import com.dungeon.game.entity.Character;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.World;
 
@@ -16,7 +17,7 @@ public abstract class Projectile extends Dynamic {
 	
 	public float range;
 	
-	public Dynamic owner;
+	public Character owner;
 	
 	protected Slot slot;
 	
@@ -54,7 +55,7 @@ public abstract class Projectile extends Dynamic {
 		
 		for(Entity e: world.entities){
 			if(!e.equals(owner)&& e.solid && e instanceof Dynamic && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
-				weapon.hit((Dynamic) e,this);
+				weapon.hit((Character) e,this);
 				killMe = true;
 			}
 		}
