@@ -12,5 +12,5 @@ public abstract class Consumable extends Item {
 		this.name = name;
 	}
 
-	public abstract void use(World world, Character user);
+	public abstract boolean use(World world, Character user);
 }

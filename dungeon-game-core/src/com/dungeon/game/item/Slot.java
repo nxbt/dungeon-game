@@ -116,9 +116,8 @@ public class Slot {
 	}
 	
 	public void consume(World world, Character user) {
-		if(item!=null){
+		if(item!=null && item instanceof Consumable && ((Consumable)item).use(world, user)){
 			item.stack--;
-			if(item instanceof Consumable)((Consumable)item).use(world, user);
 			if(item.stack == 0) item = null;
 		}
 	}
