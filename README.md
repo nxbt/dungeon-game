@@ -7,6 +7,8 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 
 ##TODO high priority:
 * Add more weapons
+* Add more effects
+* Add effects to equipables
 * Add Spells
 
 ##TODO:
