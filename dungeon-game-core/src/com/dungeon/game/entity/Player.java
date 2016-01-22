@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.effect.Dizzy;
+import com.dungeon.game.effect.ManaRegen;
+import com.dungeon.game.effect.StamRegen;
 import com.dungeon.game.item.Arrow;
 import com.dungeon.game.item.Bow;
 import com.dungeon.game.item.Crap;
@@ -35,6 +38,11 @@ public class Player extends Character {
 	
 	public Player(int x, int y) {
 		super(x, y);
+		
+		effects.add(new StamRegen(-1, 0.1f));
+		effects.add(new ManaRegen(-1, 0.1f));
+		
+		effects.add(new Dizzy(-1, 5));
 	}
 	
 	public void init() {
@@ -49,9 +57,6 @@ public class Player extends Character {
 		life = maxLife;
 		stam = maxStam;
 		mana = maxMana;
-		
-		stamRegen = 0.1f;
-		manaRegen = 0.1f;
 		
 		acel = 1.5f;
 		mvel = 5;

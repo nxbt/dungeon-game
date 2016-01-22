@@ -1,12 +1,11 @@
 package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.dungeon.game.entity.Dynamic;
-import com.dungeon.game.world.World;
 import com.dungeon.game.effect.Effect;
-import com.dungeon.game.effect.Poison;
+import com.dungeon.game.effect.LifeRegen;
 import com.dungeon.game.effect.PotionSick;
 import com.dungeon.game.entity.Character;
+import com.dungeon.game.world.World;
 
 public class LifePotion extends Consumable {
 
@@ -31,7 +30,7 @@ public class LifePotion extends Consumable {
 				if(((PotionSick)effect).potion instanceof LifePotion)return false;
 			}
 		}
-		user.addEffect(new Poison(0.05f,50));
+		user.addEffect(new LifeRegen(60,30));
 		user.addEffect(new PotionSick(60,new LifePotion()));
 		return true;
 

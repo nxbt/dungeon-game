@@ -23,9 +23,6 @@ public abstract class Character extends Dynamic {
 	public float stam;
 	public float mana;
 	
-	public float stamRegen;
-	public float manaRegen;
-	
 	public boolean immune;
 	public boolean stun;
 	
@@ -213,7 +210,7 @@ public abstract class Character extends Dynamic {
 		if(stam<maxStam) stam = (float) Math.min(stam+value,maxStam);
 	}
 	
-	public void regen_mana(float value) {
+	public void gain_mana(float value) {
 		if(mana<maxMana)mana = (float) Math.min(mana+value,maxMana);
 	}
 	

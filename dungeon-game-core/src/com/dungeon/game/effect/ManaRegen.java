@@ -15,6 +15,6 @@ public class ManaRegen extends Effect {
 	}
 	
 	public void calc(Character character){
-		character.gain_stam(rate);
+		character.gain_mana(rate);
 	}
 }

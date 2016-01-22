@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.effect.ManaRegen;
+import com.dungeon.game.effect.StamRegen;
 import com.dungeon.game.item.Arrow;
 import com.dungeon.game.item.Bow;
 import com.dungeon.game.item.Inventory;
@@ -19,7 +21,9 @@ public class Goon extends Enemy {
 	public Goon(int x, int y) {
 		super(x, y);
 		vision = 5;
-
+		
+		effects.add(new StamRegen(-1, 0.1f));
+		effects.add(new ManaRegen(-1, 0.1f));
 	}
 
 	@Override
@@ -35,9 +39,6 @@ public class Goon extends Enemy {
 		life = maxLife;
 		stam = maxStam;
 		mana = maxMana;
-		
-		stamRegen = 0.1f;
-		manaRegen = 0.1f;
 		
 		acel = 1.5f;
 		mvel = 5;
