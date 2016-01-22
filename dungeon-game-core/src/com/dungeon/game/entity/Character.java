@@ -74,8 +74,6 @@ public abstract class Character extends Dynamic {
 		move(world);
 		phys(world);
 		post(world);
-		regen_stam();
-		regen_mana();
 		sight(world);
 	}
 
@@ -179,21 +177,10 @@ public abstract class Character extends Dynamic {
 		
 		addEffect(new Stun(20));
 		
-		System.out.println(name + " took " + amount + " damage" + (life<=0? " and was killed.":"."));
-		
 		return amount;
 	}
 	
-	public float heal(float value /*Add an array of Effects*/){
-		float amount = Math.min(maxLife, life+value)-life;
-		life = Math.min(maxLife, life+value);
-		
-		System.out.println(name + " gained " + amount + " life.");
-		
-		return amount;
-	}
-	
-	public boolean consume_stam(float value) {
+	public boolean use_stam(float value) {
 		if(stam >= value) {
 			stam -= value;
 			return true;
@@ -202,7 +189,7 @@ public abstract class Character extends Dynamic {
 		return false;
 	}
 	
-	public boolean consume_mana(float value) {
+	public boolean use_mana(float value) {
 		if(mana >= value) {
 			mana -= value;
 			return true;
@@ -211,11 +198,18 @@ public abstract class Character extends Dynamic {
 		return false;
 	}
 	
-	public void regen_stam() {
+	public float gain_life(float value /*Add an array of Effects*/){
+		float amount = Math.min(maxLife, life+value)-life;
+		life = Math.min(maxLife, life+value);
+		
+		return amount;
+	}
+	
+	public void gain_stam() {
 		if(stam<maxStam)stam = (float) Math.min(stam+stamRegen,maxStam);
 	}
 	
-	public void regen_mana() {
+	public void gain_mana() {
 		if(mana<maxMana)mana = (float) Math.min(mana+manaRegen,maxMana);
 	}
 	
