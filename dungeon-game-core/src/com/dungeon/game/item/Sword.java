@@ -101,7 +101,7 @@ public class Sword extends Melee {
 			polarAngle = REST_PANG;
 			angle = REST_ANGL;
 			
-			if(mousedown && owner.consume_stam(SWING1_STAM)){
+			if(mousedown && owner.use_stam(SWING1_STAM)){
 				stage=WINDUP1;
 				stageTimer = 0;
 			}
@@ -136,7 +136,7 @@ public class Sword extends Melee {
 				polarAngle = SWING1_PANG;
 				angle = SWING1_ANGL;
 			}
-			if(index>SWING1_TIME && mousedown && owner.consume_stam(SWING2_STAM)){
+			if(index>SWING1_TIME && mousedown && owner.use_stam(SWING2_STAM)){
 				stageTimer = 0;
 				stage = WINDUP2;
 			}
@@ -183,7 +183,7 @@ public class Sword extends Melee {
 				polarAngle = SWING2_PANG;
 				angle = SWING2_ANGL;
 			}
-			if(index>SWING2_TIME && mousedown && owner.consume_stam(SWING3_STAM)){
+			if(index>SWING2_TIME && mousedown && owner.use_stam(SWING3_STAM)){
 				stageTimer = 0;
 				stage = WINDUP3;
 			}
