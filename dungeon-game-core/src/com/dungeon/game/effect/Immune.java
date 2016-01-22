@@ -12,7 +12,6 @@ public class Immune extends Effect {
 	}
 	
 	public void end(Character character) {
-		if(character.immortal)return;
 		for(Effect effect: character.effects){
 			if(effect instanceof Immune&&!effect.equals(this)) return;
 		}

@@ -11,7 +11,9 @@ public class Dizzy extends Effect {
 	}
 	
 	public void calc(Character character){
-	character.moveAngle += dizzyness;
+	if(character.move_angle!=361)character.move_angle += dizzyness;
 	dizzyness += Math.random()*amount*2f-amount;
+	if(dizzyness>amount*10)dizzyness = amount*10;
+	if(dizzyness<-amount*10)dizzyness = -amount*10;
 	}
 }

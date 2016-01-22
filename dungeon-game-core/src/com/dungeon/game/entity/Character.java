@@ -70,8 +70,8 @@ public abstract class Character extends Dynamic {
 	public void update(World world) {
 		norm();
 		calc(world);
-		move(world);
 		effect();
+		move(world);
 		phys(world);
 		post(world);
 		regen_stam();
@@ -156,14 +156,13 @@ public abstract class Character extends Dynamic {
 
 	
 	private void effect() {
-		for(Effect effect: effects){
-			effect.update(this);
+		for(int i = effects.size()-1;i>=0;i--){
+			effects.get(i).update(this);
 		}
-		for(int i = 0; i <effects.size();i++){
+		for(int i = effects.size()-1;i>=0;i--){
 			if(effects.get(i).killMe){
 				effects.get(i).end(this);
 				effects.remove(i);
-				i--;
 			}
 		}
 	}
@@ -176,7 +175,7 @@ public abstract class Character extends Dynamic {
 		
 		if(life <= 0) killMe = true;
 		
-		addEffect(new Immune(10));
+//		addEffect(new Immune(10));
 		
 		addEffect(new Stun(20));
 		
