@@ -1,11 +1,18 @@
 package com.dungeon.game.effect;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Character;
+import com.dungeon.game.entity.hud.EffectGraphic;
+import com.dungeon.game.item.Item;
 public abstract class Effect {
+	
+	public static Texture texture;
+	
+	public EffectGraphic graphic;
 
 	private String name;
 	
-	private int duration;
+	public int duration;
 	
 	public boolean killMe;
 	
@@ -27,6 +34,10 @@ public abstract class Effect {
 	public void begin(Character character){}
 	
 	public void end(Character character){}
+
+	public String getHoveredText() {
+		return null;
+	}
 	
 	
 }

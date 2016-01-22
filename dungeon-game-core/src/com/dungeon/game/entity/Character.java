@@ -146,6 +146,7 @@ public abstract class Character extends Dynamic {
 	public void addEffect(Effect effect){
 		effects.add(effect);
 		effect.begin(this);
+		if(this instanceof Player&&effect.graphic!=null)((Player)this).effectGraphics.add(effect.graphic);
 	}
 	
 
@@ -156,7 +157,8 @@ public abstract class Character extends Dynamic {
 		}
 		for(int i = effects.size()-1;i>=0;i--){
 			if(effects.get(i).killMe){
-				effects.get(i).end(this);
+				effects.get(i).end(this);				
+				if(this instanceof Player&&effects.get(i).graphic!=null)((Player)this).effectGraphics.remove(effects.get(i).graphic);
 				effects.remove(i);
 			}
 		}
@@ -170,7 +172,7 @@ public abstract class Character extends Dynamic {
 		
 		if(life <= 0) killMe = true;
 		
-		System.out.println(name + " took " + amount + " damage" + (life<=0? " and was killed.":"."));
+//		System.out.println(name + " took " + amount + " damage" + (life<=0? " and was killed.":"."));
 		if(amount>0&&hitEffects!=null){
 			for(Effect effect: hitEffects){
 				addEffect(effect);
@@ -201,7 +203,7 @@ public abstract class Character extends Dynamic {
 		float amount = Math.min(maxLife, life+value)-life;
 		life = Math.min(maxLife, life+value);
 		
-		System.out.println(name + " gained " + amount + " life.");
+//		System.out.println(name + " gained " + amount + " life.");
 		
 		return amount;
 	}

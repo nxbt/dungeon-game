@@ -1,5 +1,7 @@
 package com.dungeon.game.entity;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -7,6 +9,8 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.Dizzy;
 import com.dungeon.game.effect.ManaRegen;
 import com.dungeon.game.effect.StamRegen;
+import com.dungeon.game.entity.hud.EffectGraphic;
+import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.item.Arrow;
 import com.dungeon.game.item.Bow;
 import com.dungeon.game.item.Crap;
@@ -36,9 +40,12 @@ public class Player extends Character {
 	
 	private boolean attacking;
 	
+	public ArrayList<EffectGraphic> effectGraphics;
+	
 	public Player(int x, int y) {
 		super(x, y);
-		
+
+		effectGraphics = new ArrayList<EffectGraphic>();
 		effects.add(new StamRegen(-1, 0.1f));
 		effects.add(new ManaRegen(-1, 0.1f));
 	}
@@ -146,6 +153,18 @@ public class Player extends Character {
 	}
 	
 	public void calc(World world) { //TODO: complete rework of owner code!
+		
+		for(EffectGraphic eg: effectGraphics){
+			if(!world.hudEntities.contains(eg))world.hudEntities.add(eg);
+		}
+		
+		for(int i = world.hudEntities.size()-1;i>=0;i--){
+			if(world.hudEntities.get(i) instanceof EffectGraphic&&!effectGraphics.contains(world.hudEntities.get(i)))world.hudEntities.remove(world.hudEntities.get(i));
+		}
+		
+		for(EffectGraphic eg: effectGraphics){
+			eg.update(world);
+		}
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1))inv.slot[0].consume(world, this);
 		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2))inv.slot[1].consume(world, this);

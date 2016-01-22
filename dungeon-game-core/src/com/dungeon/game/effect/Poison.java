@@ -1,6 +1,8 @@
 package com.dungeon.game.effect;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Character;
+import com.dungeon.game.entity.hud.EffectGraphic;
 
 public class Poison extends Effect {
 	private static float TICKLENGTH = 30;
@@ -15,6 +17,8 @@ public class Poison extends Effect {
 		        this.rate = rate;
 		        this.dmg = dmg;
 		        tickTimer = TICKLENGTH;
+				texture = new Texture("poison.png");
+				graphic = new EffectGraphic(this);
 	    }
 	    
 	    public void update(Character character){
@@ -30,4 +34,8 @@ public class Poison extends Effect {
     	        	tickTimer = TICKLENGTH;
     			}else tickTimer--;
 	    }
+    	
+    	public String getHoveredText() {
+    		return "Remaining Damage: "+dmg;
+    	}
 }
