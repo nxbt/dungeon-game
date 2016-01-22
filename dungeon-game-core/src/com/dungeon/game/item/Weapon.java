@@ -1,9 +1,12 @@
 package com.dungeon.game.item;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.WeaponGraphic;
 import com.dungeon.game.world.World;
+import com.dungeon.game.effect.Effect;
 import com.dungeon.game.entity.Character;
 
 public abstract class Weapon extends Equipable{
@@ -43,5 +46,12 @@ public abstract class Weapon extends Equipable{
 	public void unequip(World world, Character e){
 		this.owner = null;
 		world.entities.remove(this.graphic);
+	}
+	
+	public ArrayList<Effect> hitEffects(){
+		ArrayList<Effect> effects = new ArrayList<Effect>();
+		
+		return effects;
+		
 	}
 }

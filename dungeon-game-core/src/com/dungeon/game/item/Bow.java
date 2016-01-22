@@ -1,11 +1,15 @@
 package com.dungeon.game.item;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.RangedGraphic;
+import com.dungeon.game.effect.Effect;
+import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.Character;
 
 public class Bow extends Ranged {
@@ -132,12 +136,19 @@ public class Bow extends Ranged {
 	@Override
 	public void hit(Character e, Projectile projectile) {
 		e.knownEntities.add(projectile.owner);
-		if(e.damage(damage*projectile.power/10)>0){
+		if(e.damage(damage*projectile.power/10,hitEffects())>0){
 			Vector2 knockVec = new Vector2();
 			knockVec.x = projectile.moveVec.x/strength*knockstr;
 			knockVec.y = projectile.moveVec.y/strength*knockstr;
 			e.acel(knockVec, false);
 		}
+		
+	}
+	
+	public ArrayList<Effect> hitEffects(){
+		ArrayList<Effect> effects = new ArrayList<Effect>();
+		effects.add(new Stun(30));
+		return effects;
 		
 	}
 

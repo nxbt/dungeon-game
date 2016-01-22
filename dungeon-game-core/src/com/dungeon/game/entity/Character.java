@@ -162,7 +162,7 @@ public abstract class Character extends Dynamic {
 		}
 	}
 	
-	public float damage(float value /*Add an array of Effects*/){
+	public float damage(float value /*Add an array of Effects*/, ArrayList<Effect> hitEffects){
 		if(immune) return 0;
 		
 		float amount = life - Math.max(life-value,0);
@@ -170,12 +170,12 @@ public abstract class Character extends Dynamic {
 		
 		if(life <= 0) killMe = true;
 		
-//		addEffect(new Immune(10));
-		
-		addEffect(new Stun(20));
-		
 		System.out.println(name + " took " + amount + " damage" + (life<=0? " and was killed.":"."));
-		
+		if(amount>0&&hitEffects!=null){
+			for(Effect effect: hitEffects){
+				addEffect(effect);
+			}
+		}
 		return amount;
 	}
 	
