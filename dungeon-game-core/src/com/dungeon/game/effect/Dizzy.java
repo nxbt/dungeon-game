@@ -24,4 +24,8 @@ public class Dizzy extends Effect {
 	public String getHoveredText() {
 		return Math.round(duration/6)/10f+" secs";
 	}
+	
+	public int getNum() {
+		return (int) Math.ceil(duration/60f);
+	}
 }

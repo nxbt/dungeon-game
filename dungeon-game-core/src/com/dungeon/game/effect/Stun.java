@@ -27,5 +27,9 @@ public class Stun extends Effect {
 		return Math.round(duration/6)/10f+" secs";
 	}
 	
+	public int getNum() {
+		return (int) Math.ceil(duration/60f);
+	}
+	
 
 }

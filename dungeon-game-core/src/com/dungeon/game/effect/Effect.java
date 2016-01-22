@@ -36,7 +36,12 @@ public abstract class Effect {
 	public void end(Character character){}
 
 	public String getHoveredText() {
-		return null;
+		return "";
+	}
+
+	public int getNum() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

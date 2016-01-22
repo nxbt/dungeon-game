@@ -25,6 +25,10 @@ public class LifeRegen extends Effect {
 	}
 	
 	public String getHoveredText() {
-		return rate*60f+" hp/sec \n"+Math.round(duration/6)/10f+" secs";
+		return Math.round(rate*60f)+" hp/sec \n"+Math.round(duration/6)/10f+" secs";
+	}
+	
+	public int getNum() {
+		return (int) Math.ceil(duration/60f);
 	}
 }

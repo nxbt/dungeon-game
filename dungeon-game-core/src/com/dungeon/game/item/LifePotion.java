@@ -32,7 +32,7 @@ public class LifePotion extends Consumable {
 				if(((PotionSick)effect).potion instanceof LifePotion)return false;
 			}
 		}
-		user.addEffect(new LifeRegen(60,30));
+		user.addEffect(new LifeRegen(180,40));
 		user.addEffect(new PotionSick(60,new LifePotion()));
 		return true;
 

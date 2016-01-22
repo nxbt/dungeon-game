@@ -36,6 +36,10 @@ public class Poison extends Effect {
 	    }
     	
     	public String getHoveredText() {
-    		return "Remaining Damage: "+dmg;
+    		return "Remaining Damage: "+Math.round(dmg);
+    	}
+    	
+    	public int getNum() {
+    		return (int)dmg;
     	}
 }
