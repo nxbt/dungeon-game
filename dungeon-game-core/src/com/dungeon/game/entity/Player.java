@@ -41,8 +41,6 @@ public class Player extends Character {
 		
 		effects.add(new StamRegen(-1, 0.1f));
 		effects.add(new ManaRegen(-1, 0.1f));
-		
-		effects.add(new Dizzy(-1, 5));
 	}
 	
 	public void init() {
