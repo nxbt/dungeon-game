@@ -11,7 +11,9 @@ public class Inventory {
 	
 	public InvGraphic graphic;
 	
-	public Inventory(int[][] layout, String graphic, int x, int y, int dragX, int dragY, int dragWidth, int dragHeight) {
+	protected World world;
+	
+	public Inventory(World world, int[][] layout, String graphic, int x, int y, int dragX, int dragY, int dragWidth, int dragHeight) {
 		
 		slot = new Slot[layout.length];
 		
@@ -19,23 +21,23 @@ public class Inventory {
 			slot[i] = new Slot(layout[i], this);
 		}
 		
-		this.graphic = new InvGraphic(graphic, this, x, y, dragX, dragY, dragWidth, dragHeight);
+		this.graphic = new InvGraphic(world, graphic, this, x, y, dragX, dragY, dragWidth, dragHeight);
 	}
 	
-	public void hovered(World world) {
+	public void hovered() {
 		for(Slot s: slot) {
 			if(s.x + graphic.x < world.mouse.x && s.x + graphic.x + Item.SIZE > world.mouse.x && s.y + graphic.y < world.mouse.y && s.y + graphic.y + Item.SIZE > world.mouse.y) s.hovered(world);
 		}
 	}
 	
-	public void calc(World world) {
+	public void calc() {
 		for(Slot s: slot) {
 			s.update(world);
 		}
 	}
 	
-	public void update(World world) {
-		calc(world);
+	public void update() {
+		calc();
 	}
 	
 	public Slot contains(Item item) {

@@ -20,8 +20,8 @@ public abstract class Weapon extends Equipable{
 	
 	public Character owner;
 	
-	public Weapon(int damage, int cooldown, int speed, Texture texture){
-		super();
+	public Weapon(World world, int damage, int cooldown, int speed, Texture texture){
+		super(world);
 		maxStack = 1;
 		this.damage = damage;
 		this.cooldown = cooldown;

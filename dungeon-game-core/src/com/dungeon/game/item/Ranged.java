@@ -3,9 +3,8 @@ package com.dungeon.game.item;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.entity.RangedGraphic;
 import com.dungeon.game.entity.Projectile;
+import com.dungeon.game.world.World;
 
 public abstract class Ranged extends Weapon {
 
@@ -20,8 +19,8 @@ public abstract class Ranged extends Weapon {
 	
 	public ArrayList<Projectile> projectiles;
 	
-	public Ranged(int damage, int cooldown, int speed, Texture texture) {
-		super(damage, cooldown, speed, texture);
+	public Ranged(World world, int damage, int cooldown, int speed, Texture texture) {
+		super(world, damage, cooldown, speed, texture);
 		projectiles = new ArrayList<Projectile>();
 	}
 
