@@ -33,7 +33,7 @@ public class LifePotion extends Consumable {
 			}
 		}
 		user.addEffect(new LifeRegen(180,40));
-		user.addEffect(new PotionSick(60,new LifePotion()));
+		user.addEffect(new PotionSick(180,new LifePotion()));
 		return true;
 
 	}

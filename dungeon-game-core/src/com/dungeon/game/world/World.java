@@ -24,7 +24,7 @@ import com.dungeon.game.entity.hud.HealthBar;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.ManaBar;
 import com.dungeon.game.entity.hud.Mouse;
-import com.dungeon.game.entity.hud.StaminaBar;
+import com.dungeon.game.entity.hud.StamBar;
 import com.dungeon.game.pathing.AreaMap;
 
 public class World {
@@ -85,7 +85,7 @@ public class World {
 		entities.add(0,player);
 
 		hudEntities.add(new HealthBar(100,20));
-		hudEntities.add(new StaminaBar(220,20));
+		hudEntities.add(new StamBar(220,20));
 		hudEntities.add(new ManaBar(340,20));
 		
 		fps = new BitmapFont(Gdx.files.internal("main_text.fnt"));
