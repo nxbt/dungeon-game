@@ -46,8 +46,8 @@ public class Player extends Character {
 		super(world, x, y);
 
 		effectGraphics = new ArrayList<EffectGraphic>();
-		effects.add(new StamRegen(-1, 0.1f));
-		effects.add(new ManaRegen(-1, 0.1f));
+		effects.add(new StamRegen(world, this, -1, 0.1f));
+		effects.add(new ManaRegen(world, this, -1, 0.1f));
 	}
 	
 	public void init() {

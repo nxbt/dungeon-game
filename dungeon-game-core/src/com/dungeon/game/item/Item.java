@@ -31,7 +31,9 @@ public abstract class Item implements Cloneable {
 	
 	public float dropChance;
 	
-	public Item() {
+	private World world;
+	
+	public Item(World world) {
 		stack = 1;
 		
 		init();

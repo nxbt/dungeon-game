@@ -22,8 +22,8 @@ public class Goon extends Enemy {
 		super(world, x, y);
 		vision = 5;
 		
-		effects.add(new StamRegen(-1, 0.1f));
-		effects.add(new ManaRegen(-1, 0.1f));
+		effects.add(new StamRegen(world, this, -1, 0.1f));
+		effects.add(new ManaRegen(world, this, -1, 0.1f));
 	}
 
 	@Override

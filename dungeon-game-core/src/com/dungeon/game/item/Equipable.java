@@ -8,8 +8,8 @@ public abstract class Equipable extends Item {
 	public int bonus_sp;
 	public int bonus_mp;
 	
-	public Equipable() {
-		
+	public Equipable(World world) {
+		super(world);
 	}
 	
 	public void update(World world, Entity ent) {}
