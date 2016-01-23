@@ -181,7 +181,7 @@ public class Player extends Character {
 				if(rightEquiped != null) equip(rightEquiped);
 				
 				if(world.hudEntities.indexOf(inv.graphic) > -1) {
-					inv.graphic.close(world);
+					inv.graphic.close();
 				}
 			}
 			else {
@@ -232,9 +232,9 @@ public class Player extends Character {
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.E) && !fight_mode) {
 			if(world.hudEntities.indexOf(inv.graphic) == -1) {
-				inv.graphic.open(world);
+				inv.graphic.open();
 			}
-			else inv.graphic.close(world);
+			else inv.graphic.close();
 		}
 		
 		boolean inp_lt = false;

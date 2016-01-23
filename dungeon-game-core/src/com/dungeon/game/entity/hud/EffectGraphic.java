@@ -17,8 +17,8 @@ public class EffectGraphic extends Hud {
 	
 	private BitmapFont font;
 
-	public EffectGraphic(Effect effect) {
-		super(0, 0);
+	public EffectGraphic(World world, Effect effect) {
+		super(world, 0, 0);
 		this.effect = effect;
 		sprite = effect.texture;
 		// TODO Auto-generated constructor stub
@@ -34,27 +34,27 @@ public class EffectGraphic extends Hud {
 	}
 
 	@Override
-	public void calc(World world) {
+	public void calc() {
 		System.out.println("check");
 		x = 0;
 		y = 320-40*world.player.effectGraphics.indexOf(this);
 	}
 
 	@Override
-	public void post(World world) {
+	public void post() {
 
 	}
 	
 	@Override
-	public void hovered(World world) {
+	public void hovered() {
 		world.descBox.updateText(effect.getHoveredText());
 	}
 	
-	public void open(World world) {
+	public void open() {
 		world.hudEntities.add(0, this);
 	}
 	
-	public void close(World world) {
+	public void close() {
 		world.hudEntities.remove(this);
 	}
 	

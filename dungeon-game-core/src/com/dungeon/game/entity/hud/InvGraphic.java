@@ -19,8 +19,8 @@ public class InvGraphic extends Hud {
 	private int dragOff_x;
 	private int dragOff_y;
 	
-	public InvGraphic(String sprite, Inventory inv, int x, int y, int dragX, int dragY, int dragWidth, int dragHeight) {
-		super(x, y);
+	public InvGraphic(World world, String sprite, Inventory inv, int x, int y, int dragX, int dragY, int dragWidth, int dragHeight) {
+		super(world, x, y);
 		
 		this.slot = inv.slot;
 		
@@ -41,7 +41,7 @@ public class InvGraphic extends Hud {
 	}
 
 	@Override
-	public void calc(World world) {
+	public void calc() {
 		if(drag){
 			x = world.mouse.x-dragOff_x;
 			y = world.mouse.y-dragOff_y;
@@ -59,7 +59,7 @@ public class InvGraphic extends Hud {
 	}
 	
 	@Override
-	public void hovered(World world) {
+	public void hovered() {
 		if(world.mouse.x>x+dragBar_x&&world.mouse.x<x+dragBar_x+dragBar_width&&world.mouse.y>y+dragBar_y&&world.mouse.y<y+dragBar_y+dragBar_height&&world.mouse.lb_pressed){
 			dragOff_x = (int) (world.mouse.x-x);
 			dragOff_y = (int) (world.mouse.y-y);
@@ -70,11 +70,11 @@ public class InvGraphic extends Hud {
 		}
 	}
 	
-	public void open(World world) {
+	public void open() {
 		world.hudEntities.add(0, this);
 	}
 	
-	public void close(World world) {
+	public void close() {
 		world.hudEntities.remove(this);
 		drag = false;
 	}
@@ -88,5 +88,5 @@ public class InvGraphic extends Hud {
 		}
 	}
 	
-	public void post(World world) {}
+	public void post() {}
 }

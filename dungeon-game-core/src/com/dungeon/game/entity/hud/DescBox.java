@@ -22,8 +22,8 @@ public class DescBox extends Hud {
 	
 	BitmapFont desc;
 	
-	public DescBox() {
-		super(0, 0);
+	public DescBox(World world) {
+		super(world, 0, 0);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class DescBox extends Hud {
 	}
 
 	@Override
-	public void calc(World world) {
+	public void calc() {
 		x = world.mouse.x;
 		y = world.mouse.y;
 		
@@ -98,5 +98,5 @@ public class DescBox extends Hud {
 		}
 	}
 	
-	public void post(World world) {}
+	public void post() {}
 }

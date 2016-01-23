@@ -62,13 +62,13 @@ public class Chest extends Static {
 	public void calc() {
 		if(world.hudEntities.contains(inv.graphic)) {
 			if(world.player.fight_mode||(Math.sqrt(Math.pow((x+d_width/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+d_height/2) - (world.player.y + world.player.d_height/2), 2))) >= world.player.REACH){
-				inv.graphic.close(world);
+				inv.graphic.close();
 			}
 			for(int i = 0; i< world.curFloor.tm.length;i++){
 				for(int k = 0; k <world.curFloor.tm[i].length;k++){
 					if(world.curFloor.tm[k][i].data==1){
 						float[] verticies = new float[]{i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,(i)*Tile.TS,(k+1)*Tile.TS};
-						if(Intersector.intersectSegmentPolygon(new Vector2(x,y), new Vector2(world.player.x,world.player.y), new Polygon(verticies))) inv.graphic.close(world);
+						if(Intersector.intersectSegmentPolygon(new Vector2(x,y), new Vector2(world.player.x,world.player.y), new Polygon(verticies))) inv.graphic.close();
 					}
 				}
 			}
@@ -78,9 +78,9 @@ public class Chest extends Static {
 	public void hovered() {
 		if(world.mouse.rb_pressed&&!world.player.fight_mode){
 			if(world.hudEntities.contains(inv.graphic)){
-				inv.graphic.close(world);
+				inv.graphic.close();
 			}
-			else inv.graphic.open(world);
+			else inv.graphic.open();
 		}
 	}
 	

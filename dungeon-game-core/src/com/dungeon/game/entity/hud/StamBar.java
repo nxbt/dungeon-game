@@ -6,16 +6,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.dungeon.game.world.World;
 
 public class StamBar extends StatusBar {
-	public StamBar(int x, int y){
-		super(x, y);
+	public StamBar(World world, int x, int y){
+		super(world, x, y);
 		filler = new TiledDrawable(new TextureRegion(new Texture("energy.png")));
 	}
 
 	@Override
-	public void calc(World world) {
+	public void calc() {
 		cur = world.player.stam;
 		max = world.player.maxStam;
 	}
 	
-	public void post(World world) {}
+	public void post() {}
 }

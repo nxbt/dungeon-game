@@ -6,16 +6,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.dungeon.game.world.World;
 
 public class HealthBar extends StatusBar {
-	public HealthBar(int x, int y){
-		super(x, y);
+	public HealthBar(World world, int x, int y){
+		super(world, x, y);
 		filler = new TiledDrawable(new TextureRegion(new Texture("heart.png")));
 	}
 
 	@Override
-	public void calc(World world) {
+	public void calc() {
 		cur = world.player.life;
 		max = world.player.maxLife;
 	}
 	
-	public void post(World world) {}
+	public void post() {}
 }

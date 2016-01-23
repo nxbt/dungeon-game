@@ -4,8 +4,8 @@ import com.dungeon.game.world.World;
 
 public class Button extends Hud {
 
-	public Button(int x, int y) {
-		super(x, y);
+	public Button(World world, int x, int y){
+		super(world, x, y);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -16,13 +16,13 @@ public class Button extends Hud {
 	}
 
 	@Override
-	public void calc(World world) {
+	public void calc() {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void post(World world) {
+	public void post() {
 		// TODO Auto-generated method stub
 
 	}

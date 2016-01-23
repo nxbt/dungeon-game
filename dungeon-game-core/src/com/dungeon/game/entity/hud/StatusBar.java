@@ -15,8 +15,8 @@ public abstract class StatusBar extends Hud {
 	
 	protected TiledDrawable filler;
 	
-	public StatusBar(int x, int y){
-		super(x, y);
+	public StatusBar(World world, int x, int y){
+		super(world, x, y);
 	}
 	
 	@Override
@@ -28,14 +28,14 @@ public abstract class StatusBar extends Hud {
 	}
 	
 	@Override 
-	public void update(World world) {
-		calc(world);
+	public void update() {
+		calc();
 		
 		percent = 1*cur/max;
 	}
 	
 	@Override
-	public void hovered(World world) {
+	public void hovered() {
 		world.descBox.updateText((int)cur + "/" + (int)max);
 	}
 	

@@ -40,8 +40,8 @@ public class Mouse extends Hud {
 	
 	public Slot slot;
 	
-	public Mouse(int x, int y) {
-		super(x, y);
+	public Mouse(World world, int x, int y){
+		super(world, x, y);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class Mouse extends Hud {
 	}
 
 	@Override
-	public void calc(World world) {
+	public void calc() {
 		x += Gdx.input.getDeltaX() * sensitivity;
 		y -= Gdx.input.getDeltaY() * sensitivity;
 		
@@ -128,7 +128,7 @@ public class Mouse extends Hud {
 			Hud ent = world.hudEntities.get(i);
 			if(x > ent.x && x < ent.x+ent.d_width && y > ent.y && y < ent.y+ent.d_height){
 				if(lb_pressed||rb_pressed)toMoveToFront = i;
-				ent.hovered(world);
+				ent.hovered();
 				onHud = true;
 				break;
 			}
@@ -151,7 +151,7 @@ public class Mouse extends Hud {
 			Entity ent = world.entities.get(i);
 			Polygon itemHBox = ent.getHitbox();
 			if(Intersector.isPointInPolygon(itemHBox.getVertices(), 0,itemHBox.getVertices().length,x+world.cam.x-world.cam.WIDTH/2,y+world.cam.y-world.cam.HEIGHT/2)){
-				ent.hovered(world);
+				ent.hovered();
 				canPlace = false;
 				break;
 			}
@@ -159,7 +159,7 @@ public class Mouse extends Hud {
 		
 		if(slot.item != null && canPlace) {
 			if(lb_pressed) {
-				world.entities.add(new Drop((int)(x + world.cam.x-world.cam.WIDTH/2-Item.SIZE/2+16), (int)(y+ world.cam.y-world.cam.HEIGHT/2-Item.SIZE/2+16), slot));
+				world.entities.add(new Drop(world, (int)(x + world.cam.x-world.cam.WIDTH/2-Item.SIZE/2+16), (int)(y+ world.cam.y-world.cam.HEIGHT/2-Item.SIZE/2+16), slot));
 				lb_pressed = false;
 			}
 			else if(rb_pressed) {
@@ -172,7 +172,7 @@ public class Mouse extends Hud {
 				
 				if(slot.item.stack == 0) slot.item = null;
 				
-				world.entities.add(new Drop((int)(x + world.cam.x-world.cam.WIDTH/2-Item.SIZE/2+16), (int)(y+ world.cam.y-world.cam.HEIGHT/2-Item.SIZE/2+16), temp));
+				world.entities.add(new Drop(world, (int)(x + world.cam.x-world.cam.WIDTH/2-Item.SIZE/2+16), (int)(y+ world.cam.y-world.cam.HEIGHT/2-Item.SIZE/2+16), temp));
 				rb_pressed = false;
 				
 				
@@ -200,5 +200,5 @@ public class Mouse extends Hud {
 		else batch.draw(sprite, x+d_offx, y+d_offy, d_width, d_height);
 	}
 	
-	public void post(World world) {}
+	public void post() {}
 }
