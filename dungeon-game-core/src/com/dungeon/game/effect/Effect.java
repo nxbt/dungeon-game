@@ -17,9 +17,9 @@ public abstract class Effect {
 	
 	public boolean killMe;
 	
-	private World world;
+	protected World world;
 	
-	private Character character;
+	protected Character character;
 	
 	public Effect(World world, Character character, String name, int duration){
 		this.name = name;

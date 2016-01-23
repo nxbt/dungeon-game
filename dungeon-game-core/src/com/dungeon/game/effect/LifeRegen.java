@@ -11,14 +11,14 @@ public class LifeRegen extends Effect {
 		super(world, character, "Healing", duration);
 		this.rate = rate;
 		texture = new Texture("heal.png");
-		graphic = new EffectGraphic(this);
+		graphic = new EffectGraphic(world, this);
 	}
 	
 	public LifeRegen(World world, Character character, int duration, int total) {
 		super(world, character,"Healing", duration);
 		this.rate = (float)total/(float)duration;
 		texture = new Texture("heal.png");
-		graphic = new EffectGraphic(this);
+		graphic = new EffectGraphic(world, this);
 	}
 	
 	public void calc(Character character){

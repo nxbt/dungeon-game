@@ -11,14 +11,15 @@ import com.dungeon.game.entity.Goon;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Tile;
+import com.dungeon.game.world.World;
 
 public class Rooms extends Generation {
 	private ArrayList<Rectangle> rooms;
 	private ArrayList<ArrayList<int[]>> halls;
 	private ArrayList<ArrayList<Rectangle>> hallEnds;
 	
-	public Rooms(int width, int height){
-		super(width, height);
+	public Rooms(World world, int width, int height){
+		super(world, width, height);
 		rooms = new ArrayList<Rectangle>();
 		halls = new ArrayList<ArrayList<int[]>>();
 		hallEnds = new ArrayList<ArrayList<Rectangle>>();
@@ -475,12 +476,12 @@ public class Rooms extends Generation {
 			for(int k = 0; k<width; k++){
 				map[y][x]=0;
 				if(!addedChest&&i>0&&k>0&&i<height-1&&k<width-1&&Math.random()>0.9){
-					entities.add(LootGenerator.getChest(1,x,y));
+					entities.add(LootGenerator.getChest(world, 1,x,y));
 					addedChest = true;
 				}
 				if(i>-1&&k>-1&&i<height&&k<width&&Math.random()>0.96){
 
-					entities.add(new Goon(x*Tile.TS+Tile.TS/2, y*Tile.TS+Tile.TS/2));
+					entities.add(new Goon(world, x*Tile.TS+Tile.TS/2, y*Tile.TS+Tile.TS/2));
 				}
 				x++;
 			}

@@ -12,7 +12,7 @@ public class Dizzy extends Effect {
 		super(world, character, "Dizzy", duration);
 		this.amount = amount;
 		texture = new Texture("dizzy.png");
-		graphic = new EffectGraphic(this);
+		graphic = new EffectGraphic(world, this);
 	}
 	
 	public void calc(Character character){

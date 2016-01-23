@@ -31,7 +31,10 @@ public class Floor {
 
 	public AreaMap areaMap;
 	
-	public Floor(int width, int height) {
+	protected World world;
+	
+	public Floor(World world, int width, int height) {
+		this.world = world;
 		this.width = width;
 		this.height = height;
 		
@@ -51,7 +54,7 @@ public class Floor {
 				spritesheet[i*sheetWidth+k] = new TextureRegion(new Texture(DEFAULT),k*Tile.TS,i*Tile.TS,Tile.TS,Tile.TS);
 			}
 		}
-		Generation gen = new Rooms(width, height);
+		Generation gen = new Rooms(world, width, height);
 		int[][] map = gen.getMap();
 		entities = gen.getEntities();
 		

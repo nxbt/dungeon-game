@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
+import com.dungeon.game.world.World;
 
 public class Biospheres extends Generation {
 	private ArrayList<Circle> rooms;
 	private ArrayList<ArrayList<int[]>> halls;
 	
-	public Biospheres(int width, int height){
-		super(width, height);
+	public Biospheres(World world, int width, int height){
+		super(world, width, height);
 		rooms = new ArrayList<Circle>();
 		halls = new ArrayList<ArrayList<int[]>>();
 		int x = width/2;

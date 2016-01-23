@@ -62,7 +62,7 @@ public class World {
 		
 		dungeons = new ArrayList<Dungeon>();
 		
-		dungeons.add(new Dungeon());
+		dungeons.add(new Dungeon(this));
 		
 		curDungeon = dungeons.get(0);
 		curFloor = curDungeon.floors.get(0);
@@ -76,17 +76,17 @@ public class World {
 		entities = new ArrayList<Entity>();
 		hudEntities = new ArrayList<Hud>();
 		
-		player = new Player(curFloor.tm[0].length/2*Tile.TS, curFloor.tm.length/2*Tile.TS);
+		player = new Player(this, curFloor.tm[0].length/2*Tile.TS, curFloor.tm.length/2*Tile.TS);
 		
-		mouse = new Mouse(0, 0);
-		descBox = new DescBox();
+		mouse = new Mouse(this, 0, 0);
+		descBox = new DescBox(this);
 		
 		entities = curFloor.entities;
 		entities.add(0,player);
 
-		hudEntities.add(new HealthBar(100,20));
-		hudEntities.add(new StamBar(220,20));
-		hudEntities.add(new ManaBar(340,20));
+		hudEntities.add(new HealthBar(this,100,20));
+		hudEntities.add(new StamBar(this,220,20));
+		hudEntities.add(new ManaBar(this,340,20));
 		
 		fps = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		fps.setColor(Color.RED);
@@ -97,23 +97,23 @@ public class World {
 	}
 	
 	public void update() {
-		mouse.update(this);
-		descBox.update(this);
+		mouse.update();
+		descBox.update();
 		
 		for(int i = 0; i < entities.size(); i++) {
-			entities.get(i).update(this);
+			entities.get(i).update();
 		}
 		
 		for(int i = 0; i < entities.size(); i++) {
 			if(entities.get(i).killMe) {
-				entities.get(i).dead(this);
+				entities.get(i).dead();
 				entities.remove(i);
 				i--;
 			}
 		}
 		
 		for(int i = hudEntities.size()-1;i>=0;i--) {
-			hudEntities.get(i).update(this);
+			hudEntities.get(i).update();
 		}
 		
 		cam.update(player.x, player.y, mouse.x, mouse.y, 1f);

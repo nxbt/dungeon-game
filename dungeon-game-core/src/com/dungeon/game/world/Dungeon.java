@@ -7,11 +7,11 @@ public class Dungeon {
 	
 	protected int seed;
 	
-	public Dungeon() {
+	public Dungeon(World world) {
 		floors = new ArrayList<Floor>();
 		
 		seed = (int) (Math.random()*1000000000);
 		
-		floors.add(new Floor(50, 50));
+		floors.add(new Floor(world, 50, 50));
 	}
 }

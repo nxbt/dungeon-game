@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.dungeon.game.world.World;
 
 public class Castle extends Generation {
 	private ArrayList<Rectangle> rooms;
 	
-	public Castle(int width, int height){
-		super(width, height);
+	public Castle(World world, int width, int height){
+		super(world, width, height);
 		rooms = new ArrayList<Rectangle>();
 		int x = height/2;
 		int y = width/2;

@@ -19,7 +19,7 @@ public class Poison extends Effect {
 		        this.dmg = dmg;
 		        tickTimer = TICKLENGTH;
 				texture = new Texture("poison.png");
-				graphic = new EffectGraphic(this);
+				graphic = new EffectGraphic(world, this);
 	    }
 	    
 	    public void update(Character character){

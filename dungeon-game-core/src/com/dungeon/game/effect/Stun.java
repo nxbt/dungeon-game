@@ -10,7 +10,7 @@ public class Stun extends Effect {
 	public Stun(World world, Character character, int duration) {
 		super(world, character, "Stun", duration);
 		texture = new Texture("stun.png");
-		graphic = new EffectGraphic(this);
+		graphic = new EffectGraphic(world, this);
 	}
 	
 	public void begin(Character character) {
