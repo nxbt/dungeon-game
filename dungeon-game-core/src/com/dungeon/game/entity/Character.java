@@ -223,4 +223,12 @@ public abstract class Character extends Dynamic {
 	public void unequip(Weapon weapon) {
 		weapon.unequip(world, this);
 	}
+	
+	public boolean hasEffect(Effect effect) {
+		for(Effect e: effects) {
+			if(e.getClass().equals(effect.getClass())) return true;
+		}
+		
+		return false;
+	}
 }

@@ -10,7 +10,9 @@ public class Dizzy extends Effect {
 	
 	public Dizzy(World world, int duration, float amount) {
 		super(world, "Dizzy", duration);
+		
 		this.amount = amount;
+		
 		texture = new Texture("dizzy.png");
 		graphic = new EffectGraphic(world, this);
 	}
@@ -23,7 +25,7 @@ public class Dizzy extends Effect {
 	}
 		
 	public String getHoveredText() {
-			return Math.round(duration/6)/10f+" secs";
+			return "You are dizzy for the next " + Math.round(duration/6)/10f + " seconds, it's hard to move!";
 	}
 		
 	public int getNum() {

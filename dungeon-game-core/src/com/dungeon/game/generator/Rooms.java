@@ -37,7 +37,7 @@ public class Rooms extends Generation {
 		int nextX;
 		int nextY;
 		if(isValidRoom(room)){
-			addRoomToMap(room);
+			addRoomToMap(room, false);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
 				if(dir == 0){
@@ -90,7 +90,7 @@ public class Rooms extends Generation {
 //					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
 				}
 			}
-			addRoomToMap(room);
+			addRoomToMap(room, true);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
 				if(dir == 0){
@@ -143,7 +143,7 @@ public class Rooms extends Generation {
 //					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
 				}
 			}
-			addRoomToMap(room);
+			addRoomToMap(room, true);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
 				if(dir == 0){
@@ -197,7 +197,7 @@ public class Rooms extends Generation {
 //					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
 				}
 			}
-			addRoomToMap(room);
+			addRoomToMap(room, true);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
 				if(dir == 0){
@@ -250,7 +250,7 @@ public class Rooms extends Generation {
 //					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
 				}
 			}
-			addRoomToMap(room);
+			addRoomToMap(room, true);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
 				if(dir == 0){
@@ -465,7 +465,7 @@ public class Rooms extends Generation {
 		return false;
 	}
 	
-	public void addRoomToMap(Rectangle room){
+	public void addRoomToMap(Rectangle room, boolean hasEnemies){
 		boolean addedChest = false;
 		rooms.add(room);
 		int x = (int) room.x;
@@ -479,7 +479,7 @@ public class Rooms extends Generation {
 					entities.add(LootGenerator.getChest(world, 1,x,y));
 					addedChest = true;
 				}
-				if(i>-1&&k>-1&&i<height&&k<width&&Math.random()>0.96){
+				if(hasEnemies && i>-1&&k>-1&&i<height&&k<width&&Math.random()>0.96){
 
 					entities.add(new Goon(world, x*Tile.TS+Tile.TS/2, y*Tile.TS+Tile.TS/2));
 				}

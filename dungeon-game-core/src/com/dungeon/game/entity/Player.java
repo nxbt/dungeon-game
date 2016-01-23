@@ -6,11 +6,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.effect.Dizzy;
+import com.dungeon.game.effect.LifeRegen;
 import com.dungeon.game.effect.ManaRegen;
 import com.dungeon.game.effect.StamRegen;
 import com.dungeon.game.entity.hud.EffectGraphic;
-import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.item.Arrow;
 import com.dungeon.game.item.Bow;
 import com.dungeon.game.item.Crap;
@@ -46,8 +45,8 @@ public class Player extends Character {
 		super(world, x, y);
 
 		effectGraphics = new ArrayList<EffectGraphic>();
-		effects.add(new StamRegen(world, -1, 0.1f));
-		effects.add(new ManaRegen(world, -1, 0.1f));
+		addEffect(new StamRegen(world, -1, 0.1f));
+		addEffect(new ManaRegen(world, -1, 0.1f));
 	}
 	
 	public void init() {

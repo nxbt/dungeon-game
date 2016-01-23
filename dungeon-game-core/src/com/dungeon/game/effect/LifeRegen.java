@@ -26,7 +26,7 @@ public class LifeRegen extends Effect {
 	}
 	
 	public String getHoveredText() {
-		return "Recovering " + Math.round(rate*60f)+" health per second for "+Math.round(duration/6)/10f+" seconds";
+		return "Recovering " + Math.round(rate*60f)+" health per second" +  (duration > 0 ? (" for "+ Math.round(duration/6)/10f +" seconds."):("."));
 	}
 	
 	public int getNum() {

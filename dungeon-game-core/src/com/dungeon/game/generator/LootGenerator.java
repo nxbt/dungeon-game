@@ -20,7 +20,7 @@ public class LootGenerator {
 			chest.inv.addItem(arrow);
 		}
 
-		for(double i = Math.random(); i < 1; i+=0.1){
+		for(double i = Math.random(); i < 0.5; i+=0.1){
 			chest.inv.addItem(new LifePotion(world));
 		}
 		return chest;
