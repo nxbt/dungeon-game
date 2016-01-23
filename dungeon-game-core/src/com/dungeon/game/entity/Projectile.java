@@ -41,7 +41,7 @@ public abstract class Projectile extends Dynamic {
 		this.weapon = weapon;
 		this.power = power;
 		
-		slot = new Slot(new int[] {0, 0, 0}, null);
+		slot = new Slot(world, new int[] {0, 0, 0}, null);
 	}
 
 	@Override

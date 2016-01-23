@@ -75,7 +75,7 @@ public abstract class Enemy extends Character {
 		
 		ArrayList<Item> drops = inv.getDrops();
 		for(Item item: drops){
-			Slot slot = new Slot(new int[]{0, 0, 0}, null);
+			Slot slot = new Slot(world, new int[]{0, 0, 0}, null);
 			slot.item = item;
 			Drop drop = new Drop(world, (int)x, (int)y, slot);
 			world.entities.add(drop);

@@ -7,8 +7,8 @@ import com.dungeon.game.world.World;
 
 public class Stun extends Effect {
 
-	public Stun(World world, Character character, int duration) {
-		super(world, character, "Stun", duration);
+	public Stun(World world, int duration) {
+		super(world, "Stun", duration);
 		texture = new Texture("stun.png");
 		graphic = new EffectGraphic(world, this);
 	}

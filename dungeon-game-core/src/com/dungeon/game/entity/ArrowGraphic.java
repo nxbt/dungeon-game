@@ -20,7 +20,7 @@ public class ArrowGraphic extends Projectile {
 		solid = false;
 		name = "arrow";
 		this.power = power;
-		slot.item = new Arrow();
+		slot.item = new Arrow(world);
 		
 	}
 

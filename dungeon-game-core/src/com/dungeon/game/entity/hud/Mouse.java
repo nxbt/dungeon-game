@@ -58,7 +58,7 @@ public class Mouse extends Hud {
 		
 		sensitivity = 0.5f;
 		
-		slot = new Slot(new int[] {0, 0, 0}, null);
+		slot = new Slot(world, new int[] {0, 0, 0}, null);
 	}
 
 	@Override
@@ -163,7 +163,7 @@ public class Mouse extends Hud {
 				lb_pressed = false;
 			}
 			else if(rb_pressed) {
-				Slot temp = new Slot(new int[] {0,0,0}, null);
+				Slot temp = new Slot(world, new int[] {0,0,0}, null);
 				
 				temp.item = slot.item.clone();
 				temp.item.stack = 1;

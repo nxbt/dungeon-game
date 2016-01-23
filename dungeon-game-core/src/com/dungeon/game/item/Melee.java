@@ -1,9 +1,8 @@
 package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.MeleeGraphic;
+import com.dungeon.game.world.World;
 
 public abstract class Melee extends Weapon {
 
@@ -14,8 +13,8 @@ public abstract class Melee extends Weapon {
 	
 	public boolean hasHit;
 	
-	public Melee(int damage, int cooldown,int speed, Texture texture) {
-		super(damage, cooldown, speed, texture);
+	public Melee(World world, int damage, int cooldown,int speed, Texture texture) {
+		super(world, damage, cooldown, speed, texture);
 	}
 
 	public abstract boolean inAttack();

@@ -45,7 +45,7 @@ public class Chest extends Static {
 			new int[] {0, 128, 168},
 			new int[] {0, 168, 168}
 		};
-		inv = new Inventory(invLayout, "chestBackground.png", 310, 140, 0, 200, 208, 16);
+		inv = new Inventory(world, invLayout, "chestBackground.png", 310, 140, 0, 200, 208, 16);
 		sprite = new Texture("chest.png");
 		solid = true;
 		

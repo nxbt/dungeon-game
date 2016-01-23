@@ -7,15 +7,15 @@ import com.dungeon.game.world.World;
 public class LifeRegen extends Effect {
 	private float rate;
 	
-	public LifeRegen(World world, Character character, int duration, float rate) {
-		super(world, character, "Healing", duration);
+	public LifeRegen(World world, int duration, float rate) {
+		super(world, "Healing", duration);
 		this.rate = rate;
 		texture = new Texture("heal.png");
 		graphic = new EffectGraphic(world, this);
 	}
 	
-	public LifeRegen(World world, Character character, int duration, int total) {
-		super(world, character,"Healing", duration);
+	public LifeRegen(World world, int duration, int total) {
+		super(world, "Healing", duration);
 		this.rate = (float)total/(float)duration;
 		texture = new Texture("heal.png");
 		graphic = new EffectGraphic(world, this);

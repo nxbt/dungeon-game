@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
-import com.dungeon.game.entity.MeleeGraphic;
-import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.effect.Effect;
-import com.dungeon.game.effect.Poison;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.Character;
+import com.dungeon.game.entity.MeleeGraphic;
+import com.dungeon.game.entity.Projectile;
+import com.dungeon.game.world.World;
 
 public class Sword extends Melee {
 
@@ -74,14 +74,14 @@ public class Sword extends Melee {
 	protected float[] dmgMult;
 	protected float[] knockMult;
 	
-	public Sword(int damage, int cooldown, int speed) {
-		super(damage, cooldown,speed, new Texture("sword.png"));
+	public Sword(World world, int damage, int cooldown, int speed) {
+		super(world, damage, cooldown,speed, new Texture("sword.png"));
 		desc = "Real sword I swear! \n\n Damage: "+damage+"\n Cooldown: "+cooldown;
 		knockratio = 0.4f;
 		knockstr = 10;
 		dmgMult = new float[]{0.7f,1,1.5f};
 		knockMult = new float[]{1,1.3f,0.7f};		
-		graphic = new MeleeGraphic(this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
+		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 
 	}
 
@@ -303,7 +303,7 @@ public class Sword extends Melee {
 	
 	public ArrayList<Effect> hitEffects(){
 		ArrayList<Effect> effects = new ArrayList<Effect>();
-		effects.add(new Stun(30));
+		effects.add(new Stun(world, 30));
 		return effects;
 		
 	}

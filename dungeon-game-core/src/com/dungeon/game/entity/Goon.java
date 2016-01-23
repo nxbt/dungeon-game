@@ -22,8 +22,8 @@ public class Goon extends Enemy {
 		super(world, x, y);
 		vision = 5;
 		
-		effects.add(new StamRegen(world, this, -1, 0.1f));
-		effects.add(new ManaRegen(world, this, -1, 0.1f));
+		effects.add(new StamRegen(world, -1, 0.1f));
+		effects.add(new ManaRegen(world, -1, 0.1f));
 	}
 
 	@Override
@@ -109,18 +109,18 @@ public class Goon extends Enemy {
 			new int[] {8, 248, 208},
 		};
 		
-		inv = new Inventory(invLayout, "invBack.png", 10, 100, 0, 240, 288, 16);
+		inv = new Inventory(world, invLayout, "invBack.png", 10, 100, 0, 240, 288, 16);
 
 		if(Math.random()>0.5){
-			inv.slot[30].item = new Bow((int) (7 + Math.random()*6), 10,10);
+			inv.slot[30].item = new Bow(world, (int) (7 + Math.random()*6), 10,10);
 			inv.slot[30].item.dropChance = 0.5f;
-			inv.slot[20].item = new Arrow();
+			inv.slot[20].item = new Arrow(world);
 			inv.slot[20].item.stack = 12;
 			inv.slot[20].item.dropChance = 0.5f;
 			ranged = true;
 		}
 		else {
-			inv.slot[30].item = new Sword((int) (7 + Math.random()*6), 10,10);
+			inv.slot[30].item = new Sword(world, (int) (7 + Math.random()*6), 10,10);
 			inv.slot[30].item.dropChance = 0.5f;
 			ranged = false;
 		}

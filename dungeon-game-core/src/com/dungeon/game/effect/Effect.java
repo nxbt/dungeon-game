@@ -19,13 +19,12 @@ public abstract class Effect {
 	
 	protected World world;
 	
-	protected Character character;
-	
-	public Effect(World world, Character character, String name, int duration){
-		this.name = name;
-		this.duration = duration;
+	public Effect(World world, String name, int duration){
 		this.world = world;
-		this.character = character;
+		
+		this.name = name;
+		
+		this.duration = duration;
 	}
 	
 	public void update(Character character){

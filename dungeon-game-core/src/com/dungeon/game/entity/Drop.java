@@ -12,7 +12,7 @@ public class Drop extends Static {
 	public Drop(World world, int x, int y, Slot slot) {
 		super(world, x, y);
 		
-		this.slot = new Slot(new int[] {0,0,0}, null);
+		this.slot = new Slot(world, new int[] {0,0,0}, null);
 		
 		this.slot.swap(slot);
 		

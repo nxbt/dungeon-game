@@ -8,8 +8,8 @@ public class PotionSick extends Effect {
 	
 	public Consumable potion;
 
-	public PotionSick(World world, Character character,  int duration, Consumable potion) {
-		super(world, character, "Potion Sickness", duration);
+	public PotionSick(World world,  int duration, Consumable potion) {
+		super(world, "Potion Sickness", duration);
 		
 		this.potion = potion;
 	}

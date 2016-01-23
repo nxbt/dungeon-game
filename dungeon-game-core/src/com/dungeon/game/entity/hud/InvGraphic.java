@@ -55,7 +55,7 @@ public class InvGraphic extends Hud {
 		if(world.mouse.lb_released){
 			drag = false;
 		}
-		inv.update(world);
+		inv.update();
 	}
 	
 	@Override
@@ -66,7 +66,7 @@ public class InvGraphic extends Hud {
 			drag = true;
 		}
 		else{
-			inv.hovered(world);
+			inv.hovered();
 		}
 	}
 	

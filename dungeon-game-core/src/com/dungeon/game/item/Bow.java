@@ -6,11 +6,12 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.dungeon.game.entity.Projectile;
-import com.dungeon.game.entity.RangedGraphic;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.Character;
+import com.dungeon.game.entity.Projectile;
+import com.dungeon.game.entity.RangedGraphic;
+import com.dungeon.game.world.World;
 
 public class Bow extends Ranged {
 	
@@ -23,8 +24,8 @@ public class Bow extends Ranged {
 	
 	private Texture[] textures;
 
-	public Bow(int damage, int cooldown, int speed) {
-		super(damage, cooldown, speed, new Texture("Bow.png"));
+	public Bow(World world, int damage, int cooldown, int speed) {
+		super(world, damage, cooldown, speed, new Texture("Bow.png"));
 		
 		strength = 10;
 		knockstr = 10;
@@ -34,7 +35,7 @@ public class Bow extends Ranged {
 
 		desc = "For the purpose of shooting...  \n\n Damage: "+damage+"\n Cooldown: "+cooldown;
 
-		graphic = new RangedGraphic(this,4,28);
+		graphic = new RangedGraphic(world, this, 4, 28);
 		
 		Texture tempSheet = new Texture(texturePath);
 		
@@ -95,8 +96,8 @@ public class Bow extends Ranged {
 		if(!sprite.equals(textures[0])){
 			changeSprite(textures[0]);
 		}
-			if(mousepressed && owner.inv.contains(new Arrow()) != null&&owner.use_stam(10)){
-				owner.inv.contains(new Arrow()).consume(null, null);
+			if(mousepressed && owner.inv.contains(new Arrow(world)) != null&&owner.use_stam(10)){
+				owner.inv.contains(new Arrow(world)).consume(null);
 				stage=WINDUP;
 				stageTimer = 0;
 			}
@@ -147,7 +148,7 @@ public class Bow extends Ranged {
 	
 	public ArrayList<Effect> hitEffects(){
 		ArrayList<Effect> effects = new ArrayList<Effect>();
-		effects.add(new Stun(30));
+		effects.add(new Stun(world, 30));
 		return effects;
 		
 	}

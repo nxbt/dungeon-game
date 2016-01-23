@@ -20,7 +20,11 @@ public class Slot {
 	
 	private Inventory inv;
 	
-	public Slot(int[] data, Inventory inv) {
+	private World world;
+	
+	public Slot(World world, int[] data, Inventory inv) {
+		this.world = world;
+		
 		this.item = null;
 		
 		this.type = data[0];
@@ -41,7 +45,7 @@ public class Slot {
 		this.item = temp;
 	}
 	
-	public void hovered(World world) {
+	public void hovered() {
 		if(((world.mouse.slot.item==null?true:world.mouse.slot.item.type==type)||type==0)) {
 			if(world.mouse.lb_pressed) {
 				if(item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(item.name)) {
@@ -89,19 +93,19 @@ public class Slot {
 			}
 			else if(world.mouse.mb_pressed) {
 				if(item != null && item instanceof Consumable) {
-					consume(world, world.player);
+					consume(world.player);
 				}
 			}
 		}
 		if(item != null)world.descBox.updateText(item);
 	}
 	
-	public void calc(World world) {
+	public void calc() {
 		
 	}
 	
-	public void update(World world) {
-		calc(world);
+	public void update() {
+		calc();
 	}
 	
 	public void draw(SpriteBatch batch, int xoff, int yoff) {
@@ -115,8 +119,8 @@ public class Slot {
 		}
 	}
 	
-	public void consume(World world, Character user) {
-		if(item!=null && item instanceof Consumable && ((Consumable)item).use(world, user)){
+	public void consume(Character user) {
+		if(item!=null && item instanceof Consumable && ((Consumable)item).use(user)){
 			item.stack--;
 			if(item.stack == 0) item = null;
 		}

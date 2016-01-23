@@ -1,10 +1,13 @@
 package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.dungeon.game.world.World;
 
 public class Stick extends Item {
 
-	public Stick() {}
+	public Stick(World world) {
+		super(world);
+	}
 
 	@Override
 	public void init() {

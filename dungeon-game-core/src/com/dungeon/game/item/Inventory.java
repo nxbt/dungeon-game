@@ -14,11 +14,12 @@ public class Inventory {
 	protected World world;
 	
 	public Inventory(World world, int[][] layout, String graphic, int x, int y, int dragX, int dragY, int dragWidth, int dragHeight) {
+		this.world = world;
 		
 		slot = new Slot[layout.length];
 		
 		for(int i = 0; i < slot.length; i++) {
-			slot[i] = new Slot(layout[i], this);
+			slot[i] = new Slot(world, layout[i], this);
 		}
 		
 		this.graphic = new InvGraphic(world, graphic, this, x, y, dragX, dragY, dragWidth, dragHeight);
@@ -26,13 +27,13 @@ public class Inventory {
 	
 	public void hovered() {
 		for(Slot s: slot) {
-			if(s.x + graphic.x < world.mouse.x && s.x + graphic.x + Item.SIZE > world.mouse.x && s.y + graphic.y < world.mouse.y && s.y + graphic.y + Item.SIZE > world.mouse.y) s.hovered(world);
+			if(s.x + graphic.x < world.mouse.x && s.x + graphic.x + Item.SIZE > world.mouse.x && s.y + graphic.y < world.mouse.y && s.y + graphic.y + Item.SIZE > world.mouse.y) s.hovered();
 		}
 	}
 	
 	public void calc() {
 		for(Slot s: slot) {
-			s.update(world);
+			s.update();
 		}
 	}
 	

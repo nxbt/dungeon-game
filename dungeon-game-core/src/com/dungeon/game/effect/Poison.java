@@ -13,8 +13,8 @@ public class Poison extends Effect {
       
       //make tick rate slower
 	
-	    public Poison(World world, Character character, float rate, float dmg) {
-		        super(world, character, "Poison",0);
+	    public Poison(World world, float rate, float dmg) {
+		        super(world, "Poison",0);
 		        this.rate = rate;
 		        this.dmg = dmg;
 		        tickTimer = TICKLENGTH;
