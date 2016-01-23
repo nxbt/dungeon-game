@@ -11,8 +11,8 @@ import com.dungeon.game.world.World;
 
 public class Chest extends Static {
 	public Inventory inv;
-	public Chest(int x, int y) {
-		super(x, y);
+	public Chest(World world, int x, int y) {
+		super(world, x, y);
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class Chest extends Static {
 	}
 
 	@Override
-	public void calc(World world) {
+	public void calc() {
 		if(world.hudEntities.contains(inv.graphic)) {
 			if(world.player.fight_mode||(Math.sqrt(Math.pow((x+d_width/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+d_height/2) - (world.player.y + world.player.d_height/2), 2))) >= world.player.REACH){
 				inv.graphic.close(world);
@@ -75,7 +75,7 @@ public class Chest extends Static {
 		}
 	}
 		
-	public void hovered(World world) {
+	public void hovered() {
 		if(world.mouse.rb_pressed&&!world.player.fight_mode){
 			if(world.hudEntities.contains(inv.graphic)){
 				inv.graphic.close(world);
@@ -84,5 +84,5 @@ public class Chest extends Static {
 		}
 	}
 	
-	public void post(World world) {}
+	public void post() {}
 }

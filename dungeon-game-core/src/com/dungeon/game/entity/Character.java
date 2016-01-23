@@ -48,8 +48,8 @@ public abstract class Character extends Dynamic {
 		
 	public Inventory inv;
 	
-	public Character(int x, int y) {
-		super(x, y);
+	public Character(World world, int x, int y) {
+		super(world, x, y);
 		
 		immune = false;
 		
@@ -64,17 +64,17 @@ public abstract class Character extends Dynamic {
 		move_angle = 361;
 	}
 	
-	public void update(World world) {
+	public void update() {
 		norm();
-		calc(world);
+		calc();
 		effect();
-		move(world);
-		phys(world);
-		post(world);
-		sight(world);
+		move();
+		phys();
+		post();
+		sight();
 	}
 
-	public void move(World world) {
+	public void move() {
 		
 		Vector2 acelVec = new Vector2();
 		acelVec.x = (float) (Math.cos(move_angle*Math.PI/180)*acel);
@@ -134,7 +134,7 @@ public abstract class Character extends Dynamic {
 		}
 	}
 	
-	public void sight(World world){
+	public void sight(){
 		for(Entity e: world.entities){
 			if(!knownEntities.contains(e)){
 				float dist = (float) Math.sqrt(Math.abs(x-e.x)*Math.abs(x-e.x)+Math.abs(y-e.y)*Math.abs(y-e.y));
@@ -216,11 +216,11 @@ public abstract class Character extends Dynamic {
 		if(mana<maxMana)mana = (float) Math.min(mana+value,maxMana);
 	}
 	
-	public void equip(World world, Weapon weapon) {
+	public void equip(Weapon weapon) {
 		weapon.equip(world, this);
 	}
 	
-	public void unequip(World world, Weapon weapon) {
+	public void unequip(Weapon weapon) {
 		weapon.unequip(world, this);
 	}
 }

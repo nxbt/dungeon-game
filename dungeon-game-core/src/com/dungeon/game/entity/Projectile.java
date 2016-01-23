@@ -21,8 +21,8 @@ public abstract class Projectile extends Dynamic {
 	
 	protected Slot slot;
 	
-	public Projectile(int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, Weapon weapon) {
-		super(x, y);
+	public Projectile(World world, int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, Weapon weapon) {
+		super(world, x, y);
 		Vector2 acelVec = new Vector2();
 		acelVec.x = (float) Math.cos((angle+135)/180*Math.PI)*power;
 		acelVec.y = (float) Math.sin((angle+135)/180*Math.PI)*power;
@@ -51,7 +51,7 @@ public abstract class Projectile extends Dynamic {
 	}
 
 	@Override
-	public void calc(World world) { //TODO: make projectile turn into pickupable items
+	public void calc() { //TODO: make projectile turn into pickupable items
 		
 		for(Entity e: world.entities){
 			if(!e.equals(owner)&& e.solid && e instanceof Dynamic && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
@@ -62,13 +62,13 @@ public abstract class Projectile extends Dynamic {
 
 	}
 	
-	public void phys(World world){
+	public void phys(){
 		float vel = getVel();
 		range--;
 		if(range<0||vel<fric){
 			killMe = true;
 			if(slot.item!=null){
-				Drop drop = new Drop((int)x, (int)y, slot);
+				Drop drop = new Drop(world, (int)x, (int)y, slot);
 				drop.angle = angle;
 				world.entities.add(drop);
 			}
@@ -78,7 +78,7 @@ public abstract class Projectile extends Dynamic {
 		}
 		
 		Polygon hitboxTile;
-		if((moveVec.x != 0 || moveVec.y != 0) && col(world,false, new float[]{0,0})==1){
+		if((moveVec.x != 0 || moveVec.y != 0) && col(false, new float[]{0,0})==1){
 			moveVec.x = 0;
 			moveVec.y = 0;
 		}

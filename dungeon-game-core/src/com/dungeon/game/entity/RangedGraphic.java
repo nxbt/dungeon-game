@@ -10,8 +10,8 @@ public class RangedGraphic extends WeaponGraphic {
 	
 	private float power;
 	
-	public RangedGraphic(Weapon weapon, float originX, float originY){
-		super(weapon);
+	public RangedGraphic(World world, Weapon weapon, float originX, float originY){
+		super(world, weapon);
 		this.origin_x = originX;
 		this.origin_y = originY;
 
@@ -24,11 +24,11 @@ public class RangedGraphic extends WeaponGraphic {
 	}
 
 	@Override
-	public void calc(World world) {
+	public void calc() {
 		if(toFire) {
 			toFire = false;
 			Polygon projectileHitBox = new Polygon(new float[]{1,28,4,31,0,32});
-			world.entities.add(new ArrowGraphic((int)x,(int)y,angle,power, projectileHitBox, 16, 16, weapon));
+			world.entities.add(new ArrowGraphic(world, (int)x,(int)y,angle,power, projectileHitBox, 16, 16, weapon));
 		}
 	}
 
@@ -38,5 +38,5 @@ public class RangedGraphic extends WeaponGraphic {
 	}
 
 	@Override
-	public void post(World world) {}
+	public void post() {}
 }

@@ -9,8 +9,8 @@ public class Drop extends Static {
 	
 	Slot slot;
 	
-	public Drop(int x, int y, Slot slot) {
-		super(x, y);
+	public Drop(World world, int x, int y, Slot slot) {
+		super(world, x, y);
 		
 		this.slot = new Slot(new int[] {0,0,0}, null);
 		
@@ -34,7 +34,7 @@ public class Drop extends Static {
 	public void init() {}
 	
 	@Override
-	public void hovered(World world){
+	public void hovered(){
 		if(world.mouse.canPickup) {
 			if(world.mouse.shift_down) {
 				world.descBox.updateText(slot.item);
@@ -79,7 +79,7 @@ public class Drop extends Static {
 	}
 
 	@Override
-	public void calc(World world) {
+	public void calc() {
 //		int tile_lt = (int) ((x-origin_x)/Tile.TS);
 //		int tile_dn = (int) ((y-origin_y)/Tile.TS);
 //		int tile_rt = (int) (((x-origin_x)+Item.SIZE)/Tile.TS);
@@ -149,5 +149,5 @@ public class Drop extends Static {
 //		}
 	}
 
-	public void post(World world) {}
+	public void post() {}
 }

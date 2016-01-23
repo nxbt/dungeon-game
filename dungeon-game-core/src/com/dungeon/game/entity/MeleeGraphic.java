@@ -9,8 +9,8 @@ import com.dungeon.game.entity.Character;
 
 public class MeleeGraphic extends WeaponGraphic {
 	
-	public MeleeGraphic(Weapon weapon, Polygon hitbox, float originX, float originY){
-		super(weapon);
+	public MeleeGraphic(World world, Weapon weapon, Polygon hitbox, float originX, float originY){
+		super(world, weapon);
 		
 		this.origin_x = originX;
 		this.origin_y = originY;
@@ -24,7 +24,7 @@ public class MeleeGraphic extends WeaponGraphic {
 	}
 
 	@Override
-	public void calc(World world) {
+	public void calc() {
 		float distance = Integer.MAX_VALUE;
 		Dynamic target = null;
 		if(((Melee) weapon).inAttack()) {
@@ -40,5 +40,5 @@ public class MeleeGraphic extends WeaponGraphic {
 		if(target!=null)weapon.hit((Character) target,null);
 	}
 	
-	public void post(World world) {}
+	public void post() {}
 }

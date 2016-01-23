@@ -8,8 +8,8 @@ import com.dungeon.game.world.World;
 
 public class ArrowGraphic extends Projectile {
 
-	public ArrowGraphic(int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, Weapon weapon) {
-		super(x, y, angle, power, hitbox, originX, originY, weapon);
+	public ArrowGraphic(World world, int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, Weapon weapon) {
+		super(world, x, y, angle, power, hitbox, originX, originY, weapon);
 		
 		this.sprite = new Texture("Arrow.png");
 		
@@ -24,5 +24,5 @@ public class ArrowGraphic extends Projectile {
 		
 	}
 
-	public void post(World world) {}
+	public void post() {}
 }

@@ -12,8 +12,8 @@ import com.dungeon.game.world.World;
 public class Door extends Static {
 	public boolean open;
 	public int dir; 
-	public Door(int x, int y, int dir) {
-		super(x, y);
+	public Door(World world, int x, int y, int dir) {
+		super(world, x, y);
 		open = false;
 		this.dir = dir;
 		if(dir == 0){
@@ -63,7 +63,7 @@ public class Door extends Static {
 	}
 
 	@Override
-	public void calc(World world) {
+	public void calc() {
 		boolean canOpen = true;
 		if(world.mouse.rb_pressed&&world.mouse.x > x-world.cam.x+world.cam.WIDTH/2 && world.mouse.x < x+Item.SIZE-world.cam.x+world.cam.WIDTH/2 && world.mouse.y > y-world.cam.y+world.cam.HEIGHT/2 && world.mouse.y < y+Item.SIZE-world.cam.y+world.cam.HEIGHT/2){
 			if(Math.sqrt(Math.pow((x+d_width/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+d_height/2) - (world.player.y + world.player.d_height/2), 2)) <= world.player.REACH){
@@ -96,5 +96,5 @@ public class Door extends Static {
 		}
 	}
 
-	public void post(World world) {}
+	public void post() {}
 }

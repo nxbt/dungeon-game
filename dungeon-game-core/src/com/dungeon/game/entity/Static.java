@@ -1,7 +1,9 @@
 package com.dungeon.game.entity;
 
+import com.dungeon.game.world.World;
+
 public abstract class Static extends Entity {
-	public Static(int x, int y) {
-		super(x, y);
+	public Static(World world, int x, int y) {
+		super(world, x, y);
 	}
 }

@@ -42,8 +42,8 @@ public class Player extends Character {
 	
 	public ArrayList<EffectGraphic> effectGraphics;
 	
-	public Player(int x, int y) {
-		super(x, y);
+	public Player(World world, int x, int y) {
+		super(world, x, y);
 
 		effectGraphics = new ArrayList<EffectGraphic>();
 		effects.add(new StamRegen(-1, 0.1f));
@@ -152,7 +152,7 @@ public class Player extends Character {
 		light = new Light(this, 1);
 	}
 	
-	public void calc(World world) { //TODO: complete rework of owner code!
+	public void calc() { //TODO: complete rework of owner code!
 		
 		for(EffectGraphic eg: effectGraphics){
 			if(!world.hudEntities.contains(eg))world.hudEntities.add(eg);
@@ -163,7 +163,7 @@ public class Player extends Character {
 		}
 		
 		for(EffectGraphic eg: effectGraphics){
-			eg.update(world);
+			eg.update();
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1))inv.slot[0].consume(world, this);
@@ -177,54 +177,54 @@ public class Player extends Character {
 			fight_mode = !fight_mode;
 			
 			if(fight_mode) {
-				if(leftEquiped != null) equip(world, leftEquiped);
-				if(rightEquiped != null) equip(world, rightEquiped);
+				if(leftEquiped != null) equip(leftEquiped);
+				if(rightEquiped != null) equip(rightEquiped);
 				
 				if(world.hudEntities.indexOf(inv.graphic) > -1) {
 					inv.graphic.close(world);
 				}
 			}
 			else {
-				if(leftEquiped != null) unequip(world, leftEquiped);
-				if(rightEquiped != null) unequip(world, rightEquiped);
+				if(leftEquiped != null) unequip(leftEquiped);
+				if(rightEquiped != null) unequip(rightEquiped);
 			}
 		}
 		
 		if(fight_mode) {
 			if(leftEquiped != null && inv.slot[30].item==null) {
-				unequip(world, leftEquiped);
+				unequip(leftEquiped);
 				
 				leftEquiped = null;
 			}
 			else if(leftEquiped == null && inv.slot[30].item != null) {
 				leftEquiped = (Weapon) inv.slot[30].item;
 				
-				equip(world, leftEquiped);
+				equip(leftEquiped);
 			}
 			else if(leftEquiped != inv.slot[30].item) {
-				unequip(world, leftEquiped);
+				unequip(leftEquiped);
 				
 				leftEquiped = (Weapon) inv.slot[30].item;
 				
-				equip(world, leftEquiped);
+				equip(leftEquiped);
 			}
 			
 			if(rightEquiped != null && inv.slot[31].item==null) {
-				unequip(world, rightEquiped);
+				unequip(rightEquiped);
 				
 				rightEquiped = null;
 			}
 			else if(rightEquiped == null && inv.slot[31].item != null) {
 				rightEquiped = (Weapon) inv.slot[31].item;
 				
-				equip(world, rightEquiped);
+				equip(rightEquiped);
 			}
 			else if(rightEquiped != inv.slot[31].item) {
-				unequip(world, rightEquiped);
+				unequip(rightEquiped);
 				
 				rightEquiped = (Weapon) inv.slot[31].item;
 				
-				equip(world, rightEquiped);
+				equip(rightEquiped);
 			}
 		}
 		
@@ -261,7 +261,7 @@ public class Player extends Character {
 		if(leftEquiped != null && fight_mode){
 			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
 			leftPos = ((Weapon) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
-			((Weapon)inv.slot[30].item).graphic.calc(world);
+			((Weapon)inv.slot[30].item).graphic.calc();
 			
 		}
 		if(attacking){
@@ -275,7 +275,7 @@ public class Player extends Character {
 	}
 
 	@Override
-	public void post(World world) {
+	public void post() {
 		if(leftEquiped != null && fight_mode){
 			float xMove = (float) (Math.cos((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
 			float yMove = (float) (Math.sin((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
@@ -285,8 +285,8 @@ public class Player extends Character {
 			((Weapon)(inv.slot[30].item)).graphic.angle = angle-135+leftPos[2];
 		}
 		if(killMe){
-			if(leftEquiped!=null)unequip(world, leftEquiped);
-			if(rightEquiped!=null)unequip(world, rightEquiped);
+			if(leftEquiped!=null)unequip(leftEquiped);
+			if(rightEquiped!=null)unequip(rightEquiped);
 		}
 	}
 }

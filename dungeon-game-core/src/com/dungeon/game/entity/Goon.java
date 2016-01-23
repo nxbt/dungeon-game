@@ -18,8 +18,8 @@ public class Goon extends Enemy {
 	
 	boolean ranged;
 
-	public Goon(int x, int y) {
-		super(x, y);
+	public Goon(World world, int x, int y) {
+		super(world, x, y);
 		vision = 5;
 		
 		effects.add(new StamRegen(-1, 0.1f));
@@ -128,47 +128,47 @@ public class Goon extends Enemy {
 	}
 
 	@Override
-	public void calc(World world) {
+	public void calc() {
 		if(leftEquiped != null && inv.slot[30].item==null) {
-			unequip(world, leftEquiped);
+			unequip(leftEquiped);
 			
 			leftEquiped = null;
 		}
 		else if(leftEquiped == null && inv.slot[30].item != null) {
 			leftEquiped = (Weapon) inv.slot[30].item;
 			
-			equip(world, leftEquiped);
+			equip(leftEquiped);
 		}
 		else if(leftEquiped != inv.slot[30].item) {
-			unequip(world, leftEquiped);
+			unequip(leftEquiped);
 			
 			leftEquiped = (Weapon) inv.slot[30].item;
 			
-			equip(world, leftEquiped);
+			equip(leftEquiped);
 		}
 		
 		if(rightEquiped != null && inv.slot[31].item==null) {
-			unequip(world, rightEquiped);
+			unequip(rightEquiped);
 			
 			rightEquiped = null;
 		}
 		else if(rightEquiped == null && inv.slot[31].item != null) {
 			rightEquiped = (Weapon) inv.slot[31].item;
 			
-			equip(world, rightEquiped);
+			equip(rightEquiped);
 		}
 		else if(rightEquiped != inv.slot[31].item) {
-			unequip(world, rightEquiped);
+			unequip(rightEquiped);
 			
 			rightEquiped = (Weapon) inv.slot[31].item;
 			
-			equip(world, rightEquiped);
+			equip(rightEquiped);
 		}
 		ArrayList<Entity> entities = (ArrayList<Entity>) world.entities.clone();
 		entities.remove(world.player);
 		entities.remove(this);
 		if(knownEntities.contains(world.player)){
-			if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(world,entities, new float[]{world.player.x,world.player.y});
+			if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{world.player.x,world.player.y});
 			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
 		}
 		attacking = false;
@@ -192,7 +192,7 @@ public class Goon extends Enemy {
 			}
 			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
 			leftPos = ((Weapon) inv.slot[30].item).getPos(down&&attack, click&&attack);
-			((Weapon)inv.slot[30].item).graphic.calc(world);
+			((Weapon)inv.slot[30].item).graphic.calc();
 			
 		}
 		if(attacking){
@@ -205,7 +205,7 @@ public class Goon extends Enemy {
 		}
 	}
 
-	public void post(World world) {
+	public void post() {
 		if(leftEquiped != null){
 			float xMove = (float) (Math.cos((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
 			float yMove = (float) (Math.sin((angle+leftPos[1])/180*Math.PI)*leftPos[0]);

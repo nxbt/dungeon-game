@@ -36,23 +36,26 @@ public abstract class Entity {
 	
 	public Light light;
 	
-	public Entity(int x, int y) {
+	public World world;
+	
+	public Entity(World world, int x, int y) {
 		this.x = x;
 		this.y = y;
+		
+		this.world = world;
 		
 		this.killMe = false;
 		
 		this.init();
 	}
 	
-	public void update(World world) {
-		calc(world);
-		post(world);
+	public void update() {
+		calc();
+		post();
 	}
 	
 	public void draw(SpriteBatch batch) {
 		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_y+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
-		
 	}
 	
 	public float[] getDrawCenter(){
@@ -81,15 +84,15 @@ public abstract class Entity {
 		return getHitbox().getBoundingRectangle();
 	}
 	
-	public void hovered(World world) {} //optional method called when the mouse hovers over an entity
+	public void hovered() {} //optional method called when the mouse hovers over an entity
 
-	public void dead(World world){};
+	public void dead(){};
 	
 	public abstract void init(); //called when an entity is created, but after the constructor is called
 	
-	public abstract void calc(World world); //called at the beginning of an update cycle
+	public abstract void calc(); //called at the beginning of an update cycle
 	
-	public abstract void post(World world); //called at the end of an update cycle
+	public abstract void post(); //called at the end of an update cycle
 	
 	
 }

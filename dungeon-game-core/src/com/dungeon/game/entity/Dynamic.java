@@ -23,8 +23,8 @@ public abstract class Dynamic extends Entity {
 	
 	public ArrayList<int[]> collisions;
 	
-	public Dynamic(int x, int y) {
-		super(x, y);
+	public Dynamic(World world, int x, int y) {
+		super(world, x, y);
 		
 		collisions = new ArrayList<int[]>();
 		
@@ -33,18 +33,18 @@ public abstract class Dynamic extends Entity {
 
 	//entity update function called on every frame before the draw phase.
 	@Override
-	public void update(World world) {
+	public void update() {
 		norm();
-		calc(world);
-		phys(world);
-		post(world);
+		calc();
+		phys();
+		post();
 	}
 	
 	//resets some variables at the start of every update cycles
 	public void norm() {}
 	
 	//calculates velocity and collisions for object
-	public void phys(World world) {
+	public void phys() {
 		float[] originalPos = new float[]{x,y};
 		
 		float vel = getVel();
@@ -62,12 +62,12 @@ public abstract class Dynamic extends Entity {
 		x += moveVec.x;
 		y += moveVec.y;
 		
-		if(moveVec.x != 0 || moveVec.y != 0)col(world,true,originalPos);
+		if(moveVec.x != 0 || moveVec.y != 0)col(true,originalPos);
 	}
 	
 	//fix collision to stop gliching into walls
 	
-	public int col(World world, boolean move, float[] originalPos){
+	public int col(boolean move, float[] originalPos){
 		collisions = new ArrayList<int[]>();
 		
 		final int TILE_COL = 1; 

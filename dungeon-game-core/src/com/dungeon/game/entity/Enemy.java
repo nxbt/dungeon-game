@@ -22,11 +22,11 @@ public abstract class Enemy extends Character {
 	protected boolean attacking;
 	
 	
-	public Enemy(int x, int y) {
-		super(x, y);
+	public Enemy(World world, int x, int y) {
+		super(world, x, y);
 	}
 	
-	protected void findPath(World world, ArrayList<Entity> entities, float[] target){
+	protected void findPath(ArrayList<Entity> entities, float[] target){
 //		int[][] mapData = new int[map.length][map[0].length];
 //		for(int i = 0;i<map.length;i++){
 //			for(int k = 0;k<map[0].length;k++){
@@ -69,15 +69,15 @@ public abstract class Enemy extends Character {
 		}
 	}
 	
-	public void dead(World world){
-		if(leftEquiped!=null)unequip(world, leftEquiped);
-		if(rightEquiped!=null)unequip(world, rightEquiped);
+	public void dead(){
+		if(leftEquiped!=null)unequip(leftEquiped);
+		if(rightEquiped!=null)unequip(rightEquiped);
 		
 		ArrayList<Item> drops = inv.getDrops();
 		for(Item item: drops){
 			Slot slot = new Slot(new int[]{0, 0, 0}, null);
 			slot.item = item;
-			Drop drop = new Drop((int)x, (int)y, slot);
+			Drop drop = new Drop(world, (int)x, (int)y, slot);
 			world.entities.add(drop);
 		}
 	}
