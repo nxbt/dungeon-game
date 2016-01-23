@@ -3,11 +3,12 @@ package com.dungeon.game.effect;
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.hud.EffectGraphic;
+import com.dungeon.game.world.World;
 
 public class Stun extends Effect {
 
-	public Stun(int duration) {
-		super("Stun", duration);
+	public Stun(World world, Character character, int duration) {
+		super(world, character, "Stun", duration);
 		texture = new Texture("stun.png");
 		graphic = new EffectGraphic(this);
 	}

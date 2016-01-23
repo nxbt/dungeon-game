@@ -1,13 +1,15 @@
 package com.dungeon.game.effect;
 
+import com.dungeon.game.entity.Character;
 import com.dungeon.game.item.Consumable;
+import com.dungeon.game.world.World;
 
 public class PotionSick extends Effect {
 	
 	public Consumable potion;
 
-	public PotionSick( int duration, Consumable potion) {
-		super("Potion Sickness", duration);
+	public PotionSick(World world, Character character,  int duration, Consumable potion) {
+		super(world, character, "Potion Sickness", duration);
 		
 		this.potion = potion;
 	}

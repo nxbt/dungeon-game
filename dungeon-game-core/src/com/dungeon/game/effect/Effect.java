@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.item.Item;
+import com.dungeon.game.world.World;
 public abstract class Effect {
 	
 	public static Texture texture;
@@ -16,9 +17,15 @@ public abstract class Effect {
 	
 	public boolean killMe;
 	
-	public Effect(String name, int duration){
+	private World world;
+	
+	private Character character;
+	
+	public Effect(World world, Character character, String name, int duration){
 		this.name = name;
 		this.duration = duration;
+		this.world = world;
+		this.character = character;
 	}
 	
 	public void update(Character character){

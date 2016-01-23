@@ -3,6 +3,7 @@ package com.dungeon.game.effect;
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.hud.EffectGraphic;
+import com.dungeon.game.world.World;
 
 public class Poison extends Effect {
 	private static float TICKLENGTH = 30;
@@ -12,8 +13,8 @@ public class Poison extends Effect {
       
       //make tick rate slower
 	
-	    public Poison(float rate, float dmg) {
-		        super("Poison",0);
+	    public Poison(World world, Character character, float rate, float dmg) {
+		        super(world, character, "Poison",0);
 		        this.rate = rate;
 		        this.dmg = dmg;
 		        tickTimer = TICKLENGTH;

@@ -1,10 +1,11 @@
 package com.dungeon.game.effect;
 
 import com.dungeon.game.entity.Character;
+import com.dungeon.game.world.World;
 
 public class Immune extends Effect {
-	public Immune(int duration) {
-		super("Immune", duration);
+	public Immune(World world, Character character, int duration) {
+		super(world, character, "Immune", duration);
 	}
 	
 	public void begin(Character character) {

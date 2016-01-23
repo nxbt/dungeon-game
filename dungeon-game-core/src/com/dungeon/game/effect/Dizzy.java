@@ -3,12 +3,13 @@ package com.dungeon.game.effect;
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.hud.EffectGraphic;
+import com.dungeon.game.world.World;
 public class Dizzy extends Effect {
 	private float amount;
 	private float dizzyness;
 	
-	public Dizzy(int duration, float amount) {
-		super("Dizzy", duration);
+	public Dizzy(World world, Character character, int duration, float amount) {
+		super(world, character, "Dizzy", duration);
 		this.amount = amount;
 		texture = new Texture("dizzy.png");
 		graphic = new EffectGraphic(this);
