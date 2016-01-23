@@ -78,7 +78,7 @@ public class Player extends Character {
 		d_offx = 0;
 		d_offy = 0;
 		
-		sprite = new Texture("person.png");
+		sprite = new Texture("Person.png");
 		
 		solid = true;
 		
