@@ -24,8 +24,11 @@ public class Bow extends Ranged {
 	
 	private Texture[] textures;
 
-	public Bow(World world, int damage, int cooldown, int speed) {
-		super(world, damage, cooldown, speed, new Texture("Bow.png"));
+	public Bow(World world, int dmgMod, int speed) {
+		super(world, new Texture("Bow.png"));
+		
+		this.speed = speed;
+		this.dmgMod = dmgMod;
 		
 		strength = 10;
 		knockstr = 10;
@@ -33,7 +36,7 @@ public class Bow extends Ranged {
 		texturePath = "Bow.png";
 		
 
-		desc = "For the purpose of shooting...  \n\n Damage: "+damage+"\n Cooldown: "+cooldown;
+		desc = "SEE: Arrow  \n\n Damage Modifier: " + dmgMod;
 
 		graphic = new RangedGraphic(world, this, 4, 28);
 		
@@ -137,7 +140,7 @@ public class Bow extends Ranged {
 	@Override
 	public void hit(Character e, Projectile projectile) {
 		e.knownEntities.add(projectile.owner);
-		if(e.damage(damage*projectile.power/10,hitEffects())>0){
+		if(e.damage(projectile.power,hitEffects())>0){
 			Vector2 knockVec = new Vector2();
 			knockVec.x = projectile.moveVec.x/strength*knockstr;
 			knockVec.y = projectile.moveVec.y/strength*knockstr;

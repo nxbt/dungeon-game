@@ -10,9 +10,6 @@ import com.dungeon.game.effect.Effect;
 import com.dungeon.game.entity.Character;
 
 public abstract class Weapon extends Equipable{
-	public int damage;
-	protected int cooldown;
-	protected int speed;
 	public WeaponGraphic graphic;
 	
 	public int stage;
@@ -20,11 +17,9 @@ public abstract class Weapon extends Equipable{
 	
 	public Character owner;
 	
-	public Weapon(World world, int damage, int cooldown, int speed, Texture texture){
+	public Weapon(World world, Texture texture){
 		super(world);
 		maxStack = 1;
-		this.damage = damage;
-		this.cooldown = cooldown;
 		type = WEAPON;
 		sprite = texture;
 	}

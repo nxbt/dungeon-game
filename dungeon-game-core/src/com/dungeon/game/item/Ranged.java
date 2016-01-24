@@ -12,6 +12,8 @@ public abstract class Ranged extends Weapon {
 	protected final int BOLT = 2;
 	protected final int ROCK = 3;
 	
+	public float dmgMod;
+	public float speed;
 	public float knockstr;
 	public float windupTime;
 	public int ammoType;
@@ -19,8 +21,8 @@ public abstract class Ranged extends Weapon {
 	
 	public ArrayList<Projectile> projectiles;
 	
-	public Ranged(World world, int damage, int cooldown, int speed, Texture texture) {
-		super(world, damage, cooldown, speed, texture);
+	public Ranged(World world, Texture texture) {
+		super(world, texture);
 		projectiles = new ArrayList<Projectile>();
 	}
 

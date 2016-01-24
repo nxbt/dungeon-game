@@ -74,11 +74,16 @@ public class Sword extends Melee {
 	protected float[] dmgMult;
 	protected float[] knockMult;
 	
-	public Sword(World world, int damage, int cooldown, int speed) {
-		super(world, damage, cooldown,speed, new Texture("Sword.png"));
-		desc = "Real sword I swear! \n\n Damage: "+damage+"\n Cooldown: "+cooldown;
+	public Sword(World world, int damage, int speed) {
+		super(world, new Texture("Sword.png"));
+		desc = "Real sword I swear! \n\n Damage: "+damage;
+		
+		this.damage = damage;
+		this.speed = speed;
+		
 		knockratio = 0.4f;
 		knockstr = 10;
+		
 		dmgMult = new float[]{0.7f,1,1.5f};
 		knockMult = new float[]{1,1.3f,0.7f};		
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);

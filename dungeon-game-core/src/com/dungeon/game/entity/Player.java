@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.effect.LifeRegen;
 import com.dungeon.game.effect.ManaRegen;
 import com.dungeon.game.effect.StamRegen;
 import com.dungeon.game.entity.hud.EffectGraphic;
@@ -21,6 +20,7 @@ import com.dungeon.game.item.LifePotion;
 import com.dungeon.game.item.OneTaper;
 import com.dungeon.game.item.RubberSword;
 import com.dungeon.game.item.Sword;
+import com.dungeon.game.item.Wand;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.Tile;
@@ -141,9 +141,10 @@ public class Player extends Character {
 		inv.slot[6].item = new Crap(world);
 		inv.slot[19].item = new Arrow(world);
 		inv.slot[20].item = new RubberSword(world);
-		inv.slot[21].item = new Sword(world, 10, 10,10);
-		inv.slot[22].item = new  Bow(world, 10, 10, 10);
+		inv.slot[21].item = new Sword(world, 5, 10);
+		inv.slot[22].item = new  Bow(world, 5, 10);
 		inv.slot[23].item = new OneTaper(world);
+		inv.slot[24].item = new Wand(world);
 		
 		inv.slot[19].item.stack = 12;
 		inv.slot[6].item.stack = 10;

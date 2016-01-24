@@ -112,7 +112,7 @@ public class Goon extends Enemy {
 		inv = new Inventory(world, invLayout, "invBack.png", 10, 100, 0, 240, 288, 16);
 
 		if(Math.random()>0.5){
-			inv.slot[30].item = new Bow(world, (int) (7 + Math.random()*6), 10,10);
+			inv.slot[30].item = new Bow(world, (int) (7 + Math.random()*6), 10);
 			inv.slot[30].item.dropChance = 0.5f;
 			inv.slot[20].item = new Arrow(world);
 			inv.slot[20].item.stack = 12;
@@ -120,7 +120,7 @@ public class Goon extends Enemy {
 			ranged = true;
 		}
 		else {
-			inv.slot[30].item = new Sword(world, (int) (7 + Math.random()*6), 10,10);
+			inv.slot[30].item = new Sword(world, (int) (7 + Math.random()*6), 10);
 			inv.slot[30].item.dropChance = 0.5f;
 			ranged = false;
 		}
