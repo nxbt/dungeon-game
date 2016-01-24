@@ -9,7 +9,6 @@ import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.World;
 
 public abstract class Projectile extends Dynamic {
-	private Weapon weapon;
 	
 	public float power;
 	
@@ -21,7 +20,7 @@ public abstract class Projectile extends Dynamic {
 	
 	protected Slot slot;
 	
-	public Projectile(World world, int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, Weapon weapon) {
+	public Projectile(World world, int x, int y, float angle, float power, Polygon hitbox, float originX, float originY) {
 		super(world, x, y);
 		Vector2 acelVec = new Vector2();
 		acelVec.x = (float) Math.cos((angle+135)/180*Math.PI)*power;
@@ -34,13 +33,10 @@ public abstract class Projectile extends Dynamic {
 		
 		rotate = true;
 		
-		this.owner = weapon.owner;
-		
 		this.hitbox = hitbox;
 		
 		this.origin_x = originX;
 		this.origin_y = originY;
-		this.weapon = weapon;
 		this.power = power;
 		
 		slot = new Slot(world, new int[] {0, 0, 0}, null);
@@ -56,8 +52,8 @@ public abstract class Projectile extends Dynamic {
 	public void calc() { //TODO: make projectile turn into pickupable items
 		
 		for(Entity e: world.entities){
-			if(!e.equals(owner)&& e.solid && e instanceof Dynamic && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
-				weapon.hit((Character) e,this);
+			if(!e.equals(owner)&& e.solid && e instanceof Character && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
+				hit((Character)e);
 				killMe = true;
 			}
 		}
@@ -65,13 +61,11 @@ public abstract class Projectile extends Dynamic {
 	}
 	
 	public void phys(){
-		System.out.println(getVel());
 		float vel = getVel();
 		range--;
 		if(range<0||vel<fric){
 			killMe = true;
 			if(slot.item!=null){
-				System.out.println("DIED");
 				Drop drop = new Drop(world, (int)x, (int)y, slot);
 				drop.angle = angle;
 				world.entities.add(drop);
@@ -90,5 +84,7 @@ public abstract class Projectile extends Dynamic {
 		x+=moveVec.x;
 		y+=moveVec.y;
 	}
+	
+	protected abstract void hit(Character character);
 
 }

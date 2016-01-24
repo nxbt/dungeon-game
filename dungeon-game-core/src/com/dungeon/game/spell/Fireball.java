@@ -15,7 +15,7 @@ public class Fireball extends Spell {
 
 	@Override
 	public void cast(float x, float y, float angle, Medium medium) {
-		world.entities.add(new FireballGraphic(world, (int)x, (int)y, angle, 10, new Polygon(new float[]{0,28,4,28,4,32,0,32}), 0, 32, medium));
+		world.entities.add(new FireballGraphic(world, (int)x, (int)y, angle, 10, new Polygon(new float[]{0,28,4,28,4,32,0,32}), 0, 32, medium, this));
 		
 	}
 
