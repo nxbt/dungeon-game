@@ -5,6 +5,7 @@ import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.MediumGraphic;
 import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.RangedGraphic;
+import com.dungeon.game.spell.Fireball;
 import com.dungeon.game.spell.Spell;
 import com.dungeon.game.world.World;
 
@@ -19,6 +20,7 @@ public class Wand extends Medium {
 		numSpells = 1;
 		
 		spells = new Spell[numSpells];
+		spells[0] = new Fireball(world);
 		
 		graphic = new MediumGraphic(world, this, 30, 2);
 	}
@@ -40,6 +42,8 @@ public class Wand extends Medium {
 		switch(stage){
 		
 		}
+		
+		if(mousepressed&&owner.use_mana(10))((MediumGraphic) graphic).cast(spells[spell],this);
 		
 		return new float[]{distance,polarAngle,angle};
 	}

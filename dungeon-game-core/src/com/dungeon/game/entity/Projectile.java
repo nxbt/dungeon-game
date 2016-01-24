@@ -27,6 +27,8 @@ public abstract class Projectile extends Dynamic {
 		acelVec.x = (float) Math.cos((angle+135)/180*Math.PI)*power;
 		acelVec.y = (float) Math.sin((angle+135)/180*Math.PI)*power;
 		acel(acelVec,false);
+
+		System.out.println(getVel());
 		range = 35;
 		this.angle = angle;
 		
@@ -63,11 +65,13 @@ public abstract class Projectile extends Dynamic {
 	}
 	
 	public void phys(){
+		System.out.println(getVel());
 		float vel = getVel();
 		range--;
 		if(range<0||vel<fric){
 			killMe = true;
 			if(slot.item!=null){
+				System.out.println("DIED");
 				Drop drop = new Drop(world, (int)x, (int)y, slot);
 				drop.angle = angle;
 				world.entities.add(drop);
