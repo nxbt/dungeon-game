@@ -142,7 +142,7 @@ public class Player extends Character {
 		inv.slot[19].item = new Arrow(world);
 		inv.slot[20].item = new RubberSword(world);
 		inv.slot[21].item = new Sword(world, 5, 10);
-		inv.slot[22].item = new  Bow(world, 5, 10);
+		inv.slot[22].item = new  Bow(world, 0.5f, 10);
 		inv.slot[23].item = new OneTaper(world);
 		inv.slot[24].item = new Wand(world);
 		

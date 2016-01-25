@@ -29,10 +29,6 @@ public abstract class Weapon extends Equipable{
 		graphic.sprite = sprite;
 	}
 	
-	public abstract float[] getPos(boolean mousedown, boolean mousepressed);
-	public abstract boolean isInUse();
-	public abstract void hit(Character e, Projectile projectile);
-	
 	public void equip(World world, Character e){
 		this.owner = e;
 		world.entities.add(this.graphic);
@@ -49,4 +45,8 @@ public abstract class Weapon extends Equipable{
 		return effects;
 		
 	}
+	
+	public abstract float[] getPos(boolean mousedown, boolean mousepressed);
+	
+	public abstract boolean isInUse();
 }

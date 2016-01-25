@@ -269,7 +269,7 @@ public class Sword extends Melee {
 		return !hasHit && (stage == SWING1 || stage == SWING2 || stage == SWING3);
 	}
 	
-	public void hit(Character e, Projectile projectile) {
+	public void hit(Character e) {
 		
 		e.knownEntities.add(owner);
 		hasHit = true;

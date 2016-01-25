@@ -24,7 +24,7 @@ public class Bow extends Ranged {
 	
 	private Texture[] textures;
 
-	public Bow(World world, int dmgMod, int speed) {
+	public Bow(World world, float dmgMod, int speed) {
 		super(world, new Texture("Bow.png"));
 		
 		this.speed = speed;
@@ -135,18 +135,6 @@ public class Bow extends Ranged {
 			break;
 		}
 		return new float[]{distance,polarAngle,angle};
-	}
-
-	@Override
-	public void hit(Character e, Projectile projectile) {
-		e.knownEntities.add(projectile.owner);
-		if(e.damage(projectile.power,hitEffects())>0){
-			Vector2 knockVec = new Vector2();
-			knockVec.x = projectile.moveVec.x/strength*knockstr;
-			knockVec.y = projectile.moveVec.y/strength*knockstr;
-			e.acel(knockVec, false);
-		}
-		
 	}
 	
 	public ArrayList<Effect> hitEffects(){

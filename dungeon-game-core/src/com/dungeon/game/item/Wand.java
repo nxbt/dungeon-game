@@ -53,9 +53,4 @@ public class Wand extends Medium {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
-	public void hit(Character e, Projectile projectile) {
-		
-	}
 }

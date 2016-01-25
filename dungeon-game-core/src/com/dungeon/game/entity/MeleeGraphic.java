@@ -37,7 +37,7 @@ public class MeleeGraphic extends WeaponGraphic {
 				}
 			}
 		}
-		if(target!=null)weapon.hit((Character) target,null);
+		if(target!=null) ((Melee) weapon).hit((Character) target);
 	}
 	
 	public void post() {}

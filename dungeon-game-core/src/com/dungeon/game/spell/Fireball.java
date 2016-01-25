@@ -3,7 +3,6 @@ package com.dungeon.game.spell;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.FireballGraphic;
 import com.dungeon.game.item.Medium;
-import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.World;
 
 public class Fireball extends Spell {

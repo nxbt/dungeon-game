@@ -25,7 +25,6 @@ public class FireballGraphic extends Projectile {
 		fric = 0.1f;
 		solid = false;
 		name = "fireball";
-		this.power = power;
 	}
 
 	@Override
@@ -37,6 +36,12 @@ public class FireballGraphic extends Projectile {
 	@Override
 	protected void hit(Character character) {
 		character.damage(100000, null);
+		
+	}
+
+	@Override
+	protected void stop() {
+		// TODO Auto-generated method stub
 		
 	}
 

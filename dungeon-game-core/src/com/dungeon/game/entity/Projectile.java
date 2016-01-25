@@ -4,21 +4,14 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.item.Slot;
-import com.dungeon.game.entity.Character;
-import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.World;
 
 public abstract class Projectile extends Dynamic {
-	
-	public float power;
-	
 	private static int OFFSET = 0;
 	
 	public float range;
 	
 	public Character owner;
-	
-	protected Slot slot;
 	
 	public Projectile(World world, int x, int y, float angle, float power, Polygon hitbox, float originX, float originY) {
 		super(world, x, y);
@@ -37,9 +30,6 @@ public abstract class Projectile extends Dynamic {
 		
 		this.origin_x = originX;
 		this.origin_y = originY;
-		this.power = power;
-		
-		slot = new Slot(world, new int[] {0, 0, 0}, null);
 	}
 
 	@Override
@@ -49,8 +39,7 @@ public abstract class Projectile extends Dynamic {
 	}
 
 	@Override
-	public void calc() { //TODO: make projectile turn into pickupable items
-		
+	public void calc() {
 		for(Entity e: world.entities){
 			if(!e.equals(owner)&& e.solid && e instanceof Character && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
 				hit((Character)e);
@@ -64,12 +53,8 @@ public abstract class Projectile extends Dynamic {
 		float vel = getVel();
 		range--;
 		if(range<0||vel<fric){
+			stop();
 			killMe = true;
-			if(slot.item!=null){
-				Drop drop = new Drop(world, (int)x, (int)y, slot);
-				drop.angle = angle;
-				world.entities.add(drop);
-			}
 		}else{
 			moveVec.x-=moveVec.x/vel*fric;
 			moveVec.y-=moveVec.y/vel*fric;
@@ -86,5 +71,6 @@ public abstract class Projectile extends Dynamic {
 	}
 	
 	protected abstract void hit(Character character);
-
+	
+	protected abstract void stop();
 }
