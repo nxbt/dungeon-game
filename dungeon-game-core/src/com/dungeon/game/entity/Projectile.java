@@ -13,16 +13,14 @@ public abstract class Projectile extends Dynamic {
 	
 	public Character owner;
 	
-	public Projectile(World world, int x, int y, float angle, float power, Polygon hitbox, float originX, float originY) {
+	public Projectile(World world, int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, int range) {
 		super(world, x, y);
 		Vector2 acelVec = new Vector2();
 		acelVec.x = (float) Math.cos((angle+135)/180*Math.PI)*power;
 		acelVec.y = (float) Math.sin((angle+135)/180*Math.PI)*power;
 		acel(acelVec,false);
-
-		System.out.println(getVel());
-		range = 35;
 		this.angle = angle;
+		this.range = range;
 		
 		rotate = true;
 		
@@ -30,6 +28,8 @@ public abstract class Projectile extends Dynamic {
 		
 		this.origin_x = originX;
 		this.origin_y = originY;
+		
+//		fric = 0.1f;
 	}
 
 	@Override
@@ -50,20 +50,24 @@ public abstract class Projectile extends Dynamic {
 	}
 	
 	public void phys(){
+		System.out.println(getVel());
 		float vel = getVel();
 		range--;
-		if(range<0||vel<fric){
+		if(range<0||vel<=fric){
 			stop();
+
+			System.out.println("stopped");
 			killMe = true;
 		}else{
 			moveVec.x-=moveVec.x/vel*fric;
 			moveVec.y-=moveVec.y/vel*fric;
 		}
 		
-		Polygon hitboxTile;
 		if((moveVec.x != 0 || moveVec.y != 0) && col(false, new float[]{0,0})==1){
 			moveVec.x = 0;
 			moveVec.y = 0;
+
+			System.out.println("stopped collide");
 		}
 		
 		x+=moveVec.x;

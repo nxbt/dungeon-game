@@ -8,12 +8,12 @@ import com.dungeon.game.world.World;
 
 public class WeaponProjectile extends Projectile {
 	
-	Ranged weapon;
+	public Ranged weapon;
 	
-	Ammo ammo;
+	public Ammo ammo;
 	
-	public WeaponProjectile(World world, Ranged weapon, Ammo ammo, int x, int y, float angle, float power, Polygon hitbox, float originX, float originY) {
-		super(world, x, y, angle, power, hitbox, originX, originY);
+	public WeaponProjectile(World world, Ranged weapon, Ammo ammo, int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, int range) {
+		super(world, x, y, angle, power, hitbox, originX, originY, range);
 
 		this.weapon = weapon;
 		this.ammo = ammo;

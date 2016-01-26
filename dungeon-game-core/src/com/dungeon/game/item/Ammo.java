@@ -2,6 +2,7 @@ package com.dungeon.game.item;
 
 import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.Projectile;
+import com.dungeon.game.entity.WeaponProjectile;
 import com.dungeon.game.world.World;
 
 public abstract class Ammo extends Item {
@@ -15,5 +16,5 @@ public abstract class Ammo extends Item {
 		maxStack = 10;
 	}
 
-	public abstract void hit(Character character, Ranged weapon, Projectile projectile);
+	public abstract void hit(Character character, Ranged weapon, WeaponProjectile projectile);
 }

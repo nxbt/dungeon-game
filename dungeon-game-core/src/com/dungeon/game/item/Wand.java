@@ -19,6 +19,8 @@ public class Wand extends Medium {
 		
 		numSpells = 1;
 		
+		this.dmgMod = 1;
+		
 		spells = new Spell[numSpells];
 		spells[0] = new Fireball(world);
 		

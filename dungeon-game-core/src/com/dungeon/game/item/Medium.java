@@ -14,6 +14,8 @@ public abstract class Medium extends Weapon {
 	
 	public int spell;
 	
+	public float dmgMod;
+	
 	public Medium(World world, Texture texture) {
 		super(world, texture);
 		

@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.Character;
-import com.dungeon.game.entity.Projectile;
+import com.dungeon.game.entity.WeaponProjectile;
 import com.dungeon.game.world.World;
 
 public class Arrow extends Ammo {
@@ -29,7 +29,7 @@ public class Arrow extends Ammo {
 	}
 
 	@Override
-	public void hit(Character character, Ranged weapon, Projectile projectile) {;
+	public void hit(Character character, Ranged weapon, WeaponProjectile projectile) {;
 		float damage = this.damage*weapon.dmgMod*projectile.getVel()/10;
 		
 		ArrayList<Effect> effects = new ArrayList<Effect>();
