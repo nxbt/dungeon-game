@@ -14,6 +14,6 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 ##TODO:
 * Add More Enemies
 * Create Backstory
-* Visibility polygonss (created from triangles)
+* Visibility polygons (created from triangles)
 * Lighting using a similar algorithm to visibility polygons.
 * Add "Sounds" that entities can pick up.
