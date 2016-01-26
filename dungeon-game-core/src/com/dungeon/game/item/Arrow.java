@@ -14,10 +14,7 @@ public class Arrow extends Ammo {
 
 	public Arrow(World world){
 		super(world);
-	}
-
-	@Override
-	public void init() {
+		
 		damage = 10;
 		
 		name = "Arrow";
@@ -26,6 +23,10 @@ public class Arrow extends Ammo {
 		maxStack = 12;
 		
 		sprite = new Texture("Arrow.png");
+	}
+
+	@Override
+	public void init() {
 	}
 
 	@Override
