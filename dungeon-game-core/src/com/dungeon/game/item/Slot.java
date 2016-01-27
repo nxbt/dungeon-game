@@ -2,6 +2,7 @@ package com.dungeon.game.item;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.Character;
@@ -9,6 +10,9 @@ import com.dungeon.game.world.World;
 
 public class Slot {
 
+	private final static Texture SLOT = new Texture("slot.png");
+	
+	public boolean renderSlot;
 	public Item item;
 	
 	public int type;
@@ -36,6 +40,8 @@ public class Slot {
 		font.setColor(Color.LIGHT_GRAY);
 		
 		this.inv = inv;
+
+		renderSlot = true;
 	}
 	
 	public void swap(Slot that) {
@@ -109,7 +115,8 @@ public class Slot {
 	}
 	
 	public void draw(SpriteBatch batch, int xoff, int yoff) {
-		if(item != null) {
+		if(renderSlot)batch.draw(SLOT, x+xoff, y+yoff, Item.SIZE, Item.SIZE);
+		if(item!=null){
 			batch.draw(item.sprite, x+xoff, y+yoff, Item.SIZE, Item.SIZE);
 			
 			if(item.stack > 1) {
@@ -117,6 +124,7 @@ public class Slot {
 				font.draw(batch, Integer.toString(item.stack), (float) (x+xoff+Item.SIZE-font.getScaleX()*(Math.floor(Math.log10(item.stack))+ 1)*7)-4, y+yoff+font.getScaleY()*12+1);
 			}
 		}
+			
 	}
 	
 	public void consume(Character user) {

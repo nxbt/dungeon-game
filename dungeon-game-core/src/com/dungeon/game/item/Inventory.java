@@ -3,6 +3,7 @@ package com.dungeon.game.item;
 import java.util.ArrayList;
 
 import com.dungeon.game.entity.hud.InvGraphic;
+import com.dungeon.game.entity.hud.InvGraphic;
 import com.dungeon.game.world.World;
 
 public class Inventory {
@@ -22,7 +23,7 @@ public class Inventory {
 			slot[i] = new Slot(world, layout[i], this);
 		}
 		
-		this.graphic = new InvGraphic(world, graphic, this, x, y, dragX, dragY, dragWidth, dragHeight);
+		this.graphic= new InvGraphic(world, this, x, y);
 	}
 	
 	public void hovered() {

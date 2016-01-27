@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.world.World;
 
-public class Window extends Hud {
+public abstract class Window extends Hud {
 	static final NinePatch WINDOW = new NinePatch(new Texture("window.png"), 1, 1, 14, 1);
 	
 	boolean drag;
@@ -40,11 +40,7 @@ public class Window extends Hud {
 		if(world.mouse.lb_released){
 			drag = false;
 		}
-	}
-
-	@Override
-	public void post() {
-		
+		subCalc();
 	}
 
 	public void hovered() {
@@ -53,9 +49,34 @@ public class Window extends Hud {
 			dragOffY = (int) (world.mouse.y-y);
 			drag = true;
 		}
+		else{
+			subHovered();
+		}
 	}
 	
 	public void draw(SpriteBatch batch) {
 		WINDOW.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
+		subDraw(batch);
+	}
+	
+
+	
+	public void open() {
+		world.hudEntities.add(0, this);
+	}
+	
+	public void close() {
+		world.hudEntities.remove(this);
+		drag = false;
+	}
+	
+	protected void subCalc(){
+		
+	}
+	protected void subHovered(){
+		
+	}
+	protected void subDraw(SpriteBatch batch){
+		
 	}
 }

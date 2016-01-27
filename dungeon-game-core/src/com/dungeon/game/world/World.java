@@ -17,6 +17,7 @@ import com.dungeon.game.entity.Player;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.HealthBar;
 import com.dungeon.game.entity.hud.Hud;
+import com.dungeon.game.entity.hud.InvGraphic;
 import com.dungeon.game.entity.hud.ManaBar;
 import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.StamBar;
@@ -83,8 +84,6 @@ public class World {
 		hudEntities.add(new HealthBar(this,100,20));
 		hudEntities.add(new StamBar(this,220,20));
 		hudEntities.add(new ManaBar(this,340,20));
-		
-		hudEntities.add(new Window(this, 100, 100));
 		
 		fps = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		fps.setColor(Color.RED);

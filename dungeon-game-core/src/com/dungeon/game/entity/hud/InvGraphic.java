@@ -1,95 +1,41 @@
 package com.dungeon.game.entity.hud;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.Slot;
 import com.dungeon.game.world.World;
 
-public class InvGraphic extends Hud {
+public class InvGraphic extends Window {
 	
-	
-	Slot[] slot;
-	
-	Inventory inv;
-	
-	private int dragBar_x;
-	private int dragBar_y;
-	private int dragBar_width;
-	private int dragBar_height;
-	private boolean drag;
-	private int dragOff_x;
-	private int dragOff_y;
-	
-	public InvGraphic(World world, String sprite, Inventory inv, int x, int y, int dragX, int dragY, int dragWidth, int dragHeight) {
+	public Inventory inv;
+
+	public InvGraphic(World world, Inventory inv, int x, int y) {
 		super(world, x, y);
-		
-		this.slot = inv.slot;
-		
-		this.sprite = new Texture(sprite);
-		
+		d_width = 0;
+		d_height = 14;
 		this.inv = inv;
-		
-		d_width = this.sprite.getWidth();
-		d_height = this.sprite.getHeight();
-		dragBar_x = dragX;
-		dragBar_y = dragY;
-		dragBar_width = dragWidth;
-		dragBar_height = dragHeight;
+		for(Slot slot: inv.slot){
+			if(slot.x + 40>d_width)d_width = slot.x + 40;
+			if(slot.y + 50>d_height)d_height = slot.y + 50;
+		}
 	}
 
 	@Override
-	public void init() {
-	}
-
-	@Override
-	public void calc() {
-		if(drag){
-			x = world.mouse.x-dragOff_x;
-			y = world.mouse.y-dragOff_y;
-			
-			if(world.hudEntities.indexOf(this) != 0) {
-				world.hudEntities.remove(this);
-				world.hudEntities.add(0, this);
-			}
-		}
+	public void post() {
+		// TODO Auto-generated method stub
 		
-		if(world.mouse.lb_released){
-			drag = false;
-		}
+	}
+	
+	protected void subCalc(){
 		inv.update();
 	}
-	
-	@Override
-	public void hovered() {
-		if(world.mouse.x>x+dragBar_x&&world.mouse.x<x+dragBar_x+dragBar_width&&world.mouse.y>y+dragBar_y&&world.mouse.y<y+dragBar_y+dragBar_height&&world.mouse.lb_pressed){
-			dragOff_x = (int) (world.mouse.x-x);
-			dragOff_y = (int) (world.mouse.y-y);
-			drag = true;
-		}
-		else{
-			inv.hovered();
-		}
+	protected void subHovered(){
+		inv.hovered();
 	}
-	
-	public void open() {
-		world.hudEntities.add(0, this);
-	}
-	
-	public void close() {
-		world.hudEntities.remove(this);
-		drag = false;
-	}
-	
-	@Override
-	public void draw(SpriteBatch batch) {
-		batch.draw(sprite, x, y, d_width, d_height);
-		
-		for(Slot s: slot) {
+	protected void subDraw(SpriteBatch batch){
+		for(Slot s: inv.slot) {
 			s.draw(batch, (int)x, (int)y);
 		}
 	}
-	
-	public void post() {}
+
 }

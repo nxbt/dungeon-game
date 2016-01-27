@@ -59,6 +59,7 @@ public class Mouse extends Hud {
 		sensitivity = 0.5f;
 		
 		slot = new Slot(world, new int[] {0, 0, 0}, null);
+		slot.renderSlot = false;
 	}
 
 	@Override
