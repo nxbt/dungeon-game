@@ -11,20 +11,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.dungeon.game.Camera;
-import com.dungeon.game.effect.Effect;
-import com.dungeon.game.entity.Chest;
-import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Enemy;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Player;
-import com.dungeon.game.entity.WeaponGraphic;
 import com.dungeon.game.entity.hud.DescBox;
-import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.entity.hud.HealthBar;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.ManaBar;
 import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.StamBar;
+import com.dungeon.game.entity.hud.Window;
 import com.dungeon.game.pathing.AreaMap;
 
 public class World {
@@ -87,6 +83,8 @@ public class World {
 		hudEntities.add(new HealthBar(this,100,20));
 		hudEntities.add(new StamBar(this,220,20));
 		hudEntities.add(new ManaBar(this,340,20));
+		
+		hudEntities.add(new Window(this, 100, 100));
 		
 		fps = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		fps.setColor(Color.RED);

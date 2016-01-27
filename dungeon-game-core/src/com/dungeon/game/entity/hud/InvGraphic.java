@@ -1,12 +1,15 @@
 package com.dungeon.game.entity.hud;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.Slot;
 import com.dungeon.game.world.World;
 
 public class InvGraphic extends Hud {
+	
+	
 	Slot[] slot;
 	
 	Inventory inv;
