@@ -8,6 +8,8 @@ import com.dungeon.game.world.World;
 public abstract class Window extends Hud {
 	static final NinePatch WINDOW = new NinePatch(new Texture("window.png"), 1, 1, 14, 1);
 	
+	private ExitButton exitButton;
+	
 	boolean drag;
 	
 	float dragOffX;
@@ -18,6 +20,8 @@ public abstract class Window extends Hud {
 		
 		d_width = 100;
 		d_height = 200;
+		
+		exitButton = new ExitButton(world, this);
 	}
 
 	@Override
@@ -40,6 +44,17 @@ public abstract class Window extends Hud {
 		if(world.mouse.lb_released){
 			drag = false;
 		}
+		
+		if(x < 0) x = 0;
+		if(y < -d_height+14) y = -d_height+14;
+		if(x+d_width > world.cam.WIDTH) x = world.cam.WIDTH-d_width;
+		if(y+d_height > world.cam.HEIGHT) y = world.cam.HEIGHT-d_height;
+		
+		if(world.hudEntities.indexOf(this) != world.hudEntities.indexOf(exitButton)+1) {
+			world.hudEntities.remove(exitButton);
+			world.hudEntities.add(world.hudEntities.indexOf(this), exitButton);
+		}
+		
 		subCalc();
 	}
 
@@ -56,6 +71,7 @@ public abstract class Window extends Hud {
 	
 	public void draw(SpriteBatch batch) {
 		WINDOW.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
+		
 		subDraw(batch);
 	}
 	
@@ -63,10 +79,12 @@ public abstract class Window extends Hud {
 	
 	public void open() {
 		world.hudEntities.add(0, this);
+		world.hudEntities.add(0, exitButton);
 	}
 	
 	public void close() {
 		world.hudEntities.remove(this);
+		world.hudEntities.remove(exitButton);
 		drag = false;
 	}
 	

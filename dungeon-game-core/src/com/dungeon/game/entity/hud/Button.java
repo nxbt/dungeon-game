@@ -6,28 +6,9 @@ public abstract class Button extends Hud {
 
 	public Button(World world, int x, int y){
 		super(world, x, y);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void calc() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void post() {
-		// TODO Auto-generated method stub
-
 	}
 	
-	public void hover() {
+	public void hovered() {
 		if(world.mouse.lb_pressed) {
 			click();
 		}

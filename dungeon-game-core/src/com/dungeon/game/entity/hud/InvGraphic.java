@@ -22,7 +22,6 @@ public class InvGraphic extends Window {
 
 	@Override
 	public void post() {
-		// TODO Auto-generated method stub
 		
 	}
 	

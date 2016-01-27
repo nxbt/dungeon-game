@@ -7,17 +7,35 @@ public class ExitButton extends Button {
 
 	public Window window;
 	
-	public ExitButton(World world, int x, int y, Window window) {
-		super(world, x, y);
+	public ExitButton(World world, Window window) {
+		super(world, 0, 0);
 		
 		this.window = window;
 		
-		sprite = new Texture("exitButton");
+		sprite = new Texture("exitButton.png");
+		
+		d_width = sprite.getWidth();
+		d_height = sprite.getHeight();
 	}
 
 	@Override
+	public void init() {
+		
+	}
+	
+	public void calc() {
+		this.x = window.x;
+		this.y = window.y + window.d_height-14;
+	}
+	
+	@Override
 	public void click() {
 		window.close();
+	}
+
+	@Override
+	public void post() {
+		
 	}
 
 }
