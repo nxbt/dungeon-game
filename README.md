@@ -19,3 +19,4 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 * Add "Sounds" that entities can pick up.
 * Add dialouge hud
 * Add NPCs
+* Add currency (meaningful!)
