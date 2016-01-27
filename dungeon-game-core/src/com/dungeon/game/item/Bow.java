@@ -100,7 +100,8 @@ public class Bow extends Ranged {
 			changeSprite(textures[0]);
 		}
 			if(mousepressed && owner.inv.contains(new Arrow(world)) != null&&owner.use_stam(10)){
-				owner.inv.contains(new Arrow(world)).consume(null);
+				owner.inv.contains(new Arrow(world)).item.stack--;
+				if(owner.inv.contains(new Arrow(world)).item.stack==0)owner.inv.contains(new Arrow(world)).item = null;
 				stage=WINDUP;
 				stageTimer = 0;
 			}
