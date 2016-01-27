@@ -27,6 +27,12 @@ public abstract class Button extends Hud {
 
 	}
 	
+	public void hover() {
+		if(world.mouse.lb_pressed) {
+			click();
+		}
+	}
+	
 	public abstract void click();
 
 }
