@@ -2,7 +2,7 @@ package com.dungeon.game.entity.hud;
 
 import com.dungeon.game.world.World;
 
-public class Button extends Hud {
+public abstract class Button extends Hud {
 
 	public Button(World world, int x, int y){
 		super(world, x, y);
@@ -26,5 +26,7 @@ public class Button extends Hud {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public abstract void click();
 
 }
