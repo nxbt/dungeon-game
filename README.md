@@ -7,7 +7,7 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 
 ##TODO high priority:
 * Finish adding effects to equipables
-* finish hud
+* Finish hud
 
 ##TODO:
 * Add More Enemies
