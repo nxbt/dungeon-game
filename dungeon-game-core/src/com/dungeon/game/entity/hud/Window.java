@@ -1,5 +1,7 @@
 package com.dungeon.game.entity.hud;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -53,6 +55,10 @@ public abstract class Window extends Hud {
 		if(world.hudEntities.indexOf(this) != world.hudEntities.indexOf(exitButton)+1) {
 			world.hudEntities.remove(exitButton);
 			world.hudEntities.add(world.hudEntities.indexOf(this), exitButton);
+		}
+		
+		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE) && world.hudEntities.indexOf(this) == 1) {
+			close();
 		}
 		
 		subCalc();
