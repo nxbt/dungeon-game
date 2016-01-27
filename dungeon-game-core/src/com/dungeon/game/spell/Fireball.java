@@ -20,6 +20,8 @@ public class Fireball extends Spell {
 		super(world);
 		this.sprite = new Texture("fireball.png");
 		this.damage = 10;
+		mana = 10;
+		cooldown = 40;
 	}
 
 	@Override

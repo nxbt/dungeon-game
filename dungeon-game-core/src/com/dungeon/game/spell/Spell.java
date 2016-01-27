@@ -11,6 +11,10 @@ public abstract class Spell {
 	protected World world;
 	
 	public Texture sprite;
+
+	public float mana;
+	
+	public float cooldown;
 	
 	public Spell(World world) {
 		this.world = world;

@@ -16,6 +16,8 @@ public abstract class Medium extends Weapon {
 	
 	public float dmgMod;
 	
+	public float cooldown;
+	
 	public Medium(World world, Texture texture) {
 		super(world, texture);
 		
@@ -24,10 +26,12 @@ public abstract class Medium extends Weapon {
 	public void nextSpell(){
 		spell++;
 		if(spell==spells.length)spell = 0;
+		System.out.println(spell);
 	}
 	
 	public void preSpell(){
 		spell--;
 		if(spell==-1)spell = spells.length-1;
+		System.out.println(spell);
 	}
 }

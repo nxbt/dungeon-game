@@ -6,6 +6,7 @@ import com.dungeon.game.entity.MediumGraphic;
 import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.RangedGraphic;
 import com.dungeon.game.spell.Fireball;
+import com.dungeon.game.spell.Heal;
 import com.dungeon.game.spell.Spell;
 import com.dungeon.game.world.World;
 
@@ -17,12 +18,13 @@ public class Wand extends Medium {
 		name = "Wand";
 		desc = "You're a wizard, Harry.\n\nI'm a WHAT?";
 		
-		numSpells = 1;
+		numSpells = 2;
 		
 		this.dmgMod = 1;
 		
 		spells = new Spell[numSpells];
 		spells[0] = new Fireball(world);
+		spells[1] = new Heal(world);
 		
 		graphic = new MediumGraphic(world, this, 30, 2);
 	}
@@ -45,7 +47,10 @@ public class Wand extends Medium {
 		
 		}
 		
-		if(mousepressed&&owner.use_mana(10))((MediumGraphic) graphic).cast(spells[spell],this);
+		if(mousepressed&&cooldown == 0&&owner.use_mana(spells[spell].mana)){
+			((MediumGraphic) graphic).cast(spells[spell],this);
+			cooldown = spells[spell].cooldown;
+		}
 		
 		return new float[]{distance,polarAngle,angle};
 	}

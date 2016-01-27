@@ -17,6 +17,7 @@ import com.dungeon.game.item.Hat;
 import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.LifePotion;
+import com.dungeon.game.item.Medium;
 import com.dungeon.game.item.OneTaper;
 import com.dungeon.game.item.RubberSword;
 import com.dungeon.game.item.Sword;
@@ -262,7 +263,11 @@ public class Player extends Character {
 			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
 			leftPos = ((Weapon) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
 			((Weapon)inv.slot[30].item).graphic.calc();
-			
+			if(inv.slot[30].item instanceof Medium){
+				if(Gdx.input.isKeyJustPressed(Input.Keys.O))((Medium)inv.slot[30].item).preSpell();
+				if(Gdx.input.isKeyJustPressed(Input.Keys.P))((Medium)inv.slot[30].item).nextSpell();
+				if(((Medium)inv.slot[30].item).cooldown>0)((Medium)inv.slot[30].item).cooldown--;
+			}
 		}
 		if(attacking){
 			mvel = 2.5f;
