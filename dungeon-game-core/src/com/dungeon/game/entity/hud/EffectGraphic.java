@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,11 +22,27 @@ public class EffectGraphic extends Hud {
 		super(world, 0, 0);
 		this.effect = effect;
 		sprite = effect.texture;
+		if (!sprite.getTextureData().isPrepared()) {
+			sprite.getTextureData().prepare();
+		}
+		Pixmap tempMap = sprite.getTextureData().consumePixmap();
+		
+
+		Texture slot = new Texture("slot.png");
+		if (!slot.getTextureData().isPrepared()) {
+			slot.getTextureData().prepare();
+		}
+		Pixmap slotMap = slot.getTextureData().consumePixmap();
+		slotMap.drawPixmap(tempMap, 0, 0);
+		sprite = new Texture(slotMap);
+		slotMap.dispose();
+		tempMap.dispose();
+		
 		// TODO Auto-generated constructor stub
 		d_width = 32;
 		d_height = 32;
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
-		font.setColor(Color.DARK_GRAY);
+		font.setColor(Color.LIGHT_GRAY);
 	}
 
 	@Override
