@@ -17,3 +17,5 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 * Visibility polygons (created from triangles)
 * Lighting using a similar algorithm to visibility polygons.
 * Add "Sounds" that entities can pick up.
+* Add dialouge hud
+* Add NPCs
