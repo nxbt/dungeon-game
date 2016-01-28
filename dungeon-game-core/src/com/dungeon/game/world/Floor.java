@@ -74,7 +74,7 @@ public class Floor {
 				if(tm[i][k-1].data==1)val+=4;
 				if(tm[i-1][k].data==1)val+=8;
 				
-				if(val != 15 && val !=0 && val !=5 && val!=6 && val!=9 && val!=10) corners.add(new int[]{i*Tile.TS,k*Tile.TS});
+				if(val != 15 && val !=0 && val !=5 && val!=6 && val!=9 && val!=10) corners.add(new int[]{k*Tile.TS,i*Tile.TS});
 					
 			}
 		}
