@@ -52,9 +52,8 @@ public class EffectGraphic extends Hud {
 
 	@Override
 	public void calc() {
-		System.out.println("check");
-		x = 0;
-		y = 320-40*world.player.effectGraphics.indexOf(this);
+		x = world.cam.WIDTH-36;
+		y = world.cam.HEIGHT-36*(1+world.player.effectGraphics.indexOf(this));
 	}
 
 	@Override

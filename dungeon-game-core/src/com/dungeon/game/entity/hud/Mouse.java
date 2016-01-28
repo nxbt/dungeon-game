@@ -127,7 +127,7 @@ public class Mouse extends Hud {
 		int toMoveToFront=0;
 		for(int i = 0; i < world.hudEntities.size(); i++) {
 			Hud ent = world.hudEntities.get(i);
-			if(x > ent.x && x < ent.x+ent.d_width && y > ent.y && y < ent.y+ent.d_height){
+			if(!(world.hudEntities.get(i) instanceof HudBackground) &&x > ent.x && x < ent.x+ent.d_width && y > ent.y && y < ent.y+ent.d_height){
 				if((lb_pressed||rb_pressed) && ent instanceof Window)toMoveToFront = i;
 				ent.hovered();
 				onHud = true;
@@ -148,13 +148,15 @@ public class Mouse extends Hud {
 				
 		world.hudEntities.add(0,world.hudEntities.get(toMoveToFront));
 		world.hudEntities.remove(toMoveToFront+1);
-		for(int i = 0; i < world.entities.size(); i++) {
-			Entity ent = world.entities.get(i);
-			Polygon itemHBox = ent.getHitbox();
-			if(Intersector.isPointInPolygon(itemHBox.getVertices(), 0,itemHBox.getVertices().length,x+world.cam.x-world.cam.WIDTH/2,y+world.cam.y-world.cam.HEIGHT/2)){
-				ent.hovered();
-				canPlace = false;
-				break;
+		if(!onHud){
+			for(int i = 0; i < world.entities.size(); i++) {
+				Entity ent = world.entities.get(i);
+				Polygon itemHBox = ent.getHitbox();
+				if(Intersector.isPointInPolygon(itemHBox.getVertices(), 0,itemHBox.getVertices().length,x+world.cam.x-world.cam.WIDTH/2,y+world.cam.y-world.cam.HEIGHT/2)){
+					ent.hovered();
+					canPlace = false;
+					break;
+				}
 			}
 		}
 		
