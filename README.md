@@ -6,7 +6,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * Finish adding effects to equipables.
 * Add player portrait to the HUD.
 * Add 9 patch to render effect icons over.
-* Visibility polygons (created from triangles)
+* implement Visibility polygons.
 
 ##TODO low priority:
 * Add more enemies
