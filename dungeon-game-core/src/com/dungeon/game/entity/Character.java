@@ -135,15 +135,15 @@ public abstract class Character extends Dynamic {
 	}
 	
 	public void sight(){
-		ArrayList<int[]> rays = new ArrayList<int[]>(); //{startX,startY,endX,endy}
+		ArrayList<float[]> rays = new ArrayList<int[]>(); //{startX,startY,endX,endy}
 		ArrayList<float[]> verticies = new ArrayList<float[]>();
 		for(int[] corner: world.curFloor.corners){
 			float angleSeg = Math.atan2(corner[1]-y,corner[0]-x)*180/Math.PI;
-			rays.add(new int[]{x,y,Math.cos((angleSeg+1)/180*Math.PI)*vision,Math.sin((angleSeg+1)/180*Math.PI)*vision});
-			rays.add(new int[]{x,y,Math.cos((angleSeg-1)/180*Math.PI)*vision,Math.sin((angleSeg-1)/180*Math.PI)*vision});
+			rays.add(new float[]{x,y,Math.cos((angleSeg+1)/180*Math.PI)*vision,Math.sin((angleSeg+1)/180*Math.PI)*vision});
+			rays.add(new float[]{x,y,Math.cos((angleSeg-1)/180*Math.PI)*vision,Math.sin((angleSeg-1)/180*Math.PI)*vision});
 		}
 		//TODO: add entity corners!
-		ArrayList<int[]> edges = new ArrayList<int[]>(); //{startX,startY,endX,endy};
+		ArrayList<float[]> edges = new ArrayList<float[]>(); //{startX,startY,endX,endy};
 		for(int i = 0; i < world.curFloor.tm.length; i++){
 			for(int k = 0; k < world.curFloor.tm[i].length; k++){
 				if(world.curFloor.tm[i][k].data == 1){
@@ -159,7 +159,7 @@ public abstract class Character extends Dynamic {
 		//calculate the verticies
 		for(int[] ray: rays){
 			Vector2 vertex = new Vector2(ray[2],ray[3]);
-			for(int edge: edges){
+			for(float[] edge: edges){
 				Intersector.intersectSegments(new Vector2(ray[0],ray[1]), vertex, new Vector2(edge[0],edge[1]), new Vector2(edge[2],edge[3]),vertex)
 			}
 			verticies.add(new float[]{vertex.x, vertex.y});
