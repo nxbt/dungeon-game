@@ -17,11 +17,10 @@ import com.dungeon.game.entity.Player;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.HealthBar;
 import com.dungeon.game.entity.hud.Hud;
-import com.dungeon.game.entity.hud.InvGraphic;
+import com.dungeon.game.entity.hud.HudSlot;
 import com.dungeon.game.entity.hud.ManaBar;
 import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.StamBar;
-import com.dungeon.game.entity.hud.Window;
 import com.dungeon.game.pathing.AreaMap;
 
 public class World {
@@ -81,9 +80,16 @@ public class World {
 		entities = curFloor.entities;
 		entities.add(0,player);
 
-		hudEntities.add(new HealthBar(this,100,20));
-		hudEntities.add(new StamBar(this,220,20));
-		hudEntities.add(new ManaBar(this,340,20));
+		hudEntities.add(new HealthBar(this,cam.WIDTH-188,48));
+		hudEntities.add(new StamBar(this,cam.WIDTH-188,66));
+		hudEntities.add(new ManaBar(this,cam.WIDTH-188,84));
+		hudEntities.add(new HudSlot(this, cam.WIDTH-80, 80, player.inv.slot[30]));
+		hudEntities.add(new HudSlot(this, cam.WIDTH-40, 80, player.inv.slot[31]));
+		hudEntities.add(new HudSlot(this, cam.WIDTH-280, 8, player.inv.slot[0]));
+		hudEntities.add(new HudSlot(this, cam.WIDTH-240, 8, player.inv.slot[1]));
+		hudEntities.add(new HudSlot(this, cam.WIDTH-200, 8, player.inv.slot[2]));
+		hudEntities.add(new HudSlot(this, cam.WIDTH-160, 8, player.inv.slot[3]));
+		hudEntities.add(new HudSlot(this, cam.WIDTH-120, 8, player.inv.slot[4]));
 		
 		fps = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		fps.setColor(Color.RED);

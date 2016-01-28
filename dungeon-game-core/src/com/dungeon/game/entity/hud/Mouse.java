@@ -183,8 +183,8 @@ public class Mouse extends Hud {
 		if (!world.player.fight_mode) {
 			sprite = ARROW;
 			
-			d_offx = 0;
-			d_offy = -16;
+			d_offx = -2;
+			d_offy = -14;
 		}
 		else {
 			sprite = CROSS;
