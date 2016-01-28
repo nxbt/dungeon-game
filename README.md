@@ -7,7 +7,7 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 
 ##TODO high priority:
 * Finish adding effects to equipables
-* Finish hud
+* Add player portrait to Hud
 * Add 9 patch to render HudEffects over.
 
 ##TODO:
@@ -19,3 +19,4 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 * Add dialouge hud
 * Add NPCs
 * Add currency (meaningful!)
+* Add menu system
