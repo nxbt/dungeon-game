@@ -21,8 +21,8 @@ public abstract class StatusBar extends Hud {
 	
 	@Override
 	public void init() {
-		d_width = 100;
-		d_height = 10;
+		d_width = 8;
+		d_height = 68;
 		percent = 1;
 		sprite = new Texture("bar.png");
 	}
@@ -41,7 +41,7 @@ public abstract class StatusBar extends Hud {
 	
 	@Override
 	public void draw(SpriteBatch batch) {
-		filler.draw(batch, x, y, d_width*percent, d_height);
+		filler.draw(batch, x, y, d_width, d_height*percent);
 		batch.draw(sprite, x, y, d_width, d_height);
 	}
 }
