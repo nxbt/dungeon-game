@@ -8,7 +8,7 @@ public class InvButton extends Button {
 	public InvButton(World world, int x, int y) {
 		super(world, x, y);
 		
-		sprite = new Texture("exitButton.png");
+		sprite = new Texture("invButton.png");
 		
 		this.d_width = sprite.getWidth();
 		this.d_height = sprite.getHeight();
