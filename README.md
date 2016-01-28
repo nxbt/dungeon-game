@@ -8,6 +8,7 @@ Currently being worked on by Brendan Thompson and Ethan Bull-Vulpe.
 ##TODO high priority:
 * Finish adding effects to equipables
 * Finish hud
+* Add 9 patch to render HudEffects over.
 
 ##TODO:
 * Add More Enemies
