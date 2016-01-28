@@ -8,7 +8,7 @@ public class MenuButton extends Button {
 	public MenuButton(World world, int x, int y) {
 		super(world, x, y);
 		
-		sprite = new Texture("invButton.png");
+		sprite = new Texture("menuButton.png");
 		
 		this.d_width = sprite.getWidth();
 		this.d_height = sprite.getHeight();

@@ -8,7 +8,7 @@ public class HelpButton extends Button {
 	public HelpButton(World world, int x, int y) {
 		super(world, x, y);
 		
-		sprite = new Texture("invButton.png");
+		sprite = new Texture("helpButton.png");
 		
 		this.d_width = sprite.getWidth();
 		this.d_height = sprite.getHeight();

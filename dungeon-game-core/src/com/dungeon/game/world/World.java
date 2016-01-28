@@ -16,11 +16,13 @@ import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Player;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.HealthBar;
+import com.dungeon.game.entity.hud.HelpButton;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.HudBackground;
 import com.dungeon.game.entity.hud.HudSlot;
 import com.dungeon.game.entity.hud.InvButton;
 import com.dungeon.game.entity.hud.ManaBar;
+import com.dungeon.game.entity.hud.MenuButton;
 import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.StamBar;
 import com.dungeon.game.pathing.AreaMap;
@@ -81,7 +83,8 @@ public class World {
 		
 		entities = curFloor.entities;
 		entities.add(0,player);
-		
+		hudEntities.add(new MenuButton(this, 4, cam.HEIGHT-20));
+		hudEntities.add(new HelpButton(this, 24, cam.HEIGHT-20));
 		hudEntities.add(new InvButton(this, cam.WIDTH-56, 76));
 		hudEntities.add(new HealthBar(this,cam.WIDTH-36,76));
 		hudEntities.add(new StamBar(this,cam.WIDTH-24,76));
