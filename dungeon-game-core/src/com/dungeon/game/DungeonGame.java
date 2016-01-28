@@ -12,11 +12,11 @@ public class DungeonGame extends ApplicationAdapter {
 	
 	@Override
 	public void create() {
+		Gdx.graphics.setDisplayMode(1280, 720, false);
+		
 		batch = new SpriteBatch();
 		
 		world = new World();
-		
-		Gdx.graphics.setDisplayMode(1280, 720, false);
 	}
 
 	@Override
