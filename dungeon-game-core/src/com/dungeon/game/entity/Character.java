@@ -190,7 +190,18 @@ public abstract class Character extends Dynamic {
 			endVertex.x = rays.get(i)[2];
 			endVertex.y = rays.get(i)[3];
 			for(float[] edge: edges){
-				Intersector.intersectSegments(rays.get(i)[0],rays.get(i)[1], endVertex.x,endVertex.y, edge[0],edge[1], edge[2],edge[3],endVertex);
+				boolean checkEdge = false;
+				float startAngle = Math.atan2(edge[1]-y,edge[0]-x)*180/Math.PI;
+				float endAngle = Math.atan2(edge[3]-y,edge[2]-x)*180/Math.PI;
+				float rayAngle = Math.atan2(ray.get(i)[1]-y, edge[0]-x)*180/Math.PI;
+				if(Math.signum(startAngle)!=Math.signum(endAngle)&&Math.abs(startAngle)+Math.abs(endAngle)>180){
+					//have to transform any negative angles because of the +-180 shift!
+					if(startAngle<0)startAngle = 360+startAngle;
+					if(endAngle<0)startAngle = 360+endAgnle;
+					if(rayAngle<0)startAngle = 360+rayAngle;
+				}
+				if((startAngle>=rayAngle&&endAngle<=rayAngle)||(endAngle>=rayAngle&&startAngle<=rayAngle))checkEdge = true;
+				if(checkEdge)Intersector.intersectSegments(rays.get(i)[0],rays.get(i)[1], endVertex.x,endVertex.y, edge[0],edge[1], edge[2],edge[3],endVertex);
 			}
 			verticies[i] = (new float[]{endVertex.x, endVertex.y});
 		}
