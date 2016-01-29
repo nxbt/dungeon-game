@@ -242,7 +242,7 @@ public abstract class Character extends Dynamic {
 		visTris.add(new Polygon(new float[]{x,y,visPolygon.getVertices()[visPolygon.getVertices().length-2],visPolygon.getVertices()[visPolygon.getVertices().length-1],visPolygon.getVertices()[0],visPolygon.getVertices()[1]}));
 		
 		for(Entity e: world.entities){
-			if(!knownEntities.contains(e)){
+			if(!knownEntities.contains(e)&&!e.equals(this)){
 				for(Polygon tri: visTris){
 					if(Intersector.overlapConvexPolygons(e.getHitbox(),tri)){
 						knownEntities.add(e);
