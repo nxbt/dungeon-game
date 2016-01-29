@@ -54,7 +54,10 @@ public class World {
 	
 	private BitmapFont fps;
 	
-	boolean debug;
+	boolean debug_hitbox;
+	boolean debug_pathing;
+	boolean debug_frames;
+	boolean debug_sight;
 	
 //	public LightMap lightMap;
 	
@@ -102,10 +105,13 @@ public class World {
 		hudEntities.add(new HudSlot(this, cam.WIDTH-108, 4, player.inv.slot[4]));
 		hudEntities.add(new HudBackground(this));
 		
-		fps = new BitmapFont(Gdx.files.internal("main_text.fnt"));
-		fps.setColor(Color.RED);
+		fpsFont = new BitmapFont(Gdx.files.internal("main_text.fnt"));
+		fpsFont.setColor(Color.RED);
 		
-		debug = false;
+		debug_hitbox = false;
+		debug_pathing = false;
+		debug_frames = false; 
+		debug_sight = false;
 		
 //		lightMap = new LightMap(cam.WIDTH,cam.HEIGHT);
 	}
@@ -132,7 +138,10 @@ public class World {
 		
 		cam.update(player.x, player.y, mouse.x, mouse.y, 1f);
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F9)) debug = !debug;
+		if(Gdx.input.isKeyJustPressed(Input.Keys.F9)) debug_frames = !debug_frames;
+		if(Gdx.input.isKeyJustPressed(Input.Keys.F8)) debug_frames = !debug_sight;
+		if(Gdx.input.isKeyJustPressed(Input.Keys.F7)) debug_frames = !debug_pathing;
+		if(Gdx.input.isKeyJustPressed(Input.Keys.F10)) debug_frames = !debug_hitbox;
 		
 //		lightMap.update(this);
 	}
@@ -148,7 +157,7 @@ public class World {
 		curFloor.draw(batch, this);
 		
 		for(int i = entities.size()-1; i >= 0; i--) {
-			if(debug||player.knownEntities.contains(entities.get(i))||entities.get(i).equals(player))entities.get(i).draw(batch);
+			if(player.knownEntities.contains(entities.get(i))||entities.get(i).equals(player)||debug_pathing)entities.get(i).draw(batch);
 		}
 		batch.end();
 		
@@ -158,33 +167,40 @@ public class World {
 			shapeRenderer.setProjectionMatrix(cam.cam.combined);
 			
 			for(Entity e: entities){
+				if(debug_hitbox) {
 					if(e.solid) shapeRenderer.setColor(Color.RED);
 					else shapeRenderer.setColor(Color.GREEN);
-					shapeRenderer.polygon(e.getHitbox().getVertices());
-					if(e instanceof Enemy){
-						if(((Enemy)e).moveTo!=null&&((Enemy)e).path!=null){
-							shapeRenderer.setColor(Color.BLUE);
-							shapeRenderer.rect(((Enemy)e).moveTo[0]*Tile.TS, ((Enemy)e).moveTo[1]*Tile.TS, Tile.TS, Tile.TS);
-							shapeRenderer.line(e.x, e.y, ((Enemy)e).moveTo[0]*Tile.TS+Tile.TS/2, ((Enemy)e).moveTo[1]*Tile.TS+Tile.TS/2);
-							int[] prePoint = new int[]{0,0};
-							shapeRenderer.setColor(Color.YELLOW);
-							for(int[] point:((Enemy)e).path){
-								if(((Enemy)e).path.indexOf(point)>0){
-									shapeRenderer.line(prePoint[0]*Tile.TS+Tile.TS/2, prePoint[1]*Tile.TS+Tile.TS/2,point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
-								}
-								prePoint = point;
-							}
+					
+					shapeRenderer.polygon(e.getHitbox().getVertices());	
+				}
+				
+				if(debug_pathing && e instanceof Enemy && ((Enemy)e).moveTo!=null&&((Enemy)e).path!=null){
+					shapeRenderer.setColor(Color.BLUE);
+					shapeRenderer.rect(((Enemy)e).moveTo[0]*Tile.TS, ((Enemy)e).moveTo[1]*Tile.TS, Tile.TS, Tile.TS);
+					shapeRenderer.line(e.x, e.y, ((Enemy)e).moveTo[0]*Tile.TS+Tile.TS/2, ((Enemy)e).moveTo[1]*Tile.TS+Tile.TS/2);
+					int[] prePoint = new int[]{0,0};
+					shapeRenderer.setColor(Color.YELLOW);
+					for(int[] point:((Enemy)e).path){
+						if(((Enemy)e).path.indexOf(point)>0){
+							shapeRenderer.line(prePoint[0]*Tile.TS+Tile.TS/2, prePoint[1]*Tile.TS+Tile.TS/2,point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
 						}
+						prePoint = point;
 					}
+				}
+				
+				if(debug_sight) {
 					shapeRenderer.setColor(Color.PURPLE);
-					if(e instanceof Character){
-						shapeRenderer.polygon(((Character)e).visPolygon.getVertices());
-					}
-					shapeRenderer.setColor(Color.PURPLE);
-					for(int[] corner: curFloor.corners){
-						if(Math.sqrt((player.x-corner[0])*(player.x-corner[0])+(player.y-corner[1])*(player.y-corner[1]))<player.vision*Tile.TS)shapeRenderer.rect(corner[0]-2,corner[1]-2,4,4);
-					}
+					if(e instanceof Character) shapeRenderer.polygon(((Character)e).visPolygon.getVertices());
+				}
 			}
+			
+			if(debug_sight) {
+				shapeRenderer.setColor(Color.PURPLE);
+				for(int[] corner: curFloor.corners){
+					shapeRenderer.rect(corner[0]-2,corner[1]-2,4,4);
+				}	
+			}
+			
 			shapeRenderer.end();
 		}
 		
@@ -201,7 +217,7 @@ public class World {
 		mouse.draw(batch);
 		descBox.draw(batch);
 		
-		fps.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 60f, cam.HEIGHT-8f);
+		if(debug_frames) fps.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 60f, cam.HEIGHT-8f);
 		
 		batch.end();
 	}
