@@ -4,9 +4,8 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 ##TODO high priority:
 * Change all floats to doubles to improve percicion. (super happy fun times)
 * Finish adding effects to equipables.
-* Add player portrait to the HUD.
 * Add 9 patch to render effect icons over.
-* implement Visibility polygons.
+* optimise visability polygons
 
 ##TODO low priority:
 * Add more enemies
