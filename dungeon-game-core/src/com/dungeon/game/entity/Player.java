@@ -137,18 +137,18 @@ public class Player extends Character {
 		
 		hat = inv.slot[35].item; 
 		inv.slot[0].item = new LifePotion(world);
-		inv.slot[0].item.stack = 10;
-		inv.slot[35].item = new Hat(world);
-		inv.slot[6].item = new Crap(world);
+		inv.slot[0].item.stack = 3;
+//		inv.slot[35].item = new Hat(world);
+//		inv.slot[6].item = new Crap(world);
 		inv.slot[19].item = new Arrow(world);
-		inv.slot[20].item = new RubberSword(world);
+//		inv.slot[20].item = new RubberSword(world);
 		inv.slot[21].item = new Sword(world, 5, 10);
 		inv.slot[22].item = new  Bow(world, 0.5f, 10);
-		inv.slot[23].item = new OneTaper(world);
+//		inv.slot[23].item = new OneTaper(world);
 		inv.slot[24].item = new Wand(world);
 		
 		inv.slot[19].item.stack = 12;
-		inv.slot[6].item.stack = 10;
+//		inv.slot[6].item.stack = 10;
 		
 		light = new Light(this, 1);
 	}

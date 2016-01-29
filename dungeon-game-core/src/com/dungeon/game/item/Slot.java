@@ -11,6 +11,10 @@ import com.dungeon.game.world.World;
 public class Slot {
 
 	private final static Texture SLOT = new Texture("slot.png");
+	private final static Texture SLOT_CONSUMABLE = new Texture("slotConsumable.png");
+	private final static Texture SLOT_WEAPON = new Texture("slotWeapon.png");
+	
+	private Texture slotTex;
 	
 	public boolean renderSlot;
 	public Item item;
@@ -42,6 +46,10 @@ public class Slot {
 		this.inv = inv;
 
 		renderSlot = true;
+		
+		if(type == 1)slotTex = SLOT_CONSUMABLE;
+		else if(type == 2)slotTex = SLOT_WEAPON;
+		else slotTex = SLOT;
 	}
 	
 	public void swap(Slot that) {
@@ -115,7 +123,7 @@ public class Slot {
 	}
 	
 	public void draw(SpriteBatch batch, int xoff, int yoff) {
-		if(renderSlot)batch.draw(SLOT, x+xoff, y+yoff, Item.SIZE, Item.SIZE);
+		if(renderSlot)batch.draw(slotTex, x+xoff, y+yoff, Item.SIZE, Item.SIZE);
 		if(item!=null){
 			batch.draw(item.sprite, x+xoff, y+yoff, Item.SIZE, Item.SIZE);
 			

@@ -1,7 +1,10 @@
 package com.dungeon.game.entity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Immune;
@@ -135,51 +138,56 @@ public abstract class Character extends Dynamic {
 	}
 	
 	public void sight(){
-		ArrayList<float[]> rays = new ArrayList<int[]>(); //{startX,startY,endX,endy}
-		ArrayList<float[]> verticies = new ArrayList<float[]>();
-		for(int[] corner: world.curFloor.corners){
-			float angleSeg = Math.atan2(corner[1]-y,corner[0]-x)*180/Math.PI;
-			rays.add(new float[]{x,y,Math.cos((angleSeg+1)/180*Math.PI)*vision,Math.sin((angleSeg+1)/180*Math.PI)*vision});
-			rays.add(new float[]{x,y,Math.cos((angleSeg-1)/180*Math.PI)*vision,Math.sin((angleSeg-1)/180*Math.PI)*vision});
-		}
-		//TODO: add entity corners!
-		ArrayList<float[]> edges = new ArrayList<float[]>(); //{startX,startY,endX,endy};
-		for(int i = 0; i < world.curFloor.tm.length; i++){
-			for(int k = 0; k < world.curFloor.tm[i].length; k++){
-				if(world.curFloor.tm[i][k].data == 1){
-					edges.add(k*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,i*Tile.TS);
-					edges.add(k*Tile.TS,i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS);
-					edges.add((k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS);
-					edges.add(k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS);
-				}
-			}
-		}
-		//TODO: add entity edges!
-		
-		//calculate the verticies
-		for(int[] ray: rays){
-			Vector2 vertex = new Vector2(ray[2],ray[3]);
-			for(float[] edge: edges){
-				Intersector.intersectSegments(new Vector2(ray[0],ray[1]), vertex, new Vector2(edge[0],edge[1]), new Vector2(edge[2],edge[3]),vertex)
-			}
-			verticies.add(new float[]{vertex.x, vertex.y});
-		}
-		
-		//calculate the angles of each vertex
-		ArrayList<float> vertexAngles = new ArrayList<float>();
-		for(float[] vertex: vertecies){
-			vertexAngles.add(Math.atan(vertex[0]-x,vertex[1]-y));
-		}
-		//reorder points to be in counterclockwise fashion.
-		vertexAngles.sort();
-		Arraylist<float[]> finalVerticies = new ArrayList<float[]>();
-		for(float angle: vertexAngles){
-			for(float[] vertex: vertecies){
-				if(angle == Math.atan(vertex[0]-x,vertex[1]-y))finalVerticies.add(vertexAngles.indexOf(angle),vertex);
-			}
-		}
-		//create the visPolygon
-		Polygon visPoly = new Polygon(finalVerticies);
+//		ArrayList<float[]> rays = new ArrayList<float[]>(); //{startX,startY,endX,endy}
+//		ArrayList<float[]> verticies = new ArrayList<float[]>();
+//		for(int[] corner: world.curFloor.corners){
+//			float angleSeg = (float) (Math.atan2(corner[1]-y,corner[0]-x)*180/Math.PI);
+//			rays.add(new float[]{x,y,(float) (Math.cos((angleSeg+1)/180*Math.PI)*vision),(float) (Math.sin((angleSeg+1)/180*Math.PI)*vision)});
+//			rays.add(new float[]{x,y,(float) (Math.cos((angleSeg-1)/180*Math.PI)*vision),(float) (Math.sin((angleSeg-1)/180*Math.PI)*vision)});
+//		}
+//		//TODO: add entity corners!
+//		ArrayList<float[]> edges = new ArrayList<float[]>(); //{startX,startY,endX,endy};
+//		for(int i = 0; i < world.curFloor.tm.length; i++){
+//			for(int k = 0; k < world.curFloor.tm[i].length; k++){
+//				if(world.curFloor.tm[i][k].data == 1){
+//					edges.add(new float[]{k*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,i*Tile.TS});
+//					edges.add(new float[]{k*Tile.TS,i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS});
+//					edges.add(new float[]{(k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS});
+//					edges.add(new float[]{k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS});
+//				}
+//			}
+//		}
+//		//TODO: add entity edges!
+//		
+//		//calculate the verticies
+//		for(float[] ray: rays){
+//			Vector2 vertex = new Vector2(ray[2],ray[3]);
+//			for(float[] edge: edges){
+//				Intersector.intersectSegments(new Vector2(ray[0],ray[1]), vertex, new Vector2(edge[0],edge[1]), new Vector2(edge[2],edge[3]),vertex);
+//			}
+//			verticies.add(new float[]{vertex.x, vertex.y});
+//		}
+//		
+//		//calculate the angles of each vertex
+//		ArrayList<Float> vertexAngles = new ArrayList<Float>();
+//		for(float[] vertex: verticies){
+//			vertexAngles.add((float) Math.atan2(vertex[0]-x,vertex[1]-y));
+//		}
+//		//reorder points to be in counterclockwise fashion.
+//		Collections.sort(vertexAngles);
+//		ArrayList<float[]> finalVerticies = new ArrayList<float[]>();
+//		for(float angle: vertexAngles){
+//			for(float[] vertex: verticies){
+//				if(angle == Math.atan2(vertex[0]-x,vertex[1]-y))finalVerticies.add(vertexAngles.indexOf(angle),vertex);
+//			}
+//		}
+//		//create the visPolygon
+//		float[] verts = new float[finalVerticies.size()];
+//		for(float[] vertex: finalVerticies){
+//			verts[finalVerticies.indexOf(vertex)*2]=vertex[0];
+//			verts[finalVerticies.indexOf(vertex)*2+1]=vertex[1];
+//		}
+//		Polygon visPoly = new Polygon(verts);
 		for(Entity e: world.entities){
 			if(!knownEntities.contains(e)){
 				float dist = (float) Math.sqrt(Math.abs(x-e.x)*Math.abs(x-e.x)+Math.abs(y-e.y)*Math.abs(y-e.y));
