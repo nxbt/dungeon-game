@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
@@ -38,7 +39,7 @@ public class Bow extends Ranged {
 
 		desc = "SEE: Arrow  \n\n Damage Modifier: " + dmgMod;
 
-		graphic = new RangedGraphic(world, this, 4, 28);
+		graphic = new RangedGraphic(world, this, new Polygon(new float[]{2,2,30,30,8,26}), 4, 28);
 		
 		Texture tempSheet = new Texture(texturePath);
 		

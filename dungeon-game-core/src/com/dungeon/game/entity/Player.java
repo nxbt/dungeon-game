@@ -49,7 +49,7 @@ public class Player extends Character {
 		addEffect(new StamRegen(world, -1, 0.1f));
 		addEffect(new ManaRegen(world, -1, 0.1f));
 		
-		vision = 3;
+		vision = 10;
 	}
 	
 	public void init() {

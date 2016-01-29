@@ -9,12 +9,12 @@ import com.dungeon.game.world.World;
 
 public class MediumGraphic extends WeaponGraphic {
 
-	public MediumGraphic(World world, Weapon weapon, float originX, float originY){
+	public MediumGraphic(World world, Weapon weapon, Polygon hitbox, float originX, float originY){
 		super(world, weapon);
 		this.origin_x = originX;
 		this.origin_y = originY;
 
-		hitbox = new Polygon(new float[]{0,0,0,0,0,0});
+		this.hitbox = hitbox;
 	}
 
 	@Override

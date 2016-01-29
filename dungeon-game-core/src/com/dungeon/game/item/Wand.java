@@ -1,6 +1,7 @@
 package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.MediumGraphic;
 import com.dungeon.game.entity.Projectile;
@@ -26,7 +27,7 @@ public class Wand extends Medium {
 		spells[0] = new Fireball(world);
 		spells[1] = new Heal(world);
 		
-		graphic = new MediumGraphic(world, this, 30, 2);
+		graphic = new MediumGraphic(world, this, new Polygon(new float[]{28,2,30,4,4,30,2,28}), 30, 2);
 	}
 
 	@Override
