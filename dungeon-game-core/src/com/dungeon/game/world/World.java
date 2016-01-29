@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.dungeon.game.Camera;
+import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.Enemy;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Player;
@@ -174,8 +175,20 @@ public class World {
 							}
 						}
 					}
+					shapeRenderer.setColor(Color.PURPLE);
+					if(e instanceof Character){
+//						float[] verts = ((Character)e).visVertexs;
+//						System.out.println("begin");
+//						for(int i = 1; i < verts.length; i+=2){
+//							shapeRenderer.line(e.x,e.y,verts[i-1],verts[i]);
+//						}
+						shapeRenderer.polygon(((Character)e).visPolygon.getVertices());
+					}
+					shapeRenderer.setColor(Color.PURPLE);
+					for(int[] corner: curFloor.corners){
+						if(Math.sqrt((player.x-corner[0])*(player.x-corner[0])+(player.y-corner[1])*(player.y-corner[1]))<player.vision*Tile.TS)shapeRenderer.rect(corner[0]-2,corner[1]-2,4,4);
+					}
 			}
-			
 			shapeRenderer.end();
 		}
 		

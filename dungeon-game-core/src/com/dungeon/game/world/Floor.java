@@ -24,6 +24,8 @@ public class Floor {
 	
 	public ArrayList<int[]> corners;
 	
+	public ArrayList<float[]> edges;
+	
 	public ArrayList<Entity> entities;
 	
 	private int width;
@@ -78,6 +80,19 @@ public class Floor {
 					
 			}
 		}
+		
+		edges = new ArrayList<float[]>(); //{startX,startY,endX,endy};
+		for(int i = 0; i < tm.length; i++){
+			for(int k = 0; k < tm[i].length; k++){
+				if(tm[i][k].data == 1){
+					edges.add(new float[]{k*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,i*Tile.TS});
+					edges.add(new float[]{k*Tile.TS,i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS});
+					edges.add(new float[]{(k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS});
+					edges.add(new float[]{k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS});
+				}
+			}
+		}
+		
 		gen.generateAreas();
 		areaMap = new AreaMap(tm);
 		for(Area area: gen.areas){

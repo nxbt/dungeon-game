@@ -48,6 +48,8 @@ public class Player extends Character {
 		effectGraphics = new ArrayList<EffectGraphic>();
 		addEffect(new StamRegen(world, -1, 0.1f));
 		addEffect(new ManaRegen(world, -1, 0.1f));
+		
+		vision = 3;
 	}
 	
 	public void init() {
@@ -138,7 +140,7 @@ public class Player extends Character {
 		hat = inv.slot[35].item; 
 		inv.slot[0].item = new LifePotion(world);
 		inv.slot[0].item.stack = 3;
-//		inv.slot[35].item = new Hat(world);
+		inv.slot[35].item = new Hat(world);
 //		inv.slot[6].item = new Crap(world);
 		inv.slot[19].item = new Arrow(world);
 //		inv.slot[20].item = new RubberSword(world);
