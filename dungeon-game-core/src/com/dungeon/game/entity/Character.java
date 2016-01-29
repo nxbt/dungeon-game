@@ -18,18 +18,21 @@ import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public abstract class Character extends Dynamic {
+	public float torq;
+	
 	public float move_angle;
 	public float target_angle;
-	
-	public float maxLife;
-	public float maxStam;
-	public float maxMana;
 	
 	public float life;
 	public float stam;
 	public float mana;
 	
+	public float maxLife;
+	public float maxStam;
+	public float maxMana;
+	
 	public boolean immune;
+	
 	public boolean stun;
 	
 	public boolean fight_mode;
@@ -83,8 +86,8 @@ public abstract class Character extends Dynamic {
 		effect();
 		move();
 		phys();
-		post();
 		sight();
+		post();
 	}
 
 	public void move() {
@@ -293,7 +296,6 @@ public abstract class Character extends Dynamic {
 		
 		if(life <= 0) killMe = true;
 		
-//		System.out.println(name + " took " + amount + " damage" + (life<=0? " and was killed.":"."));
 		if(amount>0&&hitEffects!=null){
 			for(Effect effect: hitEffects){
 				addEffect(effect);
@@ -320,11 +322,9 @@ public abstract class Character extends Dynamic {
 		return false;
 	}
 	
-	public float gain_life(float value /*Add an array of Effects*/){
+	public float gain_life(float value){
 		float amount = Math.min(maxLife, life+value)-life;
 		life = Math.min(maxLife, life+value);
-		
-//		System.out.println(name + " gained " + amount + " life.");
 		
 		return amount;
 	}
