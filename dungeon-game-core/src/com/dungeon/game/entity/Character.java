@@ -257,10 +257,23 @@ public abstract class Character extends Dynamic {
 		
 		for(Entity e: world.entities){
 			if(!knownEntities.contains(e)&&!e.equals(this)){
-				for(Polygon tri: visTris){
-					if(Intersector.overlapConvexPolygons(e.getHitbox(),tri)){
-						knownEntities.add(e);
-						break;
+				Rectangle bBox = e.getBoundingBox();
+				float[][] corners = new float[4][2];
+				corners[0] = new float[]{bBox.x,bBox.y};
+				corners[0] = new float[]{bBox.x+bBox.width,bBox.y};
+				corners[0] = new float[]{bBox.x+bBox.width,bBox.y+bBox.height};
+				corners[0] = new float[]{bBox.x,bBox.y+bBox.height};
+				boolean check = false;
+				for(int i = 0; i < corners.length-1; i++){
+					if(Intersector.distanceSegmentPoint(corners[i][0],corners[i][1],corners[i+1][0],corners[i+1][1], x, y)<vision*Tile.TS)check = true;
+				}
+				if(Intersector.distanceSegmentPoint(corners[corners.length-1][0],corners[corners.length-1][1],corners[0][0],corners[0][1], x, y)<vision*Tile.TS)check = true;
+				if(check){
+					for(Polygon tri: visTris){
+						if(Intersector.overlapConvexPolygons(e.getHitbox(),tri)){
+							knownEntities.add(e);
+							break;
+						}
 					}
 				}
 			}
