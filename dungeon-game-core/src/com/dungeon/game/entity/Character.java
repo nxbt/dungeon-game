@@ -148,6 +148,8 @@ public abstract class Character extends Dynamic {
 		for(int i = -180; i < 180; i+=18){
 			rays.add(new float[]{x,y,x+(float) (Math.cos((i)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((i)/180f*Math.PI)*vision*(float)Tile.TS)});
 		}
+		
+		long startTime = System.currentTimeMillis();
 
 		for(int[] corner: world.curFloor.corners){
 			if(Math.sqrt((x-corner[0])*(x-corner[0])+(y-corner[1])*(y-corner[1]))<vision*Tile.TS){
@@ -157,6 +159,10 @@ public abstract class Character extends Dynamic {
 				
 			}
 		}
+
+		long endTime = System.currentTimeMillis();
+		
+		if(this instanceof Player)System.out.println("generate rays:"+(endTime-startTime));
 //		if(this instanceof Player){
 //			System.out.println("begin");
 //			for(float[] num: rays){
@@ -170,21 +176,54 @@ public abstract class Character extends Dynamic {
 		//TODO: add entity edges!
 		
 		//calculate the verticies
+		startTime = System.currentTimeMillis();
+		
 		float[][] verticies = new float[rays.size()][2];
-		for(int i = 0; i <rays.size();i++){
-			Vector2 vertex = new Vector2(rays.get(i)[2],rays.get(i)[3]);
-			for(float[] edge: world.curFloor.edges){
-				Intersector.intersectSegments(rays.get(i)[0],rays.get(i)[1], vertex.x,vertex.y, edge[0],edge[1], edge[2],edge[3],vertex);
-			}
-			verticies[i] = (new float[]{vertex.x, vertex.y});
+
+		ArrayList<float[]> edges = new ArrayList<float[]>();
+		
+		for(float[] edge: world.curFloor.edges){
+			if(Intersector.distanceSegmentPoint(edge[0], edge[1], edge[2], edge[3], x, y)<vision*Tile.TS)edges.add(edge);
 		}
+		
+		Vector2 endVertex = new Vector2(0,0);
+		for(int i = 0; i <rays.size();i++){
+			endVertex.x = rays.get(i)[2];
+			endVertex.y = rays.get(i)[3];
+			for(float[] edge: edges){
+				Intersector.intersectSegments(rays.get(i)[0],rays.get(i)[1], endVertex.x,endVertex.y, edge[0],edge[1], edge[2],edge[3],endVertex);
+			}
+			verticies[i] = (new float[]{endVertex.x, endVertex.y});
+		}
+		
+		endTime = System.currentTimeMillis();
+		
+		if(this instanceof Player)System.out.println("find verticies:"+(endTime-startTime));
+		
+
+		startTime = System.currentTimeMillis();
+		
 		//calculate the angles of each vertex
 		float[] vertexAngles = new float[verticies.length];
 		for(int i = 0; i < verticies.length; i++){
 			vertexAngles[i] = (float) Math.atan2(verticies[i][1]-y,verticies[i][0]-x);
 		}
+		
+		endTime = System.currentTimeMillis();
+		
+		if(this instanceof Player)System.out.println("calcAngles:"+(endTime-startTime));
+		
 		//reorder points to be in counterclockwise fashion.
+		startTime = System.currentTimeMillis();
+		
 		Arrays.sort(vertexAngles);
+		
+		endTime = System.currentTimeMillis();
+		
+		if(this instanceof Player)System.out.println("sort angles:"+(endTime-startTime));
+		
+		startTime = System.currentTimeMillis();
+		
 		float[] finalVerticies = new float[vertexAngles.length*2];
 		for(int i = 1; i < finalVerticies.length; i+=2){
 			for(float[] vertex: verticies){
@@ -195,6 +234,9 @@ public abstract class Character extends Dynamic {
 				}
 			}
 		}
+		
+		endTime = System.currentTimeMillis();
+		if(this instanceof Player)System.out.println("order verticies:"+(endTime-startTime));
 		//create the visPolygon
 		
 //		float[] verts = new float[finalVerticies.length*2];
@@ -213,7 +255,6 @@ public abstract class Character extends Dynamic {
 			if(!knownEntities.contains(e)){
 				if(Intersector.overlapConvexPolygons(e.getHitbox(),visPolygon)){
 					knownEntities.add(e);
-					System.out.println("WTF");
 				}
 			}
 		}

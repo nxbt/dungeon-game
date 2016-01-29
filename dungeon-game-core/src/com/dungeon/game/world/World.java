@@ -205,7 +205,7 @@ public class World {
 		mouse.draw(batch);
 		descBox.draw(batch);
 		
-		if(debug) fps.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 8f, cam.HEIGHT-8f);
+		fps.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 60f, cam.HEIGHT-8f);
 		
 		batch.end();
 	}
