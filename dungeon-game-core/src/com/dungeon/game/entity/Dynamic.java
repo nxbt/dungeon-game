@@ -11,17 +11,14 @@ import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
-//abstract class for moveVec.ynamic entities, or entities that move and respond to physics.
+//abstract class for dynamic entities, or entities that move and respond to physics.
 public abstract class Dynamic extends Entity {
-	
-	public float acel;
 	public float fric;
 	public float mvel;
-	public float torq;
-	
-	public Vector2 moveVec;
 	
 	public ArrayList<int[]> collisions;
+	
+	public Vector2 moveVec;
 	
 	public Dynamic(World world, int x, int y) {
 		super(world, x, y);
