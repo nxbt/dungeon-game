@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.Enemy;
@@ -177,11 +178,6 @@ public class World {
 					}
 					shapeRenderer.setColor(Color.PURPLE);
 					if(e instanceof Character){
-//						float[] verts = ((Character)e).visVertexs;
-//						System.out.println("begin");
-//						for(int i = 1; i < verts.length; i+=2){
-//							shapeRenderer.line(e.x,e.y,verts[i-1],verts[i]);
-//						}
 						shapeRenderer.polygon(((Character)e).visPolygon.getVertices());
 					}
 					shapeRenderer.setColor(Color.PURPLE);

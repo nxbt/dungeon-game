@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import com.badlogic.gdx.math.EarClippingTriangulator;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.ShortArray;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Immune;
 import com.dungeon.game.effect.Stun;
@@ -54,6 +56,8 @@ public abstract class Character extends Dynamic {
 	
 	public Polygon visPolygon;
 	
+	public ArrayList<Polygon> visTris;
+	
 	public Character(World world, int x, int y) {
 		super(world, x, y);
 		
@@ -66,6 +70,7 @@ public abstract class Character extends Dynamic {
 		effects = new ArrayList<Effect>();
 		
 		visPolygon = new Polygon(new float[]{0,0,0,0,0,0});
+		visTris = new ArrayList<Polygon>();
 	}
 
 	public void norm() {
@@ -149,8 +154,6 @@ public abstract class Character extends Dynamic {
 			rays.add(new float[]{x,y,x+(float) (Math.cos((i)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((i)/180f*Math.PI)*vision*(float)Tile.TS)});
 		}
 		
-		long startTime = System.currentTimeMillis();
-
 		for(int[] corner: world.curFloor.corners){
 			if(Math.sqrt((x-corner[0])*(x-corner[0])+(y-corner[1])*(y-corner[1]))<vision*Tile.TS){
 				float angleSeg = (float) (Math.atan2(corner[1]-y,corner[0]-x)*180f/Math.PI);
@@ -159,10 +162,7 @@ public abstract class Character extends Dynamic {
 				
 			}
 		}
-
-		long endTime = System.currentTimeMillis();
 		
-		if(this instanceof Player)System.out.println("generate rays:"+(endTime-startTime));
 //		if(this instanceof Player){
 //			System.out.println("begin");
 //			for(float[] num: rays){
@@ -176,7 +176,6 @@ public abstract class Character extends Dynamic {
 		//TODO: add entity edges!
 		
 		//calculate the verticies
-		startTime = System.currentTimeMillis();
 		
 		float[][] verticies = new float[rays.size()][2];
 
@@ -196,12 +195,9 @@ public abstract class Character extends Dynamic {
 			verticies[i] = (new float[]{endVertex.x, endVertex.y});
 		}
 		
-		endTime = System.currentTimeMillis();
 		
-		if(this instanceof Player)System.out.println("find verticies:"+(endTime-startTime));
 		
 
-		startTime = System.currentTimeMillis();
 		
 		//calculate the angles of each vertex
 		float[] vertexAngles = new float[verticies.length];
@@ -209,20 +205,14 @@ public abstract class Character extends Dynamic {
 			vertexAngles[i] = (float) Math.atan2(verticies[i][1]-y,verticies[i][0]-x);
 		}
 		
-		endTime = System.currentTimeMillis();
 		
-		if(this instanceof Player)System.out.println("calcAngles:"+(endTime-startTime));
 		
 		//reorder points to be in counterclockwise fashion.
-		startTime = System.currentTimeMillis();
 		
 		Arrays.sort(vertexAngles);
 		
-		endTime = System.currentTimeMillis();
 		
-		if(this instanceof Player)System.out.println("sort angles:"+(endTime-startTime));
 		
-		startTime = System.currentTimeMillis();
 		
 		float[] finalVerticies = new float[vertexAngles.length*2];
 		for(int i = 1; i < finalVerticies.length; i+=2){
@@ -235,8 +225,6 @@ public abstract class Character extends Dynamic {
 			}
 		}
 		
-		endTime = System.currentTimeMillis();
-		if(this instanceof Player)System.out.println("order verticies:"+(endTime-startTime));
 		//create the visPolygon
 		
 //		float[] verts = new float[finalVerticies.length*2];
@@ -247,14 +235,19 @@ public abstract class Character extends Dynamic {
 
 		visPolygon = new Polygon(finalVerticies);
 		
-
-		
-		
+		visTris = new ArrayList<Polygon>();
+		for(int i = 0; i < (visPolygon.getVertices().length/2)-1;i++){
+			visTris.add(new Polygon(new float[]{x,y,visPolygon.getVertices()[i*2],visPolygon.getVertices()[i*2+1],visPolygon.getVertices()[i*2+2],visPolygon.getVertices()[i*2+3]}));
+		}
+		visTris.add(new Polygon(new float[]{x,y,visPolygon.getVertices()[visPolygon.getVertices().length-2],visPolygon.getVertices()[visPolygon.getVertices().length-1],visPolygon.getVertices()[0],visPolygon.getVertices()[1]}));
 		
 		for(Entity e: world.entities){
 			if(!knownEntities.contains(e)){
-				if(Intersector.overlapConvexPolygons(e.getHitbox(),visPolygon)){
-					knownEntities.add(e);
+				for(Polygon tri: visTris){
+					if(Intersector.overlapConvexPolygons(e.getHitbox(),tri)){
+						knownEntities.add(e);
+						break;
+					}
 				}
 			}
 		}
