@@ -15,8 +15,8 @@ import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Mouse extends Hud {
-	public final Texture CROSS = new Texture("Crosshair.png");
-	public final Texture ARROW = new Texture("Inven.png");
+	public final Texture CROSS = new Texture("crosshair.png");
+	public final Texture ARROW = new Texture("pointer.png");
 	
 	public boolean lb_pressed;
 	public boolean lb_released;

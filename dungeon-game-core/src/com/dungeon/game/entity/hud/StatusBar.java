@@ -24,7 +24,7 @@ public abstract class StatusBar extends Hud {
 		d_width = 8;
 		d_height = 68;
 		percent = 1;
-		sprite = new Texture("bar.png");
+		sprite = new Texture("statusbar.png");
 	}
 	
 	@Override 

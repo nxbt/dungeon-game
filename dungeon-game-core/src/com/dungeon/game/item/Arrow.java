@@ -22,7 +22,7 @@ public class Arrow extends Ammo {
 		
 		maxStack = 12;
 		
-		sprite = new Texture("Arrow.png");
+		sprite = new Texture("arrow.png");
 	}
 
 	@Override
