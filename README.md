@@ -3,7 +3,6 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 
 ##TODO high priority:
 * Change all floats to doubles to improve percicion. (super happy fun times)
-* Add advanced descriptios and in game item wiki.
 * Finish adding effects to equipables.
 
 ##TODO low priority:
