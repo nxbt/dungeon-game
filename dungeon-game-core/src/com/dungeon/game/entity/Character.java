@@ -85,6 +85,7 @@ public abstract class Character extends Dynamic {
 		
 		visPolygon = new Polygon(new float[]{0,0,0,0,0,0});
 		visTris = new ArrayList<Polygon>();
+//		angle = 1;
 	}
 
 	public void norm() {
@@ -110,22 +111,26 @@ public abstract class Character extends Dynamic {
 		acelVec.y = (float) (Math.sin(move_angle*Math.PI/180)*acel);
 		if(!stun && move_angle != 361)acel( acelVec, true );
 		
+		if(this instanceof Player){
+			System.out.println("Target: " + target_angle);
+			System.out.println("Angle: "+angle);
+		}
 		boolean turnRight = true;
 		float originalAngle = angle;
 		if(angle != target_angle) {
 			float tempAngle = angle+180;
 			float tempTargetAngle = target_angle+180;
 			
-			if(tempAngle>180&&tempTargetAngle>180){
+			if(tempAngle>=180&&tempTargetAngle>=180){
 				if(tempTargetAngle<tempAngle)turnRight = false;
 				else turnRight = true;
-			}else if(tempAngle<180&&tempTargetAngle<180){
+			}else if(tempAngle<=180&&tempTargetAngle<=180){
 				if(tempAngle>tempTargetAngle)turnRight = false;
 				else turnRight = true;
-			}else if(tempAngle>180&&tempTargetAngle<180){
+			}else if(tempAngle>=180&&tempTargetAngle<=180){
 				if(tempTargetAngle<tempAngle-180)turnRight = true;
 				else turnRight = false;
-			}else if(tempAngle<180&&tempTargetAngle>180){
+			}else if(tempAngle<=180&&tempTargetAngle>=180){
 				if(tempTargetAngle-180>tempAngle)turnRight = false;
 				else turnRight = true;
 			}
