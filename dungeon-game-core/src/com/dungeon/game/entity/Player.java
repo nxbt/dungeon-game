@@ -13,11 +13,11 @@ import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.item.Arrow;
 import com.dungeon.game.item.Bow;
 import com.dungeon.game.item.Equipable;
-import com.dungeon.game.item.Hat;
 import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.LifePotion;
 import com.dungeon.game.item.Medium;
+import com.dungeon.game.item.Melee;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.item.Wand;
 import com.dungeon.game.item.Weapon;
@@ -34,7 +34,9 @@ public class Player extends Character {
 	private Weapon rightEquiped;
 	
 	private float[] leftPos;
+	private float[] preLeftPos;
 	private float[] rightPos;
+	private float[] preRightPos;
 	
 	private boolean attacking;
 	
@@ -268,6 +270,7 @@ public class Player extends Character {
 		
 		if(leftEquiped != null && fight_mode){
 			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
+			preLeftPos = new float[]{((Weapon) inv.slot[30].item).distance,((Weapon) inv.slot[30].item).polarAngle,((Weapon) inv.slot[30].item).angle};
 			leftPos = ((Weapon) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
 			((Weapon)inv.slot[30].item).graphic.calc();
 			if(inv.slot[30].item instanceof Medium){
@@ -291,10 +294,15 @@ public class Player extends Character {
 		if(leftEquiped != null && fight_mode){
 			float xMove = (float) (Math.cos((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
 			float yMove = (float) (Math.sin((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
-			
 			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x)+xMove;
 			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y)+yMove;
 			((Weapon)(inv.slot[30].item)).graphic.angle = angle-135+leftPos[2];
+			if(((Weapon)(inv.slot[30].item)).graphic.col(false,new float[]{0,0})==1){
+				((Weapon)(inv.slot[30].item)).distance = preLeftPos[0];
+				((Weapon)(inv.slot[30].item)).polarAngle = preLeftPos[1];
+				((Weapon)(inv.slot[30].item)).angle = preLeftPos[2];
+				if(inv.slot[30].item instanceof Melee)((Melee)(inv.slot[30].item)).hasHit = true;
+			}
 		}
 		if(killMe){
 			if(leftEquiped!=null)unequip(leftEquiped);

@@ -87,7 +87,10 @@ public class Sword extends Melee {
 		dmgMult = new float[]{0.7f,1,1.5f};
 		knockMult = new float[]{1,1.3f,0.7f};		
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
-
+		
+		distance=0;
+		polarAngle= 0;
+		angle=0;
 	}
 
 	@Override
@@ -99,17 +102,14 @@ public class Sword extends Melee {
 	}
 	
 	public float[] getPos(boolean mousedown, boolean mousepressed){
-		float distance=0;
-		float polarAngle= 0;
-		float angle=0;
 		stageTimer++;
 		float constant=1;
 		int index = (int) (stageTimer*constant);
 		switch(stage){
 		case REST:
-			distance = REST_DIST;
-			polarAngle = REST_PANG;
-			angle = REST_ANGL;
+			if(Math.abs(distance-REST_DIST)>2)distance -= (distance-REST_DIST)/10;
+			if(Math.abs(polarAngle-REST_PANG)>2)polarAngle -= (polarAngle-REST_PANG)/10;
+			if(Math.abs(angle-REST_ANGL)>2)angle -= (angle-REST_ANGL)/10;
 			
 			if(mousedown && owner.use_stam(SWING1_STAM)){
 				stage=WINDUP1;
@@ -118,15 +118,10 @@ public class Sword extends Melee {
 			break;
 			
 		case WINDUP1:
-			if(index<WINDUP1_TIME){
-				distance=(int) ((WINDUP1_DIST-REST_DIST)*(index/WINDUP1_TIME))+REST_DIST;
-				polarAngle = (int) ((WINDUP1_PANG-REST_PANG)*(index/WINDUP1_TIME))+REST_PANG;
-				angle = (int) ((WINDUP1_ANGL-REST_ANGL)*(index/WINDUP1_TIME))+REST_ANGL;
-			} else {
-				distance = WINDUP1_DIST;
-				polarAngle = WINDUP1_PANG;
-				angle = WINDUP1_ANGL;
-			}
+			if(distance<WINDUP1_DIST)distance-=(REST_DIST-WINDUP1_DIST)/WINDUP1_TIME;
+			if(polarAngle>WINDUP1_PANG)polarAngle-=(REST_PANG-WINDUP1_PANG)/WINDUP1_TIME;
+			if(angle<WINDUP1_ANGL)angle-=(REST_ANGL-WINDUP1_ANGL)/WINDUP1_TIME;
+			
 			if(index>WINDUP1_TIME && !mousedown){
 				stageTimer = 0;
 				stage = SWING1;
@@ -134,17 +129,11 @@ public class Sword extends Melee {
 			}
 			break;
 		case SWING1:
-			if(index<SWING1_TIME){
-				distance=(int) ((SWING1_DIST-WINDUP1_DIST)*(index/SWING1_TIME))+WINDUP1_DIST;
-				polarAngle = (int) ((SWING1_PANG-WINDUP1_PANG)*(index/SWING1_TIME))+WINDUP1_PANG;
-				angle = (int) ((SWING1_ANGL-WINDUP1_ANGL)*(index/SWING1_TIME))+WINDUP1_ANGL;
-			} else {
-				if(!hasHit){
-					hasHit = true;
-				}
-				distance = SWING1_DIST;
-				polarAngle = SWING1_PANG;
-				angle = SWING1_ANGL;
+			if(distance>SWING1_DIST)distance-=(WINDUP1_DIST-SWING1_DIST)/SWING1_TIME;
+			if(polarAngle>SWING1_PANG)polarAngle-=(WINDUP1_PANG-SWING1_PANG)/SWING1_TIME;
+			if(angle>SWING1_ANGL)angle-=(WINDUP1_ANGL-SWING1_ANGL)/SWING1_TIME;
+			if(!hasHit&&distance<SWING1_DIST&&polarAngle<SWING1_PANG&&angle<SWING1_ANGL){
+				hasHit = true;
 			}
 			if(index>SWING1_TIME && mousedown && owner.use_stam(SWING2_STAM)){
 				stageTimer = 0;
@@ -156,24 +145,18 @@ public class Sword extends Melee {
 			}
 			break;
 		case WINDDOWN1:
-			distance=(int) ((REST_DIST-SWING1_DIST)*(index/WINDDOWN1_TIME))+SWING1_DIST;
-			polarAngle = (int) ((REST_PANG-SWING1_PANG)*(index/WINDDOWN1_TIME))+SWING1_PANG;
-			angle = (int) ((REST_ANGL-SWING1_ANGL)*(index/WINDDOWN1_TIME))+SWING1_ANGL;
+			if(distance>REST_DIST)distance-=(SWING1_DIST-REST_DIST)/WINDDOWN1_TIME;
+			if(polarAngle<REST_PANG)polarAngle-=(SWING1_PANG-REST_PANG)/WINDDOWN1_TIME;
+			if(angle<REST_ANGL)angle-=(SWING1_ANGL-REST_ANGL)/WINDDOWN1_TIME;
 			if(index>WINDDOWN1_TIME){
 				stageTimer = 0;
 				stage = REST;
 			}
 			break;
 		case WINDUP2:
-			if(index<WINDUP2_TIME){
-				distance=(int) ((WINDUP2_DIST-SWING1_DIST)*(index/WINDUP2_TIME))+SWING1_DIST;
-				polarAngle = (int) ((WINDUP2_PANG-SWING1_PANG)*(index/WINDUP2_TIME))+SWING1_PANG;
-				angle = (int) ((WINDUP2_ANGL-SWING1_ANGL)*(index/WINDUP2_TIME))+SWING1_ANGL;
-			} else {
-				distance = WINDUP2_DIST;
-				polarAngle = WINDUP2_PANG;
-				angle = WINDUP2_ANGL;
-			}
+			if(distance<WINDUP2_DIST)distance-=(SWING1_DIST-WINDUP2_DIST)/WINDUP2_TIME;
+			if(polarAngle>WINDUP2_PANG)polarAngle-=(SWING1_PANG-WINDUP2_PANG)/WINDUP2_TIME;
+			if(angle>WINDUP2_ANGL)angle-=(SWING1_ANGL-WINDUP2_ANGL)/WINDUP2_TIME;
 			if(index>WINDUP2_TIME && !mousedown){
 				stageTimer = 0;
 				stage = SWING2;
@@ -181,17 +164,11 @@ public class Sword extends Melee {
 			}
 			break;
 		case SWING2:
-			if(index<SWING2_TIME){
-				distance=(int) ((SWING2_DIST-WINDUP2_DIST)*(index/SWING2_TIME))+WINDUP2_DIST;
-				polarAngle = (int) ((SWING2_PANG-WINDUP2_PANG)*(index/SWING2_TIME))+WINDUP2_PANG;
-				angle = (int) ((SWING2_ANGL-WINDUP2_ANGL)*(index/SWING2_TIME))+WINDUP2_ANGL;
-			} else {
-				if(!hasHit){
-					hasHit = true;
-				}
-				distance = SWING2_DIST;
-				polarAngle = SWING2_PANG;
-				angle = SWING2_ANGL;
+			if(distance<SWING2_DIST)distance-=(WINDUP2_DIST-SWING2_DIST)/SWING2_TIME;
+			if(polarAngle<SWING2_PANG)polarAngle-=(WINDUP2_PANG-SWING2_PANG)/SWING2_TIME;
+			if(angle<SWING2_ANGL)angle-=(WINDUP2_ANGL-SWING2_ANGL)/SWING2_TIME;
+			if(!hasHit&&distance<SWING2_DIST&&polarAngle<SWING2_PANG&&angle<SWING2_ANGL){
+				hasHit = true;
 			}
 			if(index>SWING2_TIME && mousedown && owner.use_stam(SWING3_STAM)){
 				stageTimer = 0;
@@ -203,24 +180,18 @@ public class Sword extends Melee {
 			}
 			break;
 		case WINDDOWN2:
-			distance=(int) ((REST_DIST-SWING2_DIST)*(index/WINDDOWN2_TIME))+SWING2_DIST;
-			polarAngle = (int) ((REST_PANG-SWING2_PANG)*(index/WINDDOWN2_TIME))+SWING2_PANG;
-			angle = (int) ((REST_ANGL-SWING2_ANGL)*(index/WINDDOWN2_TIME))+SWING2_ANGL;
+			if(distance>REST_DIST)distance-=(SWING2_DIST-REST_DIST)/WINDDOWN2_TIME;
+			if(polarAngle<REST_PANG)polarAngle-=(SWING2_PANG-REST_PANG)/WINDDOWN2_TIME;
+			if(angle>REST_ANGL)angle-=(SWING2_ANGL-REST_ANGL)/WINDDOWN2_TIME;
 			if(index>WINDDOWN2_TIME){
 				stageTimer = 0;
 				stage = REST;
 			}
 			break;
 		case WINDUP3:
-			if(index<WINDUP3_TIME){
-				distance=(int) ((WINDUP3_DIST-SWING2_DIST)*(index/WINDUP3_TIME))+SWING2_DIST;
-				polarAngle = (int) ((WINDUP3_PANG-SWING2_PANG)*(index/WINDUP3_TIME))+SWING2_PANG;
-				angle = (int) ((WINDUP3_ANGL-SWING2_ANGL)*(index/WINDUP3_TIME))+SWING2_ANGL;
-			} else {
-				distance = WINDUP3_DIST;
-				polarAngle = WINDUP3_PANG;
-				angle = WINDUP3_ANGL;
-			}
+			if(distance>WINDUP3_DIST)distance-=(SWING2_DIST-WINDUP3_DIST)/WINDUP3_TIME;
+			if(polarAngle>WINDUP3_PANG)polarAngle-=(SWING2_PANG-WINDUP3_PANG)/WINDUP3_TIME;
+			if(angle>WINDUP3_ANGL)angle-=(SWING2_ANGL-WINDUP3_ANGL)/WINDUP3_TIME;
 			if(index>WINDUP3_TIME && !mousedown){
 				stageTimer = 0;
 				stage = SWING3;
@@ -228,17 +199,11 @@ public class Sword extends Melee {
 			}
 			break;
 		case SWING3:
-			if(index<SWING3_TIME){
-				distance=(int) ((SWING3_DIST-WINDUP3_DIST)*(index/SWING3_TIME))+WINDUP3_DIST;
-				polarAngle = (int) ((SWING3_PANG-WINDUP3_PANG)*(index/SWING3_TIME))+WINDUP3_PANG;
-				angle = (int) ((SWING3_ANGL-WINDUP3_ANGL)*(index/SWING3_TIME))+WINDUP3_ANGL;
-			} else {
-				if(!hasHit){
-					hasHit = true;
-				}
-				distance = SWING3_DIST;
-				polarAngle = SWING3_PANG;
-				angle = SWING3_ANGL;
+			if(distance<SWING3_DIST)distance-=(WINDUP3_DIST-SWING3_DIST)/SWING3_TIME;
+			if(polarAngle>SWING3_PANG)polarAngle-=(WINDUP3_PANG-SWING3_PANG)/SWING3_TIME;
+			if(angle<SWING3_ANGL)angle-=(WINDUP3_ANGL-SWING3_ANGL)/SWING3_TIME;
+			if(!hasHit&&distance<SWING3_DIST&&polarAngle>SWING3_PANG&&angle<SWING3_ANGL){
+				hasHit = true;
 			}
 			if(index>SWING3_CDWN + SWING3_TIME){
 				stageTimer = 0;
@@ -246,9 +211,9 @@ public class Sword extends Melee {
 			}
 			break;
 		case WINDDOWN3:
-			distance=(int) ((REST_DIST-SWING3_DIST)*(index/WINDDOWN3_TIME))+SWING3_DIST;
-			polarAngle = (int) ((REST_PANG-SWING3_PANG)*(index/WINDDOWN3_TIME))+SWING3_PANG;
-			angle = (int) ((REST_ANGL-SWING3_ANGL)*(index/WINDDOWN3_TIME))+SWING3_ANGL;
+			if(distance>REST_DIST)distance-=(SWING3_DIST-REST_DIST)/WINDDOWN3_TIME;
+			if(polarAngle<REST_PANG)polarAngle-=(SWING3_PANG-REST_PANG)/WINDDOWN3_TIME;
+			if(angle>REST_ANGL)angle-=(SWING3_ANGL-REST_ANGL)/WINDDOWN3_TIME;
 			if(index>WINDDOWN3_TIME){
 				stageTimer = 0;
 				stage = REST;
@@ -259,6 +224,8 @@ public class Sword extends Melee {
 		return new float[]{distance,polarAngle,angle};
 		
 	}
+	
+	
 
 	@Override
 	public boolean isInUse() {

@@ -4,7 +4,7 @@ import com.dungeon.game.item.Item;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.World;
 
-public abstract class WeaponGraphic extends Static {
+public abstract class WeaponGraphic extends Dynamic {
 	
 	public Weapon weapon;
 	

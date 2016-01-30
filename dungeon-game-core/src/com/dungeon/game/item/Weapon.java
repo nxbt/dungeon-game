@@ -17,6 +17,12 @@ public abstract class Weapon extends Equipable{
 	
 	public Character owner;
 	
+
+	
+	public float distance=0;
+	public float polarAngle= 0;
+	public float angle=0;
+	
 	public Weapon(World world, Texture texture){
 		super(world);
 		maxStack = 1;

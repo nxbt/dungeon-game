@@ -215,12 +215,13 @@ public abstract class Dynamic extends Entity {
 				xChange = Math.max(xChange, Math.abs(mtv.normal.x*mtv.depth));
 				yChange = Math.max(yChange, Math.abs(mtv.normal.y*mtv.depth));
 				
-				move = true;
+//				move = true;
 				
 				if(mtv.normal.x > 0) collide_lt = true;
 				if(mtv.normal.x < 0) collide_rt = true;
 				if(mtv.normal.y > 0) collide_dn = true;
 				if(mtv.normal.y < 0) collide_up = true;
+				if(mtv.normal.y !=0||mtv.normal.y !=1)collisionType = ENTITY_COL;
 			}
 		}
 		
