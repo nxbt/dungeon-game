@@ -51,4 +51,8 @@ public abstract class Item implements Cloneable {
 	}
 	
 	public abstract void init();
+	
+	public String getDesc() {
+		return "We were too lazy to write anything about this. Here's the normal description:\n\n" + desc;
+	}
 }

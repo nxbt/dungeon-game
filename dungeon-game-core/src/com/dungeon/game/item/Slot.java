@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.Character;
+import com.dungeon.game.entity.hud.DescWindow;
+import com.dungeon.game.entity.hud.Window;
 import com.dungeon.game.world.World;
 
 public class Slot {
@@ -61,7 +63,13 @@ public class Slot {
 	
 	public void hovered() {
 		if(((world.mouse.slot.item==null?true:world.mouse.slot.item.type==type)||type==0)) {
-			if(world.mouse.lb_pressed) {
+			if(world.mouse.shift_down) {
+				if(world.mouse.rb_pressed  && item != null) {
+					Window temp = new DescWindow(world, (int)world.mouse.x, (int)world.mouse.y, item);
+					temp.open();
+				}
+			}
+			else if(world.mouse.lb_pressed) {
 				if(item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(item.name)) {
 					if(item.stack + world.mouse.slot.item.stack <= item.maxStack) {
 						item.stack+=world.mouse.slot.item.stack;

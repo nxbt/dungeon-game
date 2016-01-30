@@ -1,6 +1,8 @@
 package com.dungeon.game.entity;
 
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.entity.hud.DescWindow;
+import com.dungeon.game.entity.hud.Window;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.Slot;
 import com.dungeon.game.world.World;
@@ -38,12 +40,17 @@ public class Drop extends Static {
 		if(world.mouse.canPickup) {
 			if(world.mouse.shift_down) {
 				world.descBox.updateText(slot.item);
-			}
-			if(world.mouse.lb_pressed) {
-				if(world.mouse.shift_down) {
+				
+				if(world.mouse.lb_pressed) {
 					slot.item = world.player.inv.addItem(slot.item);
 				}
-				else if(slot.item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(slot.item.name)) {
+				else if(world.mouse.rb_pressed && slot.item != null) {
+					Window temp = new DescWindow(world, (int)world.mouse.x, (int)world.mouse.y, slot.item);
+					temp.open();
+				}
+			}
+			else if(world.mouse.lb_pressed) {
+				if(slot.item != null && world.mouse.slot.item != null && world.mouse.slot.item.name.equals(slot.item.name)) {
 					if(slot.item.stack + world.mouse.slot.item.stack <= slot.item.maxStack) {
 						slot.item.stack+=world.mouse.slot.item.stack;
 						world.mouse.slot.item = null;
