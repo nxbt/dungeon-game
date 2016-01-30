@@ -11,5 +11,9 @@ public class OneTaper extends Sword {
 		knockratio = 0.3f;
 		knockstr = 10;
 	}
+	
+	public String getDesc() {
+		return "Tap";
+	}
 
 }

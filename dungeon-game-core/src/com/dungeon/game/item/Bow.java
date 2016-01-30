@@ -145,5 +145,9 @@ public class Bow extends Ranged {
 		return effects;
 		
 	}
+	
+	public String getDesc() {
+		return "Hold to pull back, release to fire, repeat to win. \n\n" + desc;
+	}
 
 }

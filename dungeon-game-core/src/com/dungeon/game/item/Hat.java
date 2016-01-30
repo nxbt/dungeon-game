@@ -24,4 +24,8 @@ public class Hat extends Equipable {
 		
 		stack = 1;
 	}
+	
+	public String getDesc() {
+		return " ";
+	}
 }

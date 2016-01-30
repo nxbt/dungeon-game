@@ -20,5 +20,9 @@ public class Stick extends Item {
 		
 		maxStack = 10;
 	}
+	
+	public String getDesc() {
+		return "It's not the only brown and sticky thing in this game.";
+	}
 
 }

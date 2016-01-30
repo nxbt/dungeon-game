@@ -312,4 +312,8 @@ public class Sword extends Melee {
 		return effects;
 		
 	}
+	
+	public String getDesc() {
+		return "Standard meele weapon. Generally for the purpose of hitting things. \n\n " + desc;
+	}
 }

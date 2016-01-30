@@ -47,4 +47,8 @@ public class Arrow extends Ammo {
 		
 		if(!character.knownEntities.contains(projectile.owner))character.knownEntities.add(projectile.owner);
 	}
+	
+	public String getDesc() {
+		return "An aproximatly forearm length stick with fluff at one end and pain at the other. Used as a projectile for bows. \n\n" + desc;
+	}
 }

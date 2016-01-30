@@ -61,4 +61,8 @@ public class Wand extends Medium {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public String getDesc() {
+		return "Well 'just Harry' your A WIZZARD! \n\n " + desc;
+	}
 }

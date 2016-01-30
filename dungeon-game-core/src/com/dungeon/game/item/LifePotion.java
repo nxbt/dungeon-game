@@ -15,7 +15,7 @@ public class LifePotion extends Consumable {
 		super(world, "Health Potion");
 		// TODO Auto-generated constructor stub
 		sprite = new Texture("lifePotion.png");
-		desc = "Ever wonder why health potions are red? \n\nYou haven't? \n\nGood.";
+		desc = "Ever wonder why health potions are red? \n\nYou haven't? \n\nGood. \n\nLife restored: 40 \nDuration: 2 seconds";
 	}
 	
 
@@ -34,5 +34,9 @@ public class LifePotion extends Consumable {
 		user.addEffect(new PotionSick(world, 180,new LifePotion(world)));
 		return true;
 
+	}
+	
+	public String getDesc() {
+		return "Drink to restore health over time. Helps with the whole not-dieing thing. \n\n" + desc;
 	}
 }

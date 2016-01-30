@@ -11,5 +11,9 @@ public class RubberSword extends Sword {
 		knockratio = 0.3f;
 		knockstr = 15;
 	}
+	
+	public String getDesc() {
+		return "Double_Meaning.exe is not responding. \n\n " + desc;
+	}
 
 }

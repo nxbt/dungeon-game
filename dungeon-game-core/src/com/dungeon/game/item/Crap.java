@@ -20,5 +20,9 @@ public class Crap extends Item {
 		
 		maxStack = 10;
 	}
+	
+	public String getDesc() {
+		return "It's crap, what did you expect? \n\n\n\n\n\n\nNOTHING WILL HAPPEN IF YOU EAT IT!";
+	}
 
 }
