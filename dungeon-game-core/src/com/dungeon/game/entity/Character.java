@@ -168,15 +168,6 @@ public abstract class Character extends Dynamic {
 			}
 		}
 		
-//		if(this instanceof Player){
-//			System.out.println("begin");
-//			for(float[] num: rays){
-//				System.out.println(num[0]);
-//				System.out.println(num[1]);
-//				System.out.println(num[2]);
-//				System.out.println(num[3]);
-//			}
-//		}
 		//TODO: add entity corners!
 		//TODO: add entity edges!
 		
@@ -200,24 +191,14 @@ public abstract class Character extends Dynamic {
 			verticies[i] = (new float[]{endVertex.x, endVertex.y});
 		}
 		
-		
-		
-
-		
 		//calculate the angles of each vertex
 		float[] vertexAngles = new float[verticies.length];
 		for(int i = 0; i < verticies.length; i++){
 			vertexAngles[i] = (float) Math.atan2(verticies[i][1]-y,verticies[i][0]-x);
 		}
 		
-		
-		
 		//reorder points to be in counterclockwise fashion.
-		
 		Arrays.sort(vertexAngles);
-		
-		
-		
 		
 		float[] finalVerticies = new float[vertexAngles.length*2];
 		for(int i = 1; i < finalVerticies.length; i+=2){
@@ -231,12 +212,6 @@ public abstract class Character extends Dynamic {
 		}
 		
 		//create the visPolygon
-		
-//		float[] verts = new float[finalVerticies.length*2];
-//		for(int i = 1; i < verts.length; i+=2){
-//			verts[i-1]=finalVerticies[(int)(i/2)][0];
-//			verts[i]=finalVerticies[(int)(i/2)][1];
-//		}
 
 		visPolygon = new Polygon(finalVerticies);
 		

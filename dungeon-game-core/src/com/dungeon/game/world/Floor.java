@@ -85,10 +85,41 @@ public class Floor {
 		for(int i = 0; i < tm.length; i++){
 			for(int k = 0; k < tm[i].length; k++){
 				if(tm[i][k].data == 1){
-					edges.add(new float[]{k*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,i*Tile.TS});
-					edges.add(new float[]{k*Tile.TS,i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS});
-					edges.add(new float[]{(k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS});
-					edges.add(new float[]{k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS});
+					if(i > 0 && tm[i-1][k].data != 1) edges.add(new float[]{k*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,i*Tile.TS});
+					if(k > 0 && tm[i][k-1].data != 1) edges.add(new float[]{k*Tile.TS,i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS});
+					if(k < tm[i].length-1 && tm[i][k+1].data != 1) edges.add(new float[]{(k+1)*Tile.TS,i*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS});
+					if(i < tm.length-1 && tm[i+1][k].data != 1)edges.add(new float[]{k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,(i+1)*Tile.TS});
+				}
+			}
+		}
+		
+		for(int i = 0; i < edges.size(); i++) {
+			float[] edge1 = edges.get(i);
+			for(int k = 0; k < edges.size(); k++) {
+				float[] edge2 = edges.get(k);
+				if(i != k) {
+					if(edge1[0] == edge2[2] && edge1[1] == edge2[3] && ((edge1[0] == edge1[2] && edge2[0] == edge2[2]) || (edge1[1] == edge1[3] && edge2[1] == edge2[3]))) {
+						edge2[2] = edge1[2];
+						edge2[3] = edge1[3];
+						
+						if(edges.contains(edge1)) {
+							edges.remove(edge1);
+							
+							i--;
+							if(i < k) k--;
+						}
+					}
+					else if(edge2[0] == edge1[2] && edge2[1] == edge1[3] && ((edge2[0] == edge2[2] && edge1[0] == edge1[2]) || (edge2[1] == edge2[3] && edge1[1] == edge1[3]))) {
+						edge1[2] = edge2[2];
+						edge1[3] = edge2[3];
+						
+						if(edges.contains(edge2)) {
+							edges.remove(edge2);
+							
+							if(k < i) i--;
+							k--;
+						}
+					}
 				}
 			}
 		}

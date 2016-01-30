@@ -157,7 +157,7 @@ public class World {
 		curFloor.draw(batch, this);
 		
 		for(int i = entities.size()-1; i >= 0; i--) {
-			if(player.knownEntities.contains(entities.get(i))||entities.get(i).equals(player)||debug_pathing)entities.get(i).draw(batch);
+			entities.get(i).draw(batch);
 		}
 		batch.end();
 		
