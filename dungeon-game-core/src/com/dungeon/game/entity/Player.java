@@ -242,7 +242,7 @@ public class Player extends Character {
 			if(world.hudEntities.indexOf(inv.graphic) == -1) {
 				inv.graphic.open();
 			}
-			else inv.graphic.close();
+			else if(world.hudEntities.contains(inv.graphic))inv.graphic.close();
 		}
 		
 		boolean inp_lt = false;
