@@ -20,7 +20,7 @@ import com.dungeon.game.world.World;
 
 public abstract class Character extends Dynamic {
 	
-	private static final int STAGER_TIME = 10;
+	private static final int STAGER_TIME = 3;
 	
 	private static int stager = 0;
 	
