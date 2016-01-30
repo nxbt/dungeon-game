@@ -162,9 +162,13 @@ public abstract class Character extends Dynamic {
 		for(int[] corner: world.curFloor.corners){
 			if(Math.sqrt((x-corner[0])*(x-corner[0])+(y-corner[1])*(y-corner[1]))<vision*Tile.TS){
 				float angleSeg = (float) (Math.atan2(corner[1]-y,corner[0]-x)*180f/Math.PI);
-				rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg+0.01f)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg+0.01)/180f*Math.PI)*vision*(float)Tile.TS)});
-				rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg-0.01f)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg-0.01)/180f*Math.PI)*vision*(float)Tile.TS)});
-				
+				if(corner[2] == 0) {
+					rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg+0.01f)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg+0.01)/180f*Math.PI)*vision*(float)Tile.TS)});
+					rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg-0.01f)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg-0.01)/180f*Math.PI)*vision*(float)Tile.TS)});
+				}
+				else {
+					rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg)/180f*Math.PI)*vision*(float)Tile.TS)});
+				}
 			}
 		}
 		

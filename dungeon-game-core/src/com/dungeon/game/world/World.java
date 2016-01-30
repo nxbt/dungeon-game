@@ -190,7 +190,7 @@ public class World {
 				
 				if(debug_sight) {
 					shapeRenderer.setColor(Color.PURPLE);
-					if(e instanceof Character) shapeRenderer.polygon(((Character)e).visPolygon.getVertices());
+					if(e instanceof Player) shapeRenderer.polygon(((Character)e).visPolygon.getVertices());
 				}
 			}
 			

@@ -76,7 +76,10 @@ public class Floor {
 				if(tm[i][k-1].data==1)val+=4;
 				if(tm[i-1][k].data==1)val+=8;
 				
-				if(val != 15 && val !=0 && val !=5 && val!=6 && val!=9 && val!=10) corners.add(new int[]{k*Tile.TS,i*Tile.TS});
+				if(val != 15 && val !=0 && val !=5 && val!=6 && val!=9 && val!=10) {
+					if(val == 1 || val == 2 || val == 4 || val == 8) corners.add(new int[]{k*Tile.TS,i*Tile.TS,0});
+					else corners.add(new int[]{k*Tile.TS,i*Tile.TS,1});
+				}
 					
 			}
 		}
@@ -121,6 +124,17 @@ public class Floor {
 						}
 					}
 				}
+			}
+		}
+		
+		for(float[] edge: edges) {
+			if(edge[0] == edge[2]) {
+				edge[1]-= 0.001f;
+				edge[3]+= 0.001f;
+			}
+			else {
+				edge[0] -= 0.001f;
+				edge[2] += 0.001f;
 			}
 		}
 		
