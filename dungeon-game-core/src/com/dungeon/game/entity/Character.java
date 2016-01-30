@@ -130,9 +130,6 @@ public abstract class Character extends Dynamic {
 				else turnRight = true;
 			}
 			
-			if(turnRight)angle+=torq;
-			else angle-=torq;
-			
 			float difference = 0;
 			float angleModifier1 = 0;
 			float angleModifier2 = 0;
@@ -157,6 +154,8 @@ public abstract class Character extends Dynamic {
 			}
 			
 			if(difference < torq) angle = target_angle;
+			else if(turnRight)angle+=torq;
+			else angle-=torq;
 				
 			if(angle > 180) angle -= 360;
 			if(angle < -180) angle += 360;

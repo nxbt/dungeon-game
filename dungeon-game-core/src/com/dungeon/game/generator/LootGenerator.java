@@ -14,7 +14,7 @@ public class LootGenerator {
 		Chest chest = new Chest(world, x*Tile.TS+Tile.TS/2,y*Tile.TS+Tile.TS/2);
 		if(Math.random()>0.5)chest.inv.addItem(new Sword(world, (int) (7 + Math.random()*6),10));
 		else {
-			chest.inv.addItem(new Bow(world, (int) (7 + Math.random()*6),10));
+			chest.inv.addItem(new Bow(world, (int) (0.7 + Math.random()*0.6),10));
 			Arrow arrow = new Arrow(world);
 			arrow.stack = (int) (Math.random()*12);
 			chest.inv.addItem(arrow);
