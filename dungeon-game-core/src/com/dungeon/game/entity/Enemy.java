@@ -21,6 +21,8 @@ public abstract class Enemy extends Character {
 	
 	protected boolean attacking;
 	
+	protected int[] targetTile;
+	
 	
 	public Enemy(World world, int x, int y) {
 		super(world, x, y);
@@ -42,7 +44,7 @@ public abstract class Enemy extends Character {
 //			}
 //		}
 //		pathfinder.setData(mapData);
-		int[] targetTile = world.areaMap.findPath(new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (world.player.x/Tile.TS),(int) (world.player.y/Tile.TS)});
+		if(stagerTimer == 0)targetTile = world.areaMap.findPath(new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (world.player.x/Tile.TS),(int) (world.player.y/Tile.TS)});
 		path = world.areaMap.lastPath;
 		if(targetTile!=null){
 				moveTo = targetTile;

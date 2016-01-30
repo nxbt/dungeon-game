@@ -19,6 +19,12 @@ import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public abstract class Character extends Dynamic {
+	
+	private static final int STAGER_TIME = 10;
+	
+	private static int stager = 0;
+	
+	protected int stagerTimer;
 	public float torq;
 	
 	public float move_angle;
@@ -66,6 +72,9 @@ public abstract class Character extends Dynamic {
 	public Character(World world, int x, int y) {
 		super(world, x, y);
 		
+		stagerTimer = stager;
+		stager++;
+		if(stager == STAGER_TIME)stager = 0;
 		immune = false;
 		
 		vision = 0;
@@ -90,6 +99,8 @@ public abstract class Character extends Dynamic {
 		phys();
 		sight();
 		post();
+		stagerTimer++;
+		if(stagerTimer == STAGER_TIME)stagerTimer = 0;
 	}
 
 	public void move() {
@@ -153,97 +164,86 @@ public abstract class Character extends Dynamic {
 	}
 	
 	public void sight(){
-		ArrayList<float[]> rays = new ArrayList<float[]>(); //{startX,startY,endX,endy}
-		
-		for(int i = -180; i < 180; i+=18){
-			rays.add(new float[]{x,y,x+(float) (Math.cos((i)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((i)/180f*Math.PI)*vision*(float)Tile.TS)});
-		}
-		
-		for(int[] corner: world.curFloor.corners){
-			if(Math.sqrt((x-corner[0])*(x-corner[0])+(y-corner[1])*(y-corner[1]))<vision*Tile.TS){
-				float angleSeg = (float) (Math.atan2(corner[1]-y,corner[0]-x)*180f/Math.PI);
-				if(corner[2] == 0) {
-					rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg+0.01f)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg+0.01)/180f*Math.PI)*vision*(float)Tile.TS)});
-					rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg-0.01f)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg-0.01)/180f*Math.PI)*vision*(float)Tile.TS)});
-				}
-				else {
-					rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg)/180f*Math.PI)*vision*(float)Tile.TS)});
-				}
+		if(stagerTimer==0){
+			
+			ArrayList<float[]> rays = new ArrayList<float[]>(); //{startX,startY,endX,endy}
+			
+			for(int i = -180; i < 180; i+=18){
+				rays.add(new float[]{x,y,x+(float) (Math.cos((i)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((i)/180f*Math.PI)*vision*(float)Tile.TS)});
 			}
-		}
-		
-		//TODO: add entity corners!
-		//TODO: add entity edges!
-		
-		//calculate the verticies
-		
-		float[][] verticies = new float[rays.size()][2];
-
-		ArrayList<float[]> edges = new ArrayList<float[]>();
-		
-		for(float[] edge: world.curFloor.edges){
-			if(Intersector.distanceSegmentPoint(edge[0], edge[1], edge[2], edge[3], x, y)<vision*Tile.TS)edges.add(edge);
-		}
-		
-		Vector2 endVertex = new Vector2(0,0);
-		for(int i = 0; i <rays.size();i++){
-			endVertex.x = rays.get(i)[2];
-			endVertex.y = rays.get(i)[3];
-			for(float[] edge: edges){
-				Intersector.intersectSegments(rays.get(i)[0],rays.get(i)[1], endVertex.x,endVertex.y, edge[0],edge[1], edge[2],edge[3],endVertex);
-			}
-			verticies[i] = (new float[]{endVertex.x, endVertex.y});
-		}
-		
-		//calculate the angles of each vertex
-		float[] vertexAngles = new float[verticies.length];
-		for(int i = 0; i < verticies.length; i++){
-			vertexAngles[i] = (float) Math.atan2(verticies[i][1]-y,verticies[i][0]-x);
-		}
-		
-		//reorder points to be in counterclockwise fashion.
-		Arrays.sort(vertexAngles);
-		
-		float[] finalVerticies = new float[vertexAngles.length*2];
-		for(int i = 1; i < finalVerticies.length; i+=2){
-			for(float[] vertex: verticies){
-				if(vertexAngles[(int)i/2] == (float)Math.atan2(vertex[1]-y,vertex[0]-x)){
-					finalVerticies[i-1] = vertex[0];
-					finalVerticies[i] = vertex[1];
-					break;
+			
+			for(int[] corner: world.curFloor.corners){
+				if(Math.sqrt((x-corner[0])*(x-corner[0])+(y-corner[1])*(y-corner[1]))<vision*Tile.TS){
+					float angleSeg = (float) (Math.atan2(corner[1]-y,corner[0]-x)*180f/Math.PI);
+					if(corner[2] == 0) {
+						rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg+0.01f)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg+0.01)/180f*Math.PI)*vision*(float)Tile.TS)});
+						rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg-0.01f)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg-0.01)/180f*Math.PI)*vision*(float)Tile.TS)});
+					}
+					else {
+						rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg)/180f*Math.PI)*vision*(float)Tile.TS)});
+					}
 				}
 			}
+			
+			//TODO: add entity corners!
+			//TODO: add entity edges!
+			
+			//calculate the verticies
+			
+			float[][] verticies = new float[rays.size()][2];
+	
+			ArrayList<float[]> edges = new ArrayList<float[]>();
+			
+			for(float[] edge: world.curFloor.edges){
+				if(Intersector.distanceSegmentPoint(edge[0], edge[1], edge[2], edge[3], x, y)<vision*Tile.TS)edges.add(edge);
+			}
+			
+			Vector2 endVertex = new Vector2(0,0);
+			for(int i = 0; i <rays.size();i++){
+				endVertex.x = rays.get(i)[2];
+				endVertex.y = rays.get(i)[3];
+				for(float[] edge: edges){
+					Intersector.intersectSegments(rays.get(i)[0],rays.get(i)[1], endVertex.x,endVertex.y, edge[0],edge[1], edge[2],edge[3],endVertex);
+				}
+				verticies[i] = (new float[]{endVertex.x, endVertex.y});
+			}
+			
+			//calculate the angles of each vertex
+			float[] vertexAngles = new float[verticies.length];
+			for(int i = 0; i < verticies.length; i++){
+				vertexAngles[i] = (float) Math.atan2(verticies[i][1]-y,verticies[i][0]-x);
+			}
+			
+			//reorder points to be in counterclockwise fashion.
+			Arrays.sort(vertexAngles);
+			
+			float[] finalVerticies = new float[vertexAngles.length*2];
+			for(int i = 1; i < finalVerticies.length; i+=2){
+				for(float[] vertex: verticies){
+					if(vertexAngles[(int)i/2] == (float)Math.atan2(vertex[1]-y,vertex[0]-x)){
+						finalVerticies[i-1] = vertex[0];
+						finalVerticies[i] = vertex[1];
+						break;
+					}
+				}
+			}
+			
+			//create the visPolygon
+	
+			visPolygon = new Polygon(finalVerticies);
+			
+			visTris = new ArrayList<Polygon>();
+			for(int i = 0; i < (visPolygon.getVertices().length/2)-1;i++){
+				visTris.add(new Polygon(new float[]{x,y,visPolygon.getVertices()[i*2],visPolygon.getVertices()[i*2+1],visPolygon.getVertices()[i*2+2],visPolygon.getVertices()[i*2+3]}));
+			}
+			visTris.add(new Polygon(new float[]{x,y,visPolygon.getVertices()[visPolygon.getVertices().length-2],visPolygon.getVertices()[visPolygon.getVertices().length-1],visPolygon.getVertices()[0],visPolygon.getVertices()[1]}));
 		}
-		
-		//create the visPolygon
-
-		visPolygon = new Polygon(finalVerticies);
-		
-		visTris = new ArrayList<Polygon>();
-		for(int i = 0; i < (visPolygon.getVertices().length/2)-1;i++){
-			visTris.add(new Polygon(new float[]{x,y,visPolygon.getVertices()[i*2],visPolygon.getVertices()[i*2+1],visPolygon.getVertices()[i*2+2],visPolygon.getVertices()[i*2+3]}));
-		}
-		visTris.add(new Polygon(new float[]{x,y,visPolygon.getVertices()[visPolygon.getVertices().length-2],visPolygon.getVertices()[visPolygon.getVertices().length-1],visPolygon.getVertices()[0],visPolygon.getVertices()[1]}));
-		
 		for(Entity e: world.entities){
 			if(!knownEntities.contains(e)&&!e.equals(this)){
-				Rectangle bBox = e.getBoundingBox();
-				float[][] corners = new float[4][2];
-				corners[0] = new float[]{bBox.x,bBox.y};
-				corners[0] = new float[]{bBox.x+bBox.width,bBox.y};
-				corners[0] = new float[]{bBox.x+bBox.width,bBox.y+bBox.height};
-				corners[0] = new float[]{bBox.x,bBox.y+bBox.height};
-				boolean check = false;
-				for(int i = 0; i < corners.length-1; i++){
-					if(Intersector.distanceSegmentPoint(corners[i][0],corners[i][1],corners[i+1][0],corners[i+1][1], x, y)<vision*Tile.TS)check = true;
-				}
-				if(Intersector.distanceSegmentPoint(corners[corners.length-1][0],corners[corners.length-1][1],corners[0][0],corners[0][1], x, y)<vision*Tile.TS)check = true;
-				if(check){
-					for(Polygon tri: visTris){
-						if(Intersector.overlapConvexPolygons(e.getHitbox(),tri)){
-							knownEntities.add(e);
-							break;
-						}
+				for(Polygon tri: visTris){
+					if(Intersector.overlapConvexPolygons(e.getHitbox(),tri)){
+						knownEntities.add(e);
+						break;
 					}
 				}
 			}
