@@ -10,7 +10,7 @@ public class Portrait extends Hud {
 
 		d_width = 68;
 		d_height = 68;
-		sprite = Math.random()>0.5?new Texture("face2.png"):new Texture("face.png");
+		sprite = new Texture("face.png");
 	}
 
 	@Override
