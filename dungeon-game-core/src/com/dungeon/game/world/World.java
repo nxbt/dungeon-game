@@ -52,7 +52,7 @@ public class World {
 	
 	public AreaMap areaMap;
 	
-	private BitmapFont fps;
+	private BitmapFont fpsFont;
 	
 	boolean debug_hitbox;
 	boolean debug_pathing;
@@ -139,9 +139,9 @@ public class World {
 		cam.update(player.x, player.y, mouse.x, mouse.y, 1f);
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F9)) debug_frames = !debug_frames;
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F8)) debug_frames = !debug_sight;
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F7)) debug_frames = !debug_pathing;
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F10)) debug_frames = !debug_hitbox;
+		if(Gdx.input.isKeyJustPressed(Input.Keys.F8)) debug_pathing = !debug_pathing;
+		if(Gdx.input.isKeyJustPressed(Input.Keys.F7)) debug_hitbox = !debug_hitbox;
+		if(Gdx.input.isKeyJustPressed(Input.Keys.F10)) debug_sight = !debug_sight;
 		
 //		lightMap.update(this);
 	}
@@ -161,7 +161,7 @@ public class World {
 		}
 		batch.end();
 		
-		if(debug) {
+		if(debug_pathing||debug_sight||debug_hitbox) {
 			shapeRenderer.begin(ShapeType.Line);
 			
 			shapeRenderer.setProjectionMatrix(cam.cam.combined);
@@ -217,7 +217,7 @@ public class World {
 		mouse.draw(batch);
 		descBox.draw(batch);
 		
-		if(debug_frames) fps.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 60f, cam.HEIGHT-8f);
+		if(debug_frames) fpsFont.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 60f, cam.HEIGHT-8f);
 		
 		batch.end();
 	}

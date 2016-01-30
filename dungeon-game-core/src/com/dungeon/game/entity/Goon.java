@@ -20,7 +20,7 @@ public class Goon extends Enemy {
 
 	public Goon(World world, int x, int y) {
 		super(world, x, y);
-		vision = 5;
+		vision = 10;
 		
 		effects.add(new StamRegen(world, -1, 0.1f));
 		effects.add(new ManaRegen(world, -1, 0.1f));
