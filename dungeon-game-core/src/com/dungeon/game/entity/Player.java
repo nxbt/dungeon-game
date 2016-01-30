@@ -9,17 +9,15 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.ManaRegen;
 import com.dungeon.game.effect.StamRegen;
 import com.dungeon.game.entity.hud.EffectGraphic;
+import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.item.Arrow;
 import com.dungeon.game.item.Bow;
-import com.dungeon.game.item.Crap;
 import com.dungeon.game.item.Equipable;
 import com.dungeon.game.item.Hat;
 import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.LifePotion;
 import com.dungeon.game.item.Medium;
-import com.dungeon.game.item.OneTaper;
-import com.dungeon.game.item.RubberSword;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.item.Wand;
 import com.dungeon.game.item.Weapon;
@@ -158,7 +156,14 @@ public class Player extends Character {
 	public void calc() { //TODO: complete rework of owner code!
 		
 		for(EffectGraphic eg: effectGraphics){
-			if(!world.hudEntities.contains(eg))world.hudEntities.add(eg);
+			if(!world.hudEntities.contains(eg)){
+				for(int i = 0; i < world.hudEntities.size(); i++){
+					if(world.hudEntities.get(i) instanceof EffectHudBackground){
+						world.hudEntities.add(i,eg);
+						break;
+					}
+				}
+			}
 		}
 		
 		for(int i = world.hudEntities.size()-1;i>=0;i--){

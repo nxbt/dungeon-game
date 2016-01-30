@@ -29,6 +29,7 @@ import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.Portrait;
 import com.dungeon.game.entity.hud.PortraitBackground;
 import com.dungeon.game.entity.hud.StamBar;
+import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.pathing.AreaMap;
 
 public class World {
@@ -105,6 +106,7 @@ public class World {
 		hudEntities.add(new HudSlot(this, cam.WIDTH-180, 4, player.inv.slot[2]));
 		hudEntities.add(new HudSlot(this, cam.WIDTH-144, 4, player.inv.slot[3]));
 		hudEntities.add(new HudSlot(this, cam.WIDTH-108, 4, player.inv.slot[4]));
+		hudEntities.add(new EffectHudBackground(this, cam.WIDTH-44, cam.HEIGHT-44));
 		hudEntities.add(new HudBackground(this));
 		
 		fpsFont = new BitmapFont(Gdx.files.internal("main_text.fnt"));
