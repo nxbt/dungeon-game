@@ -15,7 +15,7 @@ public class DescWindow extends Window {
 	
 	private String text;
 	
-	public DescWindow(World world, int x, int y, Item item) {
+	public DescWindow(World world, float x, float y, Item item) {
 		super(world, x, y);
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));

@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.dungeon.game.world.World;
 
 public class StamBar extends StatusBar {
-	public StamBar(World world, int x, int y){
+	public StamBar(World world, float x, float y){
 		super(world, x, y);
 		filler = new TiledDrawable(new TextureRegion(new Texture("energy.png")));
 	}

@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 
 public class MenuButton extends Button {
 	
-	public MenuButton(World world, int x, int y) {
+	public MenuButton(World world, float x, float y) {
 		super(world, x, y);
 		
 		sprite = new Texture("menuButton.png");

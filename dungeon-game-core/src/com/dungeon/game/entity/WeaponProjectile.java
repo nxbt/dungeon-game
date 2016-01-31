@@ -12,7 +12,7 @@ public class WeaponProjectile extends Projectile {
 	
 	public Ammo ammo;
 	
-	public WeaponProjectile(World world, Ranged weapon, Ammo ammo, int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, int range) {
+	public WeaponProjectile(World world, Ranged weapon, Ammo ammo, float x, float y, float angle, float power, Polygon hitbox, float originX, float originY, int range) {
 		super(world, x, y, angle, power, hitbox, originX, originY, range);
 
 		this.weapon = weapon;

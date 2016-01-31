@@ -18,7 +18,7 @@ public class Goon extends Enemy {
 	
 	boolean ranged;
 
-	public Goon(World world, int x, int y) {
+	public Goon(World world, float x, float y) {
 		super(world, x, y);
 		vision = 10;
 		hearing = 10;
@@ -110,7 +110,7 @@ public class Goon extends Enemy {
 			new int[] {8, 248, 208},
 		};
 		
-		inv = new Inventory(world, invLayout, "invBack.png", 10, 100, 0, 240, 288, 16);
+		inv = new Inventory(world, invLayout, 10, 100);
 
 		if(Math.random()>0.5){
 			inv.slot[30].item = new Bow(world, (float) (0.3 + Math.random()*0.6), 10);

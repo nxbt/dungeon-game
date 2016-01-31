@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 
 public class InvButton extends Button {
 
-	public InvButton(World world, int x, int y) {
+	public InvButton(World world, float x, float y) {
 		super(world, x, y);
 		
 		sprite = new Texture("invButton.png");

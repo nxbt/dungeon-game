@@ -11,7 +11,8 @@ import com.dungeon.game.world.World;
 
 public class Chest extends Static {
 	public Inventory inv;
-	public Chest(World world, int x, int y) {
+	
+	public Chest(World world, float x, float y) {
 		super(world, x, y);
 	}
 
@@ -45,7 +46,7 @@ public class Chest extends Static {
 			new int[] {0, 128, 168},
 			new int[] {0, 168, 168}
 		};
-		inv = new Inventory(world, invLayout, "chestBackground.png", 310, 140, 0, 200, 208, 16);
+		inv = new Inventory(world, invLayout, 310, 140);
 		sprite = new Texture("chest.png");
 		solid = true;
 		

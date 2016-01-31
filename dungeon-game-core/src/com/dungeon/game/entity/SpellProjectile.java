@@ -13,7 +13,7 @@ public class SpellProjectile extends Projectile {
 	
 	public Spell spell;
 	
-	public SpellProjectile(World world, Medium weapon, Spell spell, int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, int range) {
+	public SpellProjectile(World world, Medium weapon, Spell spell, float x, float y, float angle, float power, Polygon hitbox, float originX, float originY, int range) {
 		super(world, x, y, angle, power, hitbox, originX, originY, range);
 
 

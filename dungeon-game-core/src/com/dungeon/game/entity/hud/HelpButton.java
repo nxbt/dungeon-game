@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 
 public class HelpButton extends Button {
 	
-	public HelpButton(World world, int x, int y) {
+	public HelpButton(World world, float x, float y) {
 		super(world, x, y);
 		
 		sprite = new Texture("helpButton.png");

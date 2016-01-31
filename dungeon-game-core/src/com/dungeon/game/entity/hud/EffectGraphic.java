@@ -1,7 +1,5 @@
 package com.dungeon.game.entity.hud;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -9,7 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.effect.Effect;
-import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
 public class EffectGraphic extends Hud {

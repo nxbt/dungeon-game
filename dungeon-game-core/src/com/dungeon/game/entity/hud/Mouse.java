@@ -40,7 +40,7 @@ public class Mouse extends Hud {
 	
 	public Slot slot;
 	
-	public Mouse(World world, int x, int y){
+	public Mouse(World world, float x, float y){
 		super(world, x, y);
 	}
 

@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 
 public class Portrait extends Hud {
 
-	public Portrait(World world, int x, int y) {
+	public Portrait(World world, float x, float y) {
 		super(world, x, y);
 
 		d_width = 68;

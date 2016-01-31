@@ -23,8 +23,8 @@ public class Slot {
 	
 	public int type;
 	
-	public int x;
-	public int y;
+	public float x;
+	public float y;
 	
 	private BitmapFont font;
 	

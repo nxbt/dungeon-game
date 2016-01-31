@@ -24,26 +24,11 @@ public abstract class Enemy extends Character {
 	protected int[] targetTile;
 	
 	
-	public Enemy(World world, int x, int y) {
+	public Enemy(World world, float x, float y) {
 		super(world, x, y);
 	}
 	
 	protected void findPath(ArrayList<Entity> entities, float[] target){
-//		int[][] mapData = new int[map.length][map[0].length];
-//		for(int i = 0;i<map.length;i++){
-//			for(int k = 0;k<map[0].length;k++){
-//				mapData[i][k] = map[i][k].data;
-//				Rectangle tile = new Rectangle(k*Tile.TS,i*Tile.TS,Tile.TS,Tile.TS);
-//				Rectangle entity;
-//				for(Entity e: entities){
-//					if(e.solid){
-//						entity = e.getBoundingBox();
-//						if(tile.overlaps(entity))mapData[i][k]=1;
-//					}
-//				}
-//			}
-//		}
-//		pathfinder.setData(mapData);
 		if(stagerTimer == 0)targetTile = world.areaMap.findPath(new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (world.player.x/Tile.TS),(int) (world.player.y/Tile.TS)});
 		path = world.areaMap.lastPath;
 		if(targetTile!=null){

@@ -3,7 +3,6 @@ package com.dungeon.game.entity;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.hud.DescWindow;
 import com.dungeon.game.entity.hud.Window;
-import com.dungeon.game.item.Item;
 import com.dungeon.game.item.Slot;
 import com.dungeon.game.world.World;
 
@@ -11,7 +10,7 @@ public class Drop extends Static {
 	
 	Slot slot;
 	
-	public Drop(World world, int x, int y, Slot slot) {
+	public Drop(World world, float x, float y, Slot slot) {
 		super(world, x, y);
 		
 		this.slot = new Slot(world, new int[] {0,0,0}, null);

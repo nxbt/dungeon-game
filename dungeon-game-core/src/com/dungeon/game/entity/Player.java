@@ -17,7 +17,6 @@ import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.LifePotion;
 import com.dungeon.game.item.Medium;
-import com.dungeon.game.item.Melee;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.item.Wand;
 import com.dungeon.game.item.Weapon;
@@ -40,7 +39,7 @@ public class Player extends Character {
 	
 	public ArrayList<EffectGraphic> effectGraphics;
 	
-	public Player(World world, int x, int y) {
+	public Player(World world, float x, float y) {
 		super(world, x, y);
 
 		effectGraphics = new ArrayList<EffectGraphic>();
@@ -134,7 +133,7 @@ public class Player extends Character {
 			new int[] {8, 248, 208},
 		};
 		
-		inv = new Inventory(world, invLayout, "invBack.png", 10, 100, 0, 240, 288, 16);
+		inv = new Inventory(world, invLayout, 10, 100);
 		
 		hat = inv.slot[35].item; 
 		inv.slot[0].item = new LifePotion(world);

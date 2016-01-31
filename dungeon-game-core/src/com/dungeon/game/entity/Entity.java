@@ -38,7 +38,7 @@ public abstract class Entity {
 	
 	public World world;
 	
-	public Entity(World world, int x, int y) {
+	public Entity(World world, float x, float y) {
 		this.x = x;
 		this.y = y;
 		

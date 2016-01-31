@@ -13,7 +13,7 @@ public abstract class Projectile extends Dynamic {
 	
 	public Character owner;
 	
-	public Projectile(World world, int x, int y, float angle, float power, Polygon hitbox, float originX, float originY, int range) {
+	public Projectile(World world, float x, float y, float angle, float power, Polygon hitbox, float originX, float originY, int range) {
 		super(world, x, y);
 		Vector2 acelVec = new Vector2();
 		acelVec.x = (float) Math.cos((angle+135)/180*Math.PI)*power;

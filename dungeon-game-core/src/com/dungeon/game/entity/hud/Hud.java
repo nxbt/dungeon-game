@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 
 public abstract class Hud extends Static {
 
-	public Hud(World world, int x, int y) {
+	public Hud(World world, float x, float y) {
 		super(world, x, y);
 	}
 }

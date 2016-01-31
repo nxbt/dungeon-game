@@ -15,7 +15,7 @@ public abstract class StatusBar extends Hud {
 	
 	protected TiledDrawable filler;
 	
-	public StatusBar(World world, int x, int y){
+	public StatusBar(World world, float x, float y){
 		super(world, x, y);
 	}
 	

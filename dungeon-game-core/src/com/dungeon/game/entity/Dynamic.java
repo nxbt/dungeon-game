@@ -20,7 +20,7 @@ public abstract class Dynamic extends Entity {
 	
 	public Vector2 moveVec;
 	
-	public Dynamic(World world, int x, int y) {
+	public Dynamic(World world, float x, float y) {
 		super(world, x, y);
 		
 		collisions = new ArrayList<int[]>();

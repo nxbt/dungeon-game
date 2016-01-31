@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 
 public class PortraitBackground extends Hud {
 
-	public PortraitBackground(World world, int x, int y) {
+	public PortraitBackground(World world, float x, float y) {
 		super(world, x, y);
 
 		d_width = 68;

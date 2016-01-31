@@ -2,17 +2,11 @@ package com.dungeon.game.entity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
-import com.badlogic.gdx.math.EarClippingTriangulator;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.ShortArray;
 import com.dungeon.game.effect.Effect;
-import com.dungeon.game.effect.Immune;
-import com.dungeon.game.effect.Stun;
 import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.Tile;
@@ -71,7 +65,7 @@ public abstract class Character extends Dynamic {
 	
 	public ArrayList<Polygon> visTris;
 	
-	public Character(World world, int x, int y) {
+	public Character(World world, float x, float y) {
 		super(world, x, y);
 		
 		stagerTimer = stager;

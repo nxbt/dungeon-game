@@ -17,7 +17,7 @@ public abstract class Window extends Hud {
 	float dragOffX;
 	float dragOffY;
 	
-	public Window(World world, int x, int y) {
+	public Window(World world, float x, float y) {
 		super(world, x, y);
 		
 		d_width = 100;

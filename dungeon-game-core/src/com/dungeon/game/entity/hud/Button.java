@@ -4,7 +4,7 @@ import com.dungeon.game.world.World;
 
 public abstract class Button extends Hud {
 
-	public Button(World world, int x, int y){
+	public Button(World world, float x, float y){
 		super(world, x, y);
 	}
 	

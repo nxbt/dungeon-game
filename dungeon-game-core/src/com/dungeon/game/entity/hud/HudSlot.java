@@ -15,7 +15,7 @@ public class HudSlot extends Hud {
 	
 	private BitmapFont font;
 
-	public HudSlot(World world, int x, int y, Slot slot) {
+	public HudSlot(World world, float x, float y, Slot slot) {
 		super(world, x, y);
 		this.slot = slot;
 		d_width = 32;

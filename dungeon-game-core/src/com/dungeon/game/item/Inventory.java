@@ -3,7 +3,6 @@ package com.dungeon.game.item;
 import java.util.ArrayList;
 
 import com.dungeon.game.entity.hud.InvGraphic;
-import com.dungeon.game.entity.hud.InvGraphic;
 import com.dungeon.game.world.World;
 
 public class Inventory {
@@ -14,7 +13,7 @@ public class Inventory {
 	
 	protected World world;
 	
-	public Inventory(World world, int[][] layout, String graphic, int x, int y, int dragX, int dragY, int dragWidth, int dragHeight) {
+	public Inventory(World world, int[][] layout, float x, float y) {
 		this.world = world;
 		
 		slot = new Slot[layout.length];

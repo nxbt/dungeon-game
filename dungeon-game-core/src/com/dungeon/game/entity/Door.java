@@ -12,7 +12,7 @@ import com.dungeon.game.world.World;
 public class Door extends Static {
 	public boolean open;
 	public int dir; 
-	public Door(World world, int x, int y, int dir) {
+	public Door(World world, float x, float y, int dir) {
 		super(world, x, y);
 		open = false;
 		this.dir = dir;
