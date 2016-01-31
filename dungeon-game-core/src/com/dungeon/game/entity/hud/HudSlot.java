@@ -10,7 +10,6 @@ import com.dungeon.game.item.Slot;
 import com.dungeon.game.world.World;
 
 public class HudSlot extends Hud {
-	
 	private Slot slot;
 	
 	private BitmapFont font;
@@ -20,7 +19,7 @@ public class HudSlot extends Hud {
 		this.slot = slot;
 		d_width = 32;
 		d_height = 32;
-		sprite = new Texture("slot.png");
+		sprite = slot.slotTex;
 		
 
 		
@@ -29,10 +28,7 @@ public class HudSlot extends Hud {
 	}
 
 	@Override
-	public void init() {
-		
-
-	}
+	public void init() {}
 	
 	public void hovered(){
 		if(world.mouse.shift_down) {
@@ -43,20 +39,21 @@ public class HudSlot extends Hud {
 				temp.open();
 			}
 		}
-		else if(world.mouse.lb_pressed)slot.consume(world.player);
+		else if(world.mouse.lb_pressed) {
+			if(world.mouse.slot.item == null)slot.consume(world.player);
+			else {
+				slot.hovered();
+				world.descBox.text = "";
+			}
+			
+		}
 	}
 
 	@Override
-	public void calc() {
-		// TODO Auto-generated method stub
-
-	}
+	public void calc() {}
 
 	@Override
-	public void post() {
-		// TODO Auto-generated method stub
-
-	}
+	public void post() {}
 	
 	public void draw(SpriteBatch batch) {
 		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_y+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);

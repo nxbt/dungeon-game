@@ -65,4 +65,7 @@ public class Wand extends Medium {
 	public String getDesc() {
 		return "Well 'just Harry' your A WIZZARD! \n\n " + desc;
 	}
+
+	@Override
+	public void reset() {}
 }

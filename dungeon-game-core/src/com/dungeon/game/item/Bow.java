@@ -37,7 +37,7 @@ public class Bow extends Ranged {
 		texturePath = "Bow.png";
 		
 
-		desc = "SEE: Arrow  \n\n Damage Modifier: " + dmgMod;
+		desc = "SEE: Arrow  \n\n Damage Modifier: " + Math.floor(dmgMod*1000)/10f + "%";
 
 		graphic = new RangedGraphic(world, this, new Polygon(new float[]{2,2,30,30,8,26}), 4, 28);
 		
@@ -148,6 +148,18 @@ public class Bow extends Ranged {
 	
 	public String getDesc() {
 		return "Hold to pull back, release to fire, repeat to win. \n\n" + desc;
+	}
+
+	@Override
+	public void reset() {
+		stage = REST;
+		stageTimer = 0;
+		
+		distance = 30;
+		angle = 0;
+		polarAngle = 10;
+		
+		changeSprite(textures[0]);
 	}
 
 }

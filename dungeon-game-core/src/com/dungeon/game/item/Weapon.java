@@ -41,7 +41,10 @@ public abstract class Weapon extends Equipable{
 	}
 	
 	public void unequip(World world, Character e){
-		this.owner = null;
+		reset();
+		
+		owner = null;
+		
 		world.entities.remove(this.graphic);
 	}
 	
@@ -55,4 +58,6 @@ public abstract class Weapon extends Equipable{
 	public abstract float[] getPos(boolean mousedown, boolean mousepressed);
 	
 	public abstract boolean isInUse();
+	
+	public abstract void reset();
 }

@@ -16,7 +16,7 @@ public class Slot {
 	private final static Texture SLOT_CONSUMABLE = new Texture("slotConsumable.png");
 	private final static Texture SLOT_WEAPON = new Texture("slotWeapon.png");
 	
-	private Texture slotTex;
+	public Texture slotTex;
 	
 	public boolean renderSlot;
 	public Item item;

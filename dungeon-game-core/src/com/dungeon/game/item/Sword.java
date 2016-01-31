@@ -74,9 +74,9 @@ public class Sword extends Melee {
 	protected float[] dmgMult;
 	protected float[] knockMult;
 	
-	public Sword(World world, int damage, int speed) {
+	public Sword(World world, float damage, float speed) {
 		super(world, new Texture("Sword.png"));
-		desc = "Real sword I swear! \n\n Damage: "+damage;
+		desc = "Real sword I swear! \n\n Damage: "+ Math.floor(damage*10)/10f;
 		
 		this.damage = damage;
 		this.speed = speed;
@@ -132,7 +132,7 @@ public class Sword extends Melee {
 			if(distance>SWING1_DIST)distance-=(WINDUP1_DIST-SWING1_DIST)/SWING1_TIME;
 			if(polarAngle>SWING1_PANG)polarAngle-=(WINDUP1_PANG-SWING1_PANG)/SWING1_TIME;
 			if(angle>SWING1_ANGL)angle-=(WINDUP1_ANGL-SWING1_ANGL)/SWING1_TIME;
-			if(!hasHit&&distance<SWING1_DIST&&polarAngle<SWING1_PANG&&angle<SWING1_ANGL){
+			if(index>SWING1_TIME && !hasHit){
 				hasHit = true;
 			}
 			if(index>SWING1_TIME && mousedown && owner.use_stam(SWING2_STAM)){
@@ -167,7 +167,7 @@ public class Sword extends Melee {
 			if(distance<SWING2_DIST)distance-=(WINDUP2_DIST-SWING2_DIST)/SWING2_TIME;
 			if(polarAngle<SWING2_PANG)polarAngle-=(WINDUP2_PANG-SWING2_PANG)/SWING2_TIME;
 			if(angle<SWING2_ANGL)angle-=(WINDUP2_ANGL-SWING2_ANGL)/SWING2_TIME;
-			if(!hasHit&&distance<SWING2_DIST&&polarAngle<SWING2_PANG&&angle<SWING2_ANGL){
+			if(index>SWING1_TIME && !hasHit){
 				hasHit = true;
 			}
 			if(index>SWING2_TIME && mousedown && owner.use_stam(SWING3_STAM)){
@@ -202,7 +202,7 @@ public class Sword extends Melee {
 			if(distance<SWING3_DIST)distance-=(WINDUP3_DIST-SWING3_DIST)/SWING3_TIME;
 			if(polarAngle>SWING3_PANG)polarAngle-=(WINDUP3_PANG-SWING3_PANG)/SWING3_TIME;
 			if(angle<SWING3_ANGL)angle-=(WINDUP3_ANGL-SWING3_ANGL)/SWING3_TIME;
-			if(!hasHit&&distance<SWING3_DIST&&polarAngle>SWING3_PANG&&angle<SWING3_ANGL){
+			if(index>SWING1_TIME && !hasHit){
 				hasHit = true;
 			}
 			if(index>SWING3_CDWN + SWING3_TIME){
@@ -282,5 +282,15 @@ public class Sword extends Melee {
 	
 	public String getDesc() {
 		return "Standard meele weapon. Generally for the purpose of hitting things. \n\n " + desc;
+	}
+
+	@Override
+	public void reset() {
+		stage = REST;
+		stageTimer = 0;
+		
+		distance = REST_DIST;
+		polarAngle = REST_PANG;
+		angle = REST_ANGL;
 	}
 }
