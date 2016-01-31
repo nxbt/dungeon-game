@@ -39,7 +39,7 @@ public class HudSlot extends Hud {
 			if(slot.item != null)world.descBox.updateText(slot.item);
 			
 			if(world.mouse.rb_pressed && slot.item != null) {
-				Window temp = new DescWindow(world, (int)world.mouse.x, (int)world.mouse.y, slot.item);
+				Window temp = new DescWindow(world, world.mouse.x, world.mouse.y, slot.item);
 				temp.open();
 			}
 		}

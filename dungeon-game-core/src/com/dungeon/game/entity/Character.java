@@ -222,7 +222,7 @@ public abstract class Character extends Dynamic {
 			float[] finalVerticies = new float[vertexAngles.length*2];
 			for(int i = 1; i < finalVerticies.length; i+=2){
 				for(float[] vertex: verticies){
-					if(vertexAngles[(int)i/2] == (float)Math.atan2(vertex[1]-y,vertex[0]-x)){
+					if(vertexAngles[i/2] == (float)Math.atan2(vertex[1]-y,vertex[0]-x)){
 						finalVerticies[i-1] = vertex[0];
 						finalVerticies[i] = vertex[1];
 						break;

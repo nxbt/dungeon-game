@@ -45,7 +45,7 @@ public class WeaponProjectile extends Projectile {
 		
 		float angle = (float) (Math.atan2(yDiff, xDiff)*180/Math.PI) + this.angle;
 		
-		Drop drop = new Drop(world, (int)(x-Math.cos(angle/180*Math.PI)*len), (int)(y-Math.sin(angle/180*Math.PI)*len), tempSlot);
+		Drop drop = new Drop(world, (float)(x-Math.cos(angle/180*Math.PI)*len), (float)(y-Math.sin(angle/180*Math.PI)*len), tempSlot);
 		drop.angle = this.angle;
 		world.entities.add(drop);
 	}

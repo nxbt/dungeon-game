@@ -480,7 +480,7 @@ public class Rooms extends Generation {
 					addedChest = true;
 				}
 				if(hasEnemies && i>-1&&k>-1&&i<height&&k<width&&Math.random()>0.96){
-					Goon enemy =  new Goon(world, x*Tile.TS+Tile.TS/2, y*Tile.TS+Tile.TS/2);
+					Goon enemy =  new Goon(world, x*Tile.TS+Tile.TS/2f, y*Tile.TS+Tile.TS/2f);
 					enemy.angle = (float) (180f-Math.random()*360f);
 					enemy.target_angle = enemy.angle;
 					entities.add(enemy);

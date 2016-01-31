@@ -162,7 +162,7 @@ public class Mouse extends Hud {
 		
 		if(slot.item != null && canPlace) {
 			if(lb_pressed) {
-				world.entities.add(new Drop(world, (int)(x + world.cam.x-world.cam.WIDTH/2-Item.SIZE/2+16), (int)(y+ world.cam.y-world.cam.HEIGHT/2-Item.SIZE/2+16), slot));
+				world.entities.add(new Drop(world, (x + world.cam.x-world.cam.WIDTH/2-Item.SIZE/2+16), (y+ world.cam.y-world.cam.HEIGHT/2-Item.SIZE/2+16), slot));
 				lb_pressed = false;
 			}
 			else if(rb_pressed) {
@@ -175,7 +175,7 @@ public class Mouse extends Hud {
 				
 				if(slot.item.stack == 0) slot.item = null;
 				
-				world.entities.add(new Drop(world, (int)(x + world.cam.x-world.cam.WIDTH/2-Item.SIZE/2+16), (int)(y+ world.cam.y-world.cam.HEIGHT/2-Item.SIZE/2+16), temp));
+				world.entities.add(new Drop(world, (x + world.cam.x-world.cam.WIDTH/2-Item.SIZE/2+16), (y+ world.cam.y-world.cam.HEIGHT/2-Item.SIZE/2+16), temp));
 				rb_pressed = false;
 				
 				

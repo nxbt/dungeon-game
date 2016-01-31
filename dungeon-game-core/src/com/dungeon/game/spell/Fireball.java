@@ -29,7 +29,7 @@ public class Fireball extends Spell {
 		float xOff = (float) (Math.cos((angle+135)/180*Math.PI)*30);
 
 		float yOff = (float) (Math.sin((angle+135)/180*Math.PI)*30);
-		world.entities.add(new SpellProjectile(world, medium, this, (int)(x+xOff), (int)(y+yOff), angle, 6, new Polygon(new float[]{0,28,4,28,4,32,0,32}), 0, 32, 70));
+		world.entities.add(new SpellProjectile(world, medium, this, (x+xOff), (y+yOff), angle, 6, new Polygon(new float[]{0,28,4,28,4,32,0,32}), 0, 32, 70));
 		
 	}
 

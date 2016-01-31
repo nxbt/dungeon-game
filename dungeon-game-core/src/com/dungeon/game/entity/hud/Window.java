@@ -68,8 +68,8 @@ public abstract class Window extends Hud {
 
 	public void hovered() {
 		if(world.mouse.x>x&&world.mouse.x<x+d_width&&world.mouse.y>y+d_height-14&&world.mouse.y<y+d_height&&world.mouse.lb_pressed){
-			dragOffX = (int) (world.mouse.x-x);
-			dragOffY = (int) (world.mouse.y-y);
+			dragOffX = (world.mouse.x-x);
+			dragOffY = (world.mouse.y-y);
 			drag = true;
 		}
 		else{
