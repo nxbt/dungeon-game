@@ -48,6 +48,7 @@ public class Player extends Character {
 		addEffect(new ManaRegen(world, -1, 0.1f));
 		
 		vision = 10;
+		hearing = 10;
 	}
 	
 	public void init() {

@@ -59,6 +59,8 @@ public abstract class Character extends Dynamic {
 	
 	public float vision;
 	
+	public float hearing;
+	
 	public ArrayList<Entity> knownEntities;
 	
 	public ArrayList<Effect> effects;
@@ -78,6 +80,8 @@ public abstract class Character extends Dynamic {
 		immune = false;
 		
 		vision = 0;
+		
+		hearing = 0;
 		
 		knownEntities = new ArrayList<Entity>();
 		
