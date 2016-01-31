@@ -120,12 +120,14 @@ public class AreaMap {
 	public Path findAreaPath(int[] start, int[] end){
     		Area startArea = findArea(start);
     		Area endArea = findArea(end);
-    		Path path = minPaths.get(areas.indexOf(startArea)).get(areas.indexOf(endArea));
-    		path.start = start;
-    		path.end = end;
-    		
-    		return path;
-    		
+    		if(startArea!=null&&endArea!=null){
+    			Path path = minPaths.get(areas.indexOf(startArea)).get(areas.indexOf(endArea));
+        		path.start = start;
+        		path.end = end;
+        		
+        		return path;
+        		
+    		}else return null;
 	}
 	
 	public int[] findPath(int[] start, int[] end){
@@ -135,9 +137,9 @@ public class AreaMap {
 		if(startArea.equals(endArea)){
 			path = startArea.findPath(tm, start, end);
 		}
-		else{
-			path = findAreaPath(start, end).getTiles(tm);
-		}
+		else if(startArea == null||endArea == null){
+			return start;
+		}else path = findAreaPath(start, end).getTiles(tm);
 		lastPath = path;
 		if(path.size()==1)return path.get(0);
 		Vector2 startPoint_bl = new Vector2(path.get(0)[0]*Tile.TS,path.get(0)[1]*Tile.TS);
