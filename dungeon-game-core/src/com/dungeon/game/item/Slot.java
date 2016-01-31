@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.hud.DescWindow;
-import com.dungeon.game.entity.hud.Window;
 import com.dungeon.game.world.World;
 
 public class Slot {
@@ -28,7 +27,7 @@ public class Slot {
 	
 	private BitmapFont font;
 	
-	private Inventory inv;
+	public Inventory inv;
 	
 	private World world;
 	

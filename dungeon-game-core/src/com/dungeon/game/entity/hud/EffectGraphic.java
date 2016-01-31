@@ -10,7 +10,6 @@ import com.dungeon.game.effect.Effect;
 import com.dungeon.game.world.World;
 
 public class EffectGraphic extends Hud {
-	
 	Effect effect;
 	
 	private BitmapFont font;

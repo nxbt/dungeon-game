@@ -117,6 +117,7 @@ public abstract class Character extends Dynamic {
 		if(!stun && move_angle != 361)acel( acelVec, true );
 		
 		boolean turnRight = true;
+		@SuppressWarnings("unused")
 		float originalAngle = angle;
 		if(angle != target_angle) {
 			float tempAngle = angle+180;
