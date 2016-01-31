@@ -22,7 +22,7 @@ public class InvButton extends Button {
 	@Override
 	public void click() {
 		if(world.hudEntities.contains(world.player.inv.graphic)) world.player.inv.graphic.close();
-		else if(!world.player.fight_mode)world.player.inv.graphic.open();
+		else if(!world.player.fightMode)world.player.inv.graphic.open();
 	}
 
 	@Override

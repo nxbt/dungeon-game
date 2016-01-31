@@ -2,7 +2,6 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.hud.DescWindow;
-import com.dungeon.game.entity.hud.Window;
 import com.dungeon.game.item.Slot;
 import com.dungeon.game.world.World;
 
@@ -44,7 +43,8 @@ public class Drop extends Static {
 					slot.item = world.player.inv.addItem(slot.item);
 				}
 				else if(world.mouse.rb_pressed && slot.item != null) {
-					Window temp = new DescWindow(world, world.mouse.x, world.mouse.y, slot.item);
+					DescWindow temp = new DescWindow(world, world.mouse.x, world.mouse.y);
+					temp.updateText(slot.item);
 					temp.open();
 				}
 			}

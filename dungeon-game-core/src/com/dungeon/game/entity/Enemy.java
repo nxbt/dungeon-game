@@ -12,15 +12,6 @@ public abstract class Enemy extends Character {
 	public int[] moveTo;
 	public ArrayList<int[]> path;
 	
-
-	protected Weapon leftEquiped;
-	protected Weapon rightEquiped;
-	
-	protected float[] leftPos;
-	protected float[] rightPos;
-	
-	protected boolean attacking;
-	
 	protected int[] targetTile;
 	
 	

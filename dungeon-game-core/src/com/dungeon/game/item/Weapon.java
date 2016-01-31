@@ -17,16 +17,17 @@ public abstract class Weapon extends Equipable{
 	
 	public Character owner;
 	
-
-	
 	public float distance=0;
 	public float polarAngle= 0;
 	public float angle=0;
 	
 	public Weapon(World world, Texture texture){
 		super(world);
+		
 		maxStack = 1;
+		
 		type = WEAPON;
+		
 		sprite = texture;
 	}
 	
@@ -36,7 +37,10 @@ public abstract class Weapon extends Equipable{
 	}
 	
 	public void equip(World world, Character e){
-		this.owner = e;
+		reset();
+		
+		owner = e;
+		
 		world.entities.add(this.graphic);
 	}
 	

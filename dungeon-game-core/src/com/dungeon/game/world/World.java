@@ -91,6 +91,7 @@ public class World {
 		
 		entities = curFloor.entities;
 		entities.add(0,player);
+		
 		hudEntities.add(new MenuButton(this, 4, cam.HEIGHT-20));
 		hudEntities.add(new HelpButton(this, 24, cam.HEIGHT-20));
 		hudEntities.add(new InvButton(this, cam.WIDTH-56, 76));

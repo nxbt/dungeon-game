@@ -11,7 +11,7 @@ public abstract class Effect {
 	
 	public EffectGraphic graphic;
 
-	private String name;
+	public String name;
 	
 	public int duration;
 	
@@ -45,8 +45,11 @@ public abstract class Effect {
 		return "";
 	}
 
+	public String getDesc() {
+		return "Yo estoy muy pantelones";
+	}
+	
 	public int getNum() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	

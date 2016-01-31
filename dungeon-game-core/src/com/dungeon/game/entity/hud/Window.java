@@ -61,7 +61,7 @@ public abstract class Window extends Hud {
 			close();
 		}
 		
-		if(world.player.fight_mode)close();
+		if(world.player.fightMode)close();
 		
 		subCalc();
 	}

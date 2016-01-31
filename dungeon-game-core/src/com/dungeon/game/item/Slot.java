@@ -65,7 +65,8 @@ public class Slot {
 		if(((world.mouse.slot.item==null?true:world.mouse.slot.item.type==type)||type==0)) {
 			if(world.mouse.shift_down) {
 				if(world.mouse.rb_pressed  && item != null) {
-					Window temp = new DescWindow(world, world.mouse.x, world.mouse.y, item);
+					DescWindow temp = new DescWindow(world, world.mouse.x, world.mouse.y);
+					temp.updateText(item);
 					temp.open();
 				}
 			}

@@ -18,7 +18,7 @@ public class EffectGraphic extends Hud {
 	public EffectGraphic(World world, Effect effect) {
 		super(world, 0, 0);
 		this.effect = effect;
-		sprite = effect.texture;
+		sprite = Effect.texture;
 		if (!sprite.getTextureData().isPrepared()) {
 			sprite.getTextureData().prepare();
 		}
@@ -35,9 +35,9 @@ public class EffectGraphic extends Hud {
 		slotMap.dispose();
 		tempMap.dispose();
 		
-		// TODO Auto-generated constructor stub
 		d_width = 32;
 		d_height = 32;
+		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.LIGHT_GRAY);
 	}
@@ -60,6 +60,14 @@ public class EffectGraphic extends Hud {
 	
 	@Override
 	public void hovered() {
+		if(world.mouse.shift_down) {
+			if(world.mouse.rb_pressed) {
+				DescWindow temp = new DescWindow(world, world.mouse.x, world.mouse.y);
+				temp.updateText(effect);
+				temp.open();
+			}
+		}
+		
 		world.descBox.updateText(effect.getHoveredText());
 	}
 	

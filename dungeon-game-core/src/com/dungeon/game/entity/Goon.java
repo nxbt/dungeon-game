@@ -192,7 +192,7 @@ public class Goon extends Enemy {
 				attack = false;
 			}
 			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
-			leftPos = ((Weapon) inv.slot[30].item).getPos(down&&attack, click&&attack);
+			leftEquipedPos = ((Weapon) inv.slot[30].item).getPos(down&&attack, click&&attack);
 			((Weapon)inv.slot[30].item).graphic.calc();
 			
 		}
@@ -208,12 +208,12 @@ public class Goon extends Enemy {
 
 	public void post() {
 		if(leftEquiped != null){
-			float xMove = (float) (Math.cos((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
-			float yMove = (float) (Math.sin((angle+leftPos[1])/180*Math.PI)*leftPos[0]);
+			float xMove = (float) (Math.cos((angle+leftEquipedPos[1])/180*Math.PI)*leftEquipedPos[0]);
+			float yMove = (float) (Math.sin((angle+leftEquipedPos[1])/180*Math.PI)*leftEquipedPos[0]);
 			
 			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x)+xMove;
 			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y)+yMove;
-			((Weapon)(inv.slot[30].item)).graphic.angle = angle-135+leftPos[2];
+			((Weapon)(inv.slot[30].item)).graphic.angle = angle-135+leftEquipedPos[2];
 		}
 	}
 }

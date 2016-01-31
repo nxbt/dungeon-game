@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.effect.Effect;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
@@ -15,13 +16,11 @@ public class DescWindow extends Window {
 	
 	private String text;
 	
-	public DescWindow(World world, float x, float y, Item item) {
+	public DescWindow(World world, float x, float y) {
 		super(world, x, y);
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.WHITE);
-		
-		updateText(item);
 	}
 
 	@Override
@@ -34,7 +33,11 @@ public class DescWindow extends Window {
 	}
 	
 	public void updateText(Item item) {
-		updateText(item.name + "\n\n" + item.getDesc());
+		updateText("Item: " + item.name + "\n\n" + item.getDesc());
+	}
+	
+	public void updateText(Effect effect) {
+		updateText("Effect: " + effect.name + "\n\n" + effect.getDesc());
 	}
 	
 	public void updateText(String text) {

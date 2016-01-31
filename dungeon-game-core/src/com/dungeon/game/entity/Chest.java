@@ -77,7 +77,7 @@ public class Chest extends Static {
 	}
 		
 	public void hovered() {
-		if(world.mouse.rb_pressed&&!world.player.fight_mode){
+		if(world.mouse.rb_pressed&&!world.player.fightMode){
 			if(world.hudEntities.contains(inv.graphic)){
 				inv.graphic.close();
 			}

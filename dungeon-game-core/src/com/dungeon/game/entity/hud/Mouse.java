@@ -135,7 +135,7 @@ public class Mouse extends Hud {
 			}
 		}
 		
-		canPickup = (!onHud &&  Math.sqrt(Math.pow((x+world.cam.x-world.cam.WIDTH/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+world.cam.y-world.cam.HEIGHT/2) - (world.player.y + world.player.d_height/2), 2)) <= world.player.REACH) && !world.player.fight_mode;
+		canPickup = (!onHud &&  Math.sqrt(Math.pow((x+world.cam.x-world.cam.WIDTH/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+world.cam.y-world.cam.HEIGHT/2) - (world.player.y + world.player.d_height/2), 2)) <= world.player.REACH) && !world.player.fightMode;
 		for(int i = 0; i< world.curFloor.tm.length;i++){
 			for(int k = 0; k <world.curFloor.tm[i].length;k++){
 				if(world.curFloor.tm[i][k].data==1){
@@ -182,7 +182,7 @@ public class Mouse extends Hud {
 			}
 		}
 		
-		if (!world.player.fight_mode) {
+		if (!world.player.fightMode) {
 			sprite = ARROW;
 			
 			d_offx = -2;

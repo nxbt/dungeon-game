@@ -37,7 +37,15 @@ public abstract class Character extends Dynamic {
 	
 	public boolean stun;
 	
-	public boolean fight_mode;
+	protected Weapon leftEquiped;
+	protected Weapon rightEquiped;
+	
+	protected float[] leftEquipedPos;
+	protected float[] righEquipedtPos;
+	
+	public boolean fightMode;
+	
+	protected boolean attacking;
 	
 	public float physc_resist;
 	public float arcan_resist;
@@ -83,7 +91,6 @@ public abstract class Character extends Dynamic {
 		
 		visPolygon = new Polygon(new float[]{0,0,0,0,0,0});
 		visTris = new ArrayList<Polygon>();
-//		angle = 1;
 	}
 
 	public void norm() {
@@ -109,10 +116,6 @@ public abstract class Character extends Dynamic {
 		acelVec.y = (float) (Math.sin(move_angle*Math.PI/180)*acel);
 		if(!stun && move_angle != 361)acel( acelVec, true );
 		
-		if(this instanceof Player){
-			System.out.println("Target: " + target_angle);
-			System.out.println("Angle: "+angle);
-		}
 		boolean turnRight = true;
 		float originalAngle = angle;
 		if(angle != target_angle) {
@@ -186,9 +189,6 @@ public abstract class Character extends Dynamic {
 					}
 				}
 			}
-			
-			//TODO: add entity corners!
-			//TODO: add entity edges!
 			
 			//calculate the verticies
 			
@@ -337,5 +337,19 @@ public abstract class Character extends Dynamic {
 		}
 		
 		return false;
+	}
+	
+	public void toggleMode() {
+		fightMode = !fightMode;
+		
+		if(fightMode) {
+			if(leftEquiped != null) equip(leftEquiped);
+			if(rightEquiped != null) equip(rightEquiped);
+		}
+		
+		else {
+			if(leftEquiped != null) unequip(leftEquiped);
+			if(rightEquiped != null) unequip(rightEquiped);
+		}
 	}
 }

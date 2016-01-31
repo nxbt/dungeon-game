@@ -28,8 +28,6 @@ public abstract class Projectile extends Dynamic {
 		
 		this.origin_x = originX;
 		this.origin_y = originY;
-		
-//		fric = 0.1f;
 	}
 
 	@Override
@@ -63,7 +61,7 @@ public abstract class Projectile extends Dynamic {
 			moveVec.y-=moveVec.y/vel*fric;
 		}
 		
-		if((moveVec.x != 0 || moveVec.y != 0) && col(false, new float[]{0,0})==1){
+		if((moveVec.x != 0 || moveVec.y != 0) && col(false, new float[]{0,0}) > 0){
 			moveVec.x = 0;
 			moveVec.y = 0;
 
