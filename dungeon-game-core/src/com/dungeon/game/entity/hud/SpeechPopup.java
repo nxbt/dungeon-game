@@ -13,7 +13,7 @@ import com.dungeon.game.world.World;
 import com.dungeon.game.entity.Character;
 
 public class SpeechPopup extends Hud {
-	private final NinePatch SPEECH_POPUP = new NinePatch(new Texture("speechBubble.png"), 4, 4, 4, 4);
+	private final NinePatch SPEECH_POPUP = new NinePatch(new Texture("speechBubble.png"), 21, 4, 4, 21);
 	
 	private int bubbleWidth;
 	private int bubbleHeight;
@@ -41,10 +41,10 @@ public class SpeechPopup extends Hud {
 		d_offy = 0;
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
-		font.setColor(0,0,0,0.75f);
+		font.setColor(0,0,0,1);
 		font.getData().setScale(1f);
 		
-		speechSpeed = 3;
+		speechSpeed = 1;
 		speechCounter = 0;
 		text = "";
 		endText = "";
@@ -79,8 +79,8 @@ public class SpeechPopup extends Hud {
 		int max_line_length = 0;
 		
 		for(int i = 0; i < lines.size(); i++) {
-			if(lines.get(i).length() > 30) {
-				for(int k = 30; k > 0; k--) {
+			if(lines.get(i).length() > 20) {
+				for(int k = 20; k > 0; k--) {
 					if(lines.get(i).charAt(k) == ' ') {
 						lines.add(i+1,lines.get(i).substring(k+1));
 						
@@ -101,9 +101,9 @@ public class SpeechPopup extends Hud {
 			endText = "";
 		}
 		
-		d_height = lines.size() * 16 + 8;
+		d_height = lines.size() * 16 + 18;
 		
-		d_width = max_line_length * 9 + 27;
+		d_width = max_line_length * 9 + 38;
 	}
 	
 	public void hovered(){
@@ -129,7 +129,7 @@ public class SpeechPopup extends Hud {
 			
 			SPEECH_POPUP.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
 			
-			font.draw(batch, text, x+6, y+d_height-6);
+			font.draw(batch, text, x+16, y+d_height-6);
 			
 //			text = "";
 		}
