@@ -59,7 +59,10 @@ public class Mentor extends Friend {
 	public void calc() {
 		if(seenEntities.contains(world.player)){
 			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y, world.player.x-x));
-			if(!world.player.fightMode&&speechBubble.endText.equals(""))speechBubble.updateText("FUCK YOU BITCH");
+			if(!world.player.fightMode&&speechBubble.endText.equals("")){
+				speechBubble.updateText("FUCK YOU BITCH!");
+				speechBubble.dismissed = false;
+			}
 			
 		}else speechBubble.updateText("");
 		if(world.player.fightMode)speechBubble.updateText("");

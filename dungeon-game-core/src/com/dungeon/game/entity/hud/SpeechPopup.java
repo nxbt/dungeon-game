@@ -26,6 +26,8 @@ public class SpeechPopup extends Hud {
 	
 	private Character character;
 	
+	public boolean dismissed;
+	
 	private int speechSpeed;
 	private int speechCounter;
 
@@ -46,6 +48,7 @@ public class SpeechPopup extends Hud {
 		speechCounter = 0;
 		text = "";
 		endText = "";
+		dismissed = false;
 	}
 
 	@Override
@@ -105,7 +108,7 @@ public class SpeechPopup extends Hud {
 	
 	public void hovered(){
 		if(world.mouse.rb_pressed){
-			updateText("");
+			dismissed = true;
 		}
 	}
 	
@@ -119,7 +122,7 @@ public class SpeechPopup extends Hud {
 	}
 	
 	public void draw(SpriteBatch batch) {
-		if(!text.equals("")) {
+		if(!dismissed&&!text.equals("")) {
 			System.out.println("test");
 //			if(x + d_width > bubbleWidth) x -= d_width - 32;
 //			if(y + d_height > bubbleHeight) y -= d_height + 16;
