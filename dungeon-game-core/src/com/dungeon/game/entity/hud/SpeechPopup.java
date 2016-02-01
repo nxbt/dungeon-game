@@ -58,12 +58,9 @@ public class SpeechPopup extends Hud {
 	@Override
 	public void calc() {
 		if(speechCounter == 0){
-			System.out.println("addChar");
 			int textLength = text.length();
 			int endTextLength = endText.length();
 			if(textLength!=endTextLength){
-
-				System.out.println("addedChar");
 				text+=endText.charAt(textLength);
 			}
 			speechCounter = speechSpeed;
@@ -123,7 +120,6 @@ public class SpeechPopup extends Hud {
 	
 	public void draw(SpriteBatch batch) {
 		if(!dismissed&&!text.equals("")) {
-			System.out.println("test");
 //			if(x + d_width > bubbleWidth) x -= d_width - 32;
 //			if(y + d_height > bubbleHeight) y -= d_height + 16;
 			
