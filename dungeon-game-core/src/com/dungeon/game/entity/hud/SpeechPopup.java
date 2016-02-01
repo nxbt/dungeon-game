@@ -44,6 +44,8 @@ public class SpeechPopup extends Hud {
 		
 		speechSpeed = 5;
 		speechCounter = 0;
+		text = "";
+		endText = "";
 	}
 
 	@Override
@@ -91,9 +93,24 @@ public class SpeechPopup extends Hud {
 			endText += lines.get(i) + "\n";
 		}
 		
+		if(text.equals("")){
+			text = "";
+			endText = "";
+		}
+		
 		d_height = lines.size() * 16 + 8;
 		
 		d_width = max_line_length * 9 + 27;
+	}
+	
+	public void hovered(){
+		if(world.mouse.rb_pressed){
+			updateText("");
+		}
+	}
+	
+	public boolean done(){
+		return text==null||text.equals(endText);
 	}
 
 	@Override

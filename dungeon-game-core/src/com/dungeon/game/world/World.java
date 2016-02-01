@@ -124,6 +124,7 @@ public class World {
 	}
 	
 	public void update() {
+		cam.update(player.x, player.y, mouse.x, mouse.y, 1f);
 		mouse.update();
 		descBox.update();
 		
@@ -143,7 +144,6 @@ public class World {
 			hudEntities.get(i).update();
 		}
 		
-		cam.update(player.x, player.y, mouse.x, mouse.y, 1f);
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F9)) debug_frames = !debug_frames;
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F8)) debug_pathing = !debug_pathing;

@@ -3,12 +3,12 @@ package com.dungeon.game.entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.hud.SpeechPopup;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Mentor extends Friend {
 	
 	private SpeechPopup speechBubble; 
-
 	public Mentor(World world, float x, float y) {
 		super(world, x, y);
 		name = "Mentor";
@@ -16,7 +16,9 @@ public class Mentor extends Friend {
 
 		
 		vision = 10;
-		hearing = 10;
+		hearing = 3;
+		
+		speechRadius = 3;
 		
 		maxLife = 1;
 		maxStam = 1;
@@ -44,8 +46,7 @@ public class Mentor extends Friend {
 		sprite = new Texture("mentor.png");
 		angle = 0;
 		
-		speechBubble = new SpeechPopup(world,this);		
-		speechBubble.updateText("FUCK YOU BITCH!");
+		speechBubble = new SpeechPopup(world,this);	
 	}
 
 	@Override
@@ -56,9 +57,12 @@ public class Mentor extends Friend {
 
 	@Override
 	public void calc() {
-		if(knownEntities.contains(world.player))target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y, world.player.x-x));
-
-		
+		if(seenEntities.contains(world.player)){
+			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y, world.player.x-x));
+			if(!world.player.fightMode&&speechBubble.endText.equals(""))speechBubble.updateText("FUCK YOU BITCH");
+			
+		}else speechBubble.updateText("");
+		if(world.player.fightMode)speechBubble.updateText("");
 	}
 
 	@Override

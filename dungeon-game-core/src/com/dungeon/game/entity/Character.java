@@ -64,6 +64,7 @@ public abstract class Character extends Dynamic {
 	public float hearing;
 	
 	public ArrayList<Entity> knownEntities;
+	public ArrayList<Entity> seenEntities;
 	
 	public ArrayList<Effect> effects;
 		
@@ -86,6 +87,8 @@ public abstract class Character extends Dynamic {
 		hearing = 0;
 		
 		knownEntities = new ArrayList<Entity>();
+
+		seenEntities = new ArrayList<Entity>();
 		
 		effects = new ArrayList<Effect>();
 		
@@ -243,19 +246,38 @@ public abstract class Character extends Dynamic {
 			}
 			visTris.add(new Polygon(new float[]{x,y,visPolygon.getVertices()[visPolygon.getVertices().length-2],visPolygon.getVertices()[visPolygon.getVertices().length-1],visPolygon.getVertices()[0],visPolygon.getVertices()[1]}));
 		
+			ArrayList<Entity> preSeenEnts = new ArrayList<Entity>(seenEntities);
+			seenEntities = new ArrayList<Entity>();
 			for(Entity e: world.entities){
-				if(!knownEntities.contains(e)&&!e.equals(this)){
+				if(!e.equals(this)){
 					for(Polygon tri: visTris){
 						if(Intersector.overlapConvexPolygons(e.getHitbox(),tri)){
-							knownEntities.add(e);
+							if(!knownEntities.contains(e))knownEntities.add(e);
+							seenEntities.add(e);
 							break;
 						}
 					}
 				}
 			}
+			
+			for(Entity e: preSeenEnts){
+				if(!seenEntities.contains(e))unsee(e);
+			}
+			
+			for(Entity e: seenEntities){
+				if(!preSeenEnts.contains(e))see(e);
+			}
 		}
 	}
 	
+	public void see(Entity e) {
+		if(this instanceof Mentor)System.out.println("test");
+	}
+
+	public void unsee(Entity e) {
+		
+	}
+
 	public void addEffect(Effect effect){
 		effects.add(effect);
 		effect.begin(this);
