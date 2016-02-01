@@ -44,7 +44,7 @@ public class SpeechPopup extends Hud {
 		font.setColor(0,0,0,0.75f);
 		font.getData().setScale(1f);
 		
-		speechSpeed = 5;
+		speechSpeed = 3;
 		speechCounter = 0;
 		text = "";
 		endText = "";

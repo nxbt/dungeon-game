@@ -7,13 +7,12 @@ import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Mentor extends Friend {
+	private SpeechPopup speechBubble;
 	
-	private SpeechPopup speechBubble; 
 	public Mentor(World world, float x, float y) {
 		super(world, x, y);
 		name = "Mentor";
 		torq = 5;
-
 		
 		vision = 10;
 		hearing = 3;
@@ -60,7 +59,7 @@ public class Mentor extends Friend {
 		if(seenEntities.contains(world.player)){
 			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y, world.player.x-x));
 			if(!world.player.fightMode&&speechBubble.endText.equals("")){
-				speechBubble.updateText("FUCK YOU BITCH!");
+				speechBubble.updateText("I am here to help.");
 				speechBubble.dismissed = false;
 			}
 			
