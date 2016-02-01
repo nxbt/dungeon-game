@@ -91,6 +91,8 @@ public abstract class Character extends Dynamic {
 		
 		visPolygon = new Polygon(new float[]{0,0,0,0,0,0});
 		visTris = new ArrayList<Polygon>();
+
+		solid = true;
 	}
 
 	public void norm() {

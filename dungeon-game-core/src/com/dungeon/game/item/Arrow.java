@@ -36,15 +36,15 @@ public class Arrow extends Ammo {
 		ArrayList<Effect> effects = new ArrayList<Effect>();
 		effects.add(new Stun(world, 10));
 		
-		character.damage(damage, effects);
-		
-		Vector2 knockback = new Vector2();
-		
-		knockback.x = projectile.moveVec.x;
-		knockback.y = projectile.moveVec.y;
-		
-		character.acel(knockback, false);
-		
+		if(character.damage(damage, effects)>0){
+			
+			Vector2 knockback = new Vector2();
+			
+			knockback.x = projectile.moveVec.x;
+			knockback.y = projectile.moveVec.y;
+			
+			character.acel(knockback, false);
+		}
 		if(!character.knownEntities.contains(projectile.owner))character.knownEntities.add(projectile.owner);
 	}
 	

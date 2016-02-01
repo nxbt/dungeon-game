@@ -15,6 +15,7 @@ import com.dungeon.game.Camera;
 import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.Enemy;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.Mentor;
 import com.dungeon.game.entity.Player;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.HealthBar;
@@ -84,13 +85,14 @@ public class World {
 		entities = new ArrayList<Entity>();
 		hudEntities = new ArrayList<Hud>();
 		
-		player = new Player(this, curFloor.tm[0].length/2*Tile.TS, curFloor.tm.length/2*Tile.TS);
+		player = new Player(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS-Tile.TS/2);
 		
 		mouse = new Mouse(this, 0, 0);
 		descBox = new DescBox(this);
 		
 		entities = curFloor.entities;
 		entities.add(0,player);
+		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
 		
 		hudEntities.add(new MenuButton(this, 4, cam.HEIGHT-20));
 		hudEntities.add(new HelpButton(this, 24, cam.HEIGHT-20));

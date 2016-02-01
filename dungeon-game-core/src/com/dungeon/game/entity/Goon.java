@@ -31,8 +31,6 @@ public class Goon extends Enemy {
 	public void init() {
 		name = "Goon";
 		
-		solid = true;
-		
 		maxLife = 20;
 		maxStam = 100;
 		maxMana = 0;

@@ -30,9 +30,9 @@ public class Rooms extends Generation {
 	
 	public boolean generateStartRoom(int x, int y){
 		int height = (int) (3+Math.random()*map.length/7);
-		y-=(int) (Math.random()*height);
+		y-=(int) (Math.random()*height)+1;
 		int width = (int) (3+Math.random()*map[0].length/7);
-		x-=(int) (Math.random()*width);
+		x-=(int) (Math.random()*width)+1;
 		Rectangle room = new Rectangle(x,y,width,height);
 		int nextX;
 		int nextY;
