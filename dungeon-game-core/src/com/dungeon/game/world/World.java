@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.Enemy;
@@ -170,6 +171,7 @@ public class World {
 		
 		if(debug_pathing||debug_sight||debug_hitbox) {
 			shapeRenderer.begin(ShapeType.Line);
+			shapeRenderer.setAutoShapeType(true);
 			
 			shapeRenderer.setProjectionMatrix(cam.cam.combined);
 			
@@ -196,16 +198,23 @@ public class World {
 				}
 				
 				if(debug_sight) {
-					shapeRenderer.setColor(Color.PURPLE);
-					if(e instanceof Player||e instanceof Friend) shapeRenderer.polygon(((Character)e).visPolygon.getVertices());
+					Gdx.gl.glEnable(GL20.GL_BLEND);
+					Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+					if(e instanceof Character){
+						if(e instanceof Player)shapeRenderer.setColor(1,0,1,0.2f);
+						if(e instanceof Friend)shapeRenderer.setColor(0,1,1,0.2f);
+						if(e instanceof Enemy)shapeRenderer.setColor(1,1,0,0.2f);
+						shapeRenderer.set(ShapeType.Filled);
+//						shapeRenderer.polygon(((Character)e).visPolygon.getVertices());
+						for(Polygon tri: ((Character)e).visTris){
+							float[] points = tri.getVertices();
+							shapeRenderer.triangle(points[0], points[1], points[2], points[3], points[4], points[5]);
+						}
+						shapeRenderer.set(ShapeType.Line);
+					}
+					Gdx.gl.glBlendFunc(GL20.GL_ZERO, GL20.GL_ONE);
+					Gdx.gl.glDisable(GL20.GL_BLEND);
 				}
-			}
-			
-			if(debug_sight) {
-				shapeRenderer.setColor(Color.PURPLE);
-				for(int[] corner: curFloor.corners){
-					shapeRenderer.rect(corner[0]-2,corner[1]-2,4,4);
-				}	
 			}
 			
 			shapeRenderer.end();
