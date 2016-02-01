@@ -4,7 +4,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 ##TODO high priority:
 * Finish adding effects to equipables.
 * Add pathing around entities.
-* Add Dialouge huds
+* Add dialouge huds
 * Add shops
 * Add currency. (name?)
 
