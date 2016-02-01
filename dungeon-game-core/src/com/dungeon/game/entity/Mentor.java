@@ -65,7 +65,7 @@ public class Mentor extends Friend {
 			}
 			
 		}else speechBubble.updateText("");
-		if(world.player.fightMode)speechBubble.updateText("");
+		if(world.player.fightMode||Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))>speechRadius*Tile.TS)speechBubble.updateText("");
 	}
 
 	@Override

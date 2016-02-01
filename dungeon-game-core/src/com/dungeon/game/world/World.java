@@ -10,14 +10,15 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.Enemy;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.Friend;
 import com.dungeon.game.entity.Mentor;
 import com.dungeon.game.entity.Player;
 import com.dungeon.game.entity.hud.DescBox;
+import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.HealthBar;
 import com.dungeon.game.entity.hud.HelpButton;
 import com.dungeon.game.entity.hud.Hud;
@@ -30,7 +31,6 @@ import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.Portrait;
 import com.dungeon.game.entity.hud.PortraitBackground;
 import com.dungeon.game.entity.hud.StamBar;
-import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.pathing.AreaMap;
 
 public class World {
@@ -197,7 +197,7 @@ public class World {
 				
 				if(debug_sight) {
 					shapeRenderer.setColor(Color.PURPLE);
-					if(e instanceof Player) shapeRenderer.polygon(((Character)e).visPolygon.getVertices());
+					if(e instanceof Player||e instanceof Friend) shapeRenderer.polygon(((Character)e).visPolygon.getVertices());
 				}
 			}
 			
