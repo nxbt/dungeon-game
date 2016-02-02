@@ -6,7 +6,6 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * Add pathing around entities.
 * Add dialouge huds
 * Add shops
-* Add currency. (name?)
 
 ##TODO low priority:
 * Add more enemies
