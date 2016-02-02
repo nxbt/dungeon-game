@@ -24,7 +24,7 @@ public class HudSlot extends Hud {
 
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
-		font.setColor(Color.LIGHT_GRAY);
+		font.setColor(Color.WHITE);
 	}
 
 	@Override

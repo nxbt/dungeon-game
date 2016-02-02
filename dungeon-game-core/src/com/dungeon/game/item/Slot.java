@@ -42,7 +42,7 @@ public class Slot {
 		this.y = data[2];
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
-		font.setColor(Color.LIGHT_GRAY);
+		font.setColor(1,1,1,1);
 		
 		this.inv = inv;
 

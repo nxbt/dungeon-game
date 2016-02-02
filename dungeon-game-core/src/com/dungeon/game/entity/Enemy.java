@@ -2,6 +2,7 @@ package com.dungeon.game.entity;
 
 import java.util.ArrayList;
 
+import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.Slot;
 import com.dungeon.game.world.Tile;
@@ -58,6 +59,17 @@ public abstract class Enemy extends Character {
 			world.entities.add(drop);
 		}
 		
-		world.entities.add(new GoldDrop(world, x, y, 10));
+		if(gold > 0) {
+			Slot goldSlot = new Slot(world, new int[]{0,0,0}, null);
+			
+			Item goldItem = new Gold(world);
+			goldItem.stack = gold;
+			
+			goldSlot.item = goldItem;
+			
+			Drop goldDrop = new Drop(world, x, y, goldSlot);
+			
+			world.entities.add(goldDrop);
+		}
 	}
 }

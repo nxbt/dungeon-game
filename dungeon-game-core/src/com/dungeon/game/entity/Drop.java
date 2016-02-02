@@ -2,6 +2,7 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.hud.DescWindow;
+import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Slot;
 import com.dungeon.game.world.World;
 
@@ -35,7 +36,13 @@ public class Drop extends Static {
 	@Override
 	public void hovered(){
 		if(world.mouse.canPickup) {
-			if(world.mouse.shift_down) {
+			if(slot.item instanceof Gold && !(world.mouse.shift_down && world.mouse.rb_pressed)) {
+				if(world.mouse.lb_pressed || world.mouse.rb_pressed) {
+					world.player.gold += slot.item.stack;
+					slot.item = null;
+				}
+			}
+			if(world.mouse.shift_down && slot.item != null) {
 				world.descBox.updateText(slot.item);
 				
 				if(world.mouse.lb_pressed) {
@@ -84,75 +91,7 @@ public class Drop extends Static {
 	}
 
 	@Override
-	public void calc() {
-//		int tile_lt = (int) ((x-origin_x)/Tile.TS);
-//		int tile_dn = (int) ((y-origin_y)/Tile.TS);
-//		int tile_rt = (int) (((x-origin_x)+Item.SIZE)/Tile.TS);
-//		int tile_up = (int) (((y-origin_y)+Item.SIZE)/Tile.TS);
-//		
-//		boolean dl = world.curFloor.tm[tile_dn][tile_lt].data == 1;
-//		boolean dr = world.curFloor.tm[tile_dn][tile_rt].data == 1;
-//		boolean ul = world.curFloor.tm[tile_up][tile_lt].data == 1;
-//		boolean ur = world.curFloor.tm[tile_up][tile_rt].data == 1;
-//		
-//		if(dl && dr) {
-//			y = (tile_dn+1) * Tile.TS;
-//			
-//			dl = false;
-//			dr = false;
-//		}
-//		if(ul && ur) {
-//			y = (tile_up * Tile.TS)-Item.SIZE;
-//			
-//			ul = false;
-//			ur = false;
-//		}
-//		if(dl && ul) {
-//			x = (tile_lt+1) * Tile.TS;
-//			
-//			dl = false;
-//			ul = false;
-//		}
-//		if(dr && ur) {
-//			x = (tile_rt * Tile.TS)-Item.SIZE;
-//			
-//			ul = false;
-//			ur = false;
-//		}
-//		
-//		if(dl) {
-//			if((tile_lt+1)*Tile.TS - this.x < (tile_dn+1)*Tile.TS - this.y) {
-//				x = (tile_lt+1) * Tile.TS;
-//			}
-//			else {
-//				y = (tile_dn+1) * Tile.TS;
-//			}
-//		}
-//		if(dr) {
-//			if(x+Item.SIZE - tile_rt*Tile.TS < (tile_dn+1)*Tile.TS - this.y) {
-//				x = (tile_rt * Tile.TS)-Item.SIZE;
-//			}
-//			else {
-//				y = (tile_dn+1) * Tile.TS;
-//			}
-//		}
-//		if(ul) {
-//			if((tile_lt+1)*Tile.TS - this.x < y+Item.SIZE - tile_up*Tile.TS) {
-//				x = (tile_lt+1) * Tile.TS;
-//			}
-//			else {
-//				y = (tile_up * Tile.TS)-Item.SIZE;
-//			}
-//		}
-//		if(ur) {
-//			if(x+Item.SIZE - tile_rt*Tile.TS < y+Item.SIZE - tile_up*Tile.TS) {
-//				x = (tile_rt * Tile.TS)-Item.SIZE;
-//			}
-//			else {
-//				y = (tile_up * Tile.TS)-Item.SIZE;
-//			}
-//		}
-	}
+	public void calc() {}
 
 	public void post() {}
 }
