@@ -118,14 +118,6 @@ public abstract class Character extends Dynamic {
 
 	public void move() {
 		
-		//check if the player is tangled!
-		for(Effect effect: effects){
-			if(effect instanceof Tangle){
-				moveAngle = 361;
-				break;
-			}
-		}
-		
 		Vector2 acelVec = new Vector2();
 		acelVec.x = (float) (Math.cos(move_angle*Math.PI/180)*acel);
 		acelVec.y = (float) (Math.sin(move_angle*Math.PI/180)*acel);
