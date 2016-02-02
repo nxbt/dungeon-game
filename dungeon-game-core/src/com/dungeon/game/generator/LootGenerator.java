@@ -3,6 +3,7 @@ package com.dungeon.game.generator;
 import com.dungeon.game.entity.Chest;
 import com.dungeon.game.item.Arrow;
 import com.dungeon.game.item.Bow;
+import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.LifePotion;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.world.Tile;
@@ -23,6 +24,9 @@ public class LootGenerator {
 		for(double i = Math.random(); i < 0.5; i+=0.1){
 			chest.inv.addItem(new LifePotion(world));
 		}
+		Gold gold = new Gold(world);
+		gold.stack = (int) Math.round(Math.random()*15);
+		chest.inv.addItem(gold);
 		return chest;
 	}
 }

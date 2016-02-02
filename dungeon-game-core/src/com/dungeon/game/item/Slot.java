@@ -61,6 +61,12 @@ public class Slot {
 	}
 	
 	public void hovered() {
+		if(item instanceof Gold && !(world.mouse.shift_down && world.mouse.rb_pressed)) {
+			if(world.mouse.lb_pressed || world.mouse.rb_pressed) {
+				world.player.gold += item.stack;
+				item = null;
+			}
+		}
 		if(((world.mouse.slot.item==null?true:world.mouse.slot.item.type==type)||type==0)) {
 			if(world.mouse.shift_down) {
 				if(world.mouse.rb_pressed  && item != null) {
