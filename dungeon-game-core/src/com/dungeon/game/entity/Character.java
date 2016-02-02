@@ -33,6 +33,8 @@ public abstract class Character extends Dynamic {
 	public float maxStam;
 	public float maxMana;
 	
+	public int gold;
+	
 	public boolean immune;
 	
 	public boolean stun;
