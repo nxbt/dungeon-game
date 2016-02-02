@@ -33,8 +33,8 @@ public class ArcaneShot extends Spell {
 	@Override
 	public void hit(Character character, Medium weapon, SpellProjectile projectile) {
 		ArrayList<Effect> effects = new ArrayList<Effect>();
-		effects.add(new TangleVines(world, 10));
-		
+		effects.add(new TangleVines(world, 300));
+		effects.add(new Stun(world, 5));
 		if(!character.knownEntities.contains(projectile.owner))character.knownEntities.add(projectile.owner);
 		
 	}
