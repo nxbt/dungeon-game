@@ -19,13 +19,14 @@ public class Wand extends Medium {
 		name = "Wand";
 		desc = "You're a wizard, Harry.\n\nI'm a WHAT?";
 		
-		numSpells = 2;
+		numSpells = 3;
 		
 		this.dmgMod = 1;
 		
 		spells = new Spell[numSpells];
 		spells[0] = new Fireball(world);
 		spells[1] = new Heal(world);
+		spells[2] = new TangleVines(world);
 		
 		graphic = new MediumGraphic(world, this, new Polygon(new float[]{28,2,30,4,4,30,2,28}), 30, 2);
 	}
