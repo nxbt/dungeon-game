@@ -57,5 +57,7 @@ public abstract class Enemy extends Character {
 			Drop drop = new Drop(world, x, y, slot);
 			world.entities.add(drop);
 		}
+		
+		world.entities.add(new GoldDrop(world, x, y, 10));
 	}
 }
