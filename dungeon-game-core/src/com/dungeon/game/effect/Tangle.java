@@ -15,7 +15,7 @@ public class Tangle extends Effect {
 	}
 	
 	public String getHoveredText() {
-    		return "Your Tangled for  "+(int)Math.round(duration/60)+" secods!";
+    		return "You're tangled for "+(int)Math.round(duration/60)+" seconds. You can't move!";
     	}
     	
     	public int getNum() {
