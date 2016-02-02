@@ -37,6 +37,7 @@ public class Player extends Character {
 		
 		vision = 10;
 		hearing = 10;
+		gold = 25;
 	}
 	
 	public void init() {
