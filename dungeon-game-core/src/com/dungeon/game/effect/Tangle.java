@@ -10,6 +10,10 @@ public class Tangle extends Effect {
 		graphic = new EffectGraphic(world, this);
 	}
 	
+	public void calc(Character character){
+		character.moveAngle = 361;
+	}
+	
 	public String getHoveredText() {
     		return "Your Tangled for  "+(int)Math.round(duration/60)+" secods!";
     	}
