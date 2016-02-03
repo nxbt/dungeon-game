@@ -9,6 +9,7 @@ import com.dungeon.game.entity.RangedGraphic;
 import com.dungeon.game.spell.Fireball;
 import com.dungeon.game.spell.Heal;
 import com.dungeon.game.spell.Spell;
+import com.dungeon.game.spell.TangleVines;
 import com.dungeon.game.world.World;
 
 public class Wand extends Medium {

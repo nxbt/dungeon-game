@@ -38,10 +38,12 @@ public abstract class Projectile extends Dynamic {
 
 	@Override
 	public void calc() {
-		for(Entity e: world.entities){
+		for(int i = 0; i < world.entities.size();i++){
+			Entity e = world.entities.get(i);
 			if(!e.equals(owner)&& e.solid && e instanceof Character && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
 				hit((Character)e);
 				killMe = true;
+				break;
 			}
 		}
 

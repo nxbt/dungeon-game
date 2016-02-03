@@ -136,6 +136,7 @@ public class World {
 		
 		for(int i = 0; i < entities.size(); i++) {
 			if(entities.get(i).killMe) {
+				if(entities.get(i) instanceof Character)((Character)entities.get(i)).endEffects();
 				entities.get(i).dead();
 				entities.remove(i);
 				i--;

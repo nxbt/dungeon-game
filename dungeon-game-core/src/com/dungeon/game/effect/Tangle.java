@@ -1,17 +1,33 @@
 package com.dungeon.game.effect;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Character;
+import com.dungeon.game.entity.Static;
+import com.dungeon.game.entity.Vines;
+import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.world.World;
 
 public class Tangle extends Effect {
-	public Immune(World world, int duration) {
+	private Static vines;
+	public Tangle(World world, int duration) {
 		super(world, "Tangled", duration);
-		texture = new Texture("tangle.png");
+		texture = new Texture("tangled.png");
 		graphic = new EffectGraphic(world, this);
+		vines = new Vines(world);
 	}
 	
 	public void calc(Character character){
-		character.moveAngle = 361;
+		character.move_angle = 361;
+		vines.x = character.x;
+		vines.y = character.y;
+	}
+	
+	public void begin(Character character) {
+		world.entities.add(vines);
+	}
+	
+	public void end(Character character) {
+		world.entities.remove(vines);
 	}
 	
 	public String getHoveredText() {

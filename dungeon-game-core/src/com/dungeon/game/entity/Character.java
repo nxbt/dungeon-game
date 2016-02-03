@@ -301,6 +301,12 @@ public abstract class Character extends Dynamic {
 		}
 	}
 	
+	public void endEffects(){
+		for(Effect effect: effects){
+			effect.end(this);
+		}
+	}
+	
 	public float damage(float value /*Add an array of Effects*/, ArrayList<Effect> hitEffects){
 		if(immune) return 0;
 		

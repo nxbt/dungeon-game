@@ -7,12 +7,13 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
+import com.dungeon.game.effect.Tangle;
 import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.SpellProjectile;
 import com.dungeon.game.item.Medium;
 import com.dungeon.game.world.World;
 
-public class ArcaneShot extends Spell {
+public class TangleVines extends Spell {
 
 	public TangleVines(World world) {
 		super(world);
@@ -33,8 +34,8 @@ public class ArcaneShot extends Spell {
 	@Override
 	public void hit(Character character, Medium weapon, SpellProjectile projectile) {
 		ArrayList<Effect> effects = new ArrayList<Effect>();
-		effects.add(new TangleVines(world, 300));
-		effects.add(new Stun(world, 5));
+		character.addEffect(new Tangle(world, 300));
+		character.addEffect(new Stun(world, 5));
 		if(!character.knownEntities.contains(projectile.owner))character.knownEntities.add(projectile.owner);
 		
 	}
