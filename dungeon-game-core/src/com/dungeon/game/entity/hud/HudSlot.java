@@ -21,8 +21,6 @@ public class HudSlot extends Hud {
 		d_height = 32;
 		sprite = slot.slotTex;
 		
-
-		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.WHITE);
 	}
