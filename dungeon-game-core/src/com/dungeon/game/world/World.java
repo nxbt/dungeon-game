@@ -19,6 +19,7 @@ import com.dungeon.game.entity.Friend;
 import com.dungeon.game.entity.Mentor;
 import com.dungeon.game.entity.Player;
 import com.dungeon.game.entity.hud.DescBox;
+import com.dungeon.game.entity.hud.DialogueHud;
 import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.GoldCounter;
 import com.dungeon.game.entity.hud.HealthBar;
@@ -77,7 +78,6 @@ public class World {
 		
 		curDungeon = dungeons.get(0);
 		curFloor = curDungeon.floors.get(0);
-
 		
 		areaMap = curFloor.areaMap;
 		
@@ -113,6 +113,7 @@ public class World {
 		hudEntities.add(new HudSlot(this, cam.WIDTH-108, 4, player.inv.slot[4]));
 		hudEntities.add(new EffectHudBackground(this, cam.WIDTH-44, cam.HEIGHT-44));
 		hudEntities.add(new HudBackground(this));
+		hudEntities.add(new DialogueHud(this, player));
 		
 		fpsFont = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		fpsFont.setColor(Color.RED);
