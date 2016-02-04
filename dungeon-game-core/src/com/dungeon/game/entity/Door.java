@@ -14,19 +14,7 @@ public class Door extends Static {
 	public int dir; 
 	public Door(World world, float x, float y, int dir) {
 		super(world, x, y);
-		open = false;
-		this.dir = dir;
-		if(dir == 0){
-			d_offx = 0;
-			d_offy = 14;
-		}else {
-			d_offx = 18;
-			d_offy = 0;
-		}
-	}
-
-	@Override
-	public void init() {
+		
 		sprite = new Texture("door.png");
 		name = "door";
 		solid = false;
@@ -37,6 +25,16 @@ public class Door extends Static {
 		
 		origin_x = 0;
 		origin_y = 0;
+		
+		open = false;
+		this.dir = dir;
+		if(dir == 0){
+			d_offx = 0;
+			d_offy = 14;
+		}else {
+			d_offx = 18;
+			d_offy = 0;
+		}
 	}
 	
 	private void open(){

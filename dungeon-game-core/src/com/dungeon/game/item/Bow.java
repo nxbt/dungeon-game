@@ -28,6 +28,8 @@ public class Bow extends Ranged {
 	public Bow(World world, float dmgMod, int speed) {
 		super(world, new Texture("Bow.png"));
 		
+		name = "Bow";
+		
 		this.speed = speed;
 		this.dmgMod = dmgMod;
 		
@@ -79,12 +81,6 @@ public class Bow extends Ranged {
 	public boolean isInUse() {
 		if(stage == WINDUP||stage == FIRE)return true;
 		return false;
-	}
-
-	@Override
-	public void init() {
-		name = "Bow";
-
 	}
 
 	@Override

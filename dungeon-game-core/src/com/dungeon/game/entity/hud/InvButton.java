@@ -13,11 +13,6 @@ public class InvButton extends Button {
 		this.d_width = sprite.getWidth();
 		this.d_height = sprite.getHeight();
 	}
-
-	@Override
-	public void init() {
-		
-	}
 	
 	@Override
 	public void click() {

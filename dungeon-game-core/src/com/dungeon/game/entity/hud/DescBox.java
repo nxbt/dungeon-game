@@ -24,10 +24,7 @@ public class DescBox extends Hud {
 	
 	public DescBox(World world) {
 		super(world, 0, 0);
-	}
-
-	@Override
-	public void init() {
+		
 		d_width = 200;
 		d_height = 100;
 		

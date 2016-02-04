@@ -18,9 +18,4 @@ public class Gold extends Item {
 		desc = "Show me da money";
 	}
 
-	@Override
-	public void init() {
-
-	}
-
 }

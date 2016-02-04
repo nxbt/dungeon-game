@@ -17,13 +17,12 @@ public abstract class StatusBar extends Hud {
 	
 	public StatusBar(World world, float x, float y){
 		super(world, x, y);
-	}
-	
-	@Override
-	public void init() {
+		
 		d_width = 8;
 		d_height = 68;
+		
 		percent = 1;
+		
 		sprite = new Texture("statusbar.png");
 	}
 	

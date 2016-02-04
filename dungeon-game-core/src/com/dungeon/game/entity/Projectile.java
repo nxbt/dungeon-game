@@ -15,6 +15,9 @@ public abstract class Projectile extends Dynamic {
 	
 	public Projectile(World world, float x, float y, float angle, float power, Polygon hitbox, float originX, float originY, int range) {
 		super(world, x, y);
+		
+		solid = false;
+		
 		Vector2 acelVec = new Vector2();
 		acelVec.x = (float) Math.cos((angle+135)/180*Math.PI)*power;
 		acelVec.y = (float) Math.sin((angle+135)/180*Math.PI)*power;
@@ -28,12 +31,6 @@ public abstract class Projectile extends Dynamic {
 		
 		this.origin_x = originX;
 		this.origin_y = originY;
-	}
-
-	@Override
-	public void init() {
-		solid = false;
-
 	}
 
 	@Override

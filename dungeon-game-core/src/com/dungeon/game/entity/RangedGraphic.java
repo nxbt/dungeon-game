@@ -19,11 +19,6 @@ public class RangedGraphic extends WeaponGraphic {
 
 		this.hitbox = hitbox;
 	}
-	
-	@Override
-	public void init() {
-		
-	}
 
 	@Override
 	public void calc() {

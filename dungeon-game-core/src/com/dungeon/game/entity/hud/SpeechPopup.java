@@ -52,10 +52,6 @@ public class SpeechPopup extends Hud {
 	}
 
 	@Override
-	public void init() {
-	}
-
-	@Override
 	public void calc() {
 		if(speechCounter == 0){
 			int textLength = text.length();

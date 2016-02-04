@@ -19,7 +19,6 @@ import com.dungeon.game.item.Medium;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.item.Wand;
 import com.dungeon.game.item.Weapon;
-import com.dungeon.game.light.Light;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -30,17 +29,7 @@ public class Player extends Character {
 	
 	public Player(World world, float x, float y) {
 		super(world, x, y);
-
-		effectGraphics = new ArrayList<EffectGraphic>();
-		addEffect(new StamRegen(world, -1, 0.1f));
-		addEffect(new ManaRegen(world, -1, 0.1f));
 		
-		vision = 10;
-		hearing = 10;
-		gold = 25;
-	}
-	
-	public void init() {
 		name = "Player";
 		
 		torq = 10;
@@ -135,7 +124,15 @@ public class Player extends Character {
 		
 		inv.slot[19].item.stack = 6;
 		
-		light = new Light(this, 1);
+//		light = new Light(this, 1);
+		
+		effectGraphics = new ArrayList<EffectGraphic>();
+		addEffect(new StamRegen(world, -1, 0.1f));
+		addEffect(new ManaRegen(world, -1, 0.1f));
+		
+		vision = 10;
+		hearing = 10;
+		gold = 25;
 	}
 	
 	public void calc() {

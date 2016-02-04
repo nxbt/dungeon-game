@@ -18,11 +18,6 @@ public class MediumGraphic extends WeaponGraphic {
 	}
 
 	@Override
-	public void init() {
-		
-	}
-
-	@Override
 	public void calc() {
 
 	}

@@ -14,10 +14,7 @@ public class Chest extends Static {
 	
 	public Chest(World world, float x, float y) {
 		super(world, x, y);
-	}
-
-	@Override
-	public void init() {
+		
 		name = "chest";
 		int[][] invLayout = new int[][]{
 			new int[] {0, 8, 8},

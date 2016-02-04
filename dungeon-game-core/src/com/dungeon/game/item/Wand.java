@@ -31,12 +31,6 @@ public class Wand extends Medium {
 		
 		graphic = new MediumGraphic(world, this, new Polygon(new float[]{28,2,30,4,4,30,2,28}), 30, 2);
 	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public float[] getPos(boolean mousedown, boolean mousepressed) {

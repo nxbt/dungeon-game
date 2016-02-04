@@ -49,12 +49,6 @@ public class Mentor extends Friend {
 	}
 
 	@Override
-	public void init() {
-
-		
-	}
-
-	@Override
 	public void calc() {
 		if(seenEntities.contains(world.player)){
 			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y, world.player.x-x));

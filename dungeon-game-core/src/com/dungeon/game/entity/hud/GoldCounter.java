@@ -24,12 +24,6 @@ public class GoldCounter extends Hud {
 	}
 
 	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void calc() {
 		if(world.player.gold<99999)value = ""+world.player.gold;
 		else value = "99999";

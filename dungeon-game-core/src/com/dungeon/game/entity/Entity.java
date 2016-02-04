@@ -45,8 +45,6 @@ public abstract class Entity {
 		this.world = world;
 		
 		this.killMe = false;
-		
-		this.init();
 	}
 	
 	public void update() {
@@ -87,8 +85,6 @@ public abstract class Entity {
 	public void hovered() {} //optional method called when the mouse hovers over an entity
 
 	public void dead(){};
-	
-	public abstract void init(); //called when an entity is created, but after the constructor is called
 	
 	public abstract void calc(); //called at the beginning of an update cycle
 	

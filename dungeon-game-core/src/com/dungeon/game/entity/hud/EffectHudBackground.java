@@ -17,12 +17,6 @@ public class EffectHudBackground extends Hud {
 	}
 
 	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void calc() {
 		if(world.player.effectGraphics.size()>0)d_height = world.player.effectGraphics.size()*36+8;
 		else d_height = 0;

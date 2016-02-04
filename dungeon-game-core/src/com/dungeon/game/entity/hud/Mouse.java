@@ -42,10 +42,7 @@ public class Mouse extends Hud {
 	
 	public Mouse(World world, float x, float y){
 		super(world, x, y);
-	}
-
-	@Override
-	public void init() {
+		
 		Gdx.input.setCursorCatched(true);
 		
 		sprite = CROSS;

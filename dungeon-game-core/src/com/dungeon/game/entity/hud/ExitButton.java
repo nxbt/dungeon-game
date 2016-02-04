@@ -17,11 +17,6 @@ public class ExitButton extends Button {
 		d_width = sprite.getWidth();
 		d_height = sprite.getHeight();
 	}
-
-	@Override
-	public void init() {
-		
-	}
 	
 	public void calc() {
 		this.x = window.x;

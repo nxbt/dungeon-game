@@ -17,11 +17,6 @@ public class LifePotion extends Consumable {
 		sprite = new Texture("lifePotion.png");
 		desc = "Ever wonder why health potions are red? \n\nYou haven't? \n\nGood. \n\nLife restored: 40 \nDuration: 2 seconds";
 	}
-	
-
-	@Override
-	public void init() {}
-
 
 	@Override
 	public boolean use(Character user) {

@@ -26,10 +26,6 @@ public class Arrow extends Ammo {
 	}
 
 	@Override
-	public void init() {
-	}
-
-	@Override
 	public void hit(Character character, Ranged weapon, WeaponProjectile projectile) {;
 		float damage = this.damage*weapon.dmgMod*projectile.getVel()/10;
 		

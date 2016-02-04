@@ -19,11 +19,6 @@ public class MeleeGraphic extends WeaponGraphic {
 	}
 
 	@Override
-	public void init() {
-		
-	}
-
-	@Override
 	public void calc() {
 		float distance = Integer.MAX_VALUE;
 		Dynamic target = null;

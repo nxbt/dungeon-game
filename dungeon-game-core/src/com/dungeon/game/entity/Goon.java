@@ -20,18 +20,8 @@ public class Goon extends Enemy {
 
 	public Goon(World world, float x, float y) {
 		super(world, x, y);
-		vision = 10;
-		hearing = 10;
 		
-		effects.add(new StamRegen(world, -1, 0.1f));
-		effects.add(new ManaRegen(world, -1, 0.1f));
-		
-		gold = (int) Math.round(Math.random()*20);
-	}
-
-	@Override
-	public void init() {
-		name = "Goon";
+name = "Goon";
 		
 		maxLife = 20;
 		maxStam = 100;
@@ -126,6 +116,14 @@ public class Goon extends Enemy {
 			ranged = false;
 		}
 		
+		
+		vision = 10;
+		hearing = 10;
+		
+		effects.add(new StamRegen(world, -1, 0.1f));
+		effects.add(new ManaRegen(world, -1, 0.1f));
+		
+		gold = (int) Math.round(Math.random()*20);
 	}
 
 	@Override

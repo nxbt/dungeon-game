@@ -27,11 +27,6 @@ public abstract class Window extends Hud {
 	}
 
 	@Override
-	public void init() {
-		
-	}
-
-	@Override
 	public void calc() {
 		if(drag){
 			x = world.mouse.x-dragOffX;

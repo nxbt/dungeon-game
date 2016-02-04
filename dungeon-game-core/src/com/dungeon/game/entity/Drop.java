@@ -29,9 +29,6 @@ public class Drop extends Static {
 		
 		angle = (float) (180f-Math.random()*360);
 	}
-
-	@Override
-	public void init() {}
 	
 	@Override
 	public void hovered(){

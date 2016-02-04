@@ -23,9 +23,6 @@ public class HudSlot extends Hud {
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.WHITE);
 	}
-
-	@Override
-	public void init() {}
 	
 	public void hovered(){
 		if(world.mouse.shift_down) {

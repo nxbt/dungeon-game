@@ -37,8 +37,6 @@ public abstract class Item implements Cloneable {
 		this.world = world;
 		
 		stack = 1;
-		
-		init();
 	}
 	
 	public Item clone() {
@@ -49,8 +47,6 @@ public abstract class Item implements Cloneable {
 			return null;
 		}
 	}
-	
-	public abstract void init();
 	
 	public String getDesc() {
 		return "We were too lazy to write anything about this. Here's the normal description:\n\n" + desc;

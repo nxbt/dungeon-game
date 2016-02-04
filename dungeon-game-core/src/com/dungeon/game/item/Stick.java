@@ -7,10 +7,7 @@ public class Stick extends Item {
 
 	public Stick(World world) {
 		super(world);
-	}
-
-	@Override
-	public void init() {
+		
 		type = DEFAULT;
 		
 		name = "Wooden stick";

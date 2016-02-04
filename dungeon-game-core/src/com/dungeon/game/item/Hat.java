@@ -8,11 +8,6 @@ public class Hat extends Equipable {
 	public Hat(World world) {
 		super(world);
 		
-		effects.add(new Inconspicuous(world, -1));
-	}
-	
-	@Override
-	public void init() {
 		type = HELM;
 		
 		name = "Inconspicuous Hat";
@@ -23,6 +18,8 @@ public class Hat extends Equipable {
 		maxStack = 1;
 		
 		stack = 1;
+		
+		effects.add(new Inconspicuous(world, -1));
 	}
 	
 	public String getDesc() {

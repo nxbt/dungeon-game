@@ -14,12 +14,6 @@ public class PortraitBackground extends Hud {
 	}
 
 	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void calc() {
 		// TODO Auto-generated method stub
 

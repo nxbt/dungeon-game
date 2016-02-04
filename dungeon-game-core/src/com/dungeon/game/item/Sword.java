@@ -76,6 +76,11 @@ public class Sword extends Melee {
 	
 	public Sword(World world, float damage, float speed) {
 		super(world, new Texture("Sword.png"));
+		
+		name = "Sword";
+		
+		hasHit = false;
+		
 		desc = "Real sword I swear! \n\n Damage: "+ Math.floor(damage*10)/10f;
 		
 		this.damage = damage;
@@ -91,14 +96,6 @@ public class Sword extends Melee {
 		distance=0;
 		polarAngle= 0;
 		angle=0;
-	}
-
-	@Override
-	public void init() {
-		name = "Sword";
-		
-		hasHit = false;
-
 	}
 	
 	public float[] getPos(boolean mousedown, boolean mousepressed){

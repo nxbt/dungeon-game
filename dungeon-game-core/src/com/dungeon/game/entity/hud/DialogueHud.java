@@ -24,9 +24,6 @@ public class DialogueHud extends Hud {
 	}
 
 	@Override
-	public void init() {}
-
-	@Override
 	public void calc() {}
 
 	@Override

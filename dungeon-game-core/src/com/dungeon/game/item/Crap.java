@@ -7,10 +7,7 @@ public class Crap extends Item {
 
 	public Crap(World world) {
 		super(world);
-	}
-
-	@Override
-	public void init() {
+		
 		type = DEFAULT;
 		
 		name = "Pile of crap";
