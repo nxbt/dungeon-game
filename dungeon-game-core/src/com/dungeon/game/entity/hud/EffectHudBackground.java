@@ -25,10 +25,7 @@ public class EffectHudBackground extends Hud {
 	}
 
 	@Override
-	public void post() {
-		// TODO Auto-generated method stub
-
-	}
+	public void post() {}
 	
 	public void draw(SpriteBatch batch){
 		if(d_height>0)BACKGROUND.draw(batch, x, y, d_width-d_offx, d_height-d_offy);

@@ -13,7 +13,7 @@ public class LifePotion extends Consumable {
 
 	public LifePotion(World world) {
 		super(world, "Health Potion");
-		// TODO Auto-generated constructor stub
+		
 		sprite = new Texture("lifePotion.png");
 		desc = "Ever wonder why health potions are red? \n\nYou haven't? \n\nGood. \n\nLife restored: 40 \nDuration: 2 seconds";
 	}

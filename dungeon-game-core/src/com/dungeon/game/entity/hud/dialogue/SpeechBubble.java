@@ -10,9 +10,10 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.hud.Hud;
+import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
-public class SpeechBubble extends Hud {
+public class SpeechBubble extends Hud implements Cloneable {
 	
 	private final NinePatch SPEECH_BUBBLE = new NinePatch(new Texture("hudSpeechBubble.png"), 8, 8, 8, 8);
 	
@@ -27,17 +28,19 @@ public class SpeechBubble extends Hud {
 	private int speechSpeed;
 	private int speechCounter;
 
-	public SpeechBubble(World world, Character character, int speed, String text) {
+	public int proceedIndex;
+
+	public SpeechBubble(World world, Character character, int speed, String text, int proceedIndex) {
 		super(world, 0, 0);
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
-		font.setColor(0,0,0,1);
+		font.setColor(character.speechColor);
 		font.getData().setScale(1f);
 		
 		this.character = character;
 		
 		speechSpeed = speed;
 		speechCounter = speechSpeed;
-		
+		this.proceedIndex = proceedIndex;
 		updateText(text);
 	}
 
@@ -93,17 +96,20 @@ public class SpeechBubble extends Hud {
 	public boolean done(){
 		return text==null||text.equals(endText);
 	}
+	
+	public SpeechBubble clone() {
+		try {
+			return (SpeechBubble) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	@Override
-	public void post() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void post() {}
 	
-	public void draw(SpriteBatch batch) {
-//			if(x + d_width > bubbleWidth) x -= d_width - 32;
-//			if(y + d_height > bubbleHeight) y -= d_height + 16;
-			
+	public void draw(SpriteBatch batch) {		
 			SPEECH_BUBBLE.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
 			
 			font.draw(batch, text, x+8, y+d_height-6);

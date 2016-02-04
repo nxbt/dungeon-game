@@ -3,6 +3,8 @@ package com.dungeon.game.entity.character;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
@@ -78,6 +80,10 @@ public abstract class Character extends Dynamic {
 	
 	public ArrayList<Polygon> visTris;
 	
+	public Texture face;
+
+	public Color speechColor;
+	
 	public Character(World world, float x, float y) {
 		super(world, x, y);
 		
@@ -100,6 +106,10 @@ public abstract class Character extends Dynamic {
 		visTris = new ArrayList<Polygon>();
 
 		solid = true;
+		
+		face = new Texture("face.png");
+		
+		speechColor = Color.BLACK;
 	}
 
 	public void norm() {

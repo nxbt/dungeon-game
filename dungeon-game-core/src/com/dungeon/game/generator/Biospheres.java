@@ -49,7 +49,6 @@ public class Biospheres extends Generation {
 
 	@Override
 	public void generateAreas() {
-		// TODO Auto-generated method stub
 		
 	}
 }

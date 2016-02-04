@@ -17,15 +17,9 @@ public class Vines extends Static {
 	}
 
 	@Override
-	public void calc() {
-		// TODO Auto-generated method stub
-
-	}
+	public void calc() {}
 
 	@Override
-	public void post() {
-		// TODO Auto-generated method stub
-
-	}
+	public void post() {}
 
 }

@@ -36,15 +36,9 @@ public class SpellProjectile extends Projectile {
 	}
 
 	@Override
-	protected void stop() {
-		// TODO Auto-generated method stub
-
-	}
+	protected void stop() {}
 
 	@Override
-	public void post() {
-		// TODO Auto-generated method stub
-
-	}
+	public void post() {}
 
 }

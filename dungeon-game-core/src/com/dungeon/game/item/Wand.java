@@ -54,7 +54,6 @@ public class Wand extends Medium {
 
 	@Override
 	public boolean isInUse() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	

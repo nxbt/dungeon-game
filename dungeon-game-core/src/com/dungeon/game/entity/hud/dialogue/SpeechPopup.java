@@ -38,7 +38,6 @@ public class SpeechPopup extends Hud {
 		d_offy = 0;
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
-		font.setColor(0,0,0,1);
 		font.getData().setScale(1f);
 		
 		speechSpeed = 3;
@@ -47,7 +46,7 @@ public class SpeechPopup extends Hud {
 		endText = "";
 		dismissed = false;
 	}
-
+	
 	@Override
 	public void calc() {
 		if(speechCounter == 0){
@@ -117,6 +116,10 @@ public class SpeechPopup extends Hud {
 	@Override
 	public void post() {
 
+	}
+	
+	public void setColor() {
+		font.setColor(character.speechColor);
 	}
 	
 	public void draw(SpriteBatch batch) {

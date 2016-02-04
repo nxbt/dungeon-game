@@ -1,8 +1,10 @@
 package com.dungeon.game.entity.character;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
+import com.dungeon.game.entity.hud.dialogue.SpeechPopup;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -10,6 +12,10 @@ public class Mentor extends Friend {
 	
 	public Mentor(World world, float x, float y) {
 		super(world, x, y);
+		
+		speechColor = Color.ORANGE;
+		speechBubble.setColor();	
+		
 		name = "Mentor";
 		torq = 5;
 		
@@ -48,11 +54,14 @@ public class Mentor extends Friend {
 		if(seenEntities.contains(world.player)){
 			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y, world.player.x-x));
 			if(!world.player.fightMode&&speechBubble.endText.equals("")){
-				speechBubble.updateText("I am here to help.");
+				if(!world.hudEntities.contains(dialogue))speechBubble.updateText("I am here to help.");
 				speechBubble.dismissed = false;
 			}
 			
-		}else speechBubble.updateText("");
+		}else{
+			speechBubble.updateText("");
+			dialogue.close();
+		}
 		if(world.player.fightMode||Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))>speechRadius*Tile.TS)speechBubble.updateText("");
 	}
 

@@ -223,8 +223,5 @@ public class Castle extends Generation {
 	}
 
 	@Override
-	public void generateAreas() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void generateAreas() {}
 }
