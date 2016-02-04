@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
-import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.WeaponProjectile;
+import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;
 
 public class Arrow extends Ammo {

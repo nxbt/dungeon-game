@@ -1,13 +1,12 @@
-package com.dungeon.game.entity;
+package com.dungeon.game.entity.character;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.entity.hud.SpeechPopup;
+import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Mentor extends Friend {
-	private SpeechPopup speechBubble;
 	
 	public Mentor(World world, float x, float y) {
 		super(world, x, y);
@@ -39,13 +38,9 @@ public class Mentor extends Friend {
 		d_width = 32;
 		d_height = 32;
 		
-		d_offx = 0;
-		d_offy = 0;
+		dialogue = new Dialogue(world, this);
 		
 		sprite = new Texture("mentor.png");
-		angle = 0;
-		
-		speechBubble = new SpeechPopup(world,this);	
 	}
 
 	@Override

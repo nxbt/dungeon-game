@@ -1,7 +1,9 @@
-package com.dungeon.game.entity;
+package com.dungeon.game.entity.character;
 
 import java.util.ArrayList;
 
+import com.dungeon.game.entity.Drop;
+import com.dungeon.game.entity.Entity;
 import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.Slot;

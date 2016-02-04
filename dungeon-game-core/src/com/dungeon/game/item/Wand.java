@@ -2,10 +2,10 @@ package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.MediumGraphic;
 import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.RangedGraphic;
+import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.spell.Fireball;
 import com.dungeon.game.spell.Heal;
 import com.dungeon.game.spell.Spell;

@@ -12,13 +12,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.Camera;
-import com.dungeon.game.dialogue.Dialogue;
-import com.dungeon.game.entity.Character;
-import com.dungeon.game.entity.Enemy;
 import com.dungeon.game.entity.Entity;
-import com.dungeon.game.entity.Friend;
-import com.dungeon.game.entity.Mentor;
-import com.dungeon.game.entity.Player;
+import com.dungeon.game.entity.character.Character;
+import com.dungeon.game.entity.character.Enemy;
+import com.dungeon.game.entity.character.Friend;
+import com.dungeon.game.entity.character.Mentor;
+import com.dungeon.game.entity.character.Player;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.GoldCounter;
@@ -34,6 +33,7 @@ import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.Portrait;
 import com.dungeon.game.entity.hud.PortraitBackground;
 import com.dungeon.game.entity.hud.StamBar;
+import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.pathing.AreaMap;
 
 public class World {
@@ -95,9 +95,7 @@ public class World {
 		entities = curFloor.entities;
 		entities.add(0,player);
 		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
-
-//		hudEntities.add(new SpeechBubble(this,player,10,"tesgdssadhfag dadfgerga gsadgfagag fagasdgadsgt"));
-		hudEntities.add(new Dialogue(this));
+		
 		hudEntities.add(new GoldCounter(this));
 		hudEntities.add(new MenuButton(this, 4, cam.HEIGHT-20));
 		hudEntities.add(new HelpButton(this, 24, cam.HEIGHT-20));

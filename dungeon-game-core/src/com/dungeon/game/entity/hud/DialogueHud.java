@@ -2,7 +2,7 @@ package com.dungeon.game.entity.hud;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dungeon.game.entity.Character;
+import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;
 
 public class DialogueHud extends Hud {

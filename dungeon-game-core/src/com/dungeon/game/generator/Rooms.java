@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Chest;
 import com.dungeon.game.entity.Door;
 import com.dungeon.game.entity.Entity;
-import com.dungeon.game.entity.Goon;
+import com.dungeon.game.entity.character.Goon;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Tile;

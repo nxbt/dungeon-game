@@ -1,6 +1,6 @@
 package com.dungeon.game.effect;
 
-import com.dungeon.game.entity.Character;
+import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;
 public class StamRegen extends Effect {
 	private float rate;

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.WeaponGraphic;
+import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;
 import com.dungeon.game.effect.Effect;
-import com.dungeon.game.entity.Character;
 
 public abstract class Weapon extends Equipable{
 	public WeaponGraphic graphic;

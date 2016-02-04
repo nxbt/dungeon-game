@@ -1,8 +1,8 @@
 package com.dungeon.game.spell;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.SpellProjectile;
+import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.item.Medium;
 import com.dungeon.game.world.World;
 

@@ -1,8 +1,8 @@
 package com.dungeon.game.item;
 
-import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.WeaponProjectile;
+import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;
 
 public abstract class Ammo extends Item {

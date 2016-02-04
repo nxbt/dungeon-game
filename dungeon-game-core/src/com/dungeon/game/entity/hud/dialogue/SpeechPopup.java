@@ -1,16 +1,16 @@
-package com.dungeon.game.entity.hud;
+package com.dungeon.game.entity.hud.dialogue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.entity.character.Friend;
+import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.world.World;
-import com.dungeon.game.entity.Character;
 
 public class SpeechPopup extends Hud {
 	private final NinePatch SPEECH_POPUP = new NinePatch(new Texture("speechBubble.png"), 21, 4, 4, 21);
@@ -21,14 +21,14 @@ public class SpeechPopup extends Hud {
 	
 	BitmapFont font;
 	
-	private Character character;
+	private Friend character;
 	
 	public boolean dismissed;
 	
 	private int speechSpeed;
 	private int speechCounter;
 
-	public SpeechPopup(World world, Character character) {
+	public SpeechPopup(World world, Friend character) {
 		super(world, 0, 0);
 		this.character = character;
 		d_width = 200;
@@ -97,8 +97,16 @@ public class SpeechPopup extends Hud {
 	}
 	
 	public void hovered(){
-		if(world.mouse.rb_pressed){
-			dismissed = true;
+		if(!dismissed){
+			if(world.mouse.rb_pressed){
+				dismissed = true;
+			}
+			else if(world.mouse.lb_pressed) {
+				if(character.dialogue != null) {
+					character.dialogue.open();
+					dismissed = true;
+				}
+			}
 		}
 	}
 	

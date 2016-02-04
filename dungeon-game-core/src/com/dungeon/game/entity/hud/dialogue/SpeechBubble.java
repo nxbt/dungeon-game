@@ -1,4 +1,4 @@
-package com.dungeon.game.dialogue;
+package com.dungeon.game.entity.hud.dialogue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.world.World;
-import com.dungeon.game.entity.Character;
 
 public class SpeechBubble extends Hud {
 	

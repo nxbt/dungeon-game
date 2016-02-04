@@ -1,7 +1,7 @@
 package com.dungeon.game.sound;
 
-import com.dungeon.game.entity.Character;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
