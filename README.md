@@ -9,8 +9,8 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 ##TODO low priority:
 * Finish adding effects to equipables.
 * Add pathing around entities.
-* Find Artist
+* Find artist
 * Add more enemies
 * Flesh out backstory
-* Lighting using a similar algorithm to visibility polygons (reqs visibility polygons).
-* Add "Sounds" that characters can "hear".
+* Lighting using a similar algorithm to visibility polygons.
+* Add "sounds" that characters can "hear".
