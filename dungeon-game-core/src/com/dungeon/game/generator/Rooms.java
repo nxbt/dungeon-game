@@ -505,6 +505,5 @@ public class Rooms extends Generation {
 			}
 			areas.add(area);
 		}
-		System.out.println(areas.size());
 	}
 }

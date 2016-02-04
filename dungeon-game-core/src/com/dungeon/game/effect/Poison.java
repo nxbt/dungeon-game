@@ -30,7 +30,6 @@ public class Poison extends Effect {
     	public void calc(Character character){
     			if(tickTimer == 0){
     	        	character.damage(Math.round(Math.max(dmg*rate,1)),null);
-    	        	System.out.println(dmg + " still to take.");
     	        	dmg -= Math.round(Math.max(dmg*rate,1));
     	        	tickTimer = TICKLENGTH;
     			}else tickTimer--;

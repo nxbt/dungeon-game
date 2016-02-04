@@ -26,7 +26,6 @@ public class SpellProjectile extends Projectile {
 		d_height = sprite.getHeight();
 		
 		owner = weapon.owner;
-		System.out.println(getVel());
 	}
 
 	@Override

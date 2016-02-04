@@ -39,7 +39,6 @@ public class Biospheres extends Generation {
 	}
 	
 	public void addRoomToMap(Circle room){
-		System.out.println("ayyy");
 		rooms.add(room);
 		for(int i = 0; i <map.length-1; i++){
 			for(int k = 0; k <map[0].length-1; k++){

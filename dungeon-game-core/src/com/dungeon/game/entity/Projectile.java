@@ -50,15 +50,13 @@ public abstract class Projectile extends Dynamic {
 	}
 	
 	public void phys(){
-		System.out.println(getVel());
 		float vel = getVel();
 		range--;
 		if(range<0||vel<=fric){
 			stop();
-
-			System.out.println("stopped");
 			killMe = true;
-		}else{
+		}
+		else {
 			moveVec.x-=moveVec.x/vel*fric;
 			moveVec.y-=moveVec.y/vel*fric;
 		}
@@ -66,8 +64,6 @@ public abstract class Projectile extends Dynamic {
 		if((moveVec.x != 0 || moveVec.y != 0) && col(false, new float[]{0,0}) > 0){
 			moveVec.x = 0;
 			moveVec.y = 0;
-
-			System.out.println("stopped collide");
 		}
 		
 		x+=moveVec.x;

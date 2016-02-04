@@ -27,7 +27,7 @@ public class AreaMap {
 	private void calculateEdges(){
 		for(Area area: areas){
 			area.calculateEdges();
-			System.out.println("Calculating Area Edges... "+(int)((areas.indexOf(area)+1)/(float)areas.size()*100)+"%");
+			System.out.println("Calculating Area Edges: "+(int)((areas.indexOf(area)+1)/(float)areas.size()*100)+"%");
 		}
 	}
 	
@@ -37,7 +37,7 @@ public class AreaMap {
 				if(!area.equals(a))area.calculateBorders(a);
 			}
 
-			System.out.println("Finding Adjacent Areas... "+(int)((areas.indexOf(area)+1)/(float)areas.size()*100)+"%");
+			System.out.println("Finding Adjacent Areas: "+(int)((areas.indexOf(area)+1)/(float)areas.size()*100)+"%");
 		}
 	}
 	
@@ -46,7 +46,7 @@ public class AreaMap {
 			area.begin();
 			area.calculateMinPaths(tm);
 
-			System.out.println("Finding Min Paths Across Areas... "+(int)((areas.indexOf(area)+1)/(float)areas.size()*100)+"%");
+			System.out.println("Finding Min Paths Across Areas: "+(int)((areas.indexOf(area)+1)/(float)areas.size()*100)+"%");
 		}
 	}
 	
@@ -61,7 +61,7 @@ public class AreaMap {
 				}
 				minPaths.get(minPaths.size()-1).add(minPath);
 			}
-			System.out.println("Finding Min Paths Between Areas... "+(int)((areas.indexOf(area)+1)/(float)areas.size()*100)+"%");
+			System.out.println("Finding Min Paths Between Areas: "+(int)((areas.indexOf(area)+1)/(float)areas.size()*100)+"%");
 		}
 	}
 	

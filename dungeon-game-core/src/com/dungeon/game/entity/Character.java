@@ -272,13 +272,9 @@ public abstract class Character extends Dynamic {
 		}
 	}
 	
-	public void see(Entity e) {
-		if(this instanceof Mentor)System.out.println("test");
-	}
+	public void see(Entity e) {}
 
-	public void unsee(Entity e) {
-		
-	}
+	public void unsee(Entity e) {}
 
 	public void addEffect(Effect effect){
 		effects.add(effect);

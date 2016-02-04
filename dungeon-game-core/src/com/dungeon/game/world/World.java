@@ -95,6 +95,7 @@ public class World {
 		entities = curFloor.entities;
 		entities.add(0,player);
 		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
+		
 		hudEntities.add(new GoldCounter(this));
 		hudEntities.add(new MenuButton(this, 4, cam.HEIGHT-20));
 		hudEntities.add(new HelpButton(this, 24, cam.HEIGHT-20));
@@ -111,9 +112,12 @@ public class World {
 		hudEntities.add(new HudSlot(this, cam.WIDTH-180, 4, player.inv.slot[2]));
 		hudEntities.add(new HudSlot(this, cam.WIDTH-144, 4, player.inv.slot[3]));
 		hudEntities.add(new HudSlot(this, cam.WIDTH-108, 4, player.inv.slot[4]));
-		hudEntities.add(new EffectHudBackground(this, cam.WIDTH-44, cam.HEIGHT-44));
 		hudEntities.add(new HudBackground(this));
-		hudEntities.add(new DialogueHud(this, player));
+		
+		hudEntities.add(new EffectHudBackground(this, cam.WIDTH-44, cam.HEIGHT-44));
+		
+		
+//		hudEntities.add(new DialogueHud(this, player));
 		
 		fpsFont = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		fpsFont.setColor(Color.RED);
