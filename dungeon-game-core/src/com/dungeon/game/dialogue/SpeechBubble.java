@@ -1,51 +1,44 @@
-package com.dungeon.game.entity.hud;
+package com.dungeon.game.dialogue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.world.World;
 import com.dungeon.game.entity.Character;
 
-public class SpeechPopup extends Hud {
-	private final NinePatch SPEECH_POPUP = new NinePatch(new Texture("speechBubble.png"), 21, 4, 4, 21);
+public class SpeechBubble extends Hud {
 	
+	private final NinePatch SPEECH_BUBBLE = new NinePatch(new Texture("hudSpeechBubble.png"), 8, 8, 8, 8);
+	
+	public Character character;
+
 	public String text;
 	
 	public String endText;
 	
 	BitmapFont font;
 	
-	private Character character;
-	
-	public boolean dismissed;
-	
 	private int speechSpeed;
 	private int speechCounter;
 
-	public SpeechPopup(World world, Character character) {
+	public SpeechBubble(World world, Character character, int speed, String text) {
 		super(world, 0, 0);
-		this.character = character;
-		d_width = 200;
-		d_height = 100;
-		
-		d_offx = 16;
-		d_offy = 0;
-		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(0,0,0,1);
 		font.getData().setScale(1f);
 		
-		speechSpeed = 3;
-		speechCounter = 0;
-		text = "";
-		endText = "";
-		dismissed = false;
+		this.character = character;
+		
+		speechSpeed = speed;
+		speechCounter = speechSpeed;
+		
+		updateText(text);
 	}
 
 	@Override
@@ -58,6 +51,7 @@ public class SpeechPopup extends Hud {
 			}
 			speechCounter = speechSpeed;
 		}else speechCounter--;
+		
 	}
 	
 	public void updateText(String text) {
@@ -91,15 +85,9 @@ public class SpeechPopup extends Hud {
 			endText = "";
 		}
 		
-		d_height = lines.size() * 16 + 18;
+		d_height = lines.size() * 16 + 8;
 		
-		d_width = max_line_length * 9 + 38;
-	}
-	
-	public void hovered(){
-		if(world.mouse.rb_pressed){
-			dismissed = true;
-		}
+		d_width = max_line_length * 9 + 16;
 	}
 	
 	public boolean done(){
@@ -108,21 +96,18 @@ public class SpeechPopup extends Hud {
 
 	@Override
 	public void post() {
-
+		// TODO Auto-generated method stub
+		
 	}
 	
 	public void draw(SpriteBatch batch) {
-		if(!dismissed&&!text.equals("")) {
 //			if(x + d_width > bubbleWidth) x -= d_width - 32;
 //			if(y + d_height > bubbleHeight) y -= d_height + 16;
 			
-			SPEECH_POPUP.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
+			SPEECH_BUBBLE.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
 			
-			font.draw(batch, text, x+16, y+d_height-6);
+			font.draw(batch, text, x+8, y+d_height-6);
 			
-//			text = "";
-		}
 	}
-		
 
 }
