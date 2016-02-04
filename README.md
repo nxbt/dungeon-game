@@ -2,7 +2,7 @@
 The is a top-down rougelike-like game written in Java. Currently being worked on by Brendan Thompson adn Ethan  Bull-Vulpe.
 
 ##TODO high priority:
-* Add dialouge huds
+* Complete dialouge huds
 * Add shops
 * Upload screenshots to wiki
 
