@@ -2,7 +2,7 @@ package com.dungeon.game.entity.hud.dialogue;
 
 import com.dungeon.game.world.World;
 
-public class HasItem extends Criteria{
+public class HasGold extends Criteria{
 
   private Int amount;
   private Character character;
