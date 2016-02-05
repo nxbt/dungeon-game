@@ -16,7 +16,7 @@ public class Dialogue extends Hud {
 	
 	private ArrayList<SpeechBubble> speechBubbles;
 	
-	private ArrayList<SpeechBubble> potentialBubbles;
+	public ArrayList<SpeechBubble> potentialBubbles;
 	
 	private ArrayList<Character> characters;
 	
@@ -30,10 +30,9 @@ public class Dialogue extends Hud {
 		characters = new ArrayList<Character>();
 		characters.add(character);
 		characters.add(world.player);
-		potentialBubbles.add(new SpeechBubble(world,character,3,"Hello There! How you doin'?",1));
-		potentialBubbles.add(new SpeechChoice(world,new String[]{"Life Sucks","Not Bad"},new String[]{"I'm having a hard time...", "Things have been looking up!"},new int[]{2,3}));
-		potentialBubbles.add(new SpeechBubble(world,character,3,"Thats a shame. \nBut back to what I was saying... :(",1));
-		potentialBubbles.add(new SpeechBubble(world,character,3,"Good to hear, friend. \nBut lets talk!",1));
+	}
+	
+	public void begin(){
 		speechBubbles.add((SpeechBubble) potentialBubbles.get(0).clone());
 	}
 	

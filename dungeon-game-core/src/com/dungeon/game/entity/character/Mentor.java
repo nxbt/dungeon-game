@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
+import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
+import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
 import com.dungeon.game.entity.hud.dialogue.SpeechPopup;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -45,6 +47,11 @@ public class Mentor extends Friend {
 		d_height = 32;
 		
 		dialogue = new Dialogue(world, this);
+		dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Hello There! How you doin'?",1));
+		dialogue.potentialBubbles.add(new SpeechChoice(world,new String[]{"Life Sucks","Not Bad"},new String[]{"I'm having a hard time...", "Things have been looking up!"},new int[]{2,3}));
+		dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Thats a shame. \nBut back to what I was saying... :(",1));
+		dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Good to hear, friend. \nBut lets talk!",1));
+		dialogue.begin();
 		
 		sprite = new Texture("mentor.png");
 	}
