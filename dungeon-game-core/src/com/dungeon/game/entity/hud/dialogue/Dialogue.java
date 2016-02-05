@@ -31,13 +31,20 @@ public class Dialogue extends Hud {
 		characters.add(character);
 		characters.add(world.player);
 		potentialBubbles.add(new SpeechBubble(world,character,3,"Hello There! How you doin'?",1));
-		potentialBubbles.add(new SpeechBubble(world,world.player,3,"I'm fly m8",0));
+		potentialBubbles.add(new SpeechChoice(world,new String[]{"Life Sucks","Not Bad"},new String[]{"I'm having a hard time...", "Things have been looking up!"},new int[]{2,3}));
+		potentialBubbles.add(new SpeechBubble(world,character,3,"Thats a shame. \nBut back to what I was saying... :(",1));
+		potentialBubbles.add(new SpeechBubble(world,character,3,"Good to hear, friend. \nBut lets talk!",1));
 		speechBubbles.add((SpeechBubble) potentialBubbles.get(0).clone());
 	}
 	
 	public void calc(){
 		if(done()&&!(speechBubbles.get(0).proceedIndex>=potentialBubbles.size())){
-			speechBubbles.add(0,(SpeechBubble) potentialBubbles.get(speechBubbles.get(0).proceedIndex).clone());
+			if(speechBubbles.get(0) instanceof SpeechChoice){
+				speechBubbles.add(0, ((SpeechChoice)speechBubbles.get(0)).getChoiceBubble());
+				speechBubbles.remove(1);
+			}else{
+				speechBubbles.add(0,(SpeechBubble) potentialBubbles.get(speechBubbles.get(0).proceedIndex).clone());
+			}
 		}
 		if(world.player.fightMode)close();
 		int heightCounter = 88;

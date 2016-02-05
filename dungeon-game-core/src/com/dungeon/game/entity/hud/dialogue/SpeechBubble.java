@@ -15,7 +15,7 @@ import com.dungeon.game.world.World;
 
 public class SpeechBubble extends Hud implements Cloneable {
 	
-	private final NinePatch SPEECH_BUBBLE = new NinePatch(new Texture("hudSpeechBubble.png"), 8, 8, 8, 8);
+	protected final NinePatch SPEECH_BUBBLE = new NinePatch(new Texture("hudSpeechBubble.png"), 8, 8, 8, 8);
 	
 	public Character character;
 
@@ -23,7 +23,7 @@ public class SpeechBubble extends Hud implements Cloneable {
 	
 	public String endText;
 	
-	BitmapFont font;
+	protected BitmapFont font;
 	
 	private int speechSpeed;
 	private int speechCounter;
