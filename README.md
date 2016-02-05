@@ -5,6 +5,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * Complete dialouge huds
 * Add shops
 * Upload screenshots to wiki
+* Create Criteria for dialogue
 
 ##TODO low priority:
 * Finish adding effects to equipables.
