@@ -20,8 +20,6 @@ public class Dialogue extends Hud {
 	
 	private ArrayList<Character> characters;
 	
-	private int index;
-	
 	public Dialogue(World world, Character character){
 		super(null,0,0);
 		this.world = world;
@@ -37,7 +35,7 @@ public class Dialogue extends Hud {
 	}
 	
 	public void calc(){
-		if(done()&&!(speechBubbles.get(0).proceedIndex>=potentialBubbles.size())){
+		if(done()&&(world.mouse.lb_pressed || speechBubbles.get(0) instanceof SpeechChoice)&&!(speechBubbles.get(0).proceedIndex>=potentialBubbles.size())){
 			if(speechBubbles.get(0) instanceof SpeechChoice){
 				speechBubbles.add(0, ((SpeechChoice)speechBubbles.get(0)).getChoiceBubble());
 				speechBubbles.remove(1);

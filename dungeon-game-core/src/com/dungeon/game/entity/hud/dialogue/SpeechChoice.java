@@ -59,8 +59,8 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 			ArrayList<String> lines = new ArrayList<String>(Arrays.asList(choices[i].split("\\r?\\n")));
 			
 			for(int k = 0; k < lines.size(); k++) {
-				if(lines.get(k).length() > 20) {
-					for(int e = 20; e > 0; e--) {
+				if(lines.get(k).length() > 50) {
+					for(int e = 50; e > 0; e--) {
 						if(lines.get(k).charAt(e) == ' ') {
 							lines.add(k+1,lines.get(k).substring(e+1));
 							

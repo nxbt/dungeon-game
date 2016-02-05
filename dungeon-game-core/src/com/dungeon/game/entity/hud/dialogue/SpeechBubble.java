@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.hud.Hud;
-import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
 public class SpeechBubble extends Hud implements Cloneable {
@@ -29,6 +28,8 @@ public class SpeechBubble extends Hud implements Cloneable {
 	private int speechCounter;
 
 	public int proceedIndex;
+	
+	private boolean began;
 
 	public SpeechBubble(World world, Character character, int speed, String text, int proceedIndex) {
 		super(world, 0, 0);
@@ -38,6 +39,8 @@ public class SpeechBubble extends Hud implements Cloneable {
 		
 		this.character = character;
 		
+		began = true;
+		
 		speechSpeed = speed;
 		speechCounter = speechSpeed;
 		this.proceedIndex = proceedIndex;
@@ -46,6 +49,9 @@ public class SpeechBubble extends Hud implements Cloneable {
 
 	@Override
 	public void calc() {
+		if(world.mouse.lb_pressed && !began) {
+			text = endText;
+		}
 		if(speechCounter == 0){
 			int textLength = text.length();
 			int endTextLength = endText.length();
@@ -53,8 +59,19 @@ public class SpeechBubble extends Hud implements Cloneable {
 				text+=endText.charAt(textLength);
 			}
 			speechCounter = speechSpeed;
+			
+			char lastChar = text.charAt(text.length()-1);
+			
+			if(lastChar == ' ') speechCounter = 0;
+			else if(lastChar == ',') speechCounter*=3;
+			else if(lastChar == '.' || lastChar == '!' || lastChar == '?' || lastChar == ';') speechCounter*=5;
+			else if(lastChar == '\u200B') speechCounter*=2;
+			else if(lastChar == '-') speechCounter*=10;
+			else if(lastChar == ':') speechCounter*=10;
+			
 		}else speechCounter--;
 		
+		if(began) began = false;
 	}
 	
 	public void updateText(String text) {
@@ -66,8 +83,8 @@ public class SpeechBubble extends Hud implements Cloneable {
 		int max_line_length = 0;
 		
 		for(int i = 0; i < lines.size(); i++) {
-			if(lines.get(i).length() > 20) {
-				for(int k = 20; k > 0; k--) {
+			if(lines.get(i).length() > 50) {
+				for(int k = 50; k > 0; k--) {
 					if(lines.get(i).charAt(k) == ' ') {
 						lines.add(i+1,lines.get(i).substring(k+1));
 						

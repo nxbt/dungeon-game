@@ -56,7 +56,17 @@ public class SpeechPopup extends Hud {
 				text+=endText.charAt(textLength);
 			}
 			speechCounter = speechSpeed;
-		}else speechCounter--;
+			
+			char lastChar = text.charAt(text.length()-1);
+			
+			if(lastChar == ' ') speechCounter = 0;
+			else if(lastChar == ',') speechCounter*=3;
+			else if(lastChar == '.' || lastChar == '!' || lastChar == '?' || lastChar == ';') speechCounter*=5;
+			else if(lastChar == '\u200B') speechCounter*=2;
+			else if(lastChar == '-') speechCounter*=10;
+			else if(lastChar == ':') speechCounter*=10;
+		}
+		else speechCounter--;
 	}
 	
 	public void updateText(String text) {
