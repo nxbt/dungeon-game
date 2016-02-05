@@ -475,7 +475,7 @@ public class Rooms extends Generation {
 		for(int i = 0; i<height; i++){
 			for(int k = 0; k<width; k++){
 				map[y][x]=0;
-				if(!addedChest&&i>0&&k>0&&i<height-1&&k<width-1&&Math.random()>0.9){
+				if(!addedChest&&i>0&&k>0&&i<height-1&&k<width-1&&Math.random()>1f-(1f/((float)width*(float)height))){
 					entities.add(LootGenerator.getChest(world, 1,x,y));
 					addedChest = true;
 				}
