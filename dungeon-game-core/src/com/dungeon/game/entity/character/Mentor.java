@@ -47,10 +47,16 @@ public class Mentor extends Friend {
 		d_height = 32;
 		
 		dialogue = new Dialogue(world, this);
-		dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Hello There! How you doin'?",1));
-		dialogue.potentialBubbles.add(new SpeechChoice(world,new String[]{"Life Sucks","Not Bad"},new String[]{"I'm having a hard time...", "Things have been looking up!"},new int[]{2,3}));
-		dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Thats a shame. \nBut back to what I was saying... :(",1));
-		dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Good to hear, friend. \nBut lets talk!",1));
+		dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Hey.",1));
+		dialogue.potentialBubbles.add(new SpeechChoice(world,new String[]{"Heeeeeey","And you are?","The weather?"},new String[]{"And heeey to you.", "To whom do I owe the plesure?", "Some weather, isn't it?"},new int[]{2,3,4}));
+		dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Ummm... nice to see you to. Dispite that we've never met.",5));
+		dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"I'm - well, 'Mentor' will do just fine.",5));
+		dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Same old, same old. The ecasional quake or rockfall - thats it.",5));
+		dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"But your not here to introduce yourself are you?",6));
+		dialogue.potentialBubbles.add(new SpeechChoice(world,new String[]{"I'm here to stab stuff.", "Names are a good place to start.", "Wait - why am I here?"},new String[]{"I was thinking more along the lines of an intro to weaponry.", "I'm fond of names, I like to get to know people... Mentor.", "I'll be honest... I'm not really sure why I'm here..."},new int[]{7,8,9}));
+		dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"And stab stuff you will... If you learn quickly and are not stupid.",0));
+		dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Well if names are so important... Then who are you?",0));
+		dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Well if you want I can teach you how to use a sharp object to make small wholes... in things that don't want wholes in them.",0));
 		dialogue.begin();
 		
 		sprite = new Texture("mentor.png");

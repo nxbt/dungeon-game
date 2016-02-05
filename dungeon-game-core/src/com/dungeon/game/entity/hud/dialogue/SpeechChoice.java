@@ -27,11 +27,14 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 	
 	public void calc() {
 		if(world.mouse.lb_pressed&&world.mouse.x>x&&world.mouse.x<x+d_width){
-			for(int i = 0; i < choices.length; i++){
-				if(world.mouse.y>y+yOffsets[i]-18&&world.mouse.y<y+yOffsets[i]){
+			if(world.mouse.y>y&&world.mouse.y<y+yOffsets[0]){
+				choice = 0;
+				madeChoice = true;
+			}
+			for(int i = 1; i < choices.length; i++){
+				if(world.mouse.y>y+yOffsets[i-1]&&world.mouse.y<y+yOffsets[i]){
 					choice = i;
 					madeChoice = true;
-					System.out.println("yAligned");
 				}
 			}
 		}
@@ -58,7 +61,7 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 			for(int k = 0; k < lines.size(); k++) {
 				if(lines.get(k).length() > 20) {
 					for(int e = 20; e > 0; e--) {
-						if(lines.get(i).charAt(k) == ' ') {
+						if(lines.get(k).charAt(e) == ' ') {
 							lines.add(k+1,lines.get(k).substring(e+1));
 							
 							lines.set(k,lines.get(k).substring(0,e));
