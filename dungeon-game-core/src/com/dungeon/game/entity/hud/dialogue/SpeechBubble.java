@@ -62,7 +62,7 @@ public class SpeechBubble extends Hud implements Cloneable {
 			
 			char lastChar = text.charAt(text.length()-1);
 			
-			if(lastChar == ' ') speechCounter = 0;
+			if(lastChar == ' '||lastChar == '\'') speechCounter = 0;
 			else if(lastChar == ',') speechCounter*=3;
 			else if(lastChar == '.' || lastChar == '!' || lastChar == '?' || lastChar == ';') speechCounter*=5;
 			else if(lastChar == '\u200B') speechCounter*=2;
