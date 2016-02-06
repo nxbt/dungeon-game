@@ -7,7 +7,7 @@ public class Said extends Criteria{
   private Dialogue dialogue;
   private int index;
   
-  public Dialogue(World world, Dialogue dialogue, int index){
+  public Said(World world, Dialogue dialogue, int index){
     super(world);
     this.dialogue = dialogue;
     this.index = index;
@@ -15,7 +15,7 @@ public class Said extends Criteria{
   
   public boolean metCriteria(){
     for(SpeechBubble bubble: dialogue.speechBubbles){
-      if(dialogue.potentialBubbles.indexOf(bubble) == index) return
+      if(dialogue.potentialBubbles.indexOf(bubble) == index) return true;
     }
     return false;
   }

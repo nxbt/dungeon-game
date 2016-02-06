@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 public class False extends Criteria{
   
   
-  public Dialogue(World world){
+  public False(World world){
     super(world);
   }
   

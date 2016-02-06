@@ -1,14 +1,15 @@
 package com.dungeon.game.entity.hud.dialogue;
 
 import com.dungeon.game.world.World;
+import com.dungeon.game.entity.character.Character;
 
 public class HasGold extends Criteria{
 
-  private Int amount;
+  private int amount;
   private Character character;
   
   
-  public Dialogue(World world, int amount, Character character){
+  public HasGold(World world, int amount, Character character){
     super(world);
     this.amount = amount;
     this.character = character;

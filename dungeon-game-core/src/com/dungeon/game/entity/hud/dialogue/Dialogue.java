@@ -14,7 +14,7 @@ public class Dialogue extends Hud {
 	
 	private World world;
 	
-	private ArrayList<SpeechBubble> speechBubbles;
+	public ArrayList<SpeechBubble> speechBubbles;
 	
 	public ArrayList<SpeechBubble> potentialBubbles;
 	

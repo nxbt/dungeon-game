@@ -7,7 +7,7 @@ public abstract class Criteria{
   private World world;
   
   
-  public Dialogue(World world){
+  public Criteria(World world){
     this.world = world;
   }
   
