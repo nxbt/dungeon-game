@@ -46,6 +46,7 @@ public class Mentor extends Friend {
 		d_height = 32;
 		// \u200B to create pause;
 		
+		// need to complete reworkish to implement determinant choices. Breadnan ur way is cancer.
 		dialogue = new Dialogue(world, this);
 		/*00*/dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Greetings!",1));
 		/*01*/dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"I have been informed that you are here to learn the craft of combat?",2));
@@ -67,11 +68,12 @@ public class Mentor extends Friend {
 		/*17*/dialogue.potentialBubbles.add(new SpeechChoice(world,new String[]{"Yes","No"},new String[]{"Onward! What's next?", "Let me figure this out..."},new int[]{24,15}));
 		/*18*/dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Yes... very funny.",19));
 		/*19*/dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"But seriously...",24));
-		/*20*/dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"In this life we are offered many choices... but sometimes we are not. And so we must follow our path to it's ending, whatever ending that may be.",21));
+		/*20*/dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"In this life we are offered many choices... but sometimes we are not. And so we must follow our path to its ending, whatever ending that may be.",21));
 		/*21*/dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"I'm affraid this is one of those times...",3));
 		/*22*/dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"I'm terribly offended! You'd doubt the master? Then again, I couldn't expect you to know that I am, indeed, the Master - but I AM!\u200B\u200B\u200B\u200B I AM!",23));
 		/*23*/dialogue.potentialBubbles.add(new SpeechChoice(world,new String[]{"Yes Master...","Yes Master!","Yes Master?"},new String[]{"Yes Master...","Yes Master!","Yes Master?"},new int[]{3,3,3}));
-		/*24*/dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Let's continue with your training. What next: the bow, the blade, or the wand?",4));
+		/*24*/dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Let's continue with your training. What next: the bow, the blade, or the wand?",25));
+		/*25*/dialogue.potentialBubbles.add(new SpeechChoice(world,new String[]{"Bow","Blade","Wand"},new String[]{"How about the pew pew pew?", "Stabbing has always been my forte...", "Magic should do, I think!"},new int[]{5,10,14}));
 
 
 
