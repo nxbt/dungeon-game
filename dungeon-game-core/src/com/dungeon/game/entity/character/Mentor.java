@@ -74,12 +74,6 @@ public class Mentor extends Friend {
 		/*23*/dialogue.potentialBubbles.add(new SpeechChoice(world,new String[]{"Yes Master...","Yes Master!","Yes Master?"},new String[]{"Yes Master...","Yes Master!","Yes Master?"},new int[]{3,3,3}));
 		/*24*/dialogue.potentialBubbles.add(new SpeechBubble(world,this,3,"Let's continue with your training. What next: the bow, the blade, or the wand?",25));
 		/*25*/dialogue.potentialBubbles.add(new SpeechChoice(world,new String[]{"Bow","Blade","Wand"},new String[]{"How about the pew pew pew?", "Stabbing has always been my forte...", "Magic should do, I think!"},new int[]{5,10,14}));
-
-
-
-
-
-		
 		
 		dialogue.begin();
 		
