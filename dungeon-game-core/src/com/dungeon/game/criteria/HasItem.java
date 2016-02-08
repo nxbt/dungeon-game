@@ -7,14 +7,17 @@ import com.dungeon.game.item.Item;
 public class HasItem extends Criteria{
 	private Item item;
 	private Character character;
+	boolean isTrue;
 	
-	public HasItem(World world, Item item, Character character){
+	public HasItem(World world, Item item, Character character, boolean isTrue){
 		super(world);
 		this.item = item;
 		this.character = character;
+		this.isTrue = isTrue;
 	}
   
 	public boolean metCriteria(){
-		return character.inv.contains(item) != null;
+		if(isTrue)return character.inv.contains(item) != null;
+		else return !(character.inv.contains(item) != null);
 	}
 }

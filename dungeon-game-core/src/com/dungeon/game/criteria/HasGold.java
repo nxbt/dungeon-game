@@ -6,15 +6,17 @@ import com.dungeon.game.entity.character.Character;
 public class HasGold extends Criteria{
 	private int amount;
 	private Character character;
+	boolean isTrue;
   
-  
-	public HasGold(World world, int amount, Character character){
+	public HasGold(World world, int amount, Character character, boolean isTrue){
 		super(world);
 		this.amount = amount;
 		this.character = character;
+		this.isTrue = isTrue;
 	}
   
 	public boolean metCriteria(){
-		return character.gold>=amount;
+		if(isTrue)return character.gold>=amount;
+		else return !(character.gold>=amount);
 	}
 }
