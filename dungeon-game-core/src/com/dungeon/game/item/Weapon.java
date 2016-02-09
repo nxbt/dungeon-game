@@ -13,6 +13,7 @@ public abstract class Weapon extends Equipable{
 	public WeaponGraphic graphic;
 	
 	public int stage;
+	
 	protected int stageTimer;
 	
 	public Character owner;
@@ -20,6 +21,8 @@ public abstract class Weapon extends Equipable{
 	public float distance=0;
 	public float polarAngle= 0;
 	public float angle=0;
+	
+	public boolean leftSide;
 	
 	public Weapon(World world, Texture texture){
 		super(world);
@@ -36,27 +39,20 @@ public abstract class Weapon extends Equipable{
 		graphic.sprite = sprite;
 	}
 	
-	public void equip(World world, Character e){
+	public void equip(Character owner, boolean leftSide){
 		reset();
 		
-		owner = e;
+		this.owner = owner;
 		
 		world.entities.add(this.graphic);
 	}
 	
-	public void unequip(World world, Character e){
+	public void unequip(){
 		reset();
 		
-		owner = null;
+		this.owner = null;
 		
 		world.entities.remove(this.graphic);
-	}
-	
-	public ArrayList<Effect> hitEffects(){
-		ArrayList<Effect> effects = new ArrayList<Effect>();
-		
-		return effects;
-		
 	}
 	
 	public abstract float[] getPos(boolean mousedown, boolean mousepressed);
