@@ -25,6 +25,8 @@ public class Bow extends Ranged {
 	
 	private Texture[] textures;
 
+	ArrayList<Effect> effects;
+	
 	public Bow(World world, float dmgMod, int speed) {
 		super(world, new Texture("Bow.png"));
 		
@@ -75,6 +77,10 @@ public class Bow extends Ranged {
 		}
 		wholePixmap.dispose();
 		changeSprite(textures[0]);
+		
+		effects = new ArrayList<Effect>();
+		
+		effects.add(new Stun(world, 30));
 	}
 
 	@Override
@@ -133,13 +139,6 @@ public class Bow extends Ranged {
 			break;
 		}
 		return new float[]{distance,polarAngle,angle};
-	}
-	
-	public ArrayList<Effect> hitEffects(){
-		ArrayList<Effect> effects = new ArrayList<Effect>();
-		effects.add(new Stun(world, 30));
-		return effects;
-		
 	}
 	
 	public String getDesc() {
