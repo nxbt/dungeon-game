@@ -1,17 +1,23 @@
 # dungeon-game
 The is a top-down rougelike-like game written in Java. Currently being worked on by Brendan Thompson adn Ethan  Bull-Vulpe.
 
-##TODO high priority:
-* Complete dialouge huds
-* Add shops
-* Upload screenshots to wiki
-* Create Criteria for dialogue
+High priority is now for things in the very near future, low priority is for stuff in the near future that isn't as important as the stuff in high priority, and very low priority is hard stuff we're looking to do in the far future.
 
-##TODO low priority:
+##TODO high priority (attempt within a week):
+* Complete dialogue huds
+* Add criteria to dialogue
+* Make dual-weilding work properly
+* Add shops
+
+##TODO low priority (within the month?):
+* Upload screenshots to wiki
 * Finish adding effects to equipables.
 * Add pathing around entities.
+* Add more enemies.
+
+
+##TODO very low priority (in a couple months?):
 * Find artist
-* Add more enemies
-* Flesh out backstory
-* Lighting using a similar algorithm to visibility polygons.
 * Add "sounds" that characters can "hear".
+* Lighting using a similar algorithm to visibility polygons.
+* Flesh out story.
