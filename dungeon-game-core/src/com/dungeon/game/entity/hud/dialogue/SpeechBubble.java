@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
@@ -34,7 +35,9 @@ public class SpeechBubble extends Hud implements Cloneable {
 	public SpeechBubble(World world, Character character, int speed, String text, int proceedIndex) {
 		super(world, 0, 0);
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
-		font.setColor(character.speechColor);
+		Color temp = character.speechColor;
+		temp.a = 0.7f;
+		font.setColor(temp);
 		font.getData().setScale(1f);
 		
 		this.character = character;

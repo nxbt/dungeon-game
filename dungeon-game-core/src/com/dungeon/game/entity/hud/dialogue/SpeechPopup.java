@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
@@ -129,10 +130,13 @@ public class SpeechPopup extends Hud {
 	}
 	
 	public void setColor() {
-		font.setColor(character.speechColor);
+		Color temp = character.speechColor;
+		temp.a = 0.7f;
+		font.setColor(temp);
 	}
 	
 	public void draw(SpriteBatch batch) {
+		batch.setColor(1,1,1,0.8f);
 		if(!dismissed&&!text.equals("")) {
 //			if(x + d_width > bubbleWidth) x -= d_width - 32;
 //			if(y + d_height > bubbleHeight) y -= d_height + 16;
@@ -143,6 +147,8 @@ public class SpeechPopup extends Hud {
 			
 //			text = "";
 		}
+
+		batch.setColor(1,1,1,1);
 	}
 		
 
