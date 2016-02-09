@@ -26,8 +26,7 @@ public class DungeonGame extends ApplicationAdapter {
 	}
 	
 	@Override
-	public void resize(int width, int height)
-	{
+	public void resize(int width, int height) {
 	    world.cam.view.update(width, height);
 	}
 }
