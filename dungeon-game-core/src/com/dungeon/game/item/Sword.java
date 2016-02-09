@@ -74,6 +74,9 @@ public class Sword extends Melee {
 	protected float[] dmgMult;
 	protected float[] knockMult;
 	
+	ArrayList<Effect> effects;
+	
+	
 	public Sword(World world, float damage, float speed) {
 		super(world, new Texture("Sword.png"));
 		
@@ -96,6 +99,10 @@ public class Sword extends Melee {
 		distance=0;
 		polarAngle= 0;
 		angle=0;
+		
+		effects = new ArrayList<Effect>()
+		
+		effects.add(new Stun(world, 30));
 	}
 	
 	public float[] getPos(boolean mousedown, boolean mousepressed){
@@ -218,8 +225,13 @@ public class Sword extends Melee {
 			break;
 		}
 		
-		return new float[]{distance,polarAngle,angle};
+		if() {
+			distance *= -1;
+			polarAngle *=-1;
+			angle *=-1;
+		}
 		
+		return new float[]{distance,polarAngle,angle};
 	}
 	
 	
@@ -268,13 +280,6 @@ public class Sword extends Melee {
 			knockVec.y = (ySword*(1-knockratio)+yOwner*(knockratio))*cur_knockMult;
 			e.acel(knockVec, false);
 		}
-	}
-	
-	public ArrayList<Effect> hitEffects(){
-		ArrayList<Effect> effects = new ArrayList<Effect>();
-		effects.add(new Stun(world, 30));
-		return effects;
-		
 	}
 	
 	public String getDesc() {
