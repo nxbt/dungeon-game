@@ -130,8 +130,8 @@ public class Player extends Character {
 //		light = new Light(this, 1);
 		
 		effectGraphics = new ArrayList<EffectGraphic>();
+		
 		addEffect(new StamRegen(world, -1, 0.1f));
-		addEffect(new ManaRegen(world, -1, 0.1f));
 		
 		vision = 10;
 		hearing = 10;
