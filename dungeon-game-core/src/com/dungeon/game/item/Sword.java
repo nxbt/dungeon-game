@@ -100,7 +100,7 @@ public class Sword extends Melee {
 		polarAngle= 0;
 		angle=0;
 		
-		effects = new ArrayList<Effect>()
+		effects = new ArrayList<Effect>();
 		
 		effects.add(new Stun(world, 30));
 	}
@@ -225,11 +225,11 @@ public class Sword extends Melee {
 			break;
 		}
 		
-		if() {
-			distance *= -1;
-			polarAngle *=-1;
-			angle *=-1;
-		}
+//		if() {
+//			distance *= -1;
+//			polarAngle *=-1;
+//			angle *=-1;
+//		}
 		
 		return new float[]{distance,polarAngle,angle};
 	}
@@ -269,7 +269,7 @@ public class Sword extends Melee {
 			cur_dmgMult = dmgMult[2];
 			cur_knockMult = knockMult[2];
 		}
-		if(e.damage(damage*cur_dmgMult,hitEffects())>0){
+		if(e.damage(damage*cur_dmgMult, effects)>0){
 			
 			float xSword = (float) (Math.cos((weaponangle+angleModifier)/180f*Math.PI)*knockstr);
 			float ySword = (float) (Math.sin((weaponangle+angleModifier)/180f*Math.PI)*knockstr);

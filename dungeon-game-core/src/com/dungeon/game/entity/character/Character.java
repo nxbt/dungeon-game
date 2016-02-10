@@ -365,11 +365,11 @@ public abstract class Character extends Dynamic {
 	}
 	
 	public void equip(Weapon weapon) {
-		weapon.equip(world, this);
+		weapon.equip(this, true);
 	}
 	
 	public void unequip(Weapon weapon) {
-		weapon.unequip(world, this);
+		weapon.unequip();
 	}
 	
 	public boolean hasEffect(Effect effect) {
