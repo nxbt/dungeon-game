@@ -9,6 +9,8 @@ import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
+import com.dungeon.game.fuck.you.bitch;
+
 public class Mentor extends Friend {
 	
 	public Mentor(World world, float x, float y) {
