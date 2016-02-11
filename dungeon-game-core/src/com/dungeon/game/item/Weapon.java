@@ -1,13 +1,9 @@
 package com.dungeon.game.item;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.Texture;
-import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.WeaponGraphic;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;
-import com.dungeon.game.effect.Effect;
 
 public abstract class Weapon extends Equipable{
 	public WeaponGraphic graphic;
@@ -43,6 +39,8 @@ public abstract class Weapon extends Equipable{
 		reset();
 		
 		this.owner = owner;
+		
+		this.leftSide = leftSide;
 		
 		world.entities.add(this.graphic);
 	}

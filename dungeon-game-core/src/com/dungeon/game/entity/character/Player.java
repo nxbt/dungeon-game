@@ -7,7 +7,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.effect.ManaRegen;
 import com.dungeon.game.effect.StamRegen;
 import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.entity.hud.EffectHudBackground;
@@ -210,12 +209,23 @@ public class Player extends Character {
 			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
 			leftEquipedPos = ((Weapon) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
 			((Weapon)inv.slot[30].item).graphic.calc();
-			if(inv.slot[30].item instanceof Medium){
+			if(inv.slot[30].item instanceof Medium) {
 				if(Gdx.input.isKeyJustPressed(Input.Keys.O))((Medium)inv.slot[30].item).preSpell();
 				if(Gdx.input.isKeyJustPressed(Input.Keys.P))((Medium)inv.slot[30].item).nextSpell();
 				if(((Medium)inv.slot[30].item).cooldown>0)((Medium)inv.slot[30].item).cooldown--;
 			}
 		}
+		if(rightEquiped != null && fightMode){
+			if(((Weapon) inv.slot[31].item).isInUse())attacking = true;
+			rightEquipedPos = ((Weapon) inv.slot[31].item).getPos(world.mouse.rb_down, world.mouse.rb_pressed);
+			((Weapon)inv.slot[31].item).graphic.calc();
+			if(inv.slot[31].item instanceof Medium) {
+				if(Gdx.input.isKeyJustPressed(Input.Keys.O))((Medium)inv.slot[30].item).preSpell();
+				if(Gdx.input.isKeyJustPressed(Input.Keys.P))((Medium)inv.slot[30].item).nextSpell();
+				if(((Medium)inv.slot[30].item).cooldown>0)((Medium)inv.slot[30].item).cooldown--;
+			}
+		}
+		
 		if(attacking){
 			mvel = 2.5f;
 			torq = 3;
@@ -234,6 +244,13 @@ public class Player extends Character {
 			leftEquiped.graphic.x = (float) (x)+xMove;
 			leftEquiped.graphic.y = (float) (y)+yMove;
 			leftEquiped.graphic.angle = angle-135+leftEquipedPos[2];
+		}
+		if(rightEquiped != null && fightMode){
+			float xMove = (float) (Math.cos((angle+rightEquipedPos[1])/180*Math.PI)*rightEquipedPos[0]);
+			float yMove = (float) (Math.sin((angle+rightEquipedPos[1])/180*Math.PI)*rightEquipedPos[0]);
+			rightEquiped.graphic.x = (float) (x)+xMove;
+			rightEquiped.graphic.y = (float) (y)+yMove;
+			rightEquiped.graphic.angle = angle-135+rightEquipedPos[2];
 		}
 		if(killMe){
 			if(leftEquiped!=null)unequip(leftEquiped);

@@ -47,7 +47,7 @@ public abstract class Character extends Dynamic {
 	protected Weapon rightEquiped;
 	
 	protected float[] leftEquipedPos;
-	protected float[] righEquipedtPos;
+	protected float[] rightEquipedPos;
 	
 	public boolean fightMode;
 	
@@ -364,8 +364,8 @@ public abstract class Character extends Dynamic {
 		if(mana<maxMana)mana = (float) Math.min(mana+value,maxMana);
 	}
 	
-	public void equip(Weapon weapon) {
-		weapon.equip(this, true);
+	public void equip(Weapon weapon, boolean leftSide) {
+		weapon.equip(this, leftSide);
 	}
 	
 	public void unequip(Weapon weapon) {
@@ -384,8 +384,8 @@ public abstract class Character extends Dynamic {
 		fightMode = !fightMode;
 		
 		if(fightMode) {
-			if(leftEquiped != null) equip(leftEquiped);
-			if(rightEquiped != null) equip(rightEquiped);
+			if(leftEquiped != null) equip(leftEquiped, true);
+			if(rightEquiped != null) equip(rightEquiped, false);
 		}
 		
 		else {

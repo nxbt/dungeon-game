@@ -111,33 +111,36 @@ public class Bow extends Ranged {
 			break;
 			
 		case WINDUP:
-			if(index<45){
+			if(index<45) {
 				if(!sprite.equals(textures[1])){
 					changeSprite(textures[1]);
 				}
 			}
-			else{
+			else {
 				if(!sprite.equals(textures[2])){
 					changeSprite(textures[2]);
 				}
 			}
 			
-			if(!mousedown){
+			if(!mousedown) {
 				stageTimer = 0;
 				stage = FIRE;
 				((RangedGraphic) graphic).fire(strength*Math.min(index, 45)/45);
 			}
 			break;
 		case FIRE:
-			if(!sprite.equals(textures[0])){
+			if(!sprite.equals(textures[0])) {
 				changeSprite(textures[0]);
 			}
-			if(index>10){
+			if(index>10) {
 				stageTimer = 0;
 				stage = REST;
 			}
 			break;
 		}
+		
+		if(!leftSide) return new float[]{distance,polarAngle*-1,angle*-1};
+		
 		return new float[]{distance,polarAngle,angle};
 	}
 	

@@ -137,14 +137,14 @@ name = "Goon";
 		else if(leftEquiped == null && inv.slot[30].item != null) {
 			leftEquiped = (Weapon) inv.slot[30].item;
 			
-			equip(leftEquiped);
+			equip(leftEquiped, true);
 		}
 		else if(leftEquiped != inv.slot[30].item) {
 			unequip(leftEquiped);
 			
 			leftEquiped = (Weapon) inv.slot[30].item;
 			
-			equip(leftEquiped);
+			equip(leftEquiped, true);
 		}
 		
 		if(rightEquiped != null && inv.slot[31].item==null) {
@@ -155,14 +155,14 @@ name = "Goon";
 		else if(rightEquiped == null && inv.slot[31].item != null) {
 			rightEquiped = (Weapon) inv.slot[31].item;
 			
-			equip(rightEquiped);
+			equip(rightEquiped, false);
 		}
 		else if(rightEquiped != inv.slot[31].item) {
 			unequip(rightEquiped);
 			
 			rightEquiped = (Weapon) inv.slot[31].item;
 			
-			equip(rightEquiped);
+			equip(rightEquiped, false);
 		}
 		ArrayList<Entity> entities = (ArrayList<Entity>) world.entities.clone();
 		entities.remove(world.player);

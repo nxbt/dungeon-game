@@ -49,6 +49,8 @@ public class Wand extends Medium {
 			cooldown = spells[spell].cooldown;
 		}
 		
+		if(!leftSide) return new float[]{distance,polarAngle*-1,angle*-1};
+		
 		return new float[]{distance,polarAngle,angle};
 	}
 

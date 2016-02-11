@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.MeleeGraphic;
-import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;
 
@@ -225,11 +224,7 @@ public class Sword extends Melee {
 			break;
 		}
 		
-//		if() {
-//			distance *= -1;
-//			polarAngle *=-1;
-//			angle *=-1;
-//		}
+		if(!leftSide) return new float[]{distance,polarAngle*-1,angle*-1};
 		
 		return new float[]{distance,polarAngle,angle};
 	}
