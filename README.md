@@ -6,7 +6,6 @@ High priority is now for things in the very near future, low priority is for stu
 ##TODO high priority (attempt within a week):
 * Complete dialogue huds
 * Add criteria to dialogue
-* Make dual-weilding work properly
 * Add shops
 
 ##TODO low priority (within the month?):
