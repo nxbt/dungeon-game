@@ -16,7 +16,7 @@ import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
 
 public class Floor {
-	private static final String DEFAULT = "Tilemap.png";
+	private static final String DEFAULT = "tilemap.png";
 	
 	private TextureRegion[] spritesheet;
 	

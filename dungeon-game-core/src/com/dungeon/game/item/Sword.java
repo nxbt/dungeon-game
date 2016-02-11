@@ -77,7 +77,7 @@ public class Sword extends Melee {
 	
 	
 	public Sword(World world, float damage, float speed) {
-		super(world, new Texture("Sword.png"));
+		super(world, new Texture("sword.png"));
 		
 		name = "Sword";
 		

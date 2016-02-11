@@ -25,7 +25,7 @@ public class Bow extends Ranged {
 	ArrayList<Effect> effects;
 	
 	public Bow(World world, float dmgMod, int speed) {
-		super(world, new Texture("Bow.png"));
+		super(world, new Texture("bow.png"));
 		
 		name = "Bow";
 		
@@ -35,7 +35,7 @@ public class Bow extends Ranged {
 		strength = 10;
 		knockstr = 10;
 		
-		texturePath = "Bow.png";
+		texturePath = "bow.png";
 		
 
 		desc = "SEE: Arrow  \n\n Damage Modifier: " + Math.floor(dmgMod*1000)/10f + "%";

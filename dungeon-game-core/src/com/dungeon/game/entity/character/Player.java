@@ -60,7 +60,7 @@ public class Player extends Character {
 		d_offx = 0;
 		d_offy = 0;
 		
-		sprite = new Texture("Person.png");
+		sprite = new Texture("person.png");
 		
 		solid = true;
 		
@@ -220,9 +220,9 @@ public class Player extends Character {
 			rightEquipedPos = ((Weapon) inv.slot[31].item).getPos(world.mouse.rb_down, world.mouse.rb_pressed);
 			((Weapon)inv.slot[31].item).graphic.calc();
 			if(inv.slot[31].item instanceof Medium) {
-				if(Gdx.input.isKeyJustPressed(Input.Keys.O))((Medium)inv.slot[30].item).preSpell();
-				if(Gdx.input.isKeyJustPressed(Input.Keys.P))((Medium)inv.slot[30].item).nextSpell();
-				if(((Medium)inv.slot[30].item).cooldown>0)((Medium)inv.slot[30].item).cooldown--;
+				if(Gdx.input.isKeyJustPressed(Input.Keys.O))((Medium)inv.slot[31].item).preSpell();
+				if(Gdx.input.isKeyJustPressed(Input.Keys.P))((Medium)inv.slot[31].item).nextSpell();
+				if(((Medium)inv.slot[31].item).cooldown>0)((Medium)inv.slot[31].item).cooldown--;
 			}
 		}
 		
