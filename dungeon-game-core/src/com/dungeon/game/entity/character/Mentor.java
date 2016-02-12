@@ -8,6 +8,7 @@ import com.dungeon.game.criteria.HasGold;
 import com.dungeon.game.criteria.True;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
+import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -54,7 +55,21 @@ public class Mentor extends Friend {
 		dialogue = new Dialogue(world, this);
 		
 		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"Greetings!", new Criteria[] {new True(world)}, new String[] {"second"}));
-		dialogue.potentialBubbles.put("second", new SpeechBubble(world, this, "Goodbye!", new Criteria[] {new True(world)}, new String[] {"rich?"}));
+		dialogue.potentialBubbles.put("second", new SpeechBubble(world, this, "Goodbye!", new Criteria[] {new True(world)}, new String[] {"question"}));
+//		dialogue.potentialBubbles.put("question", new SpeechChoice(world, 
+//				new Criteria[]{new True(world), new True(world)}, 
+//				new Criteria[][]{new Criteria[]{new True(world)},new Criteria[]{new True(world)}}, 
+//				new String[][]{new String[]{"ONE"},new String[]{"TWO"}}, 
+//				new Criteria[][]{new Criteria[]{new True(world)},new Criteria[]{new True(world)}}, 
+//				new String[][]{new String[]{"ONE LONG"},new String[]{"TWO LONG"}}, 
+//				new Criteria[][]{new Criteria[]{new True(world)},new Criteria[]{new True(world)}}, 
+//				new String[][]{new String[]{"start"},new String[]{"second"}}
+//				));
+		
+		dialogue.potentialBubbles.put("question", new SpeechChoice(world, 
+				new String[]{"fuck1", "fuck2"}, 
+				new String[]{"fuck", "fuckfuck"}, 
+				new String[]{"start", "second"}));
 		dialogue.potentialBubbles.put("rich?", new SpeechBubble(world, this, new Criteria[]{new HasGold(world, 30, world.player), new True(world)}, new String[]{"Your Rich!", "Poor guy..."}, "start"));
 		
 		dialogue.begin();

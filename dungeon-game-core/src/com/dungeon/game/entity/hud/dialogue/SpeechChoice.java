@@ -2,26 +2,85 @@ package com.dungeon.game.entity.hud.dialogue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.criteria.Criteria;
+import com.dungeon.game.criteria.True;
 import com.dungeon.game.world.World;
 
 public class SpeechChoice extends SpeechBubble implements Cloneable {
-	private String[] choices;
-	private String[] choiceText;
-	private int[] proceedIndexes;
 	private int[] yOffsets;
 	private boolean madeChoice;
 	private int choice;
+	
+	public Criteria[] choiceCriterias; //controls which choices are available
+	public Criteria[][] choiceShortCriterias; //controls what the short text is for each choice 
+	public String[][] choiceShorts; //contains short text for each choice
+	public Criteria[][] choiceTextCriterias; //controls what the long text is for each choice
+	public String[][] choiceTexts; //contains long text for each choice
+	public Criteria[][] proceedKeyCriterias; //controls the proceed key
+	public String[][] proceedKeys; //contains the proceed keys;
+	
+	public ArrayList<Integer> availableChoices;
+	public ArrayList<String> availableChoiceShorts;
 
-	public SpeechChoice(World world, String[] choices, String[] choiceText, int[] proceedIndexes) {
-		super(world, world.player, 0, "",0);
+	public SpeechChoice(World world, Criteria[] choiceCriterias, Criteria[][] choiceShortCriterias, String[][] choiceShorts, Criteria[][] choiceTextCriterias, String[][] choiceTexts, Criteria[][] proceedKeyCriterias, String[][] proceedKeys){
+		super(world, world.player);
+		init(choiceCriterias, choiceShortCriterias, choiceShorts, choiceTextCriterias, choiceTexts, proceedKeyCriterias, proceedKeys);
+	}
+	
+	public SpeechChoice(World world, String[] choiceShorts, String[] choiceTexts, String[] proceedKeys){
+		super(world, world.player);
+
+		System.out.println(choiceShorts.length);
+		Criteria[] choiceCriterias = new Criteria[choiceShorts.length];
+		for(int i = 0; i < choiceCriterias.length; i++)choiceCriterias[i] = new True(world);
+		System.out.println(choiceCriterias.length);
+
+		Criteria[][] choiceShortCriterias = new Criteria[choiceShorts.length][1];
+		for(int i = 0; i < choiceShortCriterias.length; i++)choiceShortCriterias[i][0] = new True(world);
+		
+		Criteria[][] choiceTextCriterias = new Criteria[choiceShorts.length][1];
+		for(int i = 0; i < choiceTextCriterias.length; i++)choiceTextCriterias[i][0] = new True(world);
+		
+		Criteria[][] proceedKeyCriterias = new Criteria[choiceShorts.length][1];
+		for(int i = 0; i < proceedKeyCriterias.length; i++)proceedKeyCriterias[i][0] = new True(world);
+		
+		String[][] choiceShorts2 = new String[choiceShorts.length][1];
+		for(int i = 0; i < choiceShorts2.length; i++)choiceShorts2[i][0] = choiceShorts[i];
+		
+		String[][] choiceTexts2 = new String[choiceShorts.length][1];
+		for(int i = 0; i < choiceTexts2.length; i++)choiceTexts2[i][0] = choiceTexts[i];
+		
+		String[][] proceedKeys2 = new String[choiceShorts.length][1];
+		for(int i = 0; i < proceedKeys2.length; i++)proceedKeys2[i][0] = proceedKeys[i];
+		
+		
+		
+		
+		
+		init(choiceCriterias, choiceShortCriterias, choiceShorts2, choiceTextCriterias, choiceTexts2, proceedKeyCriterias, proceedKeys2);
+	}
+
+	private void init(Criteria[] choiceCriterias, Criteria[][] choiceShortCriterias, String[][] choiceShorts, Criteria[][] choiceTextCriterias, String[][] choiceTexts, Criteria[][] proceedKeyCriterias, String[][] proceedKeys){
+		this.choiceCriterias = choiceCriterias;
+		this.choiceShortCriterias = choiceShortCriterias;
+		this.choiceShorts = choiceShorts;
+		this.choiceTextCriterias = choiceTextCriterias;
+		this.choiceTexts = choiceTexts;
+		this.proceedKeyCriterias = proceedKeyCriterias;
+		this.proceedKeys = proceedKeys;
 		madeChoice = false;
-		this.choices = new String[choices.length];
-		this.choiceText = choiceText;
-		this.proceedIndexes = proceedIndexes;
 		choice = 0;
-		updateChoices(choices);
+		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
+		Color temp = character.speechColor;
+		temp.a = 0.7f;
+		font.setColor(temp);
+		font.getData().setScale(1f);
 	}
 	
 	public void calc() {
@@ -30,7 +89,7 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 				choice = 0;
 				madeChoice = true;
 			}
-			for(int i = 1; i < choices.length; i++){
+			for(int i = 1; i < availableChoices.size(); i++){
 				if(world.mouse.y>y+yOffsets[i-1]&&world.mouse.y<y+yOffsets[i]){
 					choice = i;
 					madeChoice = true;
@@ -43,20 +102,34 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 		return madeChoice;
 	}
 	
-	private void updateChoices(String[] choices) {
-		
-		this.choices = new String[choices.length];
-		yOffsets = new int[choices.length];
+	private void updateChoices() {
+		availableChoices = new ArrayList<Integer>();
+		for(int i = 0; i < choiceCriterias.length; i++){
+			if(choiceCriterias[i].metCriteria()){
+				availableChoices.add(i);
+			}
+		}
+		Collections.reverse(availableChoices);
+		yOffsets = new int[availableChoices.size()];
 
 		int max_line_length = 0;
 		
 
 		d_height = 8;
 		
-		for(int i = 0; i < choices.length; i++){
-			choices[i] = choices.length-i+") "+ choices[i];
-			this.choices[i] = "";
-			ArrayList<String> lines = new ArrayList<String>(Arrays.asList(choices[i].split("\\r?\\n")));
+		ArrayList<String> tempChoiceShorts = new ArrayList<String>();
+		availableChoiceShorts = new ArrayList<String>();
+		for(int i = 0; i < availableChoices.size(); i++){
+			int index = availableChoices.get(i);
+			for(int k = 0; k < choiceShortCriterias[index].length; k++){
+				if(choiceShortCriterias[index][k].metCriteria()){
+					tempChoiceShorts.add(choiceShorts[index][k]);
+					break;
+				}
+			}
+			tempChoiceShorts.set(i,availableChoices.size()-i+") "+ tempChoiceShorts.get(i));
+			this.availableChoiceShorts.add("");
+			ArrayList<String> lines = new ArrayList<String>(Arrays.asList(tempChoiceShorts.get(i).split("\\r?\\n")));
 			
 			for(int k = 0; k < lines.size(); k++) {
 				if(lines.get(k).length() > 50) {
@@ -73,11 +146,11 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 				
 				max_line_length = Math.max(max_line_length, lines.get(k).length());
 				
-				this.choices[i] += lines.get(k) + "\n";
+				availableChoiceShorts.set(i, availableChoiceShorts.get(i)+ lines.get(k) + "\n");
 			}
 			
-			if(choices[i].equals("")){
-				this.choices[i] = "";
+			if(tempChoiceShorts.get(i).equals("")){
+				availableChoiceShorts.set(i, "");
 			}
 			d_height += lines.size() * 16;
 			yOffsets[i] = d_height;
@@ -89,20 +162,29 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 	}
 	
 	public SpeechChoice clone() {
-		return (SpeechChoice) super.clone();
+		SpeechChoice temp = (SpeechChoice) super.clone();
+		temp.updateChoices();
+		return (SpeechChoice) temp;
 	}
 	
 	public void draw(SpriteBatch batch) {		
 		SPEECH_BUBBLE.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
-		for(int i = 0; i < choices.length; i++){
-			font.draw(batch, choices[i], x+8, y+yOffsets[i]-6);
+		for(int i = 0; i < availableChoices.size(); i++){
+			font.draw(batch, availableChoiceShorts.get(i), x+8, y+yOffsets[i]-6);
 		}
 		
 		
 }
 
 	public SpeechBubble getChoiceBubble() {
-		return new SpeechBubble(world, character, 3, choiceText[choice], proceedIndexes[choice]);
+		SpeechBubble temp = new SpeechBubble(world, character, choiceTextCriterias[availableChoices.get(choice)], choiceTexts[availableChoices.get(choice)], proceedKeyCriterias[availableChoices.get(choice)], proceedKeys[availableChoices.get(choice)]);
+		for(int i = 0; i < temp.textCriterias.length; i++){
+			if(temp.textCriterias[i].metCriteria()){
+				temp.updateText(temp.texts[i]);
+				break;
+			}
+		}
+		return temp;
 	}
 	
 

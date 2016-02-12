@@ -39,28 +39,33 @@ public class SpeechBubble extends Hud implements Cloneable {
 	public SpeechBubble(World world, Character character, Criteria[] textCriterias, String[] texts, Criteria[] keyCriterias, String[] proceedKeys) {
 		super(world, 0, 0);
 		
-		init(world, character, textCriterias, texts, keyCriterias, proceedKeys);
+		init(character, textCriterias, texts, keyCriterias, proceedKeys);
 	}
 	
 	public SpeechBubble(World world, Character character, String text, Criteria[] keyCriterias, String[] proceedKeys) {
 		super(world, 0 ,0);
 		
-		init(world, character, new Criteria[]{new True(world)}, new String[]{text}, keyCriterias, proceedKeys);
+		init(character, new Criteria[]{new True(world)}, new String[]{text}, keyCriterias, proceedKeys);
 	}
 	
 	public SpeechBubble(World world, Character character, Criteria[] textCriterias, String[] texts, String proceedKey) {
 		super(world, 0 ,0);
 		
-		init(world, character, textCriterias, texts, new Criteria[]{new True(world)}, new String[]{proceedKey});
+		init(character, textCriterias, texts, new Criteria[]{new True(world)}, new String[]{proceedKey});
 	}
 	
 	public SpeechBubble(World world, Character character, String text, String proceedKey){
 		super(world,0,0);
 		
-		init(world, character, new Criteria[]{new True(world)}, new String[]{text}, new Criteria[]{new True(world)}, new String[]{proceedKey});
+		init(character, new Criteria[]{new True(world)}, new String[]{text}, new Criteria[]{new True(world)}, new String[]{proceedKey});
+	}
+	
+	public SpeechBubble(World world, Character character){
+		super(world, 0, 0);
+		this.character = character;
 	}
 
-	public void init(World world, Character character, Criteria[] textCriterias, String[] texts, Criteria[] keyCriterias, String[] proceedKeys) {	
+	private void init(Character character, Criteria[] textCriterias, String[] texts, Criteria[] keyCriterias, String[] proceedKeys) {	
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		Color temp = character.speechColor;
 		temp.a = 0.7f;
@@ -157,11 +162,14 @@ public class SpeechBubble extends Hud implements Cloneable {
 	public SpeechBubble clone() {
 		try {
 			SpeechBubble temp = (SpeechBubble) super.clone();
-			for(int i = 0; i < textCriterias.length; i++){
-				if(textCriterias[i].metCriteria()){
-					temp.updateText(texts[i]);
-					break;
+			if(!(this instanceof SpeechChoice)){
+				for(int i = 0; i < textCriterias.length; i++){
+					if(textCriterias[i].metCriteria()){
+						temp.updateText(texts[i]);
+						break;
+					}
 				}
+				
 			}
 			return temp;
 		} catch (CloneNotSupportedException e) {
