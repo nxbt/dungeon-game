@@ -1,6 +1,5 @@
 package com.dungeon.game.effect;
 
-import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.item.Consumable;
 import com.dungeon.game.world.World;
 

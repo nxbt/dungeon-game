@@ -1,7 +1,6 @@
 package com.dungeon.game.criteria;
 
 import com.dungeon.game.world.World;
-import com.dungeon.game.entity.character.Character;
 
 public class Or extends Criteria {
   private Criteria[] criterias;

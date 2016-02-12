@@ -1,11 +1,7 @@
 package com.dungeon.game.spell;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Vector2;
-import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.effect.Tangle;
 import com.dungeon.game.entity.SpellProjectile;
@@ -33,7 +29,6 @@ public class TangleVines extends Spell {
 
 	@Override
 	public void hit(Character character, Medium weapon, SpellProjectile projectile) {
-		ArrayList<Effect> effects = new ArrayList<Effect>();
 		character.addEffect(new Tangle(world, 300));
 		character.addEffect(new Stun(world, 5));
 		if(!character.knownEntities.contains(projectile.owner))character.knownEntities.add(projectile.owner);

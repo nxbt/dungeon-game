@@ -1,9 +1,9 @@
 package com.dungeon.game.generator;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class BiomeMap {
-    private float[][][] biomeMap; // [x][y][types]
+	private float[][][] biomeMap; // [x][y][types]
     private ArrayList<float[]> biomeCenters; //holds locations of centers of all biomes
     
     private static final int BIOME_SPACING = 5; //min space between biome centers

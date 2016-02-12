@@ -248,7 +248,7 @@ public class Sword extends Melee {
 		float angleModifier;
 		float cur_dmgMult = 0;
 		float cur_knockMult = 0;
-		float knock = 0;
+		
 		if(stage == SWING1){
 			angleModifier = -90;
 			cur_dmgMult = dmgMult[0];

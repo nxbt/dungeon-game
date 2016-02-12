@@ -164,7 +164,10 @@ name = "Goon";
 			
 			equip(rightEquiped, false);
 		}
+		
+		@SuppressWarnings("unchecked")
 		ArrayList<Entity> entities = (ArrayList<Entity>) world.entities.clone();
+		
 		entities.remove(world.player);
 		entities.remove(this);
 		if(knownEntities.contains(world.player)){

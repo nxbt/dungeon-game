@@ -2,7 +2,6 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.item.Medium;
-import com.dungeon.game.item.Wand;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.spell.Spell;
 import com.dungeon.game.world.World;

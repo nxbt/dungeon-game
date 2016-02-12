@@ -1,10 +1,8 @@
 package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.dungeon.game.effect.Dizzy;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.LifeRegen;
-import com.dungeon.game.effect.Poison;
 import com.dungeon.game.effect.PotionSick;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;

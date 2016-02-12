@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.criteria.Criteria;
+import com.dungeon.game.criteria.True;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.world.World;
@@ -27,13 +29,38 @@ public class SpeechBubble extends Hud implements Cloneable {
 	
 	private int speechSpeed;
 	private int speechCounter;
-
-	public int proceedIndex;
+	public Criteria[] textCriterias;
+	public String[] texts;
+	public Criteria[] keyCriterias;
+	public String[] proceedKeys;
 	
 	private boolean began;
-
-	public SpeechBubble(World world, Character character, int speed, String text, int proceedIndex) {
+	
+	public SpeechBubble(World world, Character character, Criteria[] textCriterias, String[] texts, Criteria[] keyCriterias, String[] proceedKeys) {
 		super(world, 0, 0);
+		
+		init(world, character, textCriterias, texts, keyCriterias, proceedKeys);
+	}
+	
+	public SpeechBubble(World world, Character character, String text, Criteria[] keyCriterias, String[] proceedKeys) {
+		super(world, 0 ,0);
+		
+		init(world, character, new Criteria[]{new True(world)}, new String[]{text}, keyCriterias, proceedKeys);
+	}
+	
+	public SpeechBubble(World world, Character character, Criteria[] textCriterias, String[] texts, String proceedKey) {
+		super(world, 0 ,0);
+		
+		init(world, character, textCriterias, texts, new Criteria[]{new True(world)}, new String[]{proceedKey});
+	}
+	
+	public SpeechBubble(World world, Character character, String text, String proceedKey){
+		super(world,0,0);
+		
+		init(world, character, new Criteria[]{new True(world)}, new String[]{text}, new Criteria[]{new True(world)}, new String[]{proceedKey});
+	}
+
+	public void init(World world, Character character, Criteria[] textCriterias, String[] texts, Criteria[] keyCriterias, String[] proceedKeys) {	
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		Color temp = character.speechColor;
 		temp.a = 0.7f;
@@ -44,12 +71,15 @@ public class SpeechBubble extends Hud implements Cloneable {
 		
 		began = true;
 		
-		speechSpeed = speed;
+		speechSpeed = 3;
 		speechCounter = speechSpeed;
-		this.proceedIndex = proceedIndex;
-		updateText(text);
+		
+		this.textCriterias = textCriterias;
+		this.texts = texts;
+		this.keyCriterias = keyCriterias;
+		this.proceedKeys = proceedKeys;
 	}
-
+	
 	@Override
 	public void calc() {
 		if(world.mouse.lb_pressed && !began) {
@@ -117,9 +147,23 @@ public class SpeechBubble extends Hud implements Cloneable {
 		return text==null||text.equals(endText);
 	}
 	
+	public String getProceedKey(){
+		for(int i = 0; i < keyCriterias.length; i++){
+			if(keyCriterias[i].metCriteria())return proceedKeys[i];
+		}
+		return "start";
+	}
+	
 	public SpeechBubble clone() {
 		try {
-			return (SpeechBubble) super.clone();
+			SpeechBubble temp = (SpeechBubble) super.clone();
+			for(int i = 0; i < textCriterias.length; i++){
+				if(textCriterias[i].metCriteria()){
+					temp.updateText(texts[i]);
+					break;
+				}
+			}
+			return temp;
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 			return null;

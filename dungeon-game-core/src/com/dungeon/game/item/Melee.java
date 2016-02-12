@@ -1,14 +1,10 @@
 package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.dungeon.game.entity.MeleeGraphic;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;
 
-public abstract class Melee extends Weapon {
-
-	private MeleeGraphic hitbox;
-	
+public abstract class Melee extends Weapon {	
 	public float damage;
 	public float speed;
 	

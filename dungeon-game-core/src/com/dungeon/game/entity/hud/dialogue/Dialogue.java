@@ -1,6 +1,7 @@
 package com.dungeon.game.entity.hud.dialogue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
@@ -21,7 +22,9 @@ public class Dialogue extends Hud {
 	
 	public ArrayList<SpeechBubble> speechBubbles;
 	
-	public ArrayList<SpeechBubble> potentialBubbles;
+//	public ArrayList<SpeechBubble> potentialBubbles;
+	
+	public HashMap<String, SpeechBubble> potentialBubbles;
 	
 	private ArrayList<Character> characters;
 	
@@ -29,33 +32,43 @@ public class Dialogue extends Hud {
 		super(null,0,0);
 		this.world = world;
 		speechBubbles = new ArrayList<SpeechBubble>();
-		potentialBubbles = new ArrayList<SpeechBubble>();
+		potentialBubbles = new HashMap<String, SpeechBubble>();
 		characters = new ArrayList<Character>();
 		characters.add(character);
 		characters.add(world.player);
+		d_width = world.cam.WIDTH;
+		d_height = world.cam.HEIGHT;
 	}
 	
 	public void begin(){
-		speechBubbles.add((SpeechBubble) potentialBubbles.get(0).clone());
+		speechBubbles.add((SpeechBubble) potentialBubbles.get("start").clone());
 	}
 	
 	public void calc(){
-		if(done()&&(world.mouse.lb_pressed || speechBubbles.get(0) instanceof SpeechChoice)&&!(speechBubbles.get(0).proceedIndex>=potentialBubbles.size())){
-			if(speechBubbles.get(0) instanceof SpeechChoice){
-				speechBubbles.add(0, ((SpeechChoice)speechBubbles.get(0)).getChoiceBubble());
-				speechBubbles.remove(1);
-			}else{
-				speechBubbles.add(0,(SpeechBubble) potentialBubbles.get(speechBubbles.get(0).proceedIndex).clone());
-			}
+		if(world.hudEntities.indexOf(this) != 0) {
+			world.hudEntities.remove(this);
+			world.hudEntities.add(0,this);
 		}
+		
 		if(world.player.fightMode)close();
 		int heightCounter = 88;
 		for(SpeechBubble bubble: speechBubbles){
-			if(!bubble.done())bubble.update();
 			bubble.y = heightCounter;
 			heightCounter+=bubble.d_height+8;
 			if(bubble.character.equals(characters.get(0)))bubble.x = 8;
 			else if(bubble.character.equals(characters.get(1)))bubble.x = world.cam.WIDTH-bubble.d_width-8;
+			if(!bubble.done())bubble.update();
+		}
+	}
+	
+	public void hovered() {
+		if(done()&&(world.mouse.lb_pressed || speechBubbles.get(0) instanceof SpeechChoice)){
+			if(speechBubbles.get(0) instanceof SpeechChoice){
+				speechBubbles.add(0, ((SpeechChoice)speechBubbles.get(0)).getChoiceBubble());
+				speechBubbles.remove(1);
+			}else{
+				speechBubbles.add(0,(SpeechBubble) potentialBubbles.get(speechBubbles.get(0).getProceedKey()).clone());
+			}
 		}
 	}
 	

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.Entity;
-import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class LightMap {

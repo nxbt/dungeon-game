@@ -3,7 +3,6 @@ package com.dungeon.game.generator;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.world.World;
 
 public class Biospheres extends Generation {

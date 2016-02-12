@@ -10,8 +10,8 @@ import com.dungeon.game.world.World;
 
 public abstract class Generation {
 	protected World world;
-	private int width;
-	private int height;
+	protected int width;
+	protected int height;
 	protected int[][] map;
 	protected ArrayList<Entity> entities;
 	public ArrayList<Area> areas;

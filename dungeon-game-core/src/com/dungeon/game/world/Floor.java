@@ -1,15 +1,11 @@
 package com.dungeon.game.world;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
-import com.dungeon.game.entity.character.Goon;
-import com.dungeon.game.generator.Biospheres;
-import com.dungeon.game.generator.Castle;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.Rooms;
 import com.dungeon.game.pathing.Area;
@@ -27,9 +23,6 @@ public class Floor {
 	public ArrayList<float[]> edges;
 	
 	public ArrayList<Entity> entities;
-	
-	private int width;
-	private int height;
 
 	public AreaMap areaMap;
 	
@@ -37,8 +30,6 @@ public class Floor {
 	
 	public Floor(World world, int width, int height) {
 		this.world = world;
-		this.width = width;
-		this.height = height;
 		
 		entities = new ArrayList<Entity>();
 		
