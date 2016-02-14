@@ -30,38 +30,33 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 
 	public SpeechChoice(World world, Criteria[] choiceCriterias, Criteria[][] choiceShortCriterias, String[][] choiceShorts, Criteria[][] choiceTextCriterias, String[][] choiceTexts, Criteria[][] proceedKeyCriterias, String[][] proceedKeys){
 		super(world, world.player);
+		
 		init(choiceCriterias, choiceShortCriterias, choiceShorts, choiceTextCriterias, choiceTexts, proceedKeyCriterias, proceedKeys);
 	}
 	
 	public SpeechChoice(World world, String[] choiceShorts, String[] choiceTexts, String[] proceedKeys){
 		super(world, world.player);
 
-		System.out.println(choiceShorts.length);
 		Criteria[] choiceCriterias = new Criteria[choiceShorts.length];
-		for(int i = 0; i < choiceCriterias.length; i++)choiceCriterias[i] = new True(world);
-		System.out.println(choiceCriterias.length);
+		for(int i = 0; i < choiceCriterias.length; i++) choiceCriterias[i] = new True(world);
 
 		Criteria[][] choiceShortCriterias = new Criteria[choiceShorts.length][1];
-		for(int i = 0; i < choiceShortCriterias.length; i++)choiceShortCriterias[i][0] = new True(world);
+		for(int i = 0; i < choiceShortCriterias.length; i++) choiceShortCriterias[i][0] = new True(world);
 		
 		Criteria[][] choiceTextCriterias = new Criteria[choiceShorts.length][1];
-		for(int i = 0; i < choiceTextCriterias.length; i++)choiceTextCriterias[i][0] = new True(world);
+		for(int i = 0; i < choiceTextCriterias.length; i++) choiceTextCriterias[i][0] = new True(world);
 		
 		Criteria[][] proceedKeyCriterias = new Criteria[choiceShorts.length][1];
-		for(int i = 0; i < proceedKeyCriterias.length; i++)proceedKeyCriterias[i][0] = new True(world);
+		for(int i = 0; i < proceedKeyCriterias.length; i++) proceedKeyCriterias[i][0] = new True(world);
 		
 		String[][] choiceShorts2 = new String[choiceShorts.length][1];
-		for(int i = 0; i < choiceShorts2.length; i++)choiceShorts2[i][0] = choiceShorts[i];
+		for(int i = 0; i < choiceShorts2.length; i++) choiceShorts2[i][0] = choiceShorts[i];
 		
 		String[][] choiceTexts2 = new String[choiceShorts.length][1];
-		for(int i = 0; i < choiceTexts2.length; i++)choiceTexts2[i][0] = choiceTexts[i];
+		for(int i = 0; i < choiceTexts2.length; i++) choiceTexts2[i][0] = choiceTexts[i];
 		
 		String[][] proceedKeys2 = new String[choiceShorts.length][1];
-		for(int i = 0; i < proceedKeys2.length; i++)proceedKeys2[i][0] = proceedKeys[i];
-		
-		
-		
-		
+		for(int i = 0; i < proceedKeys2.length; i++) proceedKeys2[i][0] = proceedKeys[i];
 		
 		init(choiceCriterias, choiceShortCriterias, choiceShorts2, choiceTextCriterias, choiceTexts2, proceedKeyCriterias, proceedKeys2);
 	}
@@ -178,8 +173,8 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 
 	public SpeechBubble getChoiceBubble() {
 		SpeechBubble temp = new SpeechBubble(world, character, choiceTextCriterias[availableChoices.get(choice)], choiceTexts[availableChoices.get(choice)], proceedKeyCriterias[availableChoices.get(choice)], proceedKeys[availableChoices.get(choice)]);
-		for(int i = 0; i < temp.textCriterias.length; i++){
-			if(temp.textCriterias[i].metCriteria()){
+		for(int i = 0; i < temp.textCriteria.length; i++){
+			if(temp.textCriteria[i].metCriteria()){
 				temp.updateText(temp.texts[i]);
 				break;
 			}

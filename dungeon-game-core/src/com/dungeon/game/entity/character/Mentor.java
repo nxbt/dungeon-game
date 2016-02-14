@@ -4,11 +4,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.criteria.Criteria;
-import com.dungeon.game.criteria.HasGold;
-import com.dungeon.game.criteria.True;
+import com.dungeon.game.criteria.*;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
+import com.dungeon.game.item.Sword;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -49,28 +49,46 @@ public class Mentor extends Friend {
 		
 		d_width = 32;
 		d_height = 32;
-		// \u200B to create pause;
 		
-		// need to complete reworkish to implement determinant choices. Breadnan ur way is cancer.
+		// \u200B to create pause;
 		dialogue = new Dialogue(world, this);
 		
-		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"Greetings!", new Criteria[] {new True(world)}, new String[] {"second"}));
-		dialogue.potentialBubbles.put("second", new SpeechBubble(world, this, "Goodbye!", new Criteria[] {new True(world)}, new String[] {"question"}));
-//		dialogue.potentialBubbles.put("question", new SpeechChoice(world, 
-//				new Criteria[]{new True(world), new True(world)}, 
-//				new Criteria[][]{new Criteria[]{new True(world)},new Criteria[]{new True(world)}}, 
-//				new String[][]{new String[]{"ONE"},new String[]{"TWO"}}, 
-//				new Criteria[][]{new Criteria[]{new True(world)},new Criteria[]{new True(world)}}, 
-//				new String[][]{new String[]{"ONE LONG"},new String[]{"TWO LONG"}}, 
-//				new Criteria[][]{new Criteria[]{new True(world)},new Criteria[]{new True(world)}}, 
-//				new String[][]{new String[]{"start"},new String[]{"second"}}
-//				));
+		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"Hey there.", "want sword question"));
 		
-		dialogue.potentialBubbles.put("question", new SpeechChoice(world, 
-				new String[]{"fuck1", "fuck2"}, 
-				new String[]{"fuck", "fuckfuck"}, 
-				new String[]{"start", "second"}));
-		dialogue.potentialBubbles.put("rich?", new SpeechBubble(world, this, new Criteria[]{new HasGold(world, 30, world.player), new True(world)}, new String[]{"Your Rich!", "Poor guy..."}, "start"));
+		dialogue.potentialBubbles.put("want sword question", new SpeechBubble(world, this, "Do you want a sword? You'll need a weapon to fight off the monsters. There's quite a few around here...", "want sword answer"));
+		
+		dialogue.potentialBubbles.put("want sword answer", new SpeechChoice(world, 
+				new String[]{"Yes.", "I have a sword."}, 
+				new String[]{"Yeah, I'll take a sword.", "I already have a sword."},
+				new String[]{"check no sword", "check sword"}));
+		
+		dialogue.potentialBubbles.put("lie defence", new SpeechChoice(world, 
+				new String[]{"What's it to you?", "What if I wanted two?", "Didn't know you cared."}, 
+				new String[]{"What's it to you?", "What if I wanted two? Maybe I wanted to dual wield...", "Sorry, didn't know you cared that I already had one... My bad."},
+				new String[]{"refuse sword", "check two swords", "reasure"}));
+		
+		dialogue.potentialBubbles.put("check two swords", new SpeechBubble(world, this, 
+				new Criteria[]{new HasItem(world, new Sword(world, 0, 0), world.player, 2), new True(world)},
+				new String[]{"Bu- ... Wha- ... I can't even believe you. You clearly have two swords... What are you even doing? Besides...", "Even if that was the case..."},
+				"refuse sword"));
+		
+		dialogue.potentialBubbles.put("reasure", new SpeechBubble(world, this, "It's okay.", "refuse sword"));
+		
+		dialogue.potentialBubbles.put("refuse sword", new SpeechBubble(world, this, "I'm trying to help people who are unarmed. But you're fine, I'm not going to give you anything.", "goodbye"));
+		
+		dialogue.potentialBubbles.put("check no sword", new SpeechBubble(world, this, 
+				new Criteria[]{new Invert(world, new HasItem(world, new Sword(world, 0, 0), world.player)), new True(world)},
+				new String[]{"No problem.", "Wait! you already have a sword! What are you tryin' to pull?"},
+				new String[]{"give sword", "lie defence"}));
+		
+		dialogue.potentialBubbles.put("check sword", new SpeechBubble(world, this,
+				new Criteria[]{new HasItem(world, new Sword(world, 0, 0), world.player), new True(world)},
+				new String[]{"Oh, alright.", "Um... no you don't."}, 
+				new String[]{"goodbye", "give sword"}));
+		
+		dialogue.potentialBubbles.put("give sword", new SpeechBubble(world, this, "Here, ya go!", "goodbye"));
+		
+		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world, this, "See ya!", new Criteria[] {new True(world)}, new String[] {"start"}));
 		
 		dialogue.begin();
 		

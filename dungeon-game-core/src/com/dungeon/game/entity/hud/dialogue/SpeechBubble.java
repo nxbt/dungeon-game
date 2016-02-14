@@ -29,29 +29,29 @@ public class SpeechBubble extends Hud implements Cloneable {
 	
 	private int speechSpeed;
 	private int speechCounter;
-	public Criteria[] textCriterias;
+	public Criteria[] textCriteria;
 	public String[] texts;
-	public Criteria[] keyCriterias;
+	public Criteria[] keyCriteria;
 	public String[] proceedKeys;
 	
 	private boolean began;
 	
-	public SpeechBubble(World world, Character character, Criteria[] textCriterias, String[] texts, Criteria[] keyCriterias, String[] proceedKeys) {
+	public SpeechBubble(World world, Character character, Criteria[] textCriteria, String[] texts, Criteria[] keyCriteria, String[] proceedKeys) {
 		super(world, 0, 0);
 		
-		init(character, textCriterias, texts, keyCriterias, proceedKeys);
+		init(character, textCriteria, texts, keyCriteria, proceedKeys);
 	}
 	
-	public SpeechBubble(World world, Character character, String text, Criteria[] keyCriterias, String[] proceedKeys) {
+	public SpeechBubble(World world, Character character, String text, Criteria[] keyCriteria, String[] proceedKeys) {
 		super(world, 0 ,0);
 		
-		init(character, new Criteria[]{new True(world)}, new String[]{text}, keyCriterias, proceedKeys);
+		init(character, new Criteria[]{new True(world)}, new String[]{text}, keyCriteria, proceedKeys);
 	}
 	
-	public SpeechBubble(World world, Character character, Criteria[] textCriterias, String[] texts, String proceedKey) {
+	public SpeechBubble(World world, Character character, Criteria[] textCriteria, String[] texts, String proceedKey) {
 		super(world, 0 ,0);
 		
-		init(character, textCriterias, texts, new Criteria[]{new True(world)}, new String[]{proceedKey});
+		init(character, textCriteria, texts, new Criteria[]{new True(world)}, new String[]{proceedKey});
 	}
 	
 	public SpeechBubble(World world, Character character, String text, String proceedKey){
@@ -60,12 +60,18 @@ public class SpeechBubble extends Hud implements Cloneable {
 		init(character, new Criteria[]{new True(world)}, new String[]{text}, new Criteria[]{new True(world)}, new String[]{proceedKey});
 	}
 	
+	public SpeechBubble(World world, Character character, Criteria[] criteria, String[] texts, String[] proceedKeys) {
+		super(world, 0, 0);
+		
+		init(character, criteria, texts, criteria, proceedKeys);
+	}
+	
 	public SpeechBubble(World world, Character character){
 		super(world, 0, 0);
 		this.character = character;
 	}
 
-	private void init(Character character, Criteria[] textCriterias, String[] texts, Criteria[] keyCriterias, String[] proceedKeys) {	
+	private void init(Character character, Criteria[] textCriteria, String[] texts, Criteria[] keyCriteria, String[] proceedKeys) {	
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		Color temp = character.speechColor;
 		temp.a = 0.7f;
@@ -79,9 +85,9 @@ public class SpeechBubble extends Hud implements Cloneable {
 		speechSpeed = 3;
 		speechCounter = speechSpeed;
 		
-		this.textCriterias = textCriterias;
+		this.textCriteria = textCriteria;
 		this.texts = texts;
-		this.keyCriterias = keyCriterias;
+		this.keyCriteria = keyCriteria;
 		this.proceedKeys = proceedKeys;
 	}
 	
@@ -153,8 +159,8 @@ public class SpeechBubble extends Hud implements Cloneable {
 	}
 	
 	public String getProceedKey(){
-		for(int i = 0; i < keyCriterias.length; i++){
-			if(keyCriterias[i].metCriteria())return proceedKeys[i];
+		for(int i = 0; i < keyCriteria.length; i++){
+			if(keyCriteria[i].metCriteria())return proceedKeys[i];
 		}
 		return "start";
 	}
@@ -163,8 +169,8 @@ public class SpeechBubble extends Hud implements Cloneable {
 		try {
 			SpeechBubble temp = (SpeechBubble) super.clone();
 			if(!(this instanceof SpeechChoice)){
-				for(int i = 0; i < textCriterias.length; i++){
-					if(textCriterias[i].metCriteria()){
+				for(int i = 0; i < textCriteria.length; i++){
+					if(textCriteria[i].metCriteria()){
 						temp.updateText(texts[i]);
 						break;
 					}

@@ -42,8 +42,15 @@ public class Inventory {
 	}
 	
 	public Slot contains(Item item) {
+		return contains(item, 1);
+	}
+	
+	public Slot contains(Item item, int stackSize) {
 		for(Slot s: slot) {
-			if(s.item != null && s.item.getClass().equals(item.getClass())) return s;
+			if(s.item != null && s.item.getClass().equals(item.getClass())) {
+				stackSize--;
+				if(stackSize <= 0) return s;
+			}
 		}
 		
 		return null;
