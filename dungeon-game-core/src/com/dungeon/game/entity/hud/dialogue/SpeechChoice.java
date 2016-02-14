@@ -17,21 +17,21 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 	private boolean madeChoice;
 	private int choice;
 	
-	public Criteria[] choiceCriterias; //controls which choices are available
-	public Criteria[][] choiceShortCriterias; //controls what the short text is for each choice 
+	public Criteria[] choiceCriteria; //controls which choices are available
+	public Criteria[][] choiceShortCriteria; //controls what the short text is for each choice 
 	public String[][] choiceShorts; //contains short text for each choice
-	public Criteria[][] choiceTextCriterias; //controls what the long text is for each choice
+	public Criteria[][] choiceTextCriteria; //controls what the long text is for each choice
 	public String[][] choiceTexts; //contains long text for each choice
-	public Criteria[][] proceedKeyCriterias; //controls the proceed key
+	public Criteria[][] proceedKeyCriteria; //controls the proceed key
 	public String[][] proceedKeys; //contains the proceed keys;
 	
 	public ArrayList<Integer> availableChoices;
 	public ArrayList<String> availableChoiceShorts;
 
-	public SpeechChoice(World world, Criteria[] choiceCriterias, Criteria[][] choiceShortCriterias, String[][] choiceShorts, Criteria[][] choiceTextCriterias, String[][] choiceTexts, Criteria[][] proceedKeyCriterias, String[][] proceedKeys){
+	public SpeechChoice(World world, Criteria[] choiceCriteria, Criteria[][] choiceShortCriteria, String[][] choiceShorts, Criteria[][] choiceTextCriteria, String[][] choiceTexts, Criteria[][] proceedKeyCriteria, String[][] proceedKeys){
 		super(world, world.player);
 		
-		init(choiceCriterias, choiceShortCriterias, choiceShorts, choiceTextCriterias, choiceTexts, proceedKeyCriterias, proceedKeys);
+		init(choiceCriteria, choiceShortCriteria, choiceShorts, choiceTextCriteria, choiceTexts, proceedKeyCriteria, proceedKeys);
 	}
 	
 	public SpeechChoice(World world, String[] choiceShorts, String[] choiceTexts, String[] proceedKeys){
@@ -61,13 +61,13 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 		init(choiceCriterias, choiceShortCriterias, choiceShorts2, choiceTextCriterias, choiceTexts2, proceedKeyCriterias, proceedKeys2);
 	}
 
-	private void init(Criteria[] choiceCriterias, Criteria[][] choiceShortCriterias, String[][] choiceShorts, Criteria[][] choiceTextCriterias, String[][] choiceTexts, Criteria[][] proceedKeyCriterias, String[][] proceedKeys){
-		this.choiceCriterias = choiceCriterias;
-		this.choiceShortCriterias = choiceShortCriterias;
+	private void init(Criteria[] choiceCriteria, Criteria[][] choiceShortCriteria, String[][] choiceShorts, Criteria[][] choiceTextCriteria, String[][] choiceTexts, Criteria[][] proceedKeyCriteria, String[][] proceedKeys){
+		this.choiceCriteria = choiceCriteria;
+		this.choiceShortCriteria = choiceShortCriteria;
 		this.choiceShorts = choiceShorts;
-		this.choiceTextCriterias = choiceTextCriterias;
+		this.choiceTextCriteria = choiceTextCriteria;
 		this.choiceTexts = choiceTexts;
-		this.proceedKeyCriterias = proceedKeyCriterias;
+		this.proceedKeyCriteria = proceedKeyCriteria;
 		this.proceedKeys = proceedKeys;
 		madeChoice = false;
 		choice = 0;
@@ -99,8 +99,8 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 	
 	private void updateChoices() {
 		availableChoices = new ArrayList<Integer>();
-		for(int i = 0; i < choiceCriterias.length; i++){
-			if(choiceCriterias[i].metCriteria()){
+		for(int i = 0; i < choiceCriteria.length; i++){
+			if(choiceCriteria[i].metCriteria()){
 				availableChoices.add(i);
 			}
 		}
@@ -116,8 +116,8 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 		availableChoiceShorts = new ArrayList<String>();
 		for(int i = 0; i < availableChoices.size(); i++){
 			int index = availableChoices.get(i);
-			for(int k = 0; k < choiceShortCriterias[index].length; k++){
-				if(choiceShortCriterias[index][k].metCriteria()){
+			for(int k = 0; k < choiceShortCriteria[index].length; k++){
+				if(choiceShortCriteria[index][k].metCriteria()){
 					tempChoiceShorts.add(choiceShorts[index][k]);
 					break;
 				}
@@ -172,7 +172,7 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 }
 
 	public SpeechBubble getChoiceBubble() {
-		SpeechBubble temp = new SpeechBubble(world, character, choiceTextCriterias[availableChoices.get(choice)], choiceTexts[availableChoices.get(choice)], proceedKeyCriterias[availableChoices.get(choice)], proceedKeys[availableChoices.get(choice)]);
+		SpeechBubble temp = new SpeechBubble(world, character, choiceTextCriteria[availableChoices.get(choice)], choiceTexts[availableChoices.get(choice)], proceedKeyCriteria[availableChoices.get(choice)], proceedKeys[availableChoices.get(choice)]);
 		for(int i = 0; i < temp.textCriteria.length; i++){
 			if(temp.textCriteria[i].metCriteria()){
 				temp.updateText(temp.texts[i]);
