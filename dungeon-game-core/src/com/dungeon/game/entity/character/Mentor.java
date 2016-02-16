@@ -71,7 +71,7 @@ public class Mentor extends Friend {
 		
 		dialogue.potentialBubbles.put("check two swords", new SpeechBubble(world, this, 
 				new Criteria[]{new HasItem(world, new Sword(world, 0, 0), world.player, 2), new True(world)},
-				new String[]{"Bu- ... Wha- ... I can't even believe you. You clearly have two swords... What are you even doing? Besides...", "Even if that were the case..."},
+				new String[]{"Bu-\u200B\u200B\u200B Wha-\u200B\u200B\u200B I can't even believe you. You clearly have two swords... What are you even doing? Besides...", "Even if that were the case..."},
 				"refuse sword"));
 		
 		dialogue.potentialBubbles.put("reasure", new SpeechBubble(world, this, "It's okay.", "refuse sword"));
