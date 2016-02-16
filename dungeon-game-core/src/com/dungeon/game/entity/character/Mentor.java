@@ -90,7 +90,7 @@ public class Mentor extends Friend {
 		
 		dialogue.potentialBubbles.put("give sword", new SpeechBubble(world, this, "Here ya go!", "goodbye"));
 		
-		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world, this, "See ya!", new Criteria[] {new True(world)}, new String[] {"start"}));
+		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world, this, "See ya!", "end"));
 		
 		dialogue.begin();
 		

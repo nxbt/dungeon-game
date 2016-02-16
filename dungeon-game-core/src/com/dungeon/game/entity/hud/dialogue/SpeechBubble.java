@@ -29,10 +29,11 @@ public class SpeechBubble extends Hud implements Cloneable {
 	
 	private int speechSpeed;
 	private int speechCounter;
-	public Criteria[] textCriteria;
-	public String[] texts;
-	public Criteria[] keyCriteria;
-	public String[] proceedKeys;
+	
+	public Criteria[] textCriteria; //controls which text is chosen
+	public String[] texts; //different texts that can be spoken
+	public Criteria[] keyCriteria; //controls which bubble is next in the conversation
+	public String[] proceedKeys; //different keys for which bubble is to come next, based on the keyCriteria variable
 	
 	private boolean began;
 	
@@ -160,7 +161,7 @@ public class SpeechBubble extends Hud implements Cloneable {
 	
 	public String getProceedKey(){
 		for(int i = 0; i < keyCriteria.length; i++){
-			if(keyCriteria[i].metCriteria())return proceedKeys[i];
+			if(keyCriteria[i].metCriteria()) return proceedKeys[i];
 		}
 		return "start";
 	}

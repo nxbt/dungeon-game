@@ -41,7 +41,7 @@ public class Dialogue extends Hud {
 	}
 	
 	public void begin(){
-		speechBubbles.add((SpeechBubble) potentialBubbles.get("start").clone());
+		
 	}
 	
 	public void calc(){
@@ -62,13 +62,13 @@ public class Dialogue extends Hud {
 	}
 	
 	public void hovered() {
-		if(done()&&(world.mouse.lb_pressed || speechBubbles.get(0) instanceof SpeechChoice)){
+		if(speechBubbles.size() > 0 && done()&&(world.mouse.lb_pressed || speechBubbles.get(0) instanceof SpeechChoice)){
 			if(speechBubbles.get(0) instanceof SpeechChoice){
 				speechBubbles.add(0, ((SpeechChoice)speechBubbles.get(0)).getChoiceBubble());
 				speechBubbles.remove(1);
-			}else{
-				speechBubbles.add(0,(SpeechBubble) potentialBubbles.get(speechBubbles.get(0).getProceedKey()).clone());
 			}
+			else if(speechBubbles.get(0).getProceedKey().equals("end")) close();
+			else speechBubbles.add(0,(SpeechBubble) potentialBubbles.get(speechBubbles.get(0).getProceedKey()).clone());
 		}
 	}
 	
@@ -78,6 +78,9 @@ public class Dialogue extends Hud {
 	
 	public void open() {
 		if(!world.hudEntities.contains(this))world.hudEntities.add(0,this);
+		
+		speechBubbles.clear();
+		speechBubbles.add((SpeechBubble) potentialBubbles.get("start").clone());
 	}
 	
 	public void close() {
