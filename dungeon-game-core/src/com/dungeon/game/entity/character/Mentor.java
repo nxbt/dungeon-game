@@ -66,17 +66,17 @@ public class Mentor extends Friend {
 		
 		dialogue.potentialBubbles.put("lie defence", new SpeechChoice(world, 
 				new String[]{"What's it to you?", "What if I wanted two?", "Didn't know you cared."}, 
-				new String[]{"What's it to you?", "What if I wanted two? Maybe I wanted to dual wield...", "Sorry, didn't know you cared that I already had one... My bad."},
+				new String[]{"What's it to you?", "What if I wanted two swords? Maybe I want to dual wield...", "Sorry, didn't know you cared that I already had a sword... My bad."},
 				new String[]{"refuse sword", "check two swords", "reasure"}));
 		
 		dialogue.potentialBubbles.put("check two swords", new SpeechBubble(world, this, 
 				new Criteria[]{new HasItem(world, new Sword(world, 0, 0), world.player, 2), new True(world)},
-				new String[]{"Bu- ... Wha- ... I can't even believe you. You clearly have two swords... What are you even doing? Besides...", "Even if that was the case..."},
+				new String[]{"Bu- ... Wha- ... I can't even believe you. You clearly have two swords... What are you even doing? Besides...", "Even if that were the case..."},
 				"refuse sword"));
 		
 		dialogue.potentialBubbles.put("reasure", new SpeechBubble(world, this, "It's okay.", "refuse sword"));
 		
-		dialogue.potentialBubbles.put("refuse sword", new SpeechBubble(world, this, "I'm trying to help people who are unarmed. But you're fine, I'm not going to give you anything.", "goodbye"));
+		dialogue.potentialBubbles.put("refuse sword", new SpeechBubble(world, this, "I'm trying to help people who are unarmed. But you're fine, so I'm not going to give you anything.", "goodbye"));
 		
 		dialogue.potentialBubbles.put("check no sword", new SpeechBubble(world, this, 
 				new Criteria[]{new Invert(world, new HasItem(world, new Sword(world, 0, 0), world.player)), new True(world)},
