@@ -5,6 +5,7 @@ High priority is now for things in the very near future, low priority is for stu
 
 ##TODO high priority (attempt within a week):
 * Add shops
+* Add multithreding!
 
 ##TODO low priority (within the month?):
 * Upload screenshots to wiki
