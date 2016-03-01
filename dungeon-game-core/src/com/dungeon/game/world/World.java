@@ -36,6 +36,9 @@ import com.dungeon.game.entity.hud.StamBar;
 import com.dungeon.game.pathing.AreaMap;
 
 public class World {
+	private long tUpdate;
+	private long tDraw;
+	
 	public SpriteBatch hudBatch;
 	public ShapeRenderer shapeRenderer;
 	
@@ -130,6 +133,10 @@ public class World {
 	}
 	
 	public void update() {
+		System.out.println(tUpdate + "," + tDraw);
+		
+		long tStart = System.currentTimeMillis();
+		
 		cam.update(player.x, player.y, mouse.x, mouse.y, 1f);
 		mouse.update();
 		descBox.update();
@@ -158,9 +165,13 @@ public class World {
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F10)) debug_sight = !debug_sight;
 		
 //		lightMap.update(this);
+		long tEnd = System.currentTimeMillis();
+		tUpdate = tEnd - tStart;
 	}
 	
 	public void draw(SpriteBatch batch) {
+		long tStart = System.currentTimeMillis();
+		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
@@ -242,5 +253,8 @@ public class World {
 		if(debug_frames) fpsFont.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 60f, cam.HEIGHT-8f);
 		
 		batch.end();
+		
+		long tEnd = System.currentTimeMillis();
+		tDraw = tEnd - tStart;
 	}
 }
