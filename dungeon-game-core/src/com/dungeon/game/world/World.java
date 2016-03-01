@@ -133,7 +133,7 @@ public class World {
 	}
 	
 	public void update() {
-		System.out.println(tUpdate + "," + tDraw);
+//		System.out.println(tUpdate + "," + tDraw);
 		
 		long tStart = System.currentTimeMillis();
 		
