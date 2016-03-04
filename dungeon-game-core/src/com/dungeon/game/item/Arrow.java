@@ -30,7 +30,7 @@ public class Arrow extends Ammo {
 		float damage = this.damage*weapon.dmgMod*projectile.getVel()/10;
 		
 		ArrayList<Effect> effects = new ArrayList<Effect>();
-		effects.add(new Stun(world, 10));
+		effects.add(new Stun(world, 30));
 		
 		if(character.damage(damage, effects)>0){
 			

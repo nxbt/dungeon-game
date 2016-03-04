@@ -11,12 +11,12 @@ import com.dungeon.game.effect.StamRegen;
 import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.item.Arrow;
+import com.dungeon.game.item.Axe;
 import com.dungeon.game.item.Bow;
 import com.dungeon.game.item.Equipable;
 import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.LifePotion;
 import com.dungeon.game.item.Medium;
-import com.dungeon.game.item.Sword;
 import com.dungeon.game.item.Wand;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.Tile;
@@ -120,7 +120,7 @@ public class Player extends Character {
 		inv.slot[0].item.stack = 3;
 //		inv.slot[35].item = new Hat(world);
 		inv.slot[19].item = new Arrow(world);
-		inv.slot[21].item = new Sword(world, 5, 10);
+		inv.slot[21].item = new Axe(world, 5, 10);
 		inv.slot[22].item = new  Bow(world, 0.5f, 10);
 		inv.slot[24].item = new Wand(world);
 		

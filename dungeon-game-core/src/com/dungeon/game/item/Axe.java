@@ -11,18 +11,15 @@ import com.dungeon.game.entity.MeleeGraphic;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;
 
-public class Sword extends Melee {
+public class Axe extends Melee {
 
 	private final int REST = 0;
 	private final int WINDUP1 = 1;
 	private final int WINDUP2 = 2;
-	private final int WINDUP3 = 3;
 	private final int SWING1 = 4;
 	private final int SWING2 = 5;
-	private final int SWING3 = 6;
 	private final int WINDDOWN1 = 7;
 	private final int WINDDOWN2 = 8;
-	private final int WINDDOWN3 = 9;
 	
 	private final float REST_DIST = 14;
 	private final float REST_PANG = 82;
@@ -43,56 +40,43 @@ public class Sword extends Melee {
 	private final float WINDDOWN1_TIME = 20;
 	
 	private final float WINDUP2_TIME = 10;
-	private final float WINDUP2_DIST = 16;
-	private final float WINDUP2_PANG = -75;
-	private final float WINDUP2_ANGL = -80;
+	private final float WINDUP2_DIST = 5;
+	private final float WINDUP2_PANG = 0;
+	private final float WINDUP2_ANGL = 0;
 	
 	private final float SWING2_TIME = 15;
-	private final float SWING2_DIST = 26;
-	private final float SWING2_PANG = 80;
-	private final float SWING2_ANGL = 45;
+	private final float SWING2_DIST = 25;
+	private final float SWING2_PANG = 0;
+	private final float SWING2_ANGL = 0;
 	private final float SWING2_CDWN = 30;
 	private final float SWING2_STAM = 15;
 	
 	private final float WINDDOWN2_TIME = 14;
-	
-	private final float WINDUP3_TIME = 15;
-	private final float WINDUP3_DIST = 12;
-	private final float WINDUP3_PANG = 30;
-	private final float WINDUP3_ANGL = -7;
-	
-	private final float SWING3_TIME = 4;
-	private final float SWING3_DIST = 28;
-	private final float SWING3_PANG = 6;
-	private final float SWING3_ANGL = -3;
-	private final float SWING3_CDWN = 20;
-	private final float SWING3_STAM = 7;
-
-	private final float WINDDOWN3_TIME = 14;
 	
 	protected float[] dmgMult;
 	protected float[] knockMult;
 	
 	ArrayList<Effect> effects;
 	
+	ArrayList<Character> hitChars;
 	
-	public Sword(World world, float damage, float speed) {
-		super(world, new Texture("sword.png"));
+	public Axe(World world, float damage, float speed) {
+		super(world, new Texture("axe.png"));
 		
-		name = "Sword";
+		name = "Axe";
 		
 		hasHit = false;
 		
-		desc = "Real sword I swear! \n\n Damage: "+ Math.floor(damage*10)/10f;
+		desc = "And my axe! \n\n Damage: "+ Math.floor(damage*10)/10f;
 		
 		this.damage = damage;
 		this.speed = speed;
 		
-		knockratio = 0.4f;
+		knockratio = 0.2f;
 		knockstr = 10;
 		
-		dmgMult = new float[]{0.7f,1,1.5f};
-		knockMult = new float[]{1,1.3f,0.7f};		
+		dmgMult = new float[]{0.7f,1.5f};
+		knockMult = new float[]{1,0.3f};		
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 		
 		distance=0;
@@ -129,6 +113,7 @@ public class Sword extends Melee {
 				stageTimer = 0;
 				stage = SWING1;
 				if(hasHit) hasHit = false;
+				hitChars = new ArrayList<Character>();
 			}
 			break;
 		case SWING1:
@@ -157,9 +142,9 @@ public class Sword extends Melee {
 			}
 			break;
 		case WINDUP2:
-			if(distance<WINDUP2_DIST)distance-=(SWING1_DIST-WINDUP2_DIST)/WINDUP2_TIME;
-			if(polarAngle>WINDUP2_PANG)polarAngle-=(SWING1_PANG-WINDUP2_PANG)/WINDUP2_TIME;
-			if(angle>WINDUP2_ANGL)angle-=(SWING1_ANGL-WINDUP2_ANGL)/WINDUP2_TIME;
+			if(distance>WINDUP2_DIST)distance-=(SWING1_DIST-WINDUP2_DIST)/WINDUP2_TIME;
+			if(polarAngle<WINDUP2_PANG)polarAngle-=(SWING1_PANG-WINDUP2_PANG)/WINDUP2_TIME;
+			if(angle<WINDUP2_ANGL)angle-=(SWING1_ANGL-WINDUP2_ANGL)/WINDUP2_TIME;
 			if(index>WINDUP2_TIME && !mousedown){
 				stageTimer = 0;
 				stage = SWING2;
@@ -172,10 +157,6 @@ public class Sword extends Melee {
 			if(angle<SWING2_ANGL)angle-=(WINDUP2_ANGL-SWING2_ANGL)/SWING2_TIME;
 			if(index>SWING1_TIME && !hasHit){
 				hasHit = true;
-			}
-			if(index>SWING2_TIME && mousedown && owner.use_stam(SWING3_STAM)){
-				stageTimer = 0;
-				stage = WINDUP3;
 			}
 			if(index>SWING2_CDWN + SWING2_TIME){
 				stageTimer = 0;
@@ -191,37 +172,6 @@ public class Sword extends Melee {
 				stage = REST;
 			}
 			break;
-		case WINDUP3:
-			if(distance>WINDUP3_DIST)distance-=(SWING2_DIST-WINDUP3_DIST)/WINDUP3_TIME;
-			if(polarAngle>WINDUP3_PANG)polarAngle-=(SWING2_PANG-WINDUP3_PANG)/WINDUP3_TIME;
-			if(angle>WINDUP3_ANGL)angle-=(SWING2_ANGL-WINDUP3_ANGL)/WINDUP3_TIME;
-			if(index>WINDUP3_TIME && !mousedown){
-				stageTimer = 0;
-				stage = SWING3;
-				if(hasHit) hasHit = false;
-			}
-			break;
-		case SWING3:
-			if(distance<SWING3_DIST)distance-=(WINDUP3_DIST-SWING3_DIST)/SWING3_TIME;
-			if(polarAngle>SWING3_PANG)polarAngle-=(WINDUP3_PANG-SWING3_PANG)/SWING3_TIME;
-			if(angle<SWING3_ANGL)angle-=(WINDUP3_ANGL-SWING3_ANGL)/SWING3_TIME;
-			if(index>SWING3_TIME && !hasHit){
-				hasHit = true;
-			}
-			if(index>SWING3_CDWN + SWING3_TIME){
-				stageTimer = 0;
-				stage = WINDDOWN3;
-			}
-			break;
-		case WINDDOWN3:
-			if(distance>REST_DIST)distance-=(SWING3_DIST-REST_DIST)/WINDDOWN3_TIME;
-			if(polarAngle<REST_PANG)polarAngle-=(SWING3_PANG-REST_PANG)/WINDDOWN3_TIME;
-			if(angle>REST_ANGL)angle-=(SWING3_ANGL-REST_ANGL)/WINDDOWN3_TIME;
-			if(index>WINDDOWN3_TIME){
-				stageTimer = 0;
-				stage = REST;
-			}
-			break;
 		}
 		
 		if(!leftSide) return new float[]{distance,polarAngle*-1,angle*-1};
@@ -233,19 +183,20 @@ public class Sword extends Melee {
 
 	@Override
 	public boolean isInUse() {
-		return stage == WINDUP1||stage == WINDUP2||stage == WINDUP3||stage == SWING1||stage == SWING2||stage == SWING3||stage == WINDDOWN1||stage == WINDDOWN2||stage == WINDDOWN3;
+		return stage == WINDUP1||stage == WINDUP2||stage == SWING1||stage == SWING2||stage == WINDDOWN1||stage == WINDDOWN2;
 	}
 
 	public boolean inAttack() {
-		return !hasHit && (stage == SWING1 || stage == SWING2 || stage == SWING3);
+		return !hasHit && (stage == SWING1 || stage == SWING2);
 	}
 	
 	public void hit(Character e) {
-		
+		if(stage == SWING1&&hitChars.contains(e))return;
 		e.knownEntities.add(owner);
-		hasHit = true;
+		if(stage == SWING2)hasHit = true;
+		else hitChars.add(e);
 		float weaponangle = graphic.angle+135;
-		float angleModifier;
+		float angleModifier = 0;
 		float cur_dmgMult = 0;
 		float cur_knockMult = 0;
 		
@@ -255,14 +206,9 @@ public class Sword extends Melee {
 			cur_knockMult = knockMult[0];
 		}
 		else if(stage == SWING2){
-			angleModifier = 90;
+			angleModifier = 0;
 			cur_dmgMult = dmgMult[1];
 			cur_knockMult = knockMult[1];
-		}
-		else{
-			angleModifier = 0;
-			cur_dmgMult = dmgMult[2];
-			cur_knockMult = knockMult[2];
 		}
 		if(e.damage(damage*cur_dmgMult, effects)>0){
 			
@@ -275,8 +221,7 @@ public class Sword extends Melee {
 			knockVec.y = (ySword*(1-knockratio)+yOwner*(knockratio))*cur_knockMult;
 			e.acel(knockVec, false);
 		}
-		//temp solution to effects issue
-
+		//temp solution to effecs issue
 		effects.clear();
 		effects.add(new Stun(world, 30));
 	}
