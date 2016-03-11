@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.Stair;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.character.Enemy;
 import com.dungeon.game.entity.character.Friend;
@@ -36,9 +37,6 @@ import com.dungeon.game.entity.hud.StamBar;
 import com.dungeon.game.pathing.AreaMap;
 
 public class World {
-	private long tUpdate;
-	private long tDraw;
-	
 	public SpriteBatch hudBatch;
 	public ShapeRenderer shapeRenderer;
 	
@@ -96,7 +94,8 @@ public class World {
 		
 		entities = curFloor.entities;
 		entities.add(0,player);
-		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
+		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+5, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
+//		entities.add(new Stair(this, player.x,player.y+Tile.TS, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
 		
 		hudEntities.add(new GoldCounter(this));
 		hudEntities.add(new MenuButton(this, 4, cam.HEIGHT-20));
@@ -133,10 +132,6 @@ public class World {
 	}
 	
 	public void update() {
-//		System.out.println(tUpdate + "," + tDraw);
-		
-		long tStart = System.currentTimeMillis();
-		
 		cam.update(player.x, player.y, mouse.x, mouse.y, 1f);
 		mouse.update();
 		descBox.update();
@@ -163,14 +158,9 @@ public class World {
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F8)) debug_pathing = !debug_pathing;
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F7)) debug_hitbox = !debug_hitbox;
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F10)) debug_sight = !debug_sight;
-		
-//		lightMap.update(this);
-		long tEnd = System.currentTimeMillis();
-		tUpdate = tEnd - tStart;
 	}
 	
 	public void draw(SpriteBatch batch) {
-		long tStart = System.currentTimeMillis();
 		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -253,8 +243,5 @@ public class World {
 		if(debug_frames) fpsFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 60f, cam.HEIGHT-8f);
 		
 		batch.end();
-		
-		long tEnd = System.currentTimeMillis();
-		tDraw = tEnd - tStart;
 	}
 }

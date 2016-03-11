@@ -14,17 +14,20 @@ public class Rooms extends Generation {
 	private ArrayList<ArrayList<int[]>> halls;
 	private ArrayList<ArrayList<Rectangle>> hallEnds;
 	
-	public Rooms(World world, int width, int height){
+	public Rooms(World world, int width, int height, int centerX, int centerY){
 		super(world, width, height);
 		rooms = new ArrayList<Rectangle>();
 		halls = new ArrayList<ArrayList<int[]>>();
 		hallEnds = new ArrayList<ArrayList<Rectangle>>();
 		int x = height/2;
 		int y = width/2;
-		generateStartRoom(x, y);
+		System.out.println(centerX);
+		generateStartRoom(centerX, centerY);
 	}
 	
 	public boolean generateStartRoom(int x, int y){
+		int originX = x;
+		int originY = y;
 		int height = (int) (3+Math.random()*map.length/7);
 		y-=(int) (Math.random()*height)+1;
 		int width = (int) (3+Math.random()*map[0].length/7);
@@ -55,7 +58,7 @@ public class Rooms extends Generation {
 				}
 			}
 			return true;
-		}
+		}else //generateStartRoom(originX, originY);
 		return false;
 	}
 	
