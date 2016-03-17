@@ -48,11 +48,11 @@ public class Floor {
 				spritesheet[i*sheetWidth+k] = new TextureRegion(new Texture(DEFAULT),k*Tile.TS,i*Tile.TS,Tile.TS,Tile.TS);
 			}
 		}
-		Generation gen = new Rooms(world, width, height,centerX,centerY);
+		Generation gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY);
+		((Rooms)gen).generateStairDown();
 		int[][] map = gen.getMap();
 		entities = gen.getEntities();
-		if(world.curDungeon!=null)entities.add(new Stair(world, centerX*Tile.TS, centerY*Tile.TS, false, upTrapX, upTrapY));
-		entities.add(new Stair(world, (centerX+1)*Tile.TS, centerY*Tile.TS, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
+//		entities.add(new Stair(world, (centerX+1)*Tile.TS, centerY*Tile.TS, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
 		
 		fixBleeding(spritesheet);
 

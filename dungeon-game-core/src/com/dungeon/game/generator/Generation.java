@@ -14,6 +14,7 @@ public abstract class Generation {
 	protected int height;
 	protected int[][] map;
 	protected ArrayList<Entity> entities;
+	
 	public ArrayList<Area> areas;
 	public Generation(World world, int width, int height){
 		areas = new ArrayList<Area>();
@@ -21,8 +22,10 @@ public abstract class Generation {
 		this.width = width;
 		this.map = new int[height][width];
 		entities = new ArrayList<Entity>();
+		
 		generateClearDungeon();
 		this.world = world;
+		
 	}
 	
 	public int[][] getMap(){

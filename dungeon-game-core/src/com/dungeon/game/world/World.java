@@ -95,7 +95,6 @@ public class World {
 		entities = curFloor.entities;
 		entities.add(0,player);
 		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+5, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
-//		entities.add(new Stair(this, player.x,player.y+Tile.TS, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
 		
 		hudEntities.add(new GoldCounter(this));
 		hudEntities.add(new MenuButton(this, 4, cam.HEIGHT-20));

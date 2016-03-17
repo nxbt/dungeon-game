@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.dungeon.game.entity.Stair;
 import com.dungeon.game.entity.character.Goon;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Tile;
@@ -14,7 +15,7 @@ public class Rooms extends Generation {
 	private ArrayList<ArrayList<int[]>> halls;
 	private ArrayList<ArrayList<Rectangle>> hallEnds;
 	
-	public Rooms(World world, int width, int height, int centerX, int centerY){
+	public Rooms(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY){
 		super(world, width, height);
 		rooms = new ArrayList<Rectangle>();
 		halls = new ArrayList<ArrayList<int[]>>();
@@ -22,6 +23,8 @@ public class Rooms extends Generation {
 		int x = height/2;
 		int y = width/2;
 		System.out.println(centerX);
+		if(world.curDungeon!=null)entities.add(new Stair(world, centerX*Tile.TS-Tile.TS/2, centerY*Tile.TS-Tile.TS/2, false, upTrapX+1, upTrapY+1));
+
 		generateStartRoom(centerX, centerY);
 	}
 	
@@ -504,5 +507,25 @@ public class Rooms extends Generation {
 			}
 			areas.add(area);
 		}
+	}
+	
+	public void generateStairDown(){
+		Rectangle room = rooms.get(1+(int) (Math.random()*(rooms.size()-1)));
+		int width = (int) (Math.random()*(room.width-2));
+		int height = (int) (Math.random()*(room.width-2));
+		entities.add(new Stair(world,(room.x+width)*Tile.TS+Tile.TS/2 , (room.y+height)*Tile.TS+Tile.TS/2, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
+//		for(int i = 0; i < rooms.size(); i++){
+//			if(Math.random()<(i+1)/rooms.size()){
+//				Rectangle room = rooms.get(i);
+//				for(int k = 1; k < room.width-1; k++){
+//					for(int j = 1; j < room.height-1; j++){
+//						if(Math.random()>((k+1)*(j+1))/((room.width-1)*(room.height-1))){
+//							entities.add(new Stair(world,(room.x+k)*Tile.TS , (room.y+j)*Tile.TS, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
+//							return;
+//						}
+//					}
+//				}
+//			}
+//		}
 	}
 }
