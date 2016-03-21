@@ -28,7 +28,7 @@ public class Slot {
 	
 	public Inventory inv;
 	
-	private World world;
+	protected World world;
 	
 	public Slot(World world, int[] data, Inventory inv) {
 		this.world = world;

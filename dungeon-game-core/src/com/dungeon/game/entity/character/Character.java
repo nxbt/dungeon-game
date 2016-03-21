@@ -380,6 +380,15 @@ public abstract class Character extends Dynamic {
 		return false;
 	}
 	
+	public boolean spendGold(int value){
+		if(gold >= value){
+			gold -=value;
+			return true;
+		}
+		return false;
+		
+	}
+	
 	public void toggleMode() {
 		fightMode = !fightMode;
 		

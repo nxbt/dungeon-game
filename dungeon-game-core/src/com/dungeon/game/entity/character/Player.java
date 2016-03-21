@@ -134,10 +134,12 @@ public class Player extends Character {
 		
 		vision = 10;
 		hearing = 10;
-		gold = 25;
+		gold = 2500;
 	}
 	
 	public void calc() {
+		
+		if(leftEquiped!=null)System.out.println(leftEquiped.owner);
 		
 		for(EffectGraphic eg: effectGraphics){
 			if(!world.hudEntities.contains(eg)){

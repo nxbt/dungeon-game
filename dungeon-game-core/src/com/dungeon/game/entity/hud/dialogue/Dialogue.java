@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.character.Character;
+import com.dungeon.game.entity.character.Friend;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.world.World;
 
@@ -68,6 +69,10 @@ public class Dialogue extends Hud {
 				speechBubbles.remove(1);
 			}
 			else if(speechBubbles.get(0).getProceedKey().equals("end")) close();
+			else if(speechBubbles.get(0).getProceedKey().equals("shop")){
+				((Friend)speechBubbles.get(0).character).shop.graphic.open();
+				close();
+			}
 			else speechBubbles.add(0,(SpeechBubble) potentialBubbles.get(speechBubbles.get(0).getProceedKey()).clone());
 		}
 	}

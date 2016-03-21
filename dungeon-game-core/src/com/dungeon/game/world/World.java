@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.Entity;
-import com.dungeon.game.entity.Stair;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.character.Enemy;
 import com.dungeon.game.entity.character.Friend;
@@ -34,6 +33,9 @@ import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.Portrait;
 import com.dungeon.game.entity.hud.PortraitBackground;
 import com.dungeon.game.entity.hud.StamBar;
+import com.dungeon.game.item.Shop;
+import com.dungeon.game.item.Stick;
+import com.dungeon.game.item.Sword;
 import com.dungeon.game.pathing.AreaMap;
 
 public class World {
@@ -95,6 +97,7 @@ public class World {
 		entities = curFloor.entities;
 		entities.add(0,player);
 		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+5, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
+		
 		
 		hudEntities.add(new GoldCounter(this));
 		hudEntities.add(new MenuButton(this, 4, cam.HEIGHT-20));

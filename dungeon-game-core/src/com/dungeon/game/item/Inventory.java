@@ -22,7 +22,7 @@ public class Inventory {
 			slot[i] = new Slot(world, layout[i], this);
 		}
 		
-		this.graphic= new InvGraphic(world, this, x, y);
+		this.graphic = new InvGraphic(world, this, x, y);
 	}
 	
 	public void hovered() {

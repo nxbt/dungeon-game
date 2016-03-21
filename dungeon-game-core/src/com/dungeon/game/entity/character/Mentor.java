@@ -10,6 +10,8 @@ import com.dungeon.game.criteria.True;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
+import com.dungeon.game.item.Shop;
+import com.dungeon.game.item.Stick;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -50,17 +52,26 @@ public class Mentor extends Friend {
 		d_width = 32;
 		d_height = 32;
 		
+
+		shop = new Shop(world, new int[][]{new int[]{0,10,10},new int[]{0,10,60}},new int[]{10,10,10}, null, 10, 10);
+		shop.slot[0].item = new Stick(world);
+		shop.slot[0].item.stack = 10;
+		shop.slot[1].item = new Sword(world, 10, 10);
+		
 		// \u200B to create pause;
 		dialogue = new Dialogue(world, this);
 		
 		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"Hey there.", "want sword question"));
+	
 		
 		dialogue.potentialBubbles.put("want sword question", new SpeechBubble(world, this, "Do you want a sword? You'll need a weapon to fight off the monsters. There's quite a few around here...", "want sword answer"));
 		
 		dialogue.potentialBubbles.put("want sword answer", new SpeechChoice(world, 
-				new String[]{"Yes.", "I have a sword."}, 
-				new String[]{"Yeah, I'll take a sword.", "I already have a sword."},
-				new String[]{"check no sword", "check sword"}));
+				new String[]{"Yes.", "I have a sword.","Any wares?"}, 
+				new String[]{"Yeah, I'll take a sword.", "I already have a sword.", "Actually, I'd like to buy some of your wares."},
+				new String[]{"check no sword", "check sword","wares"}));
+		
+		dialogue.potentialBubbles.put("wares", new SpeechBubble(world, this, "Absolutely, here-", "shop"));
 		
 		dialogue.potentialBubbles.put("lie defence", new SpeechChoice(world, 
 				new String[]{"What's it to you?", "What if I wanted two?", "Didn't know you cared."}, 
