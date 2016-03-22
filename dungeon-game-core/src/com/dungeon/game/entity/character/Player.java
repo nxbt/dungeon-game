@@ -10,11 +10,11 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.StamRegen;
 import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.entity.hud.EffectHudBackground;
+import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.item.Arrow;
 import com.dungeon.game.item.Axe;
 import com.dungeon.game.item.Bow;
 import com.dungeon.game.item.Equipable;
-import com.dungeon.game.item.Inventory;
 import com.dungeon.game.item.LifePotion;
 import com.dungeon.game.item.Medium;
 import com.dungeon.game.item.Wand;
@@ -134,11 +134,10 @@ public class Player extends Character {
 		
 		vision = 10;
 		hearing = 10;
-		gold = 2500;
+		gold = 25;
 	}
 	
 	public void calc() {
-		
 		if(leftEquiped!=null)System.out.println(leftEquiped.owner);
 		
 		for(EffectGraphic eg: effectGraphics){

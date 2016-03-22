@@ -1,8 +1,9 @@
-package com.dungeon.game.item;
+package com.dungeon.game.inventory;
 
 import java.util.ArrayList;
 
 import com.dungeon.game.entity.hud.InvGraphic;
+import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
 public class Inventory {
@@ -20,6 +21,18 @@ public class Inventory {
 		
 		for(int i = 0; i < slot.length; i++) {
 			slot[i] = new Slot(world, layout[i], this);
+		}
+		
+		this.graphic = new InvGraphic(world, this, x, y);
+	}
+	
+	public Inventory(World world, int[][] layout, float x, float y, boolean isDialogue) {
+		this.world = world;
+		
+		slot = new Slot[layout.length];
+		
+		for(int i = 0; i < slot.length; i++) {
+			slot[i] = new DialogueSlot(world, layout[i], this);
 		}
 		
 		this.graphic = new InvGraphic(world, this, x, y);

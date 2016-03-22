@@ -13,9 +13,9 @@ import com.dungeon.game.criteria.True;
 import com.dungeon.game.world.World;
 
 public class SpeechChoice extends SpeechBubble implements Cloneable {
-	private int[] yOffsets;
-	private boolean madeChoice;
-	private int choice;
+	protected int[] yOffsets;
+	protected boolean madeChoice;
+	protected int choice;
 	
 	public Criteria[] choiceCriteria; //controls which choices are available
 	public Criteria[][] choiceShortCriteria; //controls what the short text is for each choice 
@@ -170,7 +170,7 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 		}
 		
 		
-}
+	}
 
 	public SpeechBubble getChoiceBubble() {
 		SpeechBubble temp = new SpeechBubble(world, character, choiceTextCriteria[availableChoices.get(choice)], choiceTexts[availableChoices.get(choice)], proceedKeyCriteria[availableChoices.get(choice)], proceedKeys[availableChoices.get(choice)]);

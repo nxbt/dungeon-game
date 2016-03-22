@@ -1,4 +1,4 @@
-package com.dungeon.game.item;
+package com.dungeon.game.inventory;
 
 import com.dungeon.game.world.World;
 import com.dungeon.game.entity.character.Character;

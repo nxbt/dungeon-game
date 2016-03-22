@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Item;
-import com.dungeon.game.item.Slot;
 import com.dungeon.game.world.World;
 
 public class HudSlot extends Hud {

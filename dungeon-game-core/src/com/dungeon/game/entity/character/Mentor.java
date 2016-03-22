@@ -8,9 +8,13 @@ import com.dungeon.game.criteria.HasItem;
 import com.dungeon.game.criteria.Invert;
 import com.dungeon.game.criteria.True;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
+import com.dungeon.game.entity.hud.dialogue.InvBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
-import com.dungeon.game.item.Shop;
+import com.dungeon.game.inventory.Inventory;
+import com.dungeon.game.inventory.Shop;
+import com.dungeon.game.item.Arrow;
+import com.dungeon.game.item.LifePotion;
 import com.dungeon.game.item.Stick;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.world.Tile;
@@ -53,10 +57,12 @@ public class Mentor extends Friend {
 		d_height = 32;
 		
 
-		shop = new Shop(world, new int[][]{new int[]{0,10,10},new int[]{0,10,60}},new int[]{10,10,10}, null, 10, 10);
-		shop.slot[0].item = new Stick(world);
+		shop = new Shop(world, new int[][]{new int[]{0,10,10},new int[]{0,10,60},new int[]{0,10,110}},new int[]{10,200,20}, this, 10, 10);
+		shop.slot[0].item = new Arrow(world);
 		shop.slot[0].item.stack = 10;
 		shop.slot[1].item = new Sword(world, 10, 10);
+		shop.slot[2].item = new LifePotion(world);
+		shop.slot[2].item.stack = 10;
 		
 		// \u200B to create pause;
 		dialogue = new Dialogue(world, this);
@@ -96,8 +102,14 @@ public class Mentor extends Friend {
 				new Criteria[]{new HasItem(world, new Sword(world, 0, 0), world.player), new True(world)},
 				new String[]{"Oh, alright.", "Um... no you don't."}, 
 				new String[]{"goodbye", "give sword"}));
+
+		dialogue.potentialBubbles.put("give sword", new SpeechBubble(world, this, "Here ya go!", "giftSword"));
 		
-		dialogue.potentialBubbles.put("give sword", new SpeechBubble(world, this, "Here ya go!", "goodbye"));
+		Inventory invent = new Inventory(world, new int[][]{new int[]{0,0,0},new int[]{0,0,0}}, 0, 0, true);
+		invent.slot[0].item = new Sword(world, 7, 10);
+		invent.slot[1].item = new Arrow(world);
+		invent.slot[1].item.stack = 10;
+		dialogue.potentialBubbles.put("giftSword", new InvBubble(world, this, invent , "goodbye"));
 		
 		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world, this, "See ya!", "end"));
 		

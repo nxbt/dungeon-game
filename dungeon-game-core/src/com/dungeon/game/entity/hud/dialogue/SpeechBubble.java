@@ -190,7 +190,6 @@ public class SpeechBubble extends Hud implements Cloneable {
 	
 	public void draw(SpriteBatch batch) {		
 			SPEECH_BUBBLE.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
-			
 			font.draw(batch, text, x+8, y+d_height-6);
 			
 	}

@@ -2,9 +2,9 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.character.Character;
+import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Ammo;
 import com.dungeon.game.item.Ranged;
-import com.dungeon.game.item.Slot;
 import com.dungeon.game.world.World;
 
 public class WeaponProjectile extends Projectile {

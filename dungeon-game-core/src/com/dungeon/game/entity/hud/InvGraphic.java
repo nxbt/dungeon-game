@@ -1,8 +1,8 @@
 package com.dungeon.game.entity.hud;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dungeon.game.item.Inventory;
-import com.dungeon.game.item.Slot;
+import com.dungeon.game.inventory.Inventory;
+import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.world.World;
 
 public class InvGraphic extends Window {

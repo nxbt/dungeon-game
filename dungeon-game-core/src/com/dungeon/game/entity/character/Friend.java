@@ -3,7 +3,8 @@ package com.dungeon.game.entity.character;
 import com.dungeon.game.effect.Immune;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechPopup;
-import com.dungeon.game.item.Shop;
+import com.dungeon.game.inventory.Inventory;
+import com.dungeon.game.inventory.Shop;
 import com.dungeon.game.world.World;
 
 public abstract class Friend extends Character {
@@ -15,6 +16,8 @@ public abstract class Friend extends Character {
 	public Dialogue dialogue;
 	
 	public Shop shop;
+	
+	public Inventory sharedInventory;
 	
 	public Friend(World world, float x, float y) {
 		super(world, x, y);

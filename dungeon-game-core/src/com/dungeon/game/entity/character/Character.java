@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Entity;
-import com.dungeon.game.item.Inventory;
+import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.item.Weapon;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;

@@ -33,7 +33,7 @@ import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.Portrait;
 import com.dungeon.game.entity.hud.PortraitBackground;
 import com.dungeon.game.entity.hud.StamBar;
-import com.dungeon.game.item.Shop;
+import com.dungeon.game.inventory.Shop;
 import com.dungeon.game.item.Stick;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.pathing.AreaMap;

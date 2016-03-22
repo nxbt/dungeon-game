@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.inventory.Shop;
+import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Item;
-import com.dungeon.game.item.Shop;
-import com.dungeon.game.item.Slot;
 import com.dungeon.game.world.World;
 
 public class ShopGraphic extends InvGraphic {
