@@ -23,7 +23,7 @@ public class Vendinator extends Friend {
 		
 		name = "Vendinator";
 
-		face = new Texture("vendinator_face.png");
+		face = new Texture("vendinator_happy.png");
 		
 		torq = 0;
 		

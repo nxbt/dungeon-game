@@ -126,7 +126,7 @@ public class Mentor extends Friend {
 		if(seenEntities.contains(world.player)){
 			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y, world.player.x-x));
 			if(!world.player.fightMode&&speechBubble.endText.equals("")){
-				if(!world.hudEntities.contains(dialogue))speechBubble.updateText("I am here to, well, help.");
+				if(!world.hudEntities.contains(dialogue))speechBubble.updateText("I am here to, well, help. 3dfgdfgdf dfgdfgdf dfgdfgd d fgdf");
 				speechBubble.dismissed = false;
 			}
 			
