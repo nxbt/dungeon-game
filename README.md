@@ -19,3 +19,8 @@ High priority is now for things in the very near future, low priority is for stu
 * Add "sounds" that characters can "hear".
 * Lighting using a similar algorithm to visibility polygons.
 * Flesh out story.
+
+
+##BUG TRACKER
+* closed popups blocking the mouse
+* trapdoor spawning in walls
