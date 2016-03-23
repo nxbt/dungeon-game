@@ -4,7 +4,6 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 High priority is now for things in the very near future, low priority is for stuff in the near future that isn't as important as the stuff in high priority, and very low priority is hard stuff we're looking to do in the far future.
 
 ##TODO high priority (attempt within a week):
-* Add shops
 * Add multithreding!
 
 ##TODO low priority (within the month?):
