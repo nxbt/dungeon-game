@@ -65,8 +65,16 @@ public class Vendinator extends Friend {
 		// \u200B to create pause;
 		dialogue = new Dialogue(world, this);
 		
-		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"G\u200BR\u200BE\u200BE\u200BT\u200BI\u200BN\u200BG\u200BS, \u200B\u200B I \u200B\u200B AM \u200B\u200B VENDINATOR!", "goodbye"));
-		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world,this, "Goodbye!", "end"));
+		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"G\u200BR\u200BE\u200BE\u200BT\u200BI\u200BN\u200BG\u200BS.\u200B\u200B\u200B\u200B I\u200B\u200B AM\u200B\u200B VENDINATOR!", "response"));
+		
+		dialogue.potentialBubbles.put("response", new SpeechChoice(world, 
+				new String[]{"Hello?", "Are you a machine?", "Are you selling something?", "Cool robot."}, 
+				new String[]{"Umm... Hello?", "Wait, are you a machine?", "So... are you selling something?", "Wow, what a cool robot."},
+				new String[]{"pitch", "pitch", "pitch", "pitch"}));
+		
+		dialogue.potentialBubbles.put("pitch", new SpeechBubble(world, this,"B\u200B\u200BU\u200B\u200BY\u200B\u200B\u200B\u200B\u200B\u200B HUMAN.", "goodbye"));
+		
+		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world,this, "GOODBYE!", "end"));
 		
 		
 		dialogue.begin();
