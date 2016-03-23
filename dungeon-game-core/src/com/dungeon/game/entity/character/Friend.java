@@ -15,8 +15,6 @@ public abstract class Friend extends Character {
 	
 	public Dialogue dialogue;
 	
-	public Shop shop;
-	
 	public Inventory sharedInventory;
 	
 	public Friend(World world, float x, float y) {

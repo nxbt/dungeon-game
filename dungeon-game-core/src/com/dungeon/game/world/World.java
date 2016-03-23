@@ -18,6 +18,7 @@ import com.dungeon.game.entity.character.Enemy;
 import com.dungeon.game.entity.character.Friend;
 import com.dungeon.game.entity.character.Mentor;
 import com.dungeon.game.entity.character.Player;
+import com.dungeon.game.entity.character.Vendinator;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.GoldCounter;
@@ -33,9 +34,6 @@ import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.Portrait;
 import com.dungeon.game.entity.hud.PortraitBackground;
 import com.dungeon.game.entity.hud.StamBar;
-import com.dungeon.game.inventory.Shop;
-import com.dungeon.game.item.Stick;
-import com.dungeon.game.item.Sword;
 import com.dungeon.game.pathing.AreaMap;
 
 public class World {
@@ -96,7 +94,8 @@ public class World {
 		
 		entities = curFloor.entities;
 		entities.add(0,player);
-		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+5, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
+		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
+		entities.add(new Vendinator(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS*2.5f, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
 		
 		
 		hudEntities.add(new GoldCounter(this));

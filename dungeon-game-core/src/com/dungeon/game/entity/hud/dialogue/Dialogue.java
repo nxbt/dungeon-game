@@ -69,10 +69,6 @@ public class Dialogue extends Hud {
 				speechBubbles.remove(1);
 			}
 			else if(speechBubbles.get(0).getProceedKey().equals("end")) close();
-			else if(speechBubbles.get(0).getProceedKey().equals("shop")){
-				((Friend)speechBubbles.get(0).character).shop.graphic.open();
-				close();
-			}
 			else {
 				if(speechBubbles.size()>1&&speechBubbles.get(1) instanceof InvDisplayBubble){
 					speechBubbles.remove(1);

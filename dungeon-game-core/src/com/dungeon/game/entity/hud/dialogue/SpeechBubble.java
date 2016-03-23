@@ -139,8 +139,16 @@ public class SpeechBubble extends Hud implements Cloneable {
 					}
 				}
 			}
-			
-			max_line_length = Math.max(max_line_length, lines.get(i).length());
+			for( String line: lines){
+				int length = 0;
+				for(int k = 0; k < line.length(); k++){
+					if(line.charAt(k)!='\u200B'){
+						length++;
+					}
+				}
+				max_line_length = Math.max(max_line_length, length);
+			}
+//			max_line_length = Math.max(max_line_length, lines.get(i).length());
 			
 			endText += lines.get(i) + "\n";
 		}
