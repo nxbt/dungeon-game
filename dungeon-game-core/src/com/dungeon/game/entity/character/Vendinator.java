@@ -3,15 +3,10 @@ package com.dungeon.game.entity.character;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.criteria.Criteria;
-import com.dungeon.game.criteria.HasItem;
-import com.dungeon.game.criteria.Invert;
-import com.dungeon.game.criteria.True;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.InvBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
-import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Shop;
 import com.dungeon.game.item.Arrow;
 import com.dungeon.game.item.LifePotion;
@@ -27,6 +22,8 @@ public class Vendinator extends Friend {
 		speechBubble.setColor();	
 		
 		name = "Vendinator";
+
+		face = new Texture("vendinator_face.png");
 		
 		torq = 0;
 		
@@ -65,15 +62,23 @@ public class Vendinator extends Friend {
 		// \u200B to create pause;
 		dialogue = new Dialogue(world, this);
 		
-		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"G\u200BR\u200BE\u200BE\u200BT\u200BI\u200BN\u200BG\u200BS.\u200B\u200B\u200B\u200B I\u200B\u200B AM\u200B\u200B VENDINATOR!", "response"));
+		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"G\u200BR\u200BE\u200BE\u200BT\u200BI\u200BN\u200BG\u200BS.\u200B\u200B\u200B\u200B I\u200B\u200B AM\u200B\u200B VENDINATOR!", "greetings response"));
 		
-		dialogue.potentialBubbles.put("response", new SpeechChoice(world, 
+		dialogue.potentialBubbles.put("greetings response", new SpeechChoice(world, 
 				new String[]{"Hello?", "Are you a machine?", "Are you selling something?", "Cool robot."}, 
 				new String[]{"Umm... Hello?", "Wait, are you a machine?", "So... are you selling something?", "Wow, what a cool robot."},
 				new String[]{"pitch", "pitch", "pitch", "pitch"}));
 		
-		dialogue.potentialBubbles.put("pitch", new SpeechBubble(world, this,"B\u200B\u200BU\u200B\u200BY\u200B\u200B\u200B\u200B\u200B\u200B HUMAN.", "goodbye"));
+		dialogue.potentialBubbles.put("pitch", new SpeechBubble(world, this,"B\u200B\u200BU\u200B\u200BY\u200B\u200B\u200B\u200B\u200B\u200B HUMAN.", "pitch response"));
 		
+		dialogue.potentialBubbles.put("pitch response", new SpeechChoice(world, 
+				new String[]{"Okay.", "What do you have?", "No thanks.", "No way."}, 
+				new String[]{"Umm... okay.", "Well what do you have?", "Yeah... no thanks.", "No way, I'm outta here."},
+				new String[]{"shop", "shop", "dismiss", "goodbye"}));
+		
+		dialogue.potentialBubbles.put("shop", new InvBubble(world, this, shop, "goodbye"));
+		
+		dialogue.potentialBubbles.put("dismiss", new SpeechBubble(world,this, "THEN...\u200B\u200B\u200B\u200B\u200B\u200B LEAVE.", "end"));
 		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world,this, "GOODBYE!", "end"));
 		
 		
@@ -86,7 +91,7 @@ public class Vendinator extends Friend {
 		if(seenEntities.contains(world.player)){
 			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y, world.player.x-x));
 			if(!world.player.fightMode&&speechBubble.endText.equals("")){
-				if(!world.hudEntities.contains(dialogue))speechBubble.updateText("HELLO! ... HI! - DON'T GO.");
+				if(!world.hudEntities.contains(dialogue))speechBubble.updateText("BUY!\u200B\u200B\u200B\u200B\u200B\u200B BUY!\u200B\u200B\u200B\u200B\u200B\u200B BUY!");
 				speechBubble.dismissed = false;
 			}
 			

@@ -91,9 +91,17 @@ public class SpeechPopup extends Hud {
 				}
 			}
 			
-			max_line_length = Math.max(max_line_length, lines.get(i).length());
-			
 			endText += lines.get(i) + "\n";
+		}
+		
+		for( String line: lines){
+			int length = 0;
+			for(int k = 0; k < line.length(); k++){
+				if(line.charAt(k)!='\u200B'){
+					length++;
+				}
+			}
+			max_line_length = Math.max(max_line_length, length);
 		}
 		
 		if(text.equals("")){
