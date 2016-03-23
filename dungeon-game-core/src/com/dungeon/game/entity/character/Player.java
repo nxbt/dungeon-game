@@ -134,7 +134,7 @@ public class Player extends Character {
 		
 		vision = 10;
 		hearing = 10;
-		gold = 25;
+		gold = 0;
 	}
 	
 	public void calc() {

@@ -11,14 +11,13 @@ import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
 public class ShopGraphic extends InvGraphic {
-	private static final Texture UR_MOM = new Texture("coin.png");
+	private static final Texture COIN = new Texture("coin.png");
 
 	private BitmapFont font;
 
 	public ShopGraphic(World world, Shop shop, float x, float y) {
 		super(world,shop, x, y);
 		
-
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.GOLD);
 		
@@ -35,9 +34,8 @@ public class ShopGraphic extends InvGraphic {
 		for(int i = 0; i < inv.slot.length; i++) {
 			Slot s = inv.slot[i];
 			s.draw(batch, (int)x, (int)y);
-			batch.draw(UR_MOM, x+s.x+26,y+s.y);
+			batch.draw(COIN, x+s.x+26,y+s.y);
 			font.draw(batch, Integer.toString(((Shop)inv).costs[i]), (float) (20+x+s.x+Item.SIZE), 16+y+s.y+font.getScaleY()/2*12);
-
 		}
 	}
 }

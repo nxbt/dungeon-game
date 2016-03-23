@@ -1,7 +1,5 @@
 package com.dungeon.game.inventory;
 
-import com.dungeon.game.entity.hud.DescWindow;
-import com.dungeon.game.item.Consumable;
 import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;

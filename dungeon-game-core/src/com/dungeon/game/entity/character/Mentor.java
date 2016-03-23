@@ -29,6 +29,7 @@ public class Mentor extends Friend {
 		speechBubble.setColor();	
 		
 		name = "Mentor";
+		
 		torq = 5;
 		
 		vision = 10;
@@ -77,7 +78,9 @@ public class Mentor extends Friend {
 				new String[]{"Yeah, I'll take a sword.", "I already have a sword.", "Actually, I'd like to buy some of your wares."},
 				new String[]{"check no sword", "check sword","wares"}));
 		
-		dialogue.potentialBubbles.put("wares", new SpeechBubble(world, this, "Absolutely, here-", "shop"));
+		dialogue.potentialBubbles.put("wares", new SpeechBubble(world, this, "Absolutely, here-", "shit shop"));
+		
+		dialogue.potentialBubbles.put("shit shop", new InvBubble(world, this, shop, "goodbye"));
 		
 		dialogue.potentialBubbles.put("lie defence", new SpeechChoice(world, 
 				new String[]{"What's it to you?", "What if I wanted two?", "Didn't know you cared."}, 

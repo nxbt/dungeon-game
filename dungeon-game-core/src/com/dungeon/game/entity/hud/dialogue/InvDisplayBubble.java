@@ -9,17 +9,21 @@ import com.dungeon.game.world.World;
 
 public class InvDisplayBubble extends SpeechBubble {
 	
-	private Inventory inv;
-
+	protected Inventory inv;
+	
 	public InvDisplayBubble(World world, Character character, Inventory inv) {
 		super(world, character);
+		
 		this.inv = inv;
+		
 		updateText("none");
+		
 		d_width = 0;
 		d_height = 0;
+		
 		for(int i = 0; i < inv.slot.length; i++){
-			inv.slot[i].x = 8+i%5*40;
-			inv.slot[i].y = 8+(int)(i/5)*40;
+			inv.slot[i].x = 8+i%6*40;
+			inv.slot[i].y = 8+(int)(i/6)*40;
 			if(d_width < inv.slot[i].x+40)d_width = (int) (inv.slot[i].x+40);
 			if(d_height < inv.slot[i].y+40)d_height = (int) (inv.slot[i].y+40);
 		}
