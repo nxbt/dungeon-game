@@ -10,7 +10,8 @@ import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
 import com.dungeon.game.inventory.Shop;
 import com.dungeon.game.item.Arrow;
 import com.dungeon.game.item.LifePotion;
-import com.dungeon.game.item.Sword;
+import com.dungeon.game.item.ManaPotion;
+import com.dungeon.game.item.Stick;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -52,12 +53,15 @@ public class Vendinator extends Friend {
 		d_width = 32;
 		d_height = 32;
 		
-		Shop shop = new Shop(world, new int[][]{new int[]{0,10,10},new int[]{0,10,60},new int[]{0,10,110}},new int[]{10,200,20}, this, 10, 10);
+		Shop shop = new Shop(world, new int[][]{new int[]{0,10,10},new int[]{0,10,10},new int[]{0,10,60},new int[]{0,10,110}},new int[]{5,30,15,5}, this, 10, 10);
 		shop.slot[0].item = new Arrow(world);
-		shop.slot[0].item.stack = 10;
-		shop.slot[1].item = new Sword(world, 10, 10);
-		shop.slot[2].item = new LifePotion(world);
+		shop.slot[0].item.stack = 12;
+		shop.slot[1].item = new LifePotion(world);
+		shop.slot[1].item.stack = 10;
+		shop.slot[2].item = new ManaPotion(world);
 		shop.slot[2].item.stack = 10;
+		shop.slot[3].item = new Stick(world);
+		shop.slot[3].item.stack = 10;
 		
 		// \u200B to create pause;
 		dialogue = new Dialogue(world, this);
