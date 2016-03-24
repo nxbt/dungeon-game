@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Stair;
 import com.dungeon.game.entity.character.Vendinator;
 import com.dungeon.game.pathing.Area;
@@ -553,8 +554,117 @@ public class VillageRooms extends Generation {
 	//carpet (tile)
 	//other decerative entities (sculptures, etc)
 	
+	private int[] findDoor(Rectangle room){
+		int doorside;
+		int doorpos;
+		int x,y;
+		x = (int) room.x-1;
+		y = (int) room.y;
+		for(int i = 0; i < room.height; i++){
+			if(map[y][x]==0){
+				map[y][x]=5;
+				return new int[]{0,x,y};
+			}
+
+			y++;
+		}
+		x = (int) (room.x+room.width);
+		y = (int) room.y;
+		for(int i = 0; i < room.height; i++){
+			if(map[y][x]==0){
+				map[y][x]=5;
+				return new int[]{1,x,y};
+			}
+
+			y++;
+		}
+		x = (int) room.x;
+		y = (int) room.y-1;
+		for(int i = 0; i < room.width; i++){
+			if(map[y][x]==0){
+				map[y][x]=5;
+				return new int[]{2,x,y};
+			}
+
+			x++;
+		}
+		x = (int) room.x;
+		y = (int) (room.y+room.height);
+		for(int i = 0; i < room.width; i++){
+			if(map[y][x]==0){
+				map[y][x]=5;
+				return new int[]{3,x,y};
+			}
+
+			x++;
+		}
+		
+		return null;
+		
+	}
+	
 	private void generateStore(Rectangle room){
 		specialRooms.remove(room);
+		
+		int[] doorFinder = findDoor(room);
+		int[][] roomMap;
+		int doorX, doorY;
+		ArrayList<Entity> roomEntities = new ArrayList<Entity>();
+		if(doorFinder[0]==2||doorFinder[0]==3){
+			roomMap = new int[(int) room.width][(int) room.height];
+			doorX = 0;
+			doorY = doorFinder[1];
+		}
+		else {
+			roomMap = new int[(int) room.height][(int) room.width];
+			doorX = 0;
+			doorY = doorFinder[2];
+		}
+		
+		boolean keeperBottom = Math.random()>0.5;
+		if(doorY == 0)keeperBottom = true;
+		else if(doorY == roomMap.length)keeperBottom = false;
+		
+		roomMap[keeperBottom?0:roomMap.length-1][roomMap[0].length-1]=4;
+		
+		
+		
+		//ending transformations
+		
+		if(doorFinder[0]==1||doorFinder[0]==3){
+			int[][] temp = roomMap.clone();
+			roomMap = new int[(int) room.height][(int) room.width];
+			for(int i = 0; i < temp.length; i++){
+				for(int k = 0; k < temp[i].length; k++){
+					roomMap[i][roomMap[0].length-k]=temp[i][k];
+				}
+			}
+		}
+		
+		if(doorFinder[0]==2||doorFinder[0]==3){
+			int[][] temp = roomMap.clone();
+			roomMap = new int[(int) room.height][(int) room.width];
+			for(int i = 0; i < temp.length; i++){
+				for(int k = 0; k < temp[i].length; k++){
+					roomMap[k][i]=temp[i][k];
+				}
+			}
+		}
+		
+		//copy tiles to the map
+		
+		int x = (int) room.x;
+		int y = (int) room.y;
+		
+		for(int i = 0; i < room.height; i++){
+			for(int k = 0; k < room.width; k++){
+				map[y][x] = roomMap[i][k];
+				x++;
+			}
+			y++;
+			x = (int) room.x;
+		}
+		
 		entities.add(new Vendinator(world, (room.x+1)*Tile.TS, (room.y+1)*Tile.TS));
 	}
 	
