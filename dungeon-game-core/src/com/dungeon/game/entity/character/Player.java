@@ -138,8 +138,6 @@ public class Player extends Character {
 	}
 	
 	public void calc() {
-		if(leftEquiped!=null)System.out.println(leftEquiped.owner);
-		
 		for(EffectGraphic eg: effectGraphics){
 			if(!world.hudEntities.contains(eg)){
 				for(int i = 0; i < world.hudEntities.size(); i++){

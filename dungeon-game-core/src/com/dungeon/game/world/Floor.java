@@ -9,6 +9,7 @@ import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Stair;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.Rooms;
+import com.dungeon.game.generator.VillageRooms;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
 
@@ -29,7 +30,7 @@ public class Floor {
 	
 	protected World world;
 	
-	public Floor(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY) {
+	public Floor(World world, String type, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY) {
 		this.world = world;
 		
 		entities = new ArrayList<Entity>();
@@ -48,8 +49,11 @@ public class Floor {
 				spritesheet[i*sheetWidth+k] = new TextureRegion(new Texture(DEFAULT),k*Tile.TS,i*Tile.TS,Tile.TS,Tile.TS);
 			}
 		}
-		Generation gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY);
-		((Rooms)gen).generateStairDown();
+		Generation gen;
+		if(type.equals("rooms"))gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY);
+		else if(type.equals("village_rooms"))gen = new VillageRooms(world, width, height,centerX,centerY, upTrapX, upTrapY);
+		else gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY);
+
 		int[][] map = gen.getMap();
 		entities = gen.getEntities();
 //		entities.add(new Stair(world, (centerX+1)*Tile.TS, centerY*Tile.TS, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));

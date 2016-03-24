@@ -41,7 +41,7 @@ public class Stair extends Static {
 			world.entities.remove(world.player);
 			if(world.curDungeon.floors.size() <= world.curDungeon.floors.indexOf(world.curFloor) + (goDown? 1:-1)) {
 				//generate new floor
-				world.curDungeon.floors.add(new Floor(world,50,50,destX,destY,(int)(x/Tile.TS),(int)(y/Tile.TS)));
+				world.curDungeon.floors.add(new Floor(world, "rooms", 50,50,destX,destY,(int)(x/Tile.TS),(int)(y/Tile.TS)));
 			}
 			world.curFloor = world.curDungeon.floors.get(world.curDungeon.floors.indexOf(world.curFloor) + (goDown? 1:-1));
 			world.entities = world.curFloor.entities;

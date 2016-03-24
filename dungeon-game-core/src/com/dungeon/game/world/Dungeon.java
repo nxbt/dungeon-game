@@ -12,6 +12,6 @@ public class Dungeon {
 		
 		seed = (int) (Math.random()*1000000000);
 		
-		floors.add(new Floor(world, 50, 50,25,25,0,0));
+		floors.add(new Floor(world, "village_rooms", 50, 50,25,25,0,0));
 	}
 }

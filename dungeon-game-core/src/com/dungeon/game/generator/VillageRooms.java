@@ -5,19 +5,23 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Stair;
-import com.dungeon.game.entity.character.Goon;
+import com.dungeon.game.entity.character.Vendinator;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
-public class Rooms extends Generation {
+public class VillageRooms extends Generation {
 	private ArrayList<Rectangle> rooms;
+	private ArrayList<Rectangle> specialRooms;
 	private ArrayList<ArrayList<int[]>> halls;
 	private ArrayList<ArrayList<Rectangle>> hallEnds;
 	
-	public Rooms(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY){
+	//make special room chooseing code better?
+	
+	public VillageRooms(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY){
 		super(world, width, height);
 		rooms = new ArrayList<Rectangle>();
+		specialRooms = new ArrayList<Rectangle>();
 		halls = new ArrayList<ArrayList<int[]>>();
 		hallEnds = new ArrayList<ArrayList<Rectangle>>();
 		int x = height/2;
@@ -26,21 +30,21 @@ public class Rooms extends Generation {
 		if(world.curDungeon!=null)entities.add(new Stair(world, centerX*Tile.TS-Tile.TS/2, centerY*Tile.TS-Tile.TS/2, false, upTrapX+1, upTrapY+1));
 
 		generateStartRoom(centerX, centerY);
-		generateStairDown();
+		populateSpecialRooms();
 	}
-	
+
 	public boolean generateStartRoom(int x, int y){
 		int originX = x;
 		int originY = y;
-		int height = (int) (3+Math.random()*map.length/7);
+		int height = (int) (5+Math.random()*map.length/20);
 		y-=(int) (Math.random()*height)+1;
-		int width = (int) (3+Math.random()*map[0].length/7);
+		int width = (int) (5+Math.random()*map[0].length/20);
 		x-=(int) (Math.random()*width)+1;
 		Rectangle room = new Rectangle(x,y,width,height);
 		int nextX;
 		int nextY;
 		if(isValidRoom(room)){
-			addRoomToMap(room, false);
+			addRoomToMap(room, false,false);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
 				if(dir == 0){
@@ -69,10 +73,11 @@ public class Rooms extends Generation {
 	public boolean generateBelowRoom(int x, int y, ArrayList<int[]> hall, Rectangle lastRoom){
 		int doorX = x;
 		int doorY = y-1;
-		int height = (int) (3+Math.random()*map.length/7);
+		int height = (int) (5+Math.random()*map.length/20);
 		y-=height;
-		int width = (int) (3+Math.random()*map[0].length/7);
+		int width = (int) (5+Math.random()*map[0].length/20);
 		x-=(int) (Math.random()*width);
+		boolean special = Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
@@ -93,8 +98,8 @@ public class Rooms extends Generation {
 //					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
 				}
 			}
-			addRoomToMap(room, true);
-			for(int i = 0; i<100;i++){
+			addRoomToMap(room, true,special);
+			for(int i = 0; i<(special?0:100);i++){
 				int dir = (int) (Math.random()*4);
 				if(dir == 0){
 					nextX = (int) (x+width*Math.random());
@@ -123,9 +128,10 @@ public class Rooms extends Generation {
 	public boolean generateAboveRoom(int x, int y, ArrayList<int[]> hall, Rectangle lastRoom){
 		int doorX = x;
 		int doorY = y;
-		int height = (int) (3+Math.random()*map.length/7);
-		int width = (int) (3+Math.random()*map[0].length/7);
+		int height = (int) (5+Math.random()*map.length/20);
+		int width = (int) (5+Math.random()*map[0].length/20);
 		x-=(int) (Math.random()*width);
+		boolean special = Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
@@ -146,8 +152,8 @@ public class Rooms extends Generation {
 //					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
 				}
 			}
-			addRoomToMap(room, true);
-			for(int i = 0; i<100;i++){
+			addRoomToMap(room, true,special);
+			for(int i = 0; i<(special?0:100);i++){
 				int dir = (int) (Math.random()*4);
 				if(dir == 0){
 					nextX = (int) (x+width*Math.random());
@@ -176,10 +182,11 @@ public class Rooms extends Generation {
 	public boolean generateLeftRoom(int x, int y, ArrayList<int[]> hall, Rectangle lastRoom){
 		int doorX = x-1;
 		int doorY = y;
-		int height = (int) (3+Math.random()*map.length/7);
+		int height = (int) (5+Math.random()*map.length/20);
 		y-=(int)(Math.random()*height);
-		int width = (int) (3+Math.random()*map[0].length/7);
+		int width = (int) (5+Math.random()*map[0].length/20);
 		x-=width;
+		boolean special = Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
@@ -200,8 +207,8 @@ public class Rooms extends Generation {
 //					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
 				}
 			}
-			addRoomToMap(room, true);
-			for(int i = 0; i<100;i++){
+			addRoomToMap(room, true,special);
+			for(int i = 0; i<(special?0:100);i++){
 				int dir = (int) (Math.random()*4);
 				if(dir == 0){
 					nextX = (int) (x+width*Math.random());
@@ -230,9 +237,10 @@ public class Rooms extends Generation {
 	public boolean generateRightRoom(int x, int y, ArrayList<int[]> hall, Rectangle lastRoom){
 		int doorX = x;
 		int doorY = y;
-		int height = (int) (3+Math.random()*map.length/7);
+		int height = (int) (5+Math.random()*map.length/20);
 		y-=(int)(Math.random()*height);
-		int width = (int) (3+Math.random()*map[0].length/7);
+		int width = (int) (5+Math.random()*map[0].length/20);
+		boolean special = Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
@@ -253,8 +261,8 @@ public class Rooms extends Generation {
 //					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
 				}
 			}
-			addRoomToMap(room, true);
-			for(int i = 0; i<100;i++){
+			addRoomToMap(room, true,special);
+			for(int i = 0; i<(special?0:100);i++){
 				int dir = (int) (Math.random()*4);
 				if(dir == 0){
 					nextX = (int) (x+width*Math.random());
@@ -456,6 +464,7 @@ public class Rooms extends Generation {
 	}
 	
 	public boolean isHallTaken(Rectangle roomOne, Rectangle roomTwo) {
+		if(specialRooms.contains(roomTwo))return true;
 		for(ArrayList<Rectangle> i: hallEnds){
 			boolean roomOneFound = false;
 			boolean roomTwoFound = false;
@@ -468,26 +477,20 @@ public class Rooms extends Generation {
 		return false;
 	}
 	
-	public void addRoomToMap(Rectangle room, boolean hasEnemies){
+	public void addRoomToMap(Rectangle room, boolean hasEnemies, boolean special){
 		boolean addedChest = false;
 		rooms.add(room);
+		if(special){
+			specialRooms.add(room);
+		}
 		int x = (int) room.x;
 		int y = (int) room.y;
 		int width = (int) room.width;
 		int height = (int) room.height;
 		for(int i = 0; i<height; i++){
 			for(int k = 0; k<width; k++){
-				map[y][x]=0;
-				if(!addedChest&&i>0&&k>0&&i<height-1&&k<width-1&&Math.random()>1f-(1f/((float)width*(float)height))){
-					entities.add(LootGenerator.getChest(world, 1,x,y));
-					addedChest = true;
-				}
-				if(hasEnemies && i>-1&&k>-1&&i<height&&k<width&&Math.random()>0.96){
-					Goon enemy =  new Goon(world, x*Tile.TS+Tile.TS/2f, y*Tile.TS+Tile.TS/2f);
-					enemy.angle = (float) (180f-Math.random()*360f);
-					enemy.target_angle = enemy.angle;
-					entities.add(enemy);
-				}
+				if(special)map[y][x] = 4;
+				else map[y][x]=0;
 				x++;
 			}
 			y++;
@@ -528,5 +531,35 @@ public class Rooms extends Generation {
 //				}
 //			}
 //		}
+	}
+	
+
+	
+	private void populateSpecialRooms() {
+		generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
+		generateStairRoom(specialRooms.get((int) (specialRooms.size()*Math.random())));
+		for(int i = 0; i < specialRooms.size(); i++){
+			
+		}
+	}
+	
+	//ENTITIES FOR STORE GENERATION
+	//bookshelves (diff sides)
+	//desk (2 parts)
+	//shop keeper
+	//table
+	//chairs
+	//plant pot
+	//carpet (tile)
+	//other decerative entities (sculptures, etc)
+	
+	private void generateStore(Rectangle room){
+		specialRooms.remove(room);
+		entities.add(new Vendinator(world, (room.x+1)*Tile.TS, (room.y+1)*Tile.TS));
+	}
+	
+	private void generateStairRoom(Rectangle room) {
+		specialRooms.remove(room);
+		entities.add(new Stair(world,(room.x+1)*Tile.TS+Tile.TS/2 , (room.y+1)*Tile.TS+Tile.TS/2, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
 	}
 }

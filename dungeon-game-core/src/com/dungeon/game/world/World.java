@@ -70,6 +70,12 @@ public class World {
 	public World() {
 		hudBatch = new SpriteBatch();
 		
+		cam = new Camera();
+		hudCam = new Camera();
+		
+//		player = new Player(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS-Tile.TS/2);
+		player = new Player(this, 0, 0);
+		
 		shapeRenderer = new ShapeRenderer();
 		
 		dungeons = new ArrayList<Dungeon>();
@@ -79,15 +85,13 @@ public class World {
 		curDungeon = dungeons.get(0);
 		curFloor = curDungeon.floors.get(0);
 		
-		areaMap = curFloor.areaMap;
+		player.x = curFloor.tm[0].length/2*Tile.TS-Tile.TS/2;
+		player.y = curFloor.tm.length/2*Tile.TS-Tile.TS/2;
 		
-		cam = new Camera();
-		hudCam = new Camera();
+		areaMap = curFloor.areaMap;
 		
 		entities = new ArrayList<Entity>();
 		hudEntities = new ArrayList<Hud>();
-		
-		player = new Player(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS-Tile.TS/2);
 		
 		mouse = new Mouse(this, 0, 0);
 		descBox = new DescBox(this);
