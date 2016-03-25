@@ -3,6 +3,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 
 ##TODO high priority (within a week):
 * Finish adding procedural shop decoration generation
+* Upgrade sprites
 * Add different shops to towns
 * Add procedural generation to all rooms in towns
 
