@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Stair;
 import com.dungeon.game.entity.character.Vendinator;
+import com.dungeon.game.entity.furniture.Bookshelf;
 import com.dungeon.game.entity.furniture.ShopDesk1;
 import com.dungeon.game.entity.furniture.ShopDesk2;
 import com.dungeon.game.pathing.Area;
@@ -80,7 +81,7 @@ public class VillageRooms extends Generation {
 		y-=height;
 		int width = (int) (5+Math.random()*map[0].length/20);
 		x-=(int) (Math.random()*width);
-		boolean special = Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
+		boolean special = true;//Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
@@ -134,7 +135,7 @@ public class VillageRooms extends Generation {
 		int height = (int) (5+Math.random()*map.length/20);
 		int width = (int) (5+Math.random()*map[0].length/20);
 		x-=(int) (Math.random()*width);
-		boolean special = Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
+		boolean special = true;//Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
@@ -189,7 +190,7 @@ public class VillageRooms extends Generation {
 		y-=(int)(Math.random()*height);
 		int width = (int) (5+Math.random()*map[0].length/20);
 		x-=width;
-		boolean special = Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
+		boolean special = true;//Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
@@ -243,7 +244,7 @@ public class VillageRooms extends Generation {
 		int height = (int) (5+Math.random()*map.length/20);
 		y-=(int)(Math.random()*height);
 		int width = (int) (5+Math.random()*map[0].length/20);
-		boolean special = Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
+		boolean special = true;//Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
@@ -633,7 +634,16 @@ public class VillageRooms extends Generation {
 		roomEntities.add(new Vendinator(world, (roomMap[0].length-1)*Tile.TS+Tile.TS/2, (keeperBottom? 3f/4f:roomMap.length-1+1f/4f)*Tile.TS));
 		
 		ShopDesk1 desk1 = new ShopDesk1(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*1f/4f, (keeperBottom? 3f/4f:roomMap.length-1+1f/4f)*Tile.TS);
-		ShopDesk2 desk2 = new ShopDesk2(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*-1f/4f, (keeperBottom? 7f/4f:roomMap.length-1-3f/4f)*Tile.TS); 
+		ShopDesk2 desk2 = new ShopDesk2(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*-1f/4f, (keeperBottom? 7f/4f:roomMap.length-1-3f/4f)*Tile.TS);
+
+//		int[][][] bookMap = new int[][][]{
+//			new int[][]{new int[]{-1,3}, new int[]{-1,3}, new int[]{-1,3}, new int[]{-1,3}, new int[]{-1,3}, new int[]{-1,3}}
+//			};
+		int[][][] bookMap = new int[1][roomMap[0].length*2][2];
+		for(int i = 0; i < roomMap[0].length*2; i++){
+			bookMap[0][i] = new int[]{-1,keeperBottom?2:0};
+		}
+		roomEntities.add(new Bookshelf(world, bookMap[0].length*8,(keeperBottom?roomMap.length-1+3f/4f:1f/4f)*Tile.TS, bookMap));
 		
 		if(keeperBottom){
 			desk1.angle = 180;
