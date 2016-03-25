@@ -606,6 +606,8 @@ public class VillageRooms extends Generation {
 	private void generateStore(Rectangle room){
 		specialRooms.remove(room);
 		
+		//begin transformation
+		
 		int[] doorFinder = findDoor(room);
 		int[][] roomMap;
 		int doorX, doorY;
@@ -627,12 +629,11 @@ public class VillageRooms extends Generation {
 		
 		roomMap[keeperBottom?0:roomMap.length-1][roomMap[0].length-1]=4;
 		
+		//Put populating code here thanks bye
+		roomEntities.add(new Vendinator(world, (roomMap[0].length-1)*Tile.TS+Tile.TS/2, (keeperBottom? 0:roomMap.length-1)*Tile.TS+Tile.TS/2));
 		
 		
 		//ending transformations
-		
-		System.out.println(doorFinder[0]);
-		
 		if(doorFinder[0]==1||doorFinder[0]==3){
 			int[][] temp = roomMap.clone();
 			roomMap = new int[(int) room.height][(int) room.width];
@@ -640,6 +641,9 @@ public class VillageRooms extends Generation {
 				for(int k = 0; k < temp[i].length; k++){
 					roomMap[i][roomMap[i].length-1-k]=temp[i][k];
 				}
+			}
+			for(Entity e: roomEntities) {
+				
 			}
 		}
 		
@@ -666,8 +670,6 @@ public class VillageRooms extends Generation {
 			y++;
 			x = (int) room.x;
 		}
-		
-		entities.add(new Vendinator(world, (room.x+1)*Tile.TS, (room.y+1)*Tile.TS));
 	}
 	
 	private void generateStairRoom(Rectangle room) {
