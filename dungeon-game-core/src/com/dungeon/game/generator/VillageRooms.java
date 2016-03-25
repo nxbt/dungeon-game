@@ -632,8 +632,19 @@ public class VillageRooms extends Generation {
 		//Put populating code here thanks bye
 		roomEntities.add(new Vendinator(world, (roomMap[0].length-1)*Tile.TS+Tile.TS/2, (keeperBottom? 3f/4f:roomMap.length-1+1f/4f)*Tile.TS));
 		
-		roomEntities.add(new ShopDesk1(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*1f/4f, (keeperBottom? 3f/4f:roomMap.length-1+1f/4f)*Tile.TS));
-		roomEntities.add(new ShopDesk2(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*-1f/4f, (keeperBottom? 7f/4f:roomMap.length-1-3f/4f)*Tile.TS));
+		ShopDesk1 desk1 = new ShopDesk1(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*1f/4f, (keeperBottom? 3f/4f:roomMap.length-1+1f/4f)*Tile.TS);
+		ShopDesk2 desk2 = new ShopDesk2(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*-1f/4f, (keeperBottom? 7f/4f:roomMap.length-1-3f/4f)*Tile.TS); 
+		
+		if(keeperBottom){
+			desk1.angle = 180;
+			desk2.angle = 180;
+		}else{
+			desk1.flipX = true;
+			desk2.flipX = true;
+		}
+		
+		roomEntities.add(desk1);
+		roomEntities.add(desk2);
 		
 		//ending transformations
 		if(doorFinder[0]==1||doorFinder[0]==3){
@@ -651,7 +662,7 @@ public class VillageRooms extends Generation {
 			
 			for(Entity e: roomEntities) {
 				e.x = roomMap[0].length*Tile.TS-e.x;
-				e.angle+=180;
+				e.flipX  = !e.flipX;
 			}
 		}
 		
@@ -667,7 +678,8 @@ public class VillageRooms extends Generation {
 				float tempX = e.x;
 				e.x = e.y;
 				e.y = tempX;
-				e.angle = 90+e.angle;
+				e.angle-=90;
+				e.flipX = !e.flipX;
 			}
 		}
 		

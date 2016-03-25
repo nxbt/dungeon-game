@@ -84,9 +84,9 @@ public class Door extends Static {
 	public void draw(SpriteBatch batch) {
 		if(dir ==0){
 			if(!open)batch.draw(sprite, x+d_offx, y+d_offy, d_width, d_height);
-			else batch.draw(sprite, x+d_offx, y+d_offy, 0, 0, d_width, d_height, 1, 1, 90, 0, 0, sprite.getWidth(), sprite.getHeight(), false, false);
+			else batch.draw(sprite, x+d_offx, y+d_offy, 0, 0, d_width, d_height, 1, 1, 90, 0, 0, sprite.getWidth(), sprite.getHeight(), flipX, flipY);
 		}else {
-			if(!open)batch.draw(sprite, x+d_offx, y+d_offy, 0, 0, d_width, d_height, 1, 1, 90, 0, 0, sprite.getWidth(), sprite.getHeight(), false, false);
+			if(!open)batch.draw(sprite, x+d_offx, y+d_offy, 0, 0, d_width, d_height, 1, 1, 90, 0, 0, sprite.getWidth(), sprite.getHeight(), flipX, flipY);
 			else batch.draw(sprite, x+d_offx, y+d_offy, d_width, d_height);
 		}
 	}
