@@ -23,5 +23,4 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 
 ##BUG TRACKER
 * closed popups blocking the mouse
-* trapdoor spawning in walls
 * game unplayable if there aren't enough special rooms in towns
