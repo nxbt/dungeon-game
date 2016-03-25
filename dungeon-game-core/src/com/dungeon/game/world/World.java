@@ -19,6 +19,8 @@ import com.dungeon.game.entity.character.Friend;
 import com.dungeon.game.entity.character.Mentor;
 import com.dungeon.game.entity.character.Player;
 import com.dungeon.game.entity.character.Vendinator;
+import com.dungeon.game.entity.furniture.ShopDesk1;
+import com.dungeon.game.entity.furniture.ShopDesk2;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.GoldCounter;
@@ -99,8 +101,6 @@ public class World {
 		entities = curFloor.entities;
 		entities.add(0,player);
 		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
-		entities.add(new Vendinator(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS*2.5f, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
-		
 		
 		hudEntities.add(new GoldCounter(this));
 		hudEntities.add(new MenuButton(this, 4, cam.HEIGHT-20));

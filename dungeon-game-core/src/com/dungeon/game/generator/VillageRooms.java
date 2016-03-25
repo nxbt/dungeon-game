@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Stair;
 import com.dungeon.game.entity.character.Vendinator;
+import com.dungeon.game.entity.furniture.ShopDesk1;
+import com.dungeon.game.entity.furniture.ShopDesk2;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -615,35 +617,42 @@ public class VillageRooms extends Generation {
 		if(doorFinder[0]==2||doorFinder[0]==3){
 			roomMap = new int[(int) room.width][(int) room.height];
 			doorX = 0;
-			doorY = doorFinder[1];
+			doorY = (int) (doorFinder[1]-room.x);
 		}
 		else {
 			roomMap = new int[(int) room.height][(int) room.width];
 			doorX = 0;
-			doorY = doorFinder[2];
+			doorY = (int) (doorFinder[2]- room.y);
 		}
 		
 		boolean keeperBottom = Math.random()>0.5;
 		if(doorY == 0)keeperBottom = true;
-		else if(doorY == roomMap.length)keeperBottom = false;
+		else if(doorY == roomMap.length-1)keeperBottom = false;
 		
 		roomMap[keeperBottom?0:roomMap.length-1][roomMap[0].length-1]=4;
 		
 		//Put populating code here thanks bye
 		roomEntities.add(new Vendinator(world, (roomMap[0].length-1)*Tile.TS+Tile.TS/2, (keeperBottom? 0:roomMap.length-1)*Tile.TS+Tile.TS/2));
 		
+		roomEntities.add(new ShopDesk1(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*3/4, (keeperBottom? 0:roomMap.length-1)*Tile.TS+Tile.TS*3/4));
+//		roomEntities.add(new ShopDesk2(world, (roomMap[0].length-1)*Tile.TS+Tile.TS/2, (keeperBottom? 0:roomMap.length-1)*Tile.TS+Tile.TS/2));
 		
 		//ending transformations
 		if(doorFinder[0]==1||doorFinder[0]==3){
 			int[][] temp = roomMap.clone();
-			roomMap = new int[(int) room.height][(int) room.width];
+			
+			if(doorFinder[0]==1) roomMap = new int[(int) room.height][(int) room.width];
+			else roomMap = new int[(int) room.width][(int) room.height];
+			
 			for(int i = 0; i < temp.length; i++){
 				for(int k = 0; k < temp[i].length; k++){
+					System.out.println(i +  "," + k);
 					roomMap[i][roomMap[i].length-1-k]=temp[i][k];
 				}
 			}
+			
 			for(Entity e: roomEntities) {
-				
+				e.x = roomMap[0].length*Tile.TS-e.x;
 			}
 		}
 		
@@ -654,6 +663,11 @@ public class VillageRooms extends Generation {
 				for(int k = 0; k < temp[i].length; k++){
 					roomMap[k][i]=temp[i][k];
 				}
+			}
+			for(Entity e: roomEntities) {
+				float tempX = e.x;
+				e.x = e.y;
+				e.y = tempX;
 			}
 		}
 		
@@ -669,6 +683,12 @@ public class VillageRooms extends Generation {
 			}
 			y++;
 			x = (int) room.x;
+		}
+		
+		for(Entity e: roomEntities) {
+			e.x += room.x*Tile.TS;
+			e.y += room.y*Tile.TS;
+			entities.add(e);
 		}
 	}
 	
