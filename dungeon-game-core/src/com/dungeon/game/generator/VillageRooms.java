@@ -631,12 +631,14 @@ public class VillageRooms extends Generation {
 		
 		//ending transformations
 		
+		System.out.println(doorFinder[0]);
+		
 		if(doorFinder[0]==1||doorFinder[0]==3){
 			int[][] temp = roomMap.clone();
 			roomMap = new int[(int) room.height][(int) room.width];
 			for(int i = 0; i < temp.length; i++){
 				for(int k = 0; k < temp[i].length; k++){
-					roomMap[i][roomMap[0].length-k]=temp[i][k];
+					roomMap[i][roomMap[i].length-1-k]=temp[i][k];
 				}
 			}
 		}
