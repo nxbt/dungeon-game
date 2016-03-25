@@ -20,6 +20,8 @@ public class ShopDesk2 extends Static {
 		origin_x = 24;
 		origin_y = 8;
 		
+		rotate = true;
+		
 		solid = true;
 	}
 

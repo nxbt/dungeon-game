@@ -539,8 +539,8 @@ public class VillageRooms extends Generation {
 
 	
 	private void populateSpecialRooms() {
-		generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		generateStairRoom(specialRooms.get((int) (specialRooms.size()*Math.random())));
+		while(specialRooms.size()>0)generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		for(int i = 0; i < specialRooms.size(); i++){
 			
 		}
@@ -629,13 +629,11 @@ public class VillageRooms extends Generation {
 		if(doorY == 0)keeperBottom = true;
 		else if(doorY == roomMap.length-1)keeperBottom = false;
 		
-		roomMap[keeperBottom?0:roomMap.length-1][roomMap[0].length-1]=4;
-		
 		//Put populating code here thanks bye
-		roomEntities.add(new Vendinator(world, (roomMap[0].length-1)*Tile.TS+Tile.TS/2, (keeperBottom? 0:roomMap.length-1)*Tile.TS+Tile.TS/2));
+		roomEntities.add(new Vendinator(world, (roomMap[0].length-1)*Tile.TS+Tile.TS/2, (keeperBottom? 3f/4f:roomMap.length-1+1f/4f)*Tile.TS));
 		
-		roomEntities.add(new ShopDesk1(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*3/4, (keeperBottom? 0:roomMap.length-1)*Tile.TS+Tile.TS*3/4));
-//		roomEntities.add(new ShopDesk2(world, (roomMap[0].length-1)*Tile.TS+Tile.TS/2, (keeperBottom? 0:roomMap.length-1)*Tile.TS+Tile.TS/2));
+		roomEntities.add(new ShopDesk1(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*1f/4f, (keeperBottom? 3f/4f:roomMap.length-1+1f/4f)*Tile.TS));
+		roomEntities.add(new ShopDesk2(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*-1f/4f, (keeperBottom? 7f/4f:roomMap.length-1-3f/4f)*Tile.TS));
 		
 		//ending transformations
 		if(doorFinder[0]==1||doorFinder[0]==3){
@@ -653,6 +651,7 @@ public class VillageRooms extends Generation {
 			
 			for(Entity e: roomEntities) {
 				e.x = roomMap[0].length*Tile.TS-e.x;
+				e.angle+=180;
 			}
 		}
 		
@@ -668,6 +667,7 @@ public class VillageRooms extends Generation {
 				float tempX = e.x;
 				e.x = e.y;
 				e.y = tempX;
+				e.angle = 90+e.angle;
 			}
 		}
 		
