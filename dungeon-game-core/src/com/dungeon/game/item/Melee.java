@@ -1,6 +1,5 @@
 package com.dungeon.game.item;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;
 
@@ -13,8 +12,8 @@ public abstract class Melee extends Weapon {
 	
 	public boolean hasHit;
 	
-	public Melee(World world, Texture texture) {
-		super(world, texture);
+	public Melee(World world, String filename) {
+		super(world, filename);
 	}
 
 	public abstract boolean inAttack();

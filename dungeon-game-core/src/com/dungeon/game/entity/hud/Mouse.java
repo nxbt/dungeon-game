@@ -41,7 +41,7 @@ public class Mouse extends Hud {
 	public Slot slot;
 	
 	public Mouse(World world, float x, float y){
-		super(world, x, y);
+		super(world, x, y, 16, 16, "crosshair.png");
 		
 		Gdx.input.setCursorCatched(true);
 		

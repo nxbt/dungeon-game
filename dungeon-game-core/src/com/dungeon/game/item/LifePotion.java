@@ -1,6 +1,5 @@
 package com.dungeon.game.item;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.LifeRegen;
 import com.dungeon.game.effect.PotionSick;
@@ -10,9 +9,8 @@ import com.dungeon.game.world.World;
 public class LifePotion extends Consumable {
 
 	public LifePotion(World world) {
-		super(world, "Health Potion");
+		super(world, "Health Potion", "lifePotion.png");
 		
-		sprite = new Texture("lifePotion.png");
 		desc = "Ever wonder why health potions are red? \n\nYou haven't? \n\nGood. \n\nLife restored: 40 \nDuration: 2 seconds";
 	}
 

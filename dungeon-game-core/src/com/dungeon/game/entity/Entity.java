@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.light.Light;
+import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
 
 public abstract class Entity {
@@ -34,15 +35,23 @@ public abstract class Entity {
 	
 	public Texture sprite;
 	
+	public Texture[] textures;
+	
 	public Light light;
 	
 	public World world;
 	
-	public Entity(World world, float x, float y) {
+	public Entity(World world, float x, float y, int width, int height, String filename) {
 		this.x = x;
 		this.y = y;
 		
 		this.world = world;
+		
+		textures = Spritesheet.getSprites(filename, width, height);
+		changeSprite(0);
+		
+		d_width = width;
+		d_height = height;
 		
 		this.killMe = false;
 	}
@@ -80,6 +89,10 @@ public abstract class Entity {
 	
 	public Rectangle getBoundingBox() {
 		return getHitbox().getBoundingRectangle();
+	}
+	
+	protected void changeSprite(int index){
+		sprite = textures[index];
 	}
 	
 	public void hovered() {} //optional method called when the mouse hovers over an entity

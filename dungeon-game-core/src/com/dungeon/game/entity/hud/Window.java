@@ -18,7 +18,7 @@ public abstract class Window extends Hud {
 	float dragOffY;
 	
 	public Window(World world, float x, float y) {
-		super(world, x, y);
+		super(world, x, y, 32, 32, "slot.png");
 		
 		d_width = 100;
 		d_height = 200;

@@ -17,8 +17,8 @@ public abstract class Friend extends Character {
 	
 	public Inventory sharedInventory;
 	
-	public Friend(World world, float x, float y) {
-		super(world, x, y);
+	public Friend(World world, float x, float y, int width, int height, String filename) {
+		super(world, x, y, width, height, filename);
 		
 		speechBubble = new SpeechPopup(world,this);	
 		

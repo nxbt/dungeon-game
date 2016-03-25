@@ -1,6 +1,5 @@
 package com.dungeon.game.entity;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.world.Floor;
 import com.dungeon.game.world.Tile;
@@ -13,17 +12,12 @@ public class Stair extends Static {
 	int destY;
 	
 	public Stair(World world, float x, float y, boolean goDown, int destX, int destY) {
-		super(world, x, y);
+		super(world, x, y, Tile.TS, Tile.TS, "trapdoor.png");
 		
 		this.destX = destX;
 		this.destY = destY;
 		
 		this.goDown = goDown;
-		
-		sprite = new Texture("trapdoor.png");
-		
-		d_width = sprite.getWidth();
-		d_height = sprite.getHeight();
 		
 		origin_x = 16;
 		origin_y = 16;

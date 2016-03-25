@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.effect.Effect;
+import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
 public class EffectGraphic extends Hud {
@@ -15,7 +16,8 @@ public class EffectGraphic extends Hud {
 	private BitmapFont font;
 
 	public EffectGraphic(World world, Effect effect) {
-		super(world, 0, 0);
+		super(world, 0, 0, Item.SIZE, Item.SIZE, "slot.png");
+		
 		this.effect = effect;
 		sprite = Effect.texture;
 		if (!sprite.getTextureData().isPrepared()) {
@@ -33,9 +35,6 @@ public class EffectGraphic extends Hud {
 		sprite = new Texture(slotMap);
 		slotMap.dispose();
 		tempMap.dispose();
-		
-		d_width = 32;
-		d_height = 32;
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.LIGHT_GRAY);

@@ -11,16 +11,11 @@ public class DialogueHud extends Hud {
 	private PortraitBackground portraitBackground;
 	
 	public DialogueHud(World world, Character character) {
-		super(world, 0, 0);
-		
-		sprite = new Texture("dialogueHud.png");
+		super(world, 0, 0, 80, 80, "dialogueHud.png");
 		
 		portrait = new Portrait(world, 4, 4);
 		
 		portraitBackground = new PortraitBackground(world, 4, 4);
-		
-		d_width = sprite.getWidth();
-		d_height = sprite.getHeight();
 	}
 
 	@Override

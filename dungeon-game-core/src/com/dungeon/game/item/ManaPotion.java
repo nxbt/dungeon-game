@@ -1,6 +1,5 @@
 package com.dungeon.game.item;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.ManaRegen;
 import com.dungeon.game.effect.PotionSick;
@@ -10,9 +9,8 @@ import com.dungeon.game.world.World;
 public class ManaPotion extends Consumable {
 
 	public ManaPotion(World world) {
-		super(world, "Mana Restoration Potion");
+		super(world, "Mana Restoration Potion", "lifePotion.png");
 		
-		sprite = new Texture("lifePotion.png");
 		desc = "It's full of liquid mana. Keep away from eyes.\n\nMana restored: 40 \nDuration: 2 seconds";
 	}
 

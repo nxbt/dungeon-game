@@ -4,8 +4,8 @@ import com.dungeon.game.world.World;
 
 public abstract class Button extends Hud {
 
-	public Button(World world, float x, float y){
-		super(world, x, y);
+	public Button(World world, float x, float y, int width, int height, String filename){
+		super(world, x, y, width, height, filename);
 	}
 	
 	public void hovered() {

@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Ammo;
+import com.dungeon.game.item.Item;
 import com.dungeon.game.item.Ranged;
 import com.dungeon.game.world.World;
 
@@ -14,15 +15,12 @@ public class WeaponProjectile extends Projectile {
 	public Ammo ammo;
 	
 	public WeaponProjectile(World world, Ranged weapon, Ammo ammo, float x, float y, float angle, float power, Polygon hitbox, float originX, float originY, int range) {
-		super(world, x, y, angle, power, hitbox, originX, originY, range);
+		super(world, x, y, angle, power, hitbox, originX, originY, range, Item.SIZE, Item.SIZE, "slot.png");
 
 		this.weapon = weapon;
 		this.ammo = ammo;
 		
 		sprite = ammo.sprite;
-		
-		d_width = sprite.getWidth();
-		d_height = sprite.getHeight();
 		
 		owner = weapon.owner;
 	}

@@ -2,7 +2,6 @@ package com.dungeon.game.item;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.Projectile;
 import com.dungeon.game.world.World;
 
@@ -21,8 +20,8 @@ public abstract class Ranged extends Weapon {
 	
 	public ArrayList<Projectile> projectiles;
 	
-	public Ranged(World world, Texture texture) {
-		super(world, texture);
+	public Ranged(World world, String filename) {
+		super(world, filename);
 		projectiles = new ArrayList<Projectile>();
 	}
 

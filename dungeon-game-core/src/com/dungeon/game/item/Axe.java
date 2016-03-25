@@ -61,7 +61,7 @@ public class Axe extends Melee {
 	ArrayList<Character> hitChars;
 	
 	public Axe(World world, float damage, float speed) {
-		super(world, new Texture("axe.png"));
+		super(world, "axe.png");
 		
 		name = "Axe";
 		

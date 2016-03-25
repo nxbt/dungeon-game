@@ -13,8 +13,8 @@ public abstract class Equipable extends Item {
 	
 	public ArrayList<Effect> effects;
 	
-	public Equipable(World world) {
-		super(world);
+	public Equipable(World world, String filename) {
+		super(world, filename);
 		
 		effects = new ArrayList<Effect>();
 	}

@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.character.Friend;
 import com.dungeon.game.entity.hud.Hud;
+import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
 public class SpeechPopup extends Hud {
@@ -30,7 +31,7 @@ public class SpeechPopup extends Hud {
 	private int speechCounter;
 
 	public SpeechPopup(World world, Friend character) {
-		super(world, 0, 0);
+		super(world, 0, 0, Item.SIZE, Item.SIZE, "slot.png");
 		this.character = character;
 		d_width = 200;
 		d_height = 100;

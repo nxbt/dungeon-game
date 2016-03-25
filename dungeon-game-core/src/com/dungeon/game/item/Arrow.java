@@ -13,7 +13,7 @@ import com.dungeon.game.world.World;
 public class Arrow extends Ammo {
 
 	public Arrow(World world){
-		super(world);
+		super(world, "arrow.png");
 		
 		damage = 10;
 		
@@ -21,8 +21,6 @@ public class Arrow extends Ammo {
 		desc = "The better to pew pew you with.\n\nDamage: " + damage;
 		
 		maxStack = 12;
-		
-		sprite = new Texture("arrow.png");
 	}
 
 	@Override

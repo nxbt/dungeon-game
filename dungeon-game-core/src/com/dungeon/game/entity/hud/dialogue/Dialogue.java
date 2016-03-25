@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.character.Friend;
 import com.dungeon.game.entity.hud.Hud;
+import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
 public class Dialogue extends Hud {
@@ -30,7 +31,7 @@ public class Dialogue extends Hud {
 	private ArrayList<Character> characters;
 	
 	public Dialogue(World world, Character character){
-		super(null,0,0);
+		super(null,0,0, Item.SIZE, Item.SIZE, "slot.png");
 		this.world = world;
 		speechBubbles = new ArrayList<SpeechBubble>();
 		potentialBubbles = new HashMap<String, SpeechBubble>();

@@ -10,10 +10,8 @@ public class EffectHudBackground extends Hud {
 	static final NinePatch BACKGROUND = new NinePatch(new Texture("effectBackground.png"), 8, 4, 4, 8);
 
 	public EffectHudBackground(World world, float x, float y) {
-		super(world, x, y);
-		
+		super(world, x, y, 32, 32, "slot.png");
 		d_width = 44;
-		d_height = 0;
 	}
 
 	@Override

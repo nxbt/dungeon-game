@@ -1,6 +1,5 @@
 package com.dungeon.game.item;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.WeaponGraphic;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;
@@ -20,19 +19,17 @@ public abstract class Weapon extends Equipable{
 	
 	public boolean leftSide;
 	
-	public Weapon(World world, Texture texture){
-		super(world);
+	public Weapon(World world, String filename){
+		super(world, filename);
 		
 		maxStack = 1;
 		
 		type = WEAPON;
-		
-		sprite = texture;
 	}
 	
-	protected void changeSprite(Texture texture){
-		sprite = texture;
-		graphic.sprite = sprite;
+	protected void changeSprite(int index){
+		sprite = textures[index];
+		if(graphic != null) graphic.sprite = sprite;
 	}
 	
 	public void equip(Character owner, boolean leftSide){

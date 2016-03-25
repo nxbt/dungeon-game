@@ -2,9 +2,6 @@ package com.dungeon.game.item;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
@@ -17,15 +14,11 @@ public class Bow extends Ranged {
 	private final int WINDUP = 1;
 	private final int FIRE = 2;
 	private final int WINDDOWN = 3;
-	
-	private final String texturePath;
-	
-	private Texture[] textures;
 
 	ArrayList<Effect> effects;
 	
 	public Bow(World world, float dmgMod, int speed) {
-		super(world, new Texture("bow.png"));
+		super(world, "bow.png");
 		
 		name = "Bow";
 		
@@ -34,46 +27,10 @@ public class Bow extends Ranged {
 		
 		strength = 10;
 		knockstr = 10;
-		
-		texturePath = "bow.png";
-		
 
 		desc = "SEE: Arrow  \n\n Damage Modifier: " + Math.floor(dmgMod*1000)/10f + "%";
 
 		graphic = new RangedGraphic(world, this, new Polygon(new float[]{2,2,30,30,8,26}), 4, 28);
-		
-		Texture tempSheet = new Texture(texturePath);
-		
-		int sheetWidth = tempSheet.getWidth()/Item.SIZE;
-		int sheetHeight = tempSheet.getHeight()/Item.SIZE;
-		
-		TextureRegion[] spritesheet = new TextureRegion[sheetWidth * sheetHeight];
-		
-		for(int i = 0; i < sheetHeight; i++) {
-			for(int k = 0; k < sheetWidth; k++) {
-				spritesheet[i*sheetWidth+k] = new TextureRegion(new Texture(texturePath),k*Item.SIZE,i*Item.SIZE,Item.SIZE,Item.SIZE);
-			}
-		}
-		
-		textures  = new Texture[spritesheet.length];
-		if (!tempSheet.getTextureData().isPrepared()) {
-		    tempSheet.getTextureData().prepare();
-		}
-		Pixmap wholePixmap = tempSheet.getTextureData().consumePixmap();
-		
-		for(int i = 0; i < textures.length; i++){
-			Pixmap tempMap = new Pixmap(Item.SIZE, Item.SIZE, Pixmap.Format.RGBA8888);
-			for (int x = 0; x < spritesheet[i].getRegionWidth(); x++) {
-			    for (int y = 0; y < spritesheet[i].getRegionHeight(); y++) {
-			        int colorInt = wholePixmap.getPixel(spritesheet[i].getRegionX() + x, spritesheet[i].getRegionY() + y);
-			        tempMap.drawPixel(x, y, colorInt);
-			    }
-			}
-			textures[i] = new Texture(tempMap);
-			tempMap.dispose();
-		}
-		wholePixmap.dispose();
-		changeSprite(textures[0]);
 		
 		effects = new ArrayList<Effect>();
 		
@@ -97,7 +54,7 @@ public class Bow extends Ranged {
 		switch(stage){
 		case REST:
 		if(!sprite.equals(textures[0])){
-			changeSprite(textures[0]);
+			changeSprite(0);
 		}
 			if(mousepressed && owner.inv.contains(new Arrow(world)) != null&&owner.use_stam(10)){
 				owner.inv.contains(new Arrow(world)).item.stack--;
@@ -110,12 +67,12 @@ public class Bow extends Ranged {
 		case WINDUP:
 			if(index<45) {
 				if(!sprite.equals(textures[1])){
-					changeSprite(textures[1]);
+					changeSprite(1);
 				}
 			}
 			else {
 				if(!sprite.equals(textures[2])){
-					changeSprite(textures[2]);
+					changeSprite(2);
 				}
 			}
 			
@@ -127,7 +84,7 @@ public class Bow extends Ranged {
 			break;
 		case FIRE:
 			if(!sprite.equals(textures[0])) {
-				changeSprite(textures[0]);
+				changeSprite(0);
 			}
 			if(index>10) {
 				stageTimer = 0;
@@ -154,7 +111,7 @@ public class Bow extends Ranged {
 		angle = 0;
 		polarAngle = 10;
 		
-		changeSprite(textures[0]);
+		changeSprite(0);
 	}
 
 }

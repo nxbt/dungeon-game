@@ -2,7 +2,6 @@ package com.dungeon.game.item;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
@@ -77,7 +76,7 @@ public class Sword extends Melee {
 	
 	
 	public Sword(World world, float damage, float speed) {
-		super(world, new Texture("sword.png"));
+		super(world, "sword.png");
 		
 		name = "Sword";
 		

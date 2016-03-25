@@ -18,8 +18,8 @@ public abstract class Dynamic extends Entity {
 	
 	public Vector2 moveVec;
 	
-	public Dynamic(World world, float x, float y) {
-		super(world, x, y);
+	public Dynamic(World world, float x, float y, int width, int height, String filename) {
+		super(world, x, y, width, height, filename);
 		
 		collisions = new ArrayList<int[]>();
 		

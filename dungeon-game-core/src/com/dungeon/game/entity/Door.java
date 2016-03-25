@@ -1,6 +1,5 @@
 package com.dungeon.game.entity;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
@@ -9,17 +8,15 @@ import com.dungeon.game.item.Item;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
+//TODO: rework cuz shit
 public class Door extends Static {
 	public boolean open;
 	public int dir; 
 	public Door(World world, float x, float y, int dir) {
-		super(world, x, y);
+		super(world, x, y, 32, 4, "door.png");
 		
-		sprite = new Texture("door.png");
 		name = "door";
 		solid = false;
-		d_width = 32;
-		d_height = 4;
 		
 		hitbox = new Polygon(new float[]{0,0,0,0,0,0,0,0});
 		

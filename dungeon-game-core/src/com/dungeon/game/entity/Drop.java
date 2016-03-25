@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.hud.DescWindow;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Gold;
+import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
 public class Drop extends Static {
@@ -11,16 +12,13 @@ public class Drop extends Static {
 	Slot slot;
 	
 	public Drop(World world, float x, float y, Slot slot) {
-		super(world, x, y);
+		super(world, x, y, Item.SIZE, Item.SIZE, "slot.png");
 		
 		this.slot = new Slot(world, new int[] {0,0,0}, null);
 		
 		this.slot.swap(slot);
 		
 		sprite = this.slot.item.sprite;
-
-		d_width = sprite.getWidth();
-		d_height = sprite.getHeight();
 		
 		hitbox = new Polygon(new float[]{4,4,28,4,28,28,4,28});
 		

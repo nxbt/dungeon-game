@@ -1,6 +1,5 @@
 package com.dungeon.game.item;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.MediumGraphic;
 import com.dungeon.game.spell.Fireball;
@@ -12,7 +11,7 @@ import com.dungeon.game.world.World;
 public class Wand extends Medium {
 
 	public Wand(World world) {
-		super(world, new Texture("wand.png"));
+		super(world, "wand.png");
 		
 		name = "Wand";
 		desc = "You're a wizard, Harry.\n\nI'm a WHAT?";

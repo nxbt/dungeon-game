@@ -84,8 +84,8 @@ public abstract class Character extends Dynamic {
 
 	public Color speechColor;
 	
-	public Character(World world, float x, float y) {
-		super(world, x, y);
+	public Character(World world, float x, float y, int width, int height, String filename) {
+		super(world, x, y, width, height, filename);
 		
 		stagerTimer = stager;
 		stager++;

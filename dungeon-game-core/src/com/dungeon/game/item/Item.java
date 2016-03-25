@@ -1,6 +1,7 @@
 package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
 
 public abstract class Item implements Cloneable {
@@ -28,12 +29,17 @@ public abstract class Item implements Cloneable {
 	
 	public Texture sprite;
 	
+	protected Texture[] textures;
+	
 	public float dropChance;
 	
 	protected World world;
 	
-	public Item(World world) {
+	public Item(World world, String filename) {
 		this.world = world;
+		
+		textures = Spritesheet.getSprites(filename, SIZE, SIZE);
+		changeSprite(0);
 		
 		stack = 1;
 	}
@@ -49,5 +55,9 @@ public abstract class Item implements Cloneable {
 	
 	public String getDesc() {
 		return "We were too lazy to write anything about this. Here's the normal description:\n\n" + desc;
+	}
+	
+	protected void changeSprite(int index){
+		sprite = textures[index];
 	}
 }

@@ -13,6 +13,7 @@ import com.dungeon.game.criteria.Criteria;
 import com.dungeon.game.criteria.True;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.hud.Hud;
+import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
 public class SpeechBubble extends Hud implements Cloneable {
@@ -38,37 +39,37 @@ public class SpeechBubble extends Hud implements Cloneable {
 	private boolean began;
 	
 	public SpeechBubble(World world, Character character, Criteria[] textCriteria, String[] texts, Criteria[] keyCriteria, String[] proceedKeys) {
-		super(world, 0, 0);
+		super(world, 0, 0, Item.SIZE, Item.SIZE, "slot.png");
 		
 		init(character, textCriteria, texts, keyCriteria, proceedKeys);
 	}
 	
 	public SpeechBubble(World world, Character character, String text, Criteria[] keyCriteria, String[] proceedKeys) {
-		super(world, 0 ,0);
+		super(world, 0 ,0, Item.SIZE, Item.SIZE, "slot.png");
 		
 		init(character, new Criteria[]{new True(world)}, new String[]{text}, keyCriteria, proceedKeys);
 	}
 	
 	public SpeechBubble(World world, Character character, Criteria[] textCriteria, String[] texts, String proceedKey) {
-		super(world, 0 ,0);
+		super(world, 0 ,0, Item.SIZE, Item.SIZE, "slot.png");
 		
 		init(character, textCriteria, texts, new Criteria[]{new True(world)}, new String[]{proceedKey});
 	}
 	
 	public SpeechBubble(World world, Character character, String text, String proceedKey){
-		super(world,0,0);
+		super(world,0,0, Item.SIZE, Item.SIZE, "slot.png");
 		
 		init(character, new Criteria[]{new True(world)}, new String[]{text}, new Criteria[]{new True(world)}, new String[]{proceedKey});
 	}
 	
 	public SpeechBubble(World world, Character character, Criteria[] criteria, String[] texts, String[] proceedKeys) {
-		super(world, 0, 0);
+		super(world, 0, 0, Item.SIZE, Item.SIZE, "slot.png");
 		
 		init(character, criteria, texts, criteria, proceedKeys);
 	}
 	
 	public SpeechBubble(World world, Character character){
-		super(world, 0, 0);
+		super(world, 0, 0, Item.SIZE, Item.SIZE, "slot.png");
 		this.character = character;
 	}
 

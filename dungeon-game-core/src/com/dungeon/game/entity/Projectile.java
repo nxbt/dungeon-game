@@ -11,8 +11,8 @@ public abstract class Projectile extends Dynamic {
 	
 	public Character owner;
 	
-	public Projectile(World world, float x, float y, float angle, float power, Polygon hitbox, float originX, float originY, int range) {
-		super(world, x, y);
+	public Projectile(World world, float x, float y, float angle, float power, Polygon hitbox, float originX, float originY, int range, int width, int height, String filename) {
+		super(world, x, y, width, height, filename);
 		
 		solid = false;
 		

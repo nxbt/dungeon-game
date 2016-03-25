@@ -14,10 +14,10 @@ public class HudSlot extends Hud {
 	private BitmapFont font;
 
 	public HudSlot(World world, float x, float y, Slot slot) {
-		super(world, x, y);
+		super(world, x, y, 32, 32, "slot.png");
+		
 		this.slot = slot;
-		d_width = 32;
-		d_height = 32;
+		
 		sprite = slot.slotTex;
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));

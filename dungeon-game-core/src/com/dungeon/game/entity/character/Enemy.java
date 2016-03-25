@@ -17,8 +17,8 @@ public abstract class Enemy extends Character {
 	protected int[] targetTile;
 	
 	
-	public Enemy(World world, float x, float y) {
-		super(world, x, y);
+	public Enemy(World world, float x, float y, int width, int height, String filename) {
+		super(world, x, y, width, height, filename);
 	}
 	
 	protected void findPath(ArrayList<Entity> entities, float[] target){

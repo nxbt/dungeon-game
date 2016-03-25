@@ -18,7 +18,7 @@ import com.dungeon.game.world.World;
 public class Vendinator extends Friend {
 
 	public Vendinator(World world, float x, float y) {
-		super(world, x, y);
+		super(world, x, y, 32, 32, "vendinator.png");
 		speechColor = new Color(0.1f,0.1f,0.5f,1);
 		speechBubble.setColor();	
 		
@@ -49,9 +49,6 @@ public class Vendinator extends Friend {
 		
 		origin_x = 16;
 		origin_y = 16;
-		
-		d_width = 32;
-		d_height = 32;
 		
 		Shop shop = new Shop(world, new int[][]{new int[]{0,10,10},new int[]{0,10,10},new int[]{0,10,60},new int[]{0,10,110}},new int[]{5,30,15,5}, this, 10, 10);
 		shop.slot[0].item = new Arrow(world);
@@ -87,8 +84,6 @@ public class Vendinator extends Friend {
 		
 		
 		dialogue.begin();
-		
-		sprite = new Texture("vendinator.png");
 	}
 
 	public void calc() {

@@ -28,7 +28,7 @@ public class Player extends Character {
 	public ArrayList<EffectGraphic> effectGraphics;
 	
 	public Player(World world, float x, float y) {
-		super(world, x, y);
+		super(world, x, y, 32, 32, "person.png");
 		
 		speechColor = Color.BLUE;
 		
@@ -54,13 +54,8 @@ public class Player extends Character {
 		origin_x = 16;
 		origin_y = 16;
 		
-		d_width = 32;
-		d_height = 32;
-		
 		d_offx = 0;
 		d_offy = 0;
-		
-		sprite = new Texture("person.png");
 		
 		solid = true;
 		

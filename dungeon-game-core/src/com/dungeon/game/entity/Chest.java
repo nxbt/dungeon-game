@@ -1,6 +1,5 @@
 package com.dungeon.game.entity;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
@@ -12,7 +11,7 @@ public class Chest extends Static {
 	public Inventory inv;
 	
 	public Chest(World world, float x, float y) {
-		super(world, x, y);
+		super(world, x, y, Tile.TS, Tile.TS, "chest.png");
 		
 		name = "chest";
 		int[][] invLayout = new int[][]{
@@ -43,11 +42,8 @@ public class Chest extends Static {
 			new int[] {0, 168, 168}
 		};
 		inv = new Inventory(world, invLayout, 310, 140);
-		sprite = new Texture("chest.png");
-		solid = true;
 		
-		d_width = 32;
-		d_height = 32;
+		solid = true;
 		
 		hitbox = new Polygon(new float[]{0,0,32,0,32,32,0,32});
 		

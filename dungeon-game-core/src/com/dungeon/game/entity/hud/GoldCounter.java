@@ -14,10 +14,8 @@ public class GoldCounter extends Hud {
 	private String value;
 	private BitmapFont font;
 	public GoldCounter(World world) {
-		super(world, 0, 0);
-		sprite = new Texture("coinStack.png");
-		d_width = sprite.getWidth();
-		d_height = sprite.getHeight();
+		super(world, 0, 0, 24, 24, "coinStack.png");
+		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.GOLD);
 	}

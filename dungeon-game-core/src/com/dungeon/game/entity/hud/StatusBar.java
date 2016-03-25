@@ -1,6 +1,5 @@
 package com.dungeon.game.entity.hud;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.dungeon.game.world.World;
@@ -14,14 +13,9 @@ public abstract class StatusBar extends Hud {
 	protected TiledDrawable filler;
 	
 	public StatusBar(World world, float x, float y){
-		super(world, x, y);
-		
-		d_width = 8;
-		d_height = 68;
+		super(world, x, y, 8, 68, "statusbar.png");
 		
 		percent = 1;
-		
-		sprite = new Texture("statusbar.png");
 	}
 	
 	@Override 

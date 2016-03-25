@@ -9,10 +9,9 @@ public abstract class WeaponGraphic extends Dynamic {
 	public Weapon weapon;
 	
 	public WeaponGraphic(World world, Weapon weapon) {
-		super(world, 0, 0); // x and y don't matter, they are set every frame
+		super(world, 0, 0, Item.SIZE, Item.SIZE, "slot.png"); // x and y don't matter, they are set every frame
 		sprite = weapon.sprite;
-		this.d_width = Item.SIZE;
-		this.d_height = Item.SIZE;
+		
 		name = "Graphic";
 		this.weapon = weapon;
 		rotate = true;

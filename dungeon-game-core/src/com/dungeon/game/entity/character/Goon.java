@@ -20,7 +20,7 @@ public class Goon extends Enemy {
 	boolean ranged;
 
 	public Goon(World world, float x, float y) {
-		super(world, x, y);
+		super(world, x, y, 32, 32, "goon.png");
 		
 name = "Goon";
 		
@@ -41,13 +41,8 @@ name = "Goon";
 		origin_x = 16;
 		origin_y = 16;
 		
-		d_width = 32;
-		d_height = 32;
-		
 		d_offx = 0;
 		d_offy = 0;
-		
-		sprite = new Texture("goon.png");
 		
 		light = new Light(this, 0.5f);
 		

@@ -23,10 +23,7 @@ public class DescBox extends Hud {
 	BitmapFont desc;
 	
 	public DescBox(World world) {
-		super(world, 0, 0);
-		
-		d_width = 200;
-		d_height = 100;
+		super(world, 0, 0, Item.SIZE, Item.SIZE, "slot.png");
 		
 		d_offx = 16;
 		d_offy = 0;

@@ -8,8 +8,8 @@ public abstract class Ammo extends Item {
 
 	public float damage;
 	
-	public Ammo(World world){
-		super(world);
+	public Ammo(World world, String filename){
+		super(world, filename);
 		type = DEFAULT;
 		stack = 1;
 		maxStack = 10;
