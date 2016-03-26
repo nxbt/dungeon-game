@@ -635,15 +635,6 @@ public class VillageRooms extends Generation {
 		
 		ShopDesk1 desk1 = new ShopDesk1(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*1f/4f, (keeperBottom? 3f/4f:roomMap.length-1+1f/4f)*Tile.TS);
 		ShopDesk2 desk2 = new ShopDesk2(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*-1f/4f, (keeperBottom? 7f/4f:roomMap.length-1-3f/4f)*Tile.TS);
-
-//		int[][][] bookMap = new int[][][]{
-//			new int[][]{new int[]{-1,3}, new int[]{-1,3}, new int[]{-1,3}, new int[]{-1,3}, new int[]{-1,3}, new int[]{-1,3}}
-//			};
-		int[][][] bookMap = new int[1][roomMap[0].length*2][2];
-		for(int i = 0; i < roomMap[0].length*2; i++){
-			bookMap[0][i] = new int[]{-1,keeperBottom?2:0};
-		}
-		roomEntities.add(new Bookshelf(world, bookMap[0].length*8,(keeperBottom?roomMap.length-1+3f/4f:1f/4f)*Tile.TS, bookMap));
 		
 		if(keeperBottom){
 			desk1.angle = 180;
@@ -655,6 +646,33 @@ public class VillageRooms extends Generation {
 		
 		roomEntities.add(desk1);
 		roomEntities.add(desk2);
+		
+		int[][][] bookMap = new int[1][roomMap[0].length*2][2];
+		for(int i = 0; i < roomMap[0].length*2; i++){
+			if(i == roomMap[0].length*2-1)bookMap[0][i] = new int[]{3,keeperBottom?2:0};
+			else bookMap[0][i] = new int[]{-1,keeperBottom?2:0};
+		}
+		roomEntities.add(new Bookshelf(world, bookMap[0].length*8,(keeperBottom?roomMap.length-1+3f/4f:1f/4f)*Tile.TS, bookMap));
+		
+
+		bookMap = new int[roomMap.length*2-6][1][2];
+		for(int i = 0; i < roomMap.length*2-6; i++){
+			bookMap[i][0] = new int[]{-1,3};
+		}
+		roomEntities.add(new Bookshelf(world, (roomMap[0].length-1f/4f)*Tile.TS,(keeperBottom?roomMap.length-1-bookMap.length/4f+1f/2f:((float)bookMap.length)/4f+1f/2f)*Tile.TS, bookMap));
+		
+		int shelfAreaWidth = (roomMap[0].length-2);
+		int shelfAreaHeight = (roomMap.length-4);
+		
+		int x = 1, y = keeperBottom?3:1;
+		for(int i = 0; i < shelfAreaHeight; i++){
+			for(int k = 0; k < shelfAreaWidth; k++){
+				roomMap[y][x] = 3;
+				x++;
+			}
+			y++;
+			x = 1;
+		}
 		
 		//ending transformations
 		if(doorFinder[0]==1||doorFinder[0]==3){
@@ -695,8 +713,8 @@ public class VillageRooms extends Generation {
 		
 		//copy tiles to the map
 		
-		int x = (int) room.x;
-		int y = (int) room.y;
+		x = (int) room.x;
+		y = (int) room.y;
 		
 		for(int i = 0; i < room.height; i++){
 			for(int k = 0; k < room.width; k++){
