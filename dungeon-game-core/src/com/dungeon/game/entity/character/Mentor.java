@@ -1,7 +1,6 @@
 package com.dungeon.game.entity.character;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.criteria.Criteria;
 import com.dungeon.game.criteria.HasItem;
@@ -15,7 +14,6 @@ import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Shop;
 import com.dungeon.game.item.Arrow;
 import com.dungeon.game.item.LifePotion;
-import com.dungeon.game.item.Stick;
 import com.dungeon.game.item.Sword;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -120,7 +118,7 @@ public class Mentor extends Friend {
 		if(seenEntities.contains(world.player)){
 			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y, world.player.x-x));
 			if(!world.player.fightMode&&speechBubble.endText.equals("")){
-				if(!world.hudEntities.contains(dialogue))speechBubble.updateText("I am here to, well, help. 3dfgdfgdf dfgdfgdf dfgdfgd d fgdf");
+				if(!world.hudEntities.contains(dialogue))speechBubble.updateText("I am here to help.");
 				speechBubble.dismissed = false;
 			}
 			
@@ -130,7 +128,14 @@ public class Mentor extends Friend {
 		}
 		if(world.player.fightMode||Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))>speechRadius*Tile.TS)speechBubble.updateText("");
 	}
-
+	
+	public void hovered() {
+		if(world.mouse.lb_pressed) {
+			dialogue.open();
+			speechBubble.dismissed = true;
+		}
+	}
+	
 	@Override
 	public void post() {
 		if(speechBubble.endText.equals("")){

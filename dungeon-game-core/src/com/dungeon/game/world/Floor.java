@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.dungeon.game.entity.Entity;
-import com.dungeon.game.entity.Stair;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.Rooms;
 import com.dungeon.game.generator.VillageRooms;

@@ -1,9 +1,7 @@
 package com.dungeon.game.entity.furniture;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.Static;
 import com.dungeon.game.spritesheet.Spritesheet;

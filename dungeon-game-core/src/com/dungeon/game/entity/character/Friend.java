@@ -4,7 +4,6 @@ import com.dungeon.game.effect.Immune;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechPopup;
 import com.dungeon.game.inventory.Inventory;
-import com.dungeon.game.inventory.Shop;
 import com.dungeon.game.world.World;
 
 public abstract class Friend extends Character {

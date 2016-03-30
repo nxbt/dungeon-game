@@ -1,7 +1,6 @@
 package com.dungeon.game.entity.hud.dialogue;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dungeon.game.criteria.Criteria;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;

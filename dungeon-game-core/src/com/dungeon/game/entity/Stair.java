@@ -39,7 +39,7 @@ public class Stair extends Static {
 			}
 			world.curFloor = world.curDungeon.floors.get(world.curDungeon.floors.indexOf(world.curFloor) + (goDown? 1:-1));
 			world.entities = world.curFloor.entities;
-			world.entities.add(world.player);
+			world.entities.add(0,world.player);
 			world.areaMap = world.curFloor.areaMap;
 			world.player.x = destX*Tile.TS-Tile.TS/2;
 			world.player.y = destY*Tile.TS-Tile.TS/2;

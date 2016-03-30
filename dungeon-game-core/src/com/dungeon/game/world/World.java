@@ -18,8 +18,6 @@ import com.dungeon.game.entity.character.Enemy;
 import com.dungeon.game.entity.character.Friend;
 import com.dungeon.game.entity.character.Mentor;
 import com.dungeon.game.entity.character.Player;
-import com.dungeon.game.entity.furniture.Bookshelf;
-import com.dungeon.game.entity.furniture.Carpet;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.GoldCounter;
