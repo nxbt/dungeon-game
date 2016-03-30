@@ -2,12 +2,14 @@ package com.dungeon.game.generator;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Stair;
 import com.dungeon.game.entity.character.Vendinator;
 import com.dungeon.game.entity.furniture.Bookshelf;
+import com.dungeon.game.entity.furniture.Carpet;
 import com.dungeon.game.entity.furniture.ShopDesk1;
 import com.dungeon.game.entity.furniture.ShopDesk2;
 import com.dungeon.game.pathing.Area;
@@ -673,6 +675,9 @@ public class VillageRooms extends Generation {
 			y++;
 			x = 1;
 		}
+		
+		//carpet
+		roomEntities.add(new Carpet(world,roomMap[0].length/2f*Tile.TS-Tile.TS/4,roomMap.length/2f*Tile.TS+(keeperBottom?-Tile.TS/4:Tile.TS/4),2*roomMap[0].length-3,2*roomMap.length-3, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f)));
 		
 		//ending transformations
 		if(doorFinder[0]==1||doorFinder[0]==3){
