@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Stair;
-import com.dungeon.game.entity.character.Vendinator;
+import com.dungeon.game.entity.character.Shopkeeper;
 import com.dungeon.game.entity.furniture.Bookshelf;
 import com.dungeon.game.entity.furniture.Carpet;
 import com.dungeon.game.entity.furniture.Plant;
@@ -633,8 +633,10 @@ public class VillageRooms extends Generation {
 		if(doorY == 0)keeperBottom = true;
 		else if(doorY == roomMap.length-1)keeperBottom = false;
 		
-		//Put populating code here thanks bye
-		roomEntities.add(new Vendinator(world, (roomMap[0].length-1)*Tile.TS+Tile.TS/2, (keeperBottom? 3f/4f:roomMap.length-1+1f/4f)*Tile.TS));
+		Shopkeeper tempKeeper = new Shopkeeper(world, (roomMap[0].length-1)*Tile.TS+Tile.TS/2, (keeperBottom? 3f/4f:roomMap.length-1+1f/4f)*Tile.TS);
+		tempKeeper.flipX = true;
+		
+		roomEntities.add(tempKeeper);
 		
 		ShopDesk1 desk1 = new ShopDesk1(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*1f/4f, (keeperBottom? 3f/4f:roomMap.length-1+1f/4f)*Tile.TS);
 		ShopDesk2 desk2 = new ShopDesk2(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*-1f/4f, (keeperBottom? 7f/4f:roomMap.length-1-3f/4f)*Tile.TS);
@@ -667,10 +669,16 @@ public class VillageRooms extends Generation {
 		int shelfAreaWidth = (roomMap[0].length-2);
 		int shelfAreaHeight = (roomMap.length-4);
 		
+		if(roomMap.length >= 6){
+			Bookshelf shelf = new Bookshelf(world, roomMap[0].length/2f*Tile.TS-Tile.TS/4,(keeperBottom?roomMap.length-2:2)*Tile.TS, roomMap[0].length*2-5,2);
+			if(!keeperBottom)shelf.flipY = true;
+			roomEntities.add(shelf);
+		}
+		
 		if(keeperBottom){
 			if(doorY!=0)roomEntities.add(new Plant(world,Tile.TS/2,Tile.TS/2));
 		}else{
-			if(doorY!=roomMap.length)roomEntities.add(new Plant(world,Tile.TS/2,roomMap.length*Tile.TS-Tile.TS/2));
+			if(doorY!=roomMap.length-1)roomEntities.add(new Plant(world,Tile.TS/2,roomMap.length*Tile.TS-Tile.TS/2));
 		}
 		
 		int x = 1, y = keeperBottom?3:1;
