@@ -70,7 +70,7 @@ public class Vendinator extends Friend {
 				new String[]{"Umm... Hello?", "Wait, are you a machine?", "So... are you selling something?", "Wow, what a cool robot."},
 				new String[]{"pitch", "pitch", "pitch", "pitch"}));
 		
-		dialogue.potentialBubbles.put("pitch", new SpeechBubble(world, this,"B\u200B\u200BU\u200B\u200BY\u200B\u200B\u200B\u200B\u200B\u200B HUMAN.", "pitch response"));
+		dialogue.potentialBubbles.put("pitch", new SpeechBubble(world, this,"B\u200B\u200BU\u200B\u200BY\u200B\u200B\u200B\u200B\u200B\u200B, HUMAN.", "pitch response"));
 		
 		dialogue.potentialBubbles.put("pitch response", new SpeechChoice(world, 
 				new String[]{"Okay.", "What do you have?", "No thanks.", "No way."}, 
