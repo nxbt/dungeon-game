@@ -10,6 +10,7 @@ import com.dungeon.game.entity.Stair;
 import com.dungeon.game.entity.character.Vendinator;
 import com.dungeon.game.entity.furniture.Bookshelf;
 import com.dungeon.game.entity.furniture.Carpet;
+import com.dungeon.game.entity.furniture.Plant;
 import com.dungeon.game.entity.furniture.ShopDesk1;
 import com.dungeon.game.entity.furniture.ShopDesk2;
 import com.dungeon.game.pathing.Area;
@@ -665,6 +666,12 @@ public class VillageRooms extends Generation {
 		
 		int shelfAreaWidth = (roomMap[0].length-2);
 		int shelfAreaHeight = (roomMap.length-4);
+		
+		if(keeperBottom){
+			if(doorY!=0)roomEntities.add(new Plant(world,Tile.TS/2,Tile.TS/2));
+		}else{
+			if(doorY!=roomMap.length)roomEntities.add(new Plant(world,Tile.TS/2,roomMap.length*Tile.TS-Tile.TS/2));
+		}
 		
 		int x = 1, y = keeperBottom?3:1;
 		for(int i = 0; i < shelfAreaHeight; i++){
