@@ -53,11 +53,15 @@ public abstract class Character extends Dynamic {
 	
 	protected boolean attacking;
 	
+	public float armor;
+	
 	public float physc_resist;
 	public float arcan_resist;
 	public float flame_resist;
 	public float ligtn_resist;
 	public float poisn_resist;
+	
+	public float baseArmor;
 	
 	public float base_physc_resist;
 	public float base_arcan_resist;
