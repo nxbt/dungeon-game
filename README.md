@@ -12,6 +12,9 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 ##TODO low priority (within a month?):
 * Upload screenshots to wiki
 * Finish adding effects to equipables.
+* Dungeons become more complex decending.
+* Final Dungeon is culmination of all previous dungeons.
+* only access to 1 dungeon at a time.
 
 ##TODO very low priority (within a couple months?):
 * Add multithreding!
