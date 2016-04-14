@@ -6,7 +6,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * Upgrade sprites
 * Add different shops to towns
 * Add procedural generation to all rooms in towns.
-* Add armor
+* Add armor w/ function DT = 100*0.9945^A
 
 ##TODO low priority (within a month?):
 * Upload screenshots to wiki
