@@ -6,6 +6,8 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * Add different shops to towns
 * Add procedural generation to all rooms in towns.
 * Add armor w/ function DT = 100*0.9945^A
+* psn damage and magic damage is adative
+* litn damage and flame damage is average
 
 ##TODO low priority (within a month?):
 * Upload screenshots to wiki
