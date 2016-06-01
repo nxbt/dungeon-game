@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Stair;
 import com.dungeon.game.entity.character.Shopkeeper;
+import com.dungeon.game.entity.character.StairKeeper;
 import com.dungeon.game.entity.furniture.Bookshelf;
 import com.dungeon.game.entity.furniture.Carpet;
 import com.dungeon.game.entity.furniture.Plant;
@@ -754,6 +755,100 @@ public class VillageRooms extends Generation {
 	
 	private void generateStairRoom(Rectangle room) {
 		specialRooms.remove(room);
-		entities.add(new Stair(world,(room.x+1)*Tile.TS+Tile.TS/2 , (room.y+1)*Tile.TS+Tile.TS/2, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
+		
+		//begining Tranaformations
+		int[] doorFinder = findDoor(room);
+		int[][] roomMap;
+		int doorX, doorY;
+		ArrayList<Entity> roomEntities = new ArrayList<Entity>();
+		if(doorFinder[0]==2||doorFinder[0]==3){
+			roomMap = new int[(int) room.width][(int) room.height];
+			doorX = 0;
+			doorY = (int) (doorFinder[1]-room.x);
+		}
+		else {
+			roomMap = new int[(int) room.height][(int) room.width];
+			doorX = 0;
+			doorY = (int) (doorFinder[2]- room.y);
+		}
+		int x, y;
+		if(roomMap.length%2 == 0)y = roomMap.length/2 - (int) (Math.random()*2);
+		else y = roomMap.length/2;
+		
+		if(roomMap[0].length%2 == 0)x = roomMap[0].length/2 - (int) (Math.random()*2);
+		else x = roomMap[0].length/2;
+		
+		//spawn stairs
+		roomEntities.add(new Stair(world,x*Tile.TS+Tile.TS/2 , y*Tile.TS+Tile.TS/2, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
+		
+		//add pilars
+		roomMap[1][1] = 1;
+		roomMap[1][roomMap[0].length-2] = 1;
+		roomMap[roomMap.length-2][1] = 1;
+		roomMap[roomMap.length-2][roomMap[0].length-2] = 1;
+		
+		//spawn hatchkeeper
+		boolean keeperTop = doorY >= roomMap.length/2;
+		if(doorY == roomMap.length/2 && roomMap.length%2 == 1)keeperTop = Math.random()> 0.5;
+		
+		roomEntities.add(new StairKeeper(world, 2*Tile.TS+Tile.TS/2,(keeperTop?roomMap.length - 2:1)*Tile.TS+Tile.TS/2));
+		
+		
+		//ending transformations
+				if(doorFinder[0]==1||doorFinder[0]==3){
+					int[][] temp = roomMap.clone();
+					
+					if(doorFinder[0]==1) roomMap = new int[(int) room.height][(int) room.width];
+					else roomMap = new int[(int) room.width][(int) room.height];
+					
+					for(int i = 0; i < temp.length; i++){
+						for(int k = 0; k < temp[i].length; k++){
+							System.out.println(i +  "," + k);
+							roomMap[i][roomMap[i].length-1-k]=temp[i][k];
+						}
+					}
+					
+					for(Entity e: roomEntities) {
+						e.x = roomMap[0].length*Tile.TS-e.x;
+						e.flipX  = !e.flipX;
+					}
+				}
+				
+				if(doorFinder[0]==2||doorFinder[0]==3){
+					int[][] temp = roomMap.clone();
+					roomMap = new int[(int) room.height][(int) room.width];
+					for(int i = 0; i < temp.length; i++){
+						for(int k = 0; k < temp[i].length; k++){
+							roomMap[k][i]=temp[i][k];
+						}
+					}
+					for(Entity e: roomEntities) {
+						float tempX = e.x;
+						e.x = e.y;
+						e.y = tempX;
+						e.angle-=90;
+						e.flipX = !e.flipX;
+					}
+				}
+				
+				//copy tiles to the map
+				
+				x = (int) room.x;
+				y = (int) room.y;
+				
+				for(int i = 0; i < room.height; i++){
+					for(int k = 0; k < room.width; k++){
+						map[y][x] = roomMap[i][k];
+						x++;
+					}
+					y++;
+					x = (int) room.x;
+				}
+				
+				for(Entity e: roomEntities) {
+					e.x += room.x*Tile.TS;
+					e.y += room.y*Tile.TS;
+					entities.add(e);
+				}
 	}
 }
