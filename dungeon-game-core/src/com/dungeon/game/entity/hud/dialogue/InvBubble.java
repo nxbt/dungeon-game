@@ -14,8 +14,7 @@ public class InvBubble extends SpeechChoice {
 		super(world, new String[]{"Thanks!"},new String[]{"Thank you!"},new String[]{key});
 		this.inv = inv;
 		
-//		int width = 0;
-//		int height = 0;
+		hasBeenSaid = false;
 		
 		if(inv instanceof Shop) bubble = new ShopDisplayBubble(world, character, (Shop)inv);
 		else bubble = new InvDisplayBubble(world, character, inv);

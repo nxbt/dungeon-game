@@ -15,10 +15,6 @@ public class Said extends Criteria{
 	}
   
 	public boolean metCriteria(){
-		for(SpeechBubble bubble: dialogue.speechBubbles){
-			if(dialogue.potentialBubbles.get(key).equals(bubble)) return true;
-		}
-		
-		return false;
+		return dialogue.potentialBubbles.get(key).hasBeenSaid;
 	}
 }

@@ -36,6 +36,8 @@ public class SpeechBubble extends Hud implements Cloneable {
 	public Criteria[] keyCriteria; //controls which bubble is next in the conversation
 	public String[] proceedKeys; //different keys for which bubble is to come next, based on the keyCriteria variable
 	
+	public boolean hasBeenSaid;
+	
 	private boolean began;
 	
 	public SpeechBubble(World world, Character character, Criteria[] textCriteria, String[] texts, Criteria[] keyCriteria, String[] proceedKeys) {
@@ -74,6 +76,8 @@ public class SpeechBubble extends Hud implements Cloneable {
 	}
 
 	private void init(Character character, Criteria[] textCriteria, String[] texts, Criteria[] keyCriteria, String[] proceedKeys) {	
+		hasBeenSaid = false;
+		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		Color temp = character.speechColor;
 		temp.a = 0.7f;
@@ -197,6 +201,7 @@ public class SpeechBubble extends Hud implements Cloneable {
 				}
 				
 			}
+			hasBeenSaid = true;
 			return temp;
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();

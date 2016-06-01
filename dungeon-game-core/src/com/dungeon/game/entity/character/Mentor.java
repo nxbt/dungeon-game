@@ -100,10 +100,8 @@ public class Mentor extends Friend {
 				new String[]{"Oh, alright.", "Um... no you don't."}, 
 				new String[]{"goodbye", "give sword"}));
 		
-		Inventory invent = new Inventory(world, new int[][]{new int[]{0,0,0},new int[]{0,0,0}}, 0, 0, true);
+		Inventory invent = new Inventory(world, new int[][]{new int[]{0,0,0}}, 0, 0, true);
 		invent.slot[0].item = new Sword(world, 7, 10);
-		invent.slot[1].item = new Arrow(world);
-		invent.slot[1].item.stack = 10;
 		dialogue.potentialBubbles.put("give sword", new InvBubble(world, this, invent , "goodbye"));
 		
 		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world, this, "See ya!", "end"));

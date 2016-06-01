@@ -70,6 +70,8 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 		this.proceedKeyCriteria = proceedKeyCriteria;
 		this.proceedKeys = proceedKeys;
 		
+		hasBeenSaid = false;
+		
 		madeChoice = false;
 		choice = 0;
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
@@ -160,6 +162,7 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 	public SpeechChoice clone() {
 		SpeechChoice temp = (SpeechChoice) super.clone();
 		temp.updateChoices();
+		hasBeenSaid = true;
 		return (SpeechChoice) temp;
 	}
 	
