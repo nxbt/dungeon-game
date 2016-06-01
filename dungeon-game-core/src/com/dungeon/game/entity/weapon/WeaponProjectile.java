@@ -1,11 +1,12 @@
-package com.dungeon.game.entity;
+package com.dungeon.game.entity.weapon;
 
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.entity.Drop;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.inventory.Slot;
-import com.dungeon.game.item.Ammo;
 import com.dungeon.game.item.Item;
-import com.dungeon.game.item.Ranged;
+import com.dungeon.game.item.weapon.Ranged;
+import com.dungeon.game.item.weapon.ammo.Ammo;
 import com.dungeon.game.world.World;
 
 public class WeaponProjectile extends Projectile {

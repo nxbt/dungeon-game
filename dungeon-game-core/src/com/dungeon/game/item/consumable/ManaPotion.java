@@ -1,4 +1,4 @@
-package com.dungeon.game.item;
+package com.dungeon.game.item.consumable;
 
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.ManaRegen;

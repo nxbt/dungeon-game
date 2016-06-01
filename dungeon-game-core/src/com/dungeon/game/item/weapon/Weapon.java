@@ -1,7 +1,8 @@
-package com.dungeon.game.item;
+package com.dungeon.game.item.weapon;
 
-import com.dungeon.game.entity.WeaponGraphic;
 import com.dungeon.game.entity.character.Character;
+import com.dungeon.game.entity.weapon.WeaponGraphic;
+import com.dungeon.game.item.Equipable;
 import com.dungeon.game.world.World;
 
 public abstract class Weapon extends Equipable{
@@ -39,7 +40,7 @@ public abstract class Weapon extends Equipable{
 		
 		this.leftSide = leftSide;
 		
-		world.entities.add(this.graphic);
+		world.entities.add(world.entities.indexOf(owner)+1,this.graphic);
 	}
 	
 	public void unequip(){

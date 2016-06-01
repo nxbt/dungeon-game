@@ -1,4 +1,4 @@
-package com.dungeon.game.item;
+package com.dungeon.game.item.weapon;
 
 import com.dungeon.game.spell.Spell;
 import com.dungeon.game.world.World;

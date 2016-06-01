@@ -1,11 +1,11 @@
 package com.dungeon.game.generator;
 
 import com.dungeon.game.entity.Chest;
-import com.dungeon.game.item.Arrow;
-import com.dungeon.game.item.Bow;
 import com.dungeon.game.item.Gold;
-import com.dungeon.game.item.LifePotion;
-import com.dungeon.game.item.Sword;
+import com.dungeon.game.item.consumable.LifePotion;
+import com.dungeon.game.item.weapon.Bow;
+import com.dungeon.game.item.weapon.Sword;
+import com.dungeon.game.item.weapon.ammo.Arrow;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 

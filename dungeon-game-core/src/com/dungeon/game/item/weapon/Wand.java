@@ -1,7 +1,7 @@
-package com.dungeon.game.item;
+package com.dungeon.game.item.weapon;
 
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.entity.MediumGraphic;
+import com.dungeon.game.entity.weapon.MediumGraphic;
 import com.dungeon.game.spell.Fireball;
 import com.dungeon.game.spell.Heal;
 import com.dungeon.game.spell.Spell;

@@ -1,9 +1,9 @@
 package com.dungeon.game.spell;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.dungeon.game.entity.SpellProjectile;
 import com.dungeon.game.entity.character.Character;
-import com.dungeon.game.item.Medium;
+import com.dungeon.game.entity.weapon.SpellProjectile;
+import com.dungeon.game.item.weapon.Medium;
 import com.dungeon.game.world.World;
 
 public abstract class Spell {

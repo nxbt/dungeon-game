@@ -1,8 +1,8 @@
-package com.dungeon.game.entity;
+package com.dungeon.game.entity.weapon;
 
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.item.Medium;
-import com.dungeon.game.item.Weapon;
+import com.dungeon.game.item.weapon.Medium;
+import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.spell.Spell;
 import com.dungeon.game.world.World;
 

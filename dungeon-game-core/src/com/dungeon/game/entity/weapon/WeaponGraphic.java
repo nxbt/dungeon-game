@@ -1,7 +1,8 @@
-package com.dungeon.game.entity;
+package com.dungeon.game.entity.weapon;
 
+import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.item.Item;
-import com.dungeon.game.item.Weapon;
+import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.world.World;
 
 public abstract class WeaponGraphic extends Dynamic {

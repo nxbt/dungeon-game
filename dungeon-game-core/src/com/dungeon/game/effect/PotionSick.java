@@ -1,6 +1,6 @@
 package com.dungeon.game.effect;
 
-import com.dungeon.game.item.Consumable;
+import com.dungeon.game.item.consumable.Consumable;
 import com.dungeon.game.world.World;
 
 public class PotionSick extends Effect {

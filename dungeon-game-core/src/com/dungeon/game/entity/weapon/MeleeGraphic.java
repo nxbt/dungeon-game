@@ -1,10 +1,12 @@
-package com.dungeon.game.entity;
+package com.dungeon.game.entity.weapon;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.entity.Dynamic;
+import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
-import com.dungeon.game.item.Melee;
-import com.dungeon.game.item.Weapon;
+import com.dungeon.game.item.weapon.Melee;
+import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.world.World;
 
 public class MeleeGraphic extends WeaponGraphic {

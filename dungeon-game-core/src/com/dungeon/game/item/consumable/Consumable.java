@@ -1,6 +1,7 @@
-package com.dungeon.game.item;
+package com.dungeon.game.item.consumable;
 
 import com.dungeon.game.entity.character.Character;
+import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
 public abstract class Consumable extends Item {

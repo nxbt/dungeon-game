@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.hud.DescWindow;
-import com.dungeon.game.item.Consumable;
 import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Item;
+import com.dungeon.game.item.consumable.Consumable;
 import com.dungeon.game.world.World;
 
 public class Slot {

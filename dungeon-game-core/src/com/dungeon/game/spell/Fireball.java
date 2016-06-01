@@ -7,10 +7,10 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
-import com.dungeon.game.entity.SpellProjectile;
 import com.dungeon.game.entity.character.Character;
+import com.dungeon.game.entity.weapon.SpellProjectile;
 import com.dungeon.game.item.Item;
-import com.dungeon.game.item.Medium;
+import com.dungeon.game.item.weapon.Medium;
 import com.dungeon.game.world.World;
 
 public class Fireball extends Spell {
