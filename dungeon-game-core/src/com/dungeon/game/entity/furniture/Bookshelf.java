@@ -55,7 +55,7 @@ public class Bookshelf extends Static{
 				}
 				Pixmap rotated = Spritesheet.rotatePixmap(textPixmaps[index],rotation);
 				tempMap.drawPixmap(rotated, i*16, k*16);
-				rotated.dispose();
+//				rotated.dispose();
 			}
 		}
 		
@@ -101,7 +101,7 @@ public class Bookshelf extends Static{
 				rotation = shelfMap[k][i][1];
 				Pixmap rotated = Spritesheet.rotatePixmap(textPixmaps[index],rotation);
 				tempMap.drawPixmap(rotated, i*16, k*16);
-				rotated.dispose();
+//				rotated.dispose();
 			}
 		}
 		

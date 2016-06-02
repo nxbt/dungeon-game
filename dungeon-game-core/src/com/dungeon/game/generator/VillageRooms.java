@@ -755,19 +755,22 @@ public class VillageRooms extends Generation {
 		
 		//spawn stuff
 		int x = 0,y = 0;
-		
-		int doOrientation = (int)(Math.random()*4);
-		if(doOrientation == 0 && roomMap.length < 3)doOrientation = (int)(Math.random()*3+1);
-		if(doOrientation == 0){
+		 //spawn bed
+		int bedOrientation = (int)(Math.random()*4);
+		int bedX = 0, bedY = 0;
+		if(bedOrientation == 0 && roomMap.length < 3)bedOrientation = (int)(Math.random()*3+1);
+		if(bedOrientation == 0){
 			x = 0;
 			do{
 				y = (int) (Math.random()*roomMap.length);
-			}while(y != doorY && y - 1 != doorY && y + 1 != doorY);
+			}while(y == doorY || y - 1 == doorY || y + 1 == doorY);
+			bedX = x;
+			bedY = y;
 			x*=Tile.TS;
 			x+=Tile.TS;
 			y*=Tile.TS;
 			y+=Tile.TS/2;
-		}else if(doOrientation == 1){
+		}else if(bedOrientation == 1){
 			x = (int) (Math.random()*roomMap[0].length);
 			if(doorY < 2){
 				while (x < 2){
@@ -775,17 +778,21 @@ public class VillageRooms extends Generation {
 				}
 			}
 			y = 0;
+			bedX = x;
+			bedY = y;
 			x*=Tile.TS;
 			x+=Tile.TS/2;
 			y*=Tile.TS;
 			y+=Tile.TS;
-		}else if(doOrientation == 2){
+		}else if(bedOrientation == 2){
 			x = roomMap[0].length-1;
 			y = (int) (Math.random()*roomMap.length);
+			bedX = x;
+			bedY = y;
 			x*=Tile.TS;
 			y*=Tile.TS;
 			y+=Tile.TS/2;
-		}else if(doOrientation == 3){
+		}else if(bedOrientation == 3){
 			x = (int) (Math.random()*roomMap[0].length);
 			if(doorY > roomMap.length - 3){
 				while (x < 2){
@@ -793,15 +800,29 @@ public class VillageRooms extends Generation {
 				}
 			}
 			y = roomMap.length-1;
+			bedX = x;
+			bedY = y;
 			x*=Tile.TS;
 			x+=Tile.TS/2;
 			y*=Tile.TS;
 		}
-		if(doOrientation == 0)doOrientation = 3;
-		else if(doOrientation == 1)doOrientation = 2;
-		else if(doOrientation == 2)doOrientation = 1;
-		else if(doOrientation == 3)doOrientation = 0;
-		roomEntities.add(new Bed(world, x, y, doOrientation,new Color(1,0,0,0.2f)));
+		if(bedOrientation == 0)bedOrientation = 3;
+		else if(bedOrientation == 1)bedOrientation = 2;
+		else if(bedOrientation == 2)bedOrientation = 1;
+		else if(bedOrientation == 3)bedOrientation = 0;
+		roomEntities.add(new Bed(world, x, y, bedOrientation,new Color(1,0,0,0.2f)));
+		
+		//spawn side table
+		int[][] potentialTableSpots = new int[2][2];
+		if(bedOrientation == 0){
+			
+		}else if(bedOrientation == 1){
+			
+		}else if(bedOrientation == 2){
+			
+		}else if(bedOrientation == 3){
+			
+		}
 		
 		roomEntities.add(new Carpet(world,roomMap[0].length/2f*Tile.TS,roomMap.length/2f*Tile.TS,roomMap[0].length*2-2,roomMap.length*2-2, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f)));
 

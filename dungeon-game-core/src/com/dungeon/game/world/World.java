@@ -98,7 +98,7 @@ public class World {
 		entities = curFloor.entities;
 		entities.add(0,player);
 		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
-		entities.add(new Bed(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS+Tile.TS/2,1, new Color(0,1,0,0.3f)));
+		
 		hudEntities.add(new GoldCounter(this));
 		hudEntities.add(new MenuButton(this, 4, cam.HEIGHT-20));
 		hudEntities.add(new HelpButton(this, 24, cam.HEIGHT-20));
@@ -118,9 +118,6 @@ public class World {
 		hudEntities.add(new HudBackground(this));
 		
 		hudEntities.add(new EffectHudBackground(this, cam.WIDTH-44, cam.HEIGHT-44));
-		
-		
-//		hudEntities.add(new DialogueHud(this, player));
 		
 		fpsFont = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		fpsFont.setColor(Color.RED);
@@ -214,7 +211,6 @@ public class World {
 						if(e instanceof Friend)shapeRenderer.setColor(0,1,1,0.2f);
 						if(e instanceof Enemy)shapeRenderer.setColor(1,1,0,0.2f);
 						shapeRenderer.set(ShapeType.Filled);
-//						shapeRenderer.polygon(((Character)e).visPolygon.getVertices());
 						for(Polygon tri: ((Character)e).visTris){
 							float[] points = tri.getVertices();
 							shapeRenderer.triangle(points[0], points[1], points[2], points[3], points[4], points[5]);

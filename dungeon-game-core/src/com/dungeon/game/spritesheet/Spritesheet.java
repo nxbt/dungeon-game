@@ -44,27 +44,18 @@ public class Spritesheet {
 	}
 	
 	public static Pixmap rotatePixmap (Pixmap src, int numRotates){
-	    final int width = src.getWidth();
-	    final int height = src.getHeight();
-	    Pixmap rotated = new Pixmap(width, height, src.getFormat());
-	    
-    	for (int x = 0; x < width; x++) {
-	        for (int y = 0; y < height; y++) {
-	        	int destx = x, desty = y;
-	        	for(int i = 0; i < numRotates; i++){
-	        		int xOff = destx-width/2;
-	        		int yOff = desty-height/2;
-	        		desty = height/2+(xOff);
-	        		destx = width/2-(yOff);
-	        	}
-	        	if(numRotates == 1||numRotates == 2)destx--;
-	        	if(numRotates == 2||numRotates == 3)desty--;
-	        	
+		if(numRotates == 0) return src;
+		Pixmap rotated = new Pixmap(src.getHeight(), src.getWidth(), src.getFormat());
+		for (int x = 0; x < src.getWidth(); x++) {
+	        for (int y = 0; y < src.getHeight(); y++) {
+	        	int offx = x - src.getWidth()/2, offy = y - src.getHeight()/2+1;
+	        	int destx = -offy + rotated.getWidth()/2, desty = offx+rotated.getHeight()/2;
 	        	rotated.drawPixel(destx, desty, src.getPixel(x, y));
 	        }
-	    }
-	    return rotated;
-
+		}
+		if(numRotates == 1)return rotated;
+		return rotatePixmap(rotated, numRotates-1);
+		
 	}
 	
 }
