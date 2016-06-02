@@ -9,6 +9,7 @@ import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Stair;
 import com.dungeon.game.entity.character.Shopkeeper;
 import com.dungeon.game.entity.character.StairKeeper;
+import com.dungeon.game.entity.furniture.Bed;
 import com.dungeon.game.entity.furniture.Bookshelf;
 import com.dungeon.game.entity.furniture.Carpet;
 import com.dungeon.game.entity.furniture.Plant;
@@ -545,7 +546,8 @@ public class VillageRooms extends Generation {
 	
 	private void populateSpecialRooms() {
 		generateStairRoom(specialRooms.get((int) (specialRooms.size()*Math.random())));
-		while(specialRooms.size()>0)generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
+		generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
+		while(specialRooms.size()>0)generateQuarters(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		for(int i = 0; i < specialRooms.size(); i++){
 			
 		}
@@ -615,20 +617,16 @@ public class VillageRooms extends Generation {
 		
 		//begin transformation
 		
+
 		int[] doorFinder = findDoor(room);
-		int[][] roomMap;
-		int doorX, doorY;
+		int[] doorPos = new int[2];
+		int[][] roomMap = rotate(room, doorFinder, doorPos);
+		int doorX =  doorPos[0];
+		int doorY = doorPos[1];
+		
+		
+		//initialize Entity Arrays
 		ArrayList<Entity> roomEntities = new ArrayList<Entity>();
-		if(doorFinder[0]==2||doorFinder[0]==3){
-			roomMap = new int[(int) room.width][(int) room.height];
-			doorX = 0;
-			doorY = (int) (doorFinder[1]-room.x);
-		}
-		else {
-			roomMap = new int[(int) room.height][(int) room.width];
-			doorX = 0;
-			doorY = (int) (doorFinder[2]- room.y);
-		}
 		
 		boolean keeperBottom = Math.random()>0.5;
 		if(doorY == 0)keeperBottom = true;
@@ -696,6 +694,139 @@ public class VillageRooms extends Generation {
 		roomEntities.add(new Carpet(world,roomMap[0].length/2f*Tile.TS-Tile.TS/4,roomMap.length/2f*Tile.TS+(keeperBottom?-Tile.TS/4:Tile.TS/4),2*roomMap[0].length-3,2*roomMap.length-3, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f)));
 		
 		//ending transformations
+
+		unrotate(roomMap, room, roomEntities, doorFinder);
+	}
+	
+	private void generateStairRoom(Rectangle room) {
+		specialRooms.remove(room);
+		
+		//begining Tranaformations
+		int[] doorFinder = findDoor(room);
+		int[] doorPos = new int[2];
+		int[][] roomMap = rotate(room, doorFinder, doorPos);
+		int doorX =  doorPos[0];
+		int doorY = doorPos[1];
+		
+		
+		//initialize Entity Arrays
+		ArrayList<Entity> roomEntities = new ArrayList<Entity>();
+		
+		//spawn entities and change tiles below
+		int x, y;
+		if(roomMap.length%2 == 0)y = roomMap.length/2 - (int) (Math.random()*2);
+		else y = roomMap.length/2;
+		
+		if(roomMap[0].length%2 == 0)x = roomMap[0].length/2 - (int) (Math.random()*2);
+		else x = roomMap[0].length/2;
+		
+		//spawn stairs
+		roomEntities.add(new Stair(world,x*Tile.TS+Tile.TS/2 , y*Tile.TS+Tile.TS/2, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
+		
+		//add pilars
+		roomMap[1][1] = 1;
+		roomMap[1][roomMap[0].length-2] = 1;
+		roomMap[roomMap.length-2][1] = 1;
+		roomMap[roomMap.length-2][roomMap[0].length-2] = 1;
+		
+		//spawn hatchkeeper
+		boolean keeperTop = doorY >= roomMap.length/2;
+		if(doorY == roomMap.length/2 && roomMap.length%2 == 1)keeperTop = Math.random()> 0.5;
+		
+		roomEntities.add(new StairKeeper(world, 2*Tile.TS+Tile.TS/2,(keeperTop?roomMap.length - 2:1)*Tile.TS+Tile.TS/2));
+		
+		
+		//ending transformations
+		unrotate(roomMap, room, roomEntities, doorFinder);
+	}
+	
+	private void generateQuarters(Rectangle room){
+		specialRooms.remove(room);
+		
+		//begining Tranaformations
+		int[] doorFinder = findDoor(room);
+		int[] doorPos = new int[2];
+		int[][] roomMap = rotate(room, doorFinder, doorPos);
+		int doorX =  doorPos[0];
+		int doorY = doorPos[1];
+		
+		//initialize Entity Arrays
+		ArrayList<Entity> roomEntities = new ArrayList<Entity>();
+		
+		//spawn stuff
+		int x = 0,y = 0;
+		
+		int doOrientation = (int)(Math.random()*4);
+		if(doOrientation == 0 && roomMap.length < 3)doOrientation = (int)(Math.random()*3+1);
+		if(doOrientation == 0){
+			x = 0;
+			do{
+				y = (int) (Math.random()*roomMap.length);
+			}while(y != doorY && y - 1 != doorY && y + 1 != doorY);
+			x*=Tile.TS;
+			x+=Tile.TS;
+			y*=Tile.TS;
+			y+=Tile.TS/2;
+		}else if(doOrientation == 1){
+			x = (int) (Math.random()*roomMap[0].length);
+			if(doorY < 2){
+				while (x < 2){
+					x = (int) (Math.random()*roomMap[0].length);
+				}
+			}
+			y = 0;
+			x*=Tile.TS;
+			x+=Tile.TS/2;
+			y*=Tile.TS;
+			y+=Tile.TS;
+		}else if(doOrientation == 2){
+			x = roomMap[0].length-1;
+			y = (int) (Math.random()*roomMap.length);
+			x*=Tile.TS;
+			y*=Tile.TS;
+			y+=Tile.TS/2;
+		}else if(doOrientation == 3){
+			x = (int) (Math.random()*roomMap[0].length);
+			if(doorY > roomMap.length - 3){
+				while (x < 2){
+					x = (int) (Math.random()*roomMap[0].length);
+				}
+			}
+			y = roomMap.length-1;
+			x*=Tile.TS;
+			x+=Tile.TS/2;
+			y*=Tile.TS;
+		}
+		if(doOrientation == 0)doOrientation = 3;
+		else if(doOrientation == 1)doOrientation = 2;
+		else if(doOrientation == 2)doOrientation = 1;
+		else if(doOrientation == 3)doOrientation = 0;
+		roomEntities.add(new Bed(world, x, y, doOrientation,new Color(1,0,0,0.2f)));
+		
+		roomEntities.add(new Carpet(world,roomMap[0].length/2f*Tile.TS,roomMap.length/2f*Tile.TS,roomMap[0].length*2-2,roomMap.length*2-2, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f)));
+
+		
+		
+		//ending transformations
+		unrotate(roomMap, room, roomEntities, doorFinder);
+	}
+	
+	private int[][] rotate(Rectangle room, int[] doorFinder, int[] doorPos){
+		int[][] roomMap;
+		if(doorFinder[0]==2||doorFinder[0]==3){
+			roomMap = new int[(int) room.width][(int) room.height];
+			doorPos[0] = 0;
+			doorPos[1] = (int) (doorFinder[1]-room.x);
+		}
+		else {
+			roomMap = new int[(int) room.height][(int) room.width];
+			doorPos[0] = 0;
+			doorPos[1] = (int) (doorFinder[2]- room.y);
+		}
+		return roomMap;
+	}
+	
+	private void unrotate(int[][] roomMap, Rectangle room, ArrayList<Entity> roomEntities, int[] doorFinder){
 		if(doorFinder[0]==1||doorFinder[0]==3){
 			int[][] temp = roomMap.clone();
 			
@@ -734,8 +865,8 @@ public class VillageRooms extends Generation {
 		
 		//copy tiles to the map
 		
-		x = (int) room.x;
-		y = (int) room.y;
+		int x = (int) room.x;
+		int y = (int) room.y;
 		
 		for(int i = 0; i < room.height; i++){
 			for(int k = 0; k < room.width; k++){
@@ -751,104 +882,5 @@ public class VillageRooms extends Generation {
 			e.y += room.y*Tile.TS;
 			entities.add(e);
 		}
-	}
-	
-	private void generateStairRoom(Rectangle room) {
-		specialRooms.remove(room);
-		
-		//begining Tranaformations
-		int[] doorFinder = findDoor(room);
-		int[][] roomMap;
-		int doorX, doorY;
-		ArrayList<Entity> roomEntities = new ArrayList<Entity>();
-		if(doorFinder[0]==2||doorFinder[0]==3){
-			roomMap = new int[(int) room.width][(int) room.height];
-			doorX = 0;
-			doorY = (int) (doorFinder[1]-room.x);
-		}
-		else {
-			roomMap = new int[(int) room.height][(int) room.width];
-			doorX = 0;
-			doorY = (int) (doorFinder[2]- room.y);
-		}
-		int x, y;
-		if(roomMap.length%2 == 0)y = roomMap.length/2 - (int) (Math.random()*2);
-		else y = roomMap.length/2;
-		
-		if(roomMap[0].length%2 == 0)x = roomMap[0].length/2 - (int) (Math.random()*2);
-		else x = roomMap[0].length/2;
-		
-		//spawn stairs
-		roomEntities.add(new Stair(world,x*Tile.TS+Tile.TS/2 , y*Tile.TS+Tile.TS/2, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
-		
-		//add pilars
-		roomMap[1][1] = 1;
-		roomMap[1][roomMap[0].length-2] = 1;
-		roomMap[roomMap.length-2][1] = 1;
-		roomMap[roomMap.length-2][roomMap[0].length-2] = 1;
-		
-		//spawn hatchkeeper
-		boolean keeperTop = doorY >= roomMap.length/2;
-		if(doorY == roomMap.length/2 && roomMap.length%2 == 1)keeperTop = Math.random()> 0.5;
-		
-		roomEntities.add(new StairKeeper(world, 2*Tile.TS+Tile.TS/2,(keeperTop?roomMap.length - 2:1)*Tile.TS+Tile.TS/2));
-		
-		
-		//ending transformations
-				if(doorFinder[0]==1||doorFinder[0]==3){
-					int[][] temp = roomMap.clone();
-					
-					if(doorFinder[0]==1) roomMap = new int[(int) room.height][(int) room.width];
-					else roomMap = new int[(int) room.width][(int) room.height];
-					
-					for(int i = 0; i < temp.length; i++){
-						for(int k = 0; k < temp[i].length; k++){
-							System.out.println(i +  "," + k);
-							roomMap[i][roomMap[i].length-1-k]=temp[i][k];
-						}
-					}
-					
-					for(Entity e: roomEntities) {
-						e.x = roomMap[0].length*Tile.TS-e.x;
-						e.flipX  = !e.flipX;
-					}
-				}
-				
-				if(doorFinder[0]==2||doorFinder[0]==3){
-					int[][] temp = roomMap.clone();
-					roomMap = new int[(int) room.height][(int) room.width];
-					for(int i = 0; i < temp.length; i++){
-						for(int k = 0; k < temp[i].length; k++){
-							roomMap[k][i]=temp[i][k];
-						}
-					}
-					for(Entity e: roomEntities) {
-						float tempX = e.x;
-						e.x = e.y;
-						e.y = tempX;
-						e.angle-=90;
-						e.flipX = !e.flipX;
-					}
-				}
-				
-				//copy tiles to the map
-				
-				x = (int) room.x;
-				y = (int) room.y;
-				
-				for(int i = 0; i < room.height; i++){
-					for(int k = 0; k < room.width; k++){
-						map[y][x] = roomMap[i][k];
-						x++;
-					}
-					y++;
-					x = (int) room.x;
-				}
-				
-				for(Entity e: roomEntities) {
-					e.x += room.x*Tile.TS;
-					e.y += room.y*Tile.TS;
-					entities.add(e);
-				}
 	}
 }

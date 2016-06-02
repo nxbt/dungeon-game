@@ -18,7 +18,7 @@ import com.dungeon.game.entity.character.Enemy;
 import com.dungeon.game.entity.character.Friend;
 import com.dungeon.game.entity.character.Mentor;
 import com.dungeon.game.entity.character.Player;
-import com.dungeon.game.entity.furniture.Plant;
+import com.dungeon.game.entity.furniture.Bed;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.GoldCounter;
@@ -98,7 +98,7 @@ public class World {
 		entities = curFloor.entities;
 		entities.add(0,player);
 		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
-		entities.add(new Plant(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS+Tile.TS/2));
+		entities.add(new Bed(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS+Tile.TS/2,1, new Color(0,1,0,0.3f)));
 		hudEntities.add(new GoldCounter(this));
 		hudEntities.add(new MenuButton(this, 4, cam.HEIGHT-20));
 		hudEntities.add(new HelpButton(this, 24, cam.HEIGHT-20));

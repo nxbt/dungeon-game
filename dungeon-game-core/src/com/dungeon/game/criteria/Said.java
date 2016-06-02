@@ -1,7 +1,6 @@
 package com.dungeon.game.criteria;
 
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
-import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.world.World;
 
 public class Said extends Criteria{

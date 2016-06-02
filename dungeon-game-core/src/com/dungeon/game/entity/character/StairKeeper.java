@@ -63,7 +63,8 @@ public class StairKeeper extends Friend {
 		// \u200B to create pause;
 		dialogue = new Dialogue(world, this);
 
-		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"Hello... I am the keeper of the stairs...", "below"));
+//		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"Hello... I am the keeper of the stairs...", "below"));
+		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this, new Criteria[] {new Invert(world, new Said(world, dialogue, "have answer")), new True(world)}, new String[] {"Hello... I am the keeper of the stairs...", "Hello again, traveler."}, new String[] {"below", "another question"}));
 		dialogue.potentialBubbles.put("below", new SpeechBubble(world, this,"The stairs to the below.", "have you"));
 	
 		dialogue.potentialBubbles.put("have you", new SpeechBubble(world, this, "How much do you know about whats down there?", "have answer"));
@@ -84,7 +85,7 @@ public class StairKeeper extends Friend {
 				new String[]{"help", "know a lot"}));
 		
 		dialogue.potentialBubbles.put("help", new SpeechChoice(world, 
-				new String[]{"What do I need to know?", "What's down there?","What do I need down there?", "Am I prepared?"}, 
+				new String[]{"What do I need to know?", "What's down there?","What do I need down there?"}, 
 				new String[]{"Is there anything that you believe I must know?", "What sort of evils lie below?", "What equipment should I bring with me?", "Would you say I am prepared to brave these depths?"},
 				new String[]{"what know", "what down", "what need", "what prepared"}));
 
@@ -93,7 +94,15 @@ public class StairKeeper extends Friend {
 		dialogue.potentialBubbles.put("what know 3", new SpeechBubble(world, this, "These demons forced the humans all the way up here, and placed their monsters on the floors below to keep the humans away from them.", "what know 4"));
 		dialogue.potentialBubbles.put("what know 4", new SpeechBubble(world, this, "The further down you go, and the closer to the demons you get, the stronger the monsters you encounter shall be.", "what know 5"));
 		dialogue.potentialBubbles.put("what know 5", new SpeechBubble(world, this, "You will need to bring weapons and armor down with you, or even the weakest monsters will tear you to shreads.", "what know 6"));
-		dialogue.potentialBubbles.put("what know 6", new SpeechBubble(world, this, new Criteria[] {new Invert(world, new Said(world, dialogue, "give axe")), new True(world)}, new String[] {"Here... take this. To protect yourself.", "I have already given you what I can."}, new String[] {"give axe", "another question"}));
+		dialogue.potentialBubbles.put("what know 6", new SpeechBubble(world, this, new Criteria[] {new Invert(world, new Said(world, dialogue, "give axe")), new True(world)}, new String[] {"Here... take this. To protect yourself.", "I have already ofered you what I can."}, new String[] {"give axe", "another question"}));
+		
+		dialogue.potentialBubbles.put("what down", new SpeechBubble(world, this, "Terrible monsters. And demons.", "what down 2"));
+		dialogue.potentialBubbles.put("what down 2", new SpeechBubble(world, this, "Unspeakable horrors that will strike fear into the hearts of even the bravest of men.", "what down 3"));
+		dialogue.potentialBubbles.put("what down 3", new SpeechBubble(world, this, "Be sure to bring weapons and armor with you, or you will be torn to shreds for sure.", "what know 6"));
+		
+		dialogue.potentialBubbles.put("what need", new SpeechBubble(world, this, "You'll need a weapon or two. And armor.", "what need 2"));
+		dialogue.potentialBubbles.put("what need 2", new SpeechBubble(world, this, "Talk to the blacksmith for armor. For a bit of gold, I'm sure you can fit yourself well.", "what need 3"));
+		dialogue.potentialBubbles.put("what need 3", new SpeechBubble(world, this, new Criteria[] {new Invert(world, new Said(world, dialogue, "give axe")), new True(world)}, new String[] {"And here's an axe. It's not a good weapon, but still better than nothing.", "And I have already offered you my axe."}, new String[] {"give axe", "another question"}));
 		
 		Inventory invent = new Inventory(world, new int[][]{new int[]{0,0,0}}, 0, 0, true);
 		invent.slot[0].item = new Axe(world, 7, 10);
