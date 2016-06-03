@@ -12,9 +12,11 @@ import com.dungeon.game.entity.character.StairKeeper;
 import com.dungeon.game.entity.furniture.Bed;
 import com.dungeon.game.entity.furniture.Bookshelf;
 import com.dungeon.game.entity.furniture.Carpet;
+import com.dungeon.game.entity.furniture.Dresser;
 import com.dungeon.game.entity.furniture.Plant;
 import com.dungeon.game.entity.furniture.ShopDesk1;
 import com.dungeon.game.entity.furniture.ShopDesk2;
+import com.dungeon.game.entity.furniture.SmallTable;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -545,8 +547,8 @@ public class VillageRooms extends Generation {
 
 	
 	private void populateSpecialRooms() {
-		generateStairRoom(specialRooms.get((int) (specialRooms.size()*Math.random())));
-		generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
+//		generateStairRoom(specialRooms.get((int) (specialRooms.size()*Math.random())));
+//		generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		while(specialRooms.size()>0)generateQuarters(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		for(int i = 0; i < specialRooms.size(); i++){
 			
@@ -755,6 +757,12 @@ public class VillageRooms extends Generation {
 		
 		//spawn stuff
 		int x = 0,y = 0;
+		ArrayList<int[]> occupiedTiles = new ArrayList<int[]>();
+		
+		occupiedTiles.add(new int[]{doorY,0});
+		occupiedTiles.add(new int[]{doorY,1});
+		occupiedTiles.add(new int[]{doorY+1,0});
+		occupiedTiles.add(new int[]{doorY-1,0});
 		 //spawn bed
 		int bedOrientation = (int)(Math.random()*4);
 		int bedX = 0, bedY = 0;
@@ -770,6 +778,10 @@ public class VillageRooms extends Generation {
 			x+=Tile.TS;
 			y*=Tile.TS;
 			y+=Tile.TS/2;
+			occupiedTiles.add(new int[]{bedY,bedX});
+			occupiedTiles.add(new int[]{bedY,bedX+1});
+			occupiedTiles.add(new int[]{bedY+1,bedX+1});
+			occupiedTiles.add(new int[]{bedY-1,bedX+1});
 		}else if(bedOrientation == 1){
 			x = (int) (Math.random()*roomMap[0].length);
 			if(doorY < 2){
@@ -784,6 +796,10 @@ public class VillageRooms extends Generation {
 			x+=Tile.TS/2;
 			y*=Tile.TS;
 			y+=Tile.TS;
+			occupiedTiles.add(new int[]{bedY,bedX});
+			occupiedTiles.add(new int[]{bedY+1,bedX});
+			occupiedTiles.add(new int[]{bedY+1,bedX+1});
+			occupiedTiles.add(new int[]{bedY+1,bedX-1});
 		}else if(bedOrientation == 2){
 			x = roomMap[0].length-1;
 			y = (int) (Math.random()*roomMap.length);
@@ -792,6 +808,10 @@ public class VillageRooms extends Generation {
 			x*=Tile.TS;
 			y*=Tile.TS;
 			y+=Tile.TS/2;
+			occupiedTiles.add(new int[]{bedY,bedX});
+			occupiedTiles.add(new int[]{bedY,bedX-1});
+			occupiedTiles.add(new int[]{bedY+1,bedX-1});
+			occupiedTiles.add(new int[]{bedY-1,bedX-1});
 		}else if(bedOrientation == 3){
 			x = (int) (Math.random()*roomMap[0].length);
 			if(doorY > roomMap.length - 3){
@@ -805,6 +825,10 @@ public class VillageRooms extends Generation {
 			x*=Tile.TS;
 			x+=Tile.TS/2;
 			y*=Tile.TS;
+			occupiedTiles.add(new int[]{bedY,bedX});
+			occupiedTiles.add(new int[]{bedY-1,bedX});
+			occupiedTiles.add(new int[]{bedY-1,bedX+1});
+			occupiedTiles.add(new int[]{bedY-1,bedX-1});
 		}
 		if(bedOrientation == 0)bedOrientation = 3;
 		else if(bedOrientation == 1)bedOrientation = 2;
@@ -813,21 +837,90 @@ public class VillageRooms extends Generation {
 		roomEntities.add(new Bed(world, x, y, bedOrientation,new Color(1,0,0,0.2f)));
 		
 		//spawn side table
-		int[][] potentialTableSpots = new int[2][2];
-		if(bedOrientation == 0){
-			
-		}else if(bedOrientation == 1){
-			
-		}else if(bedOrientation == 2){
-			
-		}else if(bedOrientation == 3){
+		ArrayList<int[]> potentialTableSpots = new ArrayList<int[]>();
+		if(bedOrientation % 2 == 0){
+			potentialTableSpots.add(new int[]{bedY,bedX+1});
+			potentialTableSpots.add(new int[]{bedY,bedX-1});
+		}else{
+			potentialTableSpots.add(new int[]{bedY+1,bedX});
+			potentialTableSpots.add(new int[]{bedY-1,bedX});
 			
 		}
 		
+		for(int i = 0; i < potentialTableSpots.size(); i++){
+			if(potentialTableSpots.get(i)[0] < 0 || potentialTableSpots.get(i)[0] > roomMap.length - 1 || potentialTableSpots.get(i)[1] < 0 || potentialTableSpots.get(i)[1] > roomMap[0].length - 1 || roomMap[potentialTableSpots.get(i)[0]][potentialTableSpots.get(i)[1]] != 0){
+				potentialTableSpots.remove(i);
+				i--;
+			}
+		}
+		int tableSpot = (int) Math.random()*potentialTableSpots.size();
+		
+		roomEntities.add(new SmallTable(world,potentialTableSpots.get(tableSpot)[1]*Tile.TS+Tile.TS/2,potentialTableSpots.get(tableSpot)[0]*Tile.TS+Tile.TS/2));
+		
+		occupiedTiles.add(potentialTableSpots.get(tableSpot));
+		
+		//spawn dresser
+		int attempts = 0;
+		boolean placedDresser = false;
+		int[] dresserPos = new int[]{0,0};
+		int dresserOrientation = 0;
+		do{
+			attempts++;
+			dresserOrientation = (int)(Math.random()*4);
+			if(dresserOrientation == 0){
+				for(int i = 0; i < roomMap.length-1; i++){
+					if(!checkOccupied(occupiedTiles, 0, i)&&!checkOccupied(occupiedTiles, 0, i+1)){
+						placedDresser = true;
+						dresserPos = new int[]{i,0};
+						occupiedTiles.add(dresserPos);
+						occupiedTiles.add(new int[]{i+1,0});
+						break;
+					}
+				}
+			}else if(dresserOrientation == 1){
+				for(int i = 0; i < roomMap[0].length-1; i++){
+					if(!checkOccupied(occupiedTiles, i, 0)&&!checkOccupied(occupiedTiles, i+1, 0)){
+						placedDresser = true;
+						dresserPos = new int[]{0,i};
+						occupiedTiles.add(dresserPos);
+						occupiedTiles.add(new int[]{0,i+1});
+						break;
+					}
+				}
+			}else if(dresserOrientation == 2){
+				for(int i = 0; i < roomMap.length-1; i++){
+					if(!checkOccupied(occupiedTiles, roomMap[0].length-1, i)&&!checkOccupied(occupiedTiles, roomMap[0].length-1, i+1)){
+						placedDresser = true;
+						dresserPos = new int[]{i,roomMap[0].length-1};
+						occupiedTiles.add(dresserPos);
+						occupiedTiles.add(new int[]{i+1,roomMap[0].length-1});
+						break;
+					}
+				}
+			}else{
+				for(int i = 0; i < roomMap[0].length-1; i++){
+					if(!checkOccupied(occupiedTiles, i, roomMap.length-1)&&!checkOccupied(occupiedTiles, i+1, roomMap.length-1)){
+						placedDresser = true;
+						dresserPos = new int[]{roomMap.length-1,i};
+						occupiedTiles.add(dresserPos);
+						occupiedTiles.add(new int[]{roomMap.length-1,i+1});
+						break;
+					}
+				}
+			}
+		}while(!placedDresser&&attempts < 10);
+		
+		roomEntities.add(new Dresser(world, (dresserPos[1]+(dresserOrientation%2==0?0.5f:1))*Tile.TS, (dresserPos[0]+(dresserOrientation%2==0?1:0.5f))*Tile.TS, dresserOrientation+1));
+		roomMap[dresserPos[0]][dresserPos[1]] = 5;
+		if(dresserOrientation % 2 == 0)roomMap[dresserPos[0]+1][dresserPos[1]] = 5;
+		else roomMap[dresserPos[0]][dresserPos[1]+1] = 5;
+		
 		roomEntities.add(new Carpet(world,roomMap[0].length/2f*Tile.TS,roomMap.length/2f*Tile.TS,roomMap[0].length*2-2,roomMap.length*2-2, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f)));
 
-		
-		
+		//visualize occupied tiles
+//		for(int i = 0; i < occupiedTiles.size(); i++){
+//			roomEntities.add(0,new Plant(world, occupiedTiles.get(i)[1]*Tile.TS+Tile.TS/2,occupiedTiles.get(i)[0]*Tile.TS+Tile.TS/2));
+//		}
 		//ending transformations
 		unrotate(roomMap, room, roomEntities, doorFinder);
 	}
@@ -903,5 +996,13 @@ public class VillageRooms extends Generation {
 			e.y += room.y*Tile.TS;
 			entities.add(e);
 		}
+	}
+	
+	private boolean checkOccupied(ArrayList<int[]> occupied, int x, int y){
+		for(int i = 0; i < occupied.size(); i++){
+			if(x == occupied.get(i)[1] && y == occupied.get(i)[0])return true;
+		}
+		return false;
+		
 	}
 }
