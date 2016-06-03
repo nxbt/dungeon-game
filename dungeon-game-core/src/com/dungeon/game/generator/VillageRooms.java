@@ -17,6 +17,7 @@ import com.dungeon.game.entity.furniture.Plant;
 import com.dungeon.game.entity.furniture.ShopDesk1;
 import com.dungeon.game.entity.furniture.ShopDesk2;
 import com.dungeon.game.entity.furniture.SmallTable;
+import com.dungeon.game.entity.furniture.Torch;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -547,7 +548,7 @@ public class VillageRooms extends Generation {
 
 	
 	private void populateSpecialRooms() {
-//		generateStairRoom(specialRooms.get((int) (specialRooms.size()*Math.random())));
+		generateStairRoom(specialRooms.get((int) (specialRooms.size()*Math.random())));
 //		generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		while(specialRooms.size()>0)generateQuarters(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		for(int i = 0; i < specialRooms.size(); i++){
@@ -730,6 +731,13 @@ public class VillageRooms extends Generation {
 		roomMap[1][roomMap[0].length-2] = 1;
 		roomMap[roomMap.length-2][1] = 1;
 		roomMap[roomMap.length-2][roomMap[0].length-2] = 1;
+		
+		//add torches
+		roomEntities.add(new Torch(world, 2*Tile.TS+Tile.TS/4, 1*Tile.TS+Tile.TS/2,0));
+		roomEntities.add(new Torch(world, 1*Tile.TS+Tile.TS/2, 2*Tile.TS+Tile.TS/4,3));
+		
+		roomEntities.add(new Torch(world, (roomMap[0].length-2)*Tile.TS+Tile.TS/2, 2*Tile.TS+Tile.TS/4,3));
+		roomEntities.add(new Torch(world, (roomMap[0].length-3)*Tile.TS+Tile.TS/4, 1*Tile.TS+Tile.TS/2,2));
 		
 		//spawn hatchkeeper
 		boolean keeperTop = doorY >= roomMap.length/2;
