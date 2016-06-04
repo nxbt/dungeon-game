@@ -1,9 +1,10 @@
-package com.dungeon.game.entity.character;
+package com.dungeon.game.entity.character.enemy;
 
 import java.util.ArrayList;
 
 import com.dungeon.game.entity.Drop;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Item;
@@ -11,8 +12,6 @@ import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public abstract class Enemy extends Character {
-	public int[] moveTo;
-	public ArrayList<int[]> path;
 	
 	protected int[] targetTile;
 	
@@ -46,6 +45,8 @@ public abstract class Enemy extends Character {
 				else if(inp_dn) move_angle = -90;
 				else if(inp_rt) move_angle = 0;
 				else if(inp_lt) move_angle = 180;
+				target_angle = move_angle;
+				if(flipX)target_angle+=180;
 		}
 	}
 	

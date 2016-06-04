@@ -1,4 +1,4 @@
-package com.dungeon.game.entity.character;
+package com.dungeon.game.entity.character.friend;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Polygon;

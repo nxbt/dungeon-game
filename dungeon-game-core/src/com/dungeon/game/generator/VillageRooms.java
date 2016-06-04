@@ -7,8 +7,9 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Stair;
-import com.dungeon.game.entity.character.Shopkeeper;
-import com.dungeon.game.entity.character.StairKeeper;
+import com.dungeon.game.entity.character.friend.Shopkeeper;
+import com.dungeon.game.entity.character.friend.StairKeeper;
+import com.dungeon.game.entity.character.friend.Villager;
 import com.dungeon.game.entity.furniture.Bed;
 import com.dungeon.game.entity.furniture.Bookshelf;
 import com.dungeon.game.entity.furniture.Carpet;
@@ -773,6 +774,8 @@ public class VillageRooms extends Generation {
 		int x = 0,y = 0;
 		ArrayList<int[]> occupiedTiles = new ArrayList<int[]>();
 		
+		roomEntities.add(new Villager(world,1*Tile.TS,1*Tile.TS));
+		
 		occupiedTiles.add(new int[]{doorY,0});
 		occupiedTiles.add(new int[]{doorY,1});
 		occupiedTiles.add(new int[]{doorY+1,0});
@@ -930,6 +933,8 @@ public class VillageRooms extends Generation {
 		else roomMap[dresserPos[0]][dresserPos[1]+1] = 5;
 		
 		roomEntities.add(new Carpet(world,roomMap[0].length/2f*Tile.TS,roomMap.length/2f*Tile.TS,roomMap[0].length*2-2,roomMap.length*2-2, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f)));
+		
+		
 		
 		//ending transformations
 		unrotate(roomMap, room, roomEntities, doorFinder);

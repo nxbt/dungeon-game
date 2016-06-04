@@ -1,6 +1,7 @@
-package com.dungeon.game.entity.character;
+package com.dungeon.game.entity.character.friend;
 
 import com.dungeon.game.effect.Immune;
+import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechPopup;
 import com.dungeon.game.inventory.Inventory;

@@ -14,10 +14,11 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
-import com.dungeon.game.entity.character.Enemy;
-import com.dungeon.game.entity.character.Friend;
-import com.dungeon.game.entity.character.Mentor;
 import com.dungeon.game.entity.character.Player;
+import com.dungeon.game.entity.character.enemy.Enemy;
+import com.dungeon.game.entity.character.friend.Friend;
+import com.dungeon.game.entity.character.friend.Mentor;
+import com.dungeon.game.entity.character.friend.Villager;
 import com.dungeon.game.entity.furniture.Torch;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.EffectHudBackground;
@@ -98,7 +99,8 @@ public class World {
 		entities = curFloor.entities;
 		entities.add(0,player);
 		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+Tile.TS, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
-		
+		entities.add(new Villager(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2-Tile.TS, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
+
 		hudEntities.add(new GoldCounter(this));
 		hudEntities.add(new MenuButton(this, 4, cam.HEIGHT-20));
 		hudEntities.add(new HelpButton(this, 24, cam.HEIGHT-20));
@@ -189,14 +191,14 @@ public class World {
 					shapeRenderer.polygon(e.getHitbox().getVertices());	
 				}
 				
-				if(debug_pathing && e instanceof Enemy && ((Enemy)e).moveTo!=null&&((Enemy)e).path!=null){
+				if(debug_pathing && e instanceof Character && ((Character)e).moveTo!=null&&((Character)e).path!=null){
 					shapeRenderer.setColor(Color.BLUE);
-					shapeRenderer.rect(((Enemy)e).moveTo[0]*Tile.TS, ((Enemy)e).moveTo[1]*Tile.TS, Tile.TS, Tile.TS);
-					shapeRenderer.line(e.x, e.y, ((Enemy)e).moveTo[0]*Tile.TS+Tile.TS/2, ((Enemy)e).moveTo[1]*Tile.TS+Tile.TS/2);
+					shapeRenderer.rect(((Character)e).moveTo[0]*Tile.TS, ((Character)e).moveTo[1]*Tile.TS, Tile.TS, Tile.TS);
+					shapeRenderer.line(e.x, e.y, ((Character)e).moveTo[0]*Tile.TS+Tile.TS/2, ((Character)e).moveTo[1]*Tile.TS+Tile.TS/2);
 					int[] prePoint = new int[]{0,0};
 					shapeRenderer.setColor(Color.YELLOW);
-					for(int[] point:((Enemy)e).path){
-						if(((Enemy)e).path.indexOf(point)>0){
+					for(int[] point:((Character)e).path){
+						if(((Character)e).path.indexOf(point)>0){
 							shapeRenderer.line(prePoint[0]*Tile.TS+Tile.TS/2, prePoint[1]*Tile.TS+Tile.TS/2,point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
 						}
 						prePoint = point;

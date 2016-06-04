@@ -1,4 +1,4 @@
-package com.dungeon.game.entity.character;
+package com.dungeon.game.entity.character.enemy;
 
 import java.util.ArrayList;
 
@@ -166,7 +166,7 @@ name = "Goon";
 		entities.remove(this);
 		if(knownEntities.contains(world.player)){
 			if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{world.player.x,world.player.y});
-			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
+//			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
 		}
 		attacking = false;
 		

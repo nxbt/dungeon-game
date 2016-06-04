@@ -18,6 +18,10 @@ import com.dungeon.game.world.World;
 
 public abstract class Character extends Dynamic {
 	
+
+	public int[] moveTo;
+	public ArrayList<int[]> path;
+	
 	private static final int STAGER_TIME = 3;
 	
 	private static int stager = 0;
