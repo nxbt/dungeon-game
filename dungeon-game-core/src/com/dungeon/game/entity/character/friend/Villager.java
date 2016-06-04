@@ -126,6 +126,7 @@ public class Villager extends Friend {
 			else if(inp_lt) move_angle = 180;
 			target_angle = move_angle;
 			if(flipX)target_angle+=180;
+			if(target_angle > 360)target_angle-=360;
 		}
 	}
 
