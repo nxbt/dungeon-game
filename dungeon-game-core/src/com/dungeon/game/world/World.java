@@ -98,11 +98,7 @@ public class World {
 		entities = curFloor.entities;
 		entities.add(0,player);
 		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+Tile.TS, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
-		entities.add(new Torch(this, curFloor.tm[0].length/2*Tile.TS+Tile.TS/2, curFloor.tm.length/2*Tile.TS+Tile.TS/2, 0));
-		entities.add(new Torch(this, curFloor.tm[0].length/2*Tile.TS+Tile.TS/2, curFloor.tm.length/2*Tile.TS+Tile.TS/2, 1));
-		entities.add(new Torch(this, curFloor.tm[0].length/2*Tile.TS+Tile.TS/2, curFloor.tm.length/2*Tile.TS+Tile.TS/2, 2));
-		entities.add(new Torch(this, curFloor.tm[0].length/2*Tile.TS+Tile.TS/2, curFloor.tm.length/2*Tile.TS+Tile.TS/2, 3));
-//		
+		
 		hudEntities.add(new GoldCounter(this));
 		hudEntities.add(new MenuButton(this, 4, cam.HEIGHT-20));
 		hudEntities.add(new HelpButton(this, 24, cam.HEIGHT-20));

@@ -28,7 +28,7 @@ public class VillageRooms extends Generation {
 	private ArrayList<ArrayList<int[]>> halls;
 	private ArrayList<ArrayList<Rectangle>> hallEnds;
 	
-	//make special room chooseing code better?
+	//make special room choosing code better?
 	
 	public VillageRooms(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY){
 		super(world, width, height);
@@ -89,7 +89,7 @@ public class VillageRooms extends Generation {
 		y-=height;
 		int width = (int) (5+Math.random()*map[0].length/20);
 		x-=(int) (Math.random()*width);
-		boolean special = true;//Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
+		boolean special = Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
@@ -143,7 +143,7 @@ public class VillageRooms extends Generation {
 		int height = (int) (5+Math.random()*map.length/20);
 		int width = (int) (5+Math.random()*map[0].length/20);
 		x-=(int) (Math.random()*width);
-		boolean special = true;//Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
+		boolean special = Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
@@ -198,7 +198,7 @@ public class VillageRooms extends Generation {
 		y-=(int)(Math.random()*height);
 		int width = (int) (5+Math.random()*map[0].length/20);
 		x-=width;
-		boolean special = true;//Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
+		boolean special = Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
@@ -252,7 +252,7 @@ public class VillageRooms extends Generation {
 		int height = (int) (5+Math.random()*map.length/20);
 		y-=(int)(Math.random()*height);
 		int width = (int) (5+Math.random()*map[0].length/20);
-		boolean special = true;//Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
+		boolean special = Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
@@ -737,7 +737,13 @@ public class VillageRooms extends Generation {
 		roomEntities.add(new Torch(world, 1*Tile.TS+Tile.TS/2, 2*Tile.TS+Tile.TS/4,3));
 		
 		roomEntities.add(new Torch(world, (roomMap[0].length-2)*Tile.TS+Tile.TS/2, 2*Tile.TS+Tile.TS/4,3));
-		roomEntities.add(new Torch(world, (roomMap[0].length-3)*Tile.TS+Tile.TS/4, 1*Tile.TS+Tile.TS/2,2));
+		roomEntities.add(new Torch(world, (roomMap[0].length-3)*Tile.TS+Tile.TS*3/4, 1*Tile.TS+Tile.TS/2,2));
+		
+		roomEntities.add(new Torch(world, 2*Tile.TS+Tile.TS/4, (roomMap.length-2)*Tile.TS+Tile.TS/2,0));
+		roomEntities.add(new Torch(world, 1*Tile.TS+Tile.TS/2, (roomMap.length-3)*Tile.TS+Tile.TS*3/4,1));
+		
+		roomEntities.add(new Torch(world, (roomMap[0].length-3)*Tile.TS+Tile.TS*3/4, (roomMap.length-2)*Tile.TS+Tile.TS/2,2));
+		roomEntities.add(new Torch(world, (roomMap[0].length-2)*Tile.TS+Tile.TS/2, (roomMap.length-3)*Tile.TS+Tile.TS*3/4,1));
 		
 		//spawn hatchkeeper
 		boolean keeperTop = doorY >= roomMap.length/2;
@@ -924,11 +930,7 @@ public class VillageRooms extends Generation {
 		else roomMap[dresserPos[0]][dresserPos[1]+1] = 5;
 		
 		roomEntities.add(new Carpet(world,roomMap[0].length/2f*Tile.TS,roomMap.length/2f*Tile.TS,roomMap[0].length*2-2,roomMap.length*2-2, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f)));
-
-		//visualize occupied tiles
-//		for(int i = 0; i < occupiedTiles.size(); i++){
-//			roomEntities.add(0,new Plant(world, occupiedTiles.get(i)[1]*Tile.TS+Tile.TS/2,occupiedTiles.get(i)[0]*Tile.TS+Tile.TS/2));
-//		}
+		
 		//ending transformations
 		unrotate(roomMap, room, roomEntities, doorFinder);
 	}

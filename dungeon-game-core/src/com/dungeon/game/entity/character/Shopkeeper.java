@@ -23,7 +23,7 @@ public class Shopkeeper extends Friend {
 		
 		name = "Shopkeeper";
 		
-		torq = 0.1f;
+		torq = 10f;
 		
 		vision = 10;
 		hearing = 3;

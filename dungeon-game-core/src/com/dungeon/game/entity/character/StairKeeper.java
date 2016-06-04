@@ -94,7 +94,7 @@ public class StairKeeper extends Friend {
 		dialogue.potentialBubbles.put("what know 3", new SpeechBubble(world, this, "These demons forced the humans all the way up here, and placed their monsters on the floors below to keep the humans away from them.", "what know 4"));
 		dialogue.potentialBubbles.put("what know 4", new SpeechBubble(world, this, "The further down you go, and the closer to the demons you get, the stronger the monsters you encounter shall be.", "what know 5"));
 		dialogue.potentialBubbles.put("what know 5", new SpeechBubble(world, this, "You will need to bring weapons and armor down with you, or even the weakest monsters will tear you to shreads.", "what know 6"));
-		dialogue.potentialBubbles.put("what know 6", new SpeechBubble(world, this, new Criteria[] {new Invert(world, new Said(world, dialogue, "give axe")), new True(world)}, new String[] {"Here... take this. To protect yourself.", "I have already ofered you what I can."}, new String[] {"give axe", "another question"}));
+		dialogue.potentialBubbles.put("what know 6", new SpeechBubble(world, this, new Criteria[] {new Invert(world, new Said(world, dialogue, "give axe")), new True(world)}, new String[] {"Here... take this. To protect yourself.", "I have already offered you what I can."}, new String[] {"give axe", "another question"}));
 		
 		dialogue.potentialBubbles.put("what down", new SpeechBubble(world, this, "Terrible monsters. And demons.", "what down 2"));
 		dialogue.potentialBubbles.put("what down 2", new SpeechBubble(world, this, "Unspeakable horrors that will strike fear into the hearts of even the bravest of men.", "what down 3"));
