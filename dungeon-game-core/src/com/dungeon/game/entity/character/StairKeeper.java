@@ -111,8 +111,6 @@ public class StairKeeper extends Friend {
 		dialogue.potentialBubbles.put("another question", new SpeechBubble(world, this, "Do you have any other questions?", "need help"));
 		
 		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world, this, "If you have any questions, come to me to ask. I will remain here.", "end"));
-		
-		dialogue.begin();
 	}
 
 	@Override
@@ -127,17 +125,12 @@ public class StairKeeper extends Friend {
 			
 		}else{
 			target_angle = angle;
-			speechBubble.updateText("");
-			dialogue.close();
+			if(world.hudEntities.contains(dialogue)) {
+				speechBubble.updateText("");
+				dialogue.close();
+			}
 		}
 		if(world.player.fightMode||Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))>speechRadius*Tile.TS)speechBubble.updateText("");
-	}
-	
-	public void hovered() {
-		if(world.mouse.lb_pressed) {
-			dialogue.open();
-			speechBubble.dismissed = true;
-		}
 	}
 	
 	@Override

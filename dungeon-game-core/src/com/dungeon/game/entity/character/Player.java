@@ -7,17 +7,14 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.StamRegen;
+import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.entity.hud.EffectHudBackground;
+import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.item.Equipable;
-import com.dungeon.game.item.consumable.LifePotion;
-import com.dungeon.game.item.weapon.Axe;
-import com.dungeon.game.item.weapon.Bow;
 import com.dungeon.game.item.weapon.Medium;
-import com.dungeon.game.item.weapon.Wand;
 import com.dungeon.game.item.weapon.Weapon;
-import com.dungeon.game.item.weapon.ammo.Arrow;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -25,6 +22,10 @@ public class Player extends Character {
 	public final int REACH = 4*Tile.TS;
 	
 	public ArrayList<EffectGraphic> effectGraphics;
+	
+	public boolean[] actionState; // 0 = fightMode, 1 = taking, 2 = invOpen
+	
+	public Entity focusedEntity;
 	
 	public Player(World world, float x, float y) {
 		super(world, x, y, 32, 32, "person.png");
@@ -110,17 +111,9 @@ public class Player extends Character {
 		
 		inv = new Inventory(world, invLayout, 10, 100);
 		
-		inv.slot[0].item = new LifePotion(world);
-		inv.slot[0].item.stack = 3;
-//		inv.slot[35].item = new Hat(world);
-		inv.slot[19].item = new Arrow(world);
-		inv.slot[21].item = new Axe(world, 5, 10);
-		inv.slot[22].item = new  Bow(world, 0.5f, 10);
-		inv.slot[24].item = new Wand(world);
-		
-		inv.slot[19].item.stack = 6;
-		
 //		light = new Light(this, 1);
+		
+		actionState = new boolean[] {false, false, false};
 		
 		effectGraphics = new ArrayList<EffectGraphic>();
 		
@@ -132,6 +125,8 @@ public class Player extends Character {
 	}
 	
 	public void calc() {
+		if(focusedEntity == null) focusedEntity = world.mouse;
+		
 		for(EffectGraphic eg: effectGraphics){
 			if(!world.hudEntities.contains(eg)){
 				for(int i = 0; i < world.hudEntities.size(); i++){
@@ -156,9 +151,14 @@ public class Player extends Character {
 		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3))inv.slot[2].consume(this);
 		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4))inv.slot[3].consume(this);
 		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5))inv.slot[4].consume(this);
-		target_angle = (float) (180/Math.PI*Math.atan2(world.mouse.y+world.cam.y-world.cam.HEIGHT/2-(y), world.mouse.x+world.cam.x-world.cam.WIDTH/2-(x)));
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !attacking && world.mouse.slot.item == null) toggleMode();
+		if(Hud.class.isInstance(focusedEntity)) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y+world.cam.y-world.cam.HEIGHT/2-(y), focusedEntity.x+world.cam.x-world.cam.WIDTH/2-(x)));
+		else if(focusedEntity != null) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y-y, focusedEntity.x-x));
+		
+		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !attacking && world.mouse.slot.item == null) {
+			toggleFightMode();
+			actionState[0] = !actionState[0];
+		}
 		
 		if(leftEquiped != null && inv.slot[30].item==null) leftEquiped = null;
 		else if(leftEquiped == null && inv.slot[30].item != null) leftEquiped = (Weapon) inv.slot[30].item;
@@ -198,7 +198,7 @@ public class Player extends Character {
 		
 		attacking = false;
 		
-		if(leftEquiped != null && fightMode){
+		if(leftEquiped != null && fightMode) {
 			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
 			leftEquipedPos = ((Weapon) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
 			((Weapon)inv.slot[30].item).graphic.calc();
@@ -208,7 +208,7 @@ public class Player extends Character {
 				if(((Medium)inv.slot[30].item).cooldown>0)((Medium)inv.slot[30].item).cooldown--;
 			}
 		}
-		if(rightEquiped != null && fightMode){
+		if(rightEquiped != null && fightMode) {
 			if(((Weapon) inv.slot[31].item).isInUse())attacking = true;
 			rightEquipedPos = ((Weapon) inv.slot[31].item).getPos(world.mouse.rb_down, world.mouse.rb_pressed);
 			((Weapon)inv.slot[31].item).graphic.calc();
@@ -251,4 +251,3 @@ public class Player extends Character {
 		}
 	}
 }
-

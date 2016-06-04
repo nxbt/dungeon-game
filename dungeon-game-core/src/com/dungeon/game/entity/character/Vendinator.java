@@ -81,9 +81,6 @@ public class Vendinator extends Friend {
 		
 		dialogue.potentialBubbles.put("dismiss", new SpeechBubble(world,this, "THEN...\u200B\u200B\u200B\u200B\u200B\u200B LEAVE.", "end"));
 		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world,this, "GOODBYE!", "end"));
-		
-		
-		dialogue.begin();
 	}
 
 	public void hovered() {
@@ -101,7 +98,8 @@ public class Vendinator extends Friend {
 				speechBubble.dismissed = false;
 			}
 			
-		}else{
+		}
+		else if(world.hudEntities.contains(dialogue)) {
 			speechBubble.updateText("");
 			dialogue.close();
 		}

@@ -549,7 +549,7 @@ public class VillageRooms extends Generation {
 	
 	private void populateSpecialRooms() {
 		generateStairRoom(specialRooms.get((int) (specialRooms.size()*Math.random())));
-//		generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
+		generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		while(specialRooms.size()>0)generateQuarters(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		for(int i = 0; i < specialRooms.size(); i++){
 			

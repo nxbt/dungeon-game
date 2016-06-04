@@ -23,8 +23,6 @@ public class Dialogue extends Hud {
 	
 	public ArrayList<SpeechBubble> speechBubbles;
 	
-//	public ArrayList<SpeechBubble> potentialBubbles;
-	
 	public HashMap<String, SpeechBubble> potentialBubbles;
 	
 	private ArrayList<Character> characters;
@@ -41,17 +39,13 @@ public class Dialogue extends Hud {
 		d_height = world.cam.HEIGHT;
 	}
 	
-	public void begin(){
-		
-	}
-	
 	public void calc(){
 		if(world.hudEntities.indexOf(this) != 0) {
 			world.hudEntities.remove(this);
 			world.hudEntities.add(0,this);
 		}
 		
-		if(world.player.fightMode)close();
+		if(world.player.fightMode) close();
 		int heightCounter = 88;
 		for(SpeechBubble bubble: speechBubbles){
 			bubble.y = heightCounter;
@@ -89,12 +83,17 @@ public class Dialogue extends Hud {
 	public void open() {
 		if(!world.hudEntities.contains(this))world.hudEntities.add(0,this);
 		
+		world.player.actionState[1] = true;
+		
 		speechBubbles.clear();
 		speechBubbles.add((SpeechBubble) potentialBubbles.get("start").clone());
 	}
 	
 	public void close() {
 		world.hudEntities.remove(this);
+		
+		world.player.actionState[1] = false;
+		world.player.focusedEntity = world.mouse;
 	}
 	
 	public void draw(SpriteBatch batch){

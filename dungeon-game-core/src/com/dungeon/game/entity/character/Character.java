@@ -393,7 +393,7 @@ public abstract class Character extends Dynamic {
 		
 	}
 	
-	public void toggleMode() {
+	public void toggleFightMode() {
 		fightMode = !fightMode;
 		
 		if(fightMode) {

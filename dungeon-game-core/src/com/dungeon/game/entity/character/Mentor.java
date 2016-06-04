@@ -105,33 +105,27 @@ public class Mentor extends Friend {
 		dialogue.potentialBubbles.put("give sword", new InvBubble(world, this, invent , "goodbye"));
 		
 		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world, this, "See ya!", "end"));
-		
-		dialogue.begin();
 	}
 
 	@Override
 	public void calc() {
 		if(seenEntities.contains(world.player)){
 			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y, world.player.x-x));
-			if(flipX)target_angle+=target_angle>0?-180:180;
+			if(flipX) target_angle+=target_angle>0?-180:180;
 			if(!world.player.fightMode&&speechBubble.endText.equals("")){
 				if(!world.hudEntities.contains(dialogue))speechBubble.updateText("I am here to help.");
 				speechBubble.dismissed = false;
 			}
 			
-		}else{
+		}
+		else {
 			target_angle = angle;
-			speechBubble.updateText("");
-			dialogue.close();
+			if(world.hudEntities.contains(dialogue)) {
+				speechBubble.updateText("");
+				dialogue.close();
+			}
 		}
 		if(world.player.fightMode||Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))>speechRadius*Tile.TS)speechBubble.updateText("");
-	}
-	
-	public void hovered() {
-		if(world.mouse.lb_pressed) {
-			dialogue.open();
-			speechBubble.dismissed = true;
-		}
 	}
 	
 	@Override

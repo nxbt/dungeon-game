@@ -70,8 +70,8 @@ public class World {
 	public World() {
 		hudBatch = new SpriteBatch();
 		
-		cam = new Camera();
-		hudCam = new Camera();
+		cam = new Camera(this);
+		hudCam = new Camera(this);
 		
 		player = new Player(this, 0, 0);
 		
@@ -135,7 +135,7 @@ public class World {
 	}
 	
 	public void update() {
-		cam.update(player.x, player.y, mouse.x, mouse.y, 1f);
+		cam.update();
 		mouse.update();
 		descBox.update();
 		

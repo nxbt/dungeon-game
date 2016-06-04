@@ -134,6 +134,7 @@ public class SpeechPopup extends Hud {
 			else if(world.mouse.lb_pressed) {
 				if(character.dialogue != null) {
 					character.dialogue.open();
+					world.player.focusedEntity = character;
 					dismissed = true;
 				}
 			}
@@ -158,14 +159,9 @@ public class SpeechPopup extends Hud {
 	public void draw(SpriteBatch batch) {
 		batch.setColor(1,1,1,0.8f);
 		if(!dismissed&&!text.equals("")) {
-//			if(x + d_width > bubbleWidth) x -= d_width - 32;
-//			if(y + d_height > bubbleHeight) y -= d_height + 16;
-			
 			SPEECH_POPUP.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
 			
 			font.draw(batch, text, x+16, y+d_height-6);
-			
-//			text = "";
 		}
 
 		batch.setColor(1,1,1,1);

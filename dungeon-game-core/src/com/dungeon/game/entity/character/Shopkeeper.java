@@ -2,15 +2,10 @@ package com.dungeon.game.entity.character;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.criteria.Criteria;
-import com.dungeon.game.criteria.HasItem;
-import com.dungeon.game.criteria.Invert;
-import com.dungeon.game.criteria.True;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.InvBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
-import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Shop;
 import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.weapon.Sword;
@@ -76,8 +71,6 @@ public class Shopkeeper extends Friend {
 		dialogue.potentialBubbles.put("shop", new InvBubble(world, this, shop, "goodbye"));
 		
 		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world, this, "Come again.", "end"));
-		
-		dialogue.begin();
 	}
 
 	@Override
@@ -92,17 +85,13 @@ public class Shopkeeper extends Friend {
 			
 		}else{
 			target_angle = angle;
-			speechBubble.updateText("");
-			dialogue.close();
+			
+			if(world.hudEntities.contains(dialogue)) {
+				speechBubble.updateText("");
+				dialogue.close();
+			}
 		}
 		if(world.player.fightMode||Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))>speechRadius*Tile.TS)speechBubble.updateText("");
-	}
-	
-	public void hovered() {
-		if(world.mouse.lb_pressed) {
-			dialogue.open();
-			speechBubble.dismissed = true;
-		}
 	}
 	
 	@Override

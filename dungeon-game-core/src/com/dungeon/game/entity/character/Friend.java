@@ -23,4 +23,12 @@ public abstract class Friend extends Character {
 		
 		addEffect(new Immune(world, -1));
 	}
+	
+	public void hovered() {
+		if(world.mouse.lb_pressed) {
+			dialogue.open();
+			world.player.focusedEntity = this;
+			speechBubble.dismissed = true;
+		}
+	}
 }
