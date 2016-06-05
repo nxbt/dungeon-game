@@ -11,7 +11,7 @@ public class ManaPotion extends Consumable {
 	public ManaPotion(World world) {
 		super(world, "Mana Restoration Potion", "lifePotion.png");
 		
-		desc = "It's full of liquid mana. Keep away from eyes.\n\nMana restored: 40 \nDuration: 2 seconds";
+		desc = "Drink to resotre mana over a short period of time.\n\n Mana restored: 40 \n Duration: 3 seconds";
 	}
 
 	@Override
@@ -22,12 +22,12 @@ public class ManaPotion extends Consumable {
 			}
 		}
 		user.addEffect(new ManaRegen(world, 180,40));
-		user.addEffect(new PotionSick(world, 180,new ManaPotion(world)));
+		user.addEffect(new PotionSick(world, 180, new ManaPotion(world)));
 		return true;
 
 	}
 	
 	public String getDesc() {
-		return "Drink to restore mana over a short period of time. Good for setting things on fire more. \n\n" + desc;
+		return "Consuming this item will add a mana regeneration effect to the user. While this effect is active, another mana potion item cannot be consumed.\n\n\"It's full of liquid mana.?\" -Wonerik, the archmage\n\n Mana restored: 40\n Duration: 3 seconds";
 	}
 }

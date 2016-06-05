@@ -66,7 +66,7 @@ public class Axe extends Melee {
 		
 		hasHit = false;
 		
-		desc = "And my axe! \n\n Damage: "+ Math.floor(damage*10)/10f;
+		desc = "A widely used and dependable melee weapon.\n\n Damage: "+ Math.floor(damage*10)/10f;
 		
 		this.damage = damage;
 		this.speed = speed;
@@ -226,7 +226,7 @@ public class Axe extends Melee {
 	}
 	
 	public String getDesc() {
-		return "Standard meele weapon. Generally for the purpose of hitting things. \n\n " + desc;
+		return "The standard axe class weapon. Most axe class weapons can hit multiple targets in one swing. This particular axe has a two swing combo; a fronthand swing across the body, followed by an overhead smash.\n\n\"They say axes were once used to chop something other than heads.\" -Hubber, fabled sellsword\n\n Damage: " + Math.floor(damage*10)/10f;
 	}
 
 	@Override

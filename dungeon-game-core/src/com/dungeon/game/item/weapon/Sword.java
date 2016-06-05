@@ -82,7 +82,7 @@ public class Sword extends Melee {
 		
 		hasHit = false;
 		
-		desc = "Real sword I swear! \n\n Damage: "+ Math.floor(damage*10)/10f;
+		desc = "An incredibly reliable melee weapon.\n\n Damage: "+ Math.floor(damage*10)/10f;
 		
 		this.damage = damage;
 		this.speed = speed;
@@ -281,7 +281,7 @@ public class Sword extends Melee {
 	}
 	
 	public String getDesc() {
-		return "Standard meele weapon. Generally for the purpose of hitting things. \n\n " + desc;
+		return "The accepted standard for all melee weapons, and the standard for all sword class melee weapons. Using it will swing it in a short combo of swings, damaging the first target it comes in contact with. For this particular sword, the combo begins with a fronthand swing across the body, followed by a backhand swing, and ends with a jab.\n\n\"My sword shall lead me to glory!\" -final words of Tanturin, fabled warrior\n\n Damage: "+ Math.floor(damage*10)/10f;
 	}
 
 	@Override

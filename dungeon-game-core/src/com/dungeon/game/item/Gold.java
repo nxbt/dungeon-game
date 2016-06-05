@@ -12,7 +12,10 @@ public class Gold extends Item {
 		maxStack = Integer.MAX_VALUE;
 		
 		name = "Gold";
-		desc = "Show me da money";
+		desc = "Used to buy items and services.";
 	}
-
+	
+	public String getDesc() {
+		return "A small, round gold coin with a face inscribed on each sides. One face is of a smiling woman with long, flowing hair. The other face is of a stern looking man with a full beard. Although it's origin is unknown, coins like this one can be found throughout every dungeon. Can be used to purchase items from merchants. Picking up a coin item will add it into your coin purse, where it can no longer be acessed directly.\n\n\"With enough of these, a man could acomplish anything\" -Kurson, fabled merchant";
+	}
 }

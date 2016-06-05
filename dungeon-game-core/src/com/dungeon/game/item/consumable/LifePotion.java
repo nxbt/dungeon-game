@@ -7,11 +7,11 @@ import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;
 
 public class LifePotion extends Consumable {
-
+	
 	public LifePotion(World world) {
 		super(world, "Health Potion", "lifePotion.png");
 		
-		desc = "Ever wonder why health potions are red? \n\nYou haven't? \n\nGood. \n\nLife restored: 40 \nDuration: 2 seconds";
+		desc = "Drink to restore health over a short period of time.\n\n Health restored: 40\n Duration: 3 seconds";
 	}
 
 	@Override
@@ -22,12 +22,12 @@ public class LifePotion extends Consumable {
 			}
 		}
 		user.addEffect(new LifeRegen(world, 180,40));
-		user.addEffect(new PotionSick(world, 180,new LifePotion(world)));
+		user.addEffect(new PotionSick(world, 180, new LifePotion(world)));
 		return true;
 
 	}
 	
 	public String getDesc() {
-		return "Drink to restore health over time. Helps with the whole not-dieing thing. \n\n" + desc;
+		return "Consuming this item will add a health regeneration effect to the user. While this effect is active, another health potion item cannot be consumed.\n\n\"Ever wonder what's in a health potion?\" -Tankin, the lost adventurer\n\n Health restored: 40\n Duration: 3 seconds";
 	}
 }
