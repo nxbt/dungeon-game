@@ -1,4 +1,4 @@
-package com.dungeon.game.item.weapon.ammo;
+package com.dungeon.game.item.ammo;
 
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.WeaponProjectile;

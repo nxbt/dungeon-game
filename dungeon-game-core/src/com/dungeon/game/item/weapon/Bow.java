@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.weapon.RangedGraphic;
-import com.dungeon.game.item.weapon.ammo.Arrow;
+import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.world.World;
 
 public class Bow extends Ranged {

@@ -1,13 +1,7 @@
 package com.dungeon.game.entity.character.friend;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.criteria.Criteria;
-import com.dungeon.game.criteria.Invert;
-import com.dungeon.game.criteria.Said;
-import com.dungeon.game.criteria.True;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.world.Tile;
@@ -21,6 +15,7 @@ public class Villager extends Friend {
 
 	public Villager(World world, float x, float y) {
 		super(world, x, y, 32, 32, "mentor.png");
+		
 		speechColor = new Color(0.3f,0.1f,0.4f,1);
 		speechBubble.setColor();	
 		
@@ -41,8 +36,8 @@ public class Villager extends Friend {
 		stam = maxStam;
 		mana = maxMana;
 		
-		acel = 1.5f;
-		mvel = 3;
+		acel = 1;
+		mvel = 2;
 		fric = 0.5f;
 		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
@@ -70,27 +65,16 @@ public class Villager extends Friend {
 
 	@Override
 	public void calc() {
-		if(seenEntities.contains(world.player)){
-			if(flipX)target_angle+=target_angle>0?-180:180;
-			if(!world.player.fightMode&&speechBubble.endText.equals("")){
-				if(!world.hudEntities.contains(dialogue))speechBubble.updateText("A Bunch of Bullshit");
-				speechBubble.dismissed = false;
-			}
-			
-		}else{
-			if(world.hudEntities.contains(dialogue)) {
-				speechBubble.updateText("");
-				dialogue.close();
-			}
-		}
-		if(world.player.fightMode||Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))>speechRadius*Tile.TS)speechBubble.updateText("");
-		//random wandering engdge!
-		wander();
+		showPopupBubble("");
 		
+		if(world.hudEntities.contains(dialogue)) target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y, world.player.x-x));
+		else wander();
+		
+		if(flipX) target_angle+=target_angle>0?-180:180;
 	}
 	
 	private void wander(){
-		if(Math.random()<0.01||(wanderTile[0] == (int)(x/Tile.TS) && wanderTile[1] == (int)(y/Tile.TS))){
+		if(Math.random()<0.001||(wanderTile[0] == (int)(x/Tile.TS) && wanderTile[1] == (int)(y/Tile.TS))){
 			//new target location
 			boolean foundTile = false;
 			while(!foundTile){
@@ -116,6 +100,7 @@ public class Villager extends Friend {
 			if(x-2>targetX)inp_lt=true;
 			if(y+2<targetY)inp_up=true;
 			if(y-2>targetY)inp_dn=true;
+			
 			if(inp_up && inp_rt) move_angle = 45;
 			else if(inp_up && inp_lt) move_angle = 135;
 			else if(inp_dn && inp_rt) move_angle = -45;
@@ -124,8 +109,8 @@ public class Villager extends Friend {
 			else if(inp_dn) move_angle = -90;
 			else if(inp_rt) move_angle = 0;
 			else if(inp_lt) move_angle = 180;
+			
 			target_angle = move_angle;
-			if(flipX)target_angle+=180;
 			if(target_angle > 360)target_angle-=360;
 		}
 	}

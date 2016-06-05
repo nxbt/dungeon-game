@@ -81,7 +81,7 @@ public class Dialogue extends Hud {
 	}
 	
 	public void open() {
-		if(!world.hudEntities.contains(this))world.hudEntities.add(0,this);
+		if(!world.hudEntities.contains(this)) world.hudEntities.add(0,this);
 		
 		world.player.actionState[1] = true;
 		

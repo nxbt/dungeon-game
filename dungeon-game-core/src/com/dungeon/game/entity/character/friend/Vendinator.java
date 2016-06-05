@@ -9,10 +9,9 @@ import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
 import com.dungeon.game.inventory.Shop;
 import com.dungeon.game.item.Stick;
+import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.consumable.ManaPotion;
-import com.dungeon.game.item.weapon.ammo.Arrow;
-import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Vendinator extends Friend {
@@ -91,19 +90,7 @@ public class Vendinator extends Friend {
 	}
 	
 	public void calc() {
-		if(seenEntities.contains(world.player)){
-			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y, world.player.x-x));
-			if(!world.player.fightMode&&speechBubble.endText.equals("")){
-				if(!world.hudEntities.contains(dialogue))speechBubble.updateText("BUY!\u200B\u200B\u200B\u200B\u200B\u200B BUY!\u200B\u200B\u200B\u200B\u200B\u200B BUY!");
-				speechBubble.dismissed = false;
-			}
-			
-		}
-		else if(world.hudEntities.contains(dialogue)) {
-			speechBubble.updateText("");
-			dialogue.close();
-		}
-		if(world.player.fightMode||Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))>speechRadius*Tile.TS)speechBubble.updateText("");
+		showPopupBubble("BUY!\u200B\u200B\u200B\u200B\u200B\u200B BUY!\u200B\u200B\u200B\u200B\u200B\u200B BUY!");
 	}
 
 	@Override

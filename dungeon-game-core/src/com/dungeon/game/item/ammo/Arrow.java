@@ -1,4 +1,4 @@
-package com.dungeon.game.item.weapon.ammo;
+package com.dungeon.game.item.ammo;
 
 import java.util.ArrayList;
 

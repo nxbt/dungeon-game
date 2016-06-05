@@ -29,7 +29,7 @@ public class Axe extends Melee {
 	private final float WINDUP1_PANG = 70;
 	private final float WINDUP1_ANGL = 35;
 	
-	private final float SWING1_TIME = 12;
+	private final float SWING1_TIME = 10;
 	private final float SWING1_DIST = 14;
 	private final float SWING1_PANG = -55;
 	private final float SWING1_ANGL = -50;
@@ -43,7 +43,7 @@ public class Axe extends Melee {
 	private final float WINDUP2_PANG = 0;
 	private final float WINDUP2_ANGL = 0;
 	
-	private final float SWING2_TIME = 15;
+	private final float SWING2_TIME = 4;
 	private final float SWING2_DIST = 25;
 	private final float SWING2_PANG = 0;
 	private final float SWING2_ANGL = 0;

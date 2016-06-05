@@ -12,10 +12,9 @@ import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Shop;
+import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.weapon.Sword;
-import com.dungeon.game.item.weapon.ammo.Arrow;
-import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Mentor extends Friend {
@@ -109,23 +108,12 @@ public class Mentor extends Friend {
 
 	@Override
 	public void calc() {
-		if(seenEntities.contains(world.player)){
+		showPopupBubble("I am here to help, adventurer");
+		
+		if(seenEntities.contains(world.player)) {
 			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y, world.player.x-x));
 			if(flipX) target_angle+=target_angle>0?-180:180;
-			if(!world.player.fightMode&&speechBubble.endText.equals("")){
-				if(!world.hudEntities.contains(dialogue))speechBubble.updateText("I am here to help.");
-				speechBubble.dismissed = false;
-			}
-			
 		}
-		else {
-			target_angle = angle;
-			if(world.hudEntities.contains(dialogue)) {
-				speechBubble.updateText("");
-				dialogue.close();
-			}
-		}
-		if(world.player.fightMode||Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))>speechRadius*Tile.TS)speechBubble.updateText("");
 	}
 	
 	@Override

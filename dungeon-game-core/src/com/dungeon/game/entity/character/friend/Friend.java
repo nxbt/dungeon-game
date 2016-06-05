@@ -5,6 +5,7 @@ import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechPopup;
 import com.dungeon.game.inventory.Inventory;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public abstract class Friend extends Character {
@@ -31,5 +32,21 @@ public abstract class Friend extends Character {
 			world.player.focusedEntity = this;
 			speechBubble.dismissed = true;
 		}
+	}
+	
+	public void showPopupBubble(String text) {
+		if(seenEntities.contains(world.player)){
+			if(!world.player.fightMode&&speechBubble.endText.equals("")) {
+				if(!world.hudEntities.contains(dialogue))speechBubble.updateText(text);
+				speechBubble.dismissed = false;
+			}
+			
+		}
+		else if(world.hudEntities.contains(dialogue)) {
+			speechBubble.updateText("");
+			dialogue.close();
+		}
+		
+		if(world.player.fightMode||Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))>speechRadius*Tile.TS) speechBubble.updateText("");
 	}
 }

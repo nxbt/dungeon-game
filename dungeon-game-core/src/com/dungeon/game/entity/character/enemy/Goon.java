@@ -7,10 +7,10 @@ import com.dungeon.game.effect.ManaRegen;
 import com.dungeon.game.effect.StamRegen;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.inventory.Inventory;
+import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.weapon.Bow;
 import com.dungeon.game.item.weapon.Sword;
 import com.dungeon.game.item.weapon.Weapon;
-import com.dungeon.game.item.weapon.ammo.Arrow;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
 
