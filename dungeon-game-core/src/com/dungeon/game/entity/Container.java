@@ -7,13 +7,12 @@ import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
-public class Chest extends Static {
+public class Container extends Static{
 	public Inventory inv;
 	
-	public Chest(World world, float x, float y) {
-		super(world, x, y, Tile.TS, Tile.TS, "chest.png");
+	public Container(World world, float x, float y, int width, int height, String filename) {
+		super(world, x, y, width, height, filename);
 		
-		name = "chest";
 		int[][] invLayout = new int[][]{
 			new int[] {0, 8, 8},
 			new int[] {0, 48, 8},
@@ -41,16 +40,10 @@ public class Chest extends Static {
 			new int[] {0, 128, 168},
 			new int[] {0, 168, 168}
 		};
+		
 		inv = new Inventory(world, invLayout, 310, 140);
-		
-		solid = true;
-		
-		hitbox = new Polygon(new float[]{0,0,32,0,32,32,0,32});
-		
-		origin_x = 16;
-		origin_y = 16;
 	}
-
+	
 	@Override
 	public void calc() {
 		if(world.hudEntities.contains(inv.graphic)) {
@@ -69,13 +62,15 @@ public class Chest extends Static {
 	}
 		
 	public void hovered() {
-		if(world.mouse.rb_pressed&&!world.player.fightMode){
 			if(world.hudEntities.contains(inv.graphic)){
 				inv.graphic.close();
 			}
 			else inv.graphic.open();
 		}
 	}
-	
-	public void post() {}
+
+	@Override
+	public void post() {
+	}
+
 }

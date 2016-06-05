@@ -20,6 +20,6 @@ public class Hat extends Equipable {
 	}
 	
 	public String getDesc() {
-		return " ";
+		return "This hat completely fucks the pathfinding AI. Generally used for testing purposes.";
 	}
 }

@@ -1,6 +1,6 @@
 package com.dungeon.game.generator;
 
-import com.dungeon.game.entity.Chest;
+import com.dungeon.game.entity.furniture.Chest;
 import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.weapon.Bow;
