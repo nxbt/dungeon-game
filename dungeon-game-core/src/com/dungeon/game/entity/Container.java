@@ -62,6 +62,7 @@ public class Container extends Static{
 	}
 		
 	public void hovered() {
+		if(world.mouse.lb_pressed&&!world.player.fightMode){
 			if(world.hudEntities.contains(inv.graphic)){
 				inv.graphic.close();
 			}
