@@ -4,9 +4,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
 
-public class Shirt extends Equipable {
-	public Shirt(World world, Color color) {
-		super(world, "shirt.png");
+public class Pants extends Equipable {
+
+	public Pants(World world, Color color) {
+		super(world, "pants.png");
 		
 		sprite = Spritesheet.Tint(textures[0], color, true);
 		
@@ -15,9 +16,10 @@ public class Shirt extends Equipable {
 		physc_resist = 1;
 		flame_resist = -1;
 		
-		type = CHEST;
+		type = PANTS;
 		
-		desc = "A simple wool shirt. Provideds little defence.\n\n Armor: " + (int)physc_resist;
+		desc = "A simple pair of wool pants. Provideds little defence.\n\n Armor: " + (int)physc_resist;
+
 	}
 
 }

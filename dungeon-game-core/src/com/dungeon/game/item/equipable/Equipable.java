@@ -23,6 +23,8 @@ public abstract class Equipable extends Item {
 	public Equipable(World world, String filename) {
 		super(world, filename);
 		
+		maxStack = 1;
+		
 		effects = new ArrayList<Effect>();
 	}
 	

@@ -1,9 +1,12 @@
 package com.dungeon.game.entity.furniture;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.Container;
+import com.dungeon.game.item.equipable.Pants;
+import com.dungeon.game.item.equipable.Shirt;
 import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
 
@@ -30,7 +33,6 @@ public class Dresser extends Container {
 		
 		origin_x = 16;
 		origin_y = 32;
-		
 		if(orientation%2==1){
 			hitbox = new Polygon(new float[]{0,0,32,0,32,64,0,64});
 			origin_x = 16;
@@ -40,6 +42,13 @@ public class Dresser extends Container {
 			hitbox = new Polygon(new float[]{0,0,64,0,64,32,0,32});
 			origin_x = 32;
 			origin_y = 16;
+		}
+		
+		for(int i = 0; i < inv.slot.length; i++){
+			if(Math.random() < 0.10){
+				if(Math.random() > 0.5)inv.slot[i].item = new Shirt(world, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f));
+				else inv.slot[i].item  = new Pants(world, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f));
+			}
 		}
 	}
 }

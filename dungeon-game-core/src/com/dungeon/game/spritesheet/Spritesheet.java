@@ -1,5 +1,6 @@
 package com.dungeon.game.spritesheet;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -57,5 +58,30 @@ public class Spritesheet {
 		return rotatePixmap(rotated, numRotates-1);
 		
 	}
+	
+	public static Texture Tint(Texture src, Color color, boolean alpha){
+		
+		if(!src.getTextureData().isPrepared()) src.getTextureData().prepare();
+		Pixmap tempMap = src.getTextureData().consumePixmap();
+		tempMap.setColor(color);
+		Texture sprite;
+		if(alpha){
+			for(int i = 0; i < tempMap.getWidth(); i++){
+				for(int k = 0; k < tempMap.getWidth(); k++){
+					if((tempMap.getPixel(i, k)&61440) != 0){
+						tempMap.drawPixel(i,k);
+					}
+				}
+			}
+			
+		}else{
+			tempMap.fillRectangle(0, 0, 32, 32);
+		}
+		sprite = new Texture(tempMap);
+		tempMap.dispose();
+		return sprite;
+		
+	}
+	
 	
 }
