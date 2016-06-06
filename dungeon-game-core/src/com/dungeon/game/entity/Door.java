@@ -60,7 +60,7 @@ public class Door extends Static {
 	@Override
 	public void calc() {
 		boolean canOpen = true;
-		if(world.mouse.rb_pressed&&world.mouse.x > x-world.cam.x+world.cam.WIDTH/2 && world.mouse.x < x+Item.SIZE-world.cam.x+world.cam.WIDTH/2 && world.mouse.y > y-world.cam.y+world.cam.HEIGHT/2 && world.mouse.y < y+Item.SIZE-world.cam.y+world.cam.HEIGHT/2){
+		if(world.mouse.rb_pressed&&world.mouse.x > x-world.cam.x+world.cam.width/2 && world.mouse.x < x+Item.SIZE-world.cam.x+world.cam.width/2 && world.mouse.y > y-world.cam.y+world.cam.height/2 && world.mouse.y < y+Item.SIZE-world.cam.y+world.cam.height/2){
 			if(Math.sqrt(Math.pow((x+d_width/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+d_height/2) - (world.player.y + world.player.d_height/2), 2)) <= world.player.REACH){
 				for(int i = 0; i< world.curFloor.tm.length;i++){
 					for(int k = 0; k <world.curFloor.tm[i].length;k++){

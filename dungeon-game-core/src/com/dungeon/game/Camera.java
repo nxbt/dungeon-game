@@ -17,8 +17,8 @@ public class Camera {
 	public float x;
 	public float y;
 	
-	public final int WIDTH = 640;
-	public final int HEIGHT = 360;
+	public int width = 640;
+	public int height = 360;
 	
 	public World world;
 	
@@ -28,17 +28,17 @@ public class Camera {
 		
 		this.world = world;
 		
-		cam = new OrthographicCamera(WIDTH, HEIGHT);
-		cam.position.set(this.x+WIDTH/2, this.y+HEIGHT/2, 0);
+		cam = new OrthographicCamera(width, height);
+		cam.position.set(this.x+width/2, this.y+height/2, 0);
 		
-		view = new FitViewport(WIDTH, HEIGHT, cam);
+		view = new FitViewport(width, height, cam);
 		view.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 	
 	public void update(){
 		if(Hud.class.isInstance(world.player.focusedEntity)) {
-			x += ((4*world.player.x+(world.player.focusedEntity.x-WIDTH/2)+x)/5 - x)*TWEEN;
-			y += ((4*world.player.y+(world.player.focusedEntity.y-HEIGHT/2)+y)/5 - y)*TWEEN;
+			x += ((4*world.player.x+(world.player.focusedEntity.x-width/2)+x)/5 - x)*TWEEN;
+			y += ((4*world.player.y+(world.player.focusedEntity.y-height/2)+y)/5 - y)*TWEEN;
 		}
 		else if(world.player.focusedEntity != null) {
 			x += ((4*world.player.x+world.player.focusedEntity.x)/5 - x)*TWEEN;

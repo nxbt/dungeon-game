@@ -99,8 +99,8 @@ public class Vendinator extends Friend {
 			world.hudEntities.remove(speechBubble);
 		}else{
 			if(!world.hudEntities.contains(speechBubble))world.hudEntities.add(speechBubble);	
-			speechBubble.x = x-world.cam.x+world.cam.WIDTH/2;
-			speechBubble.y = y-world.cam.y+world.cam.HEIGHT/2;
+			speechBubble.x = x-world.cam.x+world.cam.width/2;
+			speechBubble.y = y-world.cam.y+world.cam.height/2;
 		}
 		
 	}

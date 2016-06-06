@@ -43,8 +43,8 @@ public class DescBox extends Hud {
 		x = world.mouse.x;
 		y = world.mouse.y;
 		
-		screenWidth = world.cam.WIDTH;
-		screenHeight = world.cam.HEIGHT;
+		screenWidth = world.cam.width;
+		screenHeight = world.cam.height;
 	}
 	
 	public void updateText(Item item) {

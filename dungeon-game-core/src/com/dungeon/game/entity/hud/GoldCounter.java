@@ -25,7 +25,7 @@ public class GoldCounter extends Hud {
 		if(world.player.gold<99999)value = ""+world.player.gold;
 		else value = "99999";
 		backgroundWidth = value.length()*8+9;
-		x = world.cam.WIDTH-84-backgroundWidth;
+		x = world.cam.width-84-backgroundWidth;
 		y = 76;
 
 	}

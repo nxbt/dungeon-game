@@ -2,6 +2,7 @@ package com.dungeon.game.world;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,11 +12,12 @@ import com.dungeon.game.generator.Rooms;
 import com.dungeon.game.generator.VillageRooms;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
+import com.dungeon.game.spritesheet.Spritesheet;
 
 public class Floor {
 	private static final String DEFAULT = "tilemap.png";
 	
-	private TextureRegion[] spritesheet;
+	private Texture[][] textures;
 	
 	public Tile[][] tm;
 	
@@ -36,32 +38,31 @@ public class Floor {
 		
 		tm = new Tile[height][width];
 		
-		Texture tempsheet = new Texture(DEFAULT);
-		
-		int sheetWidth = tempsheet.getWidth()/Tile.TS;
-		int sheetHeight = tempsheet.getHeight()/Tile.TS;
-		
-		spritesheet = new TextureRegion[sheetWidth * sheetHeight];
-		
-		for(int i = 0; i < sheetHeight; i++) {
-			for(int k = 0; k < sheetWidth; k++) {
-				spritesheet[i*sheetWidth+k] = new TextureRegion(new Texture(DEFAULT),k*Tile.TS,i*Tile.TS,Tile.TS,Tile.TS);
-			}
-		}
 		Generation gen;
 		if(type.equals("rooms"))gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY);
 		else if(type.equals("village_rooms"))gen = new VillageRooms(world, width, height,centerX,centerY, upTrapX, upTrapY);
 		else gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY);
 
 		int[][] map = gen.getMap();
+		int[][] rotations = gen.getRotations();
 		entities = gen.getEntities();
-//		entities.add(new Stair(world, (centerX+1)*Tile.TS, centerY*Tile.TS, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
 		
-		fixBleeding(spritesheet);
+		Texture[] texturesTemp = Spritesheet.getSprites(DEFAULT, 32, 32);
+		textures = new Texture[texturesTemp.length][4];
+		for(int i = 0; i < texturesTemp.length; i++){
+			textures[i][0] = texturesTemp[i];
+			
+			if(!texturesTemp[i].getTextureData().isPrepared()) texturesTemp[i].getTextureData().prepare();
+			Pixmap tempMap = texturesTemp[i].getTextureData().consumePixmap();
+			for(int k = 1; k<4; k++){
+				textures[i][k] = new Texture(Spritesheet.rotatePixmap(tempMap, k));
+			}
+			tempMap.dispose();
+		}
 
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
-				tm[i][k] = new Tile(spritesheet,map[i][k]);
+				tm[i][k] = new Tile(textures,map[i][k],rotations[i][k]);
 			}
 		}
 		corners = new ArrayList<int[]>();
@@ -148,10 +149,10 @@ public class Floor {
 	}
 	
 	public void draw(SpriteBatch batch, World world) {
-		int startHeight = (int) (world.cam.y-world.cam.HEIGHT/2)/Tile.TS;
-		int endHeight = (int)(world.cam.y+world.cam.HEIGHT/2)/Tile.TS+1;
-		int startWidth = (int) (world.cam.x-world.cam.WIDTH/2)/Tile.TS;
-		int endWidth = (int)(world.cam.x+world.cam.WIDTH/2)/Tile.TS+1;
+		int startHeight = (int) (world.cam.y-world.cam.height/2)/Tile.TS;
+		int endHeight = (int)(world.cam.y+world.cam.height/2)/Tile.TS+1;
+		int startWidth = (int) (world.cam.x-world.cam.width/2)/Tile.TS;
+		int endWidth = (int)(world.cam.x+world.cam.width/2)/Tile.TS+1;
 		
 		startHeight = Math.max(startHeight,0);
 		endHeight = Math.min(endHeight,tm.length);
@@ -160,7 +161,7 @@ public class Floor {
 		
 		for(int i = startHeight; i < endHeight; i++){
 			for(int k = startWidth; k < endWidth; k++){
-				batch.draw(tm[i][k].texture, k*Tile.TS, i*Tile.TS);
+				batch.draw(tm[i][k].textures[tm[i][k].rotation], k*Tile.TS, i*Tile.TS);
 			}
 		}
 	}

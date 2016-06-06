@@ -11,7 +11,7 @@ public class Pants extends Equipable {
 		
 		sprite = Spritesheet.Tint(textures[0], color, true);
 		
-		name = "Shirt";
+		name = "Pants";
 		
 		physc_resist = 1;
 		flame_resist = -1;

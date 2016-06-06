@@ -42,8 +42,8 @@ public class EffectGraphic extends Hud {
 
 	@Override
 	public void calc() {
-		x = world.cam.WIDTH-36;
-		y = world.cam.HEIGHT-36*(1+world.player.effectGraphics.indexOf(this));
+		x = world.cam.width-36;
+		y = world.cam.height-36*(1+world.player.effectGraphics.indexOf(this));
 	}
 
 	@Override

@@ -11,7 +11,7 @@ public class InvBubble extends SpeechChoice {
 	public InvDisplayBubble bubble;
 	
 	public InvBubble(World world, Character character, Inventory inv, String key) {
-		super(world, new String[]{"Thanks!"},new String[]{"Thank you!"},new String[]{key});
+		super(world, new String[]{"Close"},new String[]{"Thank you."},new String[]{key});
 		this.inv = inv;
 		
 		hasBeenSaid = false;

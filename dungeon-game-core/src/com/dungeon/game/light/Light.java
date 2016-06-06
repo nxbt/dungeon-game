@@ -27,8 +27,8 @@ public class Light {
 	}
 	
 	public void update(World world) {
-		x = (int) (ent.x-world.cam.x+world.cam.WIDTH/2-(light.getWidth() * radius)/2);
-		y = (int) (world.cam.HEIGHT-(ent.y-world.cam.y+world.cam.HEIGHT/2)-(light.getHeight() * radius)/2);
+		x = (int) (ent.x-world.cam.x+world.cam.width/2-(light.getWidth() * radius)/2);
+		y = (int) (world.cam.height-(ent.y-world.cam.y+world.cam.height/2)-(light.getHeight() * radius)/2);
 	}
 	
 	public void draw(Pixmap lightMap) {

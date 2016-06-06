@@ -44,8 +44,8 @@ public abstract class Window extends Hud {
 		
 		if(x < 0) x = 0;
 		if(y < -d_height+14) y = -d_height+14;
-		if(x+d_width > world.cam.WIDTH) x = world.cam.WIDTH-d_width;
-		if(y+d_height > world.cam.HEIGHT) y = world.cam.HEIGHT-d_height;
+		if(x+d_width > world.cam.width) x = world.cam.width-d_width;
+		if(y+d_height > world.cam.height) y = world.cam.height-d_height;
 		
 		if(world.hudEntities.indexOf(this) != world.hudEntities.indexOf(exitButton)+1) {
 			world.hudEntities.remove(exitButton);

@@ -35,8 +35,8 @@ public class Dialogue extends Hud {
 		characters = new ArrayList<Character>();
 		characters.add(character);
 		characters.add(world.player);
-		d_width = world.cam.WIDTH;
-		d_height = world.cam.HEIGHT;
+		d_width = world.cam.width;
+		d_height = world.cam.height;
 	}
 	
 	public void calc(){
@@ -51,8 +51,11 @@ public class Dialogue extends Hud {
 			bubble.y = heightCounter;
 			heightCounter+=bubble.d_height+8;
 			if(bubble.character.equals(characters.get(0)))bubble.x = 8;
-			else if(bubble.character.equals(characters.get(1)))bubble.x = world.cam.WIDTH-bubble.d_width-8;
+			else if(bubble.character.equals(characters.get(1)))bubble.x = world.cam.width-bubble.d_width-8;
 			if(!bubble.done())bubble.update();
+		}
+		if(speechBubbles.get(0) instanceof InvBubble && ((InvBubble)speechBubbles.get(0)).madeChoice) {
+			speechBubbles.remove(1);
 		}
 	}
 	
@@ -64,9 +67,6 @@ public class Dialogue extends Hud {
 			}
 			else if(speechBubbles.get(0).getProceedKey().equals("end")) close();
 			else {
-				if(speechBubbles.size()>1&&speechBubbles.get(1) instanceof InvDisplayBubble){
-					speechBubbles.remove(1);
-				}
 				speechBubbles.add(0,(SpeechBubble) potentialBubbles.get(speechBubbles.get(0).getProceedKey()).clone());
 				
 				if(speechBubbles.get(0)instanceof InvBubble){
@@ -99,12 +99,12 @@ public class Dialogue extends Hud {
 	public void draw(SpriteBatch batch){
 		batch.setColor(1,1,1,0.8f);
 		for(SpeechBubble bubble: speechBubbles){
-			if((bubble.character.equals(characters.get(0))||bubble.character.equals(characters.get(1)))&&bubble.y<world.cam.HEIGHT)bubble.draw(batch);
+			if((bubble.character.equals(characters.get(0))||bubble.character.equals(characters.get(1)))&&bubble.y<world.cam.height)bubble.draw(batch);
 		}
 		batch.draw(PORTRAIT_BACKGROUND,4,4,PORTRAIT_BACKGROUND.getWidth(),PORTRAIT_BACKGROUND.getHeight());
-		batch.draw(PORTRAIT_BACKGROUND,world.cam.WIDTH-72,4,PORTRAIT_BACKGROUND.getWidth(),PORTRAIT_BACKGROUND.getHeight());
+		batch.draw(PORTRAIT_BACKGROUND,world.cam.width-72,4,PORTRAIT_BACKGROUND.getWidth(),PORTRAIT_BACKGROUND.getHeight());
 		batch.draw(characters.get(0).face,4,4,characters.get(0).face.getWidth(),characters.get(0).face.getHeight());
-		batch.draw(characters.get(1).face,world.cam.WIDTH-72,4,characters.get(0).face.getWidth(),characters.get(0).face.getHeight());
+		batch.draw(characters.get(1).face,world.cam.width-72,4,characters.get(0).face.getWidth(),characters.get(0).face.getHeight());
 		float char0ConnectorStart = 60;
 		float char1ConnectorStart = 60;
 		boolean madeChar0Start = false;

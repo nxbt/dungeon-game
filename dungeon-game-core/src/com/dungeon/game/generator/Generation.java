@@ -13,6 +13,7 @@ public abstract class Generation {
 	protected int width;
 	protected int height;
 	protected int[][] map;
+	protected int[][] rotations;
 	protected ArrayList<Entity> entities;
 	
 	public ArrayList<Area> areas;
@@ -20,7 +21,8 @@ public abstract class Generation {
 		areas = new ArrayList<Area>();
 		this.height = height;
 		this.width = width;
-		this.map = new int[height][width];
+		map = new int[height][width];
+		rotations = new int[height][width];
 		entities = new ArrayList<Entity>();
 		
 		generateClearDungeon();
@@ -32,6 +34,10 @@ public abstract class Generation {
 		return map;
 	}
 	
+	public int[][] getRotations(){
+		return rotations;
+	}
+	
 	public ArrayList<Entity> getEntities(){
 		return entities;
 	}
@@ -40,6 +46,7 @@ public abstract class Generation {
 		for(int i = 0; i<map.length;i++){
 			for(int k = 0; k<map[i].length;k++){
 				map[i][k]=1;
+				rotations[i][k]=0;
 			}
 		}
 	}

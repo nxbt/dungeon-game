@@ -99,24 +99,24 @@ public class World {
 		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+Tile.TS, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
 
 		hudEntities.add(new GoldCounter(this));
-		hudEntities.add(new MenuButton(this, 4, cam.HEIGHT-20));
-		hudEntities.add(new HelpButton(this, 24, cam.HEIGHT-20));
-		hudEntities.add(new InvButton(this, cam.WIDTH-56, 76));
-		hudEntities.add(new Portrait(this, cam.WIDTH-72, 4));
-		hudEntities.add(new PortraitBackground(this, cam.WIDTH-72, 4));
-		hudEntities.add(new HealthBar(this,cam.WIDTH-36,76));
-		hudEntities.add(new StamBar(this,cam.WIDTH-24,76));
-		hudEntities.add(new ManaBar(this,cam.WIDTH-12,76));
-		hudEntities.add(new HudSlot(this, cam.WIDTH-144, 40, player.inv.slot[30]));
-		hudEntities.add(new HudSlot(this, cam.WIDTH-108, 40, player.inv.slot[31]));
-		hudEntities.add(new HudSlot(this, cam.WIDTH-252, 4, player.inv.slot[0]));
-		hudEntities.add(new HudSlot(this, cam.WIDTH-216, 4, player.inv.slot[1]));
-		hudEntities.add(new HudSlot(this, cam.WIDTH-180, 4, player.inv.slot[2]));
-		hudEntities.add(new HudSlot(this, cam.WIDTH-144, 4, player.inv.slot[3]));
-		hudEntities.add(new HudSlot(this, cam.WIDTH-108, 4, player.inv.slot[4]));
+		hudEntities.add(new MenuButton(this, 4, cam.height-20));
+		hudEntities.add(new HelpButton(this, 24, cam.height-20));
+		hudEntities.add(new InvButton(this, cam.width-56, 76));
+		hudEntities.add(new Portrait(this, cam.width-72, 4));
+		hudEntities.add(new PortraitBackground(this, cam.width-72, 4));
+		hudEntities.add(new HealthBar(this,cam.width-36,76));
+		hudEntities.add(new StamBar(this,cam.width-24,76));
+		hudEntities.add(new ManaBar(this,cam.width-12,76));
+		hudEntities.add(new HudSlot(this, cam.width-144, 40, player.inv.slot[30]));
+		hudEntities.add(new HudSlot(this, cam.width-108, 40, player.inv.slot[31]));
+		hudEntities.add(new HudSlot(this, cam.width-252, 4, player.inv.slot[0]));
+		hudEntities.add(new HudSlot(this, cam.width-216, 4, player.inv.slot[1]));
+		hudEntities.add(new HudSlot(this, cam.width-180, 4, player.inv.slot[2]));
+		hudEntities.add(new HudSlot(this, cam.width-144, 4, player.inv.slot[3]));
+		hudEntities.add(new HudSlot(this, cam.width-108, 4, player.inv.slot[4]));
 		hudEntities.add(new HudBackground(this));
 		
-		hudEntities.add(new EffectHudBackground(this, cam.WIDTH-44, cam.HEIGHT-44));
+		hudEntities.add(new EffectHudBackground(this, cam.width-44, cam.height-44));
 		
 		fpsFont = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		fpsFont.setColor(Color.RED);
@@ -237,7 +237,7 @@ public class World {
 		mouse.draw(batch);
 		descBox.draw(batch);
 		
-		if(debug_frames) fpsFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 60f, cam.HEIGHT-8f);
+		if(debug_frames) fpsFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 60f, cam.height-8f);
 		
 		batch.end();
 	}

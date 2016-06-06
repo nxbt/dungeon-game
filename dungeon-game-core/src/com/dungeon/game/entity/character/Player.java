@@ -13,8 +13,6 @@ import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.item.equipable.Equipable;
-import com.dungeon.game.item.equipable.Pants;
-import com.dungeon.game.item.equipable.Shirt;
 import com.dungeon.game.item.weapon.Medium;
 import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.world.Tile;
@@ -113,9 +111,6 @@ public class Player extends Character {
 		
 		inv = new Inventory(world, invLayout, 10, 100);
 		
-		inv.slot[0].item = new Shirt(world, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f));
-		inv.slot[1].item = new Pants(world, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f));
-		
 //		light = new Light(this, 1);
 		
 		actionState = new boolean[] {false, false, false};
@@ -157,7 +152,7 @@ public class Player extends Character {
 		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4))inv.slot[3].consume(this);
 		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5))inv.slot[4].consume(this);
 		
-		if(Hud.class.isInstance(focusedEntity)) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y+world.cam.y-world.cam.HEIGHT/2-(y), focusedEntity.x+world.cam.x-world.cam.WIDTH/2-(x)));
+		if(Hud.class.isInstance(focusedEntity)) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y+world.cam.y-world.cam.height/2-(y), focusedEntity.x+world.cam.x-world.cam.width/2-(x)));
 		else if(focusedEntity != null) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y-y, focusedEntity.x-x));
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !attacking && world.mouse.slot.item == null) {
