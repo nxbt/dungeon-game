@@ -90,7 +90,7 @@ public class VillageRooms extends Generation {
 		y-=height;
 		int width = (int) (5+Math.random()*map[0].length/20);
 		x-=(int) (Math.random()*width);
-		boolean special = Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/2;
+		boolean special = Math.random()>1-(Math.sqrt((this.width/2-x)*(this.width/2-x)+(this.height/2-y)*(this.height/2-y))/Math.sqrt((this.width/2)*(this.width/2)+(this.height/2)*(this.height/2)))/1.5f;
 		Rectangle room = new Rectangle(x, y, width, height);
 		int nextX;
 		int nextY;
