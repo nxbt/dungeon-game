@@ -1,4 +1,4 @@
-package com.dungeon.game.item;
+package com.dungeon.game.item.equipable;
 
 import com.dungeon.game.effect.Inconspicuous;
 import com.dungeon.game.world.World;

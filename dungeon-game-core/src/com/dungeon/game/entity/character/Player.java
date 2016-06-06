@@ -12,7 +12,8 @@ import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.inventory.Inventory;
-import com.dungeon.game.item.Equipable;
+import com.dungeon.game.item.equipable.Equipable;
+import com.dungeon.game.item.equipable.Shirt;
 import com.dungeon.game.item.weapon.Medium;
 import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.world.Tile;
@@ -110,6 +111,8 @@ public class Player extends Character {
 		};
 		
 		inv = new Inventory(world, invLayout, 10, 100);
+		
+		inv.slot[0].item = new Shirt(world);
 		
 //		light = new Light(this, 1);
 		

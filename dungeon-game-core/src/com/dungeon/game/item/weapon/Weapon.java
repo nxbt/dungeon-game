@@ -2,7 +2,7 @@ package com.dungeon.game.item.weapon;
 
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.WeaponGraphic;
-import com.dungeon.game.item.Equipable;
+import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.world.World;
 
 public abstract class Weapon extends Equipable{

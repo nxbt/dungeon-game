@@ -8,7 +8,7 @@ public abstract class Consumable extends Item {
 
 	public Consumable(World world, String name, String filename) {
 		super(world, filename);
-		type = 1;
+		type = CONSUM;
 		maxStack = 10;
 		this.name = name;
 	}
