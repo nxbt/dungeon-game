@@ -61,17 +61,56 @@ public abstract class Generation {
 					int sides = 0;
 					int corners = 0;
 					
-					if(k != 0 && !Tile.isSolid(map[i][k-1])) sides += 1;
-					if(i != 0 && !Tile.isSolid(map[i-1][k])) sides += 2;
-					if(k != map[i].length-1 && !Tile.isSolid(map[i][k+1])) sides += 4;
-					if(i != map.length-1 && !Tile.isSolid(map[i+1][k])) sides += 8;
+					if(k != 0 && !Tile.isSolid(map[i][k-1])) sides += 1; //left
+					if(i != 0 && !Tile.isSolid(map[i-1][k])) sides += 2; //bottom
+					if(k != map[i].length-1 && !Tile.isSolid(map[i][k+1])) sides += 4; //right
+					if(i != map.length-1 && !Tile.isSolid(map[i+1][k])) sides += 8; //upper
 					
-					if(i != 0 && k != 0 && !Tile.isSolid(map[i-1][k-1])) corners += 1;
-					if(i != map.length-1 && k != 0 && !Tile.isSolid(map[i+1][k-1])) corners += 2;
-					if(i != 0 && k != map[i].length-1 && !Tile.isSolid(map[i-1][k+1])) corners += 4;
-					if(i != map.length-1 && k != map[i].length-1 && !Tile.isSolid(map[i+1][k+1])) corners += 8;
-					
-					if(sides == 1 || sides == 5) {
+					if(i != 0 && k != 0 && !Tile.isSolid(map[i-1][k-1])) corners += 1; //bottom left
+					if(i != map.length-1 && k != 0 && !Tile.isSolid(map[i+1][k-1])) corners += 2; //upper left
+					if(i != 0 && k != map[i].length-1 && !Tile.isSolid(map[i-1][k+1])) corners += 4; //bottom right
+					if(i != map.length-1 && k != map[i].length-1 && !Tile.isSolid(map[i+1][k+1])) corners += 8; //upper right
+					if(sides == 1 && (corners == 10 || corners == 9 || corners == 12 || corners == 4 || corners == 8 || corners == 5 || corners == 7 || corners == 11 || corners == 14 || corners == 13)){
+						map[i][k]= thre_id;
+						flips[i][k] = false;
+						rotations[i][k] = 3;
+					}
+					else if(sides == 2 && (corners == 3||corners == 6||corners == 10||corners == 8||corners == 2||corners == 12||corners == 13||corners == 7 || corners == 11 || corners == 14)){
+						map[i][k]= thre_id;
+						flips[i][k] = false;
+						rotations[i][k] = 2;
+					}
+					else if(sides == 4 && (corners == 5||corners == 9||corners == 3||corners == 2||corners == 1||corners == 10||corners == 14||corners == 13 || corners == 7 || corners == 11)){
+						map[i][k]= thre_id;
+						flips[i][k] = false;
+						rotations[i][k] = 1;
+					}
+					else if(sides == 8 && (corners == 12||corners == 6||corners == 5||corners == 1||corners == 4||corners == 3||corners == 11||corners == 14 || corners == 13 || corners == 7)){
+						map[i][k]= thre_id;
+						flips[i][k] = false;
+						rotations[i][k] = 0;
+					}
+					else if(sides == 0 && corners == 3){
+						map[i][k]= thre_id;
+						flips[i][k] = false;
+						rotations[i][k] = 1;
+					}
+					else if(sides == 0 && corners == 5){
+						map[i][k]= thre_id;
+						flips[i][k] = false;
+						rotations[i][k] = 0;
+					}
+					else if(sides == 0 && corners == 12){
+						map[i][k]= thre_id;
+						flips[i][k] = false;
+						rotations[i][k] = 3;
+					}
+					else if(sides == 0 && corners == 10){
+						map[i][k]= thre_id;
+						flips[i][k] = false;
+						rotations[i][k] = 2;
+					}
+					else if(sides == 1 || sides == 5) {
 						map[i][k] = strt_id;
 						flips[i][k] = false;
 						rotations[i][k] = 0;
@@ -151,7 +190,7 @@ public abstract class Generation {
 						flips[i][k] = false;
 						rotations[i][k] = 3;
 					}
-					else if(sides == 0 && (corners == 6 || corners == 9 || corners == 14 || corners == 13 || corners == 11 || corners == 7)){
+					else if(sides == 0 && (corners == 6 || corners == 9 || corners == 15 || corners == 14 || corners == 13 || corners == 11 || corners == 7)){
 						map[i][k] = four_id;
 						flips[i][k] = false;
 						rotations[i][k] = 0;
