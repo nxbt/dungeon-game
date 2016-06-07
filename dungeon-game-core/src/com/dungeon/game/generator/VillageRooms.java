@@ -44,6 +44,8 @@ public class VillageRooms extends Generation {
 
 		generateStartRoom(centerX, centerY);
 		populateSpecialRooms();
+		
+		makeWalls(10, 11, 12, 13, 14);
 	}
 
 	public boolean generateStartRoom(int x, int y){

@@ -37,16 +37,17 @@ public class Spritesheet {
 			    }
 			}
 			textures[i] = new Texture(tempMap);
-//			tempMap.dispose();
 		}
 		wholePixmap.dispose();
 		
 		return textures;
 	}
 	
-	public static Pixmap rotatePixmap (Pixmap src, int numRotates){
+	public static Pixmap rotatePixmap(Pixmap src, int numRotates){
 		if(numRotates == 0) return src;
+		
 		Pixmap rotated = new Pixmap(src.getHeight(), src.getWidth(), src.getFormat());
+		
 		for (int x = 0; x < src.getWidth(); x++) {
 	        for (int y = 0; y < src.getHeight(); y++) {
 	        	int offx = x - src.getWidth()/2, offy = y - src.getHeight()/2+1;
@@ -55,8 +56,21 @@ public class Spritesheet {
 	        }
 		}
 		if(numRotates == 1)return rotated;
+		
 		return rotatePixmap(rotated, numRotates-1);
 		
+	}
+	
+	public static Pixmap flipPixmap(Pixmap src) {
+		Pixmap flipped = new Pixmap(src.getHeight(), src.getWidth(), src.getFormat());
+		
+		for (int x = 0; x < src.getWidth(); x++) {
+	        for (int y = 0; y < src.getHeight(); y++) {
+	        	flipped.drawPixel(x, y, src.getPixel(src.getWidth()-x-1, y));
+	        }
+		}
+		
+		return flipped;
 	}
 	
 	public static Texture Tint(Texture src, Color color, boolean alpha){

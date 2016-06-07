@@ -27,6 +27,8 @@ public class Rooms extends Generation {
 
 		generateStartRoom(centerX, centerY);
 		generateStairDown();
+		
+		makeWalls(10, 11, 12, 13, 14);
 	}
 	
 	public boolean generateStartRoom(int x, int y){

@@ -43,26 +43,36 @@ public class Floor {
 		else if(type.equals("village_rooms"))gen = new VillageRooms(world, width, height,centerX,centerY, upTrapX, upTrapY);
 		else gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY);
 
-		int[][] map = gen.getMap();
-		int[][] rotations = gen.getRotations();
+		int[][] map = gen.map;
+		int[][] rotations = gen.rotations;
+		boolean[][] flips = gen.flips;
+		
 		entities = gen.getEntities();
 		
 		Texture[] texturesTemp = Spritesheet.getSprites(DEFAULT, 32, 32);
-		textures = new Texture[texturesTemp.length][4];
+		textures = new Texture[texturesTemp.length][8];
 		for(int i = 0; i < texturesTemp.length; i++){
 			textures[i][0] = texturesTemp[i];
 			
 			if(!texturesTemp[i].getTextureData().isPrepared()) texturesTemp[i].getTextureData().prepare();
 			Pixmap tempMap = texturesTemp[i].getTextureData().consumePixmap();
 			for(int k = 1; k<4; k++){
+				
 				textures[i][k] = new Texture(Spritesheet.rotatePixmap(tempMap, k));
 			}
+			
+			for(int k = 4; k<8; k++){
+				
+				textures[i][k] = new Texture(Spritesheet.rotatePixmap(Spritesheet.flipPixmap(tempMap), k==4?3:k-5));
+			}
+			
+			
 			tempMap.dispose();
 		}
 
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
-				tm[i][k] = new Tile(textures,map[i][k],rotations[i][k]);
+				tm[i][k] = new Tile(textures,map[i][k],rotations[i][k], flips[i][k]);
 			}
 		}
 		corners = new ArrayList<int[]>();
@@ -161,7 +171,7 @@ public class Floor {
 		
 		for(int i = startHeight; i < endHeight; i++){
 			for(int k = startWidth; k < endWidth; k++){
-				batch.draw(tm[i][k].textures[tm[i][k].rotation], k*Tile.TS, i*Tile.TS);
+				batch.draw(tm[i][k].textures[tm[i][k].rotation+(tm[i][k].flip?4:0)], k*Tile.TS, i*Tile.TS);
 			}
 		}
 	}
