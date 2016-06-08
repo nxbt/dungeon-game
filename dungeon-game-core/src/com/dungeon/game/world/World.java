@@ -11,6 +11,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
@@ -33,7 +38,12 @@ import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.Portrait;
 import com.dungeon.game.entity.hud.PortraitBackground;
 import com.dungeon.game.entity.hud.StamBar;
+//import com.dungeon.game.light.LightMap;
 import com.dungeon.game.pathing.AreaMap;
+
+import box2dLight.Light;
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 
 public class World {
 	public SpriteBatch hudBatch;
@@ -63,10 +73,22 @@ public class World {
 	boolean debug_pathing;
 	boolean debug_frames;
 	boolean debug_sight;
+
+	private com.badlogic.gdx.physics.box2d.World box2dWorld;
+	Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
+	public RayHandler rayHandler;
+	
+	ArrayList<Light> lights;
 	
 //	public LightMap lightMap;
 	
 	public World() {
+		
+
+		
+//		lightMap = new LightMap(cam.width,cam.height);
+		box2dWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
+		rayHandler = new RayHandler(box2dWorld);		
 		hudBatch = new SpriteBatch();
 		
 		cam = new Camera(this);
@@ -126,7 +148,31 @@ public class World {
 		debug_frames = false; 
 		debug_sight = false;
 		
-//		lightMap = new LightMap(cam.WIDTH,cam.HEIGHT);
+		for(int i = 0; i <curFloor.tm.length; i++){
+			for(int k = 0; k <curFloor.tm.length; k++){
+				if(curFloor.tm[i][k].data == 1){
+					// Create our body definition
+					BodyDef groundBodyDef =new BodyDef();  
+					// Set its world position
+					groundBodyDef.position.set(new Vector2(k*Tile.TS+Tile.TS/2, i*Tile.TS+Tile.TS/2));  
+
+					// Create a body from the defintion and add it to the world
+					Body groundBody = box2dWorld.createBody(groundBodyDef);  
+
+					// Create a polygon shape
+					PolygonShape groundBox = new PolygonShape();  
+					// Set the polygon shape as a box which is twice the size of our view port and 20 high
+					// (setAsBox takes half-width and half-height as arguments)
+					groundBox.setAsBox(Tile.TS/2, Tile.TS/2);
+					// Create a fixture from our polygon shape and add it to our ground body  
+					groundBody.createFixture(groundBox, 0.0f); 
+					// Clean up after ourselves
+					groundBox.dispose();
+				}
+				
+			}
+		}
+		
 	}
 	
 	public void update() {
@@ -151,6 +197,7 @@ public class World {
 			hudEntities.get(i).update();
 		}
 		
+//		lightMap.update(this);
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F9)) debug_frames = !debug_frames;
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F8)) debug_pathing = !debug_pathing;
@@ -172,6 +219,14 @@ public class World {
 		for(int i = entities.size()-1; i >= 0; i--) {
 			entities.get(i).draw(batch);
 		}
+		entities.get(entities.size()-1).draw(batch);//have to draw player twice when using lights
+		
+
+		rayHandler.setCombinedMatrix(cam.cam);
+		rayHandler.updateAndRender();
+		
+		debugRenderer.render(box2dWorld, cam.cam.combined);
+		
 		batch.end();
 		
 		if(debug_pathing||debug_sight||debug_hitbox) {

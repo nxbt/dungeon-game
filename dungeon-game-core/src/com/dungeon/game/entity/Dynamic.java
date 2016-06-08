@@ -33,6 +33,7 @@ public abstract class Dynamic extends Entity {
 		calc();
 		phys();
 		post();
+		calcLight();
 	}
 	
 	//resets some variables at the start of every update cycles

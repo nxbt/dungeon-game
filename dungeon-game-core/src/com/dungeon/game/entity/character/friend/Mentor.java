@@ -15,6 +15,7 @@ import com.dungeon.game.inventory.Shop;
 import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.weapon.Sword;
+import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
 
 public class Mentor extends Friend {
@@ -26,6 +27,8 @@ public class Mentor extends Friend {
 		speechBubble.setColor();	
 		
 		name = "Mentor";
+		
+//		light = new Light(this,0.3f);
 		
 		torq = 5;
 		

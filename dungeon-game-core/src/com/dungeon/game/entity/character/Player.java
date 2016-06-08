@@ -15,8 +15,11 @@ import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.weapon.Medium;
 import com.dungeon.game.item.weapon.Weapon;
+import com.dungeon.game.light.Light;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
+
+import box2dLight.PointLight;
 
 public class Player extends Character {
 	public final int REACH = 4*Tile.TS;
@@ -31,6 +34,8 @@ public class Player extends Character {
 		super(world, x, y, 32, 32, "person.png");
 		
 		speechColor = Color.BLUE;
+		
+		light = new PointLight(world.rayHandler, 1000 ,new Color(1,1,1,0.8f), 200, x, y);
 		
 		name = "Player";
 		

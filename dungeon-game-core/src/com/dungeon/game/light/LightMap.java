@@ -11,21 +11,26 @@ import com.dungeon.game.world.World;
 
 public class LightMap {
 
-	Pixmap lightMap;
 	
 	Texture lightMapTex;
 	
 	ArrayList<Light> lights;
 	
+	private int width;
+	private int height;
+	
 	public LightMap(int width, int height) {
-		lightMap = new Pixmap(width,height,Pixmap.Format.RGBA8888);
-		
-		lightMap.setColor(0,0,0,1);
 		
 		lights = new ArrayList<Light>();
+		
+		this.width = width;
+		this.height = height;
 	}
 
 	public void update(World world) {
+		Pixmap lightMap = new Pixmap(width,height,Pixmap.Format.RGBA8888);
+		
+		lightMap.setColor(0,0,0,1);
 		lightMap.fillRectangle(0, 0, lightMap.getWidth(), lightMap.getHeight());
 		
 		for(Entity ent: world.entities) {
@@ -36,6 +41,7 @@ public class LightMap {
 		}
 		
 		lightMapTex = new Texture(lightMap);
+		lightMap.dispose();
 	}
 	
 	public void draw(SpriteBatch batch) {

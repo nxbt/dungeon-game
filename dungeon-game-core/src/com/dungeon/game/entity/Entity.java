@@ -4,9 +4,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
-import com.dungeon.game.light.Light;
+import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
+
+import box2dLight.Light;
 
 public abstract class Entity {
 	public float x;
@@ -62,6 +64,7 @@ public abstract class Entity {
 	public void update() {
 		calc();
 		post();
+		calcLight();
 	}
 	
 	public void draw(SpriteBatch batch) {
@@ -96,6 +99,13 @@ public abstract class Entity {
 	
 	protected void changeSprite(int index){
 		sprite = textures[index];
+	}
+	
+	public void calcLight(){
+		if(light!=null){
+			System.out.println("light is");
+			light.setPosition(new Vector2(x,y));
+		}
 	}
 	
 	public void hovered() {} //optional method called when the mouse hovers over an entity

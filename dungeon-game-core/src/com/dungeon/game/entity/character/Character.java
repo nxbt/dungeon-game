@@ -132,6 +132,7 @@ public abstract class Character extends Dynamic {
 		phys();
 		sight();
 		post();
+		calcLight();
 		stagerTimer++;
 		if(stagerTimer == STAGER_TIME)stagerTimer = 0;
 	}
