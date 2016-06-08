@@ -103,7 +103,6 @@ public abstract class Entity {
 	
 	public void calcLight(){
 		if(light!=null){
-			System.out.println("light is");
 			light.setPosition(new Vector2(x,y));
 		}
 	}

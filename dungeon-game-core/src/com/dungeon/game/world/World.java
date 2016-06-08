@@ -88,7 +88,9 @@ public class World {
 		
 //		lightMap = new LightMap(cam.width,cam.height);
 		box2dWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
-		rayHandler = new RayHandler(box2dWorld);		
+		rayHandler = new RayHandler(box2dWorld);
+		rayHandler.setBlurNum(60);
+		rayHandler.setAmbientLight(new Color(0,0,0,0));
 		hudBatch = new SpriteBatch();
 		
 		cam = new Camera(this);
@@ -148,9 +150,15 @@ public class World {
 		debug_frames = false; 
 		debug_sight = false;
 		
-		for(int i = 0; i <curFloor.tm.length; i++){
-			for(int k = 0; k <curFloor.tm.length; k++){
+		double lightLocalX = ((double)curFloor.tm[0].length/2)+0.5;
+		double lightLocalY = ((double)curFloor.tm.length/2)+0.5;
+		for(int i = 1; i <curFloor.tm.length-1; i++){
+			for(int k = 1; k <curFloor.tm.length-1; k++){
 				if(curFloor.tm[i][k].data == 1){
+					
+					
+					
+					
 					// Create our body definition
 					BodyDef groundBodyDef =new BodyDef();  
 					// Set its world position
@@ -225,7 +233,7 @@ public class World {
 		rayHandler.setCombinedMatrix(cam.cam);
 		rayHandler.updateAndRender();
 		
-		debugRenderer.render(box2dWorld, cam.cam.combined);
+//		debugRenderer.render(box2dWorld, cam.cam.combined);
 		
 		batch.end();
 		
