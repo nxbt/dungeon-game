@@ -9,19 +9,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.world.World;
 
-public class LightMap {
+public class OldLightMap {
 
 	
 	Texture lightMapTex;
 	
-	ArrayList<Light> lights;
+	ArrayList<OldLight> lights;
 	
 	private int width;
 	private int height;
 	
-	public LightMap(int width, int height) {
+	public OldLightMap(int width, int height) {
 		
-		lights = new ArrayList<Light>();
+		lights = new ArrayList<OldLight>();
 		
 		this.width = width;
 		this.height = height;
@@ -35,8 +35,8 @@ public class LightMap {
 		
 		for(Entity ent: world.entities) {
 			if(ent.light != null) {
-				ent.light.update(world);
-				ent.light.draw(lightMap);
+//				ent.light.update(world);
+//				ent.light.draw(lightMap);
 			}
 		}
 		

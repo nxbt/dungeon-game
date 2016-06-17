@@ -16,6 +16,7 @@ import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.weapon.Medium;
 import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.light.Light;
+import com.dungeon.game.light.OldLight;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -35,7 +36,7 @@ public class Player extends Character {
 		
 		speechColor = Color.BLUE;
 		
-		light = new PointLight(world.rayHandler, 1000 ,new Color(1,1,1,0.8f), 300, x, y);
+		light = new Light(world, x, y, 300, 100, 0, 30, this);
 		
 		name = "Player";
 		

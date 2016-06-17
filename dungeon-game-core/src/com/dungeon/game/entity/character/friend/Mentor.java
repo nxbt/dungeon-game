@@ -16,6 +16,7 @@ import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.weapon.Sword;
 import com.dungeon.game.light.Light;
+import com.dungeon.game.light.OldLight;
 import com.dungeon.game.world.World;
 
 import box2dLight.PointLight;
@@ -30,7 +31,7 @@ public class Mentor extends Friend {
 		
 		name = "Mentor";
 		
-		light = new PointLight(world.rayHandler, 1000 ,new Color(1,1,1,0.8f), 300, x, y);
+		light = new Light(world, x, y, 300, 100, this);
 		
 		torq = 5;
 		

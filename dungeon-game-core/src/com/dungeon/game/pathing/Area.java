@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.world.Tile;
 
+
+
 public class Area {
 	protected ArrayList<int[]> points; //Array of all tiles in this area
 	protected ArrayList<int[]> edgePoints; //Array of all edges of this area.
