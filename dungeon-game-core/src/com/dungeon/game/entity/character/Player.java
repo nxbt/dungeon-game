@@ -35,7 +35,7 @@ public class Player extends Character {
 		
 		speechColor = Color.BLUE;
 		
-		light = new PointLight(world.rayHandler, 1000 ,new Color(1,1,1,0.8f), 1000, x, y);
+		light = new PointLight(world.rayHandler, 1000 ,new Color(1,1,1,0.8f), 300, x, y);
 		
 		name = "Player";
 		

@@ -2,6 +2,7 @@ package com.dungeon.game.entity.character.enemy;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.ManaRegen;
 import com.dungeon.game.effect.StamRegen;
@@ -13,6 +14,8 @@ import com.dungeon.game.item.weapon.Sword;
 import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
+
+import box2dLight.PointLight;
 
 public class Goon extends Enemy {
 	
@@ -43,7 +46,7 @@ name = "Goon";
 		d_offx = 0;
 		d_offy = 0;
 		
-		light = new Light(this, 0.5f);
+		light = new PointLight(world.rayHandler, 1000 ,new Color(1,1,1,0.8f), 1000, x, y);
 		
 		int[][] invLayout = new int[][] {
 			//consumables

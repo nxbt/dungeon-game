@@ -89,8 +89,9 @@ public class World {
 //		lightMap = new LightMap(cam.width,cam.height);
 		box2dWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
 		rayHandler = new RayHandler(box2dWorld);
-		rayHandler.setBlurNum(60);
+		rayHandler.setBlurNum(25);
 		rayHandler.setAmbientLight(new Color(0,0,0,0));
+		RayHandler.useDiffuseLight(true);
 		hudBatch = new SpriteBatch();
 		
 		cam = new Camera(this);
@@ -152,8 +153,8 @@ public class World {
 		
 		double lightLocalX = ((double)curFloor.tm[0].length/2)+0.5;
 		double lightLocalY = ((double)curFloor.tm.length/2)+0.5;
-		for(int i = 1; i <curFloor.tm.length-1; i++){
-			for(int k = 1; k <curFloor.tm.length-1; k++){
+		for(int i = 0; i <curFloor.tm.length-1; i++){
+			for(int k = 0; k <curFloor.tm.length-1; k++){
 				if(curFloor.tm[i][k].data == 1){
 					
 					

@@ -18,6 +18,8 @@ import com.dungeon.game.item.weapon.Sword;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
 
+import box2dLight.PointLight;
+
 public class Mentor extends Friend {
 	
 	public Mentor(World world, float x, float y) {
@@ -28,7 +30,7 @@ public class Mentor extends Friend {
 		
 		name = "Mentor";
 		
-//		light = new Light(this,0.3f);
+		light = new PointLight(world.rayHandler, 1000 ,new Color(1,1,1,0.8f), 300, x, y);
 		
 		torq = 5;
 		
