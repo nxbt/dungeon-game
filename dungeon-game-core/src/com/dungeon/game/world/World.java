@@ -78,8 +78,6 @@ public class World {
 	Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	public RayHandler rayHandler;
 	
-	ArrayList<Light> lights;
-	
 //	public LightMap lightMap;
 	
 	public World() {
