@@ -9,7 +9,7 @@ import com.dungeon.game.item.weapon.Melee;
 import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.world.World;
 
-public class MeleeGraphic extends WeaponGraphic {
+public class MeleeGraphic extends HandheldGraphic {
 	
 	public MeleeGraphic(World world, Weapon weapon, Polygon hitbox, float originX, float originY){
 		super(world, weapon);
@@ -24,9 +24,9 @@ public class MeleeGraphic extends WeaponGraphic {
 	public void calc() {
 		float distance = Integer.MAX_VALUE;
 		Dynamic target = null;
-		if(((Melee) weapon).inAttack()) {
+		if(((Melee) item).inAttack()) {
 			for(Entity e: world.entities){
-				if(!((Melee)weapon).hasHit&&!e.equals(weapon.owner) && e instanceof Character && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
+				if(!((Melee)item).hasHit&&!e.equals(item.owner) && e instanceof Character && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
 					if(Math.sqrt((x-e.x)*(x-e.x)+(y-e.y)*(y-e.y))<distance){
 						target = (Dynamic) e;
 						distance = (float) Math.sqrt((x-e.x)*(x-e.x)+(y-e.y)*(y-e.y));
@@ -34,7 +34,7 @@ public class MeleeGraphic extends WeaponGraphic {
 				}
 			}
 		}
-		if(target!=null) ((Melee) weapon).hit((Character) target);
+		if(target!=null) ((Melee) item).hit((Character) target);
 	}
 	
 	public void post() {}

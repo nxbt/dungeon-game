@@ -10,7 +10,7 @@ public abstract class Item implements Cloneable {
 	//Type Constants
 	protected static final int DEFAULT = 0;
 	protected static final int CONSUM = 1;
-	protected static final int WEAPON = 2;
+	protected static final int HAND = 2;
 	protected static final int GLOVES = 3;
 	protected static final int HELM = 4;
 	protected static final int CHEST = 5;

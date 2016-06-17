@@ -6,7 +6,7 @@ import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.spell.Spell;
 import com.dungeon.game.world.World;
 
-public class MediumGraphic extends WeaponGraphic {
+public class MediumGraphic extends HandheldGraphic {
 
 	public MediumGraphic(World world, Weapon weapon, Polygon hitbox, float originX, float originY){
 		super(world, weapon);

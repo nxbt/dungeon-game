@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.StamRegen;
 import com.dungeon.game.entity.Entity;
@@ -16,11 +18,8 @@ import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.weapon.Medium;
 import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.light.Light;
-import com.dungeon.game.light.OldLight;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
-
-import box2dLight.PointLight;
 
 public class Player extends Character {
 	public final int REACH = 4*Tile.TS;
@@ -33,6 +32,10 @@ public class Player extends Character {
 	
 	public Player(World world, float x, float y) {
 		super(world, x, y, 32, 32, "person.png");
+		
+		Sprite spr = new Sprite(sprite);
+		spr.setColor(new Color(1,0,0, 1));
+		sprite = spr.getTexture();
 		
 		speechColor = Color.BLUE;
 		
