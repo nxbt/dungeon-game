@@ -52,6 +52,10 @@ public abstract class Hand extends Equipable {
 	
 
 	
+	public abstract float[] getPos(boolean mousedown, boolean mousepressed);
+	
 	public abstract void reset();
+	
+	public abstract boolean isInUse();
 
 }

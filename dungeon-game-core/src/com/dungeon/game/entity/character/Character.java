@@ -12,6 +12,7 @@ import com.dungeon.game.effect.Effect;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.inventory.Inventory;
+import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -47,8 +48,8 @@ public abstract class Character extends Dynamic {
 	
 	public boolean stun;
 	
-	protected Weapon leftEquiped;
-	protected Weapon rightEquiped;
+	protected Hand leftEquiped;
+	protected Hand rightEquiped;
 	
 	protected float[] leftEquipedPos;
 	protected float[] rightEquipedPos;
@@ -373,11 +374,11 @@ public abstract class Character extends Dynamic {
 		if(mana<maxMana)mana = (float) Math.min(mana+value,maxMana);
 	}
 	
-	public void equip(Weapon weapon, boolean leftSide) {
+	public void equip(Hand weapon, boolean leftSide) {
 		weapon.equip(this, leftSide);
 	}
 	
-	public void unequip(Weapon weapon) {
+	public void unequip(Hand weapon) {
 		weapon.unequip();
 	}
 	

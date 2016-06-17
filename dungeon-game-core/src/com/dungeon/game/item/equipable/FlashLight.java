@@ -1,0 +1,34 @@
+package com.dungeon.game.item.equipable;
+
+import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.weapon.HandheldGraphic;
+import com.dungeon.game.light.Light;
+import com.dungeon.game.world.World;
+
+public class FlashLight extends Hand {
+
+	public FlashLight(World world) {
+		super(world, "stick.png");
+		name = "Lantern";
+		desc = "A small, hand held Lantern";
+		graphic = new HandheldGraphic(world,this, new Polygon(new float[]{0,0,32,0,32,32,0,32}));
+		graphic.light = new Light(world, graphic.x, graphic.y, 300, 100, (int) graphic.angle, 20, 45, 20, graphic);
+	}
+
+	@Override
+	public void reset() {
+		
+	}
+
+	@Override
+	public float[] getPos(boolean mousedown, boolean mousepressed) {
+		if(!leftSide) return new float[]{14,-82,80};
+		return new float[]{14,82,80};
+	}
+
+	public boolean isInUse() {
+		return false;
+	}
+
+}

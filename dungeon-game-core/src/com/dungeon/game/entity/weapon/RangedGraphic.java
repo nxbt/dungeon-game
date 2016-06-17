@@ -13,11 +13,9 @@ public class RangedGraphic extends HandheldGraphic {
 	private float power;
 	
 	public RangedGraphic(World world, Weapon weapon, Polygon hitbox, float originX, float originY){
-		super(world, weapon);
+		super(world, weapon, hitbox);
 		this.origin_x = originX;
 		this.origin_y = originY;
-
-		this.hitbox = hitbox;
 	}
 
 	@Override

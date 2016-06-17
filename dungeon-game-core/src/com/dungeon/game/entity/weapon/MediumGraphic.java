@@ -9,11 +9,9 @@ import com.dungeon.game.world.World;
 public class MediumGraphic extends HandheldGraphic {
 
 	public MediumGraphic(World world, Weapon weapon, Polygon hitbox, float originX, float originY){
-		super(world, weapon);
+		super(world, weapon, hitbox);
 		this.origin_x = originX;
 		this.origin_y = originY;
-
-		this.hitbox = hitbox;
 	}
 
 	@Override

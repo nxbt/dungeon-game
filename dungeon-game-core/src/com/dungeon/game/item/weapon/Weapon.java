@@ -15,15 +15,11 @@ public abstract class Weapon extends Hand{
 	public Weapon(World world, String filename){
 		super(world, filename);
 		
-		maxStack = 1;
+		
 	}
 	
 	protected void changeSprite(int index){
 		sprite = textures[index];
 		if(graphic != null) graphic.sprite = sprite;
 	}
-	
-	public abstract float[] getPos(boolean mousedown, boolean mousepressed);
-	
-	public abstract boolean isInUse();
 }

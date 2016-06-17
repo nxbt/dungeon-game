@@ -15,6 +15,8 @@ import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.item.equipable.Equipable;
+import com.dungeon.game.item.equipable.Hand;
+import com.dungeon.game.item.equipable.FlashLight;
 import com.dungeon.game.item.weapon.Medium;
 import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.light.Light;
@@ -39,7 +41,7 @@ public class Player extends Character {
 		
 		speechColor = Color.BLUE;
 		
-		light = new Light(world, x, y, 300, 100, 0, this);
+//		light = new Light(world, x, y, 300, 100, 0, this);
 		
 		name = "Player";
 		
@@ -119,6 +121,7 @@ public class Player extends Character {
 		};
 		
 		inv = new Inventory(world, invLayout, 10, 100);
+		inv.slot[0].item = new FlashLight(world);
 		
 //		light = new Light(this, 1);
 		
@@ -170,12 +173,12 @@ public class Player extends Character {
 		}
 		
 		if(leftEquiped != null && inv.slot[30].item==null) leftEquiped = null;
-		else if(leftEquiped == null && inv.slot[30].item != null) leftEquiped = (Weapon) inv.slot[30].item;
-		else if(leftEquiped != null && inv.slot[30].item != null &&!leftEquiped.equals(inv.slot[30].item)) leftEquiped = (Weapon) inv.slot[30].item;
+		else if(leftEquiped == null && inv.slot[30].item != null) leftEquiped = (Hand) inv.slot[30].item;
+		else if(leftEquiped != null && inv.slot[30].item != null &&!leftEquiped.equals(inv.slot[30].item)) leftEquiped = (Hand) inv.slot[30].item;
 		
 		if(rightEquiped != null && inv.slot[31].item==null) rightEquiped = null;
-		else if(rightEquiped == null && inv.slot[31].item != null) rightEquiped = (Weapon) inv.slot[31].item;
-		else if(rightEquiped != null && inv.slot[31].item != null && !rightEquiped.equals(inv.slot[31].item)) rightEquiped = (Weapon) inv.slot[31].item;
+		else if(rightEquiped == null && inv.slot[31].item != null) rightEquiped = (Hand) inv.slot[31].item;
+		else if(rightEquiped != null && inv.slot[31].item != null && !rightEquiped.equals(inv.slot[31].item)) rightEquiped = (Hand) inv.slot[31].item;
 		
 		if(inv.slot[35].item != null) ((Equipable) inv.slot[35].item).update(world, this);
 		
@@ -208,9 +211,9 @@ public class Player extends Character {
 		attacking = false;
 		
 		if(leftEquiped != null && fightMode) {
-			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
-			leftEquipedPos = ((Weapon) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
-			((Weapon)inv.slot[30].item).graphic.calc();
+			if(((Hand) inv.slot[30].item).isInUse())attacking = true;
+			leftEquipedPos = ((Hand) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
+			((Hand)inv.slot[30].item).graphic.calc();
 			if(inv.slot[30].item instanceof Medium) {
 				if(Gdx.input.isKeyJustPressed(Input.Keys.O))((Medium)inv.slot[30].item).preSpell();
 				if(Gdx.input.isKeyJustPressed(Input.Keys.P))((Medium)inv.slot[30].item).nextSpell();
@@ -218,9 +221,9 @@ public class Player extends Character {
 			}
 		}
 		if(rightEquiped != null && fightMode) {
-			if(((Weapon) inv.slot[31].item).isInUse())attacking = true;
-			rightEquipedPos = ((Weapon) inv.slot[31].item).getPos(world.mouse.rb_down, world.mouse.rb_pressed);
-			((Weapon)inv.slot[31].item).graphic.calc();
+			if(((Hand) inv.slot[31].item).isInUse())attacking = true;
+			rightEquipedPos = ((Hand) inv.slot[31].item).getPos(world.mouse.rb_down, world.mouse.rb_pressed);
+			((Hand)inv.slot[31].item).graphic.calc();
 			if(inv.slot[31].item instanceof Medium) {
 				if(Gdx.input.isKeyJustPressed(Input.Keys.O))((Medium)inv.slot[31].item).preSpell();
 				if(Gdx.input.isKeyJustPressed(Input.Keys.P))((Medium)inv.slot[31].item).nextSpell();
