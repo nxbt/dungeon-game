@@ -47,7 +47,7 @@ name = "Goon";
 		d_offx = 0;
 		d_offy = 0;
 		
-		light = new Light(world, x, y, 300, 100, this);
+		light = new Light(world, x, y, 300, 100, 0, this);
 		
 		int[][] invLayout = new int[][] {
 			//consumables

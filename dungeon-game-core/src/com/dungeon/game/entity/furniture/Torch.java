@@ -46,18 +46,17 @@ Pixmap tempMap = new Pixmap(16, 4, Pixmap.Format.RGB888);
 			origin_y = 8;
 		}
 		
-		light = new Light(world, x, y, 300, 100, this);
+		light = new Light(world, x, y, 100, 100, 30, this);
 	}
 
 	@Override
 	public void calc() {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void post() {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -31,7 +31,7 @@ public class Mentor extends Friend {
 		
 		name = "Mentor";
 		
-		light = new Light(world, x, y, 300, 100, this);
+		light = new Light(world, x, y, 300, 100, 0, this);
 		
 		torq = 5;
 		

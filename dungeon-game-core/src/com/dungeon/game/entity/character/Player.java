@@ -36,7 +36,7 @@ public class Player extends Character {
 		
 		speechColor = Color.BLUE;
 		
-		light = new Light(world, x, y, 300, 100, 0, 30, this);
+		light = new Light(world, x, y, 300, 100, 0, this);
 		
 		name = "Player";
 		

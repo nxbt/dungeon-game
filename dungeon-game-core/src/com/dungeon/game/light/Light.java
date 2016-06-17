@@ -18,54 +18,96 @@ public class Light {
 	
 	private PositionalLight light;
 	private Entity ent;
+	private int flickerAmount;
+	private int strength;
+	private int curFlick;
+	private int flickDir;
 	
 	//point light with color
-	public Light(World world, float x, float y, int strength, int rays, Color color, Entity ent){
+	public Light(World world, float x, float y, int strength, int rays, Color color, int flickerAmount, Entity ent){
 		light = new PointLight(world.rayHandler, rays, color, strength, x, y);
 		this.ent = ent;
+		this.flickerAmount = flickerAmount;
+		this.strength = strength;
+		curFlick = 0;
+		flickDir = 1;
 	}
 	//point light without color
-	public Light(World world, float x, float y, int strength, int rays, Entity ent){
+	public Light(World world, float x, float y, int strength, int rays, int flickerAmount, Entity ent){
 		light = new PointLight(world.rayHandler, rays, def, strength, x, y);
 		this.ent = ent;
+		this.flickerAmount = flickerAmount;
+		this.strength = strength;
+		curFlick = 0;
+		flickDir = 1;
 	}
 	//cone light with color
-	public Light(World world, float x, float y, int strength, int rays, Color color, int dirDeg, int coneDeg, Entity ent){
+	public Light(World world, float x, float y, int strength, int rays, Color color, int dirDeg, int coneDeg, int flickerAmount, Entity ent){
 		light = new ConeLight(world.rayHandler, rays, color, strength, x, y, dirDeg, coneDeg);
 		this.ent = ent;
+		this.flickerAmount = flickerAmount;
+		this.strength = strength;
+		curFlick = 0;
+		flickDir = 1;
 	}
 	//cone light without color
-	public Light(World world, float x, float y, int strength, int rays, int dirDeg, int coneDeg, Entity ent){
+	public Light(World world, float x, float y, int strength, int rays, int dirDeg, int coneDeg, int flickerAmount, Entity ent){
 		light = new ConeLight(world.rayHandler, rays, def, strength, x, y, dirDeg, coneDeg);
 		this.ent = ent;
+		this.flickerAmount = flickerAmount;
+		this.strength = strength;
+		curFlick = 0;
+		flickDir = 1;
 	}
 	
 	public void update(){
 		light.setPosition(new Vector2(ent.x,ent.y));
 		if(light instanceof ConeLight)((ConeLight) light).setDirection(ent.angle);
+		if(flickerAmount > 0){
+			curFlick += flickDir;
+			if(curFlick > flickerAmount)flickDir = (int) (-1*flickerAmount/10*(0.5+Math.random()));
+			if(curFlick < -flickerAmount)flickDir = (int) (1*flickerAmount/10*(0.5+Math.random()));
+			light.setDistance(strength+curFlick);
+		}
 	}
 	
 	
 	//point light with color
-	public void changeLight(World world, int x, int y, int strength, int rays, Color color, Entity ent){
+	public void changeLight(World world, int x, int y, int strength, int rays, Color color, int flickerAmount, Entity ent){
 		light = new PointLight(world.rayHandler, rays, color, strength, x, y);
 		this.ent = ent;
+		this.flickerAmount = flickerAmount;
+		this.strength = strength;
+		curFlick = 0;
+		flickDir = 1;
 	}
 	//point light with color
-	public void changeLight(World world, int x, int y, int strength, int rays, Entity ent){
+	public void changeLight(World world, int x, int y, int strength, int rays, int flickerAmount, Entity ent){
 		light = new PointLight(world.rayHandler, rays, def, strength, x, y);
 		this.ent = ent;
+		this.flickerAmount = flickerAmount;
+		this.strength = strength;
+		curFlick = 0;
+		flickDir = 1;
 	}
 	
 	//cone light with color
-	public void changeLight(World world, int x, int y, int strength, int rays, Color color, int dirDeg, int coneDeg, Entity ent){
+	public void changeLight(World world, int x, int y, int strength, int rays, Color color, int dirDeg, int coneDeg, int flickerAmount, Entity ent){
 		light = new ConeLight(world.rayHandler, rays, color, strength, x, y, dirDeg, coneDeg);
 		this.ent = ent;
+		this.flickerAmount = flickerAmount;
+		this.strength = strength;
+		curFlick = 0;
+		flickDir = 1;
 	}
 	//cone light with color
-	public void changeLight(World world, int x, int y, int strength, int rays, int dirDeg, int coneDeg, Entity ent){
+	public void changeLight(World world, int x, int y, int strength, int rays, int dirDeg, int coneDeg, int flickerAmount, Entity ent){
 		light = new ConeLight(world.rayHandler, rays, def, strength, x, y, dirDeg, coneDeg);
 		this.ent = ent;
+		this.flickerAmount = flickerAmount;
+		this.strength = strength;
+		curFlick = 0;
+		flickDir = 1;
 	}
 	
 
