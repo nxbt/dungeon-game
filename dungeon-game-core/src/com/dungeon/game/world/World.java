@@ -180,6 +180,11 @@ public class World {
 			}
 		}
 		
+		
+		for(Entity e: entities){
+			if(e.light != null)e.light.load();
+		}
+		
 	}
 	
 	public void update() {
@@ -302,5 +307,25 @@ public class World {
 		if(debug_frames) fpsFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 60f, cam.height-8f);
 		
 		batch.end();
+	}
+	
+	public void changeFloor(int floor, int destX, int destY, float x, float y){
+		for(Entity e: entities){
+			if(e.light != null)e.light.unload();
+		}
+		entities.remove(player);
+		if(curDungeon.floors.size() <= floor) {
+			//generate new floor
+			curDungeon.floors.add(new Floor(this, "rooms", 50,50,destX,destY,(int)(x/Tile.TS),(int)(y/Tile.TS)));
+		}
+		curFloor = curDungeon.floors.get(floor);
+		entities = curFloor.entities;
+		entities.add(0,player);
+		areaMap = curFloor.areaMap;
+		player.x = destX*Tile.TS-Tile.TS/2;
+		player.y = destY*Tile.TS-Tile.TS/2;
+		for(Entity e: entities){
+			if(e.light != null)e.light.load();
+		}
 	}
 }

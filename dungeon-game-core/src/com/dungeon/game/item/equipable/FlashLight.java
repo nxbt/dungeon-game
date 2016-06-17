@@ -2,6 +2,7 @@ package com.dungeon.game.item.equipable;
 
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.HandheldGraphic;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
@@ -29,6 +30,28 @@ public class FlashLight extends Hand {
 
 	public boolean isInUse() {
 		return false;
+	}
+	
+	public void equip(Character owner, boolean leftSide){
+		reset();
+		
+		this.graphic.light.load();
+		
+		this.owner = owner;
+		
+		this.leftSide = leftSide;
+		
+		world.entities.add(world.entities.indexOf(owner)+1,this.graphic);
+	}
+	
+	public void unequip(){
+		reset();
+		
+		this.graphic.light.unload();
+		
+		this.owner = null;
+		
+		world.entities.remove(this.graphic);
 	}
 
 }

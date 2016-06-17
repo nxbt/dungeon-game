@@ -32,17 +32,7 @@ public class Stair extends Static {
 
 	public void hovered() {
 		if(world.mouse.lb_pressed && !world.player.fightMode) {
-			world.entities.remove(world.player);
-			if(world.curDungeon.floors.size() <= world.curDungeon.floors.indexOf(world.curFloor) + (goDown? 1:-1)) {
-				//generate new floor
-				world.curDungeon.floors.add(new Floor(world, "rooms", 50,50,destX,destY,(int)(x/Tile.TS),(int)(y/Tile.TS)));
-			}
-			world.curFloor = world.curDungeon.floors.get(world.curDungeon.floors.indexOf(world.curFloor) + (goDown? 1:-1));
-			world.entities = world.curFloor.entities;
-			world.entities.add(0,world.player);
-			world.areaMap = world.curFloor.areaMap;
-			world.player.x = destX*Tile.TS-Tile.TS/2;
-			world.player.y = destY*Tile.TS-Tile.TS/2;
+			world.changeFloor(world.curDungeon.floors.indexOf(world.curFloor) + (goDown? 1:-1), destX, destY, x, y);
 		}
 	}
 	

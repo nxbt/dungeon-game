@@ -26,24 +26,29 @@ public class Light {
 	
 	//point light with color
 	public Light(World world, float x, float y, int strength, int rays, Color color, int flickerAmount, Entity ent){
+		this.world = world;
 		light = new PointLight(world.rayHandler, rays, color, strength, x, y);
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
 		curFlick = 0;
 		flickDir = 1;
+		light.remove(false);
 	}
 	//point light without color
 	public Light(World world, float x, float y, int strength, int rays, int flickerAmount, Entity ent){
+		this.world = world;
 		light = new PointLight(world.rayHandler, rays, def, strength, x, y);
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
 		curFlick = 0;
 		flickDir = 1;
+		light.remove(false);
 	}
 	//cone light with color
 	public Light(World world, float x, float y, int strength, int rays, Color color, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
+		this.world = world;
 		light = new ConeLight(world.rayHandler, rays, color, strength, x, y, dirDeg, coneDeg);
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
@@ -51,9 +56,11 @@ public class Light {
 		curFlick = 0;
 		flickDir = 1;
 		this.angleOff = angleOff;
+		light.remove(false);
 	}
 	//cone light without color
 	public Light(World world, float x, float y, int strength, int rays, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
+		this.world = world;
 		light = new ConeLight(world.rayHandler, rays, def, strength, x, y, dirDeg, coneDeg);
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
@@ -61,6 +68,7 @@ public class Light {
 		curFlick = 0;
 		flickDir = 1;
 		this.angleOff = angleOff;
+		light.remove(false);
 	}
 	
 	public void update(){
@@ -74,28 +82,41 @@ public class Light {
 		}
 	}
 	
+	public void load(){
+		light.add(world.rayHandler);
+	}
+	
+	public void unload(){
+		light.remove(false);
+	}
+	
 	
 	//point light with color
-	public void changeLight(World world, int x, int y, int strength, int rays, Color color, int flickerAmount, Entity ent){
+	public void changeLight(int x, int y, int strength, int rays, Color color, int flickerAmount, Entity ent){
+		light.remove();
 		light = new PointLight(world.rayHandler, rays, color, strength, x, y);
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
 		curFlick = 0;
 		flickDir = 1;
+		light.remove(false);
 	}
 	//point light with color
-	public void changeLight(World world, int x, int y, int strength, int rays, int flickerAmount, Entity ent){
+	public void changeLight(int x, int y, int strength, int rays, int flickerAmount, Entity ent){
+		light.remove();
 		light = new PointLight(world.rayHandler, rays, def, strength, x, y);
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
 		curFlick = 0;
 		flickDir = 1;
+		light.remove(false);
 	}
 	
 	//cone light with color
-	public void changeLight(World world, int x, int y, int strength, int rays, Color color, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
+	public void changeLight(int x, int y, int strength, int rays, Color color, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
+		light.remove();
 		light = new ConeLight(world.rayHandler, rays, color, strength, x, y, dirDeg, coneDeg);
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
@@ -103,9 +124,11 @@ public class Light {
 		curFlick = 0;
 		flickDir = 1;
 		this.angleOff = angleOff;
+		light.remove(false);
 	}
 	//cone light with color
-	public void changeLight(World world, int x, int y, int strength, int rays, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
+	public void changeLight(int x, int y, int strength, int rays, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
+		light.remove();
 		light = new ConeLight(world.rayHandler, rays, def, strength, x, y, dirDeg, coneDeg);
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
@@ -113,6 +136,7 @@ public class Light {
 		curFlick = 0;
 		flickDir = 1;
 		this.angleOff = angleOff;
+		light.remove(false);
 	}
 	
 

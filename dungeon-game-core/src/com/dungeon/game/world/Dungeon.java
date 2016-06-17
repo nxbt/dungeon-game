@@ -7,7 +7,10 @@ public class Dungeon {
 	
 	protected int seed;
 	
+	public World world;
+	
 	public Dungeon(World world) {
+		this.world = world;
 		floors = new ArrayList<Floor>();
 		
 		seed = (int) (Math.random()*1000000000);
