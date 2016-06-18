@@ -16,6 +16,7 @@ import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
+import com.dungeon.game.item.equipable.Lantern;
 import com.dungeon.game.item.equipable.FlashLight;
 import com.dungeon.game.item.weapon.Medium;
 import com.dungeon.game.item.weapon.Weapon;
@@ -122,6 +123,7 @@ public class Player extends Character {
 		
 		inv = new Inventory(world, invLayout, 10, 100);
 		inv.slot[0].item = new FlashLight(world);
+		inv.slot[1].item = new Lantern(world);
 		
 //		light = new Light(this, 1);
 		
