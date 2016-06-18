@@ -73,20 +73,13 @@ public class World {
 	boolean debug_pathing;
 	boolean debug_frames;
 	boolean debug_sight;
-
-	private com.badlogic.gdx.physics.box2d.World box2dWorld;
 	Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	public RayHandler rayHandler;
 	
 //	public LightMap lightMap;
 	
 	public World() {
-		
-
-		
-//		lightMap = new LightMap(cam.width,cam.height);
-		box2dWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
-		rayHandler = new RayHandler(box2dWorld);
+		rayHandler = new RayHandler(null);
 		rayHandler.setBlurNum(25);
 		rayHandler.setAmbientLight(new Color(0,0,0,0));
 		RayHandler.useDiffuseLight(true);
@@ -148,38 +141,7 @@ public class World {
 		debug_pathing = false;
 		debug_frames = false; 
 		debug_sight = false;
-		
-		double lightLocalX = ((double)curFloor.tm[0].length/2)+0.5;
-		double lightLocalY = ((double)curFloor.tm.length/2)+0.5;
-		for(int i = 0; i <curFloor.tm.length-1; i++){
-			for(int k = 0; k <curFloor.tm.length-1; k++){
-				if(curFloor.tm[i][k].data == 1){
-					
-					
-					
-					
-					// Create our body definition
-					BodyDef groundBodyDef =new BodyDef();  
-					// Set its world position
-					groundBodyDef.position.set(new Vector2(k*Tile.TS+Tile.TS/2, i*Tile.TS+Tile.TS/2));  
-
-					// Create a body from the defintion and add it to the world
-					Body groundBody = box2dWorld.createBody(groundBodyDef);  
-
-					// Create a polygon shape
-					PolygonShape groundBox = new PolygonShape();  
-					// Set the polygon shape as a box which is twice the size of our view port and 20 high
-					// (setAsBox takes half-width and half-height as arguments)
-					groundBox.setAsBox(Tile.TS/2, Tile.TS/2);
-					// Create a fixture from our polygon shape and add it to our ground body  
-					groundBody.createFixture(groundBox, 0.0f); 
-					// Clean up after ourselves
-					groundBox.dispose();
-				}
-				
-			}
-		}
-		
+		rayHandler.setWorld(curFloor.box2dWorld);
 		
 		for(Entity e: entities){
 			if(e.light != null)e.light.load();
@@ -327,5 +289,7 @@ public class World {
 		for(Entity e: entities){
 			if(e.light != null)e.light.load();
 		}
+
+		rayHandler.setWorld(curFloor.box2dWorld);
 	}
 }

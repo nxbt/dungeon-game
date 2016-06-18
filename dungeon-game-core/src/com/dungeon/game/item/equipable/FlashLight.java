@@ -24,8 +24,8 @@ public class FlashLight extends Hand {
 
 	@Override
 	public float[] getPos(boolean mousedown, boolean mousepressed) {
-		if(!leftSide) return new float[]{14,-82,80};
-		return new float[]{14,82,80};
+		if(!leftSide) return new float[]{10,-82,80};
+		return new float[]{10,82,80};
 	}
 
 	public boolean isInUse() {
