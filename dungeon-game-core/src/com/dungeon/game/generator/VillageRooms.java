@@ -14,6 +14,7 @@ import com.dungeon.game.entity.furniture.Bed;
 import com.dungeon.game.entity.furniture.Bookshelf;
 import com.dungeon.game.entity.furniture.Carpet;
 import com.dungeon.game.entity.furniture.Dresser;
+import com.dungeon.game.entity.furniture.Fireplace;
 import com.dungeon.game.entity.furniture.Plant;
 import com.dungeon.game.entity.furniture.ShopDesk1;
 import com.dungeon.game.entity.furniture.ShopDesk2;
@@ -777,6 +778,7 @@ public class VillageRooms extends Generation {
 		ArrayList<int[]> occupiedTiles = new ArrayList<int[]>();
 		
 		roomEntities.add(new Villager(world,1*Tile.TS,1*Tile.TS));
+		roomEntities.add(new Fireplace(world, -1-Tile.TS/2,1*Tile.TS/2,3));
 		
 		occupiedTiles.add(new int[]{doorY,0});
 		occupiedTiles.add(new int[]{doorY,1});

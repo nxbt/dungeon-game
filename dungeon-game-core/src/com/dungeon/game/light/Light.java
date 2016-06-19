@@ -22,12 +22,14 @@ public class Light {
 	
 	public World world;
 	
-	private PositionalLight light;
+	public PositionalLight light;
 	private Entity ent;
 	private int angleOff;
 	private int flickerAmount;
 	private int strength;
 	private int curFlick;
+	private int offX;
+	private int offY;
 	
 	//point light with color
 	public Light(World world, float x, float y, int strength, int rays, Color color, int flickerAmount, Entity ent){
@@ -38,6 +40,8 @@ public class Light {
 		this.strength = strength;
 		curFlick = 0;
 		light.remove(false);
+		offX = 0;
+		offY = 0;
 	}
 	//point light without color
 	public Light(World world, float x, float y, int strength, int rays, int flickerAmount, Entity ent){
@@ -48,6 +52,8 @@ public class Light {
 		this.strength = strength;
 		curFlick = 0;
 		light.remove(false);
+		offX = 0;
+		offY = 0;
 	}
 	//cone light with color
 	public Light(World world, float x, float y, int strength, int rays, Color color, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
@@ -59,6 +65,8 @@ public class Light {
 		curFlick = 0;
 		this.angleOff = angleOff;
 		light.remove(false);
+		offX = 0;
+		offY = 0;
 	}
 	//cone light without color
 	public Light(World world, float x, float y, int strength, int rays, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
@@ -70,15 +78,28 @@ public class Light {
 		curFlick = 0;
 		this.angleOff = angleOff;
 		light.remove(false);
+		offX = 0;
+		offY = 0;
 	}
 	
 	public void update(){
-		light.setPosition(new Vector2(ent.x,ent.y));
+		int actingOffX = offX;
+		int actingOffY = offY;
+		if(ent.flipX)actingOffX*=-1;
+		if(ent.flipY)actingOffY*=-1;
+		int f_x = (int) (Math.cos(ent.angle/180*Math.PI)*actingOffX - Math.sin(ent.angle/180*Math.PI)*actingOffY);
+		int f_y = (int) (Math.sin(ent.angle/180*Math.PI)*actingOffX + Math.cos(ent.angle/180*Math.PI)*actingOffY);
+		light.setPosition(new Vector2(ent.x + f_x,ent.y + f_y));
 		if(light instanceof ConeLight)((ConeLight) light).setDirection(ent.angle+angleOff);
 		if(flickerAmount > 0){
 			curFlick = (int) ((Math.random()*flickerAmount + 5*curFlick)/6); //wont this keep increasing? meh, idk, I think it needs work anyway. I'll agree the old one was bad though
 			light.setDistance(strength+curFlick);
 		}
+	}
+	
+	public void setOffset(int x ,int y){
+		offX = x;
+		offY = y;
 	}
 	
 	public void load(){
@@ -99,6 +120,8 @@ public class Light {
 		this.strength = strength;
 		curFlick = 0;
 		light.remove(false);
+		offX = 0;
+		offY = 0;
 	}
 	//point light with color
 	public void changeLight(int x, int y, int strength, int rays, int flickerAmount, Entity ent){
@@ -109,6 +132,8 @@ public class Light {
 		this.strength = strength;
 		curFlick = 0;
 		light.remove(false);
+		offX = 0;
+		offY = 0;
 	}
 	
 	//cone light with color
@@ -121,6 +146,8 @@ public class Light {
 		curFlick = 0;
 		this.angleOff = angleOff;
 		light.remove(false);
+		offX = 0;
+		offY = 0;
 	}
 	//cone light with color
 	public void changeLight(int x, int y, int strength, int rays, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
@@ -132,6 +159,8 @@ public class Light {
 		curFlick = 0;
 		this.angleOff = angleOff;
 		light.remove(false);
+		offX = 0;
+		offY = 0;
 	}
 	
 
