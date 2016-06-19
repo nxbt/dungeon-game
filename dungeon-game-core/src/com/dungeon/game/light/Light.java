@@ -76,7 +76,7 @@ public class Light {
 		light.setPosition(new Vector2(ent.x,ent.y));
 		if(light instanceof ConeLight)((ConeLight) light).setDirection(ent.angle+angleOff);
 		if(flickerAmount > 0){
-			curFlick = (int) ((Math.random()*flickerAmount + 5*curFlick)/6);
+			curFlick = (int) ((Math.random()*flickerAmount + 5*curFlick)/6); //wont this keep increasing? meh, idk, I think it needs work anyway. I'll agree the old one was bad though
 			light.setDistance(strength+curFlick);
 		}
 	}
