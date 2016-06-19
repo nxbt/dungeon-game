@@ -1,6 +1,5 @@
 package com.dungeon.game.entity.furniture;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
@@ -8,8 +7,6 @@ import com.dungeon.game.entity.Static;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
-
-import box2dLight.PointLight;
 
 public class Torch extends Static {
 
@@ -46,7 +43,7 @@ Pixmap tempMap = new Pixmap(16, 4, Pixmap.Format.RGB888);
 			origin_y = 8;
 		}
 		
-		light = new Light(world, x, y, 100, 100, 30, this);
+		light = new Light(world, x, y, 50, 100, 40, this);
 	}
 
 	@Override

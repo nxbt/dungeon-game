@@ -161,8 +161,8 @@ public class Floor {
 		
 		box2dWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
 		
-		double lightLocalX = ((double)tm[0].length/2)+0.5;
-		double lightLocalY = ((double)tm.length/2)+0.5;
+//		double lightLocalX = ((double)tm[0].length/2)+0.5;
+//		double lightLocalY = ((double)tm.length/2)+0.5;
 		for(int i = 0; i <tm.length-1; i++){
 			for(int k = 0; k <tm.length-1; k++){
 				if(tm[i][k].data == 1){

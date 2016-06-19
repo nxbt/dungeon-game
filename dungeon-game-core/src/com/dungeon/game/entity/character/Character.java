@@ -13,7 +13,6 @@ import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.item.equipable.Hand;
-import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 

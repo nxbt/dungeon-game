@@ -1,14 +1,13 @@
 package com.dungeon.game.light;
 
 import com.badlogic.gdx.graphics.Color;
-import box2dLight.PositionalLight;
-import box2dLight.PointLight;
-import box2dLight.ConeLight;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.world.World;
 
+import box2dLight.ConeLight;
 import box2dLight.PointLight;
+import box2dLight.PositionalLight;
 
 public class Light {
 
@@ -29,7 +28,6 @@ public class Light {
 	private int flickerAmount;
 	private int strength;
 	private int curFlick;
-	private int flickDir;
 	
 	//point light with color
 	public Light(World world, float x, float y, int strength, int rays, Color color, int flickerAmount, Entity ent){
@@ -39,7 +37,6 @@ public class Light {
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
 		curFlick = 0;
-		flickDir = 1;
 		light.remove(false);
 	}
 	//point light without color
@@ -50,7 +47,6 @@ public class Light {
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
 		curFlick = 0;
-		flickDir = 1;
 		light.remove(false);
 	}
 	//cone light with color
@@ -61,7 +57,6 @@ public class Light {
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
 		curFlick = 0;
-		flickDir = 1;
 		this.angleOff = angleOff;
 		light.remove(false);
 	}
@@ -73,7 +68,6 @@ public class Light {
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
 		curFlick = 0;
-		flickDir = 1;
 		this.angleOff = angleOff;
 		light.remove(false);
 	}
@@ -82,9 +76,7 @@ public class Light {
 		light.setPosition(new Vector2(ent.x,ent.y));
 		if(light instanceof ConeLight)((ConeLight) light).setDirection(ent.angle+angleOff);
 		if(flickerAmount > 0){
-			curFlick += flickDir;
-			if(curFlick > flickerAmount)flickDir = (int) (-1*flickerAmount/10*(0.5+Math.random()));
-			if(curFlick < -flickerAmount)flickDir = (int) (1*flickerAmount/10*(0.5+Math.random()));
+			curFlick = (int) ((Math.random()*flickerAmount + 5*curFlick)/6);
 			light.setDistance(strength+curFlick);
 		}
 	}
@@ -106,7 +98,6 @@ public class Light {
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
 		curFlick = 0;
-		flickDir = 1;
 		light.remove(false);
 	}
 	//point light with color
@@ -117,7 +108,6 @@ public class Light {
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
 		curFlick = 0;
-		flickDir = 1;
 		light.remove(false);
 	}
 	
@@ -129,7 +119,6 @@ public class Light {
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
 		curFlick = 0;
-		flickDir = 1;
 		this.angleOff = angleOff;
 		light.remove(false);
 	}
@@ -141,7 +130,6 @@ public class Light {
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
 		curFlick = 0;
-		flickDir = 1;
 		this.angleOff = angleOff;
 		light.remove(false);
 	}

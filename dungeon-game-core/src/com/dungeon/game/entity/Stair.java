@@ -1,7 +1,6 @@
 package com.dungeon.game.entity;
 
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.world.Floor;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 

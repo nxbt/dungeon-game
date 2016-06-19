@@ -1,7 +1,6 @@
 package com.dungeon.game.item.equipable;
 
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.HandheldGraphic;
 import com.dungeon.game.light.Light;
@@ -14,7 +13,7 @@ public class FlashLight extends Hand {
 		name = "Flash Light";
 		desc = "A small, hand held Flash Light.";
 		graphic = new HandheldGraphic(world,this, new Polygon(new float[]{0,0,32,0,32,32,0,32}), 26,6);
-		graphic.light = new Light(world, graphic.x, graphic.y, 300, 100, (int) graphic.angle, 20, 135, 20, graphic);
+		graphic.light = new Light(world, graphic.x, graphic.y, 850, 100, (int) graphic.angle, 20, 135, 0, graphic);
 	}
 
 	@Override

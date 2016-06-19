@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.StamRegen;
@@ -15,11 +14,10 @@ import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.item.equipable.Equipable;
+import com.dungeon.game.item.equipable.FlashLight;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.Lantern;
-import com.dungeon.game.item.equipable.FlashLight;
 import com.dungeon.game.item.weapon.Medium;
-import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -42,7 +40,7 @@ public class Player extends Character {
 		
 		speechColor = Color.BLUE;
 		
-//		light = new Light(world, x, y, 300, 100, 0, this);
+		light = new Light(world, x, y, 20, 100, 0, this);
 		
 		name = "Player";
 		
