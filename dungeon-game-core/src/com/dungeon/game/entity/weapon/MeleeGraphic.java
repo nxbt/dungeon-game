@@ -12,10 +12,8 @@ import com.dungeon.game.world.World;
 public class MeleeGraphic extends HandheldGraphic {
 	
 	public MeleeGraphic(World world, Weapon weapon, Polygon hitbox, float originX, float originY){
-		super(world, weapon, hitbox);
+		super(world, weapon, hitbox, originX, originY);
 		
-		this.origin_x = originX;
-		this.origin_y = originY;
 	}
 
 	@Override

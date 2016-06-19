@@ -10,10 +10,10 @@ import com.dungeon.game.world.World;
 public class Lantern extends Hand {
 
 	public Lantern(World world) {
-		super(world, "stick.png");
+		super(world, "lantern.png");
 		name = "Lantern";
 		desc = "A small, hand held Lantern.";
-		graphic = new HandheldGraphic(world,this, new Polygon(new float[]{0,0,32,0,32,32,0,32}));
+		graphic = new HandheldGraphic(world,this, new Polygon(new float[]{0,0,32,0,32,32,0,32}), 16, 16);
 		graphic.light = new Light(world, graphic.x, graphic.y, 200, 100, 30, graphic);
 	}
 
@@ -24,8 +24,8 @@ public class Lantern extends Hand {
 
 	@Override
 	public float[] getPos(boolean mousedown, boolean mousepressed) {
-		if(!leftSide) return new float[]{10,-82,80};
-		return new float[]{10,82,80};
+		if(!leftSide) return new float[]{22,-40,45+180};
+		return new float[]{22,40,45+180};
 	}
 
 	public boolean isInUse() {

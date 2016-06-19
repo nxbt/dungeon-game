@@ -10,11 +10,11 @@ import com.dungeon.game.world.World;
 public class FlashLight extends Hand {
 
 	public FlashLight(World world) {
-		super(world, "stick.png");
+		super(world, "flashLight.png");
 		name = "Flash Light";
 		desc = "A small, hand held Flash Light.";
-		graphic = new HandheldGraphic(world,this, new Polygon(new float[]{0,0,32,0,32,32,0,32}));
-		graphic.light = new Light(world, graphic.x, graphic.y, 300, 100, (int) graphic.angle, 20, 45, 20, graphic);
+		graphic = new HandheldGraphic(world,this, new Polygon(new float[]{0,0,32,0,32,32,0,32}), 26,6);
+		graphic.light = new Light(world, graphic.x, graphic.y, 300, 100, (int) graphic.angle, 20, 135, 20, graphic);
 	}
 
 	@Override
@@ -24,8 +24,8 @@ public class FlashLight extends Hand {
 
 	@Override
 	public float[] getPos(boolean mousedown, boolean mousepressed) {
-		if(!leftSide) return new float[]{10,-82,80};
-		return new float[]{10,82,80};
+		if(!leftSide) return new float[]{14,-82,10};
+		return new float[]{14,82,-10};
 	}
 
 	public boolean isInUse() {

@@ -10,7 +10,7 @@ public class HandheldGraphic extends Dynamic {
 	
 	public Hand item;
 	
-	public HandheldGraphic(World world, Hand item, Polygon hitbox) {
+	public HandheldGraphic(World world, Hand item, Polygon hitbox, float originX, float originY) {
 		super(world, 0, 0, Item.SIZE, Item.SIZE, "slot.png"); // x and y don't matter, they are set every frame
 		sprite = item.sprite;
 		
@@ -18,6 +18,9 @@ public class HandheldGraphic extends Dynamic {
 		this.item = item;
 		rotate = true;
 		this.hitbox = hitbox;
+		
+		this.origin_x = originX;
+		this.origin_y = originY;
 	}
 
 	@Override
