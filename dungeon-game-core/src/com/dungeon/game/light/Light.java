@@ -11,8 +11,15 @@ import com.dungeon.game.world.World;
 import box2dLight.PointLight;
 
 public class Light {
+
+	public static final Color RED = new Color(1,0.7f,0.7f,1);
+	public static final Color GREEN = new Color(0.7f,1,0.7f,1);
+	public static final Color BLUE = new Color(0.7f,0.7f,1,1);
+	public static final Color YELLOW = new Color(1,1,0.7f,1);
+	public static final Color PURPLE = new Color(1,0.7f,1,1);
+	public static final Color ORANGE = new Color(1,0.85f,0.7f,1);
 	
-	private final static Color def = new Color(1,1,1,1);
+	private final static Color DEF = new Color(1,1,1,1);
 	
 	public World world;
 	
@@ -38,7 +45,7 @@ public class Light {
 	//point light without color
 	public Light(World world, float x, float y, int strength, int rays, int flickerAmount, Entity ent){
 		this.world = world;
-		light = new PointLight(world.rayHandler, rays, def, strength, x, y);
+		light = new PointLight(world.rayHandler, rays, DEF, strength, x, y);
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
@@ -61,7 +68,7 @@ public class Light {
 	//cone light without color
 	public Light(World world, float x, float y, int strength, int rays, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
 		this.world = world;
-		light = new ConeLight(world.rayHandler, rays, def, strength, x, y, dirDeg, coneDeg);
+		light = new ConeLight(world.rayHandler, rays, DEF, strength, x, y, dirDeg, coneDeg);
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
@@ -105,7 +112,7 @@ public class Light {
 	//point light with color
 	public void changeLight(int x, int y, int strength, int rays, int flickerAmount, Entity ent){
 		light.remove();
-		light = new PointLight(world.rayHandler, rays, def, strength, x, y);
+		light = new PointLight(world.rayHandler, rays, DEF, strength, x, y);
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
@@ -129,7 +136,7 @@ public class Light {
 	//cone light with color
 	public void changeLight(int x, int y, int strength, int rays, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
 		light.remove();
-		light = new ConeLight(world.rayHandler, rays, def, strength, x, y, dirDeg, coneDeg);
+		light = new ConeLight(world.rayHandler, rays, DEF, strength, x, y, dirDeg, coneDeg);
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
