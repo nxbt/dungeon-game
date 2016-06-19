@@ -16,6 +16,7 @@ import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.weapon.Axe;
 import com.dungeon.game.item.weapon.Sword;
+import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
 
 public class StairKeeper extends Friend {
@@ -27,6 +28,8 @@ public class StairKeeper extends Friend {
 		speechBubble.setColor();	
 		
 		name = "Stair Keeper";
+		
+		light = new Light(world, x, y, 20, 100, 0, this);
 		
 		torq = 5;
 		

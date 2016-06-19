@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
+import com.dungeon.game.light.Light;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -20,6 +21,8 @@ public class Villager extends Friend {
 		speechBubble.setColor();	
 		
 		name = "Villager";
+		
+		light = new Light(world, x, y, 20, 100, 0, this);
 		
 		torq = 5;
 		

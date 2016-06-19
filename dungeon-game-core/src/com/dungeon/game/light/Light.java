@@ -16,7 +16,7 @@ public class Light {
 	public static final Color BLUE = new Color(0.7f,0.7f,1,1);
 	public static final Color YELLOW = new Color(1,1,0.7f,1);
 	public static final Color PURPLE = new Color(1,0.7f,1,1);
-	public static final Color ORANGE = new Color(1,0.85f,0.7f,1);
+	public static final Color ORANGE = new Color(1,0.7f,0.5f,1);
 	
 	private final static Color DEF = new Color(1,1,1,1);
 	
