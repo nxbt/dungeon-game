@@ -778,7 +778,6 @@ public class VillageRooms extends Generation {
 		ArrayList<int[]> occupiedTiles = new ArrayList<int[]>();
 		
 		roomEntities.add(new Villager(world,1*Tile.TS,1*Tile.TS));
-		roomEntities.add(new Fireplace(world, -1-Tile.TS/2,1*Tile.TS/2,3));
 		
 		occupiedTiles.add(new int[]{doorY,0});
 		occupiedTiles.add(new int[]{doorY,1});
@@ -936,6 +935,60 @@ public class VillageRooms extends Generation {
 		if(dresserOrientation % 2 == 0)roomMap[dresserPos[0]+1][dresserPos[1]] = 5;
 		else roomMap[dresserPos[0]][dresserPos[1]+1] = 5;
 		
+		//spawn Fireplace
+		attempts = 0;
+		boolean placedFirepalce = false;
+		int[] fireplacePos = new int[]{0,0};
+		int fireplaceOrientation = 0;
+		do{
+			attempts++;
+			fireplaceOrientation = (int)(Math.random()*4);
+			if(fireplaceOrientation == 0){
+				for(int i = 1; i < roomMap.length-1; i++){
+					if(!checkOccupied(occupiedTiles, 0, i)){
+						placedFirepalce = true;
+						fireplacePos = new int[]{i,0};
+						occupiedTiles.add(fireplacePos);
+						fireplacePos[1]--;
+						break;
+					}
+				}
+			}else if(fireplaceOrientation == 1){
+				for(int i = 1; i < roomMap[0].length-1; i++){
+					if(!checkOccupied(occupiedTiles, i, 0)){
+						placedFirepalce = true;
+						fireplacePos = new int[]{0,i};
+						occupiedTiles.add(fireplacePos);
+						fireplacePos[0]--;
+						break;
+					}
+				}
+			}else if(fireplaceOrientation == 2){
+				for(int i = 1; i < roomMap.length-1; i++){
+					if(!checkOccupied(occupiedTiles, roomMap[0].length-1, i)){
+						placedFirepalce = true;
+						fireplacePos = new int[]{i,roomMap[0].length-1};
+						occupiedTiles.add(fireplacePos);
+						fireplacePos[1]++;
+						break;
+					}
+				}
+			}else{
+				for(int i = 1; i < roomMap[0].length-1; i++){
+					if(!checkOccupied(occupiedTiles, i, roomMap.length-1)){
+						placedFirepalce = true;
+						fireplacePos = new int[]{roomMap.length-1,i};
+						occupiedTiles.add(fireplacePos);
+						fireplacePos[0]++;
+						break;
+					}
+				}
+			}
+		}while(!placedFirepalce&&attempts < 10);
+		
+		roomEntities.add(new Fireplace(world, fireplacePos[1]*Tile.TS+Tile.TS/2, fireplacePos[0]*Tile.TS+Tile.TS/2, fireplaceOrientation == 0?3:fireplaceOrientation == 1?2:fireplaceOrientation == 2?1:0));
+		
+		//spawn Carpet
 		roomEntities.add(new Carpet(world,roomMap[0].length/2f*Tile.TS,roomMap.length/2f*Tile.TS,roomMap[0].length*2-2,roomMap.length*2-2, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f)));
 		
 		
