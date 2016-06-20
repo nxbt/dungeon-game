@@ -14,12 +14,15 @@ import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
 
 public class Sword extends Melee {
-
+	
 	private static final Texture[] blades = Spritesheet.getSprites("swordBladeMap.png", 32, 32);
 	private static final Texture[] guards = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
 	private static final Texture[] hilts = Spritesheet.getSprites("swordHiltMap.png", 32, 32); //why is guard spelled ua and not au??
-	
+	private static final int bladeNum = 5;
+	private static final int guardNum = 2;
+	private static final int hiltNum = 2;
 	// how should we change name and stats based on the blade guard and hilt? Arrays? Text Files? Something Else?
+	private static final String[] bladeNames = new String[]{"Sword", "Light Sword", "Broad Sword", "Cutlass", "Needle"};
 
 	private final int REST = 0;
 	private final int WINDUP1 = 1;
@@ -88,9 +91,9 @@ public class Sword extends Melee {
 		super(world, "sword.png");
 		
 		//generate the sprite, for now random, but in the future will be a parameter!
-		int blade = (int) (Math.random()*2);
-		int guard = (int) (Math.random()*2);
-		int hilt = (int) (Math.random()*2);
+		int blade = (int) (Math.random()*bladeNum);
+		int guard = (int) (Math.random()*guardNum);
+		int hilt = (int) (Math.random()*hiltNum);
 		if(!blades[blade].getTextureData().isPrepared()) blades[blade].getTextureData().prepare();
 		Pixmap bladeMap = blades[blade].getTextureData().consumePixmap();
 		if(!guards[guard].getTextureData().isPrepared()) guards[guard].getTextureData().prepare();
@@ -104,7 +107,7 @@ public class Sword extends Melee {
 		//for some reason all the pixmaps are all disposed already... thx libgdx!
 		
 		
-		name = "Sword";
+		name = bladeNames[blade];
 		
 		hasHit = false;
 		
