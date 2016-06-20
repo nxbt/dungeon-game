@@ -19,7 +19,6 @@ import com.dungeon.game.entity.character.Player;
 import com.dungeon.game.entity.character.enemy.Enemy;
 import com.dungeon.game.entity.character.friend.Friend;
 import com.dungeon.game.entity.character.friend.Mentor;
-import com.dungeon.game.entity.furniture.Fireplace;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.GoldCounter;
@@ -75,7 +74,7 @@ public class World {
 	
 	public World() {
 		rayHandler = new RayHandler(null);
-		rayHandler.setBlurNum(25);
+		rayHandler.setBlurNum(15);
 		rayHandler.setAmbientLight(new Color(0,0,0,0));
 		RayHandler.useDiffuseLight(true);
 		hudBatch = new SpriteBatch();
@@ -108,7 +107,6 @@ public class World {
 		entities = curFloor.entities;
 		entities.add(0,player);
 		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+Tile.TS, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
-		entities.add(new Fireplace(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+Tile.TS, curFloor.tm.length/2*Tile.TS+Tile.TS-1,3));
 
 		hudEntities.add(new GoldCounter(this));
 		hudEntities.add(new MenuButton(this, 4, cam.height-20));
@@ -211,11 +209,6 @@ public class World {
 					else shapeRenderer.setColor(Color.GREEN);
 					
 					shapeRenderer.polygon(e.getHitbox().getVertices());	
-					
-					shapeRenderer.setColor(Color.YELLOW);
-					if(e.light != null){
-						shapeRenderer.point(e.light.light.getX(), e.light.light.getY(),0);
-					}
 				}
 				
 				if(debug_pathing && e instanceof Character && ((Character)e).moveTo!=null&&((Character)e).path!=null){

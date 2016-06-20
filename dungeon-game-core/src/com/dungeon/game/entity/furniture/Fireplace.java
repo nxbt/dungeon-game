@@ -23,7 +23,7 @@ public class Fireplace extends Static {
 		
 		solid = true;
 		hitbox = new Polygon(new float[]{0,0,32,0,32,32,0,32});
-		light = new Light(world, x, y, 300, 100, Light.ORANGE, 40, this);
+		light = new Light(world, x, y, 250, 100, Light.ORANGE, 40, this);
 		if(orientation == 0)light.setOffset(0, -18);
 		else if(orientation == 1)light.setOffset(-18, 0);
 		else if(orientation == 2)light.setOffset(0, 18);

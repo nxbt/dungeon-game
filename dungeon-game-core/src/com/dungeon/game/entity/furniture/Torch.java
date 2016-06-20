@@ -20,7 +20,7 @@ Pixmap tempMap = new Pixmap(16, 4, Pixmap.Format.RGB888);
 		Pixmap rotated = Spritesheet.rotatePixmap(tempMap,orientation);
 		sprite = new Texture(rotated);
 		tempMap.dispose();
-//		rotated.dispose();
+		
 		solid = false;
 		
 		d_width = orientation%2 == 0?16:4;
@@ -43,7 +43,7 @@ Pixmap tempMap = new Pixmap(16, 4, Pixmap.Format.RGB888);
 			origin_y = 8;
 		}
 		
-		light = new Light(world, x, y, 50, 100, 40, this);
+		light = new Light(world, x, y, 50, 100, Light.ORANGE, 40, this);
 	}
 
 	@Override
