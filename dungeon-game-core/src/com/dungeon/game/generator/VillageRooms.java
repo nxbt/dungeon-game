@@ -27,6 +27,7 @@ import com.dungeon.game.world.World;
 public class VillageRooms extends Generation {
 	private ArrayList<Rectangle> rooms;
 	private ArrayList<Rectangle> specialRooms;
+	private ArrayList<Rectangle> normRooms;
 	private ArrayList<ArrayList<int[]>> halls;
 	private ArrayList<ArrayList<Rectangle>> hallEnds;
 	
@@ -36,6 +37,7 @@ public class VillageRooms extends Generation {
 		super(world, width, height);
 		rooms = new ArrayList<Rectangle>();
 		specialRooms = new ArrayList<Rectangle>();
+		normRooms = new ArrayList<Rectangle>();
 		halls = new ArrayList<ArrayList<int[]>>();
 		hallEnds = new ArrayList<ArrayList<Rectangle>>();
 		int x = height/2;
@@ -550,14 +552,23 @@ public class VillageRooms extends Generation {
 	}
 	
 
-	
+	//populate special rooms
 	private void populateSpecialRooms() {
+		normRooms = (ArrayList<Rectangle>) rooms.clone();
+		for(int i = 0; i < specialRooms.size(); i++){
+			normRooms.remove(specialRooms.get(i));
+		}
 		generateStairRoom(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		while(specialRooms.size()>0)generateQuarters(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		for(int i = 0; i < specialRooms.size(); i++){
 			
 		}
+	}
+	
+	//will be used to populate non-special rooms
+	private void populateNormRooms(){
+		
 	}
 	
 	//ENTITIES FOR STORE GENERATION
