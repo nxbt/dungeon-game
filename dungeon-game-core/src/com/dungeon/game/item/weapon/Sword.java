@@ -2,15 +2,22 @@ package com.dungeon.game.item.weapon;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.MeleeGraphic;
+import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
 
 public class Sword extends Melee {
+
+	private static final Texture[] blades = Spritesheet.getSprites("swordBladeMap.png", 32, 32);
+	private static final Texture[] guards = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
+	private static final Texture[] hilts = Spritesheet.getSprites("swordHiltMap.png", 32, 32); //why is guard spelled ua and not au??
 
 	private final int REST = 0;
 	private final int WINDUP1 = 1;
@@ -77,6 +84,23 @@ public class Sword extends Melee {
 	
 	public Sword(World world, float damage, float speed) {
 		super(world, "sword.png");
+		
+		//generate the sprite, for now random, but in the future will be a parameter!
+		int blade = (int) (Math.random()*2);
+		int guard = (int) (Math.random()*2);
+		int hilt = (int) (Math.random()*2);
+		if(!blades[blade].getTextureData().isPrepared()) blades[blade].getTextureData().prepare();
+		Pixmap bladeMap = blades[blade].getTextureData().consumePixmap();
+		if(!guards[guard].getTextureData().isPrepared()) guards[guard].getTextureData().prepare();
+		Pixmap guardMap = guards[guard].getTextureData().consumePixmap();
+		if(!hilts[hilt].getTextureData().isPrepared()) hilts[hilt].getTextureData().prepare();
+		Pixmap hiltMap = hilts[hilt].getTextureData().consumePixmap();
+
+		bladeMap.drawPixmap(hiltMap, 0, 0);
+		bladeMap.drawPixmap(guardMap, 0, 0);
+		sprite = new Texture(bladeMap);
+		//for some reason they are all disposed already...
+		
 		
 		name = "Sword";
 		
