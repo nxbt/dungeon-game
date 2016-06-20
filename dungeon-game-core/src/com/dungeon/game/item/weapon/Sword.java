@@ -18,6 +18,8 @@ public class Sword extends Melee {
 	private static final Texture[] blades = Spritesheet.getSprites("swordBladeMap.png", 32, 32);
 	private static final Texture[] guards = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
 	private static final Texture[] hilts = Spritesheet.getSprites("swordHiltMap.png", 32, 32); //why is guard spelled ua and not au??
+	
+	// how should we change name and stats based on the blade guard and hilt? Arrays? Text Files? Something Else?
 
 	private final int REST = 0;
 	private final int WINDUP1 = 1;
@@ -99,7 +101,7 @@ public class Sword extends Melee {
 		bladeMap.drawPixmap(hiltMap, 0, 0);
 		bladeMap.drawPixmap(guardMap, 0, 0);
 		sprite = new Texture(bladeMap);
-		//for some reason they are all disposed already...
+		//for some reason all the pixmaps are all disposed already... thx libgdx!
 		
 		
 		name = "Sword";
