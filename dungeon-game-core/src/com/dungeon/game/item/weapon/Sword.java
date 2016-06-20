@@ -15,14 +15,22 @@ import com.dungeon.game.world.World;
 
 public class Sword extends Melee {
 	
-	private static final Texture[] blades = Spritesheet.getSprites("swordBladeMap.png", 32, 32);
-	private static final Texture[] guards = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
-	private static final Texture[] hilts = Spritesheet.getSprites("swordHiltMap.png", 32, 32); //why is guard spelled ua and not au??
-	private static final int bladeNum = 5;
-	private static final int guardNum = 2;
-	private static final int hiltNum = 2;
-	// how should we change name and stats based on the blade guard and hilt? Arrays? Text Files? Something Else?
-	private static final String[] bladeNames = new String[]{"Sword", "Light Sword", "Broad Sword", "Cutlass", "Needle"};
+	private static final Texture[] BLADES = Spritesheet.getSprites("swordBladeMap.png", 32, 32);
+	private static final Texture[] GUARDS = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
+	private static final Texture[] HILTS = Spritesheet.getSprites("swordHiltMap.png", 32, 32); //why is guard spelled ua and not au??
+	private static final int BLADE_NUM = 5;
+	private static final int GUARD_NUM = 2;
+	private static final int HILT_NUM = 2;
+	// how should we change name and stats based on the blade guard and hilt? Arrays? Text Files? Something Else? I'll do this for now
+	private static final String[] BLADE_NAMES = new String[]{"Sword", "Light Sword", "Broad Sword", "Cutlass", "Needle"};
+	//blade stat order is dmg, speed, knockback
+	private static final float[][] BLADE_STATS = new float[][]{
+		new float[]{1,1,1}, 
+		new float[]{0.8f,1.3f,0.6f},
+		new float[]{1.2f,0.7f,1.3f},
+		new float[]{1.5f,0.9f,0.4f},
+		new float[]{0.6f,2f,0.3f},
+		};
 
 	private final int REST = 0;
 	private final int WINDUP1 = 1;
@@ -91,15 +99,15 @@ public class Sword extends Melee {
 		super(world, "sword.png");
 		
 		//generate the sprite, for now random, but in the future will be a parameter!
-		int blade = (int) (Math.random()*bladeNum);
-		int guard = (int) (Math.random()*guardNum);
-		int hilt = (int) (Math.random()*hiltNum);
-		if(!blades[blade].getTextureData().isPrepared()) blades[blade].getTextureData().prepare();
-		Pixmap bladeMap = blades[blade].getTextureData().consumePixmap();
-		if(!guards[guard].getTextureData().isPrepared()) guards[guard].getTextureData().prepare();
-		Pixmap guardMap = guards[guard].getTextureData().consumePixmap();
-		if(!hilts[hilt].getTextureData().isPrepared()) hilts[hilt].getTextureData().prepare();
-		Pixmap hiltMap = hilts[hilt].getTextureData().consumePixmap();
+		int blade = (int) (Math.random()*BLADE_NUM);
+		int guard = (int) (Math.random()*GUARD_NUM);
+		int hilt = (int) (Math.random()*HILT_NUM);
+		if(!BLADES[blade].getTextureData().isPrepared()) BLADES[blade].getTextureData().prepare();
+		Pixmap bladeMap = BLADES[blade].getTextureData().consumePixmap();
+		if(!GUARDS[guard].getTextureData().isPrepared()) GUARDS[guard].getTextureData().prepare();
+		Pixmap guardMap = GUARDS[guard].getTextureData().consumePixmap();
+		if(!HILTS[hilt].getTextureData().isPrepared()) HILTS[hilt].getTextureData().prepare();
+		Pixmap hiltMap = HILTS[hilt].getTextureData().consumePixmap();
 
 		bladeMap.drawPixmap(hiltMap, 0, 0);
 		bladeMap.drawPixmap(guardMap, 0, 0);
@@ -107,17 +115,19 @@ public class Sword extends Melee {
 		//for some reason all the pixmaps are all disposed already... thx libgdx!
 		
 		
-		name = bladeNames[blade];
+		name = BLADE_NAMES[blade];
 		
 		hasHit = false;
 		
-		desc = "An incredibly reliable melee weapon.\n\n Damage: "+ Math.floor(damage*10)/10f;
 		
-		this.damage = damage;
-		this.speed = speed;
+		this.damage = damage * BLADE_STATS[blade][0];
+		this.speed = speed * BLADE_STATS[blade][1];
 		
 		knockratio = 0.4f;
-		knockstr = 10;
+		knockstr = 10 * BLADE_STATS[blade][2];		
+		
+		desc = "An incredibly reliable melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n\n Speed: "+ Math.floor(this.speed*10)/10f + "\n\n Knockback: "+ Math.floor(this.knockstr*10)/10f;
+
 		
 		dmgMult = new float[]{0.7f,1,1.5f};
 		knockMult = new float[]{1,1.3f,0.7f};		
@@ -128,7 +138,7 @@ public class Sword extends Melee {
 		angle=0;
 		
 		effects = new ArrayList<Effect>();
-		
+		this.
 		effects.add(new Stun(world, 30));
 	}
 	
