@@ -126,7 +126,7 @@ public class Sword extends Melee {
 		knockratio = 0.4f;
 		knockstr = 10 * BLADE_STATS[blade][2];		
 		
-		desc = "An incredibly reliable melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n\n Speed: "+ Math.floor(this.speed*10)/10f + "\n\n Knockback: "+ Math.floor(this.knockstr*10)/10f;
+		desc = "An incredibly reliable melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f;
 
 		
 		dmgMult = new float[]{0.7f,1,1.5f};
@@ -320,7 +320,7 @@ public class Sword extends Melee {
 	}
 	
 	public String getDesc() {
-		return "The accepted standard for all melee weapons, and the standard for all sword class melee weapons. Using it will swing it in a short combo of swings, damaging the first target it comes in contact with. For this particular sword, the combo begins with a fronthand swing across the body, followed by a backhand swing, and ends with a jab.\n\n\"My sword shall lead me to glory!\" -final words of Tanturin, fabled warrior\n\n Damage: "+ Math.floor(damage*10)/10f;
+		return "The accepted standard for all melee weapons, and the standard for all sword class melee weapons. Using it will swing it in a short combo of swings, damaging the first target it comes in contact with. For this particular sword, the combo begins with a fronthand swing across the body, followed by a backhand swing, and ends with a jab.\n\n\"My sword shall lead me to glory!\" -final words of Tanturin, fabled warrior\n\n Damage: "+ Math.floor(damage*10)/10f  + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f;
 	}
 
 	@Override

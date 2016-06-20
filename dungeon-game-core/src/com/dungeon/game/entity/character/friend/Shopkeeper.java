@@ -10,6 +10,7 @@ import com.dungeon.game.inventory.Shop;
 import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.weapon.Sword;
+import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
 
 public class Shopkeeper extends Friend {
@@ -21,6 +22,8 @@ public class Shopkeeper extends Friend {
 		speechBubble.setColor();
 		
 		name = "Shopkeeper";
+		
+		light = new Light(world, x, y, 20, 100, 0, this);
 		
 		torq = 10;
 		
