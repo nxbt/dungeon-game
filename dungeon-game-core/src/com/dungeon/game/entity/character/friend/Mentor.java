@@ -122,9 +122,9 @@ public class Mentor extends Friend {
 	@Override
 	public void post() {
 		if(speechBubble.endText.equals("")){
-			world.hudEntities.remove(speechBubble);
+			speechBubble.close();
 		}else{
-			if(!world.hudEntities.contains(speechBubble))world.hudEntities.add(speechBubble);	
+			if(!world.hudEntities.contains(speechBubble)&&!speechBubble.dismissed)speechBubble.open();	
 			speechBubble.x = x-world.cam.x+world.cam.width/2;
 			speechBubble.y = y-world.cam.y+world.cam.height/2;
 		}

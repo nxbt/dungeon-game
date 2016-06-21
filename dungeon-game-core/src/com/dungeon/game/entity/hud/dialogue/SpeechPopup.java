@@ -130,12 +130,14 @@ public class SpeechPopup extends Hud {
 		if(!dismissed){
 			if(world.mouse.rb_pressed){
 				dismissed = true;
+				close();
 			}
 			else if(world.mouse.lb_pressed) {
 				if(character.dialogue != null) {
 					character.dialogue.open();
 					world.player.focusedEntity = character;
 					dismissed = true;
+					close();
 				}
 			}
 		}
@@ -165,6 +167,15 @@ public class SpeechPopup extends Hud {
 		}
 
 		batch.setColor(1,1,1,1);
+	}
+	
+	public void close(){
+		System.out.println("test");
+		world.hudEntities.remove(this);
+	}
+	
+	public void open(){
+		world.hudEntities.add(this);
 	}
 		
 
