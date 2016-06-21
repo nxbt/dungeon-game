@@ -15,8 +15,6 @@ public class Bow extends Ranged {
 	private final int WINDUP = 1;
 	private final int FIRE = 2;
 	private final int WINDDOWN = 3;
-
-	ArrayList<Effect> effects;
 	
 	public Bow(World world, float dmgMod, int speed) {
 		super(world, "bow.png");
@@ -32,10 +30,6 @@ public class Bow extends Ranged {
 		desc = "The standard for all  ranged weapons.\n\n Damage modifier: " + Math.floor(dmgMod*1000)/10f + "%";
 
 		graphic = new RangedGraphic(world, this, new Polygon(new float[]{2,2,30,30,8,26}), 4, 28);
-		
-		effects = new ArrayList<Effect>();
-		
-		effects.add(new Stun(world, 30));
 	}
 
 	@Override
@@ -115,4 +109,9 @@ public class Bow extends Ranged {
 		changeSprite(0);
 	}
 
+	public ArrayList<Effect> getEffects() {
+		ArrayList<Effect> effects = new ArrayList<Effect>();
+		effects.add(new Stun(world, 30));
+		return effects;
+	}
 }

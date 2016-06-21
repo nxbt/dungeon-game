@@ -75,5 +75,6 @@ public abstract class Enemy extends Character {
 			
 			world.entities.add(goldDrop);
 		}
+		if(light!=null)light.light.remove(true);
 	}
 }

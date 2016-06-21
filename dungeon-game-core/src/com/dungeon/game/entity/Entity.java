@@ -107,7 +107,9 @@ public abstract class Entity {
 	
 	public void hovered() {} //optional method called when the mouse hovers over an entity
 
-	public void dead(){};
+	public void dead(){
+		if(light!=null)light.light.remove(true);
+	};
 	
 	public abstract void calc(); //called at the beginning of an update cycle
 	

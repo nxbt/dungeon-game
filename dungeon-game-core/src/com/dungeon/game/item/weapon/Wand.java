@@ -1,6 +1,10 @@
 package com.dungeon.game.item.weapon;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.effect.Effect;
+import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.weapon.MediumGraphic;
 import com.dungeon.game.spell.Fireball;
 import com.dungeon.game.spell.Heal;
@@ -61,4 +65,10 @@ public class Wand extends Medium {
 
 	@Override
 	public void reset() {}
+	
+	public ArrayList<Effect> getEffects() {
+		ArrayList<Effect> effects = new ArrayList<Effect>();
+		effects.add(new Stun(world, 30));
+		return effects;
+	}
 }

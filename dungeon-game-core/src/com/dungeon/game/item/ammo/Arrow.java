@@ -30,7 +30,7 @@ public class Arrow extends Ammo {
 		ArrayList<Effect> effects = new ArrayList<Effect>();
 		effects.add(new Stun(world, 30));
 		
-		if(character.damage(damage, effects)>0){
+		if(character.damage(damage, weapon.getEffects())>0){
 			
 			Vector2 knockback = new Vector2();
 			

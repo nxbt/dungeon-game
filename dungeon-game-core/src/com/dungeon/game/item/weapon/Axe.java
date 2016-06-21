@@ -209,7 +209,7 @@ public class Axe extends Melee {
 			cur_dmgMult = dmgMult[1];
 			cur_knockMult = knockMult[1];
 		}
-		if(e.damage(damage*cur_dmgMult, effects)>0){
+		if(e.damage(damage*cur_dmgMult, getEffects())>0){
 			
 			float xSword = (float) (Math.cos((weaponangle+angleModifier)/180f*Math.PI)*knockstr);
 			float ySword = (float) (Math.sin((weaponangle+angleModifier)/180f*Math.PI)*knockstr);
@@ -221,8 +221,6 @@ public class Axe extends Melee {
 			e.acel(knockVec, false);
 		}
 		//temp solution to effecs issue
-		effects.clear();
-		effects.add(new Stun(world, 30));
 	}
 	
 	public String getDesc() {
@@ -237,5 +235,11 @@ public class Axe extends Melee {
 		distance = REST_DIST;
 		polarAngle = REST_PANG;
 		angle = REST_ANGL;
+	}
+	
+	public ArrayList<Effect> getEffects() {
+		ArrayList<Effect> effects = new ArrayList<Effect>();
+		effects.add(new Stun(world, 30));
+		return effects;
 	}
 }
