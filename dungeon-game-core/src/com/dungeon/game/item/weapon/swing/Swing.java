@@ -25,16 +25,30 @@ public class Swing {
 	private int angle;
 	private int polarAngle;
 	
-	public Swing(World world){
+	public Swing(World world, boolean cleave, int windupDuration, int windupDist, int windupAngle, int windupPolarAngle, int duration, int dist, int angle, int polarAngle){
 		this.world = world;
 		
-	}
-	
-	public void progressTwordWindup(){
+		this.cleave = cleave;
+		
+		this.windupDuration = windupDuration;
+		
+		this.windupDist = windupDist;
+		this.windupAngle = windupAngle;
+		this.windupPolarAngle = windupPolarAngle;
+		
+		this.duration = duration;
+		
+		this.dist = dist;
+		this.angle = angle;
+		this.polarAngle = polarAngle;
 		
 	}
 	
-	public void progressTwordSwing(){
+	public void progressWindup(){
+		
+	}
+	
+	public void progressSwing(){
 		
 	}
 }
