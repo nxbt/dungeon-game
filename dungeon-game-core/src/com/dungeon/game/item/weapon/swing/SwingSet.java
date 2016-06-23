@@ -12,8 +12,6 @@ public class SwingSet {
 	private World world;
 	private Melee weapon;
 	
-	private int counter;
-	
 	public SwingSet(World world, Melee weapon, Swing[] swings){
 		this.world = world;
 		this.weapon = weapon;
@@ -31,6 +29,6 @@ public class SwingSet {
 	}
 	
 	public void progressWeapon(){
-		
+		curSwing.progressSwing();
 	}
 }

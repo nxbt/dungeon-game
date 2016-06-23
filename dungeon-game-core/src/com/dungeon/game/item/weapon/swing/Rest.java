@@ -11,4 +11,8 @@ public class Rest extends Swing{
 	public void progresSwing(){
 	
 	}
+	
+	public void progress(){
+		
+	}
 }

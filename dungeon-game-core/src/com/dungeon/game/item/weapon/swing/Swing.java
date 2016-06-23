@@ -25,6 +25,8 @@ public class Swing {
 	private int angle;
 	private int polarAngle;
 	
+	private int counter;
+	
 	public Swing(World world, boolean cleave, int windupDuration, int windupDist, int windupAngle, int windupPolarAngle, int duration, int dist, int angle, int polarAngle){
 		this.world = world;
 		
@@ -50,5 +52,13 @@ public class Swing {
 	
 	public void progressSwing(){
 		
+	}
+	
+	public void progress(){
+		
+	}
+	
+	public void beginSwing(){
+		counter = 0;
 	}
 }
