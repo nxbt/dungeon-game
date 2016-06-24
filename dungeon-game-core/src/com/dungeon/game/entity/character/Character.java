@@ -47,8 +47,8 @@ public abstract class Character extends Dynamic {
 	
 	public boolean stun;
 	
-	protected Hand leftEquiped;
-	protected Hand rightEquiped;
+	public Hand leftEquiped;
+	public Hand rightEquiped;
 	
 	protected float[] leftEquipedPos;
 	protected float[] rightEquipedPos;

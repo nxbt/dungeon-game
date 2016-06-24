@@ -8,7 +8,7 @@ public class Rest extends Swing{
 		super(world, false, 0, 0, 0, 0, duration, dist, angle, polarAngle);
 	}
 	
-	public void progresSwing(){
+	public void progressSwing(){
 	
 	}
 	

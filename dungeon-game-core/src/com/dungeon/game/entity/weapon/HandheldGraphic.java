@@ -11,7 +11,7 @@ public class HandheldGraphic extends Dynamic {
 	public Hand item;
 	
 	public int graphic_angle;
-	public int graphc_pAngle;
+	public int graphic_pAngle;
 	public int graphic_dist;
 	
 	public HandheldGraphic(World world, Hand item, Polygon hitbox, float originX, float originY) {
