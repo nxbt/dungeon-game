@@ -17,17 +17,17 @@ public class Swing {
 	
 	private boolean cleave; //can the weapon hit multiple enemies?
 	
-	private int windupDuration;
+	private float windupDuration;
 	
-	private int windupDist;
-	private int windupAngle;
-	private int windupPolarAngle;
+	private float windupDist;
+	private float windupAngle;
+	private float windupPolarAngle;
 	
-	protected int duration;
+	protected float duration;
 	
-	protected int dist;
-	protected int angle;
-	protected int polarAngle;
+	protected float dist;
+	protected float angle;
+	protected float polarAngle;
 	
 	protected float counter; //the swing coutner
 	

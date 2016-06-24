@@ -136,7 +136,7 @@ public class Sword extends Melee {
 		
 		swings = new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
 				new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50), 
-				new Swing(world, false, 10, 16, -75, -80, 10, 26, 80, 45),
+				new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45),
 				new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3),
 				});
 		
