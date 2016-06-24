@@ -4,22 +4,24 @@ import com.dungeon.game.world.World;
 
 public class Rest extends Swing{
 	
-	public Rest(World world, int duration, int dist, int angle, int polarAngle){
-		super(world, false, 0, 0, 0, 0, duration, dist, angle, polarAngle);
+	public Rest(World world, int duration, int dist, int polarAngle, int angle){
+		super(world, false, 0, 0, 0, 0, duration, dist, polarAngle, angle);
 	}
 	
-	public void progressSwing(int counter){
-		weapon.graphic.graphic_angle = prevSwing.angle+(prevSwing.angle - angle)/duration*counter;
-		weapon.graphic.graphic_pAngle = prevSwing.polarAngle+(prevSwing.polarAngle - polarAngle)/duration*counter;
-		weapon.graphic.graphic_dist = prevSwing.dist+(prevSwing.dist - dist)/duration*counter;
+	public void progressSwing(float counter){
+		System.out.println("Winddown");
+		weapon.graphic.graphic_angle = (int) (prevSwing.angle-(prevSwing.angle - angle)/duration*counter);
+		weapon.graphic.graphic_pAngle = (int) (prevSwing.polarAngle-(prevSwing.polarAngle - polarAngle)/duration*counter);
+		weapon.graphic.graphic_dist = (int) (prevSwing.dist-(prevSwing.dist - dist)/duration*counter);
 	}
 	
-	public void progressPause(int counter){
-		if(weapon.owner.leftEquiped.equals(weapon) && world.mouse.lb_pressed){
+	public void progressPause(float counter){
+		System.out.println("At rest");
+		if(weapon.owner.leftEquiped != null && weapon.owner.leftEquiped.equals(weapon) && world.mouse.lb_pressed){
 			nextSwing = true;
 			done = true;
 		}
-		else if(world.mouse.rb_pressed){
+		else if(weapon.owner.rightEquiped != null && weapon.owner.rightEquiped.equals(weapon) && world.mouse.rb_pressed){
 			nextSwing = true;
 			done = true;
 		}
@@ -27,7 +29,8 @@ public class Rest extends Swing{
 	
 	public void progress(){
 		counter+=weapon.speed/10; //progress the counter
-		if(counter < duration)progressSwing(counter);
+//		System.out.println("Counter: " + counter);
+		if(counter - weapon.speed/10f < duration)progressSwing(counter);
 		else progressPause(counter);
 	}
 }

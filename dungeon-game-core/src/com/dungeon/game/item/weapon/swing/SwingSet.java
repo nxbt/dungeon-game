@@ -26,6 +26,7 @@ public class SwingSet {
 		}
 		swings[0].prevSwing = swings[0];
 		curSwing = 0;
+		swings[curSwing].beginSwing();
 		
 	}
 	
@@ -38,9 +39,11 @@ public class SwingSet {
 					swings[0].prevSwing = swings[curSwing-1];
 					curSwing = 0;
 				}
+				swings[curSwing].beginSwing();
 			}else {
 				swings[0].prevSwing = swings[curSwing];
 				curSwing = 0;
+				swings[curSwing].beginSwing();
 			}
 		}
 	}

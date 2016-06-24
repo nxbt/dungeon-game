@@ -170,7 +170,6 @@ public class SpeechPopup extends Hud {
 	}
 	
 	public void close(){
-		System.out.println("test");
 		world.hudEntities.remove(this);
 	}
 	
