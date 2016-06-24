@@ -27,6 +27,8 @@ public class Swing {
 	
 	private int counter;
 	
+	protected boolean done;
+	
 	public Swing(World world, boolean cleave, int windupDuration, int windupDist, int windupAngle, int windupPolarAngle, int duration, int dist, int angle, int polarAngle){
 		this.world = world;
 		
@@ -55,10 +57,14 @@ public class Swing {
 	}
 	
 	public void progress(){
-		
+		counter+=weapon.speed/10;
+		if(counter < windupDuration)progressWindup();
+		else progressSwing();
+		if(counter >= windupDuration + duration)done = true;
 	}
 	
 	public void beginSwing(){
 		counter = 0;
+		done = false;
 	}
 }

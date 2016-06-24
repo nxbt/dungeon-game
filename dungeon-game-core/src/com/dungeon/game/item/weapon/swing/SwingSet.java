@@ -30,5 +30,6 @@ public class SwingSet {
 	
 	public void progressWeapon(){
 		curSwing.progressSwing();
+//		if(curSwing.done)curSwing = swings[swings] almost done;
 	}
 }
