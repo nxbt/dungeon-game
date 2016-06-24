@@ -2,6 +2,8 @@ package com.dungeon.game.item.weapon.swing;
 
 import com.dungeon.game.item.weapon.Melee;
 import com.dungeon.game.world.World;
+import com.badlogic.gdx.math.Vector2;
+import com.dungeon.game.entity.character.Character;
 
 public class Swing {
 	
@@ -12,6 +14,11 @@ public class Swing {
 	protected World world;
 	
 	protected Melee weapon;
+	
+	private float dmgMult; //the dmg multiplier for this swing
+	private float knockMult; //the knockback multiplier for this swing
+	private float knockAngleMod; //the knockback angle modifier. 0 = knocked the way the weapon is pointing
+	private float knockRatio; //how much knock is the direction of the sword, vs the direction of the hit. 1.0 is all the direction of the sword
 	
 	protected Swing prevSwing; //the previous swing, to access the position of the sword
 	
@@ -39,7 +46,9 @@ public class Swing {
 
 	protected boolean isInAttack;
 	
-	public Swing(World world, boolean cleave, int windupDuration, int windupDist, int windupPolarAngle, int windupAngle, int duration, int dist, int polarAngle, int angle){
+	protected boolean hasHit;
+	
+	public Swing(World world, boolean cleave, int windupDuration, int windupDist, int windupPolarAngle, int windupAngle, int duration, int dist, int polarAngle, int angle, float dmgMult, float knockMult, float knockAngleMod, float knockRatio){
 		this.world = world;
 		
 		this.cleave = cleave;
@@ -56,8 +65,14 @@ public class Swing {
 		this.angle = angle;
 		this.polarAngle = polarAngle;
 		
+		this.dmgMult = dmgMult;
+		this.knockMult = knockMult;
+		this.knockAngleMod = knockAngleMod;
+		this.knockRatio = knockRatio;
+		
 		isInUse = false;
 		isInAttack = false;
+		hasHit = false;
 		
 	}
 	
@@ -114,5 +129,23 @@ public class Swing {
 		counter = 0;
 		done = false;
 		nextSwing = false;
+		hasHit = false;
+	}
+	
+	public void hit(Character c){
+		if(!c.knownEntities.contains(weapon.owner))c.knownEntities.add(weapon.owner);
+		if(!cleave)hasHit = true;
+		float weaponangle = weapon.graphic.angle+135;
+		if(c.damage(weapon.damage*dmgMult, weapon.getEffects())>0){
+			
+			float xSword = (float) (Math.cos((weaponangle+knockAngleMod)/180f*Math.PI)*weapon.knockstr);
+			float ySword = (float) (Math.sin((weaponangle+knockAngleMod)/180f*Math.PI)*weapon.knockstr);
+			float xOwner = (float) (Math.cos((weaponangle)/180*Math.PI)*weapon.knockstr);
+			float yOwner = (float) (Math.sin((weaponangle)/180*Math.PI)*weapon.knockstr);
+			Vector2 knockVec = new Vector2();
+			knockVec.x = (xSword*(1-knockRatio)+xOwner*(knockRatio))*knockMult;
+			knockVec.y = (ySword*(1-knockRatio)+yOwner*(knockRatio))*knockMult;
+			c.acel(knockVec, false);
+		}
 	}
 }

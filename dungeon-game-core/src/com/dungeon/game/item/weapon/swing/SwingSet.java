@@ -2,6 +2,7 @@ package com.dungeon.game.item.weapon.swing;
 
 import com.dungeon.game.item.weapon.Melee;
 import com.dungeon.game.world.World;
+import com.dungeon.game.entity.character.Character;
 
 public class SwingSet {
 
@@ -33,13 +34,20 @@ public class SwingSet {
 		swings[curSwing].beginSwing();
 		
 		isInUse = false;
-		
+
 		isInAttack = false;
+		
+		weapon.hasHit = false;
 		
 	}
 	
 	public void progressWeapon(){
 		swings[curSwing].progress();
+
+		isInUse = swings[curSwing].isInUse;
+		isInAttack = swings[curSwing].isInAttack;
+		weapon.hasHit = swings[curSwing].hasHit;
+		
 		if(swings[curSwing].done){
 			if(swings[curSwing].nextSwing){
 				curSwing++;
@@ -54,14 +62,17 @@ public class SwingSet {
 				swings[curSwing].beginSwing();
 			}
 		}
-
-		isInUse = swings[curSwing].isInUse;
-		isInAttack = swings[curSwing].isInAttack;
+		
 	}
 
 	public void reset() {
 		swings[0].prevSwing = swings[0];
 		curSwing = 0;
 		swings[curSwing].beginSwing();
+	}
+	
+	public void hit(Character c){
+		swings[curSwing].hit(c);
+		weapon.hasHit = swings[curSwing].hasHit;
 	}
 }

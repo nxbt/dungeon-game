@@ -131,13 +131,14 @@ public class Sword extends Melee {
 
 		
 		dmgMult = new float[]{0.7f,1,1.5f};
-		knockMult = new float[]{1,1.3f,0.7f};		
+		knockMult = new float[]{1,1.3f,0.7f};	
+		
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 		
 		swings = new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
-				new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50), 
-				new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45),
-				new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3),
+				new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f), 
+				new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f),
+				new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f),
 				});
 		
 		distance=0;
@@ -289,42 +290,42 @@ public class Sword extends Melee {
 		return swings.isInAttack;
 	}
 	
-	public void hit(Character e) {
+	public void hit(Character c) {
+		swings.hit(c);
 		
-		if(!e.knownEntities.contains(owner))e.knownEntities.add(owner);
-		hasHit = true;
-		float weaponangle = graphic.angle+135;
-		float angleModifier;
-		float cur_dmgMult = 0;
-		float cur_knockMult = 0;
-		
-		if(stage == SWING1){
-			angleModifier = -90;
-			cur_dmgMult = dmgMult[0];
-			cur_knockMult = knockMult[0];
-		}
-		else if(stage == SWING2){
-			angleModifier = 90;
-			cur_dmgMult = dmgMult[1];
-			cur_knockMult = knockMult[1];
-		}
-		else{
-			angleModifier = 0;
-			cur_dmgMult = dmgMult[2];
-			cur_knockMult = knockMult[2];
-		}
-		if(e.damage(damage*cur_dmgMult, getEffects())>0){
-			
-			float xSword = (float) (Math.cos((weaponangle+angleModifier)/180f*Math.PI)*knockstr);
-			float ySword = (float) (Math.sin((weaponangle+angleModifier)/180f*Math.PI)*knockstr);
-			float xOwner = (float) (Math.cos((weaponangle)/180*Math.PI)*knockstr);
-			float yOwner = (float) (Math.sin((weaponangle)/180*Math.PI)*knockstr);
-			Vector2 knockVec = new Vector2();
-			knockVec.x = (xSword*(1-knockratio)+xOwner*(knockratio))*cur_knockMult;
-			knockVec.y = (ySword*(1-knockratio)+yOwner*(knockratio))*cur_knockMult;
-			e.acel(knockVec, false);
-		}
-		//temp solution to effects issue
+//		if(!e.knownEntities.contains(owner))e.knownEntities.add(owner);
+//		hasHit = true;
+//		float weaponangle = graphic.angle+135;
+//		float angleModifier;
+//		float cur_dmgMult = 0;
+//		float cur_knockMult = 0;
+//		
+//		if(stage == SWING1){
+//			angleModifier = -90;
+//			cur_dmgMult = dmgMult[0];
+//			cur_knockMult = knockMult[0];
+//		}
+//		else if(stage == SWING2){
+//			angleModifier = 90;
+//			cur_dmgMult = dmgMult[1];
+//			cur_knockMult = knockMult[1];
+//		}
+//		else{
+//			angleModifier = 0;
+//			cur_dmgMult = dmgMult[2];
+//			cur_knockMult = knockMult[2];
+//		}
+//		if(e.damage(damage*cur_dmgMult, getEffects())>0){
+//			
+//			float xSword = (float) (Math.cos((weaponangle+angleModifier)/180f*Math.PI)*knockstr);
+//			float ySword = (float) (Math.sin((weaponangle+angleModifier)/180f*Math.PI)*knockstr);
+//			float xOwner = (float) (Math.cos((weaponangle)/180*Math.PI)*knockstr);
+//			float yOwner = (float) (Math.sin((weaponangle)/180*Math.PI)*knockstr);
+//			Vector2 knockVec = new Vector2();
+//			knockVec.x = (xSword*(1-knockratio)+xOwner*(knockratio))*cur_knockMult;
+//			knockVec.y = (ySword*(1-knockratio)+yOwner*(knockratio))*cur_knockMult;
+//			e.acel(knockVec, false);
+//		}
 	}
 	
 	public String getDesc() {

@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 public class Rest extends Swing{
 	
 	public Rest(World world, int duration, int dist, int polarAngle, int angle){
-		super(world, false, 0, 0, 0, 0, duration, dist, polarAngle, angle);
+		super(world, false, 0, 0, 0, 0, duration, dist, polarAngle, angle, 0, 0, 0, 0);
 	}
 	
 	public void progressSwing(float counter){
@@ -36,5 +36,9 @@ public class Rest extends Swing{
 //		System.out.println("Counter: " + counter);
 		if(counter - weapon.speed/10f < duration)progressSwing(counter);
 		else progressPause(counter);
+	}
+	
+	public void hit(Character c){
+		System.out.println("ERROR: rest.hit should NEVER be called!");
 	}
 }
