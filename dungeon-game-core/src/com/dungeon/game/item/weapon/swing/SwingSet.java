@@ -12,6 +12,10 @@ public class SwingSet {
 	private World world;
 	private Melee weapon;
 	
+	public boolean isInUse;
+	
+	public boolean isInAttack;
+	
 	
 	public SwingSet(World world, Melee weapon, Swing[] swings){
 		this.world = world;
@@ -27,6 +31,10 @@ public class SwingSet {
 		swings[0].prevSwing = swings[0];
 		curSwing = 0;
 		swings[curSwing].beginSwing();
+		
+		isInUse = false;
+		
+		isInAttack = false;
 		
 	}
 	
@@ -46,5 +54,14 @@ public class SwingSet {
 				swings[curSwing].beginSwing();
 			}
 		}
+
+		isInUse = swings[curSwing].isInUse;
+		isInAttack = swings[curSwing].isInAttack;
+	}
+
+	public void reset() {
+		swings[0].prevSwing = swings[0];
+		curSwing = 0;
+		swings[curSwing].beginSwing();
 	}
 }

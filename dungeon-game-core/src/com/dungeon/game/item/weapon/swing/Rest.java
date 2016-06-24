@@ -9,6 +9,8 @@ public class Rest extends Swing{
 	}
 	
 	public void progressSwing(float counter){
+		isInUse = true;
+		isInAttack = false;
 		System.out.println("Winddown");
 		weapon.graphic.graphic_angle = (int) (prevSwing.angle-(prevSwing.angle - angle)/duration*counter);
 		weapon.graphic.graphic_pAngle = (int) (prevSwing.polarAngle-(prevSwing.polarAngle - polarAngle)/duration*counter);
@@ -16,6 +18,8 @@ public class Rest extends Swing{
 	}
 	
 	public void progressPause(float counter){
+		isInUse = false;
+		isInAttack = false;
 		System.out.println("At rest");
 		if(weapon.owner.leftEquiped != null && weapon.owner.leftEquiped.equals(weapon) && world.mouse.lb_pressed){
 			nextSwing = true;

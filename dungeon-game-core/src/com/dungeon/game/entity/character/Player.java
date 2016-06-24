@@ -251,7 +251,7 @@ public class Player extends Character {
 	@Override
 	public void post() {
 		if(leftEquiped != null && fightMode){
-			leftEquiped.graphic.updatePos();
+			leftEquiped.graphic.updatePos(true);
 //			float xMove = (float) (Math.cos((angle+leftEquipedPos[1])/180*Math.PI)*leftEquipedPos[0]);
 //			float yMove = (float) (Math.sin((angle+leftEquipedPos[1])/180*Math.PI)*leftEquipedPos[0]);
 //			leftEquiped.graphic.x = (float) (x)+xMove;
@@ -259,7 +259,7 @@ public class Player extends Character {
 //			leftEquiped.graphic.angle = angle-135+leftEquipedPos[2];
 		}
 		if(rightEquiped != null && fightMode){
-			rightEquiped.graphic.updatePos();
+			rightEquiped.graphic.updatePos(false);
 //			float xMove = (float) (Math.cos((angle+rightEquipedPos[1])/180*Math.PI)*rightEquipedPos[0]);
 //			float yMove = (float) (Math.sin((angle+rightEquipedPos[1])/180*Math.PI)*rightEquipedPos[0]);
 //			rightEquiped.graphic.x = (float) (x)+xMove;

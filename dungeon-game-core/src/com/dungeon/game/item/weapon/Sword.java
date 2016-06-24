@@ -35,62 +35,62 @@ public class Sword extends Melee {
 		new float[]{0.6f,2f,0.3f},
 		};
 
-	private final int REST = 0;
-	private final int WINDUP1 = 1;
-	private final int WINDUP2 = 2;
-	private final int WINDUP3 = 3;
-	private final int SWING1 = 4;
-	private final int SWING2 = 5;
-	private final int SWING3 = 6;
-	private final int WINDDOWN1 = 7;
-	private final int WINDDOWN2 = 8;
-	private final int WINDDOWN3 = 9;
-	
-	private final float REST_DIST = 14;
-	private final float REST_PANG = 82;
-	private final float REST_ANGL = -10;
-	
-	private final float WINDUP1_TIME = 10;
-	private final float WINDUP1_DIST = 24;
-	private final float WINDUP1_PANG = 70;
-	private final float WINDUP1_ANGL = 35;
-	
-	private final float SWING1_TIME = 8;
-	private final float SWING1_DIST = 14;
-	private final float SWING1_PANG = -55;
-	private final float SWING1_ANGL = -50;
-	private final float SWING1_CDWN = 30;
-	private final float SWING1_STAM = 10;
-	
-	private final float WINDDOWN1_TIME = 20;
-	
-	private final float WINDUP2_TIME = 10;
-	private final float WINDUP2_DIST = 16;
-	private final float WINDUP2_PANG = -75;
-	private final float WINDUP2_ANGL = -80;
-	
-	private final float SWING2_TIME = 10;
-	private final float SWING2_DIST = 26;
-	private final float SWING2_PANG = 80;
-	private final float SWING2_ANGL = 45;
-	private final float SWING2_CDWN = 30;
-	private final float SWING2_STAM = 15;
-	
-	private final float WINDDOWN2_TIME = 14;
-	
-	private final float WINDUP3_TIME = 15;
-	private final float WINDUP3_DIST = 12;
-	private final float WINDUP3_PANG = 30;
-	private final float WINDUP3_ANGL = -7;
-	
-	private final float SWING3_TIME = 4;
-	private final float SWING3_DIST = 28;
-	private final float SWING3_PANG = 6;
-	private final float SWING3_ANGL = -3;
-	private final float SWING3_CDWN = 20;
-	private final float SWING3_STAM = 7;
-
-	private final float WINDDOWN3_TIME = 14;
+//	private final int REST = 0;
+//	private final int WINDUP1 = 1;
+//	private final int WINDUP2 = 2;
+//	private final int WINDUP3 = 3;
+//	private final int SWING1 = 4;
+//	private final int SWING2 = 5;
+//	private final int SWING3 = 6;
+//	private final int WINDDOWN1 = 7;
+//	private final int WINDDOWN2 = 8;
+//	private final int WINDDOWN3 = 9;
+//	
+//	private final float REST_DIST = 14;
+//	private final float REST_PANG = 82;
+//	private final float REST_ANGL = -10;
+//	
+//	private final float WINDUP1_TIME = 10;
+//	private final float WINDUP1_DIST = 24;
+//	private final float WINDUP1_PANG = 70;
+//	private final float WINDUP1_ANGL = 35;
+//	
+//	private final float SWING1_TIME = 8;
+//	private final float SWING1_DIST = 14;
+//	private final float SWING1_PANG = -55;
+//	private final float SWING1_ANGL = -50;
+//	private final float SWING1_CDWN = 30;
+//	private final float SWING1_STAM = 10;
+//	
+//	private final float WINDDOWN1_TIME = 20;
+//	
+//	private final float WINDUP2_TIME = 10;
+//	private final float WINDUP2_DIST = 16;
+//	private final float WINDUP2_PANG = -75;
+//	private final float WINDUP2_ANGL = -80;
+//	
+//	private final float SWING2_TIME = 10;
+//	private final float SWING2_DIST = 26;
+//	private final float SWING2_PANG = 80;
+//	private final float SWING2_ANGL = 45;
+//	private final float SWING2_CDWN = 30;
+//	private final float SWING2_STAM = 15;
+//	
+//	private final float WINDDOWN2_TIME = 14;
+//	
+//	private final float WINDUP3_TIME = 15;
+//	private final float WINDUP3_DIST = 12;
+//	private final float WINDUP3_PANG = 30;
+//	private final float WINDUP3_ANGL = -7;
+//	
+//	private final float SWING3_TIME = 4;
+//	private final float SWING3_DIST = 28;
+//	private final float SWING3_PANG = 6;
+//	private final float SWING3_ANGL = -3;
+//	private final float SWING3_CDWN = 20;
+//	private final float SWING3_STAM = 7;
+//
+//	private final float WINDDOWN3_TIME = 14;
 	
 	protected float[] dmgMult;
 	protected float[] knockMult;
@@ -280,11 +280,13 @@ public class Sword extends Melee {
 
 	@Override
 	public boolean isInUse() {
-		return stage == WINDUP1||stage == WINDUP2||stage == WINDUP3||stage == SWING1||stage == SWING2||stage == SWING3||stage == WINDDOWN1||stage == WINDDOWN2||stage == WINDDOWN3;
+//		return stage == WINDUP1||stage == WINDUP2||stage == WINDUP3||stage == SWING1||stage == SWING2||stage == SWING3||stage == WINDDOWN1||stage == WINDDOWN2||stage == WINDDOWN3;
+		return swings.isInUse;
 	}
 
 	public boolean inAttack() {
-		return !hasHit && (stage == SWING1 || stage == SWING2 || stage == SWING3);
+//		return !hasHit && (stage == SWING1 || stage == SWING2 || stage == SWING3);
+		return swings.isInAttack;
 	}
 	
 	public void hit(Character e) {
@@ -331,12 +333,13 @@ public class Sword extends Melee {
 
 	@Override
 	public void reset() {
-		stage = REST;
-		stageTimer = 0;
-		
-		distance = REST_DIST;
-		polarAngle = REST_PANG;
-		angle = REST_ANGL;
+		swings.reset();
+//		stage = REST;
+//		stageTimer = 0;
+//		
+//		distance = REST_DIST;
+//		polarAngle = REST_PANG;
+//		angle = REST_ANGL;
 	}
 
 	@Override

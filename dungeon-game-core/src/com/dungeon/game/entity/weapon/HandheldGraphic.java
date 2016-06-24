@@ -39,12 +39,20 @@ public class HandheldGraphic extends Dynamic {
 		
 	}
 	
-	public void updatePos(){
-		float xMove = (float) (Math.cos((item.owner.angle+graphic_pAngle)/180*Math.PI)*graphic_dist);
-		float yMove = (float) (Math.sin((item.owner.angle+graphic_pAngle)/180*Math.PI)*graphic_dist);
-		x = (float) (item.owner.x)+xMove;
-		y = (float) (item.owner.y)+yMove;
-		angle = item.owner.angle-135+graphic_angle;
+	public void updatePos(boolean left){
+		if(left){
+			float xMove = (float) (Math.cos((item.owner.angle+graphic_pAngle)/180*Math.PI)*graphic_dist);
+			float yMove = (float) (Math.sin((item.owner.angle+graphic_pAngle)/180*Math.PI)*graphic_dist);
+			x = (float) (item.owner.x)+xMove;
+			y = (float) (item.owner.y)+yMove;
+			angle = item.owner.angle-135+graphic_angle;
+		}else{
+			float xMove = (float) (Math.cos((item.owner.angle-graphic_pAngle)/180*Math.PI)*graphic_dist);
+			float yMove = (float) (Math.sin((item.owner.angle-graphic_pAngle)/180*Math.PI)*graphic_dist);
+			x = (float) (item.owner.x)+xMove;
+			y = (float) (item.owner.y)+yMove;
+			angle = item.owner.angle-135-graphic_angle;
+		}
 		
 	}
 

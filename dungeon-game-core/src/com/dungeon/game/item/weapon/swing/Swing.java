@@ -34,6 +34,10 @@ public class Swing {
 	protected boolean done; //should the SwingSet progress to the next swing?
 	
 	protected boolean nextSwing; //true go to next swing, false go to rest
+
+	protected boolean isInUse;
+
+	protected boolean isInAttack;
 	
 	public Swing(World world, boolean cleave, int windupDuration, int windupDist, int windupPolarAngle, int windupAngle, int duration, int dist, int polarAngle, int angle){
 		this.world = world;
@@ -52,10 +56,15 @@ public class Swing {
 		this.angle = angle;
 		this.polarAngle = polarAngle;
 		
+		isInUse = false;
+		isInAttack = false;
+		
 	}
 	
 	//called if the swing is in the windup
 	public void progressWindup(float counter){ // have to add stuff for right side
+		isInUse = true;
+		isInAttack = false;
 		System.out.println("Windup");
 		weapon.graphic.graphic_angle = (int) (prevSwing.angle-(prevSwing.angle - windupAngle)/windupDuration*counter);
 		weapon.graphic.graphic_pAngle = (int) (prevSwing.polarAngle-(prevSwing.polarAngle - windupPolarAngle)/windupDuration*counter);
@@ -64,6 +73,8 @@ public class Swing {
 	
 	//called if the swing is in the swing
 	public void progressSwing(float counter){ // have to add stuff for right side
+		isInUse = true;
+		isInAttack = true;
 		System.out.println("Swing");
 		weapon.graphic.graphic_angle = (int) (windupAngle-(windupAngle - angle)/duration*counter);
 		weapon.graphic.graphic_pAngle = (int) (windupPolarAngle-(windupPolarAngle - polarAngle)/duration*counter);
@@ -72,10 +83,18 @@ public class Swing {
 	
 	//called if the swing is in the pause after the swing
 	public void progressPause(float counter){
+		isInUse = true;
+		isInAttack = false;
 		System.out.println("Pause");
 		//if the mouse button is pressed during the pause after the swing, then nextswing is set to true
-		if(weapon.owner.leftEquiped != null && weapon.owner.leftEquiped.equals(weapon) && world.mouse.lb_pressed)nextSwing = true; // have to change this for non-players. with owner.attackleft or something
-		else if(weapon.owner.rightEquiped != null && weapon.owner.rightEquiped.equals(weapon) && world.mouse.rb_pressed)nextSwing = true;
+		if(weapon.owner.leftEquiped != null && weapon.owner.leftEquiped.equals(weapon) && world.mouse.lb_pressed){
+			nextSwing = true; // have to change this for non-players. with owner.attackleft or something
+			done = true;
+		}
+		else if(weapon.owner.rightEquiped != null && weapon.owner.rightEquiped.equals(weapon) && world.mouse.rb_pressed){
+			nextSwing = true;
+			done = true;
+		}
 	}
 	
 	//ticks the swing
