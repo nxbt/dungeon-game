@@ -9,7 +9,7 @@ public class Swing {
 	
 	private static final int PAUSE_DURATION = 30;
 	
-	private World world;
+	protected World world;
 	
 	protected Melee weapon;
 	
@@ -23,13 +23,13 @@ public class Swing {
 	private int windupAngle;
 	private int windupPolarAngle;
 	
-	private int duration;
+	protected int duration;
 	
 	private int dist;
 	private int angle;
 	private int polarAngle;
 	
-	private int counter; //the swing coutner
+	protected int counter; //the swing coutner
 	
 	protected boolean done; //should the SwingSet progress to the next swing?
 	
