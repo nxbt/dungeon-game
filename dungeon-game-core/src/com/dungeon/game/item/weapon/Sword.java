@@ -10,6 +10,9 @@ import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.MeleeGraphic;
+import com.dungeon.game.item.weapon.swing.Rest;
+import com.dungeon.game.item.weapon.swing.Swing;
+import com.dungeon.game.item.weapon.swing.SwingSet;
 import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
 
@@ -131,6 +134,8 @@ public class Sword extends Melee {
 		knockMult = new float[]{1,1.3f,0.7f};		
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 		
+		swings = new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50)});
+		
 		distance=0;
 		polarAngle= 0;
 		angle=0;
@@ -141,126 +146,128 @@ public class Sword extends Melee {
 	}
 	
 	public float[] getPos(boolean mousedown, boolean mousepressed){
-		stageTimer++;
-		float speedConst=speed/10;
-		int index = (int) (stageTimer*speedConst);
-		switch(stage){
-		case REST:
-			if(Math.abs(distance-REST_DIST)>2)distance -= (distance-REST_DIST)/10;
-			if(Math.abs(polarAngle-REST_PANG)>2)polarAngle -= (polarAngle-REST_PANG)/10;
-			if(Math.abs(angle-REST_ANGL)>2)angle -= (angle-REST_ANGL)/10;
-			
-			if(mousedown && owner.use_stam(SWING1_STAM)){
-				stage=WINDUP1;
-				stageTimer = 0;
-			}
-			break;
-			
-		case WINDUP1:
-			if(distance<WINDUP1_DIST)distance-=speedConst*(REST_DIST-WINDUP1_DIST)/WINDUP1_TIME;
-			if(polarAngle>WINDUP1_PANG)polarAngle-=speedConst*(REST_PANG-WINDUP1_PANG)/WINDUP1_TIME;
-			if(angle<WINDUP1_ANGL)angle-=speedConst*(REST_ANGL-WINDUP1_ANGL)/WINDUP1_TIME;
-			
-			if(index>WINDUP1_TIME && !mousedown){
-				stageTimer = 0;
-				stage = SWING1;
-				if(hasHit) hasHit = false;
-			}
-			break;
-		case SWING1:
-			if(distance>SWING1_DIST)distance-=speedConst*(WINDUP1_DIST-SWING1_DIST)/SWING1_TIME;
-			if(polarAngle>SWING1_PANG)polarAngle-=speedConst*(WINDUP1_PANG-SWING1_PANG)/SWING1_TIME;
-			if(angle>SWING1_ANGL)angle-=speedConst*(WINDUP1_ANGL-SWING1_ANGL)/SWING1_TIME;
-			if(index>SWING1_TIME && !hasHit){
-				hasHit = true;
-			}
-			if(index>SWING1_TIME && mousedown && owner.use_stam(SWING2_STAM)){
-				stageTimer = 0;
-				stage = WINDUP2;
-			}
-			if(index>SWING1_CDWN*speedConst + SWING1_TIME ){
-				stageTimer = 0;
-				stage = WINDDOWN1;
-			}
-			break;
-		case WINDDOWN1:
-			if(distance>REST_DIST)distance-=speedConst*(SWING1_DIST-REST_DIST)/WINDDOWN1_TIME;
-			if(polarAngle<REST_PANG)polarAngle-=speedConst*(SWING1_PANG-REST_PANG)/WINDDOWN1_TIME;
-			if(angle<REST_ANGL)angle-=speedConst*(SWING1_ANGL-REST_ANGL)/WINDDOWN1_TIME;
-			if(index>WINDDOWN1_TIME){
-				stageTimer = 0;
-				stage = REST;
-			}
-			break;
-		case WINDUP2:
-			if(distance<WINDUP2_DIST)distance-=speedConst*(SWING1_DIST-WINDUP2_DIST)/WINDUP2_TIME;
-			if(polarAngle>WINDUP2_PANG)polarAngle-=speedConst*(SWING1_PANG-WINDUP2_PANG)/WINDUP2_TIME;
-			if(angle>WINDUP2_ANGL)angle-=speedConst*(SWING1_ANGL-WINDUP2_ANGL)/WINDUP2_TIME;
-			if(index>WINDUP2_TIME && !mousedown){
-				stageTimer = 0;
-				stage = SWING2;
-				if(hasHit) hasHit = false;
-			}
-			break;
-		case SWING2:
-			if(distance<SWING2_DIST)distance-=speedConst*(WINDUP2_DIST-SWING2_DIST)/SWING2_TIME;
-			if(polarAngle<SWING2_PANG)polarAngle-=speedConst*(WINDUP2_PANG-SWING2_PANG)/SWING2_TIME;
-			if(angle<SWING2_ANGL)angle-=speedConst*(WINDUP2_ANGL-SWING2_ANGL)/SWING2_TIME;
-			if(index>SWING1_TIME && !hasHit){
-				hasHit = true;
-			}
-			if(index>SWING2_TIME && mousedown && owner.use_stam(SWING3_STAM)){
-				stageTimer = 0;
-				stage = WINDUP3;
-			}
-			if(index>SWING2_CDWN*speedConst + SWING2_TIME){
-				stageTimer = 0;
-				stage = WINDDOWN2;
-			}
-			break;
-		case WINDDOWN2:
-			if(distance>REST_DIST)distance-=speedConst*(SWING2_DIST-REST_DIST)/WINDDOWN2_TIME;
-			if(polarAngle<REST_PANG)polarAngle-=speedConst*(SWING2_PANG-REST_PANG)/WINDDOWN2_TIME;
-			if(angle>REST_ANGL)angle-=speedConst*(SWING2_ANGL-REST_ANGL)/WINDDOWN2_TIME;
-			if(index>WINDDOWN2_TIME){
-				stageTimer = 0;
-				stage = REST;
-			}
-			break;
-		case WINDUP3:
-			if(distance>WINDUP3_DIST)distance-=speedConst*(SWING2_DIST-WINDUP3_DIST)/WINDUP3_TIME;
-			if(polarAngle>WINDUP3_PANG)polarAngle-=speedConst*(SWING2_PANG-WINDUP3_PANG)/WINDUP3_TIME;
-			if(angle>WINDUP3_ANGL)angle-=speedConst*(SWING2_ANGL-WINDUP3_ANGL)/WINDUP3_TIME;
-			if(index>WINDUP3_TIME && !mousedown){
-				stageTimer = 0;
-				stage = SWING3;
-				if(hasHit) hasHit = false;
-			}
-			break;
-		case SWING3:
-			if(distance<SWING3_DIST)distance-=speedConst*(WINDUP3_DIST-SWING3_DIST)/SWING3_TIME;
-			if(polarAngle>SWING3_PANG)polarAngle-=speedConst*(WINDUP3_PANG-SWING3_PANG)/SWING3_TIME;
-			if(angle<SWING3_ANGL)angle-=speedConst*(WINDUP3_ANGL-SWING3_ANGL)/SWING3_TIME;
-			if(index>SWING3_TIME && !hasHit){
-				hasHit = true;
-			}
-			if(index>SWING3_CDWN*speedConst + SWING3_TIME){
-				stageTimer = 0;
-				stage = WINDDOWN3;
-			}
-			break;
-		case WINDDOWN3:
-			if(distance>REST_DIST)distance-=speedConst*(SWING3_DIST-REST_DIST)/WINDDOWN3_TIME;
-			if(polarAngle<REST_PANG)polarAngle-=speedConst*(SWING3_PANG-REST_PANG)/WINDDOWN3_TIME;
-			if(angle>REST_ANGL)angle-=speedConst*(SWING3_ANGL-REST_ANGL)/WINDDOWN3_TIME;
-			if(index>WINDDOWN3_TIME){
-				stageTimer = 0;
-				stage = REST;
-			}
-			break;
-		}
+//		stageTimer++;
+//		float speedConst=speed/10;
+//		int index = (int) (stageTimer*speedConst);
+//		switch(stage){
+//		case REST:
+//			if(Math.abs(distance-REST_DIST)>2)distance -= (distance-REST_DIST)/10;
+//			if(Math.abs(polarAngle-REST_PANG)>2)polarAngle -= (polarAngle-REST_PANG)/10;
+//			if(Math.abs(angle-REST_ANGL)>2)angle -= (angle-REST_ANGL)/10;
+//			
+//			if(mousedown && owner.use_stam(SWING1_STAM)){
+//				stage=WINDUP1;
+//				stageTimer = 0;
+//			}
+//			break;
+//			
+//		case WINDUP1:
+//			if(distance<WINDUP1_DIST)distance-=speedConst*(REST_DIST-WINDUP1_DIST)/WINDUP1_TIME;
+//			if(polarAngle>WINDUP1_PANG)polarAngle-=speedConst*(REST_PANG-WINDUP1_PANG)/WINDUP1_TIME;
+//			if(angle<WINDUP1_ANGL)angle-=speedConst*(REST_ANGL-WINDUP1_ANGL)/WINDUP1_TIME;
+//			
+//			if(index>WINDUP1_TIME && !mousedown){
+//				stageTimer = 0;
+//				stage = SWING1;
+//				if(hasHit) hasHit = false;
+//			}
+//			break;
+//		case SWING1:
+//			if(distance>SWING1_DIST)distance-=speedConst*(WINDUP1_DIST-SWING1_DIST)/SWING1_TIME;
+//			if(polarAngle>SWING1_PANG)polarAngle-=speedConst*(WINDUP1_PANG-SWING1_PANG)/SWING1_TIME;
+//			if(angle>SWING1_ANGL)angle-=speedConst*(WINDUP1_ANGL-SWING1_ANGL)/SWING1_TIME;
+//			if(index>SWING1_TIME && !hasHit){
+//				hasHit = true;
+//			}
+//			if(index>SWING1_TIME && mousedown && owner.use_stam(SWING2_STAM)){
+//				stageTimer = 0;
+//				stage = WINDUP2;
+//			}
+//			if(index>SWING1_CDWN*speedConst + SWING1_TIME ){
+//				stageTimer = 0;
+//				stage = WINDDOWN1;
+//			}
+//			break;
+//		case WINDDOWN1:
+//			if(distance>REST_DIST)distance-=speedConst*(SWING1_DIST-REST_DIST)/WINDDOWN1_TIME;
+//			if(polarAngle<REST_PANG)polarAngle-=speedConst*(SWING1_PANG-REST_PANG)/WINDDOWN1_TIME;
+//			if(angle<REST_ANGL)angle-=speedConst*(SWING1_ANGL-REST_ANGL)/WINDDOWN1_TIME;
+//			if(index>WINDDOWN1_TIME){
+//				stageTimer = 0;
+//				stage = REST;
+//			}
+//			break;
+//		case WINDUP2:
+//			if(distance<WINDUP2_DIST)distance-=speedConst*(SWING1_DIST-WINDUP2_DIST)/WINDUP2_TIME;
+//			if(polarAngle>WINDUP2_PANG)polarAngle-=speedConst*(SWING1_PANG-WINDUP2_PANG)/WINDUP2_TIME;
+//			if(angle>WINDUP2_ANGL)angle-=speedConst*(SWING1_ANGL-WINDUP2_ANGL)/WINDUP2_TIME;
+//			if(index>WINDUP2_TIME && !mousedown){
+//				stageTimer = 0;
+//				stage = SWING2;
+//				if(hasHit) hasHit = false;
+//			}
+//			break;
+//		case SWING2:
+//			if(distance<SWING2_DIST)distance-=speedConst*(WINDUP2_DIST-SWING2_DIST)/SWING2_TIME;
+//			if(polarAngle<SWING2_PANG)polarAngle-=speedConst*(WINDUP2_PANG-SWING2_PANG)/SWING2_TIME;
+//			if(angle<SWING2_ANGL)angle-=speedConst*(WINDUP2_ANGL-SWING2_ANGL)/SWING2_TIME;
+//			if(index>SWING1_TIME && !hasHit){
+//				hasHit = true;
+//			}
+//			if(index>SWING2_TIME && mousedown && owner.use_stam(SWING3_STAM)){
+//				stageTimer = 0;
+//				stage = WINDUP3;
+//			}
+//			if(index>SWING2_CDWN*speedConst + SWING2_TIME){
+//				stageTimer = 0;
+//				stage = WINDDOWN2;
+//			}
+//			break;
+//		case WINDDOWN2:
+//			if(distance>REST_DIST)distance-=speedConst*(SWING2_DIST-REST_DIST)/WINDDOWN2_TIME;
+//			if(polarAngle<REST_PANG)polarAngle-=speedConst*(SWING2_PANG-REST_PANG)/WINDDOWN2_TIME;
+//			if(angle>REST_ANGL)angle-=speedConst*(SWING2_ANGL-REST_ANGL)/WINDDOWN2_TIME;
+//			if(index>WINDDOWN2_TIME){
+//				stageTimer = 0;
+//				stage = REST;
+//			}
+//			break;
+//		case WINDUP3:
+//			if(distance>WINDUP3_DIST)distance-=speedConst*(SWING2_DIST-WINDUP3_DIST)/WINDUP3_TIME;
+//			if(polarAngle>WINDUP3_PANG)polarAngle-=speedConst*(SWING2_PANG-WINDUP3_PANG)/WINDUP3_TIME;
+//			if(angle>WINDUP3_ANGL)angle-=speedConst*(SWING2_ANGL-WINDUP3_ANGL)/WINDUP3_TIME;
+//			if(index>WINDUP3_TIME && !mousedown){
+//				stageTimer = 0;
+//				stage = SWING3;
+//				if(hasHit) hasHit = false;
+//			}
+//			break;
+//		case SWING3:
+//			if(distance<SWING3_DIST)distance-=speedConst*(WINDUP3_DIST-SWING3_DIST)/SWING3_TIME;
+//			if(polarAngle>SWING3_PANG)polarAngle-=speedConst*(WINDUP3_PANG-SWING3_PANG)/SWING3_TIME;
+//			if(angle<SWING3_ANGL)angle-=speedConst*(WINDUP3_ANGL-SWING3_ANGL)/SWING3_TIME;
+//			if(index>SWING3_TIME && !hasHit){
+//				hasHit = true;
+//			}
+//			if(index>SWING3_CDWN*speedConst + SWING3_TIME){
+//				stageTimer = 0;
+//				stage = WINDDOWN3;
+//			}
+//			break;
+//		case WINDDOWN3:
+//			if(distance>REST_DIST)distance-=speedConst*(SWING3_DIST-REST_DIST)/WINDDOWN3_TIME;
+//			if(polarAngle<REST_PANG)polarAngle-=speedConst*(SWING3_PANG-REST_PANG)/WINDDOWN3_TIME;
+//			if(angle>REST_ANGL)angle-=speedConst*(SWING3_ANGL-REST_ANGL)/WINDDOWN3_TIME;
+//			if(index>WINDDOWN3_TIME){
+//				stageTimer = 0;
+//				stage = REST;
+//			}
+//			break;
+//		}
+//		
+//		if(!leftSide) return new float[]{distance,polarAngle*-1,angle*-1};
 		
-		if(!leftSide) return new float[]{distance,polarAngle*-1,angle*-1};
+		swings.progressWeapon();
 		
 		return new float[]{distance,polarAngle,angle};
 	}

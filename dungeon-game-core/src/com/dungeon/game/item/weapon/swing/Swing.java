@@ -55,14 +55,14 @@ public class Swing {
 	}
 	
 	//called if the swing is in the windup
-	public void progressWindup(int counter){
+	public void progressWindup(int counter){ // have to add stuff for right side
 		weapon.graphic.graphic_angle = prevSwing.angle+(prevSwing.angle - windupAngle)/windupDuration*counter;
 		weapon.graphic.graphic_pAngle = prevSwing.polarAngle+(prevSwing.polarAngle - windupPolarAngle)/windupDuration*counter;
 		weapon.graphic.graphic_dist = prevSwing.dist+(prevSwing.dist - windupDist)/windupDuration*counter;
 	}
 	
 	//called if the swing is in the swing
-	public void progressSwing(int counter){
+	public void progressSwing(int counter){ // have to add stuff for right side
 		weapon.graphic.graphic_angle = windupAngle+(windupAngle - angle)/duration*counter;
 		weapon.graphic.graphic_pAngle = windupPolarAngle+(windupPolarAngle - polarAngle)/duration*counter;
 		weapon.graphic.graphic_dist = windupDist+(windupDist - dist)/duration*counter;

@@ -244,18 +244,20 @@ public class Player extends Character {
 	@Override
 	public void post() {
 		if(leftEquiped != null && fightMode){
-			float xMove = (float) (Math.cos((angle+leftEquipedPos[1])/180*Math.PI)*leftEquipedPos[0]);
-			float yMove = (float) (Math.sin((angle+leftEquipedPos[1])/180*Math.PI)*leftEquipedPos[0]);
-			leftEquiped.graphic.x = (float) (x)+xMove;
-			leftEquiped.graphic.y = (float) (y)+yMove;
-			leftEquiped.graphic.angle = angle-135+leftEquipedPos[2];
+			leftEquiped.graphic.updatePos();
+//			float xMove = (float) (Math.cos((angle+leftEquipedPos[1])/180*Math.PI)*leftEquipedPos[0]);
+//			float yMove = (float) (Math.sin((angle+leftEquipedPos[1])/180*Math.PI)*leftEquipedPos[0]);
+//			leftEquiped.graphic.x = (float) (x)+xMove;
+//			leftEquiped.graphic.y = (float) (y)+yMove;
+//			leftEquiped.graphic.angle = angle-135+leftEquipedPos[2];
 		}
 		if(rightEquiped != null && fightMode){
-			float xMove = (float) (Math.cos((angle+rightEquipedPos[1])/180*Math.PI)*rightEquipedPos[0]);
-			float yMove = (float) (Math.sin((angle+rightEquipedPos[1])/180*Math.PI)*rightEquipedPos[0]);
-			rightEquiped.graphic.x = (float) (x)+xMove;
-			rightEquiped.graphic.y = (float) (y)+yMove;
-			rightEquiped.graphic.angle = angle-135+rightEquipedPos[2];
+			rightEquiped.graphic.updatePos();
+//			float xMove = (float) (Math.cos((angle+rightEquipedPos[1])/180*Math.PI)*rightEquipedPos[0]);
+//			float yMove = (float) (Math.sin((angle+rightEquipedPos[1])/180*Math.PI)*rightEquipedPos[0]);
+//			rightEquiped.graphic.x = (float) (x)+xMove;
+//			rightEquiped.graphic.y = (float) (y)+yMove;
+//			rightEquiped.graphic.angle = angle-135+rightEquipedPos[2];
 		}
 		if(killMe){
 			if(leftEquiped!=null)unequip(leftEquiped);
