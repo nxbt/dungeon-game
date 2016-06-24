@@ -9,12 +9,20 @@ public class Rest extends Swing{
 	}
 	
 	public void progressSwing(int counter){
-	
+		weapon.graphic.graphic_angle = prevSwing.angle+(prevSwing.angle - angle)/duration*counter;
+		weapon.graphic.graphic_pAngle = prevSwing.polarAngle+(prevSwing.polarAngle - polarAngle)/duration*counter;
+		weapon.graphic.graphic_dist = prevSwing.dist+(prevSwing.dist - dist)/duration*counter;
 	}
 	
 	public void progressPause(int counter){
-		if(weapon.owner.leftEquiped.equals(weapon) && world.mouse.lb_pressed)nextSwing = true;
-		else if(world.mouse.rb_pressed)nextSwing = true;
+		if(weapon.owner.leftEquiped.equals(weapon) && world.mouse.lb_pressed){
+			nextSwing = true;
+			done = true;
+		}
+		else if(world.mouse.rb_pressed){
+			nextSwing = true;
+			done = true;
+		}
 	}
 	
 	public void progress(){

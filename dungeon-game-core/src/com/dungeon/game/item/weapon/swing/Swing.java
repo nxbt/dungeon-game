@@ -25,9 +25,9 @@ public class Swing {
 	
 	protected int duration;
 	
-	private int dist;
-	private int angle;
-	private int polarAngle;
+	protected int dist;
+	protected int angle;
+	protected int polarAngle;
 	
 	protected int counter; //the swing coutner
 	
@@ -63,15 +63,15 @@ public class Swing {
 	
 	//called if the swing is in the swing
 	public void progressSwing(int counter){
-		weapon.graphic.graphic_angle = windupAngle+(windupAngle - angle)/windupDuration*counter;
-		weapon.graphic.graphic_pAngle = windupPolarAngle+(windupPolarAngle - polarAngle)/windupDuration*counter;
-		weapon.graphic.graphic_dist = windupDist+(windupDist - dist)/windupDuration*counter;
+		weapon.graphic.graphic_angle = windupAngle+(windupAngle - angle)/duration*counter;
+		weapon.graphic.graphic_pAngle = windupPolarAngle+(windupPolarAngle - polarAngle)/duration*counter;
+		weapon.graphic.graphic_dist = windupDist+(windupDist - dist)/duration*counter;
 	}
 	
 	//called if the swing is in the pause after the swing
 	public void progressPause(int counter){
 		//if the mouse button is pressed during the pause after the swing, then nextswing is set to true
-		if(weapon.owner.leftEquiped.equals(weapon) && world.mouse.lb_pressed)nextSwing = true;
+		if(weapon.owner.leftEquiped.equals(weapon) && world.mouse.lb_pressed)nextSwing = true; // have to change this for non-players. with owner.attackleft or something
 		else if(world.mouse.rb_pressed)nextSwing = true;
 	}
 	

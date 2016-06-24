@@ -24,7 +24,7 @@ public class SwingSet {
 			this.swings[i].weapon = this.weapon;
 			this.swings[i].prevSwing = this.swings[i-1];
 		}
-		
+		swings[0].prevSwing = swings[0];
 		curSwing = 0;
 		
 	}
@@ -34,8 +34,14 @@ public class SwingSet {
 		if(swings[curSwing].done){
 			if(swings[curSwing].nextSwing){
 				curSwing++;
-				if(curSwing == swings.length)curSwing = 0;
-			}else curSwing = 0;
+				if(curSwing == swings.length){
+					swings[0].prevSwing = swings[curSwing-1];
+					curSwing = 0;
+				}
+			}else {
+				swings[0].prevSwing = swings[curSwing];
+				curSwing = 0;
+			}
 		}
 	}
 }
