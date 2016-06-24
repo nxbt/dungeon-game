@@ -134,9 +134,9 @@ public class Sword extends Melee {
 		knockMult = new float[]{1,1.3f,0.7f};		
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 		
-		swings = new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), 
 				new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50), 
-				new Swing(world, false, 10, 16, -75, -80, 10, 26, 80, 45)
+				new Swing(world, false, 10, 16, -75, -80, 10, 26, 80, 45),
+				new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3),
 				});
 		
 		distance=0;
