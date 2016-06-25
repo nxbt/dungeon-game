@@ -1,10 +1,11 @@
 package com.dungeon.game.item.weapon.swing;
 
+import com.dungeon.game.item.Item;
 import com.dungeon.game.item.weapon.Melee;
 import com.dungeon.game.world.World;
 import com.dungeon.game.entity.character.Character;
 
-public class SwingSet {
+public class SwingSet{
 
 	private Swing[] swings;
 	
@@ -74,5 +75,10 @@ public class SwingSet {
 	public void hit(Character c){
 		swings[curSwing].hit(c);
 		weapon.hasHit = swings[curSwing].hasHit;
+	}
+	
+	public void setWorld(World w){
+		world = w;
+		for(int i = 0; i < swings.length; i++)swings[i].world = w;
 	}
 }

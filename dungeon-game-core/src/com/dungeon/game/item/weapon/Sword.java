@@ -35,13 +35,33 @@ public class Sword extends Melee {
 		new float[]{0.6f,2f,0.3f},
 		};
 		
-	private static final float[][] BLADE_SWINGS = new float[][]{
-		new float[]{},
-		new float[]{},
-		new float[]{},
-		new float[]{},
-		new float[]{}
-		};
+	private final SwingSet[] BLADE_SWINGS = new SwingSet[]{
+			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
+					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f), 
+					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f),
+					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f),
+					}),
+			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
+					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f), 
+					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f),
+					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f),
+					}),
+			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
+					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f), 
+					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f),
+					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f),
+					}),
+			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
+					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f), 
+					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f),
+					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f),
+					}),
+			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
+					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f), 
+					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f),
+					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f),
+					})
+	};
 	
 	
 	
@@ -146,11 +166,8 @@ public class Sword extends Melee {
 		
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 		
-		swings = new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
-				new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f), 
-				new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f),
-				new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f),
-				});
+		swings = BLADE_SWINGS[blade]; // do we have to clone it? I guess not
+		swings.setWorld(world); //is this neccicary? (I think so)
 		
 		distance=0;
 		polarAngle= 0;
