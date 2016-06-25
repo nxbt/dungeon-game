@@ -188,7 +188,7 @@ name = "Goon";
 				attack = false;
 			}
 			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
-			leftEquipedPos = ((Weapon) inv.slot[30].item).getPos(down&&attack, click&&attack);
+			((Weapon) inv.slot[30].item).getPos(down&&attack, click&&attack);
 			((Weapon)inv.slot[30].item).graphic.calc();
 			
 		}
@@ -204,12 +204,7 @@ name = "Goon";
 
 	public void post() {
 		if(leftEquiped != null){
-			float xMove = (float) (Math.cos((angle+leftEquipedPos[1])/180*Math.PI)*leftEquipedPos[0]);
-			float yMove = (float) (Math.sin((angle+leftEquipedPos[1])/180*Math.PI)*leftEquipedPos[0]);
-			
-			((Weapon)(inv.slot[30].item)).graphic.x = (float) (x)+xMove;
-			((Weapon)(inv.slot[30].item)).graphic.y = (float) (y)+yMove;
-			((Weapon)(inv.slot[30].item)).graphic.angle = angle-135+leftEquipedPos[2];
+			leftEquiped.graphic.updatePos(true);
 		}
 	}
 }

@@ -50,9 +50,6 @@ public abstract class Character extends Dynamic {
 	public Hand leftEquiped;
 	public Hand rightEquiped;
 	
-	protected float[] leftEquipedPos;
-	protected float[] rightEquipedPos;
-	
 	public boolean fightMode;
 	
 	protected boolean attacking;

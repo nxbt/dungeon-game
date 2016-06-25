@@ -219,7 +219,7 @@ public class Player extends Character {
 		
 		if(leftEquiped != null && fightMode) {
 			if(((Hand) inv.slot[30].item).isInUse())attacking = true;
-			leftEquipedPos = ((Hand) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
+			((Hand) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
 			((Hand)inv.slot[30].item).graphic.calc();
 			if(inv.slot[30].item instanceof Medium) {
 				if(Gdx.input.isKeyJustPressed(Input.Keys.O))((Medium)inv.slot[30].item).preSpell();
@@ -229,7 +229,7 @@ public class Player extends Character {
 		}
 		if(rightEquiped != null && fightMode) {
 			if(((Hand) inv.slot[31].item).isInUse())attacking = true;
-			rightEquipedPos = ((Hand) inv.slot[31].item).getPos(world.mouse.rb_down, world.mouse.rb_pressed);
+			((Hand) inv.slot[31].item).getPos(world.mouse.rb_down, world.mouse.rb_pressed);
 			((Hand)inv.slot[31].item).graphic.calc();
 			if(inv.slot[31].item instanceof Medium) {
 				if(Gdx.input.isKeyJustPressed(Input.Keys.O))((Medium)inv.slot[31].item).preSpell();
