@@ -34,6 +34,17 @@ public class Sword extends Melee {
 		new float[]{1.5f,0.9f,0.4f},
 		new float[]{0.6f,2f,0.3f},
 		};
+		
+	private static final float[][] BLADE_SWINGS = new float[][]{
+		new float[]{},
+		new float[]{},
+		new float[]{},
+		new float[]{},
+		new float[]{}
+		};
+	
+	
+	
 
 //	private final int REST = 0;
 //	private final int WINDUP1 = 1;
