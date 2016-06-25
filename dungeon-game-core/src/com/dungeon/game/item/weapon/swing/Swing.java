@@ -102,11 +102,11 @@ public class Swing {
 		isInAttack = false;
 		System.out.println("Pause");
 		//if the mouse button is pressed during the pause after the swing, then nextswing is set to true
-		if(weapon.owner.leftEquiped != null && weapon.owner.leftEquiped.equals(weapon) && world.mouse.lb_pressed){
+		if(weapon.owner.leftEquiped != null && weapon.owner.leftEquiped.equals(weapon) && weapon.owner.leftActivated){
 			nextSwing = true; // have to change this for non-players. with owner.attackleft or something
 			done = true;
 		}
-		else if(weapon.owner.rightEquiped != null && weapon.owner.rightEquiped.equals(weapon) && world.mouse.rb_pressed){
+		else if(weapon.owner.rightEquiped != null && weapon.owner.rightEquiped.equals(weapon) && weapon.owner.rightActivated){
 			nextSwing = true;
 			done = true;
 		}

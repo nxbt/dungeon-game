@@ -179,11 +179,6 @@ name = "Goon";
 				down = Math.random()>0.02;
 				attack = true;
 			}
-			if(!ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<90){
-				click = true;
-				down = Math.random()>0.9;
-				attack = true;
-			}
 			if(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat")){
 				attack = false;
 			}
@@ -199,6 +194,19 @@ name = "Goon";
 		else{
 			mvel = 5;
 			torq = 10;
+		}
+	}
+	
+	@Override
+	protected void activations() {
+		if(!ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<90){
+			if(Math.random() < 0.2)rightActivated = true;
+			else rightActivated = false;
+			if(Math.random() < 0.2)leftActivated = true;
+			else leftActivated = false;
+		}else{
+			rightActivated = false;
+			leftActivated = false;
 		}
 	}
 

@@ -248,6 +248,15 @@ public class Player extends Character {
 		}
 	}
 
+
+	@Override
+	protected void activations() {
+		if(world.mouse.rb_pressed)rightActivated = true;
+		else rightActivated = false;
+		if(world.mouse.lb_pressed)leftActivated = true;
+		else leftActivated = false;
+	}
+
 	@Override
 	public void post() {
 		if(leftEquiped != null && fightMode){

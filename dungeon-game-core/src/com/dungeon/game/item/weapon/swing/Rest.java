@@ -21,11 +21,11 @@ public class Rest extends Swing{
 		isInUse = false;
 		isInAttack = false;
 		System.out.println("At rest");
-		if(weapon.owner.leftEquiped != null && weapon.owner.leftEquiped.equals(weapon) && world.mouse.lb_pressed){
+		if(weapon.owner.leftEquiped != null && weapon.owner.leftEquiped.equals(weapon) && weapon.owner.leftActivated){
 			nextSwing = true;
 			done = true;
 		}
-		else if(weapon.owner.rightEquiped != null && weapon.owner.rightEquiped.equals(weapon) && world.mouse.rb_pressed){
+		else if(weapon.owner.rightEquiped != null && weapon.owner.rightEquiped.equals(weapon) && weapon.owner.rightActivated){
 			nextSwing = true;
 			done = true;
 		}

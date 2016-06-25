@@ -50,6 +50,9 @@ public abstract class Character extends Dynamic {
 	public Hand leftEquiped;
 	public Hand rightEquiped;
 	
+	public boolean leftActivated;
+	public boolean rightActivated;
+	
 	public boolean fightMode;
 	
 	protected boolean attacking;
@@ -115,6 +118,9 @@ public abstract class Character extends Dynamic {
 		face = new Texture("face.png");
 		
 		speechColor = Color.BLACK;
+		
+		leftActivated = false;
+		rightActivated = false;
 	}
 
 	public void norm() {
@@ -123,6 +129,7 @@ public abstract class Character extends Dynamic {
 	
 	public void update() {
 		norm();
+		activations();
 		calc();
 		effect();
 		move();
@@ -289,6 +296,12 @@ public abstract class Character extends Dynamic {
 			}
 		}
 	}
+	
+
+
+	protected void activations(){
+		
+	};
 	
 	public void see(Entity e) {}
 
