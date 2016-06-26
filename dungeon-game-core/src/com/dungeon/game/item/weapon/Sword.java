@@ -33,9 +33,21 @@ public class Sword extends Melee {
 		new float[]{0.8f,1.3f,0.6f,0.7f},
 		new float[]{1.2f,0.7f,1.3f, 1.3f},
 		new float[]{1.5f,0.9f,0.4f, 0.9f},
-		new float[]{0.6f,2f,0.3f, 0.3f},
+		new float[]{0.6f,2f,0.3f, 0.3f}
 		};
 		
+	private static final float[][] GUARD_STATS = new float[][]{
+		new float[]{1,1,1,1},
+		new float[]{1,1.05f,0.9f,1.05f},
+		new float[]{1,0.95f,1.05f,1.1f}
+		};
+		
+	private static final float[][] HILT_STATS = new float[][]{
+		new float[]{1,1,1,1},
+		new float[]{1,1,1.1f,1.1f},
+		new float[]{1.05f,0.95f,0.9f,1.05f}
+		};
+	
 	private final SwingSet[] BLADE_SWINGS = new SwingSet[]{
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //sword
 					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
@@ -183,15 +195,15 @@ public class Sword extends Melee {
 		hasHit = false;
 		
 		
-		this.damage = damage * BLADE_STATS[blade][0];
-		this.speed = speed * BLADE_STATS[blade][1];
+		this.damage = damage * BLADE_STATS[blade][0] * GUARD_STATS[guard][0] * HILT_STATS[hilt][0];
+		this.speed = speed * BLADE_STATS[blade][1] * GUARD_STATS[guard][1] * HILT_STATS[hilt][1];
 		
 		knockratio = 0.4f;
-		knockstr = 10 * BLADE_STATS[blade][2];	
+		knockstr = 10 * BLADE_STATS[blade][2]* GUARD_STATS[guard][2] * HILT_STATS[hilt][2];	
 		
-		this.weight = weight * BLADE_STATS[blade][3];	
+		this.weight = weight * BLADE_STATS[blade][3]* GUARD_STATS[guard][3] * HILT_STATS[hilt][3];	
 		
-		desc = "An incredibly reliable melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f + "\n bladeNum: "+blade + "\n guardNum: "+guard + "\n hiltNum: "+hilt;
+		desc = "An incredibly reliable melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f + "\n\n bladeNum: "+blade + "\n guardNum: "+guard + "\n hiltNum: "+hilt;
 
 		
 		dmgMult = new float[]{0.7f,1,1.5f};
