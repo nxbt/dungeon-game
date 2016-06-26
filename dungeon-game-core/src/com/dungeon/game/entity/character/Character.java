@@ -132,6 +132,12 @@ public abstract class Character extends Dynamic {
 		//default arrays
 		equipSlots = new Slot[]{};
 		equipItems = new Equipable[equipSlots.length];
+		
+		armor = 0;
+		arcan_resist = 0;
+		flame_resist = 0;
+		ligtn_resist = 0;
+		poisn_resist = 0;
 	}
 
 	public void norm() {
@@ -378,6 +384,8 @@ public abstract class Character extends Dynamic {
 	
 	public float damage(float value /*Add an array of Effects*/, ArrayList<Effect> hitEffects){
 		if(immune) return 0;
+		
+		value *=Math.pow(0.9945f,armor); //reduce damage for armor
 		
 		float amount = life - Math.max(life-value,0);
 		life-=value;
