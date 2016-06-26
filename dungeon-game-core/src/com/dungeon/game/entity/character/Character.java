@@ -306,34 +306,34 @@ public abstract class Character extends Dynamic {
 	}
 	
 	private void handleEquips() {
-		for(int i = 0; i < equipSlots.length; i++){
-			if(equipSlots[i].item == null){
-				if(equipItems[i] != null){
-					equipItems[i].unequip();
-					equipItems[i] = null;
-				}
-			}else{
-				if(equipItems[i] == null){
-					if(equipSlots[i].item instanceof Weapon){
-						equipItems[i] = null;
-					}else{
-						equipItems[i] = (Equipable) equipSlots[i].item;
-						equipItems[i].equip(this, false);
-					}
-				}else{
-					if(!equipSlots[i].item.equals(equipItems[i])){
-						equipItems[i].unequip();
-						if(equipSlots[i].item instanceof Weapon){
-							equipItems[i] = null;
-						}else{
-							equipItems[i] = (Equipable) equipSlots[i].item;
-							equipItems[i].equip(this, false);
-						}
-					}
-				}
-			}
-			
-		}
+//		for(int i = 0; i < equipSlots.length; i++){
+//			if(equipSlots[i].item == null){
+//				if(equipItems[i] != null){
+//					equipItems[i].unequip();
+//					equipItems[i] = null;
+//				}
+//			}else{
+//				if(equipItems[i] == null){
+//					if(equipSlots[i].item instanceof Weapon){
+//						equipItems[i] = null;
+//					}else{
+//						equipItems[i] = (Equipable) equipSlots[i].item;
+//						equipItems[i].equip(this, false);
+//					}
+//				}else{
+//					if(!equipSlots[i].item.equals(equipItems[i])){
+//						equipItems[i].unequip();
+//						if(equipSlots[i].item instanceof Weapon){
+//							equipItems[i] = null;
+//						}else{
+//							equipItems[i] = (Equipable) equipSlots[i].item;
+//							equipItems[i].equip(this, false);
+//						}
+//					}
+//				}
+//			}
+//			
+//		}
 		
 	}
 
@@ -450,12 +450,18 @@ public abstract class Character extends Dynamic {
 		fightMode = !fightMode;
 		
 		if(fightMode) {
-			if(leftEquiped != null) equip(leftEquiped, true);
+			if(equipSlots[0].item != null && equipSlots[0].item instanceof Weapon){
+				equipItems[0] = (Equipable) equipSlots[0].item;
+				equip((Hand) equipItems[0], true);
+			}
 			if(rightEquiped != null) equip(rightEquiped, false);
 		}
 		
 		else {
-			if(leftEquiped != null) unequip(leftEquiped);
+			if(equipItems[0] != null && equipItems[0] instanceof Weapon){
+				equipItems[0].unequip();
+				equipItems[0] = null;
+			}
 			if(rightEquiped != null) unequip(rightEquiped);
 		}
 	}

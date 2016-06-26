@@ -30,6 +30,7 @@ public abstract class Hand extends Equipable {
 	}
 	
 	public void equip(Character owner, boolean leftSide){
+		System.out.println("equiped");
 		reset();
 		
 		this.owner = owner;
@@ -42,6 +43,7 @@ public abstract class Hand extends Equipable {
 	}
 	
 	public void unequip(){
+		System.out.println("unequiped");
 		reset();
 		
 

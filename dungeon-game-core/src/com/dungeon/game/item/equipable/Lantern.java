@@ -33,6 +33,7 @@ public class Lantern extends Hand {
 	}
 	
 	public void equip(Character owner, boolean leftSide){
+		System.out.println("equiped");
 		reset();
 		
 		this.graphic.light.load();
@@ -45,6 +46,7 @@ public class Lantern extends Hand {
 	}
 	
 	public void unequip(){
+		System.out.println("unequiped");
 		reset();
 		
 		this.graphic.light.unload();

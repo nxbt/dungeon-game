@@ -195,9 +195,9 @@ public class Player extends Character {
 			actionState[0] = !actionState[0];
 		}
 		
-		if(leftEquiped != null && inv.slot[30].item==null) leftEquiped = null;
-		else if(leftEquiped == null && inv.slot[30].item != null) leftEquiped = (Hand) inv.slot[30].item;
-		else if(leftEquiped != null && inv.slot[30].item != null &&!leftEquiped.equals(inv.slot[30].item)) leftEquiped = (Hand) inv.slot[30].item;
+//		if(leftEquiped != null && inv.slot[30].item==null) leftEquiped = null;
+//		else if(leftEquiped == null && inv.slot[30].item != null) leftEquiped = (Hand) inv.slot[30].item;
+//		else if(leftEquiped != null && inv.slot[30].item != null &&!leftEquiped.equals(inv.slot[30].item)) leftEquiped = (Hand) inv.slot[30].item;
 		
 		if(rightEquiped != null && inv.slot[31].item==null) rightEquiped = null;
 		else if(rightEquiped == null && inv.slot[31].item != null) rightEquiped = (Hand) inv.slot[31].item;
@@ -233,7 +233,7 @@ public class Player extends Character {
 		
 		attacking = false;
 		
-		if(leftEquiped != null && fightMode) {
+		if(equipItems[0] != null && fightMode) {
 			if(((Hand) inv.slot[30].item).isInUse())attacking = true;
 			((Hand) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
 			((Hand)inv.slot[30].item).graphic.calc();
@@ -275,8 +275,8 @@ public class Player extends Character {
 
 	@Override
 	public void post() {
-		if(leftEquiped != null && fightMode){
-			leftEquiped.graphic.updatePos(true);
+		if(equipItems[0] != null && fightMode){
+			((Hand)equipItems[0]).graphic.updatePos(true);
 //			float xMove = (float) (Math.cos((angle+leftEquipedPos[1])/180*Math.PI)*leftEquipedPos[0]);
 //			float yMove = (float) (Math.sin((angle+leftEquipedPos[1])/180*Math.PI)*leftEquipedPos[0]);
 //			leftEquiped.graphic.x = (float) (x)+xMove;
@@ -292,7 +292,7 @@ public class Player extends Character {
 //			rightEquiped.graphic.angle = angle-135+rightEquipedPos[2];
 		}
 		if(killMe){
-			if(leftEquiped!=null)unequip(leftEquiped);
+			if(equipItems[0]!=null)unequip((Hand) equipItems[0]);
 			if(rightEquiped!=null)unequip(rightEquiped);
 		}
 	}
