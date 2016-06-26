@@ -385,7 +385,7 @@ public abstract class Character extends Dynamic {
 	public float damage(float value /*Add an array of Effects*/, ArrayList<Effect> hitEffects){
 		if(immune) return 0;
 		
-		value *=Math.pow(0.9945f,armor); //reduce damage for armor
+		value *=Math.pow(0.9945f,armor); //reduce damage for armor, should we replace this with phys_resist and add in a calcResistances method somewhere?
 		
 		float amount = life - Math.max(life-value,0);
 		life-=value;
@@ -398,6 +398,38 @@ public abstract class Character extends Dynamic {
 			}
 		}
 		return amount;
+	}
+	
+	public void psnDamage(float value){
+		value*=poisn_resist;
+		
+		life-=value;
+		
+		if(life <= 0) killMe = true;
+	}
+	
+	public void fireDamage(float value){
+		value*=flame_resist;
+		
+		life-=value;
+		
+		if(life <= 0) killMe = true;
+	}
+	
+	public void electricDamage(float value){
+		value*=ligtn_resist;
+		
+		life-=value;
+		
+		if(life <= 0) killMe = true;
+	}
+	
+	public void magicDamage(float value){
+		value*=arcan_resist;
+		
+		life-=value;
+		
+		if(life <= 0) killMe = true;
 	}
 	
 	public boolean use_stam(float value) {
