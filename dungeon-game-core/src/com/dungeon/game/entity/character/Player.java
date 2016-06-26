@@ -13,13 +13,16 @@ import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.inventory.Inventory;
+import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.FlashLight;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.Lantern;
 import com.dungeon.game.item.weapon.Axe;
+import com.dungeon.game.item.weapon.Bow;
 import com.dungeon.game.item.weapon.Medium;
 import com.dungeon.game.item.weapon.Sword;
+import com.dungeon.game.item.weapon.Wand;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -124,6 +127,8 @@ public class Player extends Character {
 		inv = new Inventory(world, invLayout, 10, 100);
 		inv.slot[0].item = new FlashLight(world);
 		inv.slot[1].item = new Lantern(world);
+		inv.slot[5].item = new Arrow(world);
+		inv.slot[5].item.stack = 10;
 		inv.addItem(new Sword(world, 10, 10, 10));
 		inv.addItem(new Sword(world, 10, 10, 10));
 		inv.addItem(new Sword(world, 10, 10, 10));
@@ -131,6 +136,8 @@ public class Player extends Character {
 		inv.addItem(new Sword(world, 10, 10, 10));
 		inv.addItem(new Sword(world, 10, 10, 10));
 		inv.addItem(new Axe(world, 10, 10, 10));
+		inv.addItem(new Bow(world, 10, 10));
+		inv.addItem(new Wand(world));
 		
 //		light = new Light(this, 1);
 		

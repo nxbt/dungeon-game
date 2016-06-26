@@ -88,8 +88,10 @@ public class Bow extends Ranged {
 			break;
 		}
 		
-		if(!leftSide) return new float[]{distance,polarAngle*-1,angle*-1};
-		
+//		if(!leftSide) return new float[]{distance,polarAngle*-1,angle*-1};
+		graphic.graphic_angle = angle;
+		graphic.graphic_pAngle = polarAngle;
+		graphic.graphic_dist = distance;
 		return new float[]{distance,polarAngle,angle};
 	}
 	
