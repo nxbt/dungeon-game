@@ -35,6 +35,7 @@ import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.hud.Portrait;
 import com.dungeon.game.entity.hud.PortraitBackground;
 import com.dungeon.game.entity.hud.StamBar;
+import com.dungeon.game.item.equipable.Equipable;
 //import com.dungeon.game.light.LightMap;
 import com.dungeon.game.pathing.AreaMap;
 
@@ -108,7 +109,7 @@ public class World {
 		entities = curFloor.entities;
 		entities.add(0,player);
 		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+Tile.TS, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
-		entities.add(new Stair(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+Tile.TS, curFloor.tm.length/2*Tile.TS-Tile.TS/2, true, 10, 10));
+		entities.add(new Stair(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS, true, 10, 10));
 
 		hudEntities.add(new GoldCounter(this));
 		hudEntities.add(new MenuButton(this, 4, cam.height-20));
@@ -268,8 +269,15 @@ public class World {
 	}
 	
 	public void changeFloor(int floor, int destX, int destY, float x, float y){
-		for(Entity e: entities){
+		for(int i = 0; i < entities.size(); i++){
+			Entity e = entities.get(i);
 			if(e.light != null)e.light.unload();
+			if(e instanceof Character){
+				for(int k = 0; k < ((Character)e).equipItems.length; k++){
+					if(((Character)e).equipItems[k] != null)((Character)e).equipItems[k].unequip();
+					((Character)e).equipItems[k] = null;
+				}
+			}
 		}
 		entities.remove(player);
 		if(curDungeon.floors.size() <= floor) {
