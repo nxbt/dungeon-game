@@ -13,6 +13,7 @@ import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.inventory.Inventory;
+import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.FlashLight;
@@ -76,53 +77,55 @@ public class Player extends Character {
 		
 		int[][] invLayout = new int[][] {
 			//consumables
-			new int[] {1, 8, 8},
-			new int[] {1, 48, 8},
-			new int[] {1, 88, 8},
-			new int[] {1, 128, 8},
-			new int[] {1, 168, 8},
+			new int[] {1, 8, 8}, //1
+			new int[] {1, 48, 8}, //2
+			new int[] {1, 88, 8}, //3
+			new int[] {1, 128, 8}, //4
+			new int[] {1, 168, 8}, //5
 			//inventory
-			new int[] {0, 8, 48},
-			new int[] {0, 48, 48},
-			new int[] {0, 88, 48},
-			new int[] {0, 128, 48},
-			new int[] {0, 168, 48},
-			new int[] {0, 8, 88},
-			new int[] {0, 48, 88},
-			new int[] {0, 88, 88},
-			new int[] {0, 128, 88},
-			new int[] {0, 168, 88},
-			new int[] {0, 8, 128},
-			new int[] {0, 48, 128},
-			new int[] {0, 88, 128},
-			new int[] {0, 128, 128},
-			new int[] {0, 168, 128},
-			new int[] {0, 8, 168},
-			new int[] {0, 48, 168},
-			new int[] {0, 88, 168},
-			new int[] {0, 128, 168},
-			new int[] {0, 168, 168},
-			new int[] {0, 8, 208},
-			new int[] {0, 48, 208},
-			new int[] {0, 88, 208},
-			new int[] {0, 128, 208},
-			new int[] {0, 168, 208},
+			new int[] {0, 8, 48}, //6
+			new int[] {0, 48, 48}, //7
+			new int[] {0, 88, 48}, //8
+			new int[] {0, 128, 48}, //9
+			new int[] {0, 168, 48}, //10
+			new int[] {0, 8, 88}, //11
+			new int[] {0, 48, 88}, //12
+			new int[] {0, 88, 88}, //13
+			new int[] {0, 128, 88}, //14
+			new int[] {0, 168, 88}, //15
+			new int[] {0, 8, 128}, //16
+			new int[] {0, 48, 128}, //17
+			new int[] {0, 88, 128}, //18
+			new int[] {0, 128, 128}, //19
+			new int[] {0, 168, 128}, //20
+			new int[] {0, 8, 168}, //21
+			new int[] {0, 48, 168}, //22
+			new int[] {0, 88, 168}, //23
+			new int[] {0, 128, 168}, //24
+			new int[] {0, 168, 168}, //25
+			new int[] {0, 8, 208}, //26
+			new int[] {0, 48, 208}, //27
+			new int[] {0, 88, 208}, //28
+			new int[] {0, 128, 208}, //29
+			new int[] {0, 168, 208}, //30
 			//weapons
-			new int[] {2, 208, 8},
-			new int[] {2, 248, 8},
+			new int[] {2, 208, 8}, //31
+			new int[] {2, 248, 8}, //32
 			//Armor
-			new int[] {7, 208, 48},
-			new int[] {6, 208, 88},
-			new int[] {5, 208, 128},
-			new int[] {4, 208, 168},
-			new int[] {3, 208, 208},
+			new int[] {7, 208, 48}, //33
+			new int[] {6, 208, 88}, //34
+			new int[] {5, 208, 128}, //35
+			new int[] {4, 208, 168}, //36
+			new int[] {3, 208, 208}, //37
 			//Rings and Amulet
-			new int[] {9, 248, 48},
-			new int[] {9, 248, 88},
-			new int[] {9, 248, 128},
-			new int[] {9, 248, 168},
-			new int[] {8, 248, 208},
+			new int[] {9, 248, 48}, //38
+			new int[] {9, 248, 88}, //39
+			new int[] {9, 248, 128}, //40
+			new int[] {9, 248, 168}, //41
+			new int[] {8, 248, 208}, //42
 		};
+		
+		equipSlots = new Slot[]{inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41],inv.slot[42]};
 		
 		inv = new Inventory(world, invLayout, 10, 100);
 		inv.slot[0].item = new FlashLight(world);
