@@ -1,6 +1,7 @@
 package com.dungeon.game.item.equipable;
 
 import com.badlogic.gdx.graphics.Color;
+import com.dungeon.game.effect.Armor;
 import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
 
