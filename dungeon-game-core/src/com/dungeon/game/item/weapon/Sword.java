@@ -177,9 +177,6 @@ public class Sword extends Melee {
 		distance=0;
 		polarAngle= 0;
 		angle=0;
-		
-		effects = new ArrayList<Effect>();
-		effects.add(new Stun(world, 30));
 	}
 	
 	public float[] getPos(boolean mousedown, boolean mousepressed){

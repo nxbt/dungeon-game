@@ -196,7 +196,7 @@ public class Player extends Character {
 		else if(rightEquiped == null && inv.slot[31].item != null) rightEquiped = (Hand) inv.slot[31].item;
 		else if(rightEquiped != null && inv.slot[31].item != null && !rightEquiped.equals(inv.slot[31].item)) rightEquiped = (Hand) inv.slot[31].item;
 		
-		if(inv.slot[35].item != null) ((Equipable) inv.slot[35].item).update(world, this);
+		if(inv.slot[35].item != null) ((Equipable) inv.slot[35].item).update(this);
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.E) && !fightMode) {
 			if(world.hudEntities.indexOf(inv.graphic) == -1) {

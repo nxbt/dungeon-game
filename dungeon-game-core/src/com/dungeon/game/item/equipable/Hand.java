@@ -5,9 +5,6 @@ import com.dungeon.game.entity.weapon.HandheldGraphic;
 import com.dungeon.game.world.World;
 
 public abstract class Hand extends Equipable {
-
-	
-	public Character owner;
 	
 
 	public HandheldGraphic graphic;

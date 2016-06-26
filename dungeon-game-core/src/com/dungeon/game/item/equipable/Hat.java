@@ -16,7 +16,7 @@ public class Hat extends Equipable {
 		
 		stack = 1;
 		
-		effects.add(new Inconspicuous(world, -1));
+		passiveEffects.add(new Inconspicuous(world, -1));
 	}
 	
 	public String getDesc() {
