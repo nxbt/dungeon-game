@@ -13,7 +13,9 @@ import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
+import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
+import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -49,6 +51,8 @@ public abstract class Character extends Dynamic {
 	public boolean stun;
 	
 	public Slot[] equipSlots;
+	
+	public Equipable[] equipItems;
 	
 	public Hand leftEquiped;
 	public Hand rightEquiped;
@@ -132,6 +136,7 @@ public abstract class Character extends Dynamic {
 	
 	public void update() {
 		norm();
+		if(this instanceof Player)handleEquips();
 		activations();
 		calc();
 		effect();
@@ -300,7 +305,37 @@ public abstract class Character extends Dynamic {
 		}
 	}
 	
-
+	private void handleEquips() {
+		for(int i = 0; i < equipSlots.length; i++){
+			if(equipSlots[i].item == null){
+				if(equipItems[i] != null){
+					equipItems[i].unequip();
+					equipItems[i] = null;
+				}
+			}else{
+				if(equipItems[i] == null){
+					if(equipSlots[i].item instanceof Weapon){
+						equipItems[i] = null;
+					}else{
+						equipItems[i] = (Equipable) equipSlots[i].item;
+						equipItems[i].equip(this, false);
+					}
+				}else{
+					if(!equipSlots[i].item.equals(equipItems[i])){
+						equipItems[i].unequip();
+						if(equipSlots[i].item instanceof Weapon){
+							equipItems[i] = null;
+						}else{
+							equipItems[i] = (Equipable) equipSlots[i].item;
+							equipItems[i].equip(this, false);
+						}
+					}
+				}
+			}
+			
+		}
+		
+	}
 
 	protected void activations(){
 		

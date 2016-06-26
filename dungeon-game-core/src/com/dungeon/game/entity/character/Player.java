@@ -14,11 +14,13 @@ import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
+import com.dungeon.game.item.Item;
 import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.FlashLight;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.Lantern;
+import com.dungeon.game.item.equipable.Shirt;
 import com.dungeon.game.item.weapon.Axe;
 import com.dungeon.game.item.weapon.Bow;
 import com.dungeon.game.item.weapon.Medium;
@@ -125,9 +127,10 @@ public class Player extends Character {
 			new int[] {8, 248, 208}, //42
 		};
 		
-		equipSlots = new Slot[]{inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41],inv.slot[42]};
 		
 		inv = new Inventory(world, invLayout, 10, 100);
+		equipSlots = new Slot[]{inv.slot[30],inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41]};
+		equipItems = new Equipable[equipSlots.length];
 		inv.slot[0].item = new FlashLight(world);
 		inv.slot[1].item = new Lantern(world);
 		inv.slot[5].item = new Arrow(world);
@@ -141,6 +144,7 @@ public class Player extends Character {
 		inv.addItem(new Axe(world, 10, 10, 10));
 		inv.addItem(new Bow(world, 10, 10));
 		inv.addItem(new Wand(world));
+		inv.addItem(new Shirt(world, speechColor));
 		
 //		light = new Light(this, 1);
 		
