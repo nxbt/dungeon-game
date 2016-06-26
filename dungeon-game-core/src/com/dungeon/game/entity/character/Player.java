@@ -17,6 +17,7 @@ import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.FlashLight;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.Lantern;
+import com.dungeon.game.item.weapon.Axe;
 import com.dungeon.game.item.weapon.Medium;
 import com.dungeon.game.item.weapon.Sword;
 import com.dungeon.game.light.Light;
@@ -129,6 +130,7 @@ public class Player extends Character {
 		inv.addItem(new Sword(world, 10, 10, 10));
 		inv.addItem(new Sword(world, 10, 10, 10));
 		inv.addItem(new Sword(world, 10, 10, 10));
+		inv.addItem(new Axe(world, 10, 10, 10));
 		
 //		light = new Light(this, 1);
 		

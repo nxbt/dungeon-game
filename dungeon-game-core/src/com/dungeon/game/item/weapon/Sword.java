@@ -36,22 +36,22 @@ public class Sword extends Melee {
 		};
 		
 	private final SwingSet[] BLADE_SWINGS = new SwingSet[]{
-			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
+			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //sword
 					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
 					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
 					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f),
 					}),
-			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
+			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //light sword
 					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
 					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
 					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f),
 					}),
-			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
+			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //broad sword
 					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
 					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
 					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f),
 					}),
-			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
+			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //cutlass
 					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
 					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
 					new Swing(world, false, 10, 24, 80, 50, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1),
@@ -59,7 +59,7 @@ public class Sword extends Melee {
 					new Swing(world, false, 10, 24, 80, 50, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1),
 					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
 					}),
-			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
+			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //needle
 					new Swing(world, false, 15, 12, 40, -7, 4, 28, 12, -3, 0.75f, 0.7f, 0, 0.4f, 0.5f),
 					new Swing(world, false, 15, 12, 0, 0, 4, 28, 0, 0, 1.5f, 0.7f, 0, 0.4f, 1f),
 					new Swing(world, false, 15, 12, -40, 7, 4, 28, -12, 3, 0.75f, 0.7f, 0, 0.4f, 1.5f),
@@ -179,7 +179,6 @@ public class Sword extends Melee {
 		angle=0;
 		
 		effects = new ArrayList<Effect>();
-		this.
 		effects.add(new Stun(world, 30));
 	}
 	
