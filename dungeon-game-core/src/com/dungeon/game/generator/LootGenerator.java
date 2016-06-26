@@ -13,7 +13,7 @@ public class LootGenerator {
 	public static Chest getChest(World world, int level, int x, int y){
 
 		Chest chest = new Chest(world, x*Tile.TS+Tile.TS/2,y*Tile.TS+Tile.TS/2);
-		if(Math.random()>0.5)chest.inv.addItem(new Sword(world, (float) (6 + Math.random()*6),10));
+		if(Math.random()>0.5)chest.inv.addItem(new Sword(world, (float) (6 + Math.random()*6),10, 10));
 		else {
 			chest.inv.addItem(new Bow(world, (float) (0.7f + Math.random()*0.6f),10));
 			Arrow arrow = new Arrow(world);

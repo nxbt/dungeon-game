@@ -12,6 +12,8 @@ public abstract class Weapon extends Hand{
 	
 	protected int stageTimer;
 	
+	public float weight;
+	
 	public Weapon(World world, String filename){
 		super(world, filename);
 		

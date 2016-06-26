@@ -106,7 +106,7 @@ name = "Goon";
 			ranged = true;
 		}
 		else {
-			inv.slot[30].item = new Sword(world, (float) (6 + Math.random()*6),10);
+			inv.slot[30].item = new Sword(world, (float) (6 + Math.random()*6),10, 10);
 			inv.slot[30].item.dropChance = 0.5f;
 			ranged = false;
 		}

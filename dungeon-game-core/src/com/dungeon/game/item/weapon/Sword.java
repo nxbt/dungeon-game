@@ -28,41 +28,41 @@ public class Sword extends Melee {
 	private static final String[] BLADE_NAMES = new String[]{"Sword", "Light Sword", "Broad Sword", "Cutlass", "Needle"};
 	//blade stat order is dmg, speed, knockback
 	private static final float[][] BLADE_STATS = new float[][]{
-		new float[]{1,1,1}, 
-		new float[]{0.8f,1.3f,0.6f},
-		new float[]{1.2f,0.7f,1.3f},
-		new float[]{1.5f,0.9f,0.4f},
-		new float[]{0.6f,2f,0.3f},
+		new float[]{1,1,1,1}, 
+		new float[]{0.8f,1.3f,0.6f,0.7f},
+		new float[]{1.2f,0.7f,1.3f, 1.3f},
+		new float[]{1.5f,0.9f,0.4f, 0.9f},
+		new float[]{0.6f,2f,0.3f, 0.3f},
 		};
 		
 	private final SwingSet[] BLADE_SWINGS = new SwingSet[]{
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
-					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f), 
-					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f),
-					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f),
+					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
+					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
+					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f),
 					}),
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
-					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f), 
-					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f),
-					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f),
+					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
+					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
+					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f),
 					}),
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
-					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f), 
-					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f),
-					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f),
+					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
+					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
+					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f),
 					}),
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
-					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f), 
-					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f),
-					new Swing(world, false, 10, 24, 80, 50, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f),
-					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f),
-					new Swing(world, false, 10, 24, 80, 50, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f),
-					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f),
+					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
+					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
+					new Swing(world, false, 10, 24, 80, 50, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1),
+					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
+					new Swing(world, false, 10, 24, 80, 50, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1),
+					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
 					}),
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
-					new Swing(world, false, 15, 12, 40, -7, 4, 28, 12, -3, 0.75f, 0.7f, 0, 0.4f),
-					new Swing(world, false, 15, 12, 0, 0, 4, 28, 0, 0, 1.5f, 0.7f, 0, 0.4f),
-					new Swing(world, false, 15, 12, -40, 7, 4, 28, -12, 3, 0.75f, 0.7f, 0, 0.4f),
+					new Swing(world, false, 15, 12, 40, -7, 4, 28, 12, -3, 0.75f, 0.7f, 0, 0.4f, 0.5f),
+					new Swing(world, false, 15, 12, 0, 0, 4, 28, 0, 0, 1.5f, 0.7f, 0, 0.4f, 1f),
+					new Swing(world, false, 15, 12, -40, 7, 4, 28, -12, 3, 0.75f, 0.7f, 0, 0.4f, 1.5f),
 					})
 	};
 	
@@ -130,7 +130,7 @@ public class Sword extends Melee {
 	protected float[] knockMult;
 	
 	
-	public Sword(World world, float damage, float speed) {
+	public Sword(World world, float damage, float speed, float weight) {
 		super(world, "sword.png");
 		
 		//generate the sprite, for now random, but in the future will be a parameter!
@@ -159,7 +159,9 @@ public class Sword extends Melee {
 		this.speed = speed * BLADE_STATS[blade][1];
 		
 		knockratio = 0.4f;
-		knockstr = 10 * BLADE_STATS[blade][2];		
+		knockstr = 10 * BLADE_STATS[blade][2];	
+		
+		this.weight = weight * BLADE_STATS[blade][3];	
 		
 		desc = "An incredibly reliable melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f;
 

@@ -57,7 +57,7 @@ public class Mentor extends Friend {
 		Shop shop = new Shop(world, new int[][]{new int[]{0,10,10},new int[]{0,10,60},new int[]{0,10,110}},new int[]{10,200,20}, this, 10, 10);
 		shop.slot[0].item = new Arrow(world);
 		shop.slot[0].item.stack = 10;
-		shop.slot[1].item = new Sword(world, 10, 10);
+		shop.slot[1].item = new Sword(world, 10, 10, 10);
 		shop.slot[2].item = new LifePotion(world);
 		shop.slot[2].item.stack = 10;
 		
@@ -84,7 +84,7 @@ public class Mentor extends Friend {
 				new String[]{"refuse sword", "check two swords", "reasure"}));
 		
 		dialogue.potentialBubbles.put("check two swords", new SpeechBubble(world, this, 
-				new Criteria[]{new HasItem(world, new Sword(world, 0, 0), world.player, 2), new True(world)},
+				new Criteria[]{new HasItem(world, new Sword(world, 0, 0, 0), world.player, 2), new True(world)},
 				new String[]{"Bu-\u200B\u200B\u200B Wha-\u200B\u200B\u200B I can't even believe you. You clearly have two swords... What are you even doing? Besides...", "Even if that were the case..."},
 				"refuse sword"));
 		
@@ -93,17 +93,17 @@ public class Mentor extends Friend {
 		dialogue.potentialBubbles.put("refuse sword", new SpeechBubble(world, this, "I'm trying to help people who are unarmed. But you're fine, so I'm not going to give you anything.", "goodbye"));
 		
 		dialogue.potentialBubbles.put("check no sword", new SpeechBubble(world, this, 
-				new Criteria[]{new Invert(world, new HasItem(world, new Sword(world, 0, 0), world.player)), new True(world)},
+				new Criteria[]{new Invert(world, new HasItem(world, new Sword(world, 0, 0, 0), world.player)), new True(world)},
 				new String[]{"No problem.", "Wait! you already have a sword! What are you tryin' to pull?"},
 				new String[]{"give sword", "lie defence"}));
 		
 		dialogue.potentialBubbles.put("check sword", new SpeechBubble(world, this,
-				new Criteria[]{new HasItem(world, new Sword(world, 0, 0), world.player), new True(world)},
+				new Criteria[]{new HasItem(world, new Sword(world, 0, 0, 0), world.player), new True(world)},
 				new String[]{"Oh, alright.", "Um... no you don't."}, 
 				new String[]{"goodbye", "give sword"}));
 		
 		Inventory invent = new Inventory(world, new int[][]{new int[]{0,0,0}}, 0, 0, true);
-		invent.slot[0].item = new Sword(world, 7, 10);
+		invent.slot[0].item = new Sword(world, 7, 10, 10);
 		dialogue.potentialBubbles.put("give sword", new InvBubble(world, this, invent , "goodbye"));
 		
 		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world, this, "See ya!", "end"));

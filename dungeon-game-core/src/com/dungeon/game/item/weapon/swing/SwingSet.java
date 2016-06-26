@@ -56,7 +56,12 @@ public class SwingSet{
 					swings[0].prevSwing = swings[curSwing-1];
 					curSwing = 0;
 				}
-				swings[curSwing].beginSwing();
+				
+				if(!swings[curSwing].beginSwing()){
+					swings[0].prevSwing = swings[curSwing-1];
+					curSwing = 0;
+					swings[curSwing].beginSwing();
+				}
 			}else {
 				swings[0].prevSwing = swings[curSwing];
 				curSwing = 0;
