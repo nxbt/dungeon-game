@@ -128,6 +128,10 @@ public abstract class Character extends Dynamic {
 		
 		leftActivated = false;
 		rightActivated = false;
+		
+		//default arrays
+		equipSlots = new Slot[]{};
+		equipItems = new Equipable[equipSlots.length];
 	}
 
 	public void norm() {
@@ -136,7 +140,7 @@ public abstract class Character extends Dynamic {
 	
 	public void update() {
 		norm();
-		if(this instanceof Player)handleEquips();
+		handleEquips();
 		activations();
 		calc();
 		effect();
@@ -305,35 +309,35 @@ public abstract class Character extends Dynamic {
 		}
 	}
 	
-	private void handleEquips() {
-//		for(int i = 0; i < equipSlots.length; i++){
-//			if(equipSlots[i].item == null){
-//				if(equipItems[i] != null){
-//					equipItems[i].unequip();
-//					equipItems[i] = null;
-//				}
-//			}else{
-//				if(equipItems[i] == null){
-//					if(equipSlots[i].item instanceof Weapon){
-//						equipItems[i] = null;
-//					}else{
-//						equipItems[i] = (Equipable) equipSlots[i].item;
-//						equipItems[i].equip(this, false);
-//					}
-//				}else{
-//					if(!equipSlots[i].item.equals(equipItems[i])){
-//						equipItems[i].unequip();
-//						if(equipSlots[i].item instanceof Weapon){
-//							equipItems[i] = null;
-//						}else{
-//							equipItems[i] = (Equipable) equipSlots[i].item;
-//							equipItems[i].equip(this, false);
-//						}
-//					}
-//				}
-//			}
-//			
-//		}
+	public void handleEquips() {
+		for(int i = 0; i < equipSlots.length; i++){
+			if(equipSlots[i].item == null){
+				if(equipItems[i] != null){
+					equipItems[i].unequip();
+					equipItems[i] = null;
+				}
+			}else{
+				if(equipItems[i] == null){
+					if(equipSlots[i].item instanceof Weapon){
+						equipItems[i] = null;
+					}else{
+						equipItems[i] = (Equipable) equipSlots[i].item;
+						equipItems[i].equip(this, false);
+					}
+				}else{
+					if(!equipSlots[i].item.equals(equipItems[i])){
+						equipItems[i].unequip();
+						if(equipSlots[i].item instanceof Weapon){
+							equipItems[i] = null;
+						}else{
+							equipItems[i] = (Equipable) equipSlots[i].item;
+							equipItems[i].equip(this, false);
+						}
+					}
+				}
+			}
+			
+		}
 		
 	}
 
@@ -454,7 +458,10 @@ public abstract class Character extends Dynamic {
 				equipItems[0] = (Equipable) equipSlots[0].item;
 				equip((Hand) equipItems[0], true);
 			}
-			if(rightEquiped != null) equip(rightEquiped, false);
+			if(equipSlots[1].item != null && equipSlots[1].item instanceof Weapon){
+				equipItems[1] = (Equipable) equipSlots[1].item;
+				equip((Hand) equipItems[1], false);
+			}
 		}
 		
 		else {
@@ -462,7 +469,10 @@ public abstract class Character extends Dynamic {
 				equipItems[0].unequip();
 				equipItems[0] = null;
 			}
-			if(rightEquiped != null) unequip(rightEquiped);
+			if(equipItems[1] != null && equipItems[1] instanceof Weapon){
+				equipItems[1].unequip();
+				equipItems[1] = null;
+			}
 		}
 	}
 }

@@ -20,11 +20,11 @@ public class Rest extends Swing{
 		isInUse = false;
 		isInAttack = false;
 		//if the user tries to attack during rest, done and nextSwing are set to true, so the swingSet knows to proceed.
-		if(weapon.owner.leftEquiped != null && weapon.owner.leftEquiped.equals(weapon) && weapon.owner.leftActivated){
+		if(weapon.owner.equipItems[0] != null && weapon.owner.equipItems[0].equals(weapon) && weapon.owner.leftActivated){
 			nextSwing = true;
 			done = true;
 		}
-		else if(weapon.owner.rightEquiped != null && weapon.owner.rightEquiped.equals(weapon) && weapon.owner.rightActivated){
+		else if(weapon.owner.equipItems[1] != null && weapon.owner.equipItems[1].equals(weapon) && weapon.owner.rightActivated){
 			nextSwing = true;
 			done = true;
 		}

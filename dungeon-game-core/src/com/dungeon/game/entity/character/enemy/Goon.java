@@ -7,7 +7,10 @@ import com.dungeon.game.effect.ManaRegen;
 import com.dungeon.game.effect.StamRegen;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.inventory.Inventory;
+import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.ammo.Arrow;
+import com.dungeon.game.item.equipable.Equipable;
+import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.weapon.Bow;
 import com.dungeon.game.item.weapon.Sword;
 import com.dungeon.game.item.weapon.Weapon;
@@ -96,6 +99,9 @@ name = "Goon";
 		};
 		
 		inv = new Inventory(world, invLayout, 10, 100);
+		
+		equipSlots = new Slot[]{inv.slot[30],inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41]};
+		equipItems = new Equipable[equipSlots.length];
 
 		if(Math.random()>0.5){
 			inv.slot[30].item = new Bow(world, (float) (0.3 + Math.random()*0.6), 10);
@@ -123,41 +129,41 @@ name = "Goon";
 
 	@Override
 	public void calc() {
-		if(leftEquiped != null && inv.slot[30].item==null) {
-			unequip(leftEquiped);
-			
-			leftEquiped = null;
-		}
-		else if(leftEquiped == null && inv.slot[30].item != null) {
-			leftEquiped = (Weapon) inv.slot[30].item;
-			
-			equip(leftEquiped, true);
-		}
-		else if(leftEquiped != inv.slot[30].item) {
-			unequip(leftEquiped);
-			
-			leftEquiped = (Weapon) inv.slot[30].item;
-			
-			equip(leftEquiped, true);
-		}
-		
-		if(rightEquiped != null && inv.slot[31].item==null) {
-			unequip(rightEquiped);
-			
-			rightEquiped = null;
-		}
-		else if(rightEquiped == null && inv.slot[31].item != null) {
-			rightEquiped = (Weapon) inv.slot[31].item;
-			
-			equip(rightEquiped, false);
-		}
-		else if(rightEquiped != inv.slot[31].item) {
-			unequip(rightEquiped);
-			
-			rightEquiped = (Weapon) inv.slot[31].item;
-			
-			equip(rightEquiped, false);
-		}
+//		if(leftEquiped != null && inv.slot[30].item==null) {
+//			unequip(leftEquiped);
+//			
+//			leftEquiped = null;
+//		}
+//		else if(leftEquiped == null && inv.slot[30].item != null) {
+//			leftEquiped = (Weapon) inv.slot[30].item;
+//			
+//			equip(leftEquiped, true);
+//		}
+//		else if(leftEquiped != inv.slot[30].item) {
+//			unequip(leftEquiped);
+//			
+//			leftEquiped = (Weapon) inv.slot[30].item;
+//			
+//			equip(leftEquiped, true);
+//		}
+//		
+//		if(rightEquiped != null && inv.slot[31].item==null) {
+//			unequip(rightEquiped);
+//			
+//			rightEquiped = null;
+//		}
+//		else if(rightEquiped == null && inv.slot[31].item != null) {
+//			rightEquiped = (Weapon) inv.slot[31].item;
+//			
+//			equip(rightEquiped, false);
+//		}
+//		else if(rightEquiped != inv.slot[31].item) {
+//			unequip(rightEquiped);
+//			
+//			rightEquiped = (Weapon) inv.slot[31].item;
+//			
+//			equip(rightEquiped, false);
+//		}
 		
 		@SuppressWarnings("unchecked")
 		ArrayList<Entity> entities = (ArrayList<Entity>) world.entities.clone();
@@ -169,8 +175,8 @@ name = "Goon";
 //			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
 		}
 		attacking = false;
-		
-		if(leftEquiped != null){
+		System.out.println(equipItems[0]);
+		if(equipItems[0] != null){
 			boolean attack = false;
 			boolean down = true;
 			boolean click = false;
@@ -211,8 +217,33 @@ name = "Goon";
 	}
 
 	public void post() {
-		if(leftEquiped != null){
-			leftEquiped.graphic.updatePos(true);
+		if(equipItems[0] != null){
+			((Hand)equipItems[0]).graphic.updatePos(true);
 		}
+	}
+	
+	//HAVE TO IMPLEMENT FIGHT MODE FOR NON-PLAYERS
+	public void handleEquips() {
+		for(int i = 0; i < equipSlots.length; i++){
+			if(equipSlots[i].item == null){
+				if(equipItems[i] != null){
+					equipItems[i].unequip();
+					equipItems[i] = null;
+				}
+			}else{
+				if(equipItems[i] == null){
+					equipItems[i] = (Equipable) equipSlots[i].item;
+					equipItems[i].equip(this, false);
+				}else{
+					if(!equipSlots[i].item.equals(equipItems[i])){
+						equipItems[i].unequip();
+						equipItems[i] = (Equipable) equipSlots[i].item;
+						equipItems[i].equip(this, false);
+					}
+				}
+			}
+			
+		}
+		
 	}
 }
