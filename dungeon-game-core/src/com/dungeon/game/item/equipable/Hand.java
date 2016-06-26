@@ -37,10 +37,15 @@ public abstract class Hand extends Equipable {
 		this.leftSide = leftSide;
 		
 		world.entities.add(world.entities.indexOf(owner)+1,this.graphic);
+
+		onEquip();
 	}
 	
 	public void unequip(){
 		reset();
+		
+
+		onUnequip();
 		
 		this.owner = null;
 		

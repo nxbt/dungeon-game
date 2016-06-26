@@ -42,9 +42,21 @@ public abstract class Equipable extends Item {
 		}
 	};
 	
-	public void onUnEquip(){
+	public void onUnequip(){
 
 		for(Effect e: passiveEffects)e.killMe = true;
 	};
+	
+	public void equip(Character owner, boolean leftSide){
+		
+		this.owner = owner;
+		onEquip();
+	}
+	
+	public void unequip(){
+		
+		onUnequip();
+		this.owner = null;
+	}
 	
 }
