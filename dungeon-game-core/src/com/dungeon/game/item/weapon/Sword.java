@@ -23,8 +23,8 @@ public class Sword extends Melee {
 	private static final Texture[] GUARDS = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
 	private static final Texture[] HILTS = Spritesheet.getSprites("swordHiltMap.png", 32, 32); //why is guard spelled ua and not au??
 	private static final int BLADE_NUM = 5;
-	private static final int GUARD_NUM = 2;
-	private static final int HILT_NUM = 2;
+	private static final int GUARD_NUM = 3;
+	private static final int HILT_NUM = 3;
 	// how should we change name and stats based on the blade guard and hilt? Arrays? Text Files? Something Else? I'll do this for now
 	private static final String[] BLADE_NAMES = new String[]{"Sword", "Light Sword", "Broad Sword", "Cutlass", "Needle"};
 	//blade stat order is dmg, speed, knockback, stanima
@@ -144,10 +144,13 @@ public class Sword extends Melee {
 		Pixmap guardMap = GUARDS[guard].getTextureData().consumePixmap();
 		if(!HILTS[hilt].getTextureData().isPrepared()) HILTS[hilt].getTextureData().prepare();
 		Pixmap hiltMap = HILTS[hilt].getTextureData().consumePixmap();
-
-		bladeMap.drawPixmap(hiltMap, 0, 0);
-		bladeMap.drawPixmap(guardMap, 0, 0);
-		sprite = new Texture(bladeMap);
+		
+		Pixmap spr = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
+		spr.drawPixmap(bladeMap, 0, 0);
+		spr.drawPixmap(hiltMap, 0, 0);
+		spr.drawPixmap(guardMap, 0, 0);
+		sprite = new Texture(spr);
+		spr.dispose();
 		//for some reason all the pixmaps are all disposed already... thx libgdx!
 		
 		
@@ -164,7 +167,7 @@ public class Sword extends Melee {
 		
 		this.weight = weight * BLADE_STATS[blade][3];	
 		
-		desc = "An incredibly reliable melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f;
+		desc = "An incredibly reliable melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f + "\n bladeNum: "+blade + "\n guardNum: "+guard + "\n hiltNum: "+hilt;
 
 		
 		dmgMult = new float[]{0.7f,1,1.5f};
