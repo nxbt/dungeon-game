@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
+import com.dungeon.game.effect.LifeRegen;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.MeleeGraphic;

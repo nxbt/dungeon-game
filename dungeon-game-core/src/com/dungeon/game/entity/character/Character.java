@@ -385,10 +385,12 @@ public abstract class Character extends Dynamic {
 	
 	public void equip(Hand weapon, boolean leftSide) {
 		weapon.equip(this, leftSide);
+		weapon.onEquip();
 	}
 	
 	public void unequip(Hand weapon) {
 		weapon.unequip();
+		weapon.onUnEquip();
 	}
 	
 	public boolean hasEffect(Effect effect) {

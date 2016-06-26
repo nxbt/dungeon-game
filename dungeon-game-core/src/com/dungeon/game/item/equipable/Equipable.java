@@ -36,11 +36,15 @@ public abstract class Equipable extends Item {
 	public void update(Entity ent) {}
 	
 	public void onEquip(){
-		
+		for(Effect e: passiveEffects){
+			e.killMe = false;
+			owner.addEffect(e);
+		}
 	};
 	
 	public void onUnEquip(){
-		
+
+		for(Effect e: passiveEffects)e.killMe = true;
 	};
 	
 }
