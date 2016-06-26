@@ -40,17 +40,17 @@ public class Sword extends Melee {
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //sword
 					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
 					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
-					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f),
+					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
 					}),
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //light sword
 					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
 					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
-					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f),
+					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
 					}),
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //broad sword
 					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
 					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
-					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f),
+					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
 					}),
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //cutlass
 					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
@@ -58,13 +58,37 @@ public class Sword extends Melee {
 					new Swing(world, false, 10, 24, 80, 50, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1),
 					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
 					new Swing(world, false, 10, 24, 80, 50, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1),
-					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
+					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1)
 					}),
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //needle
 					new Swing(world, false, 15, 12, 40, -7, 4, 28, 12, -3, 0.75f, 0.7f, 0, 0.4f, 0.5f),
 					new Swing(world, false, 15, 12, 0, 0, 4, 28, 0, 0, 1.5f, 0.7f, 0, 0.4f, 1f),
-					new Swing(world, false, 15, 12, -40, 7, 4, 28, -12, 3, 0.75f, 0.7f, 0, 0.4f, 1.5f),
+					new Swing(world, false, 15, 12, -40, 7, 4, 28, -12, 3, 0.75f, 0.7f, 0, 0.4f, 1.5f)
 					})
+	};
+	
+	private final Swing[][] GUARD_SWINGS = new Swing[][]{
+		new Swing[]{
+				
+		},
+		new Swing[]{
+				
+		},
+		new Swing[]{
+				new Swing(world, false, 10, 10, 20, -90, 10, 26, 15, -90, 0.5f, 1.5f, 90, 0, 2)
+		}
+	};
+	
+	private final Swing[][] HILT_SWINGS = new Swing[][]{
+		new Swing[]{
+				
+		},
+		new Swing[]{
+				
+		},
+		new Swing[]{
+				new Swing(world, false, 10, 15, 70, 150, 10, 26, 0, 90, 2f, 0.6f, 180, 0, 2)
+		}
 	};
 	
 	
@@ -176,6 +200,12 @@ public class Sword extends Melee {
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 		
 		swings = BLADE_SWINGS[blade]; // do we have to clone it? I guess not
+		for(int i = 0; i < GUARD_SWINGS[guard].length; i++){
+			swings.addSwing(GUARD_SWINGS[guard][i]);
+		}
+		for(int i = 0; i < HILT_SWINGS[hilt].length; i++){
+			swings.addSwing(HILT_SWINGS[hilt][i]);
+		}
 		swings.setWorld(world); //is this neccicary? (I think so)
 		
 		distance=0;

@@ -89,4 +89,14 @@ public class SwingSet{
 		world = w; //update the world
 		for(int i = 0; i < swings.length; i++)swings[i].world = w; //update all the swings worlds
 	}
+
+	public void addSwing(Swing swing) {
+		Swing[] oldSwings = swings;
+		swings = new Swing[swings.length+1];
+		for(int i = 0; i < oldSwings.length; i++)swings[i] = oldSwings[i];
+		swing.weapon = weapon;
+		swing.prevSwing = oldSwings[oldSwings.length-1];
+		swings[swings.length-1] = swing;
+		
+	}
 }
