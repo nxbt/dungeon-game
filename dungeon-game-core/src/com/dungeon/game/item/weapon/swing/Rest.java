@@ -5,13 +5,12 @@ import com.dungeon.game.world.World;
 public class Rest extends Swing{
 	
 	public Rest(World world, int duration, int dist, int polarAngle, int angle){
-		super(world, false, 0, 0, 0, 0, duration, dist, polarAngle, angle, 0, 0, 0, 0, 0);
+		super(world, false, 0, 0, 0, 0, duration, dist, polarAngle, angle, 0, 0, 0, 0, 0); //rests have no windup and never hit anything, so we pass in 0 for those values
 	}
 	
 	public void progressSwing(float counter){
 		isInUse = true;
 		isInAttack = false;
-		System.out.println("Winddown");
 		weapon.graphic.graphic_angle = (int) (prevSwing.angle-(prevSwing.angle - angle)/duration*counter);
 		weapon.graphic.graphic_pAngle = (int) (prevSwing.polarAngle-(prevSwing.polarAngle - polarAngle)/duration*counter);
 		weapon.graphic.graphic_dist = (int) (prevSwing.dist-(prevSwing.dist - dist)/duration*counter);
@@ -20,7 +19,7 @@ public class Rest extends Swing{
 	public void progressPause(float counter){
 		isInUse = false;
 		isInAttack = false;
-		System.out.println("At rest");
+		//if the user tries to attack during rest, done and nextSwing are set to true, so the swingSet knows to proceed.
 		if(weapon.owner.leftEquiped != null && weapon.owner.leftEquiped.equals(weapon) && weapon.owner.leftActivated){
 			nextSwing = true;
 			done = true;
@@ -33,18 +32,16 @@ public class Rest extends Swing{
 	
 	public void progress(){
 		counter+=weapon.speed/10; //progress the counter
-//		System.out.println("Counter: " + counter);
-		if(counter - weapon.speed/10f < duration)progressSwing(counter);
-		else progressPause(counter);
+		if(counter - weapon.speed/10f < duration)progressSwing(counter); //we are in the winddown phase
+		else progressPause(counter); //we are at rest
 	}
 	
 	public boolean beginSwing(){
-//		System.out.println("BEGIN SWING");
 		counter = 0;
 		done = false;
 		nextSwing = false;
 		hasHit = false;
-		return true;
+		return true; //rest consumes no stanima so it always returns true
 	}
 	
 	public void hit(Character c){

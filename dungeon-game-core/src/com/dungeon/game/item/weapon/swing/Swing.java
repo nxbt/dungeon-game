@@ -82,7 +82,6 @@ public class Swing {
 	public void progressWindup(float counter){ // have to add stuff for right side
 		isInUse = true;
 		isInAttack = false;
-		System.out.println("Windup");
 		weapon.graphic.graphic_angle = (int) (prevSwing.angle-(prevSwing.angle - windupAngle)/windupDuration*counter);
 		weapon.graphic.graphic_pAngle = (int) (prevSwing.polarAngle-(prevSwing.polarAngle - windupPolarAngle)/windupDuration*counter);
 		weapon.graphic.graphic_dist = (int) (prevSwing.dist-(prevSwing.dist - windupDist)/windupDuration*counter);
@@ -92,7 +91,6 @@ public class Swing {
 	public void progressSwing(float counter){ // have to add stuff for right side
 		isInUse = true;
 		isInAttack = true;
-		System.out.println("Swing");
 		weapon.graphic.graphic_angle = (int) (windupAngle-(windupAngle - angle)/duration*counter);
 		weapon.graphic.graphic_pAngle = (int) (windupPolarAngle-(windupPolarAngle - polarAngle)/duration*counter);
 		weapon.graphic.graphic_dist = (int) (windupDist-(windupDist - dist)/duration*counter);
@@ -102,7 +100,6 @@ public class Swing {
 	public void progressPause(float counter){
 		isInUse = true;
 		isInAttack = false;
-		System.out.println("Pause");
 		//if the mouse button is pressed during the pause after the swing, then nextswing is set to true
 		if(weapon.owner.leftEquiped != null && weapon.owner.leftEquiped.equals(weapon) && weapon.owner.leftActivated){
 			nextSwing = true; // have to change this for non-players. with owner.attackleft or something
@@ -117,38 +114,37 @@ public class Swing {
 	//ticks the swing
 	public void progress(){
 		counter+=weapon.speed/10f; //progress the counter, the unaccuracy is caused by overshooting durations!
-//		System.out.println("Counter: " + counter);
-		if(counter - weapon.speed/10f< windupDuration)progressWindup(counter);
-		else if(counter - weapon.speed/10f< windupDuration + duration)progressSwing(counter - windupDuration);
-		else if(counter - weapon.speed/10f< windupDuration + duration + PAUSE_DURATION*(weapon.speed/10))progressPause((int) (counter/(weapon.speed/10)));
-		else done = true;
+		if(counter - weapon.speed/10f< windupDuration)progressWindup(counter); //we are in the windup phase
+		else if(counter - weapon.speed/10f< windupDuration + duration)progressSwing(counter - windupDuration); //we are in the swing phase
+		else if(counter - weapon.speed/10f< windupDuration + duration + PAUSE_DURATION*(weapon.speed/10))progressPause((int) (counter/(weapon.speed/10))); // we are in the pause after the swing, in which you can initiate another swing
+		else done = true; //this swing is done!
 		
 	}
 	
 	//clears all variables for the swing;
 	public boolean beginSwing(){
-//		System.out.println("BEGIN SWING");
 		counter = 0;
 		done = false;
 		nextSwing = false;
 		hasHit = false;
-		return (weapon.owner.use_stam(weapon.weight*stanMult));
+		return (weapon.owner.use_stam(weapon.weight*stanMult)); //return true if the user has enough stanima to proceed with the swing
 	}
 	
+	//called if the weapon hits a character during this swing.
 	public void hit(Character c){
-		if(!c.knownEntities.contains(weapon.owner))c.knownEntities.add(weapon.owner);
-		if(!cleave)hasHit = true;
-		float weaponangle = weapon.graphic.angle+135;
-		if(c.damage(weapon.damage*dmgMult, weapon.getEffects())>0){
+		if(!c.knownEntities.contains(weapon.owner))c.knownEntities.add(weapon.owner); //the target now knows where the attacker is!
+		if(!cleave)hasHit = true; //if the weapon is not a cleave weapon, then we update hashit, so it cant hit another enemy this swing.
+		float weaponangle = weapon.graphic.angle+135; // get the angle the tip of the sword is pointing so we can calc knockback
+		if(c.damage(weapon.damage*dmgMult, weapon.getEffects())>0){ //if the target takes at least 1 dmg...
 			
-			float xSword = (float) (Math.cos((weaponangle+knockAngleMod)/180f*Math.PI)*weapon.knockstr);
-			float ySword = (float) (Math.sin((weaponangle+knockAngleMod)/180f*Math.PI)*weapon.knockstr);
-			float xOwner = (float) (Math.cos((weaponangle)/180*Math.PI)*weapon.knockstr);
-			float yOwner = (float) (Math.sin((weaponangle)/180*Math.PI)*weapon.knockstr);
-			Vector2 knockVec = new Vector2();
-			knockVec.x = (xSword*(1-knockRatio)+xOwner*(knockRatio))*knockMult;
-			knockVec.y = (ySword*(1-knockRatio)+yOwner*(knockRatio))*knockMult;
-			c.acel(knockVec, false);
+			float xSword = (float) (Math.cos((weaponangle+knockAngleMod)/180f*Math.PI)*weapon.knockstr); //x knockback caused by sword swing
+			float ySword = (float) (Math.sin((weaponangle+knockAngleMod)/180f*Math.PI)*weapon.knockstr); //y knockback caused by sword swing
+			float xOwner = (float) (Math.cos((weaponangle)/180*Math.PI)*weapon.knockstr); //x knockback away from the attacker
+			float yOwner = (float) (Math.sin((weaponangle)/180*Math.PI)*weapon.knockstr); //y knockback away from the attacker
+			Vector2 knockVec = new Vector2(); //create a knockback vector
+			knockVec.x = (xSword*(1-knockRatio)+xOwner*(knockRatio))*knockMult; //set the x of the knockVec based on the knockRatio and the knockMult
+			knockVec.y = (ySword*(1-knockRatio)+yOwner*(knockRatio))*knockMult; //set the y of the knockVec based on the knockRatio and the knockMult
+			c.acel(knockVec, false); //knock that ***** about!
 		}
 	}
 }
