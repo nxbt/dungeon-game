@@ -148,6 +148,7 @@ public abstract class Character extends Dynamic {
 		norm();
 		handleEquips();
 		activations();
+		calcResistances();
 		calc();
 		effect();
 		move();
@@ -351,6 +352,12 @@ public abstract class Character extends Dynamic {
 		
 	};
 	
+
+	private void calcResistances() {
+		physc_resist = (float) Math.pow(0.9945f,armor);
+		
+	}
+	
 	public void see(Entity e) {}
 
 	public void unsee(Entity e) {}
@@ -385,7 +392,7 @@ public abstract class Character extends Dynamic {
 	public float damage(float value /*Add an array of Effects*/, ArrayList<Effect> hitEffects){
 		if(immune) return 0;
 		
-		value *=Math.pow(0.9945f,armor); //reduce damage for armor, should we replace this with phys_resist and add in a calcResistances method somewhere?
+		value *=physc_resist; //reduce damage for armor, should we replace this with phys_resist and add in a calcResistances method somewhere?
 		
 		float amount = life - Math.max(life-value,0);
 		life-=value;

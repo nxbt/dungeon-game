@@ -31,9 +31,7 @@ public class SwingSet{
 			this.swings[i].weapon = this.weapon;
 			this.swings[i].prevSwing = this.swings[i-1];
 		}
-		swings[0].prevSwing = swings[0];
-		curSwing = 0;
-		swings[curSwing].beginSwing();
+		reset();
 		
 		isInUse = false;
 
@@ -78,6 +76,7 @@ public class SwingSet{
 		swings[0].prevSwing = swings[0];
 		curSwing = 0;
 		swings[curSwing].beginSwing();
+		swings[curSwing].counter = swings[curSwing].duration*weapon.speed/10*2;
 	}
 	
 	public void hit(Character c){ //called when the weapon hits a character

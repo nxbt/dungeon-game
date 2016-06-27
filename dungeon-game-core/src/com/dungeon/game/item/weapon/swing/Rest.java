@@ -28,6 +28,9 @@ public class Rest extends Swing{
 			nextSwing = true;
 			done = true;
 		}
+		weapon.graphic.graphic_angle = (int) angle;
+		weapon.graphic.graphic_pAngle = (int) polarAngle;
+		weapon.graphic.graphic_dist = (int) dist;
 	}
 	
 	public void progress(){
