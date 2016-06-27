@@ -24,6 +24,8 @@ public abstract class Effect {
 		this.name = name;
 		
 		this.duration = duration;
+		
+		killMe = false;
 	}
 	
 	public void update(Character character){

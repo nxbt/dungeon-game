@@ -29,7 +29,7 @@ public class Poison extends Effect {
 	
     	public void calc(Character character){
     			if(tickTimer == 0){
-    	        	character.damage(Math.round(Math.max(dmg*rate,1)),null);
+    				character.addEffect(new PoisonDamage(world, Math.round(Math.max(dmg*rate,1))));
     	        	dmg -= Math.round(Math.max(dmg*rate,1));
     	        	tickTimer = TICKLENGTH;
     			}else tickTimer--;

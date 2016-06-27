@@ -400,7 +400,7 @@ public abstract class Character extends Dynamic {
 		return amount;
 	}
 	
-	public void psnDamage(float value){
+	public void poisonDamage(float value){
 		value*=poisn_resist;
 		
 		life-=value;
