@@ -1,6 +1,8 @@
-package com.dungeon.game.item.equipable;
+package com.dungeon.game.item.equipable.armor;
 
 import com.badlogic.gdx.graphics.Color;
+import com.dungeon.game.effect.Armor;
+import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
 
@@ -18,6 +20,8 @@ public class Shirt extends Equipable {
 		type = CHEST;
 		
 		desc = "A simple wool shirt. Provideds little defence.\n\n Armor: " + (int)physc_resist;
+		
+		passiveEffects.add(new Armor(world, (int) physc_resist));
 	}
 
 }

@@ -19,7 +19,7 @@ import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.FlashLight;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.Lantern;
-import com.dungeon.game.item.equipable.Shirt;
+import com.dungeon.game.item.equipable.armor.Shirt;
 import com.dungeon.game.item.weapon.Axe;
 import com.dungeon.game.item.weapon.Bow;
 import com.dungeon.game.item.weapon.Medium;

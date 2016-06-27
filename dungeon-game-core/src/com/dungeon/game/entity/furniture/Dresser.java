@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.Container;
-import com.dungeon.game.item.equipable.Pants;
-import com.dungeon.game.item.equipable.Shirt;
+import com.dungeon.game.item.equipable.armor.Pants;
+import com.dungeon.game.item.equipable.armor.Shirt;
 import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
 

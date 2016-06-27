@@ -1,6 +1,7 @@
-package com.dungeon.game.item.equipable;
+package com.dungeon.game.item.equipable.armor;
 
 import com.dungeon.game.effect.Inconspicuous;
+import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.world.World;
 
 public class Hat extends Equipable {

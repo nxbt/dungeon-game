@@ -18,8 +18,8 @@ public class Armor extends Effect {
 		graphic = new EffectGraphic(world, this);
 	}
 	
-	public Armor(World world, int duration, int amount, boolean passive) { //for use in armor so you cant see the effect :o
-		super(world, "Armor", duration);
+	public Armor(World world, int amount) { //for use in armor so you cant see the effect :o
+		super(world, "Armor", -1);
 		
 		this.amount = amount;
 	}
