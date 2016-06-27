@@ -52,8 +52,8 @@ public abstract class Enemy extends Character {
 	}
 	
 	public void dead(){
-		if(leftEquiped!=null)unequip(leftEquiped);
-		if(rightEquiped!=null)unequip(rightEquiped);
+		if(equipItems[0]!=null)equipItems[0].unequip();
+		if(equipItems[1]!=null)equipItems[1].unequip();
 		
 		ArrayList<Item> drops = inv.getDrops();
 		for(Item item: drops){
