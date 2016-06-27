@@ -18,11 +18,14 @@ public class SwingSet{
 	
 	public boolean isInAttack;
 	
+	public boolean repeatable;
 	
-	public SwingSet(World world, Melee weapon, Swing[] swings){
+	
+	public SwingSet(World world, Melee weapon, Swing[] swings, boolean repeatable){
 		this.world = world;
 		this.weapon = weapon;
 		this.swings = swings;
+		this.repeatable = repeatable;
 		
 		this.swings[0].weapon = this.weapon;
 		
@@ -53,9 +56,16 @@ public class SwingSet{
 		if(swings[curSwing].done){
 			if(swings[curSwing].nextSwing){ //if nextSwing is true, then we progress to the next swing
 				curSwing++; //increase curSwing by 1
+				if(repeatable && curSwing == 1)swings[curSwing].prevSwing = swings[0]; 
 				if(curSwing == swings.length){ //if it was the last swing we need to go back to the resting position
-					swings[0].prevSwing = swings[curSwing-1]; //set rest's prevSwing to the swing that just finished
-					curSwing = 0; //set curSwing to 0, the resting position
+					if(!repeatable){
+						swings[0].prevSwing = swings[curSwing-1]; //set rest's prevSwing to the swing that just finished
+						curSwing = 0; //set curSwing to 0, the resting position
+					}else{
+						swings[1].prevSwing = swings[curSwing-1]; //if its repeatable then we go to the first swing
+						curSwing = 1; //set curSwing to 1, the first swing position
+					}
+					
 				}
 				
 				if(!swings[curSwing].beginSwing()){ //reset variables for the new swing, and check if the owner has stanima to do so

@@ -267,9 +267,9 @@ public class Player extends Character {
 
 	@Override
 	protected void activations() {
-		if(world.mouse.rb_pressed)rightActivated = true;
+		if(world.mouse.rb_down)rightActivated = true;
 		else rightActivated = false;
-		if(world.mouse.lb_pressed)leftActivated = true;
+		if(world.mouse.lb_down)leftActivated = true;
 		else leftActivated = false;
 	}
 

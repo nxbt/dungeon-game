@@ -80,6 +80,9 @@ public class Swing {
 	
 	//called if the swing is in the windup
 	public void progressWindup(float counter){ // have to add stuff for right side
+		if(counter> windupDuration&&((weapon.owner.equipItems[0].equals(weapon) && weapon.owner.leftActivated)||(weapon.owner.equipItems[1].equals(weapon) && weapon.owner.rightActivated))){
+			this.counter-=weapon.speed/10f;
+		}
 		isInUse = true;
 		isInAttack = false;
 		weapon.graphic.graphic_angle = (int) (prevSwing.angle-(prevSwing.angle - windupAngle)/windupDuration*counter);

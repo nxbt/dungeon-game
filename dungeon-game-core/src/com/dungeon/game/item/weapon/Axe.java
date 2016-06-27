@@ -89,7 +89,7 @@ public class Axe extends Melee {
 		swings = new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
 				new Swing(world, true, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
 				new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 2f, 0.7f, 0, 0.4f, 0.8f),
-				});
+				}, false);
 		
 		effects = new ArrayList<Effect>();
 		
