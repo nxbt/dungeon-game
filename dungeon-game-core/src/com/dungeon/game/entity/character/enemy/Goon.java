@@ -175,7 +175,6 @@ name = "Goon";
 //			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
 		}
 		attacking = false;
-		System.out.println(equipItems[0]);
 		if(equipItems[0] != null){
 			boolean attack = false;
 			boolean down = true;

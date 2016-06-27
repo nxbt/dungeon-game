@@ -42,7 +42,6 @@ public class VillageRooms extends Generation {
 		hallEnds = new ArrayList<ArrayList<Rectangle>>();
 		int x = height/2;
 		int y = width/2;
-		System.out.println(centerX);
 		if(world.curDungeon!=null)entities.add(new Stair(world, centerX*Tile.TS-Tile.TS/2, centerY*Tile.TS-Tile.TS/2, false, upTrapX+1, upTrapY+1));
 
 		generateStartRoom(centerX, centerY);
@@ -1032,7 +1031,6 @@ public class VillageRooms extends Generation {
 			
 			for(int i = 0; i < temp.length; i++){
 				for(int k = 0; k < temp[i].length; k++){
-					System.out.println(i +  "," + k);
 					roomMap[i][roomMap[i].length-1-k]=temp[i][k];
 				}
 			}

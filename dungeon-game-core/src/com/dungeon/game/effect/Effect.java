@@ -4,7 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.world.World;
-public abstract class Effect {
+
+public abstract class Effect implements Cloneable {
 	
 	public static Texture texture;
 	
@@ -54,5 +55,12 @@ public abstract class Effect {
 		return 0;
 	}
 	
-	
+	public Effect clone() {
+		try {
+			return (Effect) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

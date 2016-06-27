@@ -14,10 +14,12 @@ public abstract class Weapon extends Hand{
 	
 	public float weight;
 	
+	public ArrayList<Effect> hitEffects;
+	
 	public Weapon(World world, String filename){
 		super(world, filename);
 		
-		
+		hitEffects = new ArrayList<Effect>();
 	}
 	
 	protected void changeSprite(int index){
@@ -25,5 +27,13 @@ public abstract class Weapon extends Hand{
 		if(graphic != null) graphic.sprite = sprite;
 	}
 	
-	public abstract ArrayList<Effect> getEffects();
+	public ArrayList<Effect> getEffects() {
+		ArrayList<Effect> effects = new ArrayList<Effect>();
+		
+		for(Effect effect: hitEffects) {
+			effects.add(effect.clone());
+		}
+		
+		return effects;
+	}
 }

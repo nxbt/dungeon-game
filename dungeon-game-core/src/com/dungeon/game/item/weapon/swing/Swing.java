@@ -1,15 +1,17 @@
 package com.dungeon.game.item.weapon.swing;
 
-import com.dungeon.game.item.weapon.Melee;
-import com.dungeon.game.world.World;
+import java.util.ArrayList;
+
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.character.Character;
+import com.dungeon.game.item.weapon.Melee;
+import com.dungeon.game.world.World;
 
 public class Swing {
 	
 	//all durations are in miliseconds
 	
-	private static final int PAUSE_DURATION = 30;
+	protected static final int PAUSE_DURATION = 30;
 	
 	protected World world;
 	
@@ -25,7 +27,7 @@ public class Swing {
 	
 	private boolean cleave; //can the weapon hit multiple enemies?
 	
-	private float windupDuration;
+	protected float windupDuration;
 	
 	private float windupDist;
 	private float windupAngle;
@@ -48,6 +50,8 @@ public class Swing {
 	protected boolean isInAttack;
 	
 	protected boolean hasHit;
+	
+	protected ArrayList<Character> hitChars;
 	
 	public Swing(World world, boolean cleave, int windupDuration, int windupDist, int windupPolarAngle, int windupAngle, int duration, int dist, int polarAngle, int angle, float dmgMult, float knockMult, float knockAngleMod, float knockRatio, float stanMult){
 		this.world = world;
@@ -76,11 +80,12 @@ public class Swing {
 		isInAttack = false;
 		hasHit = false;
 		
+		hitChars = new ArrayList<Character>();
 	}
 	
 	//called if the swing is in the windup
 	public void progressWindup(float counter){ // have to add stuff for right side
-		if(counter> windupDuration&&((weapon.owner.equipItems[0].equals(weapon) && weapon.owner.leftActivated)||(weapon.owner.equipItems[1].equals(weapon) && weapon.owner.rightActivated))){
+		if(counter >= windupDuration&&((weapon.owner.equipItems[0] != null && weapon.owner.equipItems[0].equals(weapon) && weapon.owner.leftActivated) || (weapon.owner.equipItems[1] != null && weapon.owner.equipItems[1].equals(weapon) && weapon.owner.rightActivated))){
 			this.counter-=weapon.speed/10f;
 		}
 		isInUse = true;
@@ -126,6 +131,7 @@ public class Swing {
 	
 	//clears all variables for the swing;
 	public boolean beginSwing(){
+		hitChars.clear();
 		counter = 0;
 		done = false;
 		nextSwing = false;
@@ -135,6 +141,10 @@ public class Swing {
 	
 	//called if the weapon hits a character during this swing.
 	public void hit(Character c){
+		if(hitChars.contains(c)) return;
+		
+		hitChars.add(c);
+		
 		if(!c.knownEntities.contains(weapon.owner))c.knownEntities.add(weapon.owner); //the target now knows where the attacker is!
 		if(!cleave)hasHit = true; //if the weapon is not a cleave weapon, then we update hashit, so it cant hit another enemy this swing.
 		float weaponangle = weapon.graphic.angle+135; // get the angle the tip of the sword is pointing so we can calc knockback

@@ -1,9 +1,8 @@
 package com.dungeon.game.item.weapon.swing;
 
-import com.dungeon.game.item.Item;
+import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.item.weapon.Melee;
 import com.dungeon.game.world.World;
-import com.dungeon.game.entity.character.Character;
 
 public class SwingSet{
 
@@ -53,7 +52,7 @@ public class SwingSet{
 		weapon.hasHit = swings[curSwing].hasHit;
 		
 		//if the swing is done, we need to figure out what to do!
-		if(swings[curSwing].done){
+		if(swings[curSwing].done && ((curSwing != swings.length-1) || (swings[curSwing].counter > swings[curSwing].windupDuration + swings[curSwing].duration + Swing.PAUSE_DURATION*weapon.speed/10f) || repeatable)) { //if not repeatable and on the last swing, you can't force a return to the rest position (don't change it works trust me)
 			if(swings[curSwing].nextSwing){ //if nextSwing is true, then we progress to the next swing
 				curSwing++; //increase curSwing by 1
 				if(repeatable && curSwing == 1)swings[curSwing].prevSwing = swings[0]; 
@@ -71,7 +70,7 @@ public class SwingSet{
 				if(!swings[curSwing].beginSwing()){ //reset variables for the new swing, and check if the owner has stanima to do so
 					swings[0].prevSwing = swings[curSwing-1]; //if the owner does not have enough stanima to swing, we go to the resting position, gotta update prevSwing!
 					curSwing = 0; // set the curSwing to rest
-					swings[curSwing].beginSwing(); //begin the restin posion
+					swings[curSwing].beginSwing(); //begin the resting position
 				}
 			}else { //if nextSwing is false, we go back to the resting position
 				swings[0].prevSwing = swings[curSwing]; //set the prevSwing to the swing we just finished

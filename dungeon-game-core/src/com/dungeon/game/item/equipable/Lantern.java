@@ -1,6 +1,5 @@
 package com.dungeon.game.item.equipable;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.HandheldGraphic;
@@ -33,7 +32,6 @@ public class Lantern extends Hand {
 	}
 	
 	public void equip(Character owner, boolean leftSide){
-		System.out.println("equiped");
 		reset();
 		
 		this.graphic.light.load();
@@ -46,7 +44,6 @@ public class Lantern extends Hand {
 	}
 	
 	public void unequip(){
-		System.out.println("unequiped");
 		reset();
 		
 		this.graphic.light.unload();
