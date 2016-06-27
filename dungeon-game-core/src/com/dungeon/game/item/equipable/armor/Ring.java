@@ -5,7 +5,7 @@ import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
 
-public class Ring extends Equipable {
+public abstract class Ring extends Equipable {
 
 	public Ring(World world, Color color) {
 		super(world, "pants.png");

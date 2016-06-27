@@ -4,7 +4,7 @@ import com.dungeon.game.effect.Inconspicuous;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.world.World;
 
-public class Hat extends Equipable {
+public abstract class Hat extends Equipable {
 	public Hat(World world) {
 		super(world, "hat.png");
 		

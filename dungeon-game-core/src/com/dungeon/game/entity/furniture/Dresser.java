@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.Container;
-import com.dungeon.game.item.equipable.armor.Pants;
-import com.dungeon.game.item.equipable.armor.Shirt;
+import com.dungeon.game.item.equipable.armor.WoolPants;
+import com.dungeon.game.item.equipable.armor.WoolShirt;
 import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
 
@@ -46,8 +46,8 @@ public class Dresser extends Container {
 		
 		for(int i = 0; i < inv.slot.length; i++){
 			if(Math.random() < 0.10){
-				if(Math.random() > 0.5)inv.slot[i].item = new Shirt(world, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f));
-				else inv.slot[i].item  = new Pants(world, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f));
+				if(Math.random() > 0.5)inv.slot[i].item = new WoolShirt(world, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f));
+				else inv.slot[i].item  = new WoolPants(world, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f));
 			}
 		}
 	}
