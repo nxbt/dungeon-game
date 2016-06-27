@@ -98,6 +98,7 @@ public abstract class Character extends Dynamic {
 	public Texture face;
 
 	public Color speechColor;
+	public String desc;
 	
 	public Character(World world, float x, float y, int width, int height, String filename) {
 		super(world, x, y, width, height, filename);
@@ -138,6 +139,8 @@ public abstract class Character extends Dynamic {
 		flame_resist = 0;
 		ligtn_resist = 0;
 		poisn_resist = 0;
+		
+		desc = "On this stage, we are all players. Even this guy.";
 	}
 
 	public void norm() {

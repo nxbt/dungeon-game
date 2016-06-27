@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.world.World;
 
 public abstract class Window extends Hud {
-	static final NinePatch WINDOW = new NinePatch(new Texture("window.png"), 1, 1, 14, 1);
+	static final NinePatch WINDOW = new NinePatch(new Texture("window.png"), 2, 2, 14, 2);
 	
 	private ExitButton exitButton;
 	
