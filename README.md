@@ -13,6 +13,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * Add procedural generation to all rooms in towns.
 * Upload screenshots to wiki
 * Finish adding effects to equipables.
+* change pathfinding to use GDXAI ? 
 
 ##TODO very low priority (within a couple months?):
 * Add multithreding!
