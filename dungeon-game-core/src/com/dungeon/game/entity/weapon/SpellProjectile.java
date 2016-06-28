@@ -14,8 +14,7 @@ public class SpellProjectile extends Projectile {
 	
 	public SpellProjectile(World world, Medium weapon, Spell spell, float x, float y, float angle, float power, Polygon hitbox, float originX, float originY, int range, int width, int height, String filename) {
 		super(world, x, y, angle, power, hitbox, originX, originY, range, width, height, filename);
-
-
+		
 		this.weapon = weapon;
 		this.spell = spell;
 		

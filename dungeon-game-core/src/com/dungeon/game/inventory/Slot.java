@@ -86,6 +86,9 @@ public class Slot {
 						item.stack+=world.mouse.slot.item.stack;
 						world.mouse.slot.item = null;
 					}
+					else if(item.maxStack == 1) {
+						swap(world.mouse.slot);
+					}
 					else {
 						world.mouse.slot.item.stack = item.stack+world.mouse.slot.item.stack-item.maxStack;
 						item.stack = item.maxStack;

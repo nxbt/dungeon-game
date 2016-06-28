@@ -27,8 +27,8 @@ public class StatsWindow extends Window {
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.WHITE);
 		
-		this.d_width = 74*3 + 8;
-		this.d_height = 144 + 14 + 16 + 64;
+		this.d_width = 230;
+		this.d_height = 238;
 	}
 	
 	public String fixDesc(String text) {
