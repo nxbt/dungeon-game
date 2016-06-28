@@ -35,16 +35,20 @@ public class VillageRooms extends Generation {
 	
 	public VillageRooms(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY){
 		super(world, width, height);
-		rooms = new ArrayList<Rectangle>();
-		specialRooms = new ArrayList<Rectangle>();
-		normRooms = new ArrayList<Rectangle>();
-		halls = new ArrayList<ArrayList<int[]>>();
-		hallEnds = new ArrayList<ArrayList<Rectangle>>();
 		int x = height/2;
 		int y = width/2;
 		if(world.curDungeon!=null)entities.add(new Stair(world, centerX*Tile.TS-Tile.TS/2, centerY*Tile.TS-Tile.TS/2, false, upTrapX+1, upTrapY+1));
 
-		generateStartRoom(centerX, centerY);
+		do{
+			System.out.println("generated village rooms");
+			generateClearDungeon();
+			rooms = new ArrayList<Rectangle>();
+			specialRooms = new ArrayList<Rectangle>();
+			normRooms = new ArrayList<Rectangle>();
+			halls = new ArrayList<ArrayList<int[]>>();
+			hallEnds = new ArrayList<ArrayList<Rectangle>>();
+			generateStartRoom(centerX, centerY);
+		}while(specialRooms.size() < 3);
 		populateSpecialRooms();
 		
 		makeWalls(10, 11, 12, 13, 14);
@@ -559,6 +563,7 @@ public class VillageRooms extends Generation {
 		}
 		generateStairRoom(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
+		generateTrainingCenter(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		while(specialRooms.size()>0)generateQuarters(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		for(int i = 0; i < specialRooms.size(); i++){
 			
@@ -1003,6 +1008,26 @@ public class VillageRooms extends Generation {
 		
 		
 		
+		//ending transformations
+		unrotate(roomMap, room, roomEntities, doorFinder);
+	}
+	
+	private void generateTrainingCenter(Rectangle room){
+		specialRooms.remove(room);
+		
+		//begining Tranaformations
+		int[] doorFinder = findDoor(room);
+		int[] doorPos = new int[2];
+		int[][] roomMap = rotate(room, doorFinder, doorPos);
+		int doorX =  doorPos[0];
+		int doorY = doorPos[1];
+		
+		//initialize Entity Arrays
+		ArrayList<Entity> roomEntities = new ArrayList<Entity>();
+		
+		//spawn stuff
+		int x = 0,y = 0;
+		ArrayList<int[]> occupiedTiles = new ArrayList<int[]>();
 		//ending transformations
 		unrotate(roomMap, room, roomEntities, doorFinder);
 	}
