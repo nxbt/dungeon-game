@@ -7,19 +7,14 @@ import com.dungeon.game.world.World;
 
 public abstract class Ring extends Equipable {
 
-	public Ring(World world, Color color) {
-		super(world, "pants.png");
-		
-		sprite = Spritesheet.Tint(textures[0], color, true);
+	public Ring(World world, String tex) {
+		super(world, tex);
 		
 		name = "Ring";
 		
-		physc_resist = 1;
-		flame_resist = -1;
-		
 		type = RING;
 		
-		desc = "No, really. It's a ring!\n\n Armor: " + (int)physc_resist;
+		desc = "We are lazy and incapable of writing descriptions.";
 
 	}
 

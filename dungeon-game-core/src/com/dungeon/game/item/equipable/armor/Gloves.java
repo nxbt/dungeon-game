@@ -7,19 +7,14 @@ import com.dungeon.game.world.World;
 
 public abstract class Gloves extends Equipable {
 
-	public Gloves(World world, Color color) {
-		super(world, "pants.png");
-		
-		sprite = Spritesheet.Tint(textures[0], color, true);
+	public Gloves(World world, String tex) {
+		super(world, tex);
 		
 		name = "Gloves";
 		
-		physc_resist = 1;
-		flame_resist = -1;
-		
 		type = GLOVES;
 		
-		desc = "No, really. They're gloves!\n\n Armor: " + (int)physc_resist;
+		desc = "ERROR: desc = null, programmers = dumb.";
 
 	}
 

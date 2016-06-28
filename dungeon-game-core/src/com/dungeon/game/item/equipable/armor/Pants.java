@@ -7,20 +7,14 @@ import com.dungeon.game.world.World;
 
 public abstract class Pants extends Equipable {
 
-	public Pants(World world, Color color) {
-		super(world, "pants.png");
-		
-		sprite = Spritesheet.Tint(textures[0], color, true);
-		
+	public Pants(World world, String tex) {
+		super(world, tex);
+
 		name = "Pants";
-		
-		physc_resist = 1;
-		flame_resist = -1;
 		
 		type = PANTS;
 		
-		desc = "A simple pair of wool pants. Provideds little defence.\n\n Armor: " + (int)physc_resist;
-		
+		desc = "Our descriptions have been abducted by aliens. Send help.";
 
 	}
 

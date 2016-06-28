@@ -7,21 +7,14 @@ import com.dungeon.game.spritesheet.Spritesheet;
 import com.dungeon.game.world.World;
 
 public abstract class Shirt extends Equipable {
-	public Shirt(World world, Color color) {
-		super(world, "shirt.png");
-		
-		sprite = Spritesheet.Tint(textures[0], color, true);
+	public Shirt(World world, String tex) {
+		super(world, tex);
 		
 		name = "Shirt";
 		
-		physc_resist = 1;
-		flame_resist = -1;
-		
 		type = CHEST;
 		
-		desc = "A simple wool shirt. Provideds little defence.\n\n Armor: " + (int)physc_resist;
-		
-		passiveEffects.add(new Armor(world, (int) physc_resist));
+		desc = "We forgot to write a description for this shirt. Sry bae.";
 	}
 
 }

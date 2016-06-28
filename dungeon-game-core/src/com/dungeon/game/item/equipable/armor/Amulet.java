@@ -7,19 +7,14 @@ import com.dungeon.game.world.World;
 
 public class Amulet extends Equipable {
 
-	public Amulet(World world, Color color) {
-		super(world, "pants.png");
-		
-		sprite = Spritesheet.Tint(textures[0], color, true);
+	public Amulet(World world, String tex) {
+		super(world, tex);
 		
 		name = "Amulet";
 		
-		physc_resist = 1;
-		flame_resist = -1;
-		
 		type = AMULET;
 		
-		desc = "No, really. It's an amulet!\n\n Armor: " + (int)physc_resist;
+		desc = "Amulet you guess what this is, ok?";
 
 	}
 
