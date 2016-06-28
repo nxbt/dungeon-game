@@ -9,6 +9,7 @@ import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.Stair;
 import com.dungeon.game.entity.character.friend.Shopkeeper;
 import com.dungeon.game.entity.character.friend.StairKeeper;
+import com.dungeon.game.entity.character.friend.Trainer;
 import com.dungeon.game.entity.character.friend.Villager;
 import com.dungeon.game.entity.furniture.Bed;
 import com.dungeon.game.entity.furniture.Bookshelf;
@@ -1012,6 +1013,8 @@ public class VillageRooms extends Generation {
 		unrotate(roomMap, room, roomEntities, doorFinder);
 	}
 	
+	
+	//generate the trainer and his shit
 	private void generateTrainingCenter(Rectangle room){
 		specialRooms.remove(room);
 		
@@ -1028,9 +1031,13 @@ public class VillageRooms extends Generation {
 		//spawn stuff
 		int x = 0,y = 0;
 		ArrayList<int[]> occupiedTiles = new ArrayList<int[]>();
+		
+		//generate things!
+		roomEntities.add(new Trainer(world, Tile.TS, Tile.TS));
 		//ending transformations
 		unrotate(roomMap, room, roomEntities, doorFinder);
 	}
+	
 	
 	private int[][] rotate(Rectangle room, int[] doorFinder, int[] doorPos){
 		int[][] roomMap;
