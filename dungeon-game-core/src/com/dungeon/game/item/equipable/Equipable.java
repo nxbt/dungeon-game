@@ -48,13 +48,11 @@ public abstract class Equipable extends Item {
 	};
 	
 	public void equip(Character owner, boolean leftSide){
-		System.out.println("equiped");
 		this.owner = owner;
 		onEquip();
 	}
 	
 	public void unequip(){
-		System.out.println("unequiped");
 		
 		onUnequip();
 		this.owner = null;
