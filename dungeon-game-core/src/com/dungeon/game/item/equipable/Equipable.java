@@ -30,6 +30,8 @@ public abstract class Equipable extends Item {
 		
 		maxStack = 1;
 		
+		stack = 1;
+		
 		passiveEffects = new ArrayList<Effect>();
 	}
 	
