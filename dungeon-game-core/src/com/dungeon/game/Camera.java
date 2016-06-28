@@ -36,7 +36,11 @@ public class Camera {
 	}
 	
 	public void update(){
-		if(Hud.class.isInstance(world.player.focusedEntity)) {
+		if(world.player.actionState[2]) {
+			x += (world.player.x - x) * TWEEN;
+			y += (world.player.y - y) * TWEEN;
+		}
+		else if(Hud.class.isInstance(world.player.focusedEntity)) {
 			x += ((4*world.player.x+(world.player.focusedEntity.x-width/2)+x)/5 - x)*TWEEN;
 			y += ((4*world.player.y+(world.player.focusedEntity.y-height/2)+y)/5 - y)*TWEEN;
 		}

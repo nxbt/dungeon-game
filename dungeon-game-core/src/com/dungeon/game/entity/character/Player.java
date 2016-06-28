@@ -35,7 +35,7 @@ public class Player extends Character {
 	
 	public ArrayList<EffectGraphic> effectGraphics;
 	
-	public boolean[] actionState; // 0 = fightMode, 1 = taking, 2 = invOpen
+	public boolean[] actionState; // 0 = fightMode, 1 = talking, 2 = invOpen
 	
 	public Entity focusedEntity;
 	
@@ -146,8 +146,6 @@ public class Player extends Character {
 		inv.addItem(new Wand(world));
 		inv.addItem(new WoolShirt(world, speechColor));
 		
-//		light = new Light(this, 1);
-		
 		actionState = new boolean[] {false, false, false};
 		
 		effectGraphics = new ArrayList<EffectGraphic>();
@@ -187,7 +185,8 @@ public class Player extends Character {
 		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4))inv.slot[3].consume(this);
 		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5))inv.slot[4].consume(this);
 		
-		if(Hud.class.isInstance(focusedEntity)) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y+world.cam.y-world.cam.height/2-(y), focusedEntity.x+world.cam.x-world.cam.width/2-(x)));
+		if(actionState[2]) target_angle = angle;
+		else if(Hud.class.isInstance(focusedEntity)) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y+world.cam.y-world.cam.height/2-(y), focusedEntity.x+world.cam.x-world.cam.width/2-(x)));
 		else if(focusedEntity != null) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y-y, focusedEntity.x-x));
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !attacking && world.mouse.slot.item == null) {
@@ -195,13 +194,6 @@ public class Player extends Character {
 			actionState[0] = !actionState[0];
 		}
 		
-//		if(equipItems[0] != null && inv.slot[30].item==null) equipItems[0] = null;
-//		else if(equipItems[0] == null && inv.slot[30].item != null) equipItems[0] = (Hand) inv.slot[30].item;
-//		else if(equipItems[0] != null && inv.slot[30].item != null &&!equipItems[0].equals(inv.slot[30].item)) equipItems[0] = (Hand) inv.slot[30].item;
-		
-//		if(rightEquiped != null && inv.slot[31].item==null) rightEquiped = null;
-//		else if(rightEquiped == null && inv.slot[31].item != null) rightEquiped = (Hand) inv.slot[31].item;
-//		else if(rightEquiped != null && inv.slot[31].item != null && !rightEquiped.equals(inv.slot[31].item)) rightEquiped = (Hand) inv.slot[31].item;
 		if(inv.slot[35].item != null) ((Equipable) inv.slot[35].item).update(this);
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.E) && !fightMode) {
@@ -261,6 +253,9 @@ public class Player extends Character {
 			mvel = 5;
 			torq = 10;
 		}
+		
+		if(!actionState[2] && world.hudEntities.indexOf(inv.graphic) >= 0) actionState[2] = true;
+		else if(actionState[2] && world.hudEntities.indexOf(inv.graphic) == -1) actionState[2] = false;
 	}
 
 
@@ -276,19 +271,9 @@ public class Player extends Character {
 	public void post() {
 		if(equipItems[0] != null && fightMode && equipItems[0] instanceof Weapon){
 			((Hand)equipItems[0]).graphic.updatePos(true);
-//			float xMove = (float) (Math.cos((angle+leftEquipedPos[1])/180*Math.PI)*leftEquipedPos[0]);
-//			float yMove = (float) (Math.sin((angle+leftEquipedPos[1])/180*Math.PI)*leftEquipedPos[0]);
-//			leftEquiped.graphic.x = (float) (x)+xMove;
-//			leftEquiped.graphic.y = (float) (y)+yMove;
-//			leftEquiped.graphic.angle = angle-135+leftEquipedPos[2];
 		}else if(equipItems[0] != null && !(equipItems[0] instanceof Weapon))((Hand)equipItems[0]).graphic.updatePos(true);
 		if(equipItems[1] != null && fightMode && equipItems[1] instanceof Weapon){
 			((Hand)equipItems[1]).graphic.updatePos(false);
-//			float xMove = (float) (Math.cos((angle+rightEquipedPos[1])/180*Math.PI)*rightEquipedPos[0]);
-//			float yMove = (float) (Math.sin((angle+rightEquipedPos[1])/180*Math.PI)*rightEquipedPos[0]);
-//			rightEquiped.graphic.x = (float) (x)+xMove;
-//			rightEquiped.graphic.y = (float) (y)+yMove;
-//			rightEquiped.graphic.angle = angle-135+rightEquipedPos[2];
 		}else if(equipItems[1] != null && !(equipItems[1] instanceof Weapon))((Hand)equipItems[1]).graphic.updatePos(true);
 		if(killMe){
 			if(equipItems[0]!=null)unequip((Hand) equipItems[0]);

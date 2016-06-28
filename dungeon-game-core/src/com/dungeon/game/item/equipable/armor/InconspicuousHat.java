@@ -1,7 +1,6 @@
 package com.dungeon.game.item.equipable.armor;
 
 import com.dungeon.game.effect.Inconspicuous;
-import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.world.World;
 
 public abstract class InconspicuousHat extends Hat {

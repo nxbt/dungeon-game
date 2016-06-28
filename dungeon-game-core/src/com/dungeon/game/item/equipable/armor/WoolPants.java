@@ -12,7 +12,7 @@ public class WoolPants extends Pants {
 		
 		sprite = Spritesheet.Tint(textures[0], color, true);
 		
-		name = "Pants";
+		name = "Wool Pants";
 		
 		physc_resist = 1;
 		flame_resist = -1;

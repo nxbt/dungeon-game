@@ -12,7 +12,7 @@ public class WoolShirt extends Shirt {
 		
 		sprite = Spritesheet.Tint(textures[0], color, true);
 		
-		name = "Shirt";
+		name = "Wool Shirt";
 		
 		physc_resist = 1;
 		flame_resist = -1;
