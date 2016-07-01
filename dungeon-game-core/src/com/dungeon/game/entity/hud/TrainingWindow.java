@@ -16,6 +16,8 @@ public class TrainingWindow extends Window {
 	private Melee weapon;
 	
 	private BitmapFont font;
+	
+	private PartsInfo partsInfo;
 
 	public TrainingWindow(World world, float x, float y) {
 		super(world, x, y);
@@ -35,7 +37,15 @@ public class TrainingWindow extends Window {
 		slot.x = x + 4;
 		slot.y = y + d_height - 48;
 		slot.calc();
-		weapon = (Melee) slot.slot.item;
+		if(weapon != (Melee) slot.slot.item){
+			weapon = (Melee) slot.slot.item;
+			partsInfo = new PartsInfo(world, 0, 0, weapon);
+		}
+		
+		if(partsInfo != null){
+			partsInfo.x = x + 4;
+			partsInfo.y = y + 4;
+		}
 	}
 	
 	public void subHovered(){
@@ -61,6 +71,7 @@ public class TrainingWindow extends Window {
 			font.draw(batch, dmg, x + 144 - 8*dmg.length(), y + d_height - 50);
 			font.draw(batch, spd, x + 144 - 8*spd.length(), y + d_height - 66);
 			font.draw(batch, knk, x + 144 - 8*knk.length(), y + d_height - 82);
+			partsInfo.draw(batch);
 		}
 	}
 

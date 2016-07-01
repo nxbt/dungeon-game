@@ -14,9 +14,9 @@ import com.dungeon.game.world.World;
 
 public class Sword extends Melee {
 	
-	private static final Texture[] BLADES = Spritesheet.getSprites("swordBladeMap.png", 32, 32);
-	private static final Texture[] GUARDS = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
-	private static final Texture[] HILTS = Spritesheet.getSprites("swordHiltMap.png", 32, 32); //why is guard spelled ua and not au??
+	public static final Texture[] BLADES = Spritesheet.getSprites("swordBladeMap.png", 32, 32);
+	public static final Texture[] GUARDS = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
+	public static final Texture[] HILTS = Spritesheet.getSprites("swordHiltMap.png", 32, 32); //why is guard spelled ua and not au??
 	private static final int BLADE_NUM = 5;
 	private static final int GUARD_NUM = 3;
 	private static final int HILT_NUM = 3;
@@ -85,14 +85,17 @@ public class Sword extends Melee {
 	protected float[] dmgMult;
 	protected float[] knockMult;
 	
+	public int blade;
+	public int guard;
+	public int hilt;
 	
 	public Sword(World world, float damage, float speed, float weight) {
 		super(world, "sword.png");
 		
 		//generate the sprite, for now random, but in the future will be a parameter!
-		int blade = (int) (Math.random()*BLADE_NUM);
-		int guard = (int) (Math.random()*GUARD_NUM);
-		int hilt = (int) (Math.random()*HILT_NUM);
+		blade = (int) (Math.random()*BLADE_NUM);
+		guard = (int) (Math.random()*GUARD_NUM);
+		hilt = (int) (Math.random()*HILT_NUM);
 		if(!BLADES[blade].getTextureData().isPrepared()) BLADES[blade].getTextureData().prepare();
 		Pixmap bladeMap = BLADES[blade].getTextureData().consumePixmap();
 		if(!GUARDS[guard].getTextureData().isPrepared()) GUARDS[guard].getTextureData().prepare();
