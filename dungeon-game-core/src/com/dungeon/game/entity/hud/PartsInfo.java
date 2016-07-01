@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.item.weapon.Sword;
 import com.dungeon.game.item.weapon.Weapon;
+import com.dungeon.game.utilities.TextHelper;
 import com.dungeon.game.world.World;
 
 public class PartsInfo extends Hud {
@@ -53,7 +54,7 @@ public class PartsInfo extends Hud {
 	
 	public void draw(SpriteBatch batch) {
 			BACKGROUND.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
-			font.draw(batch, "Parts: ", x + 4, y + d_height - 4);
+			font.draw(batch, "Parts: ", TextHelper.alignCenter("Parts: ", x + d_width/2), y + d_height - 4);
 	}
 
 }
