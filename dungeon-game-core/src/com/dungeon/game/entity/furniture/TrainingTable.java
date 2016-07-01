@@ -10,11 +10,13 @@ public class TrainingTable extends Static {
 	private TrainingWindow window;
 
 	public TrainingTable(World world, float x, float y) {
-		super(world, x, y, 16, 16, "bedside.png");
+		super(world, x, y, 32, 32, "trainingTable.png");
 		
 		window = new TrainingWindow(world, 0, 0);
 		
-		hitbox = new Polygon(new float[]{0,0,16,0,16,16,0,16});
+		hitbox = new Polygon(new float[]{1,1,31,1,31,31,1,31});
+		
+		solid = true;
 		
 	}
 

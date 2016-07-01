@@ -9,7 +9,7 @@ import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
 public class HudSlot extends Hud {
-	private Slot slot;
+	protected Slot slot;
 	
 	private BitmapFont font;
 
