@@ -8,16 +8,16 @@ public abstract class Item implements Cloneable {
 	public static final int SIZE = 32;
 	
 	//Type Constants
-	protected static final int DEFAULT = 0;
-	protected static final int CONSUM = 1;
-	protected static final int HAND = 2;
-	protected static final int GLOVES = 3;
-	protected static final int HELM = 4;
-	protected static final int CHEST = 5;
-	protected static final int PANTS = 6;
-	protected static final int BOOTS = 7;
-	protected static final int AMULET = 8;
-	protected static final int RING = 9;
+	public static final int DEFAULT = 0;
+	public static final int CONSUM = 1;
+	public static final int HAND = 2;
+	public static final int GLOVES = 3;
+	public static final int HELM = 4;
+	public static final int CHEST = 5;
+	public static final int PANTS = 6;
+	public static final int BOOTS = 7;
+	public static final int AMULET = 8;
+	public static final int RING = 9;
 	
 	public int stack;
 	public int maxStack;

@@ -34,12 +34,9 @@ public class HudSlot extends Hud {
 				temp.open();
 			}
 		}
-		else if(world.mouse.lb_pressed) {
-			if(world.mouse.slot.item == null)slot.consume(world.player);
-			else {
-				slot.hovered();
-				world.descBox.text = "";
-			}
+		else {
+			slot.hovered();
+			world.descBox.text = "";
 			
 		}
 	}

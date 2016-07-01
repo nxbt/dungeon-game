@@ -15,6 +15,7 @@ import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.ammo.Arrow;
+import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.FlashLight;
 import com.dungeon.game.item.equipable.Hand;
@@ -132,7 +133,8 @@ public class Player extends Character {
 		equipSlots = new Slot[]{inv.slot[30],inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41]};
 		equipItems = new Equipable[equipSlots.length];
 		inv.slot[0].item = new FlashLight(world);
-		inv.slot[1].item = new Lantern(world);
+		inv.slot[31].item = new Lantern(world);
+		inv.slot[1].item = new LifePotion(world);
 		inv.slot[5].item = new Arrow(world);
 		inv.slot[5].item.stack = 10;
 		inv.addItem(new Sword(world, 10, 10, 10));
