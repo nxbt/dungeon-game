@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.weapon.Melee;
+import com.dungeon.game.utilities.TextHelper;
 import com.dungeon.game.world.World;
 
 public class TrainingWindow extends Window {
@@ -68,9 +69,9 @@ public class TrainingWindow extends Window {
 			String spd = "" + Math.round(weapon.speed*10)/10f;
 			String knk = "" + Math.round(weapon.knockstr*10)/10f;
 			font.draw(batch, "Damage:\nSpeed:\nKnockback:", x + 4, y + d_height - 50);
-			font.draw(batch, dmg, x + 144 - 8*dmg.length(), y + d_height - 50);
-			font.draw(batch, spd, x + 144 - 8*spd.length(), y + d_height - 66);
-			font.draw(batch, knk, x + 144 - 8*knk.length(), y + d_height - 82);
+			font.draw(batch, dmg, TextHelper.alignRight(dmg, x + 144), y + d_height - 50);
+			font.draw(batch, spd, TextHelper.alignRight(spd, x + 144), y + d_height - 66);
+			font.draw(batch, knk, TextHelper.alignRight(knk, x + 144), y + d_height - 82);
 			partsInfo.draw(batch);
 		}
 	}

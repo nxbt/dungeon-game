@@ -1,7 +1,7 @@
 package com.dungeon.game.item;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.dungeon.game.spritesheet.Spritesheet;
+import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.World;
 
 public abstract class Item implements Cloneable {

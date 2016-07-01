@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.Static;
 import com.dungeon.game.light.Light;
-import com.dungeon.game.spritesheet.Spritesheet;
+import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.World;
 
 public class Torch extends Static {

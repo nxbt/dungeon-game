@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.Container;
 import com.dungeon.game.item.equipable.armor.WoolPants;
 import com.dungeon.game.item.equipable.armor.WoolShirt;
-import com.dungeon.game.spritesheet.Spritesheet;
+import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.World;
 
 public class Dresser extends Container {

@@ -1,4 +1,4 @@
-package com.dungeon.game.spritesheet;
+package com.dungeon.game.utilities;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
