@@ -33,16 +33,19 @@ public class PartsInfo extends Hud {
 		parts = new PartInfo[3];
 		
 		if(weapon instanceof Sword){
-			parts[0] = new PartInfo(world, 0, 0, 0, 0, ((Sword) weapon).blade);
-			parts[1] = new PartInfo(world, 0, 0, 0, 0, ((Sword) weapon).guard);
-			parts[2] = new PartInfo(world, 0, 0, 0, 0, ((Sword) weapon).hilt);
+			parts[0] = new PartInfo(world, 0, 0, PartInfo.SWORD, PartInfo.BLADE, ((Sword) weapon).blade);
+			parts[1] = new PartInfo(world, 0, 0, PartInfo.SWORD, PartInfo.GUARD, ((Sword) weapon).guard);
+			parts[2] = new PartInfo(world, 0, 0, PartInfo.SWORD, PartInfo.HILT, ((Sword) weapon).hilt);
 		}
 		
 	}
 
 	@Override
 	public void calc() {
-		// TODO Auto-generated method stub
+		for(int i = 0; i < parts.length; i++){
+			parts[i].x = this.x + 4;
+			parts[i].y = this.y + this.d_height - 25 - i * 25;
+		}
 
 	}
 
@@ -55,6 +58,9 @@ public class PartsInfo extends Hud {
 	public void draw(SpriteBatch batch) {
 			BACKGROUND.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
 			font.draw(batch, "Parts: ", TextHelper.alignCenter("Parts: ", x + d_width/2), y + d_height - 4);
+			for(int i = 0; i < parts.length; i++){
+				parts[i].draw(batch);
+			}
 	}
 
 }

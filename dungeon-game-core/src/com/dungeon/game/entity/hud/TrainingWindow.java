@@ -46,6 +46,7 @@ public class TrainingWindow extends Window {
 		if(partsInfo != null){
 			partsInfo.x = x + 4;
 			partsInfo.y = y + 4;
+			partsInfo.calc();
 		}
 	}
 	
