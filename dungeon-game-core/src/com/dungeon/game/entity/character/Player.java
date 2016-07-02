@@ -132,7 +132,7 @@ public class Player extends Character {
 		inv = new Inventory(world, invLayout, 10, 100);
 		equipSlots = new Slot[]{inv.slot[30],inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41]};
 		equipItems = new Equipable[equipSlots.length];
-		inv.slot[0].item = new FlashLight(world);
+		inv.slot[6].item = new FlashLight(world);
 		inv.slot[31].item = new Lantern(world);
 		inv.slot[1].item = new LifePotion(world);
 		inv.slot[5].item = new Arrow(world);
@@ -147,6 +147,8 @@ public class Player extends Character {
 		inv.addItem(new Bow(world, 10, 10));
 		inv.addItem(new Wand(world));
 		inv.addItem(new WoolShirt(world, speechColor));
+		
+		inv.slot[1].item.stack = 5;
 		
 		actionState = new boolean[] {false, false, false};
 		

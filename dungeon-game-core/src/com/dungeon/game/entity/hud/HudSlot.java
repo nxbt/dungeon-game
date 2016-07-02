@@ -31,7 +31,7 @@ public class HudSlot extends Hud {
 			world.mouse.shift_down = true;
 		}
 		else {
-			if(world.mouse.lb_pressed && world.mouse.slot.item == null)slot.consume(world.player);
+			if(world.mouse.lb_pressed && world.mouse.slot.item == null && slot.consume(world.player)) return;
 			
 			slot.hovered();
 			world.descBox.text = "";

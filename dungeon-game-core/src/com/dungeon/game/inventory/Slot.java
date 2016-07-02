@@ -157,10 +157,12 @@ public class Slot {
 			
 	}
 	
-	public void consume(Character user) {
+	public boolean consume(Character user) {
 		if(item!=null && item instanceof Consumable && ((Consumable)item).use(user)){
 			item.stack--;
 			if(item.stack == 0) item = null;
+			return true;
 		}
+		return false;
 	}
 }
