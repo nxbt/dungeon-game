@@ -2,6 +2,7 @@ package com.dungeon.game.entity.hud;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
@@ -14,7 +15,7 @@ import com.dungeon.game.item.Item;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
-public class Mouse extends Hud {
+public class Mouse extends Hud  implements InputProcessor {
 	public final Texture CROSS = new Texture("crosshair.png");
 	public final Texture ARROW = new Texture("pointer.png");
 	
@@ -30,6 +31,8 @@ public class Mouse extends Hud {
 	public boolean mb_released;
 	public boolean mb_down;
 	
+	public int scroll;
+	
 	public boolean onHud;
 	public boolean canPickup;
 	private boolean canPlace;
@@ -44,6 +47,8 @@ public class Mouse extends Hud {
 		super(world, x, y, 16, 16, "crosshair.png");
 		
 		Gdx.input.setCursorCatched(true);
+		
+		Gdx.input.setInputProcessor(this);
 		
 		sprite = CROSS;
 		
@@ -200,5 +205,49 @@ public class Mouse extends Hud {
 		else batch.draw(sprite, x+d_offx, y+d_offy, d_width, d_height);
 	}
 	
-	public void post() {}
+	public void post() {
+		scroll = 0;
+	}
+
+	@Override
+	public boolean scrolled(int amount) {
+		scroll += amount;
+		
+		return amount != 0;
+	}
+	
+	@Override
+	public boolean keyDown(int arg0) {
+		return false;
+	}
+
+	@Override
+	public boolean keyTyped(char arg0) {
+		return false;
+	}
+
+	@Override
+	public boolean keyUp(int arg0) {
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int arg0, int arg1) {
+		return false;
+	}
+
+	@Override
+	public boolean touchDown(int arg0, int arg1, int arg2, int arg3) {
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int arg0, int arg1, int arg2) {
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
+		return false;
+	}
 }

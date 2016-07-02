@@ -14,11 +14,15 @@ public abstract class Window extends Hud {
 	
 	boolean drag;
 	
+	float scroll;
+	
 	float dragOffX;
 	float dragOffY;
 	
 	public Window(World world, float x, float y) {
 		super(world, x, y, 32, 32, "slot.png");
+		
+		scroll = 0;
 		
 		d_width = 100;
 		d_height = 200;
@@ -62,6 +66,8 @@ public abstract class Window extends Hud {
 	}
 
 	public void hovered() {
+		scroll += 3*world.mouse.scroll;
+		
 		if(world.mouse.x>x&&world.mouse.x<x+d_width&&world.mouse.y>y+d_height-14&&world.mouse.y<y+d_height&&world.mouse.lb_pressed){
 			dragOffX = (world.mouse.x-x);
 			dragOffY = (world.mouse.y-y);
