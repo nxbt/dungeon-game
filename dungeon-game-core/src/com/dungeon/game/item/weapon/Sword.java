@@ -21,9 +21,9 @@ public class Sword extends Melee {
 	private static final int GUARD_NUM = 3;
 	private static final int HILT_NUM = 3;
 	// how should we change name and stats based on the blade guard and hilt? Arrays? Text Files? Something Else? I'll do this for now
-	public static final String[] BLADE_NAMES = new String[]{"Sword", "Light Sword", "Broad Sword", "Cutlass", "Needle"};
+	public static final String[] BLADE_NAMES = new String[]{"Straight Sword", "Light Sword", "Broad Sword", "Scimitar", "Rapier"};
 	public static final String[] GUARD_NAMES = new String[]{"Defender's Gaurd", "Squared Gaurd", "Spiked Gaurd"};
-	public static final String[] HILT_NAMES = new String[]{"Utilitarian Hilt", "Square Hilt", "Deadly Hilt"};
+	public static final String[] HILT_NAMES = new String[]{"Utilitarian Hilt", "Square Hilt", "Spiked Hilt"};
 	//blade stat order is dmg, speed, knockback, stanima
 	private static final float[][] BLADE_STATS = new float[][]{
 		new float[]{1,1,1,1}, 
@@ -126,7 +126,7 @@ public class Sword extends Melee {
 		
 		this.weight = weight * BLADE_STATS[blade][3]* GUARD_STATS[guard][3] * HILT_STATS[hilt][3];	
 		
-		desc = "An incredibly reliable melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f;
+		desc = "The most common and widely used melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f;
 
 		
 		dmgMult = new float[]{0.7f,1,1.5f};
@@ -168,7 +168,7 @@ public class Sword extends Melee {
 	}
 	
 	public String getDesc() {
-		return "The accepted standard for all melee weapons, and the standard for all sword class melee weapons. Using it will swing it in a short combo of swings, damaging the first target it comes in contact with. For this particular sword, the combo begins with a fronthand swing across the body, followed by a backhand swing, and ends with a jab.\n\n\"My sword shall lead me to glory!\" -final words of Tanturin, fabled warrior\n\n Damage: "+ Math.floor(damage*10)/10f  + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f;
+		return "The accepted standard for melee weapons, mainly due to how common it is. Swords are generally considered very reliable, despite the diverse range of blades. This reliability is another reason for their wide acceptance.\n\n\"My sword shall lead me to glory!\" -final words of Tanturin, fabled warrior\n\n Damage: "+ Math.floor(damage*10)/10f  + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f;
 	}
 
 	@Override
