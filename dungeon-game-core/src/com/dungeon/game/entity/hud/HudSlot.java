@@ -26,18 +26,15 @@ public class HudSlot extends Hud {
 	
 	public void hovered(){
 		if(world.mouse.shift_down) {
-			if(slot.item != null)world.descBox.updateText(slot.item);
-			
-			if(world.mouse.rb_pressed && slot.item != null) {
-				DescWindow temp = new DescWindow(world, world.mouse.x, world.mouse.y);
-				temp.updateText(slot.item);
-				temp.open();
-			}
+			world.mouse.shift_down = false;
+			slot.hovered();
+			world.mouse.shift_down = true;
 		}
 		else {
+			if(world.mouse.lb_pressed && world.mouse.slot.item == null)slot.consume(world.player);
+			
 			slot.hovered();
 			world.descBox.text = "";
-			
 		}
 	}
 

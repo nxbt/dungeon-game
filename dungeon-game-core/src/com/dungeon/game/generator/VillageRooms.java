@@ -41,7 +41,6 @@ public class VillageRooms extends Generation {
 		if(world.curDungeon!=null)entities.add(new Stair(world, centerX*Tile.TS-Tile.TS/2, centerY*Tile.TS-Tile.TS/2, false, upTrapX+1, upTrapY+1));
 
 		do{
-			System.out.println("generated village rooms");
 			generateClearDungeon();
 			rooms = new ArrayList<Rectangle>();
 			specialRooms = new ArrayList<Rectangle>();
