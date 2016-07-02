@@ -21,7 +21,9 @@ public class Sword extends Melee {
 	private static final int GUARD_NUM = 3;
 	private static final int HILT_NUM = 3;
 	// how should we change name and stats based on the blade guard and hilt? Arrays? Text Files? Something Else? I'll do this for now
-	private static final String[] BLADE_NAMES = new String[]{"Sword", "Light Sword", "Broad Sword", "Cutlass", "Needle"};
+	public static final String[] BLADE_NAMES = new String[]{"Sword", "Light Sword", "Broad Sword", "Cutlass", "Needle"};
+	public static final String[] GUARD_NAMES = new String[]{"Defender's Gaurd", "Squared Gaurd", "Spiked Gaurd"};
+	public static final String[] HILT_NAMES = new String[]{"Utilitarian Hilt", "Square Hilt", "Deadly Hilt"};
 	//blade stat order is dmg, speed, knockback, stanima
 	private static final float[][] BLADE_STATS = new float[][]{
 		new float[]{1,1,1,1}, 

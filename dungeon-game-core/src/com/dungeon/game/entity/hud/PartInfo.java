@@ -5,9 +5,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.item.weapon.Sword;
+import com.dungeon.game.utilities.TextHelper;
 import com.dungeon.game.world.World;
 
 public class PartInfo extends Hud {
+	
+	//there is definately a better way do do this shit! more classes i think. A part class?
+	
+	private static final Texture slot = new Texture("slot.png");
 
 	public static final int SWORD = 0;
 	
@@ -33,16 +38,10 @@ public class PartInfo extends Hud {
 		if(this.type == 0){
 			if(this.data == 0){
 				tex = Sword.BLADES[id];
-				origin_x = 14;
-				origin_y = 18;
 			}else if(this.data == 1){
 				tex = Sword.GUARDS[id];
-				origin_x = 26;
-				origin_y = 6;
 			}else if(this.data == 2){
 				tex = Sword.HILTS[id];
-				origin_x = 30;
-				origin_y = 2;
 			}
 		}
 		
@@ -57,17 +56,37 @@ public class PartInfo extends Hud {
 
 	}
 	
+	public void hovered(){
+		String text = "";
+		if(type == SWORD){
+			if(data == BLADE){
+				text = Sword.BLADE_NAMES[id];
+			}else if(data == GUARD){
+				text = Sword.GUARD_NAMES[id];
+			}else if(data == HILT){
+				text = Sword.HILT_NAMES[id];
+			}
+		}
+		world.descBox.updateText(text);
+	}
+	
 	public void draw(SpriteBatch batch){
 		if(type == SWORD){
 			if(data == BLADE){
-				font.draw(batch, "Blade:", x, y);
-				batch.draw(tex, x + 70 - origin_x, y - origin_y - 6, d_width, d_height);
+				font.draw(batch, "Blade:", x - 60, y + 22);
+				batch.draw(slot, x, y, d_width, d_width);
+				batch.draw(tex, x, y, d_width, d_height);
+				font.draw(batch, Sword.BLADE_NAMES[id], TextHelper.alignRight(Sword.BLADE_NAMES[id], x + 183), y + 22);
 			}else if(data == GUARD){
-				font.draw(batch, "Guard:", x, y);
-				batch.draw(tex, x + 70 - origin_x, y - origin_y - 6, d_width, d_height);
+				font.draw(batch, "Guard:", x - 60, y + 22);
+				batch.draw(slot, x, y, d_width, d_width);
+				batch.draw(tex, x, y, d_width, d_height);
+				font.draw(batch, Sword.GUARD_NAMES[id], TextHelper.alignRight(Sword.GUARD_NAMES[id], x + 183), y + 22);
 			}else if(data == HILT){
-				font.draw(batch, "Hilt:", x, y);
-				batch.draw(tex, x + 70 - origin_x, y - origin_y - 6, d_width, d_height);
+				font.draw(batch, "Hilt:", x - 60, y + 22);
+				batch.draw(slot, x, y, d_width, d_width);
+				batch.draw(tex, x, y, d_width, d_height);
+				font.draw(batch, Sword.HILT_NAMES[id], TextHelper.alignRight(Sword.HILT_NAMES[id], x + 183), y + 22);
 			}
 		}
 	}

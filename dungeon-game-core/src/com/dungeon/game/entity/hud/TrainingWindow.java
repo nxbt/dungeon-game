@@ -24,7 +24,7 @@ public class TrainingWindow extends Window {
 		super(world, x, y);
 		
 		d_width = 300;
-		d_height = 200;
+		d_height = 220;
 		
 		slot = new HudSlot(world,0,0,new Slot(world, new int[]{Item.HAND, 0, 0}, null));
 		
@@ -40,7 +40,8 @@ public class TrainingWindow extends Window {
 		slot.calc();
 		if(weapon != (Melee) slot.slot.item){
 			weapon = (Melee) slot.slot.item;
-			partsInfo = new PartsInfo(world, 0, 0, weapon);
+			if(weapon == null) partsInfo = null;
+			else partsInfo = new PartsInfo(world, 0, 0, weapon);
 		}
 		
 		if(partsInfo != null){
@@ -51,8 +52,13 @@ public class TrainingWindow extends Window {
 	}
 	
 	public void subHovered(){
-		if(world.mouse.x > this.slot.x && world.mouse.x < this.slot.x + this.slot.d_width && world.mouse.y > this.slot.y && world.mouse.y < this.slot.y + this.slot.d_height){
+		if(world.mouse.x > slot.x && world.mouse.x < slot.x + slot.d_width && world.mouse.y > slot.y && world.mouse.y < slot.y + slot.d_height){
 			slot.hovered();
+			return;
+		}
+		if(partsInfo != null && world.mouse.x > partsInfo.x && world.mouse.x < partsInfo.x + partsInfo.d_width && world.mouse.y > partsInfo.y && world.mouse.y < partsInfo.y + partsInfo.d_height){
+			partsInfo.hovered();
+			return;
 		}
 	}
 

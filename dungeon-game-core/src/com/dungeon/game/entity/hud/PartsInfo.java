@@ -22,8 +22,8 @@ public class PartsInfo extends Hud {
 
 	public PartsInfo(World world, float x, float y, Weapon weapon) {
 		super(world, x, y, 32, 32, "slot.png");
-		d_width = 144;
-		d_height = 96;
+		d_width = 256;
+		d_height = 116;
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.WHITE);
@@ -43,10 +43,19 @@ public class PartsInfo extends Hud {
 	@Override
 	public void calc() {
 		for(int i = 0; i < parts.length; i++){
-			parts[i].x = this.x + 4;
-			parts[i].y = this.y + this.d_height - 25 - i * 25;
+			parts[i].x = this.x + 66;
+			parts[i].y = this.y + this.d_height - 50 - i * 32;
 		}
 
+	}
+	
+	public void hovered(){
+		for(int i = 0; i < parts.length; i++){
+			if(world.mouse.x > parts[i].x && world.mouse.x < parts[i].x + parts[i].d_width && world.mouse.y > parts[i].y && world.mouse.y < parts[i].y + parts[i].d_height){
+				parts[i].hovered();
+				break;
+			}
+		}
 	}
 
 	@Override
