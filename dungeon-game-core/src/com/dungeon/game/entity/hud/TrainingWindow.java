@@ -12,7 +12,7 @@ import com.dungeon.game.world.World;
 
 public class TrainingWindow extends Window {
 	
-	private HudSlot slot;
+	private Slot slot;
 	
 	private Melee weapon;
 	
@@ -26,7 +26,7 @@ public class TrainingWindow extends Window {
 		d_width = 300;
 		d_height = 220;
 		
-		slot = new HudSlot(world,0,0,new Slot(world, new int[]{Item.HAND, 0, 0}, null));
+		slot = new Slot(world, new int[]{Item.HAND, 0, 0}, null);
 		
 		this.weapon = null;
 		
@@ -38,8 +38,8 @@ public class TrainingWindow extends Window {
 		slot.x = x + 4;
 		slot.y = y + d_height - 48;
 		slot.calc();
-		if(weapon != (Melee) slot.slot.item){
-			weapon = (Melee) slot.slot.item;
+		if(weapon != (Melee) slot.item){
+			weapon = (Melee) slot.item;
 			if(weapon == null) partsInfo = null;
 			else partsInfo = new PartsInfo(world, 0, 0, weapon);
 		}
@@ -52,7 +52,7 @@ public class TrainingWindow extends Window {
 	}
 	
 	public void subHovered(){
-		if(world.mouse.x > slot.x && world.mouse.x < slot.x + slot.d_width && world.mouse.y > slot.y && world.mouse.y < slot.y + slot.d_height){
+		if(world.mouse.x > slot.x && world.mouse.x < slot.x + Item.SIZE && world.mouse.y > slot.y && world.mouse.y < slot.y + Item.SIZE){
 			slot.hovered();
 			return;
 		}
@@ -69,7 +69,7 @@ public class TrainingWindow extends Window {
 	}
 	
 	public void subDraw(SpriteBatch batch){
-		slot.draw(batch);
+		slot.draw(batch, 0, 0);
 		if(weapon != null){
 			font.draw(batch, weapon.name, x + 38, y + d_height - 26);
 			String dmg = "" + Math.round(weapon.damage*10)/10f;

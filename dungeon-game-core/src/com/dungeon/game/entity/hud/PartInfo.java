@@ -52,8 +52,6 @@ public class PartInfo extends Hud {
 
 	@Override
 	public void calc() {
-		// TODO Auto-generated method stub
-
 	}
 	
 	public void hovered(){
@@ -72,17 +70,19 @@ public class PartInfo extends Hud {
 	
 	public void draw(SpriteBatch batch){
 		if(type == SWORD){
-			if(data == BLADE){
+			if(data == BLADE) {
 				font.draw(batch, "Blade:", x - 60, y + 22);
 				batch.draw(slot, x, y, d_width, d_width);
 				batch.draw(tex, x, y, d_width, d_height);
 				font.draw(batch, Sword.BLADE_NAMES[id], TextHelper.alignRight(Sword.BLADE_NAMES[id], x + 183), y + 22);
-			}else if(data == GUARD){
+			}
+			else if(data == GUARD) {
 				font.draw(batch, "Guard:", x - 60, y + 22);
 				batch.draw(slot, x, y, d_width, d_width);
 				batch.draw(tex, x, y, d_width, d_height);
 				font.draw(batch, Sword.GUARD_NAMES[id], TextHelper.alignRight(Sword.GUARD_NAMES[id], x + 183), y + 22);
-			}else if(data == HILT){
+			}
+			else if(data == HILT) {
 				font.draw(batch, "Hilt:", x - 60, y + 22);
 				batch.draw(slot, x, y, d_width, d_width);
 				batch.draw(tex, x, y, d_width, d_height);
@@ -93,8 +93,5 @@ public class PartInfo extends Hud {
 
 	@Override
 	public void post() {
-		// TODO Auto-generated method stub
-
 	}
-
 }

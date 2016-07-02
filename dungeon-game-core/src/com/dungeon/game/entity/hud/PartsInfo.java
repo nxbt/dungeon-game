@@ -60,8 +60,6 @@ public class PartsInfo extends Hud {
 
 	@Override
 	public void post() {
-		// TODO Auto-generated method stub
-
 	}
 	
 	public void draw(SpriteBatch batch) {
