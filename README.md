@@ -6,6 +6,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * psn damage and magic damage is adative
 * litn damage and flame damage is average
 * change tilemap rendering to pixmap
+* Create a parts sub package for item
 
 ##TODO low priority (within a month?):
 * Finish adding procedural shop decoration generation
