@@ -41,6 +41,7 @@ public class SpeechPopup extends Hud {
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.getData().setScale(1f);
+		font.setUseIntegerPositions(false);
 		
 		speechSpeed = 3;
 		speechCounter = 0;

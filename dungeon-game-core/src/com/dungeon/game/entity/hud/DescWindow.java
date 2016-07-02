@@ -12,15 +12,10 @@ import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
 public class DescWindow extends Window {
-	private BitmapFont font;
-	
 	private String text;
 	
 	public DescWindow(World world, float x, float y) {
 		super(world, x, y);
-		
-		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
-		font.setColor(Color.WHITE);
 	}
 
 	@Override

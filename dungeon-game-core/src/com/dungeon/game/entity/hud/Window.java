@@ -2,7 +2,9 @@ package com.dungeon.game.entity.hud;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.world.World;
@@ -11,6 +13,8 @@ public abstract class Window extends Hud {
 	static final NinePatch WINDOW = new NinePatch(new Texture("window.png"), 2, 2, 14, 2);
 	
 	private ExitButton exitButton;
+	
+	protected BitmapFont font;
 	
 	boolean drag;
 	
@@ -28,6 +32,10 @@ public abstract class Window extends Hud {
 		d_height = 200;
 		
 		exitButton = new ExitButton(world, this);
+		
+		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
+		font.setUseIntegerPositions(false);
+		font.setColor(Color.WHITE);
 	}
 
 	@Override

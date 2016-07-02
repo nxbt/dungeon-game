@@ -35,7 +35,7 @@ public class DescBox extends Hud {
 		
 		desc = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		desc.setColor(Color.LIGHT_GRAY);
-		desc.getData().setScale(1f);
+		desc.setUseIntegerPositions(false);
 	}
 
 	@Override
