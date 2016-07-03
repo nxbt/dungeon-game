@@ -96,7 +96,7 @@ public class Bow extends Ranged {
 	}
 	
 	public String getDesc() {
-		return "The standard bow class weapon. Most weapons in the bow class must be pulled back by holding the use button before firing and require consuming one arrow class ammo item to fire. The further pulled back the bow is, the faster the arrow released will travel and the more damage it will inflict to any target it come in contact with. The damage modifier is applied to the damage of the arrow fired.\n\n\"Only once you can place an arrow anywhere you can see you have become an archer.\" -Garsin, the first archer\n\n Damage modifier: " + Math.floor(dmgMod*1000)/10f + "%";
+		return "The standard bow class weapon. Most weapons in the bow class must be pulled back by holding the use button before firing and require consuming one arrow class ammo item to fire. The further pulled back the bow is, the faster the arrow released will travel and the more damage it will inflict to any target it come in contact with. The damage modifier is applied to the damage of the arrow fired.\n\n\"Only once you can place an arrow anywhere you can see have you become an archer.\" -Garsin, the first archer\n\n Damage modifier: " + Math.floor(dmgMod*1000)/10f + "%";
 	}
 
 	@Override

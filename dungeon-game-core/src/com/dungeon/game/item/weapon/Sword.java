@@ -61,7 +61,7 @@ public class Sword extends Melee {
 	public Part guard;
 	public Part hilt;
 	
-	public Sword(World world, float damage, float speed, float weight) {
+	public Sword(World world, float damage, float speed, float knock, float weight) {
 		super(world, "sword.png");
 		
 		//generate the sprite, for now random, but in the future will be a parameter!
@@ -93,10 +93,11 @@ public class Sword extends Melee {
 		
 		baseDamage = damage;
 		baseSpeed = speed;
+		baseKnock = knock;
 		baseWeight = weight;
 		
 		knockratio = 0.4f;
-		knockstr = 10 * blade.knockMult * guard.knockMult * hilt.knockMult;	
+		knockstr = knock * blade.knockMult * guard.knockMult * hilt.knockMult;	
 		
 		this.weight = weight * blade.weightMult * guard.weightMult * hilt.weightMult;	
 		
