@@ -2,6 +2,7 @@ package com.dungeon.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.light.Light;
@@ -106,6 +107,11 @@ public abstract class Entity {
 	}
 	
 	public void hovered() {} //optional method called when the mouse hovers over an entity
+	
+	public boolean isHovered(){
+		return Intersector.isPointInPolygon(getHitbox().getVertices(), 0,getHitbox().getVertices().length,world.mouse.x+world.cam.x-world.cam.width/2,world.mouse.y+world.cam.y-world.cam.height/2);
+		
+	}
 
 	public void dead(){
 		if(light!=null)light.light.remove(true);

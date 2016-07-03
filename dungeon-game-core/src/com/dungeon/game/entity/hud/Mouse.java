@@ -129,7 +129,7 @@ public class Mouse extends Hud  implements InputProcessor {
 		int toMoveToFront=0;
 		for(int i = 0; i < world.hudEntities.size(); i++) {
 			Hud ent = world.hudEntities.get(i);
-			if(!(world.hudEntities.get(i) instanceof HudBackground) &&x > ent.x && x < ent.x+ent.d_width && y > ent.y && y < ent.y+ent.d_height){
+			if(!(world.hudEntities.get(i) instanceof HudBackground) && ent.isHovered()){
 				if((lb_pressed||rb_pressed) && ent instanceof Window)toMoveToFront = i;
 				ent.hovered();
 				onHud = true;
@@ -249,5 +249,10 @@ public class Mouse extends Hud  implements InputProcessor {
 	@Override
 	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
 		return false;
+	}
+	
+	public boolean isHovered(){
+		return false;
+		
 	}
 }

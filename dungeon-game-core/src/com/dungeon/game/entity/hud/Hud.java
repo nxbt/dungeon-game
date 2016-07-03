@@ -10,6 +10,8 @@ public abstract class Hud extends Static {
 	}
 	
 	public boolean isHovered(){
+		System.out.println(this.getClass().getName());
+		System.out.println(world);
 		return (world.mouse.x > x && world.mouse.x < x + d_width && world.mouse.y > y && world.mouse.y < y + d_height);
 	}
 }

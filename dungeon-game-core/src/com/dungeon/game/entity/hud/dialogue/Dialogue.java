@@ -18,8 +18,6 @@ public class Dialogue extends Hud {
 	protected final NinePatch SPEECH_BUBBLE_CONNECTOR = new NinePatch(new Texture("hudBubbleConnector.png"), 4, 4, 0, 0);
 	protected final NinePatch SPEECH_BUBBLE_START0 = new NinePatch(new Texture("hudBubbleStart0.png"), 20, 4, 0, 17);
 	protected final NinePatch SPEECH_BUBBLE_START1 = new NinePatch(new Texture("hudBubbleStart1.png"), 20, 4, 0, 17);
-
-	private World world;
 	
 	public ArrayList<SpeechBubble> speechBubbles;
 	
@@ -28,8 +26,7 @@ public class Dialogue extends Hud {
 	private ArrayList<Character> characters;
 	
 	public Dialogue(World world, Character character){
-		super(null,0,0, Item.SIZE, Item.SIZE, "slot.png");
-		this.world = world;
+		super(world,0,0, Item.SIZE, Item.SIZE, "slot.png");
 		speechBubbles = new ArrayList<SpeechBubble>();
 		potentialBubbles = new HashMap<String, SpeechBubble>();
 		characters = new ArrayList<Character>();
