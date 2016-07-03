@@ -27,6 +27,7 @@ public class GoldCounter extends Hud {
 		backgroundWidth = value.length()*8+9;
 		x = world.cam.width-84-backgroundWidth;
 		y = 76;
+		super.calc();
 
 	}
 
@@ -34,7 +35,7 @@ public class GoldCounter extends Hud {
 	public void post() {}
 	
 	public void draw(SpriteBatch batch){
-		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_y+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),flipX,flipY);
+		super.draw(batch);
 		BACKGROUND.draw(batch, x+24, y, backgroundWidth, d_height-d_offy);
 		font.draw(batch, value, x+26, y+font.getScaleY()*12+2);
 	}

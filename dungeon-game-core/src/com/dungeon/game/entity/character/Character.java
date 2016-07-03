@@ -144,6 +144,7 @@ public abstract class Character extends Dynamic {
 	}
 
 	public void norm() {
+		super.norm();
 		move_angle = 361;
 	}
 	

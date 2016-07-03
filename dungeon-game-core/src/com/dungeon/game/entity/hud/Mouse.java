@@ -202,7 +202,7 @@ public class Mouse extends Hud  implements InputProcessor {
 		if(slot.item != null) {
 			slot.draw(batch, (int)x-Item.SIZE/2, (int)y-Item.SIZE/2);
 		}
-		else batch.draw(sprite, x+d_offx, y+d_offy, d_width, d_height);
+		else super.draw(batch);
 	}
 	
 	public void post() {
@@ -253,6 +253,5 @@ public class Mouse extends Hud  implements InputProcessor {
 	
 	public boolean isHovered(){
 		return false;
-		
 	}
 }

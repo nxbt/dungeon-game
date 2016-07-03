@@ -74,11 +74,7 @@ public abstract class Window extends Hud {
 		
 		if(world.player.fightMode)close();
 		
-		for(int i = 0; i < subEntities.size(); i++){
-			subEntities.get(i).x = subEntities.get(i).subOffX + x;
-			subEntities.get(i).y = subEntities.get(i).subOffY + y;
-			subEntities.get(i).calc();
-		}
+		super.calc();
 	}
 
 	public void hovered() {
@@ -90,13 +86,7 @@ public abstract class Window extends Hud {
 			drag = true;
 		}
 		else{
-			//are any subEntities hovered?
-			for(int i = 0; i < subEntities.size(); i++){
-				if(subEntities.get(i).isHovered()){
-					subEntities.get(i).hovered();
-					return;
-				}
-			}
+			super.calc();
 		}
 	}
 	

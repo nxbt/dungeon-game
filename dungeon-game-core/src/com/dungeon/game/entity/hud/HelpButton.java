@@ -12,7 +12,9 @@ public class HelpButton extends Button {
 	public void click() {}
 
 	@Override
-	public void calc() {}
+	public void calc() {
+		super.calc();
+	}
 
 	@Override
 	public void post() {}

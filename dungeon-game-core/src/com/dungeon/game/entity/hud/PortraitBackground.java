@@ -14,7 +14,9 @@ public class PortraitBackground extends Hud {
 	}
 
 	@Override
-	public void calc() {}
+	public void calc() {
+		super.calc();
+	}
 
 	@Override
 	public void post() {}

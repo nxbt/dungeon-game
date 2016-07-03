@@ -18,11 +18,13 @@ public class DialogueHud extends Hud {
 	}
 
 	@Override
-	public void calc() {}
+	public void calc() {
+		super.calc();
+	}
 
 	@Override
 	public void draw(SpriteBatch batch) {
-		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_y+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),flipX,flipY);
+		super.draw(batch);
 		
 		portraitBackground.draw(batch);
 		

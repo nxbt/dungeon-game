@@ -15,6 +15,7 @@ public class ManaBar extends StatusBar {
 	public void calc() {
 		cur = world.player.mana;
 		max = world.player.maxMana;
+		super.calc();
 	}
 	
 	public void post() {}

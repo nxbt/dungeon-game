@@ -15,6 +15,7 @@ public class ExitButton extends Button {
 	public void calc() {
 		this.x = window.x;
 		this.y = window.y + window.d_height-14;
+		super.calc();
 	}
 	
 	@Override

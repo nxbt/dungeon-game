@@ -15,9 +15,12 @@ public class HoverZone extends Hud {
 	}
 
 	@Override
-	public void calc() {}
+	public void calc() {
+		super.calc();
+	}
 	
 	public void hovered(){
+		super.hovered();
 		world.descBox.updateText(text);
 	}
 
@@ -25,7 +28,9 @@ public class HoverZone extends Hud {
 	public void post() {}
 	
 	public void draw(SpriteBatch batch){
-		
+		for(int i = 0; i < subEntities.size(); i++){
+			subEntities.get(i).draw(batch);
+		}
 	}
 
 }

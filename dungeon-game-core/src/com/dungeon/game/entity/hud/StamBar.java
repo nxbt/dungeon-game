@@ -15,6 +15,7 @@ public class StamBar extends StatusBar {
 	public void calc() {
 		cur = world.player.stam;
 		max = world.player.maxStam;
+		super.calc();
 	}
 	
 	public void post() {}

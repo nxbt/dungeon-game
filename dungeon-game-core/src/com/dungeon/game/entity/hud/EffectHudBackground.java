@@ -19,6 +19,7 @@ public class EffectHudBackground extends Hud {
 		if(world.player.effectGraphics.size()>0)d_height = world.player.effectGraphics.size()*36+8;
 		else d_height = 0;
 		y = world.cam.height - d_height; 
+		super.calc();
 
 	}
 

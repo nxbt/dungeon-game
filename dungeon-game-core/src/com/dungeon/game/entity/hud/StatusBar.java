@@ -20,13 +20,14 @@ public abstract class StatusBar extends Hud {
 	
 	@Override 
 	public void update() {
-		calc();
 		
 		percent = 1*cur/max;
+		super.update();
 	}
 	
 	@Override
 	public void hovered() {
+		super.hovered();
 		world.descBox.updateText((int)cur + "/" + (int)max);
 	}
 	

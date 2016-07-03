@@ -15,6 +15,7 @@ public class HealthBar extends StatusBar {
 	public void calc() {
 		cur = world.player.life;
 		max = world.player.maxLife;
+		super.calc();
 	}
 	
 	public void post() {}

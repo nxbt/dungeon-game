@@ -31,6 +31,7 @@ public class MeleeGraphic extends HandheldGraphic {
 			}
 		}
 		if(target!=null) ((Melee) item).hit((Character) target);
+		super.calc();
 	}
 	
 	public void post() {}

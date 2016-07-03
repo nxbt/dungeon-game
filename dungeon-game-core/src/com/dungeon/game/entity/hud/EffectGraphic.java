@@ -44,6 +44,7 @@ public class EffectGraphic extends Hud {
 	public void calc() {
 		x = world.cam.width-36;
 		y = world.cam.height-36*(1+world.player.effectGraphics.indexOf(this));
+		super.calc();
 	}
 
 	@Override
@@ -53,6 +54,7 @@ public class EffectGraphic extends Hud {
 	
 	@Override
 	public void hovered() {
+		super.hovered();
 		if(world.mouse.shift_down) {
 			if(world.mouse.rb_pressed) {
 				DescWindow temp = new DescWindow(world, world.mouse.x, world.mouse.y);

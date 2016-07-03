@@ -14,12 +14,12 @@ public class MediumGraphic extends HandheldGraphic {
 
 	@Override
 	public void calc() {
-
+		super.calc();
 	}
 
 	@Override
 	public void post() {
-
+		super.calc();
 	}
 
 	public void cast(Spell spell, Medium medium) {
