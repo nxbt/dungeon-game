@@ -174,4 +174,20 @@ public class Swing implements Cloneable{
 			return null;
 		}
 	}
+	
+	public static Swing[] getAllowedSwings(Part[] parts){
+		ArrayList<String> allowedSwings = new ArrayList<String>();
+		ArrayList<String> bannedSwings = new ArrayList<String>();
+		for(int i = 0; i < parts.length; i++){
+			for(int k = 0; k < parts[i].allowedSwings.length; k++){
+				if(!allowedSwings.contains(parts[i].allowedSwings[k]))allowedSwings.add(parts[i].allowedSwings[k]);
+			}
+			for(int k = 0; k < parts[i].bannedSwings.length; k++){
+				if(!bannedSwings.contains(parts[i].bannedSwings[k]))bannedSwings.add(parts[i].bannedSwings[k]);
+			}
+		}
+		ArrayList<Swing> swings = new ArrayList<Swing>();
+		return (Swing[]) swings.toArray();
+		
+	}
 }

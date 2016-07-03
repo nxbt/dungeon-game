@@ -5,9 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dungeon.game.item.weapon.Sword;
 import com.dungeon.game.utilities.Spritesheet;
-import com.dungeon.game.utilities.TextHelper;
 import com.dungeon.game.world.World;
 
 public class Part implements Cloneable{	

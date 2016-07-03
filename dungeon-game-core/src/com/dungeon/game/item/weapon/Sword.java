@@ -10,7 +10,6 @@ import com.dungeon.game.item.weapon.parts.Part;
 import com.dungeon.game.item.weapon.swing.Rest;
 import com.dungeon.game.item.weapon.swing.Swing;
 import com.dungeon.game.item.weapon.swing.SwingSet;
-import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.World;
 
 public class Sword extends Melee {
