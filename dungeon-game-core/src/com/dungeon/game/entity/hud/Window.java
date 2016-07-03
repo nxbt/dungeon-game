@@ -25,12 +25,8 @@ public abstract class Window extends Hud {
 	float dragOffX;
 	float dragOffY;
 	
-	protected ArrayList<Hud> subEntities;
-	
 	public Window(World world, float x, float y) {
 		super(world, x, y, 32, 32, "slot.png");
-		
-		subEntities = new ArrayList<Hud>();
 		
 		scroll = 0;
 		
@@ -136,14 +132,5 @@ public abstract class Window extends Hud {
 	}
 	protected void subDraw(SpriteBatch batch){
 		
-	}
-	
-	protected void addSubEntitiy(Hud subEnt, String id, int x, int y){
-		subEnt.setSubOff(id, x, y);
-		subEntities.add(subEnt);
-	}
-	
-	protected void removeSubEntity(String id){
-		for(int i = 0; i < subEntities.size(); i++)if(subEntities.get(i).subId.equals(id))subEntities.remove(subEntities.get(i));
 	}
 }
