@@ -39,10 +39,15 @@ public class TrainingWindow extends Window {
 		if(weapon != (Melee) slot.item){
 			weapon = (Melee) slot.item;
 			if(weapon == null){
-				subEntities.remove("partsInfo");
+				removeSubEntity("partsInfo");
+				removeSubEntity("statDesc");
 			}
 			else{
 				addSubEntitiy(new PartsInfo(world, 0, 0, weapon),  "partsInfo", 4, 4);
+				addSubEntitiy(new HoverZone(world, "Weapon Damage: " + Math.round(weapon.damage*10)/10f + "\nBase Damage: " + Math.round(weapon.baseDamage*10)/10f, 0, 0, 156, 16),  "statDesc", 4, d_height - 66);
+				addSubEntitiy(new HoverZone(world, "Weapon Speed: " + Math.round(weapon.speed*10)/10f + "\nBase Speed: " + Math.round(weapon.baseSpeed*10)/10f, 0, 0, 156, 16),  "statDesc", 4, d_height - 84);
+				addSubEntitiy(new HoverZone(world, "Weapon Knockback: " + Math.round(weapon.knockstr*10)/10f + "\nBase Knockback: " + Math.round(weapon.baseKnock*10)/10f, 0, 0, 156, 16),  "statDesc", 4, d_height - 100);
+				addSubEntitiy(new HoverZone(world, "Weapon Weight: " + Math.round(weapon.weight*10)/10f + "\nBase Weight: " + Math.round(weapon.baseWeight*10)/10f, 0, 0, 156, 16),  "statDesc", 4, d_height - 116);
 			}
 		}
 	}
@@ -51,24 +56,6 @@ public class TrainingWindow extends Window {
 		if(world.mouse.x > slot.x && world.mouse.x < slot.x + Item.SIZE && world.mouse.y > slot.y && world.mouse.y < slot.y + Item.SIZE){
 			slot.hovered();
 			return;
-		}
-		if(weapon != null && world.mouse.x > x + 4 && world.mouse.x < x + 160){
-			if(world.mouse.y >  y + d_height - 66 && world.mouse.y <  y + d_height - 50){
-				world.descBox.updateText("Weapon Damage: " + Math.round(weapon.damage*10)/10f + "\nBase Damage: " + Math.round(weapon.baseDamage*10)/10f);
-				return;
-			}
-			else if(world.mouse.y >  y + d_height - 84 && world.mouse.y <  y + d_height - 66){
-				world.descBox.updateText("Weapon Speed: " + Math.round(weapon.speed*10)/10f + "\nBase Speed: " + Math.round(weapon.baseSpeed*10)/10f);
-				return;
-			}
-			else if(world.mouse.y >  y + d_height - 100 && world.mouse.y <  y + d_height - 84){
-				world.descBox.updateText("Weapon Knockback: " + Math.round(weapon.knockstr*10)/10f + "\nBase Knockback: " + Math.round(weapon.baseKnock*10)/10f);
-				return;
-			}
-			else if(world.mouse.y >  y + d_height - 116 && world.mouse.y <  y + d_height - 100){
-				world.descBox.updateText("Weapon Weight: " + Math.round(weapon.weight*10)/10f + "\nBase Weight: " + Math.round(weapon.baseWeight*10)/10f);
-				return;
-			}
 		}
 	}
 

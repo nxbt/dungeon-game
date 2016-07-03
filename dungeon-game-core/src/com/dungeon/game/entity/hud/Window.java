@@ -144,6 +144,6 @@ public abstract class Window extends Hud {
 	}
 	
 	protected void removeSubEntity(String id){
-		for(int i = 0; i < subEntities.size(); i++)if(subEntities.get(i).subId.equals(id))subEntities.remove(i);
+		for(int i = 0; i < subEntities.size(); i++)if(subEntities.get(i).subId.equals(id))subEntities.remove(subEntities.get(i));
 	}
 }
