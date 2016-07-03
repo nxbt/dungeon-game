@@ -73,7 +73,7 @@ public class TrainingWindow extends Window {
 			String spd = "" + Math.round(weapon.speed*10)/10f;
 			String knk = "" + Math.round(weapon.knockstr*10)/10f;
 			String wgt = "" + Math.round(weapon.weight*10)/10f;
-			font.draw(batch, "Base Damage:\nBase Speed:\nBase Knock:\nBase Weight:", x + 4, y + d_height - 50);
+			font.draw(batch, "Damage:\nSpeed:\nKnock:\nWeight:", x + 4, y + d_height - 50);
 			font.draw(batch, dmg, TextHelper.alignRight(dmg, x + 160), y + d_height - 50);
 			font.draw(batch, spd, TextHelper.alignRight(spd, x + 160), y + d_height - 66);
 			font.draw(batch, knk, TextHelper.alignRight(knk, x + 160), y + d_height - 82);

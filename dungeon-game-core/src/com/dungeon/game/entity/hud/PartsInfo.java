@@ -23,7 +23,7 @@ public class PartsInfo extends Hud {
 
 	public PartsInfo(World world, float x, float y, Weapon weapon) {
 		super(world, x, y, 32, 32, "slot.png");
-		d_width = 140;
+		d_width = 160;
 		d_height = 116;
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
