@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.item.weapon.Sword;
 import com.dungeon.game.item.weapon.Weapon;
+import com.dungeon.game.item.weapon.parts.Part;
 import com.dungeon.game.utilities.TextHelper;
 import com.dungeon.game.world.World;
 
@@ -16,7 +17,7 @@ public class PartsInfo extends Hud {
 	
 	private Weapon weapon;
 	
-	private PartInfo[] parts;
+	private Part[] parts;
 	
 	private BitmapFont font;
 
@@ -30,29 +31,25 @@ public class PartsInfo extends Hud {
 		
 		this.weapon = weapon;
 		
-		parts = new PartInfo[3];
+		parts = new Part[3];
 		
 		if(weapon instanceof Sword){
-			parts[0] = new PartInfo(world, 0, 0, PartInfo.SWORD, PartInfo.BLADE, ((Sword) weapon).blade);
-			parts[1] = new PartInfo(world, 0, 0, PartInfo.SWORD, PartInfo.GUARD, ((Sword) weapon).guard);
-			parts[2] = new PartInfo(world, 0, 0, PartInfo.SWORD, PartInfo.HILT, ((Sword) weapon).hilt);
+			parts[0] = ((Sword) weapon).blade;
+			parts[1] = ((Sword) weapon).guard;
+			parts[2] = ((Sword) weapon).hilt;
 		}
 		
 	}
 
 	@Override
 	public void calc() {
-		for(int i = 0; i < parts.length; i++){
-			parts[i].x = this.x + 66;
-			parts[i].y = this.y + this.d_height - 50 - i * 32;
-		}
 
 	}
 	
 	public void hovered(){
 		for(int i = 0; i < parts.length; i++){
-			if(world.mouse.x > parts[i].x && world.mouse.x < parts[i].x + parts[i].d_width && world.mouse.y > parts[i].y && world.mouse.y < parts[i].y + parts[i].d_height){
-				parts[i].hovered();
+			if(world.mouse.x > x + 66 && world.mouse.x < x + 66 + 32 && world.mouse.y > y + d_height - 50 - i * 32 && world.mouse.y < y + d_height - 50 - i * 32 + 32){
+				parts[i].hovered(world);
 				break;
 			}
 		}
@@ -66,7 +63,7 @@ public class PartsInfo extends Hud {
 			BACKGROUND.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
 			font.draw(batch, "Parts: ", TextHelper.alignCenter("Parts: ", x + d_width/2), y + d_height - 4);
 			for(int i = 0; i < parts.length; i++){
-				parts[i].draw(batch);
+				parts[i].draw(batch, x + 66, y + d_height - 50 - i * 32);
 			}
 	}
 

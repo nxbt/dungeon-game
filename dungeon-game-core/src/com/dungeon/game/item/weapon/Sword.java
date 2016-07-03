@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.MeleeGraphic;
+import com.dungeon.game.item.weapon.parts.Part;
 import com.dungeon.game.item.weapon.swing.Rest;
 import com.dungeon.game.item.weapon.swing.Swing;
 import com.dungeon.game.item.weapon.swing.SwingSet;
@@ -87,23 +88,23 @@ public class Sword extends Melee {
 	protected float[] dmgMult;
 	protected float[] knockMult;
 	
-	public int blade;
-	public int guard;
-	public int hilt;
+	public Part blade;
+	public Part guard;
+	public Part hilt;
 	
 	public Sword(World world, float damage, float speed, float weight) {
 		super(world, "sword.png");
 		
 		//generate the sprite, for now random, but in the future will be a parameter!
-		blade = (int) (Math.random()*BLADE_NUM);
-		guard = (int) (Math.random()*GUARD_NUM);
-		hilt = (int) (Math.random()*HILT_NUM);
-		if(!BLADES[blade].getTextureData().isPrepared()) BLADES[blade].getTextureData().prepare();
-		Pixmap bladeMap = BLADES[blade].getTextureData().consumePixmap();
-		if(!GUARDS[guard].getTextureData().isPrepared()) GUARDS[guard].getTextureData().prepare();
-		Pixmap guardMap = GUARDS[guard].getTextureData().consumePixmap();
-		if(!HILTS[hilt].getTextureData().isPrepared()) HILTS[hilt].getTextureData().prepare();
-		Pixmap hiltMap = HILTS[hilt].getTextureData().consumePixmap();
+		blade = Part.SWORD_BLADES[(int) (Math.random()*Part.SWORD_BLADE_NUM)].clone();
+		guard = Part.SWORD_GUARDS[(int) (Math.random()*Part.SWORD_GUARD_NUM)].clone();
+		hilt = Part.SWORD_HILTS[(int) (Math.random()*Part.SWORD_HILT_NUM)].clone();
+		if(!blade.sprite.getTextureData().isPrepared()) blade.sprite.getTextureData().prepare();
+		Pixmap bladeMap = blade.sprite.getTextureData().consumePixmap();
+		if(!guard.sprite.getTextureData().isPrepared()) guard.sprite.getTextureData().prepare();
+		Pixmap guardMap = guard.sprite.getTextureData().consumePixmap();
+		if(!hilt.sprite.getTextureData().isPrepared()) hilt.sprite.getTextureData().prepare();
+		Pixmap hiltMap = hilt.sprite.getTextureData().consumePixmap();
 		
 		Pixmap spr = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
 		spr.drawPixmap(bladeMap, 0, 0);
@@ -114,17 +115,17 @@ public class Sword extends Melee {
 		//for some reason all the pixmaps are all disposed already... thx libgdx!
 		
 		
-		name = BLADE_NAMES[blade];
+		name = blade.name;
 		
 		hasHit = false;
 		
-		this.damage = damage * BLADE_STATS[blade][0] * GUARD_STATS[guard][0] * HILT_STATS[hilt][0];
-		this.speed = speed * BLADE_STATS[blade][1] * GUARD_STATS[guard][1] * HILT_STATS[hilt][1];
+		this.damage = damage * blade.dmgMult * guard.dmgMult * hilt.dmgMult;
+		this.speed = speed * blade.speedMult * guard.speedMult * hilt.speedMult;
 		
 		knockratio = 0.4f;
-		knockstr = 10 * BLADE_STATS[blade][2]* GUARD_STATS[guard][2] * HILT_STATS[hilt][2];	
+		knockstr = 10 * blade.knockMult * guard.knockMult * hilt.knockMult;	
 		
-		this.weight = weight * BLADE_STATS[blade][3]* GUARD_STATS[guard][3] * HILT_STATS[hilt][3];	
+		this.weight = weight * blade.weightMult * guard.weightMult * hilt.weightMult;	
 		
 		desc = "The most common and widely used melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f;
 
@@ -134,12 +135,12 @@ public class Sword extends Melee {
 		
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 		
-		swings = BLADE_SWINGS[blade]; // do we have to clone it? I guess not
-		for(int i = 0; i < GUARD_SWINGS[guard].length; i++){
-			swings.addSwing(GUARD_SWINGS[guard][i]);
+		swings = BLADE_SWINGS[blade.id]; // do we have to clone it? I guess not
+		for(int i = 0; i < GUARD_SWINGS[guard.id].length; i++){
+			swings.addSwing(GUARD_SWINGS[guard.id][i]);
 		}
-		for(int i = 0; i < HILT_SWINGS[hilt].length; i++){
-			swings.addSwing(HILT_SWINGS[hilt][i]);
+		for(int i = 0; i < HILT_SWINGS[hilt.id].length; i++){
+			swings.addSwing(HILT_SWINGS[hilt.id][i]);
 		}
 		swings.setWorld(world); //is this neccicary? (I think so)
 		
