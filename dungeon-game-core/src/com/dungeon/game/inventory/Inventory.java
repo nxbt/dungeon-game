@@ -71,7 +71,7 @@ public class Inventory {
 	
 	public Item addItem(Item item) {
 		for(Slot s: slot) {
-			if(s.item != null && s.item.getClass().equals(item.getClass()) && s.item.stack < s.item.maxStack) {
+			if(s.item != null && !s.item.equals(item) && s.item.getClass().equals(item.getClass()) && s.item.stack < s.item.maxStack) {
 				if(s.item.stack + item.stack > s.item.maxStack) {
 					item.stack -= s.item.maxStack-s.item.stack;
 					s.item.stack = s.item.maxStack;

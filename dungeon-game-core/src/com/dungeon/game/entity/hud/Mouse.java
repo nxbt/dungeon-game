@@ -129,7 +129,7 @@ public class Mouse extends Hud  implements InputProcessor {
 		int toMoveToFront=0;
 		for(int i = 0; i < world.hudEntities.size(); i++) {
 			Hud ent = world.hudEntities.get(i);
-			if(!(world.hudEntities.get(i) instanceof HudBackground) && ent.isHovered()){
+			if(ent.isHovered()){
 				if((lb_pressed||rb_pressed) && ent instanceof Window)toMoveToFront = i;
 				ent.hovered();
 				onHud = true;

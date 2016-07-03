@@ -16,12 +16,11 @@ public class InvButton extends Button {
 
 	@Override
 	public void calc() {
-		
+		super.calc();
 	}
 
 	@Override
 	public void post() {
-		
 	}
 
 }

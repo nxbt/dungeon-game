@@ -24,7 +24,6 @@ import com.dungeon.game.entity.furniture.Stair;
 import com.dungeon.game.entity.furniture.TrainingTable;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.EffectHudBackground;
-import com.dungeon.game.entity.hud.GoldCounter;
 import com.dungeon.game.entity.hud.HealthBar;
 import com.dungeon.game.entity.hud.HelpButton;
 import com.dungeon.game.entity.hud.Hud;
@@ -113,23 +112,6 @@ public class World {
 		entities.add(new Trainer(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+Tile.TS, curFloor.tm.length/2*Tile.TS+Tile.TS/2));
 		entities.add(new TrainingTable(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2-Tile.TS, curFloor.tm.length/2*Tile.TS+Tile.TS/2));
 		entities.add(new Stair(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS, true, 10, 10));
-		
-		hudEntities.add(new GoldCounter(this));
-		hudEntities.add(new MenuButton(this, 4, cam.height-20));
-		hudEntities.add(new HelpButton(this, 24, cam.height-20));
-		hudEntities.add(new InvButton(this, cam.width-56, 76));
-		hudEntities.add(new Portrait(this, cam.width-72, 4));
-		hudEntities.add(new PortraitBackground(this, cam.width-72, 4));
-		hudEntities.add(new HealthBar(this,cam.width-36,76));
-		hudEntities.add(new StamBar(this,cam.width-24,76));
-		hudEntities.add(new ManaBar(this,cam.width-12,76));
-		hudEntities.add(new HudSlot(this, cam.width-144, 40, player.inv.slot[30]));
-		hudEntities.add(new HudSlot(this, cam.width-108, 40, player.inv.slot[31]));
-		hudEntities.add(new HudSlot(this, cam.width-252, 4, player.inv.slot[0]));
-		hudEntities.add(new HudSlot(this, cam.width-216, 4, player.inv.slot[1]));
-		hudEntities.add(new HudSlot(this, cam.width-180, 4, player.inv.slot[2]));
-		hudEntities.add(new HudSlot(this, cam.width-144, 4, player.inv.slot[3]));
-		hudEntities.add(new HudSlot(this, cam.width-108, 4, player.inv.slot[4]));
 		hudEntities.add(new HudBackground(this));
 		
 		hudEntities.add(new EffectHudBackground(this, cam.width-44, cam.height-44));

@@ -2,6 +2,7 @@ package com.dungeon.game.entity.hud;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.Static;
 import com.dungeon.game.world.World;
 
@@ -18,6 +19,31 @@ public abstract class Hud extends Static {
 		super(world, x, y, width, height, filename);
 		
 		subEntities = new ArrayList<Hud>();
+	}
+	
+	public void calc(){
+		for(int i = 0; i < subEntities.size(); i++){
+			subEntities.get(i).x = subEntities.get(i).subOffX + x;
+			subEntities.get(i).y = subEntities.get(i).subOffY + y;
+			subEntities.get(i).calc();
+		}
+	}
+	
+	public void hovered(){
+		super.hovered();
+		for(int i = 0; i < subEntities.size(); i++){
+			if(subEntities.get(i).isHovered()){
+				subEntities.get(i).hovered();
+				return;
+			}
+		}
+	}
+	
+	public void draw(SpriteBatch batch) {
+		super.draw(batch);
+		for(int i = 0; i < subEntities.size(); i++){
+			subEntities.get(i).draw(batch);
+		}
 	}
 	
 	public boolean isHovered(){
