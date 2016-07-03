@@ -90,12 +90,16 @@ public class Sword extends Melee {
 		this.damage = damage * blade.dmgMult * guard.dmgMult * hilt.dmgMult;
 		this.speed = speed * blade.speedMult * guard.speedMult * hilt.speedMult;
 		
+		baseDamage = damage;
+		baseSpeed = speed;
+		baseWeight = weight;
+		
 		knockratio = 0.4f;
 		knockstr = 10 * blade.knockMult * guard.knockMult * hilt.knockMult;	
 		
 		this.weight = weight * blade.weightMult * guard.weightMult * hilt.weightMult;	
 		
-		desc = "The most common and widely used melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f;
+		desc = "The most common and widely used melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Weight: "+ Math.floor(this.weight*10)/10f;
 
 		
 		dmgMult = new float[]{0.7f,1,1.5f};
@@ -137,7 +141,7 @@ public class Sword extends Melee {
 	}
 	
 	public String getDesc() {
-		return "The accepted standard for melee weapons, mainly due to how common it is. Swords are generally considered very reliable, despite the diverse range of blades. This reliability is another reason for their wide acceptance.\n\n\"My sword shall lead me to glory!\" -final words of Tanturin, fabled warrior\n\n Damage: "+ Math.floor(damage*10)/10f  + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f;
+		return "The accepted standard for melee weapons, mainly due to how common it is. Swords are generally considered very reliable, despite the diverse range of blades. This reliability is another reason for their wide acceptance.\n\n\"My sword shall lead me to glory!\" -final words of Tanturin, fabled warrior\n\n Damage: "+ Math.floor(damage*10)/10f  + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Weight: "+ Math.floor(this.weight*10)/10f;
 	}
 
 	@Override
