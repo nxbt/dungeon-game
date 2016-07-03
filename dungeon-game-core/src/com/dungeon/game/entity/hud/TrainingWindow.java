@@ -17,8 +17,6 @@ public class TrainingWindow extends Window {
 	private Melee weapon;
 	
 	private BitmapFont font;
-	
-	private PartsInfo partsInfo;
 
 	public TrainingWindow(World world, float x, float y) {
 		super(world, x, y);
@@ -40,28 +38,18 @@ public class TrainingWindow extends Window {
 		slot.calc();
 		if(weapon != (Melee) slot.item){
 			weapon = (Melee) slot.item;
-			if(weapon == null) partsInfo = null;
-			else partsInfo = new PartsInfo(world, 0, 0, weapon);
-		}
-		
-		if(partsInfo != null){
-			partsInfo.x = x + 4;
-			partsInfo.y = y + 4;
-			partsInfo.calc();
+			if(weapon == null){
+				subEntities.remove("partsInfo");
+			}
+			else{
+				addSubEntitiy(new PartsInfo(world, 0, 0, weapon),  "partsInfo", 4, 4);
+			}
 		}
 	}
 	
 	public void subHovered(){
 		if(world.mouse.x > slot.x && world.mouse.x < slot.x + Item.SIZE && world.mouse.y > slot.y && world.mouse.y < slot.y + Item.SIZE){
 			slot.hovered();
-			return;
-		}
-//		if(partsInfo != null && world.mouse.x > partsInfo.x && world.mouse.x < partsInfo.x + partsInfo.d_width && world.mouse.y > partsInfo.y && world.mouse.y < partsInfo.y + partsInfo.d_height){
-//			partsInfo.hovered();
-//			return;
-//		}
-		if(partsInfo != null && partsInfo.isHovered()){
-			partsInfo.hovered();
 			return;
 		}
 		if(weapon != null && world.mouse.x > x + 4 && world.mouse.x < x + 160){
@@ -100,7 +88,6 @@ public class TrainingWindow extends Window {
 			font.draw(batch, spd, TextHelper.alignRight(spd, x + 160), y + d_height - 66);
 			font.draw(batch, knk, TextHelper.alignRight(knk, x + 160), y + d_height - 82);
 			font.draw(batch, wgt, TextHelper.alignRight(wgt, x + 160), y + d_height - 98);
-			partsInfo.draw(batch);
 		}
 	}
 

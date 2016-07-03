@@ -1,5 +1,7 @@
 package com.dungeon.game.entity.hud;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -23,8 +25,12 @@ public abstract class Window extends Hud {
 	float dragOffX;
 	float dragOffY;
 	
+	protected ArrayList<Hud> subEntities;
+	
 	public Window(World world, float x, float y) {
 		super(world, x, y, 32, 32, "slot.png");
+		
+		subEntities = new ArrayList<Hud>();
 		
 		scroll = 0;
 		
@@ -71,6 +77,12 @@ public abstract class Window extends Hud {
 		if(world.player.fightMode)close();
 		
 		subCalc();
+		
+		for(int i = 0; i < subEntities.size(); i++){
+			subEntities.get(i).x = subEntities.get(i).subOffX + x;
+			subEntities.get(i).y = subEntities.get(i).subOffY + y;
+			subEntities.get(i).calc();
+		}
 	}
 
 	public void hovered() {
@@ -82,6 +94,13 @@ public abstract class Window extends Hud {
 			drag = true;
 		}
 		else{
+			//are any subEntities hovered?
+			for(int i = 0; i < subEntities.size(); i++){
+				if(subEntities.get(i).isHovered()){
+					subEntities.get(i).hovered();
+					return;
+				}
+			}
 			subHovered();
 		}
 	}
@@ -90,6 +109,10 @@ public abstract class Window extends Hud {
 		WINDOW.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
 		
 		subDraw(batch);
+		//draw the subEntities!
+		for(int i = 0; i < subEntities.size(); i++){
+			subEntities.get(i).draw(batch);
+		}
 	}
 	
 
@@ -113,5 +136,14 @@ public abstract class Window extends Hud {
 	}
 	protected void subDraw(SpriteBatch batch){
 		
+	}
+	
+	protected void addSubEntitiy(Hud subEnt, String id, int x, int y){
+		subEnt.setSubOff(id, x, y);
+		subEntities.add(subEnt);
+	}
+	
+	protected void removeSubEntity(String id){
+		for(int i = 0; i < subEntities.size(); i++)if(subEntities.get(i).subId.equals(id))subEntities.remove(i);
 	}
 }
