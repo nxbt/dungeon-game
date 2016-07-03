@@ -36,11 +36,11 @@ public class DescWindow extends Window {
 	}
 	
 	public void updateText(Item item) {
-		updateText("Item: " + item.name + "\n\n" + item.getDesc());
+		updateText(item.getDesc());
 	}
 	
 	public void updateText(Effect effect) {
-		updateText("Effect: " + effect.name + "\n\n" + effect.getDesc());
+		updateText(effect.getDesc());
 	}
 	
 	public void updateText(String text) {
