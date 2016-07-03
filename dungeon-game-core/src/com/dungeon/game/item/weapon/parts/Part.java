@@ -122,11 +122,11 @@ public class Part implements Cloneable{
 	public static final int SWORD_HILT_NUM = 3;
 	
 	public static final Part[] SWORD_BLADES = new Part[]{
-			new Part("Basic Blade", SWORD_BLADE_SPIRTES[0], SWORD, BLADE, 0, new String[]{}, new String[]{}, 1, 1, 1, 1),
+			new Part("Straight Sword", SWORD_BLADE_SPIRTES[0], SWORD, BLADE, 0, new String[]{}, new String[]{}, 1, 1, 1, 1),
 			new Part("Light Sword", SWORD_BLADE_SPIRTES[1], SWORD, BLADE, 1, new String[]{}, new String[]{}, 0.8f,1.3f,0.6f,0.7f),
 			new Part("Broad Sword", SWORD_BLADE_SPIRTES[2], SWORD, BLADE, 2, new String[]{}, new String[]{}, 1.2f,0.7f,1.3f, 1.3f),
 			new Part("Scimitar",    SWORD_BLADE_SPIRTES[3], SWORD, BLADE, 3, new String[]{}, new String[]{}, 1.5f,0.9f,0.4f, 0.9f),
-			new Part("Needle",      SWORD_BLADE_SPIRTES[4], SWORD, BLADE, 4, new String[]{}, new String[]{}, 0.6f,2f,0.3f, 0.3f),
+			new Part("Rapier",      SWORD_BLADE_SPIRTES[4], SWORD, BLADE, 4, new String[]{}, new String[]{}, 0.6f,2f,0.3f, 0.3f),
 	};
 	
 	public static final Part[] SWORD_GUARDS = new Part[]{
