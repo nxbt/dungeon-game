@@ -60,6 +60,24 @@ public class TrainingWindow extends Window {
 			partsInfo.hovered();
 			return;
 		}
+		if(weapon != null && world.mouse.x > x + 4 && world.mouse.x < x + 160){
+			if(world.mouse.y >  y + d_height - 66 && world.mouse.y <  y + d_height - 50){
+				world.descBox.updateText("Weapon Damage: " + Math.round(weapon.damage*10)/10f + "\nBase Damage: " + Math.round(weapon.baseDamage*10)/10f);
+				return;
+			}
+			else if(world.mouse.y >  y + d_height - 84 && world.mouse.y <  y + d_height - 66){
+				world.descBox.updateText("Weapon Speed: " + Math.round(weapon.speed*10)/10f + "\nBase Speed: " + Math.round(weapon.baseSpeed*10)/10f);
+				return;
+			}
+			else if(world.mouse.y >  y + d_height - 100 && world.mouse.y <  y + d_height - 84){
+				world.descBox.updateText("Weapon Knockback: " + Math.round(weapon.knockstr*10)/10f + "\nBase Knockback: " + Math.round(weapon.baseKnock*10)/10f);
+				return;
+			}
+			else if(world.mouse.y >  y + d_height - 116 && world.mouse.y <  y + d_height - 100){
+				world.descBox.updateText("Weapon Weight: " + Math.round(weapon.weight*10)/10f + "\nBase Weight: " + Math.round(weapon.baseWeight*10)/10f);
+				return;
+			}
+		}
 	}
 
 	@Override
@@ -69,10 +87,10 @@ public class TrainingWindow extends Window {
 		slot.draw(batch, 0, 0);
 		if(weapon != null){
 			font.draw(batch, weapon.name, x + 38, y + d_height - 26);
-			String dmg = "" + Math.round(weapon.baseDamage*10)/10f;
-			String spd = "" + Math.round(weapon.baseSpeed*10)/10f;
-			String knk = "" + Math.round(weapon.baseKnock*10)/10f;
-			String wgt = "" + Math.round(weapon.baseWeight*10)/10f;
+			String dmg = "" + Math.round(weapon.damage*10)/10f;
+			String spd = "" + Math.round(weapon.speed*10)/10f;
+			String knk = "" + Math.round(weapon.knockstr*10)/10f;
+			String wgt = "" + Math.round(weapon.weight*10)/10f;
 			font.draw(batch, "Base Damage:\nBase Speed:\nBase Knock:\nBase Weight:", x + 4, y + d_height - 50);
 			font.draw(batch, dmg, TextHelper.alignRight(dmg, x + 160), y + d_height - 50);
 			font.draw(batch, spd, TextHelper.alignRight(spd, x + 160), y + d_height - 66);

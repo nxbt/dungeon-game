@@ -101,7 +101,7 @@ public class Sword extends Melee {
 		
 		this.weight = weight * blade.weightMult * guard.weightMult * hilt.weightMult;	
 		
-		desc = "The most common and widely used melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Weight: "+ Math.floor(this.weight*10)/10f;
+		desc = "The most common and widely used melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f + "\n Weight: "+ Math.floor(this.weight*10)/10f;
 
 		
 		dmgMult = new float[]{0.7f,1,1.5f};
