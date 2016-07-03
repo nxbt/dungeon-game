@@ -1,6 +1,7 @@
-package com.dungeon.game.entity;
+package com.dungeon.game.entity.furniture;
 
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.entity.Static;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 

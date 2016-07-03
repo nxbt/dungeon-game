@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.entity.Container;
 import com.dungeon.game.item.equipable.armor.WoolPants;
 import com.dungeon.game.item.equipable.armor.WoolShirt;
 import com.dungeon.game.utilities.Spritesheet;

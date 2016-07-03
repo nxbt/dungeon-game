@@ -2,19 +2,8 @@ package com.dungeon.game.entity.character.friend;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.criteria.Criteria;
-import com.dungeon.game.criteria.HasItem;
-import com.dungeon.game.criteria.Invert;
-import com.dungeon.game.criteria.True;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
-import com.dungeon.game.entity.hud.dialogue.InvBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
-import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
-import com.dungeon.game.inventory.Inventory;
-import com.dungeon.game.inventory.Shop;
-import com.dungeon.game.item.ammo.Arrow;
-import com.dungeon.game.item.consumable.LifePotion;
-import com.dungeon.game.item.weapon.Sword;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
 
