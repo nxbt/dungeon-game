@@ -56,7 +56,11 @@ public class TrainingWindow extends Window {
 			slot.hovered();
 			return;
 		}
-		if(partsInfo != null && world.mouse.x > partsInfo.x && world.mouse.x < partsInfo.x + partsInfo.d_width && world.mouse.y > partsInfo.y && world.mouse.y < partsInfo.y + partsInfo.d_height){
+//		if(partsInfo != null && world.mouse.x > partsInfo.x && world.mouse.x < partsInfo.x + partsInfo.d_width && world.mouse.y > partsInfo.y && world.mouse.y < partsInfo.y + partsInfo.d_height){
+//			partsInfo.hovered();
+//			return;
+//		}
+		if(partsInfo != null && partsInfo.isHovered()){
 			partsInfo.hovered();
 			return;
 		}
