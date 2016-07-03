@@ -25,13 +25,16 @@ public class InvGraphic extends Window {
 		
 	}
 	
-	protected void subCalc(){
+	public void calc(){
 		inv.update();
+		super.calc();
 	}
-	protected void subHovered(){
+	public void hovered(){
+		super.hovered();
 		inv.hovered();
 	}
-	protected void subDraw(SpriteBatch batch){
+	public void draw(SpriteBatch batch){
+		super.draw(batch);
 		for(Slot s: inv.slot) {
 			s.draw(batch, (int)x, (int)y);
 		}

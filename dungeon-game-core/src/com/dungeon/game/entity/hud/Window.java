@@ -10,18 +10,22 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.world.World;
 
 public abstract class Window extends Hud {
-	static final NinePatch WINDOW = new NinePatch(new Texture("window.png"), 2, 2, 14, 2);
+	private static final NinePatch WINDOW = new NinePatch(new Texture("window.png"), 2, 2, 14, 2);
+	
+	private static final NinePatch SCROLL_BAR = new NinePatch(new Texture("slot.png"), 2, 2, 2, 2);
 	
 	private ExitButton exitButton;
 	
 	protected BitmapFont font;
 	
-	boolean drag;
+	protected boolean drag;
 	
-	float scroll;
+	protected float scroll;
 	
-	float dragOffX;
-	float dragOffY;
+	protected float dragOffX;
+	protected float dragOffY;
+	
+	protected float contentHeight;
 	
 	public Window(World world, float x, float y) {
 		super(world, x, y, 32, 32, "slot.png");
@@ -70,8 +74,6 @@ public abstract class Window extends Hud {
 		
 		if(world.player.fightMode)close();
 		
-		subCalc();
-		
 		for(int i = 0; i < subEntities.size(); i++){
 			subEntities.get(i).x = subEntities.get(i).subOffX + x;
 			subEntities.get(i).y = subEntities.get(i).subOffY + y;
@@ -95,14 +97,16 @@ public abstract class Window extends Hud {
 					return;
 				}
 			}
-			subHovered();
 		}
 	}
 	
 	public void draw(SpriteBatch batch) {
 		WINDOW.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
-		
-		subDraw(batch);
+		float scrollThickness = (d_height - 16)/contentHeight;
+		if(scrollThickness < 1){
+			float scrollHeight = ((scroll * 16) / (contentHeight))*(d_height - 16);
+			SCROLL_BAR.draw(batch, x + d_width - 7, y + 2 + (d_height - 16) - scrollHeight - scrollThickness * (d_height - 16), 5, scrollThickness * (d_height - 16));
+		}
 		//draw the subEntities!
 		for(int i = 0; i < subEntities.size(); i++){
 			subEntities.get(i).draw(batch);
@@ -120,15 +124,5 @@ public abstract class Window extends Hud {
 		world.hudEntities.remove(this);
 		world.hudEntities.remove(exitButton);
 		drag = false;
-	}
-	
-	protected void subCalc(){
-		
-	}
-	protected void subHovered(){
-		
-	}
-	protected void subDraw(SpriteBatch batch){
-		
 	}
 }

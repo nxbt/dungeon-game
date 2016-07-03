@@ -32,7 +32,7 @@ public class TrainingWindow extends Window {
 		font.setColor(Color.WHITE);
 	}
 	
-	public void subCalc(){
+	public void calc(){
 		slot.x = x + 4;
 		slot.y = y + d_height - 48;
 		slot.calc();
@@ -50,9 +50,11 @@ public class TrainingWindow extends Window {
 				addSubEntitiy(new HoverZone(world, "Weapon Weight: " + Math.round(weapon.weight*10)/10f + "\nBase Weight: " + Math.round(weapon.baseWeight*10)/10f, 0, 0, 156, 16),  "statDesc", 4, d_height - 116);
 			}
 		}
+		super.calc();
 	}
 	
-	public void subHovered(){
+	public void hovered(){
+		super.hovered();
 		if(world.mouse.x > slot.x && world.mouse.x < slot.x + Item.SIZE && world.mouse.y > slot.y && world.mouse.y < slot.y + Item.SIZE){
 			slot.hovered();
 			return;
@@ -62,7 +64,8 @@ public class TrainingWindow extends Window {
 	@Override
 	public void post() {}
 	
-	public void subDraw(SpriteBatch batch){
+	public void draw(SpriteBatch batch){
+		super.draw(batch);
 		slot.draw(batch, 0, 0);
 		if(weapon != null){
 			font.draw(batch, weapon.name, x + 38, y + d_height - 26);

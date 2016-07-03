@@ -31,7 +31,8 @@ public class DescWindow extends Window {
 		}
 	}
 
-	public void subDraw(SpriteBatch batch) {
+	public void draw(SpriteBatch batch) {
+		super.draw(batch);
 		font.draw(batch, drawText, x+6, y+d_height-16);
 	}
 	
@@ -65,6 +66,8 @@ public class DescWindow extends Window {
 			max_line_length = Math.max(max_line_length, lines.get(i).length());
 			
 			this.text += lines.get(i) + "\n";
+			
+			contentHeight = lines.size() * 16;
 		}
 		
 		d_height = lines.size() * 16 + 18;
