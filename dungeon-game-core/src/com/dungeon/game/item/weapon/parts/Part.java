@@ -79,17 +79,7 @@ public class Part implements Cloneable{
 	}
 	
 	public void hovered(World world){
-		String text = "";
-		if(type == SWORD){
-			if(part == BLADE){
-				text = Sword.BLADE_NAMES[id];
-			}else if(part == GUARD){
-				text = Sword.GUARD_NAMES[id];
-			}else if(part == HILT){
-				text = Sword.HILT_NAMES[id];
-			}
-		}
-		world.descBox.updateText(text);
+		world.descBox.updateText(name);
 	}
 	
 	public void draw(SpriteBatch batch, float x, float y){

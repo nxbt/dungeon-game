@@ -15,74 +15,43 @@ import com.dungeon.game.world.World;
 
 public class Sword extends Melee {
 	
-	public static final Texture[] BLADES = Spritesheet.getSprites("swordBladeMap.png", 32, 32);
-	public static final Texture[] GUARDS = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
-	public static final Texture[] HILTS = Spritesheet.getSprites("swordHiltMap.png", 32, 32); //why is guard spelled ua and not au??
-	private static final int BLADE_NUM = 5;
-	private static final int GUARD_NUM = 3;
-	private static final int HILT_NUM = 3;
-	// how should we change name and stats based on the blade guard and hilt? Arrays? Text Files? Something Else? I'll do this for now
-	public static final String[] BLADE_NAMES = new String[]{"Straight Sword", "Light Sword", "Broad Sword", "Scimitar", "Rapier"};
-	public static final String[] GUARD_NAMES = new String[]{"Defender's Gaurd", "Squared Gaurd", "Spiked Gaurd"};
-	public static final String[] HILT_NAMES = new String[]{"Utilitarian Hilt", "Square Hilt", "Spiked Hilt"};
-	//blade stat order is dmg, speed, knockback, stanima
-	private static final float[][] BLADE_STATS = new float[][]{
-		new float[]{1,1,1,1}, 
-		new float[]{0.8f,1.3f,0.6f,0.7f},
-		new float[]{1.2f,0.7f,1.3f, 1.3f},
-		new float[]{1.5f,0.9f,0.4f, 0.9f},
-		new float[]{0.6f,2f,0.3f, 0.3f}
-		};
-		
-	private static final float[][] GUARD_STATS = new float[][]{
-		new float[]{1,1,1,1},
-		new float[]{1,1.05f,0.9f,1.05f},
-		new float[]{1,0.95f,1.05f,1.1f}
-		};
-		
-	private static final float[][] HILT_STATS = new float[][]{
-		new float[]{1,1,1,1},
-		new float[]{1,1,1.1f,1.1f},
-		new float[]{1.05f,0.95f,0.9f,1.05f}
-		};
-	
 	private final SwingSet[] BLADE_SWINGS = new SwingSet[]{
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //sword
-					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
-					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
-					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
+					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
+					new Swing(world, "Slash", false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
+					new Swing(world, "Stab", false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
 					} ,false),
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //light sword
-					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
-					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
-					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
+					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
+					new Swing(world, "Slash", false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
+					new Swing(world, "Stab", false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
 					} ,false),
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //broad sword
-					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
-					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
-					new Swing(world, false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
+					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
+					new Swing(world, "Slash", false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
+					new Swing(world, "Stab", false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
 					} ,false),
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //cutlass
-					new Swing(world, false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
-					new Swing(world, false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
+					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
+					new Swing(world, "Slash", false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
 					} ,true),
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //needle
-					new Swing(world, false, 15, 12, 40, -7, 4, 28, 12, -3, 0.75f, 0.7f, 0, 0.4f, 0.5f),
-					new Swing(world, false, 15, 12, 0, 0, 4, 28, 0, 0, 1.5f, 0.7f, 0, 0.4f, 1f),
-					new Swing(world, false, 15, 12, -40, 7, 4, 28, -12, 3, 0.75f, 0.7f, 0, 0.4f, 1.5f)
+					new Swing(world, "Stab", false, 15, 12, 40, -7, 4, 28, 12, -3, 0.75f, 0.7f, 0, 0.4f, 0.5f),
+					new Swing(world, "Stab", false, 15, 12, 0, 0, 4, 28, 0, 0, 1.5f, 0.7f, 0, 0.4f, 1f),
+					new Swing(world, "Stab", false, 15, 12, -40, 7, 4, 28, -12, 3, 0.75f, 0.7f, 0, 0.4f, 1.5f)
 					} , true)
 	};
 	
 	private final Swing[][] GUARD_SWINGS = new Swing[][]{
 		new Swing[]{},
 		new Swing[]{},
-		new Swing[]{new Swing(world, false, 10, 10, 20, -90, 10, 26, 15, -90, 0.5f, 1.5f, 90, 0, 2)}
+		new Swing[]{new Swing(world, "Guard Hit", false, 10, 10, 20, -90, 10, 26, 15, -90, 0.5f, 1.5f, 90, 0, 2)}
 	};
 	
 	private final Swing[][] HILT_SWINGS = new Swing[][]{
 		new Swing[]{},
 		new Swing[]{},
-		new Swing[]{new Swing(world, false, 10, 15, 70, 150, 10, 26, 0, 90, 2f, 0.6f, 180, 0, 2)}
+		new Swing[]{new Swing(world, "Hilt Hit", false, 10, 15, 70, 150, 10, 26, 0, 90, 2f, 0.6f, 180, 0, 2)}
 	};
 	
 	protected float[] dmgMult;

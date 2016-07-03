@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.item.weapon.Melee;
+import com.dungeon.game.item.weapon.parts.Part;
 import com.dungeon.game.world.World;
 
-public class Swing {
+public class Swing implements Cloneable{
 	
 	//all durations are in miliseconds
 	
@@ -53,8 +54,12 @@ public class Swing {
 	
 	protected ArrayList<Character> hitChars;
 	
-	public Swing(World world, boolean cleave, int windupDuration, int windupDist, int windupPolarAngle, int windupAngle, int duration, int dist, int polarAngle, int angle, float dmgMult, float knockMult, float knockAngleMod, float knockRatio, float stanMult){
+	public String name;
+	
+	public Swing(World world, String name, boolean cleave, int windupDuration, int windupDist, int windupPolarAngle, int windupAngle, int duration, int dist, int polarAngle, int angle, float dmgMult, float knockMult, float knockAngleMod, float knockRatio, float stanMult){
 		this.world = world;
+		
+		this.name = name;
 		
 		this.cleave = cleave;
 		
@@ -158,6 +163,15 @@ public class Swing {
 			knockVec.x = (xSword*(1-knockRatio)+xOwner*(knockRatio))*knockMult; //set the x of the knockVec based on the knockRatio and the knockMult
 			knockVec.y = (ySword*(1-knockRatio)+yOwner*(knockRatio))*knockMult; //set the y of the knockVec based on the knockRatio and the knockMult
 			c.acel(knockVec, false); //knock that ***** about!
+		}
+	}
+	
+	public Swing clone() {
+		try {
+			return (Swing) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

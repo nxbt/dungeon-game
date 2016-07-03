@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 public class Rest extends Swing{
 	
 	public Rest(World world, int duration, int dist, int polarAngle, int angle){
-		super(world, false, 0, 0, 0, 0, duration, dist, polarAngle, angle, 0, 0, 0, 0, 0); //rests have no windup and never hit anything, so we pass in 0 for those values
+		super(world, "Rest", false, 0, 0, 0, 0, duration, dist, polarAngle, angle, 0, 0, 0, 0, 0); //rests have no windup and never hit anything, so we pass in 0 for those values
 	}
 	
 	public void progressSwing(float counter){
