@@ -2,7 +2,6 @@
 The is a top-down rougelike-like game written in Java. Currently being worked on by Brendan Thompson adn Ethan  Bull-Vulpe.
 
 ##TODO high priority (within a week):
-* Add armor w/ function DT = 100*0.9945^A
 * psn damage and magic damage is adative
 * litn damage and flame damage is average
 * change tilemap rendering to pixmap
