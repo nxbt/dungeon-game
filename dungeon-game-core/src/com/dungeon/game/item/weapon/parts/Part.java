@@ -79,7 +79,7 @@ public class Part implements Cloneable{
 	}
 	
 	public void hovered(World world){
-		world.descBox.updateText(name);
+		world.descBox.updateText(name + "\n Damage Multiplier: " + dmgMult + "\n Speed Multiplier: " + speedMult + "\n Knockback Multiplier: " + knockMult + "\n Weight Multiplier: " + weightMult);
 	}
 	
 	public void draw(SpriteBatch batch, float x, float y){
@@ -95,10 +95,9 @@ public class Part implements Cloneable{
 				text = "Hilt:";
 			}
 
-			font.draw(batch, text, x - 60, y + 22);
+			font.draw(batch, text, x - 70, y + 22);
 			batch.draw(slot, x, y, 32, 32);
 			batch.draw(sprite, x, y, 32, 32);
-			font.draw(batch, name, TextHelper.alignRight(name, x + 183), y + 22);
 		}
 	}
 	
