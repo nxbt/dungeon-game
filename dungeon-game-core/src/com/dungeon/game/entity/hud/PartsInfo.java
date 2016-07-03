@@ -50,7 +50,8 @@ public class PartsInfo extends Hud {
 		super.hovered();
 		for(int i = 0; i < parts.length; i++){
 			if(world.mouse.x > x + 76 && world.mouse.x < x + 76 + 32 && world.mouse.y > y + d_height - 50 - i * 32 && world.mouse.y < y + d_height - 50 - i * 32 + 32){
-				parts[i].hovered(world);
+				parts[i].hovered();
+
 				break;
 			}
 		}

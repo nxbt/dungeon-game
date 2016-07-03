@@ -5,14 +5,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.item.Item;
 import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.World;
 
-public class Part implements Cloneable{	
+public class Part extends Item implements Cloneable{	
 	
 	private static final Texture slot = new Texture("slot.png");
-	
-	public Texture sprite;
 	
 	//what type of weapon does this part go on?
 	public int type;
@@ -35,9 +34,6 @@ public class Part implements Cloneable{
 	
 	//each part has a unique id
 	
-	//what is the parts name?
-	public String name;
-	
 	//which swings are allowed by this part?
 	public String[] allowedSwings;
 	
@@ -59,6 +55,8 @@ public class Part implements Cloneable{
 	private BitmapFont font;
 	
 	public Part(String name, Texture sprite, int type, int part, int id, String[] allowedSwings, String[] bannedSwings, float dmgMult, float speedMult, float knockMult, float weightMult){
+		//parts never need the world, and its too much of a pain to pass one in.
+		super(null, "slot.png");
 		this.name = name;
 		this.sprite = sprite;
 		this.type = type;
@@ -76,8 +74,13 @@ public class Part implements Cloneable{
 		
 	}
 	
-	public void hovered(World world){
-		world.descBox.updateText(name + "\n Damage Multiplier: " + dmgMult + "\n Speed Multiplier: " + speedMult + "\n Knockback Multiplier: " + knockMult + "\n Weight Multiplier: " + weightMult);
+	public void hovered(){
+		world.descBox.updateText(getDesc());
+	}
+	
+	public String getDesc(){
+		return name + "\n Damage Multiplier: " + dmgMult + "\n Speed Multiplier: " + speedMult + "\n Knockback Multiplier: " + knockMult + "\n Weight Multiplier: " + weightMult;
+		
 	}
 	
 	public void draw(SpriteBatch batch, float x, float y){
@@ -99,18 +102,14 @@ public class Part implements Cloneable{
 		}
 	}
 	
-	public Part clone() {
-		try {
-			Part newPart = (Part) super.clone();
-			newPart.allowedSwings = new String[allowedSwings.length];
-			for(int i = 0; i < allowedSwings.length; i++)newPart.allowedSwings[i] = allowedSwings[i];
-			newPart.bannedSwings = new String[bannedSwings.length];
-			for(int i = 0; i < bannedSwings.length; i++)newPart.bannedSwings[i] = bannedSwings[i];
-			return newPart;
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-			return null;
-		}
+	public Part clone(World world) {
+		Part newPart = (Part) super.clone();
+		newPart.allowedSwings = new String[allowedSwings.length];
+		newPart.world = world;
+		for(int i = 0; i < allowedSwings.length; i++)newPart.allowedSwings[i] = allowedSwings[i];
+		newPart.bannedSwings = new String[bannedSwings.length];
+		for(int i = 0; i < bannedSwings.length; i++)newPart.bannedSwings[i] = bannedSwings[i];
+		return newPart;
 	}
 	
 	public static final Texture[] SWORD_BLADE_SPIRTES = Spritesheet.getSprites("swordBladeMap.png", 32, 32);

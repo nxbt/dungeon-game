@@ -86,7 +86,7 @@ public abstract class Window extends Hud {
 			drag = true;
 		}
 		else{
-			super.calc();
+			super.hovered();
 		}
 	}
 	

@@ -65,9 +65,9 @@ public class Sword extends Melee {
 		super(world, "sword.png");
 		
 		//generate the sprite, for now random, but in the future will be a parameter!
-		blade = Part.SWORD_BLADES[(int) (Math.random()*Part.SWORD_BLADE_NUM)].clone();
-		guard = Part.SWORD_GUARDS[(int) (Math.random()*Part.SWORD_GUARD_NUM)].clone();
-		hilt = Part.SWORD_HILTS[(int) (Math.random()*Part.SWORD_HILT_NUM)].clone();
+		blade = Part.SWORD_BLADES[(int) (Math.random()*Part.SWORD_BLADE_NUM)].clone(world);
+		guard = Part.SWORD_GUARDS[(int) (Math.random()*Part.SWORD_GUARD_NUM)].clone(world);
+		hilt = Part.SWORD_HILTS[(int) (Math.random()*Part.SWORD_HILT_NUM)].clone(world);
 		if(!blade.sprite.getTextureData().isPrepared()) blade.sprite.getTextureData().prepare();
 		Pixmap bladeMap = blade.sprite.getTextureData().consumePixmap();
 		if(!guard.sprite.getTextureData().isPrepared()) guard.sprite.getTextureData().prepare();
