@@ -165,4 +165,9 @@ public class Slot {
 		}
 		return false;
 	}
+	
+	public boolean isHovered(){
+		return (world.mouse.x > x && world.mouse.x < x + Item.SIZE && world.mouse.y > y && world.mouse.y < y + Item.SIZE);
+		
+	}
 }
