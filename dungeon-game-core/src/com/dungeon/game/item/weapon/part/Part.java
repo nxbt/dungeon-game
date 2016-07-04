@@ -10,12 +10,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.weapon.Weapon;
-import com.dungeon.game.utilities.Spritesheet;
+import com.dungeon.game.item.weapon.part.sword.SwordPart;
+import com.dungeon.game.item.weapon.part.sword.blade.BasicBlade;
+import com.dungeon.game.item.weapon.part.sword.guard.BasicGuard;
+import com.dungeon.game.item.weapon.part.sword.hilt.BasicHilt;
 import com.dungeon.game.world.World;
 
-public class Part extends Item implements Cloneable{	
+public abstract class Part extends Item implements Cloneable{	
 	
-	private static final Texture slot = new Texture("slot.png");
+	protected static final Texture slot = new Texture("slot.png");
+
+	public static int NUM;
+	public static Texture[] SPRITES;
 	
 	//what type of weapon does this part go on?
 	public int type;
@@ -27,11 +33,6 @@ public class Part extends Item implements Cloneable{
 	
 	//what part of the weapon does it go on?
 	public int part;
-	
-	//parts
-	public static final int BLADE = 0;
-	public static final int GUARD = 1;
-	public static final int HILT = 2;
 	
 	//what is the unique Id?
 	public int id;
@@ -56,55 +57,33 @@ public class Part extends Item implements Cloneable{
 	//stanima multiplier for this part
 	public float weightMult;
 	
-	private BitmapFont font;
+	protected BitmapFont font;
 	
-	public Part(String name, Texture sprite, int type, int part, int id, String[] allowedSwings, String[] bannedSwings, float dmgMult, float speedMult, float knockMult, float weightMult){
-		//parts never need the world, and its too much of a pain to pass one in.
+	public interface PartGetter {
+		Part Constructor();
+	}
+	
+	public static PartGetter[] parts;
+	
+	public Part(String name, Texture sprite) {
 		super(null, "slot.png");
-		this.name = name;
+		
 		this.sprite = sprite;
-		this.type = type;
-		this.part = part;
-		this.id = id;
-		this.allowedSwings = allowedSwings;
-		this.bannedSwings = bannedSwings;
-		this.dmgMult = dmgMult;
-		this.speedMult = speedMult;
-		this.knockMult = knockMult;
-		this.weightMult = weightMult;
+		this.name = name;
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.WHITE);
-		
 	}
-	
+
 	public void hovered(){
 		world.descBox.updateText(getDesc());
 	}
 	
 	public String getDesc(){
 		return name + "\n Damage Multiplier: " + dmgMult + "\n Speed Multiplier: " + speedMult + "\n Knockback Multiplier: " + knockMult + "\n Weight Multiplier: " + weightMult;
-		
 	}
 	
-	public void draw(SpriteBatch batch, float x, float y){
-		String text = "";
-		if(type == SWORD){
-			if(part == BLADE) {
-				text = "Blade:";
-			}
-			else if(part == GUARD) {
-				text = "Guard:";
-			}
-			else if(part == HILT) {
-				text = "Hilt:";
-			}
-
-			font.draw(batch, text, x - 70, y + 22);
-			batch.draw(slot, x, y, 32, 32);
-			batch.draw(sprite, x, y, 32, 32);
-		}
-	}
+	public abstract void draw(SpriteBatch batch, float x, float y);
 	
 	public Part clone(World world) {
 		Part newPart = (Part) super.clone();
@@ -122,33 +101,28 @@ public class Part extends Item implements Cloneable{
 		return new ArrayList<Effect>();
 	};
 	
-	public static final Texture[] SWORD_BLADE_SPIRTES = Spritesheet.getSprites("swordBladeMap.png", 32, 32);
-	public static final Texture[] SWORD_GUARD_SPIRTES = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
-	public static final Texture[] SWORD_HILT_SPIRTES = Spritesheet.getSprites("swordHiltMap.png", 32, 32); //why is guard spelled ua and not au??
-
-	public static final int SWORD_BLADE_NUM = 5;
-	public static final int SWORD_GUARD_NUM = 3;
-	public static final int SWORD_HILT_NUM = 3;
-	
 	public static final Part[] SWORD_BLADES = new Part[]{
-			new Part("Straight Sword", SWORD_BLADE_SPIRTES[0], SWORD, BLADE, 0, new String[]{}, new String[]{}, 1, 1, 1, 1),
-			new Part("Light Sword", SWORD_BLADE_SPIRTES[1], SWORD, BLADE, 1, new String[]{}, new String[]{}, 0.8f,1.3f,0.6f,0.7f),
-			new Part("Broad Sword", SWORD_BLADE_SPIRTES[2], SWORD, BLADE, 2, new String[]{}, new String[]{}, 1.2f,0.7f,1.3f, 1.3f),
-			new Part("Scimitar",    SWORD_BLADE_SPIRTES[3], SWORD, BLADE, 3, new String[]{}, new String[]{}, 1.5f,0.9f,0.4f, 0.9f),
-			new Part("Rapier",      SWORD_BLADE_SPIRTES[4], SWORD, BLADE, 4, new String[]{}, new String[]{}, 0.6f,2f,0.3f, 0.3f),
+			new BasicBlade()
+//			new Part("Straight Sword", SWORD_BLADE_SPIRTES[0], SWORD, BLADE, 0, new String[]{}, new String[]{}, 1, 1, 1, 1),
+//			new Part("Light Sword", SWORD_BLADE_SPIRTES[1], SWORD, BLADE, 1, new String[]{}, new String[]{}, 0.8f,1.3f,0.6f,0.7f),
+//			new Part("Broad Sword", SWORD_BLADE_SPIRTES[2], SWORD, BLADE, 2, new String[]{}, new String[]{}, 1.2f,0.7f,1.3f, 1.3f),
+//			new Part("Scimitar",    SWORD_BLADE_SPIRTES[3], SWORD, BLADE, 3, new String[]{}, new String[]{}, 1.5f,0.9f,0.4f, 0.9f),
+//			new Part("Rapier",      SWORD_BLADE_SPIRTES[4], SWORD, BLADE, 4, new String[]{}, new String[]{}, 0.6f,2f,0.3f, 0.3f),
 	};
 	
 	public static final Part[] SWORD_GUARDS = new Part[]{
-			new Part("Defender's Guard", SWORD_GUARD_SPIRTES[0], SWORD, GUARD, 0, new String[]{}, new String[]{}, 1, 1, 1, 1),
-			new Part("Squared Gaurd",    SWORD_GUARD_SPIRTES[1], SWORD, GUARD, 1, new String[]{}, new String[]{}, 1,1.05f,0.9f,1.05f),
-			new Part("Spiked Guard",     SWORD_GUARD_SPIRTES[2], SWORD, GUARD, 2, new String[]{}, new String[]{}, 1,0.95f,1.05f,1.1f),
+			new BasicGuard()
+//			new Part("Defender's Guard", SWORD_GUARD_SPIRTES[0], SWORD, GUARD, 0, new String[]{}, new String[]{}, 1, 1, 1, 1),
+//			new Part("Squared Gaurd",    SWORD_GUARD_SPIRTES[1], SWORD, GUARD, 1, new String[]{}, new String[]{}, 1,1.05f,0.9f,1.05f),
+//			new Part("Spiked Guard",     SWORD_GUARD_SPIRTES[2], SWORD, GUARD, 2, new String[]{}, new String[]{}, 1,0.95f,1.05f,1.1f),
 
 	};
 
 	public static final Part[] SWORD_HILTS = new Part[]{
-			new Part("Utilitarian Hilt", SWORD_HILT_SPIRTES[0], SWORD, HILT, 0, new String[]{}, new String[]{}, 1, 1, 1, 1),
-			new Part("Square Hilt",      SWORD_HILT_SPIRTES[1], SWORD, HILT, 1, new String[]{}, new String[]{}, 1,1,1.1f,1.1f),
-			new Part("Spiked Hilt",      SWORD_HILT_SPIRTES[2], SWORD, HILT, 2, new String[]{}, new String[]{}, 1.05f,0.95f,0.9f,1.05f),
+			new BasicHilt()
+//			new Part("Utilitarian Hilt", SWORD_HILT_SPIRTES[0], SWORD, HILT, 0, new String[]{}, new String[]{}, 1, 1, 1, 1),
+//			new Part("Square Hilt",      SWORD_HILT_SPIRTES[1], SWORD, HILT, 1, new String[]{}, new String[]{}, 1,1,1.1f,1.1f),
+//			new Part("Spiked Hilt",      SWORD_HILT_SPIRTES[2], SWORD, HILT, 2, new String[]{}, new String[]{}, 1.05f,0.95f,0.9f,1.05f),
 
 	};
 

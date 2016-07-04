@@ -7,6 +7,9 @@ import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.MeleeGraphic;
 import com.dungeon.game.item.weapon.part.Part;
+import com.dungeon.game.item.weapon.part.sword.blade.SwordBlade;
+import com.dungeon.game.item.weapon.part.sword.guard.SwordGuard;
+import com.dungeon.game.item.weapon.part.sword.hilt.SwordHilt;
 import com.dungeon.game.item.weapon.swing.Rest;
 import com.dungeon.game.item.weapon.swing.Swing;
 import com.dungeon.game.item.weapon.swing.SwingSet;
@@ -65,9 +68,9 @@ public class Sword extends Melee {
 		super(world, "sword.png");
 		
 		//generate the sprite, for now random, but in the future will be a parameter!
-		blade = Part.SWORD_BLADES[(int) (Math.random()*Part.SWORD_BLADE_NUM)].clone(world);
-		guard = Part.SWORD_GUARDS[(int) (Math.random()*Part.SWORD_GUARD_NUM)].clone(world);
-		hilt = Part.SWORD_HILTS[(int) (Math.random()*Part.SWORD_HILT_NUM)].clone(world);
+		blade = Part.SWORD_BLADES[(int) (Math.random()*SwordBlade.NUM)].clone(world);
+		guard = Part.SWORD_GUARDS[(int) (Math.random()*SwordGuard.NUM)].clone(world);
+		hilt = Part.SWORD_HILTS[(int) (Math.random()*SwordHilt.NUM)].clone(world);
 		if(!blade.sprite.getTextureData().isPrepared()) blade.sprite.getTextureData().prepare();
 		Pixmap bladeMap = blade.sprite.getTextureData().consumePixmap();
 		if(!guard.sprite.getTextureData().isPrepared()) guard.sprite.getTextureData().prepare();
