@@ -1,5 +1,7 @@
 package com.dungeon.game.item.weapon;
 
+import java.lang.reflect.Constructor;
+
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
@@ -10,7 +12,6 @@ import com.dungeon.game.item.weapon.part.Part;
 import com.dungeon.game.item.weapon.part.sword.blade.BasicBlade;
 import com.dungeon.game.item.weapon.part.sword.blade.SwordBlade;
 import com.dungeon.game.item.weapon.part.sword.guard.SwordGuard;
-import com.dungeon.game.item.weapon.part.sword.hilt.BasicHilt;
 import com.dungeon.game.item.weapon.part.sword.hilt.SwordHilt;
 import com.dungeon.game.item.weapon.swing.Rest;
 import com.dungeon.game.item.weapon.swing.Swing;
@@ -70,11 +71,11 @@ public class Sword extends Melee {
 		super(world, "sword.png");
 		
 		try {
-			System.out.println(obs[(int) (Math.random()*obs.length)].getConstructor());
+			blade = (Part) obs[(int) (Math.random()*obs.length)].newInstance();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			
+//			
 		//generate the sprite, for now random, but in the future will be a parameter!
 		blade = Part.SWORD_BLADES[(int) (Math.random()*SwordBlade.NUM)].clone(world);
 		guard = Part.SWORD_GUARDS[(int) (Math.random()*SwordGuard.NUM)].clone(world);
@@ -170,8 +171,8 @@ public class Sword extends Melee {
 				+ "will remain in the part the holder was located.\n\n\"My sword shall lead me to glory!\" -final words of Tanturin, the mythical warrior";
 	}
 	
-	public static Class[] obs = new Class[]{
-			BasicBlade.class
+	public static Constructor<?>[] obs = new Constructor<?>[]{
+			BasicBlade.class.getConstructors()[0],
 	};
 	
 
