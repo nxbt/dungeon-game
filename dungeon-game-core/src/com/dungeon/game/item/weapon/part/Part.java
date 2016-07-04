@@ -59,12 +59,6 @@ public abstract class Part extends Item implements Cloneable{
 	
 	protected BitmapFont font;
 	
-	public interface PartGetter {
-		void constructor();
-	}
-	
-	public static PartGetter[] parts;
-	
 	public Part(String name, Texture sprite) {
 		super(null, "slot.png");
 		

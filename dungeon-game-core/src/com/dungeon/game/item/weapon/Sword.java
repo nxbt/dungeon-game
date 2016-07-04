@@ -7,8 +7,10 @@ import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.MeleeGraphic;
 import com.dungeon.game.item.weapon.part.Part;
+import com.dungeon.game.item.weapon.part.sword.blade.BasicBlade;
 import com.dungeon.game.item.weapon.part.sword.blade.SwordBlade;
 import com.dungeon.game.item.weapon.part.sword.guard.SwordGuard;
+import com.dungeon.game.item.weapon.part.sword.hilt.BasicHilt;
 import com.dungeon.game.item.weapon.part.sword.hilt.SwordHilt;
 import com.dungeon.game.item.weapon.swing.Rest;
 import com.dungeon.game.item.weapon.swing.Swing;
@@ -67,8 +69,12 @@ public class Sword extends Melee {
 	public Sword(World world, float damage, float speed, float knock, float weight) {
 		super(world, "sword.png");
 		
-		System.out.println(SwordBlade.parts);
-		
+		try {
+			System.out.println(obs[(int) (Math.random()*obs.length)].getConstructor());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
 		//generate the sprite, for now random, but in the future will be a parameter!
 		blade = Part.SWORD_BLADES[(int) (Math.random()*SwordBlade.NUM)].clone(world);
 		guard = Part.SWORD_GUARDS[(int) (Math.random()*SwordGuard.NUM)].clone(world);
@@ -163,6 +169,11 @@ public class Sword extends Melee {
 				+ "and then fitted by a jewler, the sword will inherient this enchantment. Gems can only be removed from these slot by a jewler, so if a sword is disassembled a gem "
 				+ "will remain in the part the holder was located.\n\n\"My sword shall lead me to glory!\" -final words of Tanturin, the mythical warrior";
 	}
+	
+	public static Class[] obs = new Class[]{
+			BasicBlade.class
+	};
+	
 
 	@Override
 	public void reset() {
