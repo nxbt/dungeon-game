@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.item.weapon.Melee;
-import com.dungeon.game.item.weapon.parts.Part;
+import com.dungeon.game.item.weapon.part.Part;
 import com.dungeon.game.world.World;
 
 public class Swing implements Cloneable{

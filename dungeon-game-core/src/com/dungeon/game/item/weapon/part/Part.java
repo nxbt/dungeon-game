@@ -1,4 +1,4 @@
-package com.dungeon.game.item.weapon.parts;
+package com.dungeon.game.item.weapon.part;
 
 import java.util.ArrayList;
 

@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.MeleeGraphic;
-import com.dungeon.game.item.weapon.parts.Part;
+import com.dungeon.game.item.weapon.part.Part;
 import com.dungeon.game.item.weapon.swing.Rest;
 import com.dungeon.game.item.weapon.swing.Swing;
 import com.dungeon.game.item.weapon.swing.SwingSet;

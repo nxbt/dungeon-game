@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.item.weapon.Sword;
 import com.dungeon.game.item.weapon.Weapon;
-import com.dungeon.game.item.weapon.parts.Part;
+import com.dungeon.game.item.weapon.part.Part;
 import com.dungeon.game.utilities.TextHelper;
 import com.dungeon.game.world.World;
 
