@@ -2,8 +2,8 @@ package com.dungeon.game.generator;
 
 import java.util.ArrayList;
 
-import com.dungeon.game.entity.Door;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.furniture.Door;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;

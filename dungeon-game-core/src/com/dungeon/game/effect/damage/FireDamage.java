@@ -1,25 +1,26 @@
-package com.dungeon.game.effect;
+package com.dungeon.game.effect.damage;
 
+import com.dungeon.game.effect.Effect;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;
 
-public class ElectricDamage extends Effect {
+public class FireDamage extends Effect {
 	
 	private float amount;
 
-	public ElectricDamage(World world, float amount) {
-		super(world, "Electric Damage", 0);
+	public FireDamage(World world, float amount) {
+		super(world, "Fire Damage", 0);
 		
 		this.amount = amount;
 	}
 	
 	public void begin(Character character){
-		character.electricDamage(amount);
+		character.fireDamage(amount);
 		killMe = true;
 	}
 	
 	public String getHoveredText() {
-		return "You took " + amount + "electric damage";
+		return "You took " + amount + "fire damage";
 	}
 	
 	public int getNum() {
