@@ -67,6 +67,8 @@ public class Sword extends Melee {
 	public Sword(World world, float damage, float speed, float knock, float weight) {
 		super(world, "sword.png");
 		
+		System.out.println(SwordBlade.parts);
+		
 		//generate the sprite, for now random, but in the future will be a parameter!
 		blade = Part.SWORD_BLADES[(int) (Math.random()*SwordBlade.NUM)].clone(world);
 		guard = Part.SWORD_GUARDS[(int) (Math.random()*SwordGuard.NUM)].clone(world);

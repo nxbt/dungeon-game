@@ -1,5 +1,8 @@
 package com.dungeon.game.item.weapon.part.sword.blade;
 
+import com.dungeon.game.item.weapon.Sword;
+import com.dungeon.game.item.weapon.Weapon;
+
 public class BasicBlade extends SwordBlade {
 
 	public BasicBlade() {

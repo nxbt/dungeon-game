@@ -2,13 +2,20 @@ package com.dungeon.game.item.weapon.part.sword.guard;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.item.weapon.part.Part;
+import com.dungeon.game.item.weapon.part.Part.PartGetter;
 import com.dungeon.game.item.weapon.part.sword.SwordPart;
+import com.dungeon.game.item.weapon.part.sword.blade.BasicBlade;
 import com.dungeon.game.utilities.Spritesheet;
 
-public class SwordGuard extends SwordPart {
+public abstract class SwordGuard extends SwordPart {
 	
 	public static int NUM = 1;
 	public static Texture[] SPIRTES = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
+	
+	public static PartGetter[] parts = new PartGetter[]{
+	
+	};
 
 	public SwordGuard(String name, Texture sprite) {
 		super(name, sprite);

@@ -60,7 +60,7 @@ public abstract class Part extends Item implements Cloneable{
 	protected BitmapFont font;
 	
 	public interface PartGetter {
-		Part Constructor();
+		void constructor();
 	}
 	
 	public static PartGetter[] parts;
