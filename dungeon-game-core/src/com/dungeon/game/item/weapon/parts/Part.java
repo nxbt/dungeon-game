@@ -1,11 +1,15 @@
 package com.dungeon.game.item.weapon.parts;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.effect.Effect;
 import com.dungeon.game.item.Item;
+import com.dungeon.game.item.weapon.Weapon;
 import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.World;
 
@@ -111,6 +115,12 @@ public class Part extends Item implements Cloneable{
 		for(int i = 0; i < bannedSwings.length; i++)newPart.bannedSwings[i] = bannedSwings[i];
 		return newPart;
 	}
+	
+	public void begin(Weapon weapon){}; // called when the part is added to the weapon used to add passiveEffects to the weapon
+	
+	public ArrayList<Effect> getEffects(){ //get the effects of this part
+		return new ArrayList<Effect>();
+	};
 	
 	public static final Texture[] SWORD_BLADE_SPIRTES = Spritesheet.getSprites("swordBladeMap.png", 32, 32);
 	public static final Texture[] SWORD_GUARD_SPIRTES = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
