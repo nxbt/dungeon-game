@@ -44,6 +44,9 @@ public abstract class Part extends Item implements Cloneable{
 	//which swings are banned by this part?
 	public String[] bannedSwings;
 	
+	//is it repeatable?
+	public boolean repeatable;
+	
 	//damage multiplier for this part
 	public float damage;
 	

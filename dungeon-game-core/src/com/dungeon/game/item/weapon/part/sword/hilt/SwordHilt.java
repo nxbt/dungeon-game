@@ -20,6 +20,7 @@ public abstract class SwordHilt extends SwordPart {
 	public SwordHilt(World world,  String name, Texture sprite, int level) {
 		super(world, name, sprite, level);
 		part = HILT;
+		repeatable = true;
 	}
 	
 	public void draw(SpriteBatch batch, float x, float y){

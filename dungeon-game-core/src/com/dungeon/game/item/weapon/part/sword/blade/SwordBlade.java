@@ -10,7 +10,7 @@ import com.dungeon.game.world.World;
 
 public abstract class SwordBlade extends SwordPart {
 	
-	public static final int NUM = 3;
+	public static final int NUM = 4;
 
 	public static final Texture[] SPRITES = Spritesheet.getSprites("swordBladeMap.png", 32, 32);
 	
@@ -18,11 +18,13 @@ public abstract class SwordBlade extends SwordPart {
 		BasicBlade.class.getConstructors()[0],
 		SlimBlade.class.getConstructors()[0],
 		BroadBlade.class.getConstructors()[0],
+		Scimitar.class.getConstructors()[0],
 	};
 
 	public SwordBlade(World world, String name, Texture sprite, int level) {
 		super(world, name, sprite, level);
 		part = BLADE;
+		repeatable = false;
 	}
 	
 	public void draw(SpriteBatch batch, float x, float y){

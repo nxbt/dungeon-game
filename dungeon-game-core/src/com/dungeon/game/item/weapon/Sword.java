@@ -217,7 +217,7 @@ public class Sword extends Melee {
 		swings[1] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
 		swings[2] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
 		swings[3] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
-		return new SwingSet(world, this, swings, false);
+		return new SwingSet(world, this, swings, blade.repeatable && guard.repeatable && hilt.repeatable);
 	}
 
 	@Override
