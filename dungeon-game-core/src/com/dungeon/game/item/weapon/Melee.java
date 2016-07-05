@@ -22,4 +22,12 @@ public abstract class Melee extends Weapon {
 	public abstract boolean inAttack();
 	
 	public abstract void hit(Character e);
+	
+	public abstract String getDamageText();
+	
+	public abstract String getSpeedText();
+	
+	public abstract String getKnockText();
+	
+	public abstract String getWeightText();
 }

@@ -2,10 +2,10 @@ package com.dungeon.game.item.weapon.part.sword.blade;
 
 import com.dungeon.game.world.World;
 
-public class SlimBlade extends SwordBlade {
+public class BroadBlade extends SwordBlade {
 
-	public SlimBlade(World world, int level) {
-		super(world, "Slim Blade", SPRITES[1], level);
+	public BroadBlade(World world, int level) {
+		super(world, "Broad Blade", SPRITES[2], level);
 		id = 0;
 		allowedSwings = new String[0];
 		bannedSwings = new String[0];
@@ -13,10 +13,10 @@ public class SlimBlade extends SwordBlade {
 
 	@Override
 	public void setStats(float level) {
-		damage = 8*level;
-		speed = 12*level;
-		knockback = 7;
-		weight = 7;
+		damage = 12*level;
+		speed = 7*level;
+		knockback = 12;
+		weight = 13;
 	}
 
 }

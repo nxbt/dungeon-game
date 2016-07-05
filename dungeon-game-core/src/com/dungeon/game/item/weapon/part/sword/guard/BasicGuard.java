@@ -12,10 +12,10 @@ public class BasicGuard extends SwordGuard {
 	}
 
 	@Override
-	public void setStats(int level) {
+	public void setStats(float level) {
 		damage = 0;
-		speed = 0;
-		knockback = 0;
+		speed = -1;
+		knockback = 1;
 		weight = 1;
 		
 	}

@@ -12,9 +12,9 @@ public class BasicHilt extends SwordHilt {
 	}
 
 	@Override
-	public void setStats(int level) {
+	public void setStats(float level) {
 		damage = 0;
-		speed = 0;
+		speed = 1;
 		knockback = 0;
 		weight = 1;
 		

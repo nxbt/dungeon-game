@@ -180,4 +180,24 @@ public class Sword extends Melee {
 	public void reset() {
 		swings.reset();
 	}
+
+	@Override
+	public String getDamageText() {
+		return "Weapon Damage: " + Math.round(damage*10)/10f + "   \n Blade: " + blade.damage + "   \n Guard: " + guard.damage + "   \n Hilt: " + hilt.damage;
+	}
+
+	@Override
+	public String getSpeedText() {
+		return "Weapon Speed: " + Math.round(speed*10)/10f + "   \n Blade: " + blade.speed + "   \n Guard: " + guard.speed + "   \n Hilt: " + hilt.speed;
+	}
+
+	@Override
+	public String getKnockText() {
+		return "Weapon Knockback: " + Math.round(knockback*10)/10f + "   \n Blade: " + blade.knockback + "   \n Guard: " + guard.knockback + "   \n Hilt: " + hilt.knockback;
+	}
+
+	@Override
+	public String getWeightText() {
+		return "Weapon Weight: " + Math.round(weight*10)/10f + "   \n Blade: " + blade.weight + "   \n Guard: " + guard.weight + "   \n Hilt: " + hilt.weight;
+	}
 }

@@ -44,10 +44,10 @@ public class TrainingWindow extends Window {
 			}
 			else{
 				addSubEntitiy(new PartsInfo(world, 0, 0, weapon),  "partsInfo", 4, 4);
-				addSubEntitiy(new HoverZone(world, "Weapon Damage: " + Math.round(weapon.damage*10)/10f, 0, 0, 156, 16),  "statDesc", 4, d_height - 66);
-				addSubEntitiy(new HoverZone(world, "Weapon Speed: " + Math.round(weapon.speed*10)/10f, 0, 0, 156, 16),  "statDesc", 4, d_height - 84);
-				addSubEntitiy(new HoverZone(world, "Weapon Knockback: " + Math.round(weapon.knockback*10)/10f, 0, 0, 156, 16),  "statDesc", 4, d_height - 100);
-				addSubEntitiy(new HoverZone(world, "Weapon Weight: " + Math.round(weapon.weight*10)/10f, 0, 0, 156, 16),  "statDesc", 4, d_height - 116);
+				addSubEntitiy(new HoverZone(world, weapon.getDamageText(), 0, 0, 156, 16),  "statDesc", 4, d_height - 66);
+				addSubEntitiy(new HoverZone(world, weapon.getSpeedText(), 0, 0, 156, 16),  "statDesc", 4, d_height - 84);
+				addSubEntitiy(new HoverZone(world, weapon.getKnockText(), 0, 0, 156, 16),  "statDesc", 4, d_height - 100);
+				addSubEntitiy(new HoverZone(world, weapon.getWeightText(), 0, 0, 156, 16),  "statDesc", 4, d_height - 116);
 			}
 		}
 		super.calc();

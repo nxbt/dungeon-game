@@ -12,7 +12,7 @@ public class BasicBlade extends SwordBlade {
 	}
 
 	@Override
-	public void setStats(int level) {
+	public void setStats(float level) {
 		damage = 10*level;
 		speed = 10*level;
 		knockback = 10;

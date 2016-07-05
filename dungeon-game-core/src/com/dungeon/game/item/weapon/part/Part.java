@@ -96,7 +96,7 @@ public abstract class Part extends Item implements Cloneable{
 		return new ArrayList<Effect>();
 	};
 	
-	public abstract void setStats(int level);
+	public abstract void setStats(float level);
 	
 	
 	//does fuck all. VERY IMPORTANT. (actually though: if you delete it the game will be kill)

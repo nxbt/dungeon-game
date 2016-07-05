@@ -70,4 +70,24 @@ public class Axe extends Melee {
 	public void reset() {
 		swings.reset();
 	}
+
+	@Override
+	public String getDamageText() {
+		return "Weapon Damage: " + Math.round(damage*10)/10f;
+	}
+
+	@Override
+	public String getSpeedText() {
+		return "Weapon Speed: " + Math.round(speed*10)/10f;
+	}
+
+	@Override
+	public String getKnockText() {
+		return "Weapon Knockback: " + Math.round(knockback*10)/10f;
+	}
+
+	@Override
+	public String getWeightText() {
+		return "Weapon Weight: " + Math.round(weight*10)/10f;
+	}
 }
