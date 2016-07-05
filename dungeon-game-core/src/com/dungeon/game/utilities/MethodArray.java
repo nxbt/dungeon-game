@@ -1,7 +1,9 @@
-package com.dungeon.game;
+package com.dungeon.game.utilities;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+
+import com.dungeon.game.entity.Entity;
 
 public class MethodArray {
 	
@@ -22,6 +24,33 @@ public class MethodArray {
 		}
 		methods = newMethods;
 	}
+	
+	
+	//example of how to use MethodArray <----
+//	MethodArray methodArray = new MethodArray(3){
+//		public void method1(){
+//			System.out.println(player.name);
+//		}
+//		
+//		public void method2(){
+//			System.out.println("test2");
+//		}
+//		
+//		public void method3(){
+//			System.out.println("test3");
+//		}
+//		
+//	};
+//	
+//	for(int i = 0; i < 10; i++){
+//		try {
+//			methodArray.methods[0].invoke(methodArray, null);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//	}
 	
 	
 
