@@ -1,7 +1,5 @@
 package com.dungeon.game.item.weapon;
 
-import java.lang.reflect.Constructor;
-
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
@@ -16,7 +14,6 @@ import com.dungeon.game.item.weapon.part.sword.hilt.SwordHilt;
 import com.dungeon.game.item.weapon.swing.Rest;
 import com.dungeon.game.item.weapon.swing.Swing;
 import com.dungeon.game.item.weapon.swing.SwingSet;
-import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.World;
 
 public class Sword extends Melee {
@@ -72,15 +69,27 @@ public class Sword extends Melee {
 		super(world, "sword.png");
 		
 		try {
-			blade = (Part) obs[(int) (Math.random()*obs.length)].newInstance();
+			blade = (Part) SwordBlade.parts[(int) (Math.random()*SwordBlade.NUM)].newInstance(world);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			guard = (Part) SwordGuard.parts[(int) (Math.random()*SwordGuard.NUM)].newInstance(world);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			hilt = (Part) SwordHilt.parts[(int) (Math.random()*SwordHilt.NUM)].newInstance(world);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 //			
-		//generate the sprite, for now random, but in the future will be a parameter!
+//		generate the sprite, for now random, but in the future will be a parameter!
 //		blade = Part.SWORD_BLADES[(int) (Math.random()*SwordBlade.NUM)].clone(world);
-		guard = Part.SWORD_GUARDS[(int) (Math.random()*SwordGuard.NUM)].clone(world);
-		hilt = Part.SWORD_HILTS[(int) (Math.random()*SwordHilt.NUM)].clone(world);
+//		guard = Part.SWORD_GUARDS[(int) (Math.random()*SwordGuard.NUM)].clone(world);
+//		hilt = Part.SWORD_HILTS[(int) (Math.random()*SwordHilt.NUM)].clone(world);
 		if(!blade.sprite.getTextureData().isPrepared()) blade.sprite.getTextureData().prepare();
 		Pixmap bladeMap = blade.sprite.getTextureData().consumePixmap();
 		if(!guard.sprite.getTextureData().isPrepared()) guard.sprite.getTextureData().prepare();
@@ -171,10 +180,6 @@ public class Sword extends Melee {
 				+ "and then fitted by a jewler, the sword will inherient this enchantment. Gems can only be removed from these slot by a jewler, so if a sword is disassembled a gem "
 				+ "will remain in the part the holder was located.\n\n\"My sword shall lead me to glory!\" -final words of Tanturin, the mythical warrior";
 	}
-	
-	public static Class<?>[] obs = new Class<?>[]{
-			BasicBlade.class,
-	};
 	
 
 	@Override

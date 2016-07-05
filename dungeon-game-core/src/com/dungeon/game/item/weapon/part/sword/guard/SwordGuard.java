@@ -1,17 +1,24 @@
 package com.dungeon.game.item.weapon.part.sword.guard;
 
+import java.lang.reflect.Constructor;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.item.weapon.part.sword.SwordPart;
 import com.dungeon.game.utilities.Spritesheet;
+import com.dungeon.game.world.World;
 
 public abstract class SwordGuard extends SwordPart {
 	
-	public static int NUM = 1;
-	public static Texture[] SPIRTES = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
+	public static final int NUM = 1;
+	public static final Texture[] SPIRTES = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
+	
+	public static final Constructor<?>[] parts = new Constructor<?>[]{
+		BasicGuard.class.getConstructors()[0],
+	};
 
-	public SwordGuard(String name, Texture sprite) {
-		super(name, sprite);
+	public SwordGuard(World world, String name, Texture sprite) {
+		super(world, name, sprite);
 		part = GUARD;
 	}
 	

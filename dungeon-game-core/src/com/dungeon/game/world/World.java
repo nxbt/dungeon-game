@@ -24,18 +24,11 @@ import com.dungeon.game.entity.furniture.Stair;
 import com.dungeon.game.entity.furniture.TrainingTable;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.EffectHudBackground;
-import com.dungeon.game.entity.hud.HealthBar;
-import com.dungeon.game.entity.hud.HelpButton;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.HudBackground;
-import com.dungeon.game.entity.hud.HudSlot;
-import com.dungeon.game.entity.hud.InvButton;
-import com.dungeon.game.entity.hud.ManaBar;
-import com.dungeon.game.entity.hud.MenuButton;
 import com.dungeon.game.entity.hud.Mouse;
-import com.dungeon.game.entity.hud.Portrait;
-import com.dungeon.game.entity.hud.PortraitBackground;
-import com.dungeon.game.entity.hud.StamBar;
+import com.dungeon.game.item.weapon.part.Part;
+import com.dungeon.game.item.weapon.part.sword.blade.SwordBlade;
 //import com.dungeon.game.light.LightMap;
 import com.dungeon.game.pathing.AreaMap;
 
@@ -75,6 +68,8 @@ public class World {
 //	public LightMap lightMap;
 	
 	public World() {
+		Part.doFuckAll(); //Never Forget
+		
 		rayHandler = new RayHandler(null);
 		rayHandler.setBlurNum(15);
 		rayHandler.setAmbientLight(new Color(0,0,0,0));

@@ -1,9 +1,11 @@
 package com.dungeon.game.item.weapon.part.sword.guard;
 
+import com.dungeon.game.world.World;
+
 public class BasicGuard extends SwordGuard {
 
-	public BasicGuard() {
-		super("Basic Guard", SPIRTES[0]);
+	public BasicGuard(World world) {
+		super(world, "Basic Guard", SPIRTES[0]);
 		id = 0;
 		dmgMult = 1;
 		speedMult = 1;
