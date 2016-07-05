@@ -98,6 +98,7 @@ public abstract class Swing implements Cloneable{
 		this.knockMult = knockMult;
 		this.knockAngleMod = knockAngleMod;
 		this.knockRatio = knockRatio;
+		this.stanMult = stanMult;
 	}
 	
 	//called if the swing is in the windup
