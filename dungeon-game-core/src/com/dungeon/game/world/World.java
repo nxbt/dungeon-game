@@ -1,5 +1,6 @@
 package com.dungeon.game.world;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.dungeon.game.Camera;
+import com.dungeon.game.MethodArray;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.character.Player;
@@ -67,6 +69,31 @@ public class World {
 //	public LightMap lightMap;
 	
 	public World() {
+		MethodArray methodArray = new MethodArray(3){
+			public void method1(){
+				System.out.println("test1");
+			}
+			
+			public void method2(){
+				System.out.println("test2");
+			}
+			
+			public void method3(){
+				System.out.println("test3");
+			}
+			
+		};
+		
+		for(int i = 0; i < 10; i++){
+			
+			try {
+				methodArray.methods[0].invoke(methodArray, null);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		Part.doFuckAll(); //Never Forget
 		
 		rayHandler = new RayHandler(null);
