@@ -7,7 +7,6 @@ import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.MeleeGraphic;
 import com.dungeon.game.item.weapon.part.Part;
-import com.dungeon.game.item.weapon.part.sword.blade.BasicBlade;
 import com.dungeon.game.item.weapon.part.sword.blade.SwordBlade;
 import com.dungeon.game.item.weapon.part.sword.guard.SwordGuard;
 import com.dungeon.game.item.weapon.part.sword.hilt.SwordHilt;

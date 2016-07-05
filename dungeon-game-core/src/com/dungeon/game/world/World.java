@@ -28,7 +28,6 @@ import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.HudBackground;
 import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.item.weapon.part.Part;
-import com.dungeon.game.item.weapon.part.sword.blade.SwordBlade;
 //import com.dungeon.game.light.LightMap;
 import com.dungeon.game.pathing.AreaMap;
 
