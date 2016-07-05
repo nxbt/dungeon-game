@@ -11,9 +11,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.weapon.Weapon;
-import com.dungeon.game.item.weapon.part.sword.blade.BasicBlade;
-import com.dungeon.game.item.weapon.part.sword.guard.BasicGuard;
-import com.dungeon.game.item.weapon.part.sword.hilt.BasicHilt;
 import com.dungeon.game.world.World;
 
 public abstract class Part extends Item implements Cloneable{	
