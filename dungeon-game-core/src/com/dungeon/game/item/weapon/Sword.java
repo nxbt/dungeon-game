@@ -64,23 +64,23 @@ public class Sword extends Melee {
 	public Part guard;
 	public Part hilt;
 	
-	public Sword(World world, float damage, float speed, float knock, float weight) {
+	public Sword(World world, int level) {
 		super(world, "sword.png");
 		
 		try {
-			blade = (Part) SwordBlade.parts[(int) (Math.random()*SwordBlade.NUM)].newInstance(world);
+			blade = (Part) SwordBlade.parts[(int) (Math.random()*SwordBlade.NUM)].newInstance(world, level);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		try {
-			guard = (Part) SwordGuard.parts[(int) (Math.random()*SwordGuard.NUM)].newInstance(world);
+			guard = (Part) SwordGuard.parts[(int) (Math.random()*SwordGuard.NUM)].newInstance(world, level);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		try {
-			hilt = (Part) SwordHilt.parts[(int) (Math.random()*SwordHilt.NUM)].newInstance(world);
+			hilt = (Part) SwordHilt.parts[(int) (Math.random()*SwordHilt.NUM)].newInstance(world, level);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -109,20 +109,15 @@ public class Sword extends Melee {
 		
 		hasHit = false;
 		
-		this.damage = damage * blade.dmgMult * guard.dmgMult * hilt.dmgMult;
-		this.speed = speed * blade.speedMult * guard.speedMult * hilt.speedMult;
-		
-		baseDamage = damage;
-		baseSpeed = speed;
-		baseKnock = knock;
-		baseWeight = weight;
+		this.damage = blade.damage + guard.damage + hilt.damage;
+		this.speed = blade.speed + guard.speed + hilt.speed;
 		
 		knockratio = 0.4f;
-		knockstr = knock * blade.knockMult * guard.knockMult * hilt.knockMult;	
+		knockback = blade.knockback + guard.knockback + hilt.knockback;	
 		
-		this.weight = weight * blade.weightMult * guard.weightMult * hilt.weightMult;	
+		this.weight = blade.weight + guard.weight + hilt.weight;
 		
-		desc = "The most common and widely used melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockstr*10)/10f + "\n Weight: "+ Math.floor(this.weight*10)/10f;
+		desc = "The most common and widely used melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockback*10)/10f + "\n Weight: "+ Math.floor(this.weight*10)/10f;
 
 		
 		dmgMult = new float[]{0.7f,1,1.5f};

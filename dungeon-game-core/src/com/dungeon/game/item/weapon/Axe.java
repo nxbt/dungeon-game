@@ -27,7 +27,7 @@ public class Axe extends Melee {
 		this.weight = weight;
 		
 		knockratio = 0.2f;
-		knockstr = 10;
+		knockback = 10;
 		
 		dmgMult = new float[]{0.7f,1.5f};
 		knockMult = new float[]{1,0.3f};		

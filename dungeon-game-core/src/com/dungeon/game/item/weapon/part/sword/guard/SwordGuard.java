@@ -17,8 +17,8 @@ public abstract class SwordGuard extends SwordPart {
 		BasicGuard.class.getConstructors()[0],
 	};
 
-	public SwordGuard(World world, String name, Texture sprite) {
-		super(world, name, sprite);
+	public SwordGuard(World world, String name, Texture sprite, int level) {
+		super(world, name, sprite, level);
 		part = GUARD;
 	}
 	

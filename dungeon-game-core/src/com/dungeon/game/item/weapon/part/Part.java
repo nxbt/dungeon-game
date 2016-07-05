@@ -45,20 +45,20 @@ public abstract class Part extends Item implements Cloneable{
 	public String[] bannedSwings;
 	
 	//damage multiplier for this part
-	public float dmgMult;
+	public float damage;
 	
 	//speed multiplier for this part
-	public float speedMult;
+	public float speed;
 	
 	//knockback multiplier for this part
-	public float knockMult;
+	public float knockback;
 	
 	//stanima multiplier for this part
-	public float weightMult;
+	public float weight;
 	
 	protected BitmapFont font;
 	
-	public Part(World world, String name, Texture sprite) {
+	public Part(World world, String name, Texture sprite, int level) {
 		super(world, "slot.png");
 		
 		this.sprite = sprite;
@@ -66,6 +66,8 @@ public abstract class Part extends Item implements Cloneable{
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.WHITE);
+		
+		setStats(level);
 	}
 
 	public void hovered(){
@@ -73,7 +75,7 @@ public abstract class Part extends Item implements Cloneable{
 	}
 	
 	public String getDesc(){
-		return name + "\n Damage Multiplier: " + dmgMult + "\n Speed Multiplier: " + speedMult + "\n Knockback Multiplier: " + knockMult + "\n Weight Multiplier: " + weightMult;
+		return name + "\n Damage: " + damage + "\n Speed: " + speed + "\n Knockback: " + knockback + "\n Weight: " + weight;
 	}
 	
 	public abstract void draw(SpriteBatch batch, float x, float y);
@@ -93,6 +95,8 @@ public abstract class Part extends Item implements Cloneable{
 	public ArrayList<Effect> getEffects(){ //get the effects of this part
 		return new ArrayList<Effect>();
 	};
+	
+	public abstract void setStats(int level);
 	
 	
 	//does fuck all. VERY IMPORTANT. (actually though: if you delete it the game will be kill)

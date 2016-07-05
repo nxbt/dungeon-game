@@ -17,8 +17,8 @@ public abstract class SwordHilt extends SwordPart {
 		BasicHilt.class.getConstructors()[0],
 	};
 
-	public SwordHilt(World world,  String name, Texture sprite) {
-		super(world, name, sprite);
+	public SwordHilt(World world,  String name, Texture sprite, int level) {
+		super(world, name, sprite, level);
 		part = HILT;
 	}
 	

@@ -155,10 +155,10 @@ public class Swing implements Cloneable{
 		float weaponangle = weapon.graphic.angle+135; // get the angle the tip of the sword is pointing so we can calc knockback
 		if(c.damage(weapon.damage*dmgMult, weapon.getEffects())>0){ //if the target takes at least 1 dmg...
 			
-			float xSword = (float) (Math.cos((weaponangle+knockAngleMod)/180f*Math.PI)*weapon.knockstr); //x knockback caused by sword swing
-			float ySword = (float) (Math.sin((weaponangle+knockAngleMod)/180f*Math.PI)*weapon.knockstr); //y knockback caused by sword swing
-			float xOwner = (float) (Math.cos((weaponangle)/180*Math.PI)*weapon.knockstr); //x knockback away from the attacker
-			float yOwner = (float) (Math.sin((weaponangle)/180*Math.PI)*weapon.knockstr); //y knockback away from the attacker
+			float xSword = (float) (Math.cos((weaponangle+knockAngleMod)/180f*Math.PI)*weapon.knockback); //x knockback caused by sword swing
+			float ySword = (float) (Math.sin((weaponangle+knockAngleMod)/180f*Math.PI)*weapon.knockback); //y knockback caused by sword swing
+			float xOwner = (float) (Math.cos((weaponangle)/180*Math.PI)*weapon.knockback); //x knockback away from the attacker
+			float yOwner = (float) (Math.sin((weaponangle)/180*Math.PI)*weapon.knockback); //y knockback away from the attacker
 			Vector2 knockVec = new Vector2(); //create a knockback vector
 			knockVec.x = (xSword*(1-knockRatio)+xOwner*(knockRatio))*knockMult; //set the x of the knockVec based on the knockRatio and the knockMult
 			knockVec.y = (ySword*(1-knockRatio)+yOwner*(knockRatio))*knockMult; //set the y of the knockVec based on the knockRatio and the knockMult

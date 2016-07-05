@@ -58,7 +58,7 @@ public class StairKeeper extends Friend {
 		Shop shop = new Shop(world, new int[][]{new int[]{0,10,10},new int[]{0,10,60},new int[]{0,10,110}},new int[]{10,200,20}, this, 10, 10);
 		shop.slot[0].item = new Arrow(world);
 		shop.slot[0].item.stack = 10;
-		shop.slot[1].item = new Sword(world, 10, 10, 10, 10);
+		shop.slot[1].item = new Sword(world, 1);
 		shop.slot[2].item = new LifePotion(world);
 		shop.slot[2].item.stack = 10;
 		

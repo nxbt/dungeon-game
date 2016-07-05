@@ -11,8 +11,8 @@ public abstract class SwordPart extends Part {
 	public static final int GUARD = 1;
 	public static final int HILT = 2;
 
-	public SwordPart(World world, String name, Texture sprite) {
-		super(world, name, sprite);
+	public SwordPart(World world, String name, Texture sprite, int level) {
+		super(world, name, sprite, level);
 		type = SWORD;
 	}
 

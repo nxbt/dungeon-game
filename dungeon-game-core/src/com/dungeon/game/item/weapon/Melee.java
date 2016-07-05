@@ -8,12 +8,7 @@ public abstract class Melee extends Weapon {
 	public float damage;
 	public float speed;
 	
-	public float baseDamage;
-	public float baseSpeed;
-	public float baseWeight;
-	public float baseKnock;
-	
-	public float knockstr; //str of the knockback of this weapon
+	public float knockback; //str of the knockback of this weapon
 	protected float knockratio; //1 = all away from player, 0 = all by weapon movement;
 	
 	public boolean hasHit;

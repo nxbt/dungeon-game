@@ -19,8 +19,8 @@ public abstract class SwordBlade extends SwordPart {
 		SlimBlade.class.getConstructors()[0],
 	};
 
-	public SwordBlade(World world, String name, Texture sprite) {
-		super(world, name, sprite);
+	public SwordBlade(World world, String name, Texture sprite, int level) {
+		super(world, name, sprite, level);
 		part = BLADE;
 	}
 	

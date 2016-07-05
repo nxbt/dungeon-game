@@ -137,12 +137,12 @@ public class Player extends Character {
 		inv.slot[1].item = new LifePotion(world);
 		inv.slot[5].item = new Arrow(world);
 		inv.slot[5].item.stack = 10;
-		inv.addItem(new Sword(world, 10, 10, 10, 10));
-		inv.addItem(new Sword(world, 10, 10, 10, 10));
-		inv.addItem(new Sword(world, 10, 10, 10, 10));
-		inv.addItem(new Sword(world, 10, 10, 10, 10));
-		inv.addItem(new Sword(world, 10, 10, 10, 10));
-		inv.addItem(new Sword(world, 10, 10, 10, 10));
+		inv.addItem(new Sword(world, 1));
+		inv.addItem(new Sword(world, 1));
+		inv.addItem(new Sword(world, 1));
+		inv.addItem(new Sword(world, 1));
+		inv.addItem(new Sword(world, 1));
+		inv.addItem(new Sword(world, 1));
 		inv.addItem(new Axe(world, 10, 10, 10));
 		inv.addItem(new Bow(world, 10, 10));
 		inv.addItem(new Wand(world));
