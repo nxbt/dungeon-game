@@ -70,6 +70,14 @@ public class Axe extends Melee {
 	public void reset() {
 		swings.reset();
 	}
+	
+	public String[] getAllowedSwings(){
+		return null;
+	}
+	
+	public SwingSet getStartSwings(){
+		return null;
+	}
 
 	@Override
 	public String getDamageText() {

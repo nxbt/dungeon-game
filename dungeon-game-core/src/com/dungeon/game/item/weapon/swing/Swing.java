@@ -1,5 +1,6 @@
 package com.dungeon.game.item.weapon.swing;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
@@ -190,4 +191,23 @@ public class Swing implements Cloneable{
 		return (Swing[]) swings.toArray();
 		
 	}
+	
+	public static final Class<?>[] SWINGS = new Class<?>[]{
+			Slash.class,
+			Stab.class
+	};
+	
+	public static Swing getSwingByName(World world, String name){
+		for(int i = 0; i < SWINGS.length; i++){
+			if(SWINGS[i].getName().equals("com.dungeon.game.item.weapon.swing."+name)){
+				try {
+					return (Swing) SWINGS[i].getConstructors()[0].newInstance(world);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
+	}
+	
 }

@@ -1,5 +1,8 @@
 package com.dungeon.game.item.weapon;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
@@ -19,9 +22,9 @@ public class Sword extends Melee {
 	
 	private final SwingSet[] BLADE_SWINGS = new SwingSet[]{
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //sword
-					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
-					new Swing(world, "Slash", false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
-					new Swing(world, "Stab", false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
+					Swing.getSwingByName(world, "Slash"), 
+					Swing.getSwingByName(world, "Slash"),
+					Swing.getSwingByName(world, "Stab"), 
 					} ,false),
 			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //light sword
 					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
@@ -125,14 +128,14 @@ public class Sword extends Melee {
 		
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 		
-		swings = BLADE_SWINGS[blade.id]; // do we have to clone it? I guess not
-		for(int i = 0; i < GUARD_SWINGS[guard.id].length; i++){
-			swings.addSwing(GUARD_SWINGS[guard.id][i]);
-		}
-		for(int i = 0; i < HILT_SWINGS[hilt.id].length; i++){
-			swings.addSwing(HILT_SWINGS[hilt.id][i]);
-		}
-		
+//		swings = BLADE_SWINGS[blade.id]; // do we have to clone it? I guess not
+//		for(int i = 0; i < GUARD_SWINGS[guard.id].length; i++){
+//			swings.addSwing(GUARD_SWINGS[guard.id][i]);
+//		}
+//		for(int i = 0; i < HILT_SWINGS[hilt.id].length; i++){
+//			swings.addSwing(HILT_SWINGS[hilt.id][i]);
+//		}
+		swings = getStartSwings();
 		hitEffects.add(new Stun(world, 30));
 	}
 	
@@ -179,6 +182,41 @@ public class Sword extends Melee {
 	@Override
 	public void reset() {
 		swings.reset();
+	}
+	
+	public String[] getAllowedSwings(){
+		ArrayList<String> bannedSwings = new ArrayList<String>();
+		for(int i = 0; i < blade.bannedSwings.length; i++){
+			if(!bannedSwings.contains(blade.bannedSwings[i]))bannedSwings.add(blade.bannedSwings[i]);
+		}
+		for(int i = 0; i < guard.bannedSwings.length; i++){
+			if(!bannedSwings.contains(guard.bannedSwings[i]))bannedSwings.add(guard.bannedSwings[i]);
+		}
+		for(int i = 0; i < hilt.bannedSwings.length; i++){
+			if(!bannedSwings.contains(hilt.bannedSwings[i]))bannedSwings.add(hilt.bannedSwings[i]);
+		}
+		
+		ArrayList<String> allowedSwings = new ArrayList<String>();
+		for(int i = 0; i < blade.allowedSwings.length; i++){
+			if(!allowedSwings.contains(blade.allowedSwings[i]) && !bannedSwings.contains(blade.allowedSwings[i]))allowedSwings.add(blade.allowedSwings[i]);
+		}
+		for(int i = 0; i < guard.allowedSwings.length; i++){
+			if(!allowedSwings.contains(guard.allowedSwings[i]) && !bannedSwings.contains(blade.allowedSwings[i]))allowedSwings.add(guard.allowedSwings[i]);
+		}
+		for(int i = 0; i < hilt.allowedSwings.length; i++){
+			if(!allowedSwings.contains(hilt.allowedSwings[i]) && !bannedSwings.contains(blade.allowedSwings[i]))allowedSwings.add(hilt.allowedSwings[i]);
+		}
+		return allowedSwings.toArray(new String[0]);
+	}
+	
+	public SwingSet getStartSwings(){
+		String[] allowedSwings = getAllowedSwings();
+		Swing[] swings = new Swing[4];
+		swings[0] = new Rest(world, 20, 14, 82, -10);
+		swings[1] = Swing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
+		swings[2] = Swing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
+		swings[3] = Swing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
+		return new SwingSet(world, this, swings, false);
 	}
 
 	@Override

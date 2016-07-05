@@ -7,8 +7,13 @@ public class SlimBlade extends SwordBlade {
 	public SlimBlade(World world, int level) {
 		super(world, "Slim Blade", SPRITES[1], level);
 		id = 0;
-		allowedSwings = new String[0];
-		bannedSwings = new String[0];
+		allowedSwings = new String[]{
+			"Slash",
+			"Stab"
+		};
+		bannedSwings = new String[]{
+				
+		};
 	}
 
 	@Override
