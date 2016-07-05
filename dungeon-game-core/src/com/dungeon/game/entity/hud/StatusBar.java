@@ -19,10 +19,9 @@ public abstract class StatusBar extends Hud {
 	}
 	
 	@Override 
-	public void update() {
-		
+	public void calc() {
 		percent = 1*cur/max;
-		super.update();
+		super.calc();
 	}
 	
 	@Override

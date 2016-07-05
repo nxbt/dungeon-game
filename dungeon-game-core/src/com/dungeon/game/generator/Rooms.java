@@ -1,5 +1,6 @@
 package com.dungeon.game.generator;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Intersector;
@@ -7,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.character.enemy.Goon;
 import com.dungeon.game.entity.furniture.Stair;
 import com.dungeon.game.pathing.Area;
+import com.dungeon.game.utilities.MethodArray;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -14,6 +16,7 @@ public class Rooms extends Generation {
 	private ArrayList<Rectangle> rooms;
 	private ArrayList<ArrayList<int[]>> halls;
 	private ArrayList<ArrayList<Rectangle>> hallEnds;
+	private MethodArray roomGenerators;
 	
 	public Rooms(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY){
 		super(world, width, height);
@@ -24,7 +27,28 @@ public class Rooms extends Generation {
 		int y = width/2;
 		System.out.println(centerX);
 		if(world.curDungeon!=null)entities.add(new Stair(world, centerX*Tile.TS-Tile.TS/2, centerY*Tile.TS-Tile.TS/2, false, upTrapX+1, upTrapY+1));
-
+		roomGenerators = new MethodArray(4){
+			public void a(int x, int y, int width, int height, int dir, Rectangle room){
+				int nextX = (int) (x+width*Math.random());
+				int nextY = y;
+				generateHallWay(nextX, nextY-1, dir, room);
+			}
+			public void b(int x, int y, int width, int height, int dir, Rectangle room){
+				int nextX = (int) (x+width*Math.random());
+				int nextY = y+height;
+				generateHallWay(nextX, nextY, dir, room);
+			}
+			public void c(int x, int y, int width, int height, int dir, Rectangle room){
+				int nextX = x;
+				int nextY = (int) (y+height*Math.random());
+				generateHallWay(nextX-1, nextY, dir, room);
+			}
+			public void d(int x, int y, int width, int height, int dir, Rectangle room){
+				int nextX = x+width;
+				int nextY = (int) (y+height*Math.random());
+				generateHallWay(nextX, nextY, dir, room);
+			}
+		};
 		generateStartRoom(centerX, centerY);
 		generateStairDown();
 		
@@ -45,22 +69,11 @@ public class Rooms extends Generation {
 			addRoomToMap(room, false);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
-				if(dir == 0){
-					nextX = (int) (x+width*Math.random());
-					nextY = y;
-					generateHallWay(nextX, nextY-1, dir, room);
-				}else if(dir == 1){
-					nextX = (int) (x+width*Math.random());
-					nextY = y+height;
-					generateHallWay(nextX, nextY, dir, room);
-				}else if(dir == 2){
-					nextX = x;
-					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX-1, nextY, dir, room);
-				}else if(dir == 3){
-					nextX = x+width;
-					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX, nextY, dir, room);
+				try {
+					roomGenerators.methods[dir].invoke(roomGenerators, x, y, width, height, dir, room);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 			return true;
@@ -98,22 +111,11 @@ public class Rooms extends Generation {
 			addRoomToMap(room, true);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
-				if(dir == 0){
-					nextX = (int) (x+width*Math.random());
-					nextY = y;
-					generateHallWay(nextX, nextY-1, dir, room);
-				}else if(dir == 1){
-					nextX = (int) (x+width*Math.random());
-					nextY = y+height;
-					generateHallWay(nextX, nextY, dir, room);
-				}else if(dir == 2){
-					nextX = x;
-					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX-1, nextY, dir, room);
-				}else if(dir == 3){
-					nextX = x+width;
-					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX, nextY, dir, room);
+				try {
+					roomGenerators.methods[dir].invoke(roomGenerators, x, y, width, height, dir, room);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 			return true;
@@ -151,22 +153,11 @@ public class Rooms extends Generation {
 			addRoomToMap(room, true);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
-				if(dir == 0){
-					nextX = (int) (x+width*Math.random());
-					nextY = y;
-					generateHallWay(nextX, nextY-1, dir, room);
-				}else if(dir == 1){
-					nextX = (int) (x+width*Math.random());
-					nextY = y+height;
-					generateHallWay(nextX, nextY, dir, room);
-				}else if(dir == 2){
-					nextX = x;
-					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX-1, nextY, dir, room);
-				}else if(dir == 3){
-					nextX = x+width;
-					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX, nextY, dir, room);
+				try {
+					roomGenerators.methods[dir].invoke(roomGenerators, x, y, width, height, dir, room);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 			return true;
@@ -205,22 +196,11 @@ public class Rooms extends Generation {
 			addRoomToMap(room, true);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
-				if(dir == 0){
-					nextX = (int) (x+width*Math.random());
-					nextY = y;
-					generateHallWay(nextX, nextY-1, dir, room);
-				}else if(dir == 1){
-					nextX = (int) (x+width*Math.random());
-					nextY = y+height;
-					generateHallWay(nextX, nextY, dir, room);
-				}else if(dir == 2){
-					nextX = x;
-					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX-1, nextY, dir, room);
-				}else if(dir == 3){
-					nextX = x+width;
-					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX, nextY, dir, room);
+				try {
+					roomGenerators.methods[dir].invoke(roomGenerators, x, y, width, height, dir, room);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 			return true;
@@ -258,22 +238,11 @@ public class Rooms extends Generation {
 			addRoomToMap(room, true);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
-				if(dir == 0){
-					nextX = (int) (x+width*Math.random());
-					nextY = y;
-					generateHallWay(nextX, nextY-1, dir, room);
-				}else if(dir == 1){
-					nextX = (int) (x+width*Math.random());
-					nextY = y+height;
-					generateHallWay(nextX, nextY, dir, room);
-				}else if(dir == 2){
-					nextX = x;
-					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX-1, nextY, dir, room);
-				}else if(dir == 3){
-					nextX = x+width;
-					nextY = (int) (y+height*Math.random());
-					generateHallWay(nextX, nextY, dir, room);
+				try {
+					roomGenerators.methods[dir].invoke(roomGenerators, x, y, width, height, dir, room);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 			return true;
