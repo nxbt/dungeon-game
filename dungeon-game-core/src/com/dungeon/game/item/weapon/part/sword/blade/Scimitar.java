@@ -3,9 +3,11 @@ package com.dungeon.game.item.weapon.part.sword.blade;
 import com.dungeon.game.world.World;
 
 public class Scimitar extends SwordBlade {
+	
+	//we all know its real name is SwashBuckler! <3 
 
 	public Scimitar(World world, int level) {
-		super(world, "Basic Blade", SPRITES[3], level);
+		super(world, "Scimitar", SPRITES[3], level);
 		id = 0;
 		allowedSwings = new String[]{
 			"Slash"
@@ -18,10 +20,10 @@ public class Scimitar extends SwordBlade {
 
 	@Override
 	public void setStats(float level) {
-		damage = 10*level;
-		speed = 10*level;
-		knockback = 10;
-		weight = 10;
+		damage = 8*level;
+		speed = 11*level;
+		knockback = 6;
+		weight = 9;
 	}
 
 }
