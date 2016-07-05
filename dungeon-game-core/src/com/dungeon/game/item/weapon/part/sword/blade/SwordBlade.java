@@ -7,9 +7,9 @@ import com.dungeon.game.utilities.Spritesheet;
 
 public abstract class SwordBlade extends SwordPart {
 	
-	public static int NUM = 1;
-	public static Texture[] SPIRTES = Spritesheet.getSprites("swordBladeMap.png", 32, 32);
+	public static final int NUM = 1;
 
+	public static Texture[] SPRITES = Spritesheet.getSprites("swordBladeMap.png", 32, 32);
 
 	public SwordBlade(String name, Texture sprite) {
 		super(name, sprite);

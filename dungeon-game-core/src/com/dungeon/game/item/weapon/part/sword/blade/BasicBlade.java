@@ -1,11 +1,14 @@
 package com.dungeon.game.item.weapon.part.sword.blade;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.dungeon.game.entity.Entity;
 import com.dungeon.game.utilities.Spritesheet;
 
 public class BasicBlade extends SwordBlade {
+	;
 
 	public BasicBlade() {
-		super("Basic Blade", Spritesheet.getSprites("swordBladeMap.png", 32, 32)[0]);
+		super("Basic Blade", BasicBlade.SPRITES[0]);
 		id = 0;
 		dmgMult = 1;
 		speedMult = 1;

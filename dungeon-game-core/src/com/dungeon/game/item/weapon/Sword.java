@@ -16,6 +16,7 @@ import com.dungeon.game.item.weapon.part.sword.hilt.SwordHilt;
 import com.dungeon.game.item.weapon.swing.Rest;
 import com.dungeon.game.item.weapon.swing.Swing;
 import com.dungeon.game.item.weapon.swing.SwingSet;
+import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.World;
 
 public class Sword extends Melee {
@@ -77,7 +78,7 @@ public class Sword extends Melee {
 		}
 //			
 		//generate the sprite, for now random, but in the future will be a parameter!
-		blade = Part.SWORD_BLADES[(int) (Math.random()*SwordBlade.NUM)].clone(world);
+//		blade = Part.SWORD_BLADES[(int) (Math.random()*SwordBlade.NUM)].clone(world);
 		guard = Part.SWORD_GUARDS[(int) (Math.random()*SwordGuard.NUM)].clone(world);
 		hilt = Part.SWORD_HILTS[(int) (Math.random()*SwordHilt.NUM)].clone(world);
 		if(!blade.sprite.getTextureData().isPrepared()) blade.sprite.getTextureData().prepare();
@@ -171,8 +172,8 @@ public class Sword extends Melee {
 				+ "will remain in the part the holder was located.\n\n\"My sword shall lead me to glory!\" -final words of Tanturin, the mythical warrior";
 	}
 	
-	public static Constructor<?>[] obs = new Constructor<?>[]{
-			BasicBlade.class.getConstructors()[0],
+	public static Class<?>[] obs = new Class<?>[]{
+			BasicBlade.class,
 	};
 	
 

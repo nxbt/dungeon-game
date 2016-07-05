@@ -10,6 +10,7 @@ import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.World;
 
 public abstract class Entity {
+	
 	public float x;
 	public float y;
 	
