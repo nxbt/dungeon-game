@@ -1,8 +1,9 @@
 package com.dungeon.game.item.weapon.swing.sword;
 
+import com.dungeon.game.item.weapon.swing.Swing;
 import com.dungeon.game.world.World;
 
-public class Stab extends Swing {
+public class Stab extends SwordSwing {
 
 	public Stab(World world) {
 		super(world, "Stab");

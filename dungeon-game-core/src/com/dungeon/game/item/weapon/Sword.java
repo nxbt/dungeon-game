@@ -13,9 +13,10 @@ import com.dungeon.game.item.weapon.part.Part;
 import com.dungeon.game.item.weapon.part.sword.blade.SwordBlade;
 import com.dungeon.game.item.weapon.part.sword.guard.SwordGuard;
 import com.dungeon.game.item.weapon.part.sword.hilt.SwordHilt;
+import com.dungeon.game.item.weapon.swing.Swing;
+import com.dungeon.game.item.weapon.swing.SwingSet;
 import com.dungeon.game.item.weapon.swing.sword.Rest;
-import com.dungeon.game.item.weapon.swing.sword.Swing;
-import com.dungeon.game.item.weapon.swing.sword.SwingSet;
+import com.dungeon.game.item.weapon.swing.sword.SwordSwing;
 import com.dungeon.game.world.World;
 
 public class Sword extends Melee {
@@ -213,9 +214,9 @@ public class Sword extends Melee {
 		String[] allowedSwings = getAllowedSwings();
 		Swing[] swings = new Swing[4];
 		swings[0] = new Rest(world);
-		swings[1] = Swing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
-		swings[2] = Swing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
-		swings[3] = Swing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
+		swings[1] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
+		swings[2] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
+		swings[3] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
 		return new SwingSet(world, this, swings, false);
 	}
 

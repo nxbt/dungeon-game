@@ -1,4 +1,4 @@
-package com.dungeon.game.item.weapon.swing.sword;
+package com.dungeon.game.item.weapon.swing;
 
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.item.weapon.Melee;

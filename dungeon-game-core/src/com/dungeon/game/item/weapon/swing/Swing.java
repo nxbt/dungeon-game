@@ -1,4 +1,4 @@
-package com.dungeon.game.item.weapon.swing.sword;
+package com.dungeon.game.item.weapon.swing;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.item.weapon.Melee;
 import com.dungeon.game.item.weapon.part.Part;
+import com.dungeon.game.item.weapon.swing.sword.Slash;
+import com.dungeon.game.item.weapon.swing.sword.Stab;
 import com.dungeon.game.world.World;
 
 public abstract class Swing implements Cloneable{
@@ -37,9 +39,9 @@ public abstract class Swing implements Cloneable{
 	
 	protected float duration;
 	
-	protected float dist;
-	protected float angle;
-	protected float polarAngle;
+	public float dist;
+	public float angle;
+	public float polarAngle;
 	
 	protected float counter; //the swing coutner
 	
@@ -185,39 +187,12 @@ public abstract class Swing implements Cloneable{
 		}
 	}
 	
-	public static Swing[] getAllowedSwings(Part[] parts){
-		ArrayList<String> allowedSwings = new ArrayList<String>();
-		ArrayList<String> bannedSwings = new ArrayList<String>();
-		for(int i = 0; i < parts.length; i++){
-			for(int k = 0; k < parts[i].allowedSwings.length; k++){
-				if(!allowedSwings.contains(parts[i].allowedSwings[k]))allowedSwings.add(parts[i].allowedSwings[k]);
-			}
-			for(int k = 0; k < parts[i].bannedSwings.length; k++){
-				if(!bannedSwings.contains(parts[i].bannedSwings[k]))bannedSwings.add(parts[i].bannedSwings[k]);
-			}
-		}
-		ArrayList<Swing> swings = new ArrayList<Swing>();
-		return (Swing[]) swings.toArray();
-		
-	}
-	
-	public static final Class<?>[] SWINGS = new Class<?>[]{
-			Slash.class,
-			Stab.class
-	};
+	public static  Class<?>[] SWINGS;
 	
 	public static Swing getSwingByName(World world, String name){
-		for(int i = 0; i < SWINGS.length; i++){
-			if(SWINGS[i].getName().equals("com.dungeon.game.item.weapon.swing.sword."+name)){
-				try {
-					return (Swing) SWINGS[i].getConstructors()[0].newInstance(world);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
 		return null;
-	}
+		
+	};
 	
 	public abstract void setPrevSwing(Swing prevSwing);
 	

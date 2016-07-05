@@ -4,11 +4,11 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.MeleeGraphic;
+import com.dungeon.game.item.weapon.swing.Swing;
+import com.dungeon.game.item.weapon.swing.SwingSet;
 import com.dungeon.game.item.weapon.swing.sword.Rest;
 import com.dungeon.game.item.weapon.swing.sword.Slash;
 import com.dungeon.game.item.weapon.swing.sword.Stab;
-import com.dungeon.game.item.weapon.swing.sword.Swing;
-import com.dungeon.game.item.weapon.swing.sword.SwingSet;
 import com.dungeon.game.world.World;
 
 public class Axe extends Melee {

@@ -1,8 +1,8 @@
 package com.dungeon.game.item.weapon;
 
 import com.dungeon.game.entity.character.Character;
-import com.dungeon.game.item.weapon.swing.sword.Swing;
-import com.dungeon.game.item.weapon.swing.sword.SwingSet;
+import com.dungeon.game.item.weapon.swing.Swing;
+import com.dungeon.game.item.weapon.swing.SwingSet;
 import com.dungeon.game.world.World;
 
 public abstract class Melee extends Weapon {	
