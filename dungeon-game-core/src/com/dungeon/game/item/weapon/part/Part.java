@@ -98,7 +98,7 @@ public abstract class Part extends Item implements Cloneable{
 	};
 	
 	
-	//does fuck all. VERY IMPORTANT. (actually though: if you deleat it the game will be kill)
+	//does fuck all. VERY IMPORTANT. (actually though: if you delete it the game will be kill)
 	public static final void doFuckAll(){
 		
 	}
