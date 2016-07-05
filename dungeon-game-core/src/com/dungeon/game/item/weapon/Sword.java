@@ -13,52 +13,52 @@ import com.dungeon.game.item.weapon.part.Part;
 import com.dungeon.game.item.weapon.part.sword.blade.SwordBlade;
 import com.dungeon.game.item.weapon.part.sword.guard.SwordGuard;
 import com.dungeon.game.item.weapon.part.sword.hilt.SwordHilt;
-import com.dungeon.game.item.weapon.swing.Rest;
-import com.dungeon.game.item.weapon.swing.Swing;
-import com.dungeon.game.item.weapon.swing.SwingSet;
+import com.dungeon.game.item.weapon.swing.sword.Rest;
+import com.dungeon.game.item.weapon.swing.sword.Swing;
+import com.dungeon.game.item.weapon.swing.sword.SwingSet;
 import com.dungeon.game.world.World;
 
 public class Sword extends Melee {
 	
-	private final SwingSet[] BLADE_SWINGS = new SwingSet[]{
-			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //sword
-					Swing.getSwingByName(world, "Slash"), 
-					Swing.getSwingByName(world, "Slash"),
-					Swing.getSwingByName(world, "Stab"), 
-					} ,false),
-			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //light sword
-					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
-					new Swing(world, "Slash", false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
-					new Swing(world, "Stab", false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
-					} ,false),
-			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //broad sword
-					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
-					new Swing(world, "Slash", false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
-					new Swing(world, "Stab", false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
-					} ,false),
-			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //cutlass
-					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
-					new Swing(world, "Slash", false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
-					} ,true),
-			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //needle
-					new Swing(world, "Stab", false, 15, 12, 40, -7, 4, 28, 12, -3, 0.75f, 0.7f, 0, 0.4f, 0.5f),
-					new Swing(world, "Stab", false, 15, 12, 0, 0, 4, 28, 0, 0, 1.5f, 0.7f, 0, 0.4f, 1f),
-					new Swing(world, "Stab", false, 15, 12, -40, 7, 4, 28, -12, 3, 0.75f, 0.7f, 0, 0.4f, 1.5f),
-					new Swing(world, "Stab", false, 15, 12, 0, 0, 4, 28, 0, 0, 1.5f, 0.7f, 0, 0.4f, 1f),
-					} , true)
-	};
-	
-	private final Swing[][] GUARD_SWINGS = new Swing[][]{
-		new Swing[]{},
-		new Swing[]{},
-		new Swing[]{new Swing(world, "Guard Hit", false, 10, 10, 20, -90, 10, 26, 15, -90, 0.5f, 1.5f, 90, 0, 2)}
-	};
-	
-	private final Swing[][] HILT_SWINGS = new Swing[][]{
-		new Swing[]{},
-		new Swing[]{},
-		new Swing[]{new Swing(world, "Hilt Hit", false, 10, 15, 70, 150, 10, 26, 0, 90, 2f, 0.6f, 180, 0, 2)}
-	};
+//	private final SwingSet[] BLADE_SWINGS = new SwingSet[]{
+//			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //sword
+//					Swing.getSwingByName(world, "Slash"), 
+//					Swing.getSwingByName(world, "Slash"),
+//					Swing.getSwingByName(world, "Stab"), 
+//					} ,false),
+//			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //light sword
+//					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
+//					new Swing(world, "Slash", false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
+//					new Swing(world, "Stab", false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
+//					} ,false),
+//			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //broad sword
+//					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
+//					new Swing(world, "Slash", false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
+//					new Swing(world, "Stab", false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
+//					} ,false),
+//			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //cutlass
+//					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
+//					new Swing(world, "Slash", false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
+//					} ,true),
+//			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //needle
+//					new Swing(world, "Stab", false, 15, 12, 40, -7, 4, 28, 12, -3, 0.75f, 0.7f, 0, 0.4f, 0.5f),
+//					new Swing(world, "Stab", false, 15, 12, 0, 0, 4, 28, 0, 0, 1.5f, 0.7f, 0, 0.4f, 1f),
+//					new Swing(world, "Stab", false, 15, 12, -40, 7, 4, 28, -12, 3, 0.75f, 0.7f, 0, 0.4f, 1.5f),
+//					new Swing(world, "Stab", false, 15, 12, 0, 0, 4, 28, 0, 0, 1.5f, 0.7f, 0, 0.4f, 1f),
+//					} , true)
+//	};
+//	
+//	private final Swing[][] GUARD_SWINGS = new Swing[][]{
+//		new Swing[]{},
+//		new Swing[]{},
+//		new Swing[]{new Swing(world, "Guard Hit", false, 10, 10, 20, -90, 10, 26, 15, -90, 0.5f, 1.5f, 90, 0, 2)}
+//	};
+//	
+//	private final Swing[][] HILT_SWINGS = new Swing[][]{
+//		new Swing[]{},
+//		new Swing[]{},
+//		new Swing[]{new Swing(world, "Hilt Hit", false, 10, 15, 70, 150, 10, 26, 0, 90, 2f, 0.6f, 180, 0, 2)}
+//	};
 	
 	protected float[] dmgMult;
 	protected float[] knockMult;
@@ -212,7 +212,7 @@ public class Sword extends Melee {
 	public SwingSet getStartSwings(){
 		String[] allowedSwings = getAllowedSwings();
 		Swing[] swings = new Swing[4];
-		swings[0] = new Rest(world, 20, 14, 82, -10);
+		swings[0] = new Rest(world);
 		swings[1] = Swing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
 		swings[2] = Swing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
 		swings[3] = Swing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);

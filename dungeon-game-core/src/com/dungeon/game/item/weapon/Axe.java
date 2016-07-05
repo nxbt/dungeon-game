@@ -4,9 +4,11 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.MeleeGraphic;
-import com.dungeon.game.item.weapon.swing.Rest;
-import com.dungeon.game.item.weapon.swing.Swing;
-import com.dungeon.game.item.weapon.swing.SwingSet;
+import com.dungeon.game.item.weapon.swing.sword.Rest;
+import com.dungeon.game.item.weapon.swing.sword.Slash;
+import com.dungeon.game.item.weapon.swing.sword.Stab;
+import com.dungeon.game.item.weapon.swing.sword.Swing;
+import com.dungeon.game.item.weapon.swing.sword.SwingSet;
 import com.dungeon.game.world.World;
 
 public class Axe extends Melee {
@@ -33,9 +35,9 @@ public class Axe extends Melee {
 		knockMult = new float[]{1,0.3f};		
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 		
-		swings = new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10),
-				new Swing(world, "Cleave", true, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
-				new Swing(world, "Chop", false, 15, 12, 30, -7, 4, 28, 6, -3, 2f, 0.7f, 0, 0.4f, 0.8f),
+		swings = new SwingSet(world, this, new Swing[]{new Rest(world),
+				new Slash(world), 
+				new Stab(world),
 				}, false);
 		
 		hitEffects.add(new Stun(world, 30));
