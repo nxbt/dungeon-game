@@ -8,9 +8,9 @@ import com.dungeon.game.world.World;
 
 public class ElectricResistance extends Effect {
 	
-	private int amount;
+	private float amount;
 
-	public ElectricResistance(World world, int duration, int amount) {
+	public ElectricResistance(World world, int duration, float amount) {
 		super(world, "Electric Resistance", duration);
 		
 		this.amount = amount;
@@ -19,7 +19,7 @@ public class ElectricResistance extends Effect {
 		graphic = new EffectGraphic(world, this);
 	}
 	
-	public ElectricResistance(World world, int amount) { //for use in armor so you cant see the effect :o
+	public ElectricResistance(World world, float amount) { //for use in armor so you cant see the effect :o
 		super(world, "Electric Resistance", -1);
 		
 		this.amount = amount;

@@ -8,9 +8,9 @@ import com.dungeon.game.world.World;
 
 public class FireResistance extends Effect {
 	
-	private int amount;
+	private float amount;
 
-	public FireResistance(World world, int duration, int amount) {
+	public FireResistance(World world, int duration, float amount) {
 		super(world, "Fire Resistance", duration);
 		
 		this.amount = amount;
@@ -19,7 +19,7 @@ public class FireResistance extends Effect {
 		graphic = new EffectGraphic(world, this);
 	}
 	
-	public FireResistance(World world, int amount) { //for use in armor so you cant see the effect :o
+	public FireResistance(World world, float amount) { //for use in armor so you cant see the effect :o
 		super(world, "Fire Resistance", -1);
 		
 		this.amount = amount;

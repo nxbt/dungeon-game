@@ -7,7 +7,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.effect.Fire;
 import com.dungeon.game.effect.regen.StamRegen;
+import com.dungeon.game.effect.resistance.FireResistance;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.entity.hud.EffectHudBackground;
@@ -153,8 +155,9 @@ public class Player extends Character {
 		actionState = new boolean[] {false, false, false};
 		
 		effectGraphics = new ArrayList<EffectGraphic>();
-		
+
 		addEffect(new StamRegen(world, -1, 0.1f));
+		addEffect(new Fire(world, 5));
 		
 		vision = 10;
 		hearing = 10;

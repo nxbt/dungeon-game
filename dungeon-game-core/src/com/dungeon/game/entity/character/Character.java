@@ -358,7 +358,7 @@ public abstract class Character extends Dynamic {
 	
 
 	private void calcResistances() {
-		physc_resist = (float) (Math.pow(0.9945f,armor)*75+25)/100f;
+		physc_resist = 1f - (float) (Math.pow(0.9945f,armor)*75+25)/100f;
 		
 	}
 	
@@ -397,7 +397,7 @@ public abstract class Character extends Dynamic {
 	public float damage(float value /*Add an array of Effects*/, ArrayList<Effect> hitEffects){
 		if(immune) return 0;
 		
-		value *= physc_resist; //reduce damage for armor, should we replace this with phys_resist and add in a calcResistances method somewhere?
+		value *= Math.max(1-physc_resist,0); //reduce damage for armor, should we replace this with phys_resist and add in a calcResistances method somewhere?
 		
 		float amount = life - Math.max(life-value,0);
 		life-=value;
@@ -413,7 +413,7 @@ public abstract class Character extends Dynamic {
 	}
 	
 	public void poisonDamage(float value){
-		value*=poisn_resist;
+		value*=Math.max(1-poisn_resist,0);
 		
 		life-=value;
 		
@@ -421,7 +421,7 @@ public abstract class Character extends Dynamic {
 	}
 	
 	public void fireDamage(float value){
-		value*=flame_resist;
+		value*=Math.max(1-flame_resist, 0);
 		
 		life-=value;
 		
@@ -429,7 +429,7 @@ public abstract class Character extends Dynamic {
 	}
 	
 	public void electricDamage(float value){
-		value*=ligtn_resist;
+		value*=Math.max(1-ligtn_resist,0);
 		
 		life-=value;
 		
@@ -437,7 +437,7 @@ public abstract class Character extends Dynamic {
 	}
 	
 	public void magicDamage(float value){
-		value*=arcan_resist;
+		value*=Math.max(1-arcan_resist,0);
 		
 		life-=value;
 		

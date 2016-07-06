@@ -8,9 +8,9 @@ import com.dungeon.game.world.World;
 
 public class Armor extends Effect {
 	
-	private int amount;
+	private float amount;
 
-	public Armor(World world, int duration, int amount) {
+	public Armor(World world, int duration, float amount) {
 		super(world, "Armor", duration);
 		
 		this.amount = amount;
@@ -19,7 +19,7 @@ public class Armor extends Effect {
 		graphic = new EffectGraphic(world, this);
 	}
 	
-	public Armor(World world, int amount) { //for use in armor so you cant see the effect :o
+	public Armor(World world, float amount) { //for use in armor so you cant see the effect :o
 		super(world, "Armor", -1);
 		
 		this.amount = amount;

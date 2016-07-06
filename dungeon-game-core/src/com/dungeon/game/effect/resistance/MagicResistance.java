@@ -8,9 +8,9 @@ import com.dungeon.game.world.World;
 
 public class MagicResistance extends Effect {
 	
-	private int amount;
+	private float amount;
 
-	public MagicResistance(World world, int duration, int amount) {
+	public MagicResistance(World world, int duration, float amount) {
 		super(world, "Magic Resistance", duration);
 		
 		this.amount = amount;
@@ -19,7 +19,7 @@ public class MagicResistance extends Effect {
 		graphic = new EffectGraphic(world, this);
 	}
 	
-	public MagicResistance(World world, int amount) { //for use in armor so you cant see the effect :o
+	public MagicResistance(World world, float amount) { //for use in armor so you cant see the effect :o
 		super(world, "Magic Resistance", -1);
 		
 		this.amount = amount;

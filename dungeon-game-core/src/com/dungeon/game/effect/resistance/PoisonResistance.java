@@ -8,9 +8,9 @@ import com.dungeon.game.world.World;
 
 public class PoisonResistance extends Effect {
 	
-	private int amount;
+	private float amount;
 
-	public PoisonResistance(World world, int duration, int amount) {
+	public PoisonResistance(World world, int duration, float amount) {
 		super(world, "Poison Resistance", duration);
 		
 		this.amount = amount;
@@ -19,7 +19,7 @@ public class PoisonResistance extends Effect {
 		graphic = new EffectGraphic(world, this);
 	}
 	
-	public PoisonResistance(World world, int amount) { //for use in armor so you cant see the effect :o
+	public PoisonResistance(World world, float amount) { //for use in armor so you cant see the effect :o
 		super(world, "Poison Resistance", -1);
 		
 		this.amount = amount;

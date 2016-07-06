@@ -1,46 +1,54 @@
 package com.dungeon.game.effect;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.dungeon.game.effect.damage.FireDamage;
 import com.dungeon.game.effect.damage.PoisonDamage;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.world.World;
 
-public class Poison extends Effect {
+public class Fire extends Effect {
 	private static float TICKLENGTH = 30;
-    private float dmg;
-    private float rate;
     private float tickTimer;
-      
-    //make tick rate slower
 	
-	public Poison(World world, float rate, float dmg) {
-		super(world, "Poison",0);
-		this.rate = rate;
-		this.dmg = dmg;
+	private int str;
+
+	public Fire(World world, int str) {
+		super(world, "Fire", 0);
+		this.str = str;
 		tickTimer = TICKLENGTH;
-		texture = new Texture("poison.png");
+		
+		texture = new Texture("dizzy.png");
 		graphic = new EffectGraphic(world, this);
 	}
-	    
+	
+
+    
 	public void update(Character character){
 		calc(character);
-		if(dmg==0)killMe = true;
+		if(str==0)killMe = true;
 	}
 	
     public void calc(Character character){
     	if(tickTimer == 0){
-    		character.addEffect(new PoisonDamage(world, Math.round(Math.max(dmg*rate,1))));
-    		dmg -= Math.round(Math.max(dmg*rate,1));
+        	character.addEffect(new FireDamage(world, str));
+        	float chance = (float) Math.random();
+        	while(chance < (1+character.flame_resist)/2 && str > 0){
+            	str--;
+            	chance = (float) Math.random();
+        	}
     		tickTimer = TICKLENGTH;
     	}else tickTimer--;
 	}
-    	
+	
 	public String getHoveredText() {
-		return "Remaining Damage: "+Math.round(dmg);
+		return "You are on fire, it is "+str+" hot!";
 	}
-    	
+	
+
+	
 	public int getNum() {
-		return (int)dmg;
+		return (int) str;
 	}
+
 }
