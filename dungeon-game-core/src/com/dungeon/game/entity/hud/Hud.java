@@ -64,4 +64,13 @@ public abstract class Hud extends Static {
 	protected void removeSubEntity(String id){
 		for(int i = 0; i < subEntities.size(); i++)if(subEntities.get(i).subId.equals(id))subEntities.remove(subEntities.get(i));
 	}
+	
+	protected Hud[] getSubEntity(String id){
+		ArrayList<Hud> ents = new ArrayList<Hud>();
+		for(Hud h: subEntities){
+			if(h.subId.equals(id))ents.add(h);
+		}
+		return ents.toArray(new Hud[0]);
+		
+	}
 }

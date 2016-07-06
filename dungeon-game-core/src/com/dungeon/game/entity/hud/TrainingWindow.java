@@ -37,11 +37,16 @@ public class TrainingWindow extends Window {
 		slot.y = y + d_height - 48;
 		slot.calc();
 		if(weapon != (Melee) slot.item){
+			if(weapon!=null){
+				((SwingSelection) getSubEntity("swingSelection")[0]).setSwings();
+			}
 			weapon = (Melee) slot.item;
 			removeSubEntity("partsInfo");
+			removeSubEntity("swingSelection");
 			removeSubEntity("statDesc");
 			if(weapon != null){
 				addSubEntitiy(new PartsInfo(world, 0, 0, weapon),  "partsInfo", 4, 4);
+				addSubEntitiy(new SwingSelection(world, 0, 0, weapon),  "swingSelection", 168, 4);
 				addSubEntitiy(new HoverZone(world, weapon.getDamageText(), 0, 0, 156, 16),  "statDesc", 4, d_height - 66);
 				addSubEntitiy(new HoverZone(world, weapon.getSpeedText(), 0, 0, 156, 16),  "statDesc", 4, d_height - 84);
 				addSubEntitiy(new HoverZone(world, weapon.getKnockText(), 0, 0, 156, 16),  "statDesc", 4, d_height - 100);

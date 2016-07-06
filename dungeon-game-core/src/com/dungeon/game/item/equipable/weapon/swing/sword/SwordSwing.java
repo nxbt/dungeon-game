@@ -20,7 +20,7 @@ public abstract class SwordSwing extends Swing {
 
 	public static Swing getSwingByName(World world, String name){
 		for(int i = 0; i < SWINGS.length; i++){
-			if(SWINGS[i].getName().equals("com.dungeon.game.item.equipable.weapon.swing.sword."+name)){
+			if(SWINGS[i].getSimpleName().equals(name)){
 				try {
 					return (Swing) SWINGS[i].getConstructors()[0].newInstance(world);
 				} catch (Exception e) {

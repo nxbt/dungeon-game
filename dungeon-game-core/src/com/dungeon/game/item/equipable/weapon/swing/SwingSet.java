@@ -6,7 +6,7 @@ import com.dungeon.game.world.World;
 
 public class SwingSet{
 
-	private Swing[] swings;
+	public Swing[] swings;
 	
 	private int curSwing;
 	
@@ -105,6 +105,26 @@ public class SwingSet{
 		swing.weapon = weapon;
 		swing.setPrevSwing(oldSwings[oldSwings.length-1]);
 		swings[swings.length-1] = swing;
+		
+	}
+
+	public void setSwings(Swing[] newSwings) {
+
+		swings = newSwings;
+		
+		this.swings[0].weapon = this.weapon;
+		//set the weapon for all the swings
+		for(int i = 1; i < swings.length; i++){
+			swings[i].weapon = weapon;
+			swings[i].setPrevSwing(swings[i-1]);
+		}
+		reset();
+				
+		isInUse = false;
+			
+		isInAttack = false;
+			
+		weapon.hasHit = false;
 		
 	}
 }

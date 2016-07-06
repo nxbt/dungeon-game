@@ -14,7 +14,7 @@ public abstract class Melee extends Weapon {
 	
 	public boolean hasHit;
 	
-	protected SwingSet swings;
+	public SwingSet swings;
 	
 	public Melee(World world, String filename) {
 		super(world, filename);
