@@ -14,9 +14,9 @@ public class Poison extends Effect {
       
     //make tick rate slower
 	
-	public Poison(World world, float rate, float dmg) {
+	public Poison(World world, float dmg) {
 		super(world, "Poison",0);
-		this.rate = rate;
+		this.rate = 0.1f;
 		this.dmg = dmg;
 		tickTimer = TICKLENGTH;
 		texture = new Texture("poison.png");
@@ -35,6 +35,15 @@ public class Poison extends Effect {
     		tickTimer = TICKLENGTH;
     	}else tickTimer--;
 	}
+    
+    public void begin(Character character){
+    	for(Effect e: character.effects){
+    		if(e instanceof Poison && !e.killMe && e != this){
+    			e.killMe = true;
+    			dmg+=((Poison) e).dmg;
+    		}
+    	}
+    }
     	
 	public String getHoveredText() {
 		return "Remaining Damage: "+Math.round(dmg);

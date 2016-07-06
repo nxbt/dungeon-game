@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
+import com.dungeon.game.effect.Fire;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.SpellProjectile;
@@ -45,6 +46,7 @@ public class Fireball extends Spell {
 		
 		ArrayList<Effect> effects = new ArrayList<Effect>();
 		effects.add(new Stun(world, 10));
+		effects.add(new Fire(world, 5));
 		
 		if(character.damage(damage, effects) > 0) {
 			Vector2 knockback = new Vector2();

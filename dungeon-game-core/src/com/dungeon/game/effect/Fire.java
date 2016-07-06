@@ -40,6 +40,15 @@ public class Fire extends Effect {
     		tickTimer = TICKLENGTH;
     	}else tickTimer--;
 	}
+    
+    public void begin(Character character){
+    	for(Effect e: character.effects){
+    		if(e instanceof Fire && !e.killMe && e != this){
+    			e.killMe = true;
+    			this.str+=((Fire) e).str;
+    		}
+    	}
+    }
 	
 	public String getHoveredText() {
 		return "You are on fire, it is "+str+" hot!";
