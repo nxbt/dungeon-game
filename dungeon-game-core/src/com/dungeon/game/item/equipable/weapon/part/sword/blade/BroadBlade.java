@@ -9,7 +9,7 @@ public class BroadBlade extends SwordBlade {
 		id = 0;
 		allowedSwings = new String[]{
 			"Slash",
-			"Stab"
+			"Stab",
 		};
 		bannedSwings = new String[]{
 				

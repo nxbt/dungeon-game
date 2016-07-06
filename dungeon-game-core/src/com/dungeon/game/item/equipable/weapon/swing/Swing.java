@@ -21,11 +21,11 @@ public abstract class Swing implements Cloneable{
 	
 	protected Melee weapon;
 	
-	private float dmgMult; //the dmg multiplier for this swing
-	private float knockMult; //the knockback multiplier for this swing
-	private float knockAngleMod; //the knockback angle modifier. 0 = knocked the way the weapon is pointing
-	private float knockRatio; //how much knock is the direction of the sword, vs the direction of the hit. 1.0 is all the direction of the sword
-	private float stanMult; //the stanima use multiplier for this swing
+	protected float dmgMult; //the dmg multiplier for this swing
+	protected float knockMult; //the knockback multiplier for this swing
+	protected float knockAngleMod; //the knockback angle modifier. 0 = knocked the way the weapon is pointing
+	protected float knockRatio; //how much knock is the direction of the sword, vs the direction of the hit. 1.0 is all the direction of the sword
+	protected float stanMult; //the stanima use multiplier for this swing
 	
 	public Swing prevSwing; //the previous swing, to access the position of the sword
 	
