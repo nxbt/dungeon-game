@@ -7,7 +7,7 @@ import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.WeaponProjectile;
-import com.dungeon.game.item.weapon.Ranged;
+import com.dungeon.game.item.equipable.weapon.Ranged;
 import com.dungeon.game.world.World;
 
 public class Arrow extends Ammo {

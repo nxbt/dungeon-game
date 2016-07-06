@@ -2,8 +2,8 @@ package com.dungeon.game.entity.weapon;
 
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.item.ammo.Arrow;
-import com.dungeon.game.item.weapon.Ranged;
-import com.dungeon.game.item.weapon.Weapon;
+import com.dungeon.game.item.equipable.weapon.Ranged;
+import com.dungeon.game.item.equipable.weapon.Weapon;
 import com.dungeon.game.world.World;
 
 public class RangedGraphic extends HandheldGraphic {

@@ -6,7 +6,7 @@ import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.ammo.Ammo;
-import com.dungeon.game.item.weapon.Ranged;
+import com.dungeon.game.item.equipable.weapon.Ranged;
 import com.dungeon.game.world.World;
 
 public class WeaponProjectile extends Projectile {

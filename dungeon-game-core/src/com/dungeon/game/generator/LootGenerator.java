@@ -4,8 +4,8 @@ import com.dungeon.game.entity.furniture.Chest;
 import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.consumable.LifePotion;
-import com.dungeon.game.item.weapon.Bow;
-import com.dungeon.game.item.weapon.Sword;
+import com.dungeon.game.item.equipable.weapon.Bow;
+import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 

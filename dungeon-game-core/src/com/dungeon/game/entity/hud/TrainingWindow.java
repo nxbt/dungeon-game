@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Item;
-import com.dungeon.game.item.weapon.Melee;
+import com.dungeon.game.item.equipable.weapon.Melee;
 import com.dungeon.game.utilities.TextHelper;
 import com.dungeon.game.world.World;
 

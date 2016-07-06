@@ -28,7 +28,7 @@ import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.HudBackground;
 import com.dungeon.game.entity.hud.Mouse;
-import com.dungeon.game.item.weapon.part.Part;
+import com.dungeon.game.item.equipable.weapon.part.Part;
 //import com.dungeon.game.light.LightMap;
 import com.dungeon.game.pathing.AreaMap;
 import com.dungeon.game.utilities.MethodArray;

@@ -15,7 +15,7 @@ import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
-import com.dungeon.game.item.weapon.Weapon;
+import com.dungeon.game.item.equipable.weapon.Weapon;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
