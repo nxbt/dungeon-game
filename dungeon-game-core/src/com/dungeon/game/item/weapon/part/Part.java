@@ -63,6 +63,10 @@ public abstract class Part extends Item implements Cloneable{
 	
 	protected BitmapFont font;
 	
+	public ArrayList<Effect> hitEffects;
+	
+	public ArrayList<Effect> passiveEffects;
+	
 	public Part(World world, String name, Texture sprite, int level) {
 		super(world, "slot.png");
 		
@@ -73,6 +77,8 @@ public abstract class Part extends Item implements Cloneable{
 		font.setColor(Color.WHITE);
 		
 		setStats(level);
+		passiveEffects = new ArrayList<Effect>();
+		hitEffects = new ArrayList<Effect>();
 	}
 
 	public void hovered(){
@@ -91,11 +97,15 @@ public abstract class Part extends Item implements Cloneable{
 		return newPart;
 	}
 	
-	public void begin(Weapon weapon){}; // called when the part is added to the weapon used to add passiveEffects to the weapon
+	public void begin(Weapon weapon){
+		for(Effect e: passiveEffects){
+			weapon.passiveEffects.add(e);
+		}
+		for(Effect e: hitEffects){
+			weapon.hitEffects.add(e);
+		}
+	}; // called when the part is added to the weapon used to add passiveEffects to the weapon
 	
-	public ArrayList<Effect> getEffects(){ //get the effects of this part
-		return new ArrayList<Effect>();
-	};
 	
 	public abstract void setStats(float level);
 	

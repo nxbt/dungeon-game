@@ -21,6 +21,13 @@ public class LifeRegen extends Effect {
 		graphic = new EffectGraphic(world, this);
 	}
 	
+
+	
+	public LifeRegen(World world, float rate) {
+		super(world, "Healing", -1);
+		this.rate = rate;
+	}
+	
 	public void calc(Character character){
 		character.gain_life(rate);
 	}

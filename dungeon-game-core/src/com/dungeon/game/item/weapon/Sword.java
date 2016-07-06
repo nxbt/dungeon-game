@@ -88,6 +88,10 @@ public class Sword extends Melee {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		blade.begin(this);
+		guard.begin(this);
+		hilt.begin(this);
 //			
 //		generate the sprite, for now random, but in the future will be a parameter!
 //		blade = Part.SWORD_BLADES[(int) (Math.random()*SwordBlade.NUM)].clone(world);
