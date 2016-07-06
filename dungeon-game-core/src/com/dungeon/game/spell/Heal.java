@@ -1,6 +1,6 @@
 package com.dungeon.game.spell;
 
-import com.dungeon.game.effect.LifeRegen;
+import com.dungeon.game.effect.regen.LifeRegen;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.SpellProjectile;
 import com.dungeon.game.item.equipable.weapon.Medium;

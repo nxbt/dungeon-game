@@ -1,5 +1,6 @@
-package com.dungeon.game.effect;
+package com.dungeon.game.effect.resistance;
 
+import com.dungeon.game.effect.Effect;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.World;
 

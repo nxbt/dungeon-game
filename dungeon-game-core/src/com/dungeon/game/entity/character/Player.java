@@ -7,7 +7,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.effect.StamRegen;
+import com.dungeon.game.effect.regen.StamRegen;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.entity.hud.EffectHudBackground;

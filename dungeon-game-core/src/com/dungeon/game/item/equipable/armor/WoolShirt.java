@@ -1,7 +1,7 @@
 package com.dungeon.game.item.equipable.armor;
 
 import com.badlogic.gdx.graphics.Color;
-import com.dungeon.game.effect.Armor;
+import com.dungeon.game.effect.resistance.Armor;
 import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.World;
 
