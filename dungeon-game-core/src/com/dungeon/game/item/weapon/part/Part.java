@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.weapon.Weapon;
+import com.dungeon.game.item.weapon.swing.Swing;
+import com.dungeon.game.item.weapon.swing.sword.SwordSwing;
 import com.dungeon.game.world.World;
 
 public abstract class Part extends Item implements Cloneable{	
@@ -75,10 +77,6 @@ public abstract class Part extends Item implements Cloneable{
 
 	public void hovered(){
 		world.descBox.updateText(getDesc());
-	}
-	
-	public String getDesc(){
-		return name + "\n Damage: " + damage + "\n Speed: " + speed + "\n Knockback: " + knockback + "\n Weight: " + weight;
 	}
 	
 	public abstract void draw(SpriteBatch batch, float x, float y);

@@ -38,11 +38,9 @@ public class TrainingWindow extends Window {
 		slot.calc();
 		if(weapon != (Melee) slot.item){
 			weapon = (Melee) slot.item;
-			if(weapon == null){
-				removeSubEntity("partsInfo");
-				removeSubEntity("statDesc");
-			}
-			else{
+			removeSubEntity("partsInfo");
+			removeSubEntity("statDesc");
+			if(weapon != null){
 				addSubEntitiy(new PartsInfo(world, 0, 0, weapon),  "partsInfo", 4, 4);
 				addSubEntitiy(new HoverZone(world, weapon.getDamageText(), 0, 0, 156, 16),  "statDesc", 4, d_height - 66);
 				addSubEntitiy(new HoverZone(world, weapon.getSpeedText(), 0, 0, 156, 16),  "statDesc", 4, d_height - 84);

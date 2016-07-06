@@ -10,11 +10,13 @@ import com.dungeon.game.world.World;
 
 public abstract class SwordHilt extends SwordPart {
 	
-	public static final int NUM = 1;
+	public static final int NUM = 3;
 	public static final Texture[] SPIRTES = Spritesheet.getSprites("swordHiltMap.png", 32, 32); //why is guard spelled ua and not au??
 	
 	public static final Constructor<?>[] parts = new Constructor<?>[]{
 		BasicHilt.class.getConstructors()[0],
+		SquaredHilt.class.getConstructors()[0],
+		SpikedHilt.class.getConstructors()[0],
 	};
 
 	public SwordHilt(World world,  String name, Texture sprite, int level) {

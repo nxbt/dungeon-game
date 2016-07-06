@@ -12,7 +12,9 @@ public abstract class SwordSwing extends Swing {
 	
 	public static final Class<?>[] SWINGS = new Class<?>[]{
 		Slash.class,
-		Stab.class
+		Stab.class,
+		GuardJab.class,
+		HiltJab.class
 	};
 
 	public static Swing getSwingByName(World world, String name){

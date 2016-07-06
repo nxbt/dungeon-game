@@ -168,8 +168,8 @@ public abstract class Swing implements Cloneable{
 		float weaponangle = weapon.graphic.angle+135; // get the angle the tip of the sword is pointing so we can calc knockback
 		if(c.damage(weapon.damage*dmgMult, weapon.getEffects())>0){ //if the target takes at least 1 dmg...
 			
-			float xSword = (float) (Math.cos((weaponangle+knockAngleMod)/180f*Math.PI)*weapon.knockback); //x knockback caused by sword swing
-			float ySword = (float) (Math.sin((weaponangle+knockAngleMod)/180f*Math.PI)*weapon.knockback); //y knockback caused by sword swing
+			float xSword = (float) (Math.cos((weaponangle+(weapon.leftSide?knockAngleMod:-knockAngleMod))/180f*Math.PI)*weapon.knockback); //x knockback caused by sword swing
+			float ySword = (float) (Math.sin((weaponangle+(weapon.leftSide?knockAngleMod:-knockAngleMod))/180f*Math.PI)*weapon.knockback); //y knockback caused by sword swing
 			float xOwner = (float) (Math.cos((weaponangle)/180*Math.PI)*weapon.knockback); //x knockback away from the attacker
 			float yOwner = (float) (Math.sin((weaponangle)/180*Math.PI)*weapon.knockback); //y knockback away from the attacker
 			Vector2 knockVec = new Vector2(); //create a knockback vector

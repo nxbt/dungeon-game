@@ -10,11 +10,13 @@ import com.dungeon.game.world.World;
 
 public abstract class SwordGuard extends SwordPart {
 	
-	public static final int NUM = 1;
+	public static final int NUM = 3;
 	public static final Texture[] SPIRTES = Spritesheet.getSprites("swordGuardMap.png", 32, 32);
 	
 	public static final Constructor<?>[] parts = new Constructor<?>[]{
 		BasicGuard.class.getConstructors()[0],
+		DefendersGuard.class.getConstructors()[0],
+		SpikedGuard.class.getConstructors()[0],
 	};
 
 	public SwordGuard(World world, String name, Texture sprite, int level) {
