@@ -380,9 +380,10 @@ public abstract class Character extends Dynamic {
 		}
 		for(int i = effects.size()-1;i>=0;i--){
 			if(effects.get(i).killMe){
-				effects.get(i).end(this);				
-				if(this instanceof Player&&effects.get(i).graphic!=null)((Player)this).effectGraphics.remove(effects.get(i).graphic);
+				Effect e = effects.get(i);
+				if(this instanceof Player&&effects.get(i).graphic!=null)((Player)this).effectGraphics.remove(e.graphic);
 				effects.remove(i);
+				e.end(this);
 			}
 		}
 	}
