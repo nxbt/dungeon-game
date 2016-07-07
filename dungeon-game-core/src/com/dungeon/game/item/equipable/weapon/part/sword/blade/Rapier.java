@@ -25,9 +25,9 @@ public class Rapier extends SwordBlade {
 	@Override
 	public void setStats(float level) {
 		damage = 6*level;
-		speed = 18*level;
+		speed = 16*level;
 		knockback = 3;
-		weight = 4;
+		weight = 5;
 	}
 
 }
