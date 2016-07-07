@@ -12,7 +12,6 @@ public class Chop extends SwordSwing {
 	
 	public void setPrevSwing(Swing prevSwing) {
 		this.prevSwing = prevSwing;
-		System.out.println(prevSwing.endingZone);
 		if(prevSwing.endingZone == LEFT){
 			setStats(false, 20, 10, 100, 100, 10, 15, 0, 0, 1.3f, 1f, -90, 0, 1.3f);
 			endingZone = LEFT;

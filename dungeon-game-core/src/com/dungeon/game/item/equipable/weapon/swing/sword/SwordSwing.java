@@ -16,7 +16,8 @@ public abstract class SwordSwing extends Swing {
 		GuardJab.class,
 		HiltJab.class,
 		Whirlwind.class,
-		Chop.class
+		Chop.class,
+		Execute.class
 	};
 
 	public static Swing getSwingByName(World world, String name){
