@@ -14,7 +14,9 @@ public class Rapier extends SwordBlade {
 			"Stab"
 		};
 		bannedSwings = new String[]{
-			"Slash"
+			"Slash",
+			"Chop",
+			"Whirlwind"
 		};
 		repeatable = true;
 	}

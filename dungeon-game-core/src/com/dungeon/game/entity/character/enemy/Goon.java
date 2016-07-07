@@ -232,12 +232,12 @@ name = "Goon";
 			}else{
 				if(equipItems[i] == null){
 					equipItems[i] = (Equipable) equipSlots[i].item;
-					equipItems[i].equip(this, false);
+					equipItems[i].equip(this, true);
 				}else{
 					if(!equipSlots[i].item.equals(equipItems[i])){
 						equipItems[i].unequip();
 						equipItems[i] = (Equipable) equipSlots[i].item;
-						equipItems[i].equip(this, false);
+						equipItems[i].equip(this, true);
 					}
 				}
 			}

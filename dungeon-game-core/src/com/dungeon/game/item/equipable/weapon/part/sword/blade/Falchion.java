@@ -2,26 +2,25 @@ package com.dungeon.game.item.equipable.weapon.part.sword.blade;
 
 import com.dungeon.game.world.World;
 
-public class BroadBlade extends SwordBlade {
+public class Falchion extends SwordBlade {
 
-	public BroadBlade(World world, int level) {
-		super(world, "Broad Blade", SPRITES[2], level);
+	public Falchion(World world, int level) {
+		super(world, "Falchion", SPRITES[5], level);
 		id = 0;
 		allowedSwings = new String[]{
 			"Slash",
-			"Stab",
 			"Chop"
 		};
 		bannedSwings = new String[]{
-				
+			"Stab"
 		};
 	}
 
 	@Override
 	public void setStats(float level) {
-		damage = 12*level;
-		speed = 7*level;
-		knockback = 12;
+		damage = 15*level;
+		speed = 9*level;
+		knockback = 13;
 		weight = 13;
 	}
 

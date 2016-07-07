@@ -10,7 +10,7 @@ import com.dungeon.game.world.World;
 
 public abstract class SwordBlade extends SwordPart {
 	
-	public static final int NUM = 5;
+	public static final int NUM = 6;
 
 	public static final Texture[] SPRITES = Spritesheet.getSprites("swordBladeMap.png", 32, 32);
 	
@@ -20,6 +20,7 @@ public abstract class SwordBlade extends SwordPart {
 		BroadBlade.class.getConstructors()[0],
 		Scimitar.class.getConstructors()[0],
 		Rapier.class.getConstructors()[0],
+		Falchion.class.getConstructors()[0],
 	};
 
 	public SwordBlade(World world, String name, Texture sprite, int level) {
