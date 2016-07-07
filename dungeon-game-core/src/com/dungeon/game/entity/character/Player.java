@@ -145,7 +145,7 @@ public class Player extends Character {
 		inv.addItem(new Sword(world, 1));
 		inv.addItem(new Sword(world, 1));
 		inv.addItem(new Sword(world, 1));
-		inv.addItem(new Axe(world, 10, 10, 10));
+		inv.addItem(new Axe(world, 1));
 		inv.addItem(new Bow(world, 10, 10));
 		inv.addItem(new Wand(world));
 		inv.addItem(new WoolShirt(world, speechColor));

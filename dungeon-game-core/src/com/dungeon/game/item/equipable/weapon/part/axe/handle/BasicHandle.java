@@ -18,10 +18,10 @@ public class BasicHandle extends AxeHandle {
 
 	@Override
 	public void setStats(float level) {
-		damage = 10*level;
-		speed = 10*level;
-		knockback = 10;
-		weight = 10;
+		damage = 0*level;
+		speed = 1*level;
+		knockback = 1;
+		weight = 2;
 	}
 
 }

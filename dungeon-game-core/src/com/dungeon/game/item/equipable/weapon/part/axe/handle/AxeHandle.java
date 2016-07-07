@@ -12,7 +12,7 @@ public abstract class AxeHandle extends AxePart {
 	
 	public static final int NUM = 1;
 
-	public static final Texture[] SPRITES = Spritesheet.getSprites("axeHandleMap.png", 32, 32);
+	public static final Texture[] SPRITES = Spritesheet.getSprites("axeHiltMap.png", 32, 32);
 	
 	public static final Constructor<?>[] parts = new Constructor<?>[]{
 		BasicHandle.class.getConstructors()[0],

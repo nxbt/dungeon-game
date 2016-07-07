@@ -18,10 +18,10 @@ public class BasicTip extends AxeTip {
 
 	@Override
 	public void setStats(float level) {
-		damage = 10*level;
-		speed = 10*level;
-		knockback = 10;
-		weight = 10;
+		damage = 1*level;
+		speed = 0*level;
+		knockback = 0;
+		weight = 1;
 	}
 
 }

@@ -107,7 +107,7 @@ public class StairKeeper extends Friend {
 		dialogue.potentialBubbles.put("what need 3", new SpeechBubble(world, this, new Criteria[] {new Invert(world, new Said(world, dialogue, "give axe")), new True(world)}, new String[] {"And here's an axe. It's not a good weapon, but still better than nothing.", "And I have already offered you my axe."}, new String[] {"give axe", "another question"}));
 		
 		Inventory invent = new Inventory(world, new int[][]{new int[]{0,0,0}}, 0, 0, true);
-		invent.slot[0].item = new Axe(world, 7, 10, 10);
+		invent.slot[0].item = new Axe(world, 1);
 		dialogue.potentialBubbles.put("give axe", new InvBubble(world, this, invent , "another question"));
 		
 		dialogue.potentialBubbles.put("another question", new SpeechBubble(world, this, "Do you have any other questions?", "need help"));

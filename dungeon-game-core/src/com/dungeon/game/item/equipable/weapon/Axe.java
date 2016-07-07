@@ -1,5 +1,7 @@
 package com.dungeon.game.item.equipable.weapon;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
@@ -18,6 +20,7 @@ import com.dungeon.game.item.equipable.weapon.swing.SwingSet;
 import com.dungeon.game.item.equipable.weapon.swing.sword.Rest;
 import com.dungeon.game.item.equipable.weapon.swing.sword.Slash;
 import com.dungeon.game.item.equipable.weapon.swing.sword.Stab;
+import com.dungeon.game.item.equipable.weapon.swing.sword.SwordSwing;
 import com.dungeon.game.world.World;
 
 public class Axe extends Melee {
@@ -32,9 +35,9 @@ public class Axe extends Melee {
 
 		
 		try {
-			blade = (Part) AxeBlade.parts[(int) (Math.random()*SwordBlade.NUM)].newInstance(world, level);
-			tip = (Part) AxeTip.parts[(int) (Math.random()*SwordGuard.NUM)].newInstance(world, level);
-			handle = (Part) AxeHandle.parts[(int) (Math.random()*SwordHilt.NUM)].newInstance(world, level);
+			blade = (Part) AxeBlade.parts[(int) (Math.random()*AxeBlade.NUM)].newInstance(world, level);
+			tip = (Part) AxeTip.parts[(int) (Math.random()*AxeTip.NUM)].newInstance(world, level);
+			handle = (Part) AxeHandle.parts[(int) (Math.random()*AxeHandle.NUM)].newInstance(world, level);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -70,11 +73,12 @@ public class Axe extends Melee {
 		
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 		
-		swings = new SwingSet(world, this, new Swing[]{new Rest(world),
-				new Slash(world), 
-				new Stab(world),
-				}, false);
-		
+//		swings = new SwingSet(world, this, new Swing[]{new Rest(world),
+//				new Slash(world), 
+//				new Stab(world),
+//				}, false);
+
+		swings = getStartSwings();
 		hitEffects.add(new Stun(world, 30));
 	}
 	
@@ -109,11 +113,38 @@ public class Axe extends Melee {
 	}
 	
 	public String[] getAllowedSwings(){
-		return null;
+		ArrayList<String> bannedSwings = new ArrayList<String>();
+		for(int i = 0; i < blade.bannedSwings.length; i++){
+			if(!bannedSwings.contains(blade.bannedSwings[i]))bannedSwings.add(blade.bannedSwings[i]);
+		}
+		for(int i = 0; i < tip.bannedSwings.length; i++){
+			if(!bannedSwings.contains(tip.bannedSwings[i]))bannedSwings.add(tip.bannedSwings[i]);
+		}
+		for(int i = 0; i < handle.bannedSwings.length; i++){
+			if(!bannedSwings.contains(handle.bannedSwings[i]))bannedSwings.add(handle.bannedSwings[i]);
+		}
+		
+		ArrayList<String> allowedSwings = new ArrayList<String>();
+		for(int i = 0; i < blade.allowedSwings.length; i++){
+			if(!allowedSwings.contains(blade.allowedSwings[i]) && !bannedSwings.contains(blade.allowedSwings[i]))allowedSwings.add(blade.allowedSwings[i]);
+		}
+		for(int i = 0; i < tip.allowedSwings.length; i++){
+			if(!allowedSwings.contains(tip.allowedSwings[i]) && !bannedSwings.contains(blade.allowedSwings[i]))allowedSwings.add(tip.allowedSwings[i]);
+		}
+		for(int i = 0; i < handle.allowedSwings.length; i++){
+			if(!allowedSwings.contains(handle.allowedSwings[i]) && !bannedSwings.contains(blade.allowedSwings[i]))allowedSwings.add(handle.allowedSwings[i]);
+		}
+		return allowedSwings.toArray(new String[0]);
 	}
 	
 	public SwingSet getStartSwings(){
-		return null;
+		String[] allowedSwings = getAllowedSwings();
+		Swing[] swings = new Swing[4];
+		swings[0] = new Rest(world);
+		swings[1] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
+		swings[2] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
+		swings[3] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
+		return new SwingSet(world, this, swings, blade.repeatable && tip.repeatable && handle.repeatable);
 	}
 
 	@Override
