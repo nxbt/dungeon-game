@@ -16,15 +16,16 @@ public class Rapier extends SwordBlade {
 		bannedSwings = new String[]{
 			"Slash",
 			"Chop",
-			"Whirlwind"
+			"Whirlwind",
+			"Execute"
 		};
 		repeatable = true;
 	}
 
 	@Override
 	public void setStats(float level) {
-		damage = 4*level;
-		speed = 22*level;
+		damage = 6*level;
+		speed = 18*level;
 		knockback = 3;
 		weight = 4;
 	}
