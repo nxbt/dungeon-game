@@ -18,10 +18,29 @@ public abstract class Melee extends Weapon {
 	public Melee(World world, String filename) {
 		super(world, filename);
 	}
-
-	public abstract boolean inAttack();
 	
-	public abstract void hit(Character e);
+	public float[] getPos(boolean mousedown, boolean mousepressed){
+		swings.progressWeapon();
+		
+		return new float[]{distance,polarAngle,angle};
+	}
+	
+	@Override
+	public boolean isInUse() {
+		return swings.isInUse;
+	}
+
+	public boolean inAttack() {
+		return swings.isInAttack;
+	}
+	
+	public void hit(Character c) {
+		swings.hit(c);
+	}
+
+	public void reset() {
+		swings.reset();
+	}
 	
 	public abstract String getDamageText();
 	

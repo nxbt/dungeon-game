@@ -80,27 +80,6 @@ public class Sword extends Melee {
 		hitEffects.add(new Stun(world, 30));
 	}
 	
-	public float[] getPos(boolean mousedown, boolean mousepressed){
-		swings.progressWeapon();
-		
-		return new float[]{distance,polarAngle,angle};
-	}
-	
-	
-
-	@Override
-	public boolean isInUse() {
-		return swings.isInUse;
-	}
-
-	public boolean inAttack() {
-		return swings.isInAttack;
-	}
-	
-	public void hit(Character c) {
-		swings.hit(c);
-	}
-	
 	public String getDesc() {
 		return "Sword\n\nThe accepted standard for melee weapons, mainly due to how common it is. Swords are generally considered very reliable, despite the diverse range of blades. "
 				+ "This reliability is another reason for their wide acceptance. Even those who have become experts of other types of weapons and have rarely tocuhed a sword conceed "
@@ -117,12 +96,6 @@ public class Sword extends Melee {
 				+ "a sword is disassembled, the blade will carry the enchantment. Besides enchanting the sword directly, some rare parts contain gem holders. If a gem is enchanted "
 				+ "and then fitted by a jewler, the sword will inherient this enchantment. Gems can only be removed from these slot by a jewler, so if a sword is disassembled a gem "
 				+ "will remain in the part the holder was located.\n\n\"My sword shall lead me to glory!\" -final words of Tanturin, the mythical warrior";
-	}
-	
-
-	@Override
-	public void reset() {
-		swings.reset();
 	}
 	
 	public String[] getAllowedSwings(){
