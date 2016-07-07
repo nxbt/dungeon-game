@@ -1,11 +1,11 @@
-package com.dungeon.game.item.equipable.weapon.part.axe.blade;
+package com.dungeon.game.item.equipable.weapon.part.axe.handle;
 
 import com.dungeon.game.world.World;
 
-public class BasicBlade extends AxeBlade {
+public class BasicHandle extends AxeHandle {
 
-	public BasicBlade(World world, int level) {
-		super(world, "Basic Axe Head", SPRITES[0], level);
+	public BasicHandle(World world, int level) {
+		super(world, "Basic Axe Handle", SPRITES[0], level);
 		id = 0;
 		allowedSwings = new String[]{
 			"Slash",

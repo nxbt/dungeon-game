@@ -8,7 +8,6 @@ public class RubberSword extends Sword {
 		super(world, 1);
 		name = "Rubber Sword";
 		desc = "The Blade of Knocking! \n Has 'other' uses. ;) \n\n Damage: "+damage;
-		knockratio = 0.3f;
 		knockback = 15;
 	}
 	

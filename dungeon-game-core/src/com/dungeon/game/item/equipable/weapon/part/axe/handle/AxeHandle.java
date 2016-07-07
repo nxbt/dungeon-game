@@ -10,12 +10,12 @@ import com.dungeon.game.world.World;
 
 public abstract class AxeHandle extends AxePart {
 	
-	public static final int NUM = 0;
+	public static final int NUM = 1;
 
 	public static final Texture[] SPRITES = Spritesheet.getSprites("axeHandleMap.png", 32, 32);
 	
 	public static final Constructor<?>[] parts = new Constructor<?>[]{
-//		BasicBlade.class.getConstructors()[0],
+		BasicHandle.class.getConstructors()[0],
 	};
 
 	public AxeHandle(World world, String name, Texture sprite, int level) {

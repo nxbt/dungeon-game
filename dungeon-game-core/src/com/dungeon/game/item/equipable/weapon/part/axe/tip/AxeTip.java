@@ -10,12 +10,12 @@ import com.dungeon.game.world.World;
 
 public abstract class AxeTip extends AxePart {
 	
-	public static final int NUM = 0;
+	public static final int NUM = 1;
 
 	public static final Texture[] SPRITES = Spritesheet.getSprites("axeTipMap.png", 32, 32);
 	
 	public static final Constructor<?>[] parts = new Constructor<?>[]{
-//		BasicBlade.class.getConstructors()[0],
+		BasicTip.class.getConstructors()[0],
 	};
 
 	public AxeTip(World world, String name, Texture sprite, int level) {

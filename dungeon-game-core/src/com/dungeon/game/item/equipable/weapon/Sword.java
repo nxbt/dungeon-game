@@ -21,49 +21,6 @@ import com.dungeon.game.world.World;
 
 public class Sword extends Melee {
 	
-//	private final SwingSet[] BLADE_SWINGS = new SwingSet[]{
-//			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //sword
-//					Swing.getSwingByName(world, "Slash"), 
-//					Swing.getSwingByName(world, "Slash"),
-//					Swing.getSwingByName(world, "Stab"), 
-//					} ,false),
-//			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //light sword
-//					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
-//					new Swing(world, "Slash", false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
-//					new Swing(world, "Stab", false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
-//					} ,false),
-//			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //broad sword
-//					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
-//					new Swing(world, "Slash", false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
-//					new Swing(world, "Stab", false, 15, 12, 30, -7, 4, 28, 6, -3, 1.5f, 0.7f, 0, 0.4f, 0.8f)
-//					} ,false),
-//			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //cutlass
-//					new Swing(world, "Slash", false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1), 
-//					new Swing(world, "Slash", false, 10, 16, -75, -80, 10, 20, 80, 45, 1, 1.3f, 90, 0.4f, 1),
-//					} ,true),
-//			new SwingSet(world, this, new Swing[]{new Rest(world, 20, 14, 82, -10), //needle
-//					new Swing(world, "Stab", false, 15, 12, 40, -7, 4, 28, 12, -3, 0.75f, 0.7f, 0, 0.4f, 0.5f),
-//					new Swing(world, "Stab", false, 15, 12, 0, 0, 4, 28, 0, 0, 1.5f, 0.7f, 0, 0.4f, 1f),
-//					new Swing(world, "Stab", false, 15, 12, -40, 7, 4, 28, -12, 3, 0.75f, 0.7f, 0, 0.4f, 1.5f),
-//					new Swing(world, "Stab", false, 15, 12, 0, 0, 4, 28, 0, 0, 1.5f, 0.7f, 0, 0.4f, 1f),
-//					} , true)
-//	};
-//	
-//	private final Swing[][] GUARD_SWINGS = new Swing[][]{
-//		new Swing[]{},
-//		new Swing[]{},
-//		new Swing[]{new Swing(world, "Guard Hit", false, 10, 10, 20, -90, 10, 26, 15, -90, 0.5f, 1.5f, 90, 0, 2)}
-//	};
-//	
-//	private final Swing[][] HILT_SWINGS = new Swing[][]{
-//		new Swing[]{},
-//		new Swing[]{},
-//		new Swing[]{new Swing(world, "Hilt Hit", false, 10, 15, 70, 150, 10, 26, 0, 90, 2f, 0.6f, 180, 0, 2)}
-//	};
-	
-	protected float[] dmgMult;
-	protected float[] knockMult;
-	
 	public Part blade;
 	public Part guard;
 	public Part hilt;
@@ -73,17 +30,7 @@ public class Sword extends Melee {
 		
 		try {
 			blade = (Part) SwordBlade.parts[(int) (Math.random()*SwordBlade.NUM)].newInstance(world, level);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
 			guard = (Part) SwordGuard.parts[(int) (Math.random()*SwordGuard.NUM)].newInstance(world, level);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
 			hilt = (Part) SwordHilt.parts[(int) (Math.random()*SwordHilt.NUM)].newInstance(world, level);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,11 +39,7 @@ public class Sword extends Melee {
 		blade.begin(this);
 		guard.begin(this);
 		hilt.begin(this);
-//			
-//		generate the sprite, for now random, but in the future will be a parameter!
-//		blade = Part.SWORD_BLADES[(int) (Math.random()*SwordBlade.NUM)].clone(world);
-//		guard = Part.SWORD_GUARDS[(int) (Math.random()*SwordGuard.NUM)].clone(world);
-//		hilt = Part.SWORD_HILTS[(int) (Math.random()*SwordHilt.NUM)].clone(world);
+		
 		if(!blade.sprite.getTextureData().isPrepared()) blade.sprite.getTextureData().prepare();
 		Pixmap bladeMap = blade.sprite.getTextureData().consumePixmap();
 		if(!guard.sprite.getTextureData().isPrepared()) guard.sprite.getTextureData().prepare();
@@ -117,19 +60,12 @@ public class Sword extends Melee {
 		
 		hasHit = false;
 		
-		this.damage = blade.damage + guard.damage + hilt.damage;
-		this.speed = blade.speed + guard.speed + hilt.speed;
+		damage = blade.damage + guard.damage + hilt.damage;
+		speed = blade.speed + guard.speed + hilt.speed;
+		knockback = blade.knockback + guard.knockback + hilt.knockback;
+		weight = blade.weight + guard.weight + hilt.weight;
 		
-		knockratio = 0.4f;
-		knockback = blade.knockback + guard.knockback + hilt.knockback;	
-		
-		this.weight = blade.weight + guard.weight + hilt.weight;
-		
-		desc = "The most common and widely used melee weapon.\n\n Damage: "+ Math.floor(this.damage*10)/10f + "\n Speed: "+ Math.floor(this.speed*10)/10f + "\n Knockback: "+ Math.floor(this.knockback*10)/10f + "\n Weight: "+ Math.floor(this.weight*10)/10f;
-
-		
-		dmgMult = new float[]{0.7f,1,1.5f};
-		knockMult = new float[]{1,1.3f,0.7f};	
+		desc = "The most common and widely used melee weapon.\n\n Damage: "+ Math.floor(damage*10)/10f + "\n Speed: "+ Math.floor(speed*10)/10f + "\n Knockback: "+ Math.floor(knockback*10)/10f + "\n Weight: "+ Math.floor(weight*10)/10f;
 		
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 		

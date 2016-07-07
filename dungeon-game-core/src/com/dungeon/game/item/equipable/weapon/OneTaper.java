@@ -8,7 +8,6 @@ public class OneTaper extends Sword {
 		super(world, 1);
 		name = "One Tapper";
 		desc = "This large sword is light and well balanced in your hand! \n ...'balanced' \n\n Damage: "+damage;
-		knockratio = 0.3f;
 		knockback = 10;
 	}
 	

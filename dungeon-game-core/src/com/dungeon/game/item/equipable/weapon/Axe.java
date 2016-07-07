@@ -1,9 +1,18 @@
 package com.dungeon.game.item.equipable.weapon;
 
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.MeleeGraphic;
+import com.dungeon.game.item.equipable.weapon.part.Part;
+import com.dungeon.game.item.equipable.weapon.part.axe.blade.AxeBlade;
+import com.dungeon.game.item.equipable.weapon.part.axe.handle.AxeHandle;
+import com.dungeon.game.item.equipable.weapon.part.axe.tip.AxeTip;
+import com.dungeon.game.item.equipable.weapon.part.sword.blade.SwordBlade;
+import com.dungeon.game.item.equipable.weapon.part.sword.guard.SwordGuard;
+import com.dungeon.game.item.equipable.weapon.part.sword.hilt.SwordHilt;
 import com.dungeon.game.item.equipable.weapon.swing.Swing;
 import com.dungeon.game.item.equipable.weapon.swing.SwingSet;
 import com.dungeon.game.item.equipable.weapon.swing.sword.Rest;
@@ -12,27 +21,53 @@ import com.dungeon.game.item.equipable.weapon.swing.sword.Stab;
 import com.dungeon.game.world.World;
 
 public class Axe extends Melee {
-	protected float[] dmgMult;
-	protected float[] knockMult;
 	
-	public Axe(World world, float damage, float speed, float weight) {
+	public Part blade;
+	public Part tip;
+	public Part handle;
+	
+	public Axe(World world, int level) {
 		super(world, "axe.png");
 		
-		name = "Axe";
+
+		
+		try {
+			blade = (Part) AxeBlade.parts[(int) (Math.random()*SwordBlade.NUM)].newInstance(world, level);
+			tip = (Part) AxeTip.parts[(int) (Math.random()*SwordGuard.NUM)].newInstance(world, level);
+			handle = (Part) AxeHandle.parts[(int) (Math.random()*SwordHilt.NUM)].newInstance(world, level);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		blade.begin(this);
+		tip.begin(this);
+		handle.begin(this);
+		
+		if(!blade.sprite.getTextureData().isPrepared()) blade.sprite.getTextureData().prepare();
+		Pixmap bladeMap = blade.sprite.getTextureData().consumePixmap();
+		if(!tip.sprite.getTextureData().isPrepared()) tip.sprite.getTextureData().prepare();
+		Pixmap tipMap = tip.sprite.getTextureData().consumePixmap();
+		if(!handle.sprite.getTextureData().isPrepared()) handle.sprite.getTextureData().prepare();
+		Pixmap handleMap = handle.sprite.getTextureData().consumePixmap();
+		
+		Pixmap spr = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
+		spr.drawPixmap(handleMap, 0, 0);
+		spr.drawPixmap(bladeMap, 0, 0);
+		spr.drawPixmap(tipMap, 0, 0);
+		sprite = new Texture(spr);
+		spr.dispose();
+		
+		name = blade.name;
 		
 		hasHit = false;
 		
-		desc = "A widely used and dependable melee weapon.\n\n Damage: "+ Math.floor(damage*10)/10f;
+		damage = blade.damage + tip.damage + handle.damage;
+		speed = blade.speed + tip.speed + handle.speed;
+		knockback = blade.knockback + tip.knockback + handle.knockback;
+		weight = blade.weight + tip.weight + handle.weight;
 		
-		this.damage = damage;
-		this.speed = speed;
-		this.weight = weight;
+		desc = "A widely used and dependable melee weapon.\n\n Damage: "+ Math.floor(damage*10)/10f + "\n Speed: "+ Math.floor(speed*10)/10f + "\n Knockback: "+ Math.floor(knockback*10)/10f + "\n Weight: "+ Math.floor(weight*10)/10f;
 		
-		knockratio = 0.2f;
-		knockback = 10;
-		
-		dmgMult = new float[]{0.7f,1.5f};
-		knockMult = new float[]{1,0.3f};		
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 		
 		swings = new SwingSet(world, this, new Swing[]{new Rest(world),
