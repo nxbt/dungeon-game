@@ -9,7 +9,6 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * Add different shops to towns
 * Add procedural generation to all rooms in towns.
 * Upload screenshots to wiki
-* Finish adding effects to equipables.
 * change pathfinding to use GDXAI ? 
 
 ##TODO very low priority (within a couple months?):
@@ -28,5 +27,5 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * hidden player "level" controlls dungeon difficulty and loot.
 
 ##BUG TRACKER
-* closed popups blocking the mouse
 * game unplayable if there aren't enough special rooms in towns
+* popups don't close when going down or up a floor
