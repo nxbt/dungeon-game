@@ -2,9 +2,7 @@
 The is a top-down rougelike-like game written in Java. Currently being worked on by Brendan Thompson adn Ethan  Bull-Vulpe.
 
 ##TODO high priority (within a week):
-* psn damage and magic damage is adative
-* litn damage and flame damage is average
-* change tilemap rendering to pixmap
+* change tilemap rendering to pixmap (we had a reason for this...)
 
 ##TODO low priority (within a month?):
 * Finish adding procedural shop decoration generation
