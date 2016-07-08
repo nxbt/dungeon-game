@@ -7,6 +7,7 @@ import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.weapon.RangedGraphic;
 import com.dungeon.game.item.ammo.Arrow;
+import com.dungeon.game.item.equipable.weapon.part.Part;
 import com.dungeon.game.world.World;
 
 public class Bow extends Ranged {
@@ -115,5 +116,9 @@ public class Bow extends Ranged {
 		ArrayList<Effect> effects = new ArrayList<Effect>();
 		effects.add(new Stun(world, 30));
 		return effects;
+	}
+	
+	public Part[] getParts(){
+		return null;
 	}
 }

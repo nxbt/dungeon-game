@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.item.equipable.Hand;
+import com.dungeon.game.item.equipable.weapon.part.Part;
 import com.dungeon.game.world.World;
 
 public abstract class Weapon extends Hand{
@@ -36,4 +37,6 @@ public abstract class Weapon extends Hand{
 		
 		return effects;
 	}
+	
+	public abstract Part[] getParts();
 }

@@ -1,26 +1,15 @@
 package com.dungeon.game.item.equipable.weapon;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.Stun;
-import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.MeleeGraphic;
 import com.dungeon.game.item.equipable.weapon.part.Part;
 import com.dungeon.game.item.equipable.weapon.part.axe.blade.AxeBlade;
 import com.dungeon.game.item.equipable.weapon.part.axe.handle.AxeHandle;
 import com.dungeon.game.item.equipable.weapon.part.axe.tip.AxeTip;
-import com.dungeon.game.item.equipable.weapon.part.sword.blade.SwordBlade;
-import com.dungeon.game.item.equipable.weapon.part.sword.guard.SwordGuard;
-import com.dungeon.game.item.equipable.weapon.part.sword.hilt.SwordHilt;
-import com.dungeon.game.item.equipable.weapon.swing.Swing;
-import com.dungeon.game.item.equipable.weapon.swing.SwingSet;
-import com.dungeon.game.item.equipable.weapon.swing.sword.Rest;
-import com.dungeon.game.item.equipable.weapon.swing.sword.Slash;
-import com.dungeon.game.item.equipable.weapon.swing.sword.Stab;
-import com.dungeon.game.item.equipable.weapon.swing.sword.SwordSwing;
+import com.dungeon.game.item.equipable.weapon.swing.axe.AxeSwing;
 import com.dungeon.game.world.World;
 
 public class Axe extends Melee {
@@ -78,47 +67,13 @@ public class Axe extends Melee {
 //				new Stab(world),
 //				}, false);
 
+		swingClass = AxeSwing.class;
 		swings = getStartSwings();
 		hitEffects.add(new Stun(world, 30));
 	}
 	
 	public String getDesc() {
 		return "The standard axe class weapon. Most axe class weapons can hit multiple targets in one swing. This particular axe has a two swing combo; a fronthand swing across the body, followed by an overhead smash.\n\n\"They say axes were once used to chop something other than heads.\" -Hubber, fabled sellsword\n\n Damage: " + Math.floor(damage*10)/10f;
-	}
-	
-	public String[] getAllowedSwings(){
-		ArrayList<String> bannedSwings = new ArrayList<String>();
-		for(int i = 0; i < blade.bannedSwings.length; i++){
-			if(!bannedSwings.contains(blade.bannedSwings[i]))bannedSwings.add(blade.bannedSwings[i]);
-		}
-		for(int i = 0; i < tip.bannedSwings.length; i++){
-			if(!bannedSwings.contains(tip.bannedSwings[i]))bannedSwings.add(tip.bannedSwings[i]);
-		}
-		for(int i = 0; i < handle.bannedSwings.length; i++){
-			if(!bannedSwings.contains(handle.bannedSwings[i]))bannedSwings.add(handle.bannedSwings[i]);
-		}
-		
-		ArrayList<String> allowedSwings = new ArrayList<String>();
-		for(int i = 0; i < blade.allowedSwings.length; i++){
-			if(!allowedSwings.contains(blade.allowedSwings[i]) && !bannedSwings.contains(blade.allowedSwings[i]))allowedSwings.add(blade.allowedSwings[i]);
-		}
-		for(int i = 0; i < tip.allowedSwings.length; i++){
-			if(!allowedSwings.contains(tip.allowedSwings[i]) && !bannedSwings.contains(blade.allowedSwings[i]))allowedSwings.add(tip.allowedSwings[i]);
-		}
-		for(int i = 0; i < handle.allowedSwings.length; i++){
-			if(!allowedSwings.contains(handle.allowedSwings[i]) && !bannedSwings.contains(blade.allowedSwings[i]))allowedSwings.add(handle.allowedSwings[i]);
-		}
-		return allowedSwings.toArray(new String[0]);
-	}
-	
-	public SwingSet getStartSwings(){
-		String[] allowedSwings = getAllowedSwings();
-		Swing[] swings = new Swing[4];
-		swings[0] = new Rest(world);
-		swings[1] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
-		swings[2] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
-		swings[3] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
-		return new SwingSet(world, this, swings, blade.repeatable && tip.repeatable && handle.repeatable);
 	}
 
 	@Override
@@ -139,5 +94,9 @@ public class Axe extends Melee {
 	@Override
 	public String getWeightText() {
 		return "Weapon Weight: " + Math.round(weight*10)/10f + "   \n Blade: " + blade.weight + "   \n Guard: " + tip.weight + "   \n Hilt: " + handle.weight;
+	}
+	
+	public Part[] getParts(){
+		return new Part[]{blade, tip, handle};
 	}
 }

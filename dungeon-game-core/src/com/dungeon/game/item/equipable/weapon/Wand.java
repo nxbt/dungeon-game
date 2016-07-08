@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.weapon.MediumGraphic;
+import com.dungeon.game.item.equipable.weapon.part.Part;
 import com.dungeon.game.spell.Fireball;
 import com.dungeon.game.spell.Heal;
 import com.dungeon.game.spell.Spell;
@@ -70,5 +71,9 @@ public class Wand extends Medium {
 		ArrayList<Effect> effects = new ArrayList<Effect>();
 		effects.add(new Stun(world, 30));
 		return effects;
+	}
+	
+	public Part[] getParts(){
+		return null;
 	}
 }

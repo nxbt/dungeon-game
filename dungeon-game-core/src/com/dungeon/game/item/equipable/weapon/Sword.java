@@ -1,13 +1,11 @@
 package com.dungeon.game.item.equipable.weapon;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.Stun;
-import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.MeleeGraphic;
 import com.dungeon.game.item.equipable.weapon.part.Part;
 import com.dungeon.game.item.equipable.weapon.part.sword.blade.SwordBlade;
@@ -76,6 +74,7 @@ public class Sword extends Melee {
 //		for(int i = 0; i < HILT_SWINGS[hilt.id].length; i++){
 //			swings.addSwing(HILT_SWINGS[hilt.id][i]);
 //		}
+		swingClass = SwordSwing.class;
 		swings = getStartSwings();
 		hitEffects.add(new Stun(world, 30));
 	}
@@ -97,41 +96,6 @@ public class Sword extends Melee {
 				+ "and then fitted by a jewler, the sword will inherient this enchantment. Gems can only be removed from these slot by a jewler, so if a sword is disassembled a gem "
 				+ "will remain in the part the holder was located.\n\n\"My sword shall lead me to glory!\" -final words of Tanturin, the mythical warrior";
 	}
-	
-	public String[] getAllowedSwings(){
-		ArrayList<String> bannedSwings = new ArrayList<String>();
-		for(int i = 0; i < blade.bannedSwings.length; i++){
-			if(!bannedSwings.contains(blade.bannedSwings[i]))bannedSwings.add(blade.bannedSwings[i]);
-		}
-		for(int i = 0; i < guard.bannedSwings.length; i++){
-			if(!bannedSwings.contains(guard.bannedSwings[i]))bannedSwings.add(guard.bannedSwings[i]);
-		}
-		for(int i = 0; i < hilt.bannedSwings.length; i++){
-			if(!bannedSwings.contains(hilt.bannedSwings[i]))bannedSwings.add(hilt.bannedSwings[i]);
-		}
-		
-		ArrayList<String> allowedSwings = new ArrayList<String>();
-		for(int i = 0; i < blade.allowedSwings.length; i++){
-			if(!allowedSwings.contains(blade.allowedSwings[i]) && !bannedSwings.contains(blade.allowedSwings[i]))allowedSwings.add(blade.allowedSwings[i]);
-		}
-		for(int i = 0; i < guard.allowedSwings.length; i++){
-			if(!allowedSwings.contains(guard.allowedSwings[i]) && !bannedSwings.contains(blade.allowedSwings[i]))allowedSwings.add(guard.allowedSwings[i]);
-		}
-		for(int i = 0; i < hilt.allowedSwings.length; i++){
-			if(!allowedSwings.contains(hilt.allowedSwings[i]) && !bannedSwings.contains(blade.allowedSwings[i]))allowedSwings.add(hilt.allowedSwings[i]);
-		}
-		return allowedSwings.toArray(new String[0]);
-	}
-	
-	public SwingSet getStartSwings(){
-		String[] allowedSwings = getAllowedSwings();
-		Swing[] swings = new Swing[4];
-		swings[0] = new Rest(world);
-		swings[1] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
-		swings[2] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
-		swings[3] = SwordSwing.getSwingByName(world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
-		return new SwingSet(world, this, swings, blade.repeatable && guard.repeatable && hilt.repeatable);
-	}
 
 	@Override
 	public String getDamageText() {
@@ -151,5 +115,9 @@ public class Sword extends Melee {
 	@Override
 	public String getWeightText() {
 		return "Weapon Weight: " + Math.round(weight*10)/10f + "   \n Blade: " + blade.weight + "   \n Guard: " + guard.weight + "   \n Hilt: " + hilt.weight;
+	}
+	
+	public Part[] getParts(){
+		return new Part[]{blade, guard, hilt};
 	}
 }

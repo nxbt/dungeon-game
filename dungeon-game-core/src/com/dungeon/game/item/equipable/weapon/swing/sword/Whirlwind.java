@@ -12,7 +12,6 @@ public class Whirlwind extends SwordSwing {
 	
 	public void setPrevSwing(Swing prevSwing) {
 		this.prevSwing = prevSwing;
-		System.out.println(prevSwing.endingZone);
 		if(prevSwing.endingZone == LEFT){
 			setStats(true, 10, 10, 90, 90, 30, 10, -270, -270, 0.7f, 1f, -90, 0.4f, 2);
 			endingZone = LEFT;

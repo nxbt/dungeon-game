@@ -12,7 +12,6 @@ public class HiltJab extends SwordSwing {
 	
 	public void setPrevSwing(Swing prevSwing) {
 		this.prevSwing = prevSwing;
-		System.out.println(prevSwing.endingZone);
 		if(prevSwing.endingZone == LEFT){
 			setStats(false, 10, 15, 70, 150, 10, 26, 0, 90, 2f, 0.6f, 180, 0, 2);
 			endingZone = LEFT;

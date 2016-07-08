@@ -8,8 +8,7 @@ public class BasicBlade extends AxeBlade {
 		super(world, "Basic Axe Head", SPRITES[0], level);
 		id = 0;
 		allowedSwings = new String[]{
-			"Slash",
-			"Stab"
+			"Cleave"
 		};
 		bannedSwings = new String[]{
 				
