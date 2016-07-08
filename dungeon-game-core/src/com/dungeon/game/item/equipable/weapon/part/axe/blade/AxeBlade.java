@@ -10,12 +10,13 @@ import com.dungeon.game.world.World;
 
 public abstract class AxeBlade extends AxePart {
 	
-	public static final int NUM = 1;
+	public static final int NUM = 2;
 
 	public static final Texture[] SPRITES = Spritesheet.getSprites("axeBladeMap.png", 32, 32);
 	
 	public static final Constructor<?>[] parts = new Constructor<?>[]{
 		BasicBlade.class.getConstructors()[0],
+		SquaredBlade.class.getConstructors()[0],
 	};
 
 	public AxeBlade(World world, String name, Texture sprite, int level) {
