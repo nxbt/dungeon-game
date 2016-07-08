@@ -57,7 +57,6 @@ public class Sword extends Melee {
 		speed = blade.speed + guard.speed + hilt.speed;
 		knockback = blade.knockback + guard.knockback + hilt.knockback;
 		weight = blade.weight + guard.weight + hilt.weight;
-		numSwings = blade.numSwings + guard.numSwings + hilt.numSwings;
 		
 		desc = "The most common and widely used melee weapon.\n\n Damage: "+ Math.floor(damage*10)/10f + "\n Speed: "+ Math.floor(speed*10)/10f + "\n Knockback: "+ Math.floor(knockback*10)/10f + "\n Weight: "+ Math.floor(weight*10)/10f;
 		

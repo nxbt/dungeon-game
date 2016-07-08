@@ -79,6 +79,11 @@ public abstract class Melee extends Weapon {
 	}
 	
 	public SwingSet getStartSwings(){
+		Part[] parts = getParts();
+		numSwings = 0;
+		for(Part p: parts){
+			numSwings+=p.numSwings;
+		}
 		String[] allowedSwings = getAllowedSwings();
 		Swing[] swings = new Swing[numSwings+1];
 		swings[0] = new Rest(world);
@@ -89,8 +94,6 @@ public abstract class Melee extends Weapon {
 				e.printStackTrace();
 			}
 		}
-		
-		Part[] parts = getParts();
 		boolean repeatable = true;
 		for(Part p: parts){
 			if(!p.repeatable){
