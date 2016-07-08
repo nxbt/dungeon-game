@@ -2,26 +2,27 @@ package com.dungeon.game.item.equipable.weapon.part.axe.blade;
 
 import com.dungeon.game.world.World;
 
-public class SquaredBlade extends AxeBlade {
+public class Hatchet extends AxeBlade {
 
-	public SquaredBlade(World world, int level) {
-		super(world, "Square Axe", SPRITES[1], level);
+	public Hatchet(World world, int level) {
+		super(world, "Hatchet", SPRITES[2], level);
 		id = 0;
 		allowedSwings = new String[]{
-			"Chop",
-			"SkullSpliter"
+			"Chop"
 		};
 		bannedSwings = new String[]{
-				
+			"Cleave",
+			"SkullSpliter"
 		};
+		repeatable = true;
 	}
 
 	@Override
 	public void setStats(float level) {
-		damage = 8*level;
-		speed = 11*level;
+		damage = 6*level;
+		speed = 13*level;
 		knockback = 7;
-		weight = 7;
+		weight = 6;
 	}
 
 }

@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 public class BasicBlade extends AxeBlade {
 
 	public BasicBlade(World world, int level) {
-		super(world, "Basic Axe Head", SPRITES[0], level);
+		super(world, "Basic Axe", SPRITES[0], level);
 		id = 0;
 		allowedSwings = new String[]{
 			"Cleave",

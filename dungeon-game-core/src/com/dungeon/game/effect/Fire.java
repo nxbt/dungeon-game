@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.effect.damage.FireDamage;
 import com.dungeon.game.effect.damage.PoisonDamage;
 import com.dungeon.game.entity.character.Character;
+import com.dungeon.game.entity.character.Player;
 import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.world.World;
 
@@ -46,6 +47,8 @@ public class Fire extends Effect {
     		if(e instanceof Fire && !e.killMe && e != this){
     			e.killMe = true;
     			this.str+=((Fire) e).str;
+    			if(character instanceof Player&&e.graphic!=null)((Player)character).effectGraphics.remove(e.graphic);
+    			character.effects.remove(e);
     		}
     	}
     }

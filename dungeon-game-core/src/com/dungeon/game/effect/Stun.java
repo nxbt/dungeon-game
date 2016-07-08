@@ -2,6 +2,7 @@ package com.dungeon.game.effect;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.entity.character.Character;
+import com.dungeon.game.entity.character.Player;
 import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.world.World;
 
@@ -15,6 +16,14 @@ public class Stun extends Effect {
 	
 	public void begin(Character character) {
 		character.stun = true;
+		for(Effect e: character.effects){
+    		if(e instanceof Stun && !e.killMe && e != this){
+    			e.killMe = true;
+    			duration = Math.max(duration, e.duration);
+    			if(character instanceof Player&&e.graphic!=null)((Player)character).effectGraphics.remove(e.graphic);
+    			character.effects.remove(e);
+    		}
+    	}
 	}
 	
 	public void end(Character character) {
