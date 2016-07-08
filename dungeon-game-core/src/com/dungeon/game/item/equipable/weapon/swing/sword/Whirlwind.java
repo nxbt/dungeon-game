@@ -17,7 +17,7 @@ public class Whirlwind extends SwordSwing {
 			endingZone = LEFT;
 			weapon.graphic.toFlip = true;
 		}else{
-			setStats(true, 10, 10, 90, 90, 30, 10, -270, -270, 0.7f, 1f, -90, 0.4f, 2);
+			setStats(true, 10, 10, -90, -90, 30, 10, 270, 270, 0.7f, 1f, -90, 0.4f, 2);
 			endingZone = RIGHT;
 			weapon.graphic.toFlip = false;
 		}
@@ -30,14 +30,24 @@ public class Whirlwind extends SwordSwing {
 		if(weapon.owner.equipItems[0] != null && weapon.owner.equipItems[0].equals(weapon) && weapon.owner.leftActivated){
 			nextSwing = true; // have to change this for non-players. with owner.attackleft or something
 			done = true;
-			angle = 90;
-			polarAngle = 90;
+			if(endingZone == LEFT){
+				angle = 90;
+				polarAngle = 90;
+			}else{
+				angle = -90;
+				polarAngle = -90;
+			}
 		}
 		else if(weapon.owner.equipItems[1] != null && weapon.owner.equipItems[1].equals(weapon) && weapon.owner.rightActivated){
 			nextSwing = true;
 			done = true;
-			angle = 90;
-			polarAngle = 90;
+			if(endingZone == LEFT){
+				angle = 90;
+				polarAngle = 90;
+			}else{
+				angle = -90;
+				polarAngle = -90;
+			}
 		}
 	}
 	
@@ -49,8 +59,13 @@ public class Whirlwind extends SwordSwing {
 		else if(counter - weapon.speed/10f< windupDuration + duration + PAUSE_DURATION*(weapon.speed/10))progressPause((int) (counter/(weapon.speed/10))); // we are in the pause after the swing, in which you can initiate another swing
 		else {
 			done = true; //this swing is done!
-			angle = 90;
-			polarAngle = 90;
+			if(endingZone == LEFT){
+				angle = 90;
+				polarAngle = 90;
+			}else{
+				angle = -90;
+				polarAngle = -90;
+			}
 		}
 		
 	}
