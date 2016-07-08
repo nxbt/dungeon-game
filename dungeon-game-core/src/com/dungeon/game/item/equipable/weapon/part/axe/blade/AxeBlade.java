@@ -10,7 +10,9 @@ import com.dungeon.game.world.World;
 
 public abstract class AxeBlade extends AxePart {
 	
-	public static final int NUM = 3;
+	public static final int NUM = 4;
+	
+	//axe head named after place?
 
 	public static final Texture[] SPRITES = Spritesheet.getSprites("axeBladeMap.png", 32, 32);
 	
@@ -18,6 +20,7 @@ public abstract class AxeBlade extends AxePart {
 		BasicBlade.class.getConstructors()[0],
 		SquaredBlade.class.getConstructors()[0],
 		Hatchet.class.getConstructors()[0],
+		AngularBlade.class.getConstructors()[0],
 	};
 
 	public AxeBlade(World world, String name, Texture sprite, int level) {
