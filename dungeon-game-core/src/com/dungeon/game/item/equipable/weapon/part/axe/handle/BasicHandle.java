@@ -8,8 +8,6 @@ public class BasicHandle extends AxeHandle {
 		super(world, "Basic Axe Handle", SPRITES[0], level);
 		id = 0;
 		allowedSwings = new String[]{
-			"Slash",
-			"Stab"
 		};
 		bannedSwings = new String[]{
 				

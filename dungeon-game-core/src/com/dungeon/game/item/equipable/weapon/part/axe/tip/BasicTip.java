@@ -8,8 +8,6 @@ public class BasicTip extends AxeTip {
 		super(world, "Basic Axe Tip", SPRITES[0], level);
 		id = 0;
 		allowedSwings = new String[]{
-			"Slash",
-			"Stab"
 		};
 		bannedSwings = new String[]{
 				
