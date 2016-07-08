@@ -11,7 +11,9 @@ public abstract class AxeSwing extends Swing {
 	}
 	
 	public static final Class<?>[] SWINGS = new Class<?>[]{
-		Cleave.class
+		Cleave.class,
+		Chop.class,
+		SkullSpliter.class
 	};
 
 	public static Swing getSwingByName(World world, String name){
