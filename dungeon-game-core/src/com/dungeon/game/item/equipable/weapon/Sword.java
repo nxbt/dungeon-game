@@ -45,7 +45,7 @@ public class Sword extends Melee {
 		spr.drawPixmap(hiltMap, 0, 0);
 		spr.drawPixmap(guardMap, 0, 0);
 		sprite = new Texture(spr);
-		spr.dispose();
+//		spr.dispose();
 		//for some reason all the pixmaps are all disposed already... thx libgdx!
 		
 		

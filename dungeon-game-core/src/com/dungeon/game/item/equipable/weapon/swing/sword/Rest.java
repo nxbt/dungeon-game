@@ -60,6 +60,7 @@ public class Rest extends SwordSwing{
 	@Override
 	public void setPrevSwing(Swing prevSwing) {
 		this.prevSwing = prevSwing;
+		weapon.graphic.toFlip = true;
 		
 	}
 }

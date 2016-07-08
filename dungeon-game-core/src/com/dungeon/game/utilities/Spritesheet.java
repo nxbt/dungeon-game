@@ -1,13 +1,12 @@
 package com.dungeon.game.utilities;
 
-import java.lang.reflect.Method;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Spritesheet {
+	
 	public static Texture[] getSprites(String filename, int width, int height) {
 		Texture[] textures;
 		

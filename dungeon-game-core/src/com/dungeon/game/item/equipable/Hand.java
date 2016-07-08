@@ -31,8 +31,16 @@ public abstract class Hand extends Equipable {
 	
 	public void equip(Character owner, boolean leftSide){
 		reset();
-		
+		System.out.println(leftSide);
 		this.owner = owner;
+		graphic.sprite = sprite;
+		if(leftSide){
+			graphic.toFlip = true;
+			graphic.flipped = false;
+		}else{
+			graphic.toFlip = true;
+			graphic.flipped = false;
+		}
 		
 		this.leftSide = leftSide;
 		

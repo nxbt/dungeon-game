@@ -15,9 +15,11 @@ public class HiltJab extends SwordSwing {
 		if(prevSwing.endingZone == LEFT){
 			setStats(false, 10, 15, 70, 150, 10, 26, 0, 90, 2f, 0.6f, 180, 0, 2);
 			endingZone = LEFT;
+			weapon.graphic.toFlip = true;
 		}else{
 			setStats(false, 10, 15, -70, -150, 10, 26, 0, -90, 2f, 0.6f, 180, 0, 2);
 			endingZone = RIGHT;
+			weapon.graphic.toFlip = false;
 		}
 	}
 

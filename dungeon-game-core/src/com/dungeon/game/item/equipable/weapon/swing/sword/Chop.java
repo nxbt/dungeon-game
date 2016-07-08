@@ -15,9 +15,11 @@ public class Chop extends SwordSwing {
 		if(prevSwing.endingZone == LEFT){
 			setStats(false, 20, 10, 100, 100, 10, 15, 0, 0, 1.3f, 1f, -90, 0, 1.3f);
 			endingZone = LEFT;
+			weapon.graphic.toFlip = true;
 		}else{
 			setStats(false, 20, 10, -100, -100, 10, 15, 0, 0, 1.3f, 1f, 90, 0, 1.3f);
 			endingZone = RIGHT;
+			weapon.graphic.toFlip = false;
 		}
 	}
 

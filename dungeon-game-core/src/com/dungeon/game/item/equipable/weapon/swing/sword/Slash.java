@@ -15,9 +15,11 @@ public class Slash extends SwordSwing {
 		if(prevSwing.endingZone == LEFT){
 			setStats(false, 10, 24, 70, 35, 8, 14, -55, -50, 0.7f, 1, -90, 0.4f, 1);
 			endingZone = RIGHT;
+			weapon.graphic.toFlip = true;
 		}else{
 			setStats(false, 10, 24, -70, -35, 8, 14, 55, 50, 0.7f, 1, 90, 0.4f, 1);
 			endingZone = LEFT;
+			weapon.graphic.toFlip = false;
 		}
 	}
 

@@ -42,6 +42,7 @@ public class Stab extends SwordSwing {
 				endingZone = RIGHT;
 			}
 		}
+		weapon.graphic.toFlip = false;
 	}
 
 }

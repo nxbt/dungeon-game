@@ -15,9 +15,11 @@ public class GuardJab extends SwordSwing {
 		if(prevSwing.endingZone == LEFT){
 			setStats(false, 10, 10, -20, 90, 10, 26, -15, 90, 0.5f, 1.3f, -90, 0, 2);
 			endingZone = CENTER;
+			weapon.graphic.toFlip = true;
 		}else{
 			setStats(false, 10, 10, 20, -90, 10, 26, 15, -90, 0.5f, 1.3f, 90, 0, 2);
 			endingZone = CENTER;
+			weapon.graphic.toFlip = false;
 		}
 	}
 
