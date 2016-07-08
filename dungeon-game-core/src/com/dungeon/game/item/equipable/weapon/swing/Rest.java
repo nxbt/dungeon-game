@@ -1,9 +1,8 @@
-package com.dungeon.game.item.equipable.weapon.swing.sword;
+package com.dungeon.game.item.equipable.weapon.swing;
 
-import com.dungeon.game.item.equipable.weapon.swing.Swing;
 import com.dungeon.game.world.World;
 
-public class Rest extends SwordSwing{
+public class Rest extends Swing{
 	
 	public Rest(World world){
 		super(world, "Rest"); //rests have no windup and never hit anything, so we pass in 0 for those values

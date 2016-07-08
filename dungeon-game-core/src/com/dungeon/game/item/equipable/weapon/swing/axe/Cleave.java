@@ -16,9 +16,11 @@ public class Cleave extends AxeSwing {
 		if(prevSwing.endingZone == LEFT){
 			setStats(true, 10, 24, 80, 45, 8, 14, -65, -55, 0.7f, 1, -90, 0.2f, 1);
 			endingZone = RIGHT;
+			weapon.graphic.toFlip = true;
 		}else{
 			setStats(true, 10, 24, -80, -45, 8, 14, 65, 55, 0.7f, 1, 90, 0.2f, 1);
 			endingZone = LEFT;
+			weapon.graphic.toFlip = false;
 		}
 	}
 

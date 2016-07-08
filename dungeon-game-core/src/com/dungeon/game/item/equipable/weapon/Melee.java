@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.item.equipable.weapon.part.Part;
+import com.dungeon.game.item.equipable.weapon.swing.Rest;
 import com.dungeon.game.item.equipable.weapon.swing.Swing;
 import com.dungeon.game.item.equipable.weapon.swing.SwingSet;
-import com.dungeon.game.item.equipable.weapon.swing.sword.Rest;
 import com.dungeon.game.world.World;
 
 public abstract class Melee extends Weapon {	

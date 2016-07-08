@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.item.equipable.weapon.Melee;
+import com.dungeon.game.item.equipable.weapon.swing.Rest;
 import com.dungeon.game.item.equipable.weapon.swing.Swing;
-import com.dungeon.game.item.equipable.weapon.swing.sword.Rest;
 import com.dungeon.game.world.World;
 
 public class SwingSelection extends Hud {

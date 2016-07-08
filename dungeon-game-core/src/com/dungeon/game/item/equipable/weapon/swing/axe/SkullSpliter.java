@@ -15,6 +15,7 @@ public class SkullSpliter extends AxeSwing {
 		this.prevSwing = prevSwing;
 			setStats(false, 50, -10, 0, 0, 5, 20, 0, 0, 2f, 0, 0, 1, 1.8f);
 			endingZone = CENTER;
+			weapon.graphic.toFlip = false;
 	}
 
 }
