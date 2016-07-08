@@ -25,7 +25,7 @@ public abstract class AxeTip extends AxePart {
 	}
 	
 	public void draw(SpriteBatch batch, float x, float y){
-		font.draw(batch, "Blade: ", x - 70, y + 22);
+		font.draw(batch, "Tip: ", x - 70, y + 22);
 		batch.draw(slot, x, y, 32, 32);
 		batch.draw(sprite, x, y, 32, 32);
 	}

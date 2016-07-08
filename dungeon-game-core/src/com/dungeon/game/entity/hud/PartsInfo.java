@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.item.equipable.weapon.Weapon;
 import com.dungeon.game.item.equipable.weapon.part.Part;
 import com.dungeon.game.utilities.TextHelper;
@@ -31,13 +30,7 @@ public class PartsInfo extends Hud {
 		
 		this.weapon = weapon;
 		
-		parts = new Part[3];
-		
-		if(weapon instanceof Sword){
-			parts[0] = ((Sword) weapon).blade;
-			parts[1] = ((Sword) weapon).guard;
-			parts[2] = ((Sword) weapon).hilt;
-		}
+		parts = weapon.getParts();
 		
 	}
 

@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.item.equipable.weapon.Melee;
 import com.dungeon.game.item.equipable.weapon.swing.Swing;
 import com.dungeon.game.item.equipable.weapon.swing.sword.Rest;
-import com.dungeon.game.item.equipable.weapon.swing.sword.SwordSwing;
 import com.dungeon.game.world.World;
 
 public class SwingSelection extends Hud {
@@ -28,10 +27,18 @@ public class SwingSelection extends Hud {
 		d_width = 100;
 		d_height = 212;
 		for(int i = 0; i < allowedSwings.length; i++){
-			addSubEntitiy(new SwingGraphic(world, 0, 0, SwordSwing.getSwingByName(world, allowedSwings[i]), true), "Allowed Swing", 4, (allowedSwings.length-1)*18 - 18 * i + 4);
+			try {
+				addSubEntitiy(new SwingGraphic(world, 0, 0, (Swing) weapon.swingClass.getDeclaredMethod("getSwingByName", new Class<?>[]{World.class, String.class}).invoke(null, world, allowedSwings[i]), true), "Allowed Swing", 4, (allowedSwings.length-1)*18 - 18 * i + 4);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		for(int i = 0; i < curSwings.length; i++){
-			addSubEntitiy(new SwingGraphic(world, 0, 0, SwordSwing.getSwingByName(world, curSwings[i]), false), "Selected Swing", 4, d_height - 18 * i - 22);
+			try {
+				addSubEntitiy(new SwingGraphic(world, 0, 0, (Swing) weapon.swingClass.getDeclaredMethod("getSwingByName", new Class<?>[]{World.class, String.class}).invoke(null, world, curSwings[i]), false), "Selected Swing", 4, d_height - 18 * i - 22);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
 		}
 	}
 	
@@ -69,7 +76,11 @@ public class SwingSelection extends Hud {
 		Swing[] newSwings = new Swing[swingGraphics.length+1];
 		newSwings[0] = new Rest(world);
 		for(int i = 0; i < swingGraphics.length; i++){
-			newSwings[i+1] = SwordSwing.getSwingByName(world, ((SwingGraphic)swingGraphics[i]).swing.getClass().getSimpleName());
+			try {
+				newSwings[i+1] = (Swing) weapon.swingClass.getDeclaredMethod("getSwingByName", new Class<?>[]{World.class, String.class}).invoke(null, world, ((SwingGraphic)swingGraphics[i]).swing.getClass().getSimpleName());
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
 		}
 		weapon.swings.setSwings(newSwings);
 		

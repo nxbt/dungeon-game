@@ -78,22 +78,22 @@ public class Axe extends Melee {
 
 	@Override
 	public String getDamageText() {
-		return "Weapon Damage: " + Math.round(damage*10)/10f + "   \n Blade: " + blade.damage + "   \n Guard: " + tip.damage + "   \n Hilt: " + handle.damage;
+		return "Weapon Damage: " + Math.round(damage*10)/10f + "   \n Blade: " + blade.damage + "   \n Tip: " + tip.damage + "   \n Handle: " + handle.damage;
 	}
 
 	@Override
 	public String getSpeedText() {
-		return "Weapon Speed: " + Math.round(speed*10)/10f + "   \n Blade: " + blade.speed + "   \n Guard: " + tip.speed + "   \n Hilt: " + handle.speed;
+		return "Weapon Speed: " + Math.round(speed*10)/10f + "   \n Blade: " + blade.speed + "   \n Tip: " + tip.speed + "   \n Handle: " + handle.speed;
 	}
 
 	@Override
 	public String getKnockText() {
-		return "Weapon Knockback: " + Math.round(knockback*10)/10f + "   \n Blade: " + blade.knockback + "   \n Guard: " + tip.knockback + "   \n Hilt: " + handle.knockback;
+		return "Weapon Knockback: " + Math.round(knockback*10)/10f + "   \n Blade: " + blade.knockback + "   \n Tip: " + tip.knockback + "   \n Handle: " + handle.knockback;
 	}
 
 	@Override
 	public String getWeightText() {
-		return "Weapon Weight: " + Math.round(weight*10)/10f + "   \n Blade: " + blade.weight + "   \n Guard: " + tip.weight + "   \n Hilt: " + handle.weight;
+		return "Weapon Weight: " + Math.round(weight*10)/10f + "   \n Blade: " + blade.weight + "   \n Tip: " + tip.weight + "   \n Handle: " + handle.weight;
 	}
 	
 	public Part[] getParts(){
