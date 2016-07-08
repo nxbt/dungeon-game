@@ -12,7 +12,6 @@ public class Seax extends SwordBlade {
 		};
 		bannedSwings = new String[]{
 			"Stab",
-			"Slash",
 		};
 	}
 
@@ -22,6 +21,7 @@ public class Seax extends SwordBlade {
 		speed = 12*level;
 		knockback = 8;
 		weight = 13;
+		numSwings = 2;
 	}
 
 }

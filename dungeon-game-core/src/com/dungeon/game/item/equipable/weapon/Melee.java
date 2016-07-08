@@ -15,11 +15,13 @@ public abstract class Melee extends Weapon {
 	
 	public float knockback; //str of the knockback of this weapon
 	
+	public int numSwings;
+	
 	public boolean hasHit;
 	
 	public SwingSet swings;
 	
-	public  Class<?> swingClass;;
+	public  Class<?> swingClass;
 	
 	public Melee(World world, String filename) {
 		super(world, filename);
@@ -78,15 +80,16 @@ public abstract class Melee extends Weapon {
 	
 	public SwingSet getStartSwings(){
 		String[] allowedSwings = getAllowedSwings();
-		Swing[] swings = new Swing[4];
+		Swing[] swings = new Swing[numSwings+1];
 		swings[0] = new Rest(world);
-		try {
-			swings[1] = (Swing) swingClass.getDeclaredMethod("getSwingByName", new Class<?>[]{World.class, String.class}).invoke(null, world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
-			swings[2] = (Swing) swingClass.getDeclaredMethod("getSwingByName", new Class<?>[]{World.class, String.class}).invoke(null, world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
-			swings[3] = (Swing) swingClass.getDeclaredMethod("getSwingByName", new Class<?>[]{World.class, String.class}).invoke(null, world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
-		} catch (Exception e) {
-			e.printStackTrace();
+		for(int i = 1; i < numSwings+1; i++) {
+			try {
+				swings[i] = (Swing) swingClass.getDeclaredMethod("getSwingByName", new Class<?>[]{World.class, String.class}).invoke(null, world, allowedSwings[(int) (Math.random()*allowedSwings.length)]);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 		Part[] parts = getParts();
 		boolean repeatable = true;
 		for(Part p: parts){

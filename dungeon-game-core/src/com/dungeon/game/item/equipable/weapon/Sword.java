@@ -1,7 +1,5 @@
 package com.dungeon.game.item.equipable.weapon;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
@@ -11,9 +9,6 @@ import com.dungeon.game.item.equipable.weapon.part.Part;
 import com.dungeon.game.item.equipable.weapon.part.sword.blade.SwordBlade;
 import com.dungeon.game.item.equipable.weapon.part.sword.guard.SwordGuard;
 import com.dungeon.game.item.equipable.weapon.part.sword.hilt.SwordHilt;
-import com.dungeon.game.item.equipable.weapon.swing.Swing;
-import com.dungeon.game.item.equipable.weapon.swing.SwingSet;
-import com.dungeon.game.item.equipable.weapon.swing.sword.Rest;
 import com.dungeon.game.item.equipable.weapon.swing.sword.SwordSwing;
 import com.dungeon.game.world.World;
 
@@ -62,20 +57,15 @@ public class Sword extends Melee {
 		speed = blade.speed + guard.speed + hilt.speed;
 		knockback = blade.knockback + guard.knockback + hilt.knockback;
 		weight = blade.weight + guard.weight + hilt.weight;
+		numSwings = blade.numSwings + guard.numSwings + hilt.numSwings;
 		
 		desc = "The most common and widely used melee weapon.\n\n Damage: "+ Math.floor(damage*10)/10f + "\n Speed: "+ Math.floor(speed*10)/10f + "\n Knockback: "+ Math.floor(knockback*10)/10f + "\n Weight: "+ Math.floor(weight*10)/10f;
 		
 		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
 		
-//		swings = BLADE_SWINGS[blade.id]; // do we have to clone it? I guess not
-//		for(int i = 0; i < GUARD_SWINGS[guard.id].length; i++){
-//			swings.addSwing(GUARD_SWINGS[guard.id][i]);
-//		}
-//		for(int i = 0; i < HILT_SWINGS[hilt.id].length; i++){
-//			swings.addSwing(HILT_SWINGS[hilt.id][i]);
-//		}
 		swingClass = SwordSwing.class;
 		swings = getStartSwings();
+		
 		hitEffects.add(new Stun(world, 30));
 	}
 	

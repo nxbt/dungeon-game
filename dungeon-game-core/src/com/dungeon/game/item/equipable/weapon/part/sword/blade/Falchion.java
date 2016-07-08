@@ -22,6 +22,7 @@ public class Falchion extends SwordBlade {
 		speed = 9*level;
 		knockback = 13;
 		weight = 13;
+		numSwings = 2;
 	}
 
 }

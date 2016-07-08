@@ -23,6 +23,7 @@ public class BasicBlade extends AxeBlade {
 		speed = 10*level;
 		knockback = 10;
 		weight = 10;
+		numSwings = 2;
 	}
 
 }

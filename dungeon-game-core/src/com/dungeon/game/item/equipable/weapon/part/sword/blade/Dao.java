@@ -23,6 +23,7 @@ public class Dao extends SwordBlade {
 		speed = 10*level;
 		knockback = 8;
 		weight = 11;
+		numSwings = 3;
 	}
 
 }

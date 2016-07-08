@@ -22,6 +22,7 @@ public class SquaredBlade extends AxeBlade {
 		speed = 11*level;
 		knockback = 7;
 		weight = 7;
+		numSwings = 2;
 	}
 
 }

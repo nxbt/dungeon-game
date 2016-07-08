@@ -25,6 +25,7 @@ public class Needle extends SwordBlade {
 		speed = 26*level;
 		knockback = 2;
 		weight = 2;
+		numSwings = 2;
 	}
 
 }

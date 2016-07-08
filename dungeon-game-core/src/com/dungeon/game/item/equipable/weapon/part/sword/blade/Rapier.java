@@ -28,6 +28,7 @@ public class Rapier extends SwordBlade {
 		speed = 16*level;
 		knockback = 3;
 		weight = 5;
+		numSwings = 2;
 	}
 
 }

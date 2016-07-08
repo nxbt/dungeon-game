@@ -12,7 +12,7 @@ public class SlimBlade extends SwordBlade {
 			"Stab"
 		};
 		bannedSwings = new String[]{
-				
+			
 		};
 	}
 
@@ -22,6 +22,7 @@ public class SlimBlade extends SwordBlade {
 		speed = 12*level;
 		knockback = 7;
 		weight = 7;
+		numSwings = 3;
 	}
 
 }

@@ -25,6 +25,7 @@ public class Scimitar extends SwordBlade {
 		speed = 11*level;
 		knockback = 6;
 		weight = 9;
+		numSwings = 3;
 	}
 
 }

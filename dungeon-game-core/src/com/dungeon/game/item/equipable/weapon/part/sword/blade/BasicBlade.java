@@ -22,6 +22,7 @@ public class BasicBlade extends SwordBlade {
 		speed = 10*level;
 		knockback = 10;
 		weight = 10;
+		numSwings = 3;
 	}
 
 }

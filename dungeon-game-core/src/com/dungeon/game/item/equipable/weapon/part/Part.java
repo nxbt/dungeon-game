@@ -49,17 +49,19 @@ public abstract class Part extends Item implements Cloneable{
 	//is it repeatable?
 	public boolean repeatable;
 	
-	//damage multiplier for this part
+	//damage for this part
 	public float damage;
 	
-	//speed multiplier for this part
+	//speed for this part
 	public float speed;
 	
-	//knockback multiplier for this part
+	//knockback for this part
 	public float knockback;
 	
-	//stanima multiplier for this part
+	//stanima for this part
 	public float weight;
+	
+	public int numSwings;
 	
 	protected BitmapFont font;
 	

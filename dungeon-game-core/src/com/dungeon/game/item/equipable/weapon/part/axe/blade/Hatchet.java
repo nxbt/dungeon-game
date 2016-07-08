@@ -23,6 +23,7 @@ public class Hatchet extends AxeBlade {
 		speed = 13*level;
 		knockback = 7;
 		weight = 6;
+		numSwings = 2;
 	}
 
 }

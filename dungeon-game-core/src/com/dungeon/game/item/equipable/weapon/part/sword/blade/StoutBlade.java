@@ -23,6 +23,7 @@ public class StoutBlade extends SwordBlade {
 		speed = 6*level;
 		knockback = 13;
 		weight = 16;
+		numSwings = 3;
 	}
 
 }
