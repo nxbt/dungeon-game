@@ -32,25 +32,13 @@ public class FlashLight extends Hand {
 	}
 	
 	public void equip(Character owner, boolean leftSide){
-		reset();
-		
+		super.equip(owner, leftSide);
 		this.graphic.light.load();
-		
-		this.owner = owner;
-		
-		this.leftSide = leftSide;
-		
-		world.entities.add(world.entities.indexOf(owner)+1,this.graphic);
 	}
 	
 	public void unequip(){
-		reset();
-		
+		super.unequip();
 		this.graphic.light.unload();
-		
-		this.owner = null;
-		
-		world.entities.remove(this.graphic);
 	}
 
 }
