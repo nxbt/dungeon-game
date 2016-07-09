@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.item.equipable.weapon.part.sword.SwordPart;
 import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.World;
@@ -31,6 +32,7 @@ public abstract class SwordBlade extends SwordPart {
 		super(world, name, sprite, level);
 		part = BLADE;
 		repeatable = false;
+		hitbox = new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}); // default sword blade hitbox
 	}
 	
 	public void draw(SpriteBatch batch, float x, float y){

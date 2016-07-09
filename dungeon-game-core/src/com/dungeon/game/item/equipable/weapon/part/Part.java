@@ -8,11 +8,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.equipable.weapon.Weapon;
-import com.dungeon.game.item.equipable.weapon.swing.Swing;
-import com.dungeon.game.item.equipable.weapon.swing.sword.SwordSwing;
 import com.dungeon.game.world.World;
 
 public abstract class Part extends Item implements Cloneable{	
@@ -69,6 +68,8 @@ public abstract class Part extends Item implements Cloneable{
 	
 	public ArrayList<Effect> passiveEffects;
 	
+	public Polygon hitbox;
+	
 	public Part(World world, String name, Texture sprite, int level) {
 		super(world, "slot.png");
 		
@@ -81,6 +82,8 @@ public abstract class Part extends Item implements Cloneable{
 		setStats(level);
 		passiveEffects = new ArrayList<Effect>();
 		hitEffects = new ArrayList<Effect>();
+		
+		hitbox = null; // deafault hitbox is null
 	}
 
 	public void hovered(){

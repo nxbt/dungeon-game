@@ -60,7 +60,7 @@ public class Sword extends Melee {
 		
 		desc = "The most common and widely used melee weapon.\n\n Damage: "+ Math.floor(damage*10)/10f + "\n Speed: "+ Math.floor(speed*10)/10f + "\n Knockback: "+ Math.floor(knockback*10)/10f + "\n Weight: "+ Math.floor(weight*10)/10f;
 		
-		graphic = new MeleeGraphic(world, this, new Polygon(new float[]{24,6,26,8,2,32,0,32,0,30}), 30, 2);
+		graphic = new MeleeGraphic(world, this, blade.hitbox, 30, 2);
 		
 		swingClass = SwordSwing.class;
 		swings = getStartSwings();
