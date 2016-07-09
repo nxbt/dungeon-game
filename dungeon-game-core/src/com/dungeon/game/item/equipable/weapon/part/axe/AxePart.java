@@ -34,7 +34,7 @@ public abstract class AxePart extends Part {
 				if(i != bannedSwings.length - 1)string +=", ";
 			}
 		}
-		string += repeatable?"\nRepeatable":"\nNot Repeatable";
+		string += repeatable?"\nRepeatable":"";
 		return  string;
 	}
 

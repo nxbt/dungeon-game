@@ -10,7 +10,7 @@ import com.dungeon.game.world.World;
 
 public abstract class AxeBlade extends AxePart {
 	
-	public static final int NUM = 5;
+	public static final int NUM = 8;
 	
 	//axe head named after place?
 
@@ -22,6 +22,9 @@ public abstract class AxeBlade extends AxePart {
 		Hatchet.class.getConstructors()[0],
 		AngularBlade.class.getConstructors()[0],
 		Cleaver.class.getConstructors()[0],
+		Saxon.class.getConstructors()[0],
+		Triangular.class.getConstructors()[0],
+		Tomahawk.class.getConstructors()[0],
 	};
 
 	public AxeBlade(World world, String name, Texture sprite, int level) {
