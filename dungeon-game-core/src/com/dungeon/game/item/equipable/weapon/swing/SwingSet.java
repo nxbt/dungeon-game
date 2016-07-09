@@ -60,14 +60,19 @@ public class SwingSet{
 					if(!repeatable){
 						swings[0].setPrevSwing(swings[curSwing-1]); //set rest's prevSwing to the swing that just finished
 						curSwing = 0; //set curSwing to 0, the resting position
+						swings[curSwing].beginSwing();
 					}else{
-						swings[1].setPrevSwing(swings[curSwing-1]); //if its repeatable then we go to the first swing
-						curSwing = 1; //set curSwing to 1, the first swing position
+						if(!swings[1].beginSwing()){
+							swings[0].setPrevSwing(swings[curSwing-1]); //if the owner does not have enough stanima to swing, we go to the resting position, gotta update prevSwing!
+							curSwing = 0; // set the curSwing to rest
+							swings[curSwing].beginSwing(); //begin the resting position
+						}else{
+							swings[1].setPrevSwing(swings[curSwing-1]); //if its repeatable then we go to the first swing
+							curSwing = 1; //set curSwing to 1, the first swing position
+						}
 					}
 					
-				}
-				
-				if(!swings[curSwing].beginSwing()){ //reset variables for the new swing, and check if the owner has stanima to do so
+				}else if(!swings[curSwing].beginSwing()){ //reset variables for the new swing, and check if the owner has stanima to do so
 					swings[0].setPrevSwing(swings[curSwing-1]); //if the owner does not have enough stanima to swing, we go to the resting position, gotta update prevSwing!
 					curSwing = 0; // set the curSwing to rest
 					swings[curSwing].beginSwing(); //begin the resting position
