@@ -29,3 +29,5 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 ##BUG TRACKER
 * game unplayable if there aren't enough special rooms in towns
 * popups don't close when going down or up a floor
+* there is some problem with repeatable weapons jumping when returning to the rest position
+* needle can have negative knockback
