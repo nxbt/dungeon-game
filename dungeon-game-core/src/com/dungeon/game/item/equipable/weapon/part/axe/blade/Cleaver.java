@@ -2,25 +2,25 @@ package com.dungeon.game.item.equipable.weapon.part.axe.blade;
 
 import com.dungeon.game.world.World;
 
-public class AngularBlade extends AxeBlade {
+public class Cleaver extends AxeBlade {
 
-	public AngularBlade(World world, int level) {
-		super(world, "Angular Blade", SPRITES[3], level);
+	public Cleaver(World world, int level) {
+		super(world, "Cleaver", SPRITES[4], level);
 		id = 0;
 		allowedSwings = new String[]{
-			"Chop",
+			"Cleave",
 			"SkullSpliter"
 		};
 		bannedSwings = new String[]{
-			"Cleave",
+				"Chop",
 		};
 	}
 
 	@Override
 	public void setStats(float level) {
-		damage = 8*level;
-		speed = 9*level;
-		knockback = 10;
+		damage = 9*level;
+		speed = 13*level;
+		knockback = 6;
 		weight = 11;
 		numSwings = 2;
 	}
