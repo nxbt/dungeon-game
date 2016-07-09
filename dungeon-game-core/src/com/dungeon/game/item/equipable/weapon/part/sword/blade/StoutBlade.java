@@ -19,10 +19,10 @@ public class StoutBlade extends SwordBlade {
 
 	@Override
 	public void setStats(float level) {
-		damage = 15*level;
-		speed = 6*level;
-		knockback = 13;
-		weight = 16;
+		damage = getStat(17+2*level,3.5f+1.5f*level);
+		speed = getStat(6,1.5f);
+		knockback = getStat(17,3);
+		weight = getStat(17.5f,2.5f);
 		numSwings = 3;
 	}
 

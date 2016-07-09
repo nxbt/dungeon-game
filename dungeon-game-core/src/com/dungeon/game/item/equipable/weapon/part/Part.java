@@ -117,4 +117,7 @@ public abstract class Part extends Item implements Cloneable{
 		
 	}
 
+	public static float getStat(float base, float dev) {
+		return (float) (base + (Math.random()*2*dev) - dev);
+	}
 }

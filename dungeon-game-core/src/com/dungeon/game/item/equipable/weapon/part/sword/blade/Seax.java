@@ -17,10 +17,10 @@ public class Seax extends SwordBlade {
 
 	@Override
 	public void setStats(float level) {
-		damage = 9*level;
-		speed = 12*level;
-		knockback = 8;
-		weight = 13;
+		damage = getStat(10.4f+0.8f*level,0.5f+0.2f*level);
+		speed = getStat(9.2f,1.7f);
+		knockback = getStat(7.4f,2.6f);
+		weight = getStat(13.5f,1.8f);
 		numSwings = 2;
 	}
 

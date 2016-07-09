@@ -18,10 +18,10 @@ public class SlimBlade extends SwordBlade {
 
 	@Override
 	public void setStats(float level) {
-		damage = 8*level;
-		speed = 12*level;
-		knockback = 7;
-		weight = 7;
+		damage = getStat(7.4f+1.2f*level,1.7f+0.5f*level);
+		speed = getStat(12.4f,2.4f);
+		knockback = getStat(6.8f,1.7f);
+		weight = getStat(7.2f,2.1f);
 		numSwings = 3;
 	}
 

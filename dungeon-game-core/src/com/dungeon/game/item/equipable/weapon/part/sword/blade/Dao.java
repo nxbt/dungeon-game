@@ -3,26 +3,25 @@ package com.dungeon.game.item.equipable.weapon.part.sword.blade;
 import com.dungeon.game.world.World;
 
 public class Dao extends SwordBlade {
-
 	public Dao(World world, int level) {
 		super(world, "Dao", SPRITES[7], level);
 		id = 0;
 		allowedSwings = new String[]{
 			"Slash",
-			"Chop"
+			"Whirlwind"
 		};
 		bannedSwings = new String[]{
-			"Stab",
+			"Stab"
 		};
 		repeatable = true;
 	}
 
 	@Override
 	public void setStats(float level) {
-		damage = 12*level;
-		speed = 10*level;
-		knockback = 8;
-		weight = 11;
+		damage = getStat(8.5f+0.9f*level,1.5f+0.5f*level);
+		speed = getStat(12.5f,1.5f);
+		knockback = getStat(6.5f,2);
+		weight = getStat(11,1.5f);
 		numSwings = 3;
 	}
 
