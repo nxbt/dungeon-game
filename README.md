@@ -30,4 +30,3 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * game unplayable if there aren't enough special rooms in towns
 * popups don't close when going down or up a floor
 * needle can have negative knockback
-* you can interact with hud slots while in fight mode
