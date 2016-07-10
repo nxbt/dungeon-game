@@ -1,5 +1,6 @@
 package com.dungeon.game.item.equipable.weapon.part.sword.blade;
 
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.world.World;
 
 public class Dao extends SwordBlade {
@@ -14,6 +15,8 @@ public class Dao extends SwordBlade {
 			"Stab"
 		};
 		repeatable = true;
+		hitbox = new Polygon(new float[]{2,24,23,7,25,10,13,22,10,28,5,28,5,32,1,31});
+
 	}
 
 	@Override

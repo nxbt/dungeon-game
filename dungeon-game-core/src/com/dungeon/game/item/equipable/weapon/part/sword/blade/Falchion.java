@@ -1,5 +1,6 @@
 package com.dungeon.game.item.equipable.weapon.part.sword.blade;
 
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.world.World;
 
 public class Falchion extends SwordBlade {
@@ -13,6 +14,7 @@ public class Falchion extends SwordBlade {
 		bannedSwings = new String[]{
 			"Stab"
 		};
+		hitbox = new Polygon(new float[]{3,21,22,6,25,8,3,31});
 	}
 
 	@Override

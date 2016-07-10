@@ -1,5 +1,6 @@
 package com.dungeon.game.item.equipable.weapon.part.sword.blade;
 
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.world.World;
 
 public class BroadBlade extends SwordBlade {
@@ -13,6 +14,7 @@ public class BroadBlade extends SwordBlade {
 		bannedSwings = new String[]{
 				
 		};
+		hitbox = new Polygon(new float[]{1,27,21,7,25,11,5,31,1,31});
 	}
 
 	@Override

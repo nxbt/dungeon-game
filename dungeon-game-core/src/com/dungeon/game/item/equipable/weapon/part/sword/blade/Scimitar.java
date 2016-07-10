@@ -1,5 +1,6 @@
 package com.dungeon.game.item.equipable.weapon.part.sword.blade;
 
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.world.World;
 
 public class Scimitar extends SwordBlade {
@@ -14,6 +15,7 @@ public class Scimitar extends SwordBlade {
 			"Stab"
 		};
 		repeatable = true;
+		hitbox = new Polygon(new float[]{3,26,5,19,12,12,22,7,25,10,17,14,10,21,7,23,5,30});
 	}
 
 	@Override

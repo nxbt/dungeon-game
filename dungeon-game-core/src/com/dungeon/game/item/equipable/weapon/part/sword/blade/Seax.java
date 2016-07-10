@@ -1,5 +1,6 @@
 package com.dungeon.game.item.equipable.weapon.part.sword.blade;
 
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.world.World;
 
 public class Seax extends SwordBlade {
@@ -13,6 +14,8 @@ public class Seax extends SwordBlade {
 		bannedSwings = new String[]{
 			"Stab",
 		};
+		hitbox = new Polygon(new float[]{2,27,12,15,21,7,24,9,20,14,3,31,1,31});
+
 	}
 
 	@Override

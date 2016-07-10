@@ -1,5 +1,6 @@
 package com.dungeon.game.item.equipable.weapon.part.sword.blade;
 
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.world.World;
 
 public class Needle extends SwordBlade {
@@ -16,6 +17,8 @@ public class Needle extends SwordBlade {
 			"Execute"
 		};
 		repeatable = true;
+		hitbox = new Polygon(new float[]{10,20,23,7,25,9,12,22,10,22});
+
 	}
 
 	@Override

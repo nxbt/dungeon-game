@@ -1,5 +1,6 @@
 package com.dungeon.game.item.equipable.weapon.part.sword.blade;
 
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.world.World;
 
 public class Rapier extends SwordBlade {
@@ -16,6 +17,8 @@ public class Rapier extends SwordBlade {
 			"Execute"
 		};
 		repeatable = true;
+		hitbox = new Polygon(new float[]{1,29,20,10,21,12,2,31});
+
 	}
 
 	@Override
