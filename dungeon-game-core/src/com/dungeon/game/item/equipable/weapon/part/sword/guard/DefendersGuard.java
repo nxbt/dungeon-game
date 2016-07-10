@@ -13,10 +13,10 @@ public class DefendersGuard extends SwordGuard {
 
 	@Override
 	public void setStats(float level) {
-		damage = 0;
-		speed = 0;
-		knockback = 2;
-		weight = 2;
+		damage = getStat(0.2f+0.02f*level,0.05f+0.01f*level);
+		speed = getStat(0.1f,0.04f);
+		knockback = getStat(1,0.3f);
+		weight = getStat(1.6f,0.3f);
 		
 	}
 

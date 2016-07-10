@@ -16,10 +16,10 @@ public class SpikedGuard extends SwordGuard {
 
 	@Override
 	public void setStats(float level) {
-		damage = 3*level;
-		speed = -1*level;
-		knockback = -1;
-		weight = 1;
+		damage = getStat(2.5f+0.3f*level,0.4f+0.07f*level);
+		speed = getStat(0.2f,0.07f);
+		knockback = getStat(0.05f,0.02f);
+		weight = getStat(1.1f,0.35f);
 		
 	}
 

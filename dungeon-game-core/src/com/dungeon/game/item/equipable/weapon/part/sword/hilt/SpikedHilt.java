@@ -16,10 +16,10 @@ public class SpikedHilt extends SwordHilt {
 
 	@Override
 	public void setStats(float level) {
-		damage = 3 * level;
-		speed = -1*level;
-		knockback = -1;
-		weight = 1;
+		damage = getStat(2.8f+0.2f*level,0.3f*0.04f);
+		speed = getStat(0.07f,0.02f);
+		knockback = getStat(0.03f,0.01f);
+		weight = getStat(1.2f,0.4f);
 		
 	}
 
