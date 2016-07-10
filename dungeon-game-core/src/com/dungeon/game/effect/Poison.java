@@ -38,12 +38,14 @@ public class Poison extends Effect {
 	}
     
     public void begin(Character character){
-    	for(Effect e: character.effects){
+		for(int i = 0; i < character.effects.size(); i++){
+			Effect e = character.effects.get(i);
     		if(e instanceof Poison && !e.killMe && e != this){
     			e.killMe = true;
     			dmg+=((Poison) e).dmg;
     			if(character instanceof Player&&e.graphic!=null)((Player)character).effectGraphics.remove(e.graphic);
-    			character.effects.remove(e);
+    			character.effects.remove(i);
+    			i--;
     		}
     	}
     }
