@@ -157,12 +157,15 @@ public class Goon extends Enemy {
 				if(Intersector.distanceSegmentPoint(lineOfCover[0], lineOfCover[1], lineOfCover[2], lineOfCover[3], x, y) < 4){
 					System.out.println("refining cover");
 					if(seenEntities.contains(world.player)){
+						System.out.println("moving out of cover");
 						//move into cover to hide from player
 						move_angle = (float) Math.atan2(y - lineOfCover[1], x - lineOfCover[0]);
 					}else{
+						System.out.println("moving in to cover");
 						//move out of cover to get LOS on player
 						move_angle = (float) Math.atan2(y - lineOfCover[3], x - lineOfCover[2]);
 					}
+					System.out.println(move_angle*180/Math.PI);
 				}
 			}
 		}
