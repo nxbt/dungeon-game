@@ -120,7 +120,38 @@ public class CoverFinder {
 		for(int i = (int) Math.ceil(danger.x/Tile.TS - range); i < Math.floor(danger.x/Tile.TS + range); i++){
 			for(int k = (int) Math.ceil(danger.y/Tile.TS - range); k < Math.floor(danger.y/Tile.TS + range); k++){
 				if(world.curFloor.tm[k][i].data == 0 && Math.sqrt((i-danger.x/32)*(i-danger.x/32)+(k-danger.y/32)*(k-danger.y/32)) < range){
-					world.curFloor.tm[k][i] = new Tile(textures, 3);
+					boolean cover = false;
+					for(Polygon p: dangerTris){
+						if(Intersector.overlapConvexPolygons(p, new Polygon(new float[]{i*Tile.TS, k*Tile.TS,(i+1)*Tile.TS, k*Tile.TS,(i+1)*Tile.TS, (k+1)*Tile.TS,i*Tile.TS, (k+1)*Tile.TS}))){
+							cover = true;
+							break;
+						}
+					}
+					if(cover){
+						cover = false;
+						int[][] tilesToCheck = new int[4][2];
+						tilesToCheck[0] = new int[]{i-1,k};
+						tilesToCheck[1] = new int[]{i+1,k};
+						tilesToCheck[2] = new int[]{i,k-1};
+						tilesToCheck[3] = new int[]{i,k+1};
+						for(int[] t: tilesToCheck){
+							boolean tileIsBlocking = true;
+							int x = t[0];
+							int y = t[1];
+							if(world.curFloor.tm[y][x].data == 0){
+								for(Polygon p: dangerTris){
+									if(Intersector.overlapConvexPolygons(p, new Polygon(new float[]{x*Tile.TS, y*Tile.TS,(x+1)*Tile.TS, y*Tile.TS,(x+1)*Tile.TS, (y+1)*Tile.TS,x*Tile.TS, (y+1)*Tile.TS}))){
+										tileIsBlocking = false;
+									}
+								}
+							}else tileIsBlocking = false;
+							if(tileIsBlocking){
+								cover = true;
+								world.curFloor.tm[k][i] = new Tile(textures, 3);
+								break;
+							}
+						}
+					}
 				}
 			}
 		}
