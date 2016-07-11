@@ -22,7 +22,7 @@ public class CoverFinder {
 	//pos is the int array to be filled with the coordinates of the cover tile
 	//fire back is weather the entity should chose a position from which they can shoot at danger
 	//returns weather or not an applicable cover was found
-	public static boolean findCover(World world, Entity entity, Entity danger, int[] pos, boolean fireBack, int range){
+	public static boolean findCover(World world, Entity entity, Entity danger, int[] pos, float[] lineOfCover, boolean fireBack, int range){
 		//psuedo code is something like this. any tile that HAS NO LOS to danger that is next to a tile WITH LOS to danger is considered cover when needing to shoot at danger.
 		//otherwise any tile without LOS to danger that is far from danger is cover.
 		ArrayList<float[]> rays = new ArrayList<float[]>(); //{startX,startY,endX,endy}
@@ -131,7 +131,7 @@ public class CoverFinder {
 							if(tileIsBlocking){
 								coverTiles.add(new int[]{i, k, x, y});
 								cover = true;
-								world.curFloor.tm[k][i] = new Tile(world.curFloor.textures, 3);
+//								world.curFloor.tm[k][i] = new Tile(world.curFloor.textures, 3);
 								break;
 							}
 						}
@@ -150,7 +150,30 @@ public class CoverFinder {
 			pos[1] = closestCover[1];
 			pos[2] = closestCover[2];
 			pos[3] = closestCover[3];
-			world.curFloor.tm[pos[1]][pos[0]] = new Tile(world.curFloor.textures, 4);
+			int xDiff = pos[0] - pos[2];
+			int yDiff = pos[1] - pos[3];
+			if(xDiff > 0){
+				lineOfCover[0] = pos[0]*Tile.TS + Tile.TS;
+				lineOfCover[1] = pos[1]*Tile.TS + Tile.TS / 2 ;
+				lineOfCover[2] = pos[2]*Tile.TS;
+				lineOfCover[3] = pos[3]*Tile.TS + Tile.TS / 2;
+			}else if(xDiff < 0){
+				lineOfCover[0] = pos[0]*Tile.TS;
+				lineOfCover[1] = pos[1]*Tile.TS + Tile.TS / 2;
+				lineOfCover[2] = pos[2]*Tile.TS + Tile.TS;
+				lineOfCover[3] = pos[3]*Tile.TS + Tile.TS / 2;
+			}else if(yDiff > 0){
+				lineOfCover[0] = pos[0]*Tile.TS + Tile.TS / 2;
+				lineOfCover[1] = pos[1]*Tile.TS + Tile.TS;
+				lineOfCover[2] = pos[2]*Tile.TS + Tile.TS / 2;
+				lineOfCover[3] = pos[3]*Tile.TS;
+			}else if(yDiff < 0){
+				lineOfCover[0] = pos[0]*Tile.TS + Tile.TS / 2;
+				lineOfCover[1] = pos[1]*Tile.TS;
+				lineOfCover[2] = pos[2]*Tile.TS + Tile.TS / 2;
+				lineOfCover[3] = pos[3]*Tile.TS + Tile.TS;
+			}
+//			world.curFloor.tm[pos[1]][pos[0]] = new Tile(world.curFloor.textures, 4);
 			return true;
 		}
 		

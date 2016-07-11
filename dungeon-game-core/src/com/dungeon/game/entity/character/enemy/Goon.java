@@ -2,6 +2,7 @@ package com.dungeon.game.entity.character.enemy;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.ai.CoverFinder;
 import com.dungeon.game.effect.regen.ManaRegen;
@@ -23,6 +24,9 @@ import com.dungeon.game.world.World;
 public class Goon extends Enemy {
 	
 	boolean ranged;
+	
+	//temp
+	public float[] lineOfCover;
 
 	public Goon(World world, float x, float y) {
 		super(world, x, y, 32, 32, "goon.png");
@@ -145,10 +149,20 @@ public class Goon extends Enemy {
 				if(flipX)target_angle+=180;
 				if(target_angle > 360)target_angle-=360;
 			}else{
+				lineOfCover = new float[4];
 				int[] coverPos = new int[4];
-				CoverFinder.findCover(world, this, world.player, coverPos, true, 10);
+				CoverFinder.findCover(world, this, world.player, coverPos, lineOfCover, true, 10);
 				if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{coverPos[0]*Tile.TS,coverPos[1]*Tile.TS});
 				target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
+				if(Intersector.distanceSegmentPoint(lineOfCover[0], lineOfCover[1], lineOfCover[2], lineOfCover[3], x, y) < 4){
+					if(seenEntities.contains(world.player)){
+						//move into cover to hide from player
+						move_angle = (float) Math.atan2(y - lineOfCover[1], x - lineOfCover[0]);
+					}else{
+						//move out of cover to get LOS on player
+						move_angle = (float) Math.atan2(y - lineOfCover[3], x - lineOfCover[2]);
+					}
+				}
 			}
 		}
 		attacking = false;

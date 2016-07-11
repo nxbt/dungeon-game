@@ -1,6 +1,5 @@
 package com.dungeon.game.world;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
@@ -19,6 +18,7 @@ import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.character.Player;
 import com.dungeon.game.entity.character.enemy.Enemy;
+import com.dungeon.game.entity.character.enemy.Goon;
 import com.dungeon.game.entity.character.friend.Friend;
 import com.dungeon.game.entity.character.friend.Mentor;
 import com.dungeon.game.entity.character.friend.Trainer;
@@ -32,7 +32,6 @@ import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.item.equipable.weapon.part.Part;
 //import com.dungeon.game.light.LightMap;
 import com.dungeon.game.pathing.AreaMap;
-import com.dungeon.game.utilities.MethodArray;
 
 import box2dLight.RayHandler;
 
@@ -127,7 +126,7 @@ public class World {
 		for(Entity e: entities){
 			if(e.light != null)e.light.load();
 		}
-		CoverFinder.findCover(this, player, entities.get(entities.size() - 4), new int[4], true, 10);
+		CoverFinder.findCover(this, player, entities.get(entities.size() - 4), new int[4], new float[4], true, 10);
 		
 	}
 	
@@ -210,6 +209,10 @@ public class World {
 							shapeRenderer.line(prePoint[0]*Tile.TS+Tile.TS/2, prePoint[1]*Tile.TS+Tile.TS/2,point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
 						}
 						prePoint = point;
+					}
+					if(e instanceof Goon && ((Goon)e).lineOfCover != null){
+						shapeRenderer.setColor(Color.CORAL);
+						shapeRenderer.line(((Goon)e).lineOfCover[0], ((Goon)e).lineOfCover[1], ((Goon)e).lineOfCover[2], ((Goon)e).lineOfCover[3]);
 					}
 				}
 				
