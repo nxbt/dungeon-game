@@ -155,10 +155,21 @@ public class CoverFinder {
 					}
 				}
 			}
-			
-			//figure out which cover tile is best
 		}
-		return false;
+		if(coverTiles.size() == 0)return false;
+		else{
+			//figure out which cover tile is best
+			int[] closestCover = coverTiles.get(0);
+			for(int[] tile: coverTiles){
+				if(Math.sqrt((entity.x/Tile.TS - tile[0])*(entity.x/Tile.TS - tile[0])+(entity.y/Tile.TS - tile[1])*(entity.y/Tile.TS - tile[1])) < Math.sqrt((entity.x/Tile.TS - closestCover[0])*(entity.x/Tile.TS - closestCover[0])+(entity.y/Tile.TS - closestCover[1])*(entity.y/Tile.TS - closestCover[1])))closestCover = tile;
+			}
+			pos[0] = closestCover[0];
+			pos[1] = closestCover[1];
+			pos[2] = closestCover[2];
+			pos[3] = closestCover[3];
+			world.curFloor.tm[pos[1]][pos[0]] = new Tile(textures, 4);
+			return true;
+		}
 		
 	}
 }

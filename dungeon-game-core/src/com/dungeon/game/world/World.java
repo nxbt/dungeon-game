@@ -127,7 +127,7 @@ public class World {
 		for(Entity e: entities){
 			if(e.light != null)e.light.load();
 		}
-		CoverFinder.findCover(this, null, player, null, true, 10);
+		CoverFinder.findCover(this, player, entities.get(entities.size() - 4), new int[4], true, 10);
 		
 	}
 	

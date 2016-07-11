@@ -24,7 +24,7 @@ public class Goon extends Enemy {
 	public Goon(World world, float x, float y) {
 		super(world, x, y, 32, 32, "goon.png");
 		
-name = "Goon";
+		name = "Goon";
 		
 		maxLife = 20;
 		maxStam = 100;
