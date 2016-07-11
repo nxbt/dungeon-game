@@ -21,7 +21,7 @@ public abstract class Enemy extends Character {
 	}
 	
 	protected void findPath(ArrayList<Entity> entities, float[] target){
-		if(stagerTimer == 0)targetTile = world.areaMap.findPath(new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (world.player.x/Tile.TS),(int) (world.player.y/Tile.TS)});
+		if(stagerTimer == 0)targetTile = world.areaMap.findPath(new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (target[0]/Tile.TS),(int) (target[1]/Tile.TS)});
 		path = world.areaMap.lastPath;
 		if(targetTile!=null){
 				moveTo = targetTile;
@@ -45,9 +45,6 @@ public abstract class Enemy extends Character {
 				else if(inp_dn) move_angle = -90;
 				else if(inp_rt) move_angle = 0;
 				else if(inp_lt) move_angle = 180;
-				target_angle = move_angle;
-				if(flipX)target_angle+=180;
-				if(target_angle > 360)target_angle-=360;
 		}
 	}
 	

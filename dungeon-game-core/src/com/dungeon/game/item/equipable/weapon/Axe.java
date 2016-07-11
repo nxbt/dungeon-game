@@ -61,11 +61,6 @@ public class Axe extends Melee {
 		desc = "A widely used and dependable melee weapon.\n\n Damage: "+ Math.floor(damage*10)/10f + "\n Speed: "+ Math.floor(speed*10)/10f + "\n Knockback: "+ Math.floor(knockback*10)/10f + "\n Weight: "+ Math.floor(weight*10)/10f;
 		
 		graphic = new MeleeGraphic(world, this, blade.hitbox, 30, 2);
-		
-//		swings = new SwingSet(world, this, new Swing[]{new Rest(world),
-//				new Slash(world), 
-//				new Stab(world),
-//				}, false);
 
 		swingClass = AxeSwing.class;
 		swings = getStartSwings();

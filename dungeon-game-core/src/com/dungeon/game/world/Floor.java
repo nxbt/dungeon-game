@@ -21,7 +21,7 @@ import com.dungeon.game.utilities.Spritesheet;
 public class Floor {
 	private static final String DEFAULT = "tilemap.png";
 	
-	private Texture[][] textures;
+	public Texture[][] textures;
 	
 	public Tile[][] tm;
 	

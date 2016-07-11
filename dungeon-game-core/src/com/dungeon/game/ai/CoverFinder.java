@@ -93,32 +93,15 @@ public class CoverFinder {
 			dangerTris.add(new Polygon(new float[]{danger.x,danger.y,dangerPolygon.getVertices()[i*2],dangerPolygon.getVertices()[i*2+1],dangerPolygon.getVertices()[i*2+2],dangerPolygon.getVertices()[i*2+3]}));
 		}
 		dangerTris.add(new Polygon(new float[]{danger.x,danger.y,dangerPolygon.getVertices()[dangerPolygon.getVertices().length-2],dangerPolygon.getVertices()[dangerPolygon.getVertices().length-1],dangerPolygon.getVertices()[0],dangerPolygon.getVertices()[1]}));
-		//TEMP SHIT
-		Texture[] texturesTemp = Spritesheet.getSprites("tilemap.png", 32, 32);
-		Texture[][] textures = new Texture[texturesTemp.length][8];
-		for(int i = 0; i < texturesTemp.length; i++){
-			textures[i][0] = texturesTemp[i];
-			
-			if(!texturesTemp[i].getTextureData().isPrepared()) texturesTemp[i].getTextureData().prepare();
-			Pixmap tempMap = texturesTemp[i].getTextureData().consumePixmap();
-			for(int k = 1; k<4; k++){
-				
-				textures[i][k] = new Texture(Spritesheet.rotatePixmap(tempMap, k));
-			}
-			
-			for(int k = 4; k<8; k++){
-				
-				textures[i][k] = new Texture(Spritesheet.rotatePixmap(Spritesheet.flipPixmap(tempMap), k==4?3:k-5));
-			}
-			
-			
-			tempMap.dispose();
-		}
-		//CLOSE TEMP SHIT
 		//find cover tiles
 		ArrayList<int[]> coverTiles = new ArrayList<int[]>();
-		for(int i = (int) Math.ceil(danger.x/Tile.TS - range); i < Math.floor(danger.x/Tile.TS + range); i++){
-			for(int k = (int) Math.ceil(danger.y/Tile.TS - range); k < Math.floor(danger.y/Tile.TS + range); k++){
+		//fix for off the map
+		int startX = Math.max((int) Math.ceil(danger.x/Tile.TS - range), 0);
+		int endX = (int) Math.min(Math.floor(danger.x/Tile.TS + range), world.curFloor.tm[0].length-1);
+		int startY = Math.max((int) Math.ceil(danger.y/Tile.TS - range), 0);
+		int endY = (int) Math.min(Math.floor(danger.y/Tile.TS + range), world.curFloor.tm.length-1);
+		for(int i = startX; i < endX; i++){
+			for(int k = startY; k < endY; k++){
 				if(world.curFloor.tm[k][i].data == 0 && Math.sqrt((i-danger.x/32)*(i-danger.x/32)+(k-danger.y/32)*(k-danger.y/32)) < range){
 					boolean cover = false;
 					for(Polygon p: dangerTris){
@@ -148,7 +131,7 @@ public class CoverFinder {
 							if(tileIsBlocking){
 								coverTiles.add(new int[]{i, k, x, y});
 								cover = true;
-								world.curFloor.tm[k][i] = new Tile(textures, 3);
+								world.curFloor.tm[k][i] = new Tile(world.curFloor.textures, 3);
 								break;
 							}
 						}
@@ -167,7 +150,7 @@ public class CoverFinder {
 			pos[1] = closestCover[1];
 			pos[2] = closestCover[2];
 			pos[3] = closestCover[3];
-			world.curFloor.tm[pos[1]][pos[0]] = new Tile(textures, 4);
+			world.curFloor.tm[pos[1]][pos[0]] = new Tile(world.curFloor.textures, 4);
 			return true;
 		}
 		

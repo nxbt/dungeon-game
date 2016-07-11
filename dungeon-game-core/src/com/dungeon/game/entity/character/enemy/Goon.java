@@ -3,6 +3,7 @@ package com.dungeon.game.entity.character.enemy;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.ai.CoverFinder;
 import com.dungeon.game.effect.regen.ManaRegen;
 import com.dungeon.game.effect.regen.StamRegen;
 import com.dungeon.game.entity.Entity;
@@ -12,9 +13,11 @@ import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.weapon.Bow;
+import com.dungeon.game.item.equipable.weapon.Melee;
 import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.item.equipable.weapon.Weapon;
 import com.dungeon.game.light.Light;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Goon extends Enemy {
@@ -129,41 +132,6 @@ public class Goon extends Enemy {
 
 	@Override
 	public void calc() {
-//		if(leftEquiped != null && inv.slot[30].item==null) {
-//			unequip(leftEquiped);
-//			
-//			leftEquiped = null;
-//		}
-//		else if(leftEquiped == null && inv.slot[30].item != null) {
-//			leftEquiped = (Weapon) inv.slot[30].item;
-//			
-//			equip(leftEquiped, true);
-//		}
-//		else if(leftEquiped != inv.slot[30].item) {
-//			unequip(leftEquiped);
-//			
-//			leftEquiped = (Weapon) inv.slot[30].item;
-//			
-//			equip(leftEquiped, true);
-//		}
-//		
-//		if(rightEquiped != null && inv.slot[31].item==null) {
-//			unequip(rightEquiped);
-//			
-//			rightEquiped = null;
-//		}
-//		else if(rightEquiped == null && inv.slot[31].item != null) {
-//			rightEquiped = (Weapon) inv.slot[31].item;
-//			
-//			equip(rightEquiped, false);
-//		}
-//		else if(rightEquiped != inv.slot[31].item) {
-//			unequip(rightEquiped);
-//			
-//			rightEquiped = (Weapon) inv.slot[31].item;
-//			
-//			equip(rightEquiped, false);
-//		}
 		
 		@SuppressWarnings("unchecked")
 		ArrayList<Entity> entities = (ArrayList<Entity>) world.entities.clone();
@@ -171,8 +139,17 @@ public class Goon extends Enemy {
 		entities.remove(world.player);
 		entities.remove(this);
 		if(knownEntities.contains(world.player)){
-			if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{world.player.x,world.player.y});
-//			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
+			if(equipItems[0] instanceof Melee){
+				if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{world.player.x,world.player.y});
+				target_angle = move_angle;
+				if(flipX)target_angle+=180;
+				if(target_angle > 360)target_angle-=360;
+			}else{
+				int[] coverPos = new int[4];
+				CoverFinder.findCover(world, this, world.player, coverPos, true, 10);
+				if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{coverPos[0]*Tile.TS,coverPos[1]*Tile.TS});
+				target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
+			}
 		}
 		attacking = false;
 		if(equipItems[0] != null){
@@ -205,9 +182,9 @@ public class Goon extends Enemy {
 	@Override
 	protected void activations() {
 		if(!ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<90){
-			if(Math.random() < 0.2)rightActivated = true;
+			if(Math.random() < 0.9)rightActivated = true;
 			else rightActivated = false;
-			if(Math.random() < 0.2)leftActivated = true;
+			if(Math.random() < 0.9)leftActivated = true;
 			else leftActivated = false;
 		}else{
 			rightActivated = false;
