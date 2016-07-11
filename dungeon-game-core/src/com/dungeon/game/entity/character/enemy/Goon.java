@@ -155,6 +155,7 @@ public class Goon extends Enemy {
 				if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{coverPos[0]*Tile.TS,coverPos[1]*Tile.TS});
 				target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
 				if(Intersector.distanceSegmentPoint(lineOfCover[0], lineOfCover[1], lineOfCover[2], lineOfCover[3], x, y) < 4){
+					System.out.println("refining cover");
 					if(seenEntities.contains(world.player)){
 						//move into cover to hide from player
 						move_angle = (float) Math.atan2(y - lineOfCover[1], x - lineOfCover[0]);
