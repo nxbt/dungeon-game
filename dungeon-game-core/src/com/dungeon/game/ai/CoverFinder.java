@@ -146,6 +146,7 @@ public class CoverFinder {
 								}
 							}else tileIsBlocking = false;
 							if(tileIsBlocking){
+								coverTiles.add(new int[]{i, k, x, y});
 								cover = true;
 								world.curFloor.tm[k][i] = new Tile(textures, 3);
 								break;
@@ -154,6 +155,8 @@ public class CoverFinder {
 					}
 				}
 			}
+			
+			//figure out which cover tile is best
 		}
 		return false;
 		
