@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.dungeon.game.Camera;
+import com.dungeon.game.ai.CoverFinder;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.character.Player;
@@ -126,6 +127,7 @@ public class World {
 		for(Entity e: entities){
 			if(e.light != null)e.light.load();
 		}
+		CoverFinder.findCover(this, null, player, null, true, 10);
 		
 	}
 	
