@@ -13,6 +13,8 @@ public class CoverFinder {
 	//fire back is weather the entity should chose a position from which they can shoot at danger
 	//returns weather or not an applicable cover was found
 	public static boolean findCover(World world, Entity entity, Entity danger, int[] pos, boolean fireBack){
+		//psuedo code is something like this. any tile that HAS NO LOS to danger that is next to a tile WITH LOS to danger is considered cover when needing to shoot at danger.
+		//otherwise any tile without LOS to danger that is far from danger is cover.
 		return false;
 		
 	}
