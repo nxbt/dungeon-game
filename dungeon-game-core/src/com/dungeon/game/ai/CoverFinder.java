@@ -153,25 +153,25 @@ public class CoverFinder {
 			int xDiff = pos[0] - pos[2];
 			int yDiff = pos[1] - pos[3];
 			if(xDiff > 0){
-				lineOfCover[0] = pos[0]*Tile.TS + Tile.TS;
+				lineOfCover[0] = pos[0]*Tile.TS + Tile.TS * (world.curFloor.tm[pos[1]][pos[0]+1].data == 1?0.5f:1.5f);
 				lineOfCover[1] = pos[1]*Tile.TS + Tile.TS / 2 ;
-				lineOfCover[2] = pos[2]*Tile.TS;
+				lineOfCover[2] = pos[2]*Tile.TS - Tile.TS * (world.curFloor.tm[pos[3]][pos[2]-1].data == 1?-0.5f:0.5f);
 				lineOfCover[3] = pos[3]*Tile.TS + Tile.TS / 2;
 			}else if(xDiff < 0){
-				lineOfCover[0] = pos[0]*Tile.TS;
+				lineOfCover[0] = pos[0]*Tile.TS - Tile.TS * (world.curFloor.tm[pos[1]][pos[0]-1].data == 1?-0.5f:0.5f);
 				lineOfCover[1] = pos[1]*Tile.TS + Tile.TS / 2;
-				lineOfCover[2] = pos[2]*Tile.TS + Tile.TS;
+				lineOfCover[2] = pos[2]*Tile.TS + Tile.TS * (world.curFloor.tm[pos[3]][pos[2]+1].data == 1?0.5f:1.5f);
 				lineOfCover[3] = pos[3]*Tile.TS + Tile.TS / 2;
 			}else if(yDiff > 0){
 				lineOfCover[0] = pos[0]*Tile.TS + Tile.TS / 2;
-				lineOfCover[1] = pos[1]*Tile.TS + Tile.TS;
+				lineOfCover[1] = pos[1]*Tile.TS + Tile.TS * (world.curFloor.tm[pos[1]+1][pos[0]].data == 1?0.5f:1.5f);
 				lineOfCover[2] = pos[2]*Tile.TS + Tile.TS / 2;
-				lineOfCover[3] = pos[3]*Tile.TS;
+				lineOfCover[3] = pos[3]*Tile.TS - Tile.TS * (world.curFloor.tm[pos[3]-1][pos[2]].data == 1?-0.5f:0.5f);
 			}else if(yDiff < 0){
 				lineOfCover[0] = pos[0]*Tile.TS + Tile.TS / 2;
-				lineOfCover[1] = pos[1]*Tile.TS;
+				lineOfCover[1] = pos[1]*Tile.TS - Tile.TS * (world.curFloor.tm[pos[1]-1][pos[0]].data == 1?-0.5f:0.5f);
 				lineOfCover[2] = pos[2]*Tile.TS + Tile.TS / 2;
-				lineOfCover[3] = pos[3]*Tile.TS + Tile.TS;
+				lineOfCover[3] = pos[3]*Tile.TS + Tile.TS * (world.curFloor.tm[pos[3]+1][pos[2]].data == 1?0.5f:1.5f);
 			}
 //			world.curFloor.tm[pos[1]][pos[0]] = new Tile(world.curFloor.textures, 4);
 			return true;

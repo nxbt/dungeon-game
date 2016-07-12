@@ -11,7 +11,7 @@ public abstract class Weapon extends Hand{
 	
 	public int stage;
 	
-	protected int stageTimer;
+	public int stageTimer;
 	
 	public float weight;
 	

@@ -155,19 +155,17 @@ public class Goon extends Enemy {
 				if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{coverPos[0]*Tile.TS,coverPos[1]*Tile.TS});
 				target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
 				if(Intersector.distanceSegmentPoint(lineOfCover[0], lineOfCover[1], lineOfCover[2], lineOfCover[3], x, y) < 4){
-					if(Math.random() < 0.3){
-						if(seenEntities.contains(world.player)){
-							System.out.println("moving in to cover");
-							//move into cover to hide from player
-							move_angle = (float) (Math.atan2(lineOfCover[3] - y, lineOfCover[2] - x)/Math.PI*180f);
-						}else{
-							System.out.println("moving out of cover");
-							//move out of cover to get LOS on player
-							move_angle = (float) (Math.atan2(lineOfCover[1] - y, lineOfCover[0] - x)/Math.PI*180f);
-						}
-						System.out.println(Math.round(move_angle*180/Math.PI));
+					if(((Bow)equipItems[0]).stageTimer < 45){
+						System.out.println("moving in to cover");
+						//move into cover to hide from player
+						move_angle = (float) (Math.atan2(lineOfCover[3] - y, lineOfCover[2] - x)/Math.PI*180f);
+					}else{
+						System.out.println("moving out of cover");
+						//move out of cover to get LOS on player
+						move_angle = (float) (Math.atan2(lineOfCover[1] - y, lineOfCover[0] - x)/Math.PI*180f);
+					}
+					System.out.println(Math.round(move_angle));
 						
-					}else move_angle = 361;
 				}
 			}
 		}
@@ -177,8 +175,10 @@ public class Goon extends Enemy {
 			boolean down = true;
 			boolean click = false;
 			if(ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<300){
-				click = true;
-				down = Math.random()>0.02;
+				if(((Bow)equipItems[0]).stage == Bow.REST)click = true;
+				else click = false;
+				if(((Bow)equipItems[0]).stageTimer < 45 || !(Math.sqrt((x - lineOfCover[0])*(x - lineOfCover[0])+(y - lineOfCover[1])*(y - lineOfCover[1])) < 4))down = true;
+				else down = false;
 				attack = true;
 			}
 			if(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat")){

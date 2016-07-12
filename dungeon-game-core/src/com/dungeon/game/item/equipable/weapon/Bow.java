@@ -12,10 +12,10 @@ import com.dungeon.game.world.World;
 
 public class Bow extends Ranged {
 	
-	private final int REST = 0;
-	private final int WINDUP = 1;
-	private final int FIRE = 2;
-	private final int WINDDOWN = 3;
+	public static final int REST = 0;
+	public static final int WINDUP = 1;
+	public static final int FIRE = 2;
+	private static final int WINDDOWN = 3;
 	
 	public Bow(World world, float dmgMod, int speed) {
 		super(world, "bow.png");
