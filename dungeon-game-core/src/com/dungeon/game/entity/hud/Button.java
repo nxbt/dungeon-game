@@ -10,10 +10,7 @@ public abstract class Button extends Hud {
 	
 	public void hovered() {
 		super.hovered();
-		if(world.mouse.lb_pressed) {
-			System.out.println("test");
-			click();
-		}
+		if(world.mouse.lb_pressed) click();
 	}
 	
 	public abstract void click();

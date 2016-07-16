@@ -2,7 +2,6 @@ package com.dungeon.game.effect;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.effect.damage.FireDamage;
-import com.dungeon.game.effect.damage.PoisonDamage;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.character.Player;
 import com.dungeon.game.entity.hud.EffectGraphic;

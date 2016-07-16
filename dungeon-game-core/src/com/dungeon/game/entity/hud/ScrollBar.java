@@ -30,10 +30,7 @@ public class ScrollBar extends Hud {
 	}
 
 	@Override
-	public void post() {
-		// TODO Auto-generated method stub
-
-	}
+	public void post() {}
 	
 	public void draw(SpriteBatch batch){
 		
