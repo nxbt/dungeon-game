@@ -21,6 +21,8 @@ import com.dungeon.game.utilities.Spritesheet;
 public class Floor {
 	private static final String DEFAULT = "tilemap.png";
 	
+	private static final TileMap tileMap1 = new TileMap(DEFAULT);
+	
 	public Texture[][] textures;
 	
 	public Tile[][] tm;
@@ -78,7 +80,8 @@ public class Floor {
 
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
-				tm[i][k] = new Tile(textures,map[i][k],rotations[i][k], flips[i][k]);
+//				tm[i][k] = new Tile(textures[map[i][k]],map[i][k],rotations[i][k], flips[i][k]);
+				tm[i][k] = tileMap1.getTile(map[i][k], rotations[i][k], flips[i][k]);
 			}
 		}
 		corners = new ArrayList<int[]>();
