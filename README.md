@@ -24,6 +24,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * Final Dungeon is culmination of all previous dungeons.
 * only access to 1 dungeon at a time.
 * hidden player "level" controlls dungeon difficulty and loot.
+* reword pathfinding to use heiarchal pathfinding
 
 ##BUG TRACKER
 * popups don't close when going down or up a floor
