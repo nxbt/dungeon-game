@@ -5,18 +5,27 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.world.Tile;
+import com.dungeon.game.world.TileMap;
 
 public abstract class Room {
 	public Tile[][] room;
+	
 	public Rectangle roomBase;
+	
 	public ArrayList<Entity> entities;
+	
 	private int[] doorFinder;
+	
 	private boolean[][] occupiedTiles;
+	
 	private int[] doorPos;
+	
 	public int x;
 	public int y;
 	
-	public Room(Rectangle roomBase, int[] doorFinder){
+	public TileMap tileMap;
+	
+	public Room(Rectangle roomBase, int[] doorFinder, TileMap tileMap){
 		x = (int) roomBase.x;
 		y = (int) roomBase.y;
 		this.roomBase = roomBase;
@@ -24,6 +33,7 @@ public abstract class Room {
 		this.doorFinder = doorFinder;
 		doorPos = new int[2];
 		entities = new ArrayList<Entity>();
+		this.tileMap = tileMap;
 		rotate();
 		generate();
 		unrotate();

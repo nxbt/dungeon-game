@@ -23,8 +23,6 @@ public class Floor {
 	
 	private static final TileMap tileMap1 = new TileMap(DEFAULT);
 	
-	public Texture[][] textures;
-	
 	public Tile[][] tm;
 	
 	public ArrayList<int[]> corners;
@@ -56,27 +54,6 @@ public class Floor {
 		boolean[][] flips = gen.flips;
 		
 		entities = gen.getEntities();
-		
-		Texture[] texturesTemp = Spritesheet.getSprites(DEFAULT, 32, 32);
-		textures = new Texture[texturesTemp.length][8];
-		for(int i = 0; i < texturesTemp.length; i++){
-			textures[i][0] = texturesTemp[i];
-			
-			if(!texturesTemp[i].getTextureData().isPrepared()) texturesTemp[i].getTextureData().prepare();
-			Pixmap tempMap = texturesTemp[i].getTextureData().consumePixmap();
-			for(int k = 1; k<4; k++){
-				
-				textures[i][k] = new Texture(Spritesheet.rotatePixmap(tempMap, k));
-			}
-			
-			for(int k = 4; k<8; k++){
-				
-				textures[i][k] = new Texture(Spritesheet.rotatePixmap(Spritesheet.flipPixmap(tempMap), k==4?3:k-5));
-			}
-			
-			
-			tempMap.dispose();
-		}
 
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
