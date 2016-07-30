@@ -33,10 +33,26 @@ public class proceduralPerson extends proceduralTexture {
 		
 		//generation
 		
+		//hands
+		texMap.setColor(new Color(skinColor.r*0.8f, skinColor.g*0.8f, skinColor.b*0.8f, 1));
+		texMap.fillCircle(22 + Math.round(shoulderSize/2f), 29, 2);
+		texMap.fillCircle(22 + Math.round(shoulderSize/2f), 3, 2);
+		
+		//lower arm
+		texMap.setColor(new Color((sleveType == 0?sleveColor:skinColor).r*0.9f, (sleveType == 0?sleveColor:skinColor).g*0.9f, (sleveType == 0?sleveColor:skinColor).b*0.9f, 1));
+		texMap.fillRectangle(16 + Math.round(shoulderSize/2f), 28, 5, 4);
+		texMap.fillRectangle(16 + Math.round(shoulderSize/2f), 1, 5, 4);
+		
+		//upper arm
+		texMap.setColor(sleveType == 0 || sleveType == 1?sleveColor:skinColor);
+		texMap.fillCircle(Math.round(16), 28 + Math.round(shoulderSize/2f), shoulderSize);
+		texMap.fillCircle(Math.round(16), 4 - Math.round(shoulderSize/2f), shoulderSize);
+		
 		//skin generation
 		texMap.setColor(skinColor);
 		texMap.fillCircle(16, 16, 11);
 		texMap.setColor(hairColor);
+		
 		//hair generation
 		switch(hairStyle){
 			case 0:
@@ -67,25 +83,6 @@ public class proceduralPerson extends proceduralTexture {
 		texMap.setColor(eyeColor);
 		texMap.drawPixel(16 + (int)Math.round(Math.cos(eyeAngle) * 11), 16 + (int)Math.round(Math.sin(eyeAngle) * 11));
 		texMap.drawPixel(16 + (int)Math.round(Math.cos(-eyeAngle) * 11), 16 + (int)Math.round(Math.sin(-eyeAngle) * 11));
-		
-		//arm generation
-		
-		//hands
-		texMap.setColor(new Color(skinColor.r*0.8f, skinColor.g*0.8f, skinColor.b*0.8f, 1));
-		texMap.fillCircle(22 + Math.round(shoulderSize/2f), 29, 2);
-		texMap.fillCircle(22 + Math.round(shoulderSize/2f), 3, 2);
-		
-		//lower arm
-		texMap.setColor(new Color((sleveType == 0?sleveColor:skinColor).r*0.9f, (sleveType == 0?sleveColor:skinColor).g*0.9f, (sleveType == 0?sleveColor:skinColor).b*0.9f, 1));
-		texMap.fillRectangle(16 + Math.round(shoulderSize/2f), 28, 5, 4);
-		texMap.fillRectangle(16 + Math.round(shoulderSize/2f), 1, 5, 4);
-		
-		//upper arm
-		texMap.setColor(sleveType == 0 || sleveType == 1?sleveColor:skinColor);
-		texMap.fillCircle(Math.round(16), 28 + Math.round(shoulderSize/2f), shoulderSize);
-		texMap.fillCircle(Math.round(16), 4 - Math.round(shoulderSize/2f), shoulderSize);
-//		texMap.fillRectangle(Math.round(16 - shoulderSize/2f), 28, shoulderSize, 4);
-//		texMap.fillRectangle(Math.round(16 - shoulderSize/2f), 1, shoulderSize, 4);
 		
 		
 		texture = new Texture(texMap); //create texture
