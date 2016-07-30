@@ -26,6 +26,10 @@ public class proceduralPerson extends proceduralTexture {
 		//eye vars
 		Color eyeColor = Math.random() > 0.66?Color.BLUE:Math.random() > 0.5?Color.BROWN:Color.FOREST;
 		float eyeAngle = (float) (Math.PI/7f);
+		//arm vars
+		int sleveType = (int) (Math.random()*3); // 0 = full sleves, 1 = t sleves, 2 = no sleves
+		Color sleveColor = Math.random() > 0.5?Color.PURPLE:Color.CYAN;
+		int shoulderSize = 2+(int)(Math.random()*1);
 		
 		//generation
 		
@@ -39,16 +43,13 @@ public class proceduralPerson extends proceduralTexture {
 				//normal hair
 				int x = 16;
 				int y = 16;
-				int numStrands = 500;
+				int numStrands = 250;
 				for(int i = 0; i < numStrands; i++){
-					Color tempColor = new Color((float) (0.2-Math.random()*0.4), (float) (0.2-Math.random()*0.4), (float) (0.2-Math.random()*0.4), 0);
 					float angle = (float) (2f*Math.PI*i/numStrands);
-					int length = 12;
-					if(angle < Math.PI/3 || angle > 5*Math.PI/3)length = 9;
-					hairColor.add(tempColor);
-					texMap.setColor(hairColor);
+					int length = 11 + (int)(Math.random()*2);
+					if(angle < Math.PI/3 || angle > 5*Math.PI/3)length = 8 + (int)(Math.random()*3);
+					texMap.setColor(new Color((float) (hairColor.r * (0.8f + Math.random()*0.2f)), (float) (hairColor.g * (0.8f + Math.random()*0.2f)), (float) (hairColor.b * (0.8f + Math.random()*0.2f)), 1));
 					texMap.drawLine(16, 16, 16+(int)(Math.cos(angle)*length), 16+(int)(Math.sin(angle)*length));
-					hairColor.sub(tempColor);
 				}
 			break;
 		}
@@ -66,8 +67,28 @@ public class proceduralPerson extends proceduralTexture {
 		texMap.setColor(eyeColor);
 		texMap.drawPixel(16 + (int)Math.round(Math.cos(eyeAngle) * 11), 16 + (int)Math.round(Math.sin(eyeAngle) * 11));
 		texMap.drawPixel(16 + (int)Math.round(Math.cos(-eyeAngle) * 11), 16 + (int)Math.round(Math.sin(-eyeAngle) * 11));
+		
+		//arm generation
+		
+		//hands
+		texMap.setColor(new Color(skinColor.r*0.8f, skinColor.g*0.8f, skinColor.b*0.8f, 1));
+		texMap.fillCircle(22 + Math.round(shoulderSize/2f), 29, 2);
+		texMap.fillCircle(22 + Math.round(shoulderSize/2f), 3, 2);
+		
+		//lower arm
+		texMap.setColor(new Color((sleveType == 0?sleveColor:skinColor).r*0.9f, (sleveType == 0?sleveColor:skinColor).g*0.9f, (sleveType == 0?sleveColor:skinColor).b*0.9f, 1));
+		texMap.fillRectangle(16 + Math.round(shoulderSize/2f), 28, 5, 4);
+		texMap.fillRectangle(16 + Math.round(shoulderSize/2f), 1, 5, 4);
+		
+		//upper arm
+		texMap.setColor(sleveType == 0 || sleveType == 1?sleveColor:skinColor);
+		texMap.fillCircle(Math.round(16), 28 + Math.round(shoulderSize/2f), shoulderSize);
+		texMap.fillCircle(Math.round(16), 4 - Math.round(shoulderSize/2f), shoulderSize);
+//		texMap.fillRectangle(Math.round(16 - shoulderSize/2f), 28, shoulderSize, 4);
+//		texMap.fillRectangle(Math.round(16 - shoulderSize/2f), 1, shoulderSize, 4);
+		
+		
 		texture = new Texture(texMap); //create texture
-
 	}
 
 }
