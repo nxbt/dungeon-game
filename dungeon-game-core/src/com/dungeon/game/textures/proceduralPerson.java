@@ -28,7 +28,7 @@ public class proceduralPerson extends proceduralTexture {
 		float eyeAngle = (float) (Math.PI/7f);
 		//arm vars
 		int sleveType = (int) (Math.random()*3); // 0 = full sleves, 1 = t sleves, 2 = no sleves
-		Color sleveColor = Math.random() > 0.5?Color.PURPLE:Color.CYAN;
+		Color sleveColor = new Color((float) (0.3f + Math.random()*0.7f), (float) (0.3f + Math.random()*0.7f), (float) (0.3f + Math.random()*0.7f), 1);
 		int shoulderSize = 2+(int)(Math.random()*1);
 		
 		//generation
