@@ -3,7 +3,6 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 
 ##TODO high priority (within a week):
 * change tilemap rendering to pixmap (we had a reason for this...)
-* change generation to make a tilemap rather than an int map
 * start proceedurally generated textures
 
 ##TODO low priority (within a month?):
