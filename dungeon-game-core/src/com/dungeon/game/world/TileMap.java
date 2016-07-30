@@ -32,7 +32,7 @@ public class TileMap {
 			}
 			
 			
-			tempMap.dispose();
+//			tempMap.dispose(); // can dispose if no need to clone tile textures!!!
 		}
 		tiles = new Tile[textures.length];
 		for(int i = 0; i < textures.length; i++){

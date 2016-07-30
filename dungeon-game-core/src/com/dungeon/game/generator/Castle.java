@@ -61,7 +61,7 @@ public class Castle extends Generation {
 		int nextX;
 		int nextY;
 		if(isValidRoom(room)){
-			map[doorY][doorX]=0;
+			map[doorY][doorX]=tileMap.getTile(0);
 			addRoomToMap(room);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
@@ -97,7 +97,7 @@ public class Castle extends Generation {
 		int nextX;
 		int nextY;
 		if(isValidRoom(room)){
-			map[doorY][doorX]=0;
+			map[doorY][doorX]=tileMap.getTile(0);
 			addRoomToMap(room);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
@@ -133,7 +133,7 @@ public class Castle extends Generation {
 		int nextX;
 		int nextY;
 		if(isValidRoom(room)){
-			map[doorY][doorX]=0;
+			map[doorY][doorX]=tileMap.getTile(0);
 			addRoomToMap(room);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
@@ -169,7 +169,7 @@ public class Castle extends Generation {
 		int nextX;
 		int nextY;
 		if(isValidRoom(room)){
-			map[doorY][doorX]=0;
+			map[doorY][doorX]=tileMap.getTile(0);
 			addRoomToMap(room);
 			for(int i = 0; i<100;i++){
 				int dir = (int) (Math.random()*4);
@@ -214,7 +214,7 @@ public class Castle extends Generation {
 		float height = room.height;
 		for(int i = 0; i<height; i++){
 			for(int k = 0; k<width; k++){
-				map[y][x]=2;
+				map[y][x]=tileMap.getTile(2);
 				x++;
 			}
 			y++;

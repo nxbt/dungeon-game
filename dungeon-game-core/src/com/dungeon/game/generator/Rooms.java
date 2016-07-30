@@ -98,7 +98,7 @@ public class Rooms extends Generation {
 			hallEnd.add(lastRoom);
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
-				map[hall.get(i)[1]][hall.get(i)[0]]=0;
+				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(0);
 				if(i == 0){
 //					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
 //					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
@@ -140,7 +140,7 @@ public class Rooms extends Generation {
 			hallEnd.add(lastRoom);
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
-				map[hall.get(i)[1]][hall.get(i)[0]]=0;
+				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(0);
 				if(i == 0){
 //					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
 //					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
@@ -183,7 +183,7 @@ public class Rooms extends Generation {
 			hallEnd.add(lastRoom);
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
-				map[hall.get(i)[1]][hall.get(i)[0]]=0;
+				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(0);
 				if(i == 0){
 //					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
 //					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
@@ -225,7 +225,7 @@ public class Rooms extends Generation {
 			hallEnd.add(lastRoom);
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
-				map[hall.get(i)[1]][hall.get(i)[0]]=0;
+				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(0);
 				if(i == 0){
 //					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
 //					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
@@ -327,7 +327,7 @@ public class Rooms extends Generation {
 				halls.add(hallCoordinates);
 			}
 			for(int i=0;i<hallCoordinates.size();i++){
-				map[hallCoordinates.get(i)[1]][hallCoordinates.get(i)[0]]=0;
+				map[hallCoordinates.get(i)[1]][hallCoordinates.get(i)[0]]=tileMap.getTile(0);
 				if(i==0){
 //					if(hallCoordinates.get(0)[2] == 0||hallCoordinates.get(0)[2] == 1)addDoor(hallCoordinates.get(0)[0],hallCoordinates.get(0)[1],0);
 //					if(hallCoordinates.get(0)[2] == 2||hallCoordinates.get(0)[2] == 3)addDoor(hallCoordinates.get(0)[0],hallCoordinates.get(0)[1],1);
@@ -448,7 +448,7 @@ public class Rooms extends Generation {
 		int height = (int) room.height;
 		for(int i = 0; i<height; i++){
 			for(int k = 0; k<width; k++){
-				map[y][x]=0;
+				map[y][x]=tileMap.getTile(0);
 				if(!addedChest&&i>0&&k>0&&i<height-1&&k<width-1&&Math.random()>1f-(1f/((float)width*(float)height))){
 					entities.add(LootGenerator.getChest(world, 1,x,y));
 					addedChest = true;

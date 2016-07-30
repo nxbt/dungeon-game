@@ -109,7 +109,7 @@ public class VillageRooms extends Generation {
 			hallEnd.add(lastRoom);
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
-				map[hall.get(i)[1]][hall.get(i)[0]]=0;
+				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(0);
 				if(i == 0){
 //					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
 //					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
@@ -163,7 +163,7 @@ public class VillageRooms extends Generation {
 			hallEnd.add(lastRoom);
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
-				map[hall.get(i)[1]][hall.get(i)[0]]=0;
+				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(0);
 				if(i == 0){
 //					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
 //					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
@@ -218,7 +218,7 @@ public class VillageRooms extends Generation {
 			hallEnd.add(lastRoom);
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
-				map[hall.get(i)[1]][hall.get(i)[0]]=0;
+				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(0);
 				if(i == 0){
 //					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
 //					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
@@ -272,7 +272,7 @@ public class VillageRooms extends Generation {
 			hallEnd.add(lastRoom);
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
-				map[hall.get(i)[1]][hall.get(i)[0]]=0;
+				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(0);
 				if(i == 0){
 //					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
 //					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
@@ -385,7 +385,7 @@ public class VillageRooms extends Generation {
 				halls.add(hallCoordinates);
 			}
 			for(int i=0;i<hallCoordinates.size();i++){
-				map[hallCoordinates.get(i)[1]][hallCoordinates.get(i)[0]]=0;
+				map[hallCoordinates.get(i)[1]][hallCoordinates.get(i)[0]]=tileMap.getTile(0);
 				if(i==0){
 //					if(hallCoordinates.get(0)[2] == 0||hallCoordinates.get(0)[2] == 1)addDoor(hallCoordinates.get(0)[0],hallCoordinates.get(0)[1],0);
 //					if(hallCoordinates.get(0)[2] == 2||hallCoordinates.get(0)[2] == 3)addDoor(hallCoordinates.get(0)[0],hallCoordinates.get(0)[1],1);
@@ -510,8 +510,8 @@ public class VillageRooms extends Generation {
 		int height = (int) room.height;
 		for(int i = 0; i<height; i++){
 			for(int k = 0; k<width; k++){
-				if(special)map[y][x] = 4;
-				else map[y][x]=0;
+				if(special)map[y][x] = tileMap.getTile(4);
+				else map[y][x]=tileMap.getTile(0);
 				x++;
 			}
 			y++;
@@ -592,8 +592,8 @@ public class VillageRooms extends Generation {
 		x = (int) room.x-1;
 		y = (int) room.y;
 		for(int i = 0; i < room.height; i++){
-			if(map[y][x]==0){
-				map[y][x]=5;
+			if(map[y][x].id==0){
+				map[y][x]=tileMap.getTile(5);
 				return new int[]{0,x,y};
 			}
 
@@ -602,8 +602,8 @@ public class VillageRooms extends Generation {
 		x = (int) (room.x+room.width);
 		y = (int) room.y;
 		for(int i = 0; i < room.height; i++){
-			if(map[y][x]==0){
-				map[y][x]=5;
+			if(map[y][x].id==0){
+				map[y][x]=tileMap.getTile(5);
 				return new int[]{1,x,y};
 			}
 
@@ -612,8 +612,8 @@ public class VillageRooms extends Generation {
 		x = (int) room.x;
 		y = (int) room.y-1;
 		for(int i = 0; i < room.width; i++){
-			if(map[y][x]==0){
-				map[y][x]=5;
+			if(map[y][x].id==0){
+				map[y][x]=tileMap.getTile(5);
 				return new int[]{2,x,y};
 			}
 
@@ -622,8 +622,8 @@ public class VillageRooms extends Generation {
 		x = (int) room.x;
 		y = (int) (room.y+room.height);
 		for(int i = 0; i < room.width; i++){
-			if(map[y][x]==0){
-				map[y][x]=5;
+			if(map[y][x].id==0){
+				map[y][x]=tileMap.getTile(5);
 				return new int[]{3,x,y};
 			}
 
@@ -1096,7 +1096,7 @@ public class VillageRooms extends Generation {
 		
 		for(int i = 0; i < room.height; i++){
 			for(int k = 0; k < room.width; k++){
-				map[y][x] = roomMap[i][k];
+				map[y][x] = tileMap.getTile(roomMap[i][k]);
 				x++;
 			}
 			y++;
