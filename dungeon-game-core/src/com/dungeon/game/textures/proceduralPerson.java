@@ -7,12 +7,12 @@ import com.badlogic.gdx.graphics.Texture;
 public class proceduralPerson extends proceduralTexture {
 
 	public proceduralPerson() {
-		super(32, 32);
+		super(32, 32, new int[0]);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void generateTexture() { //NEED TO ADD NOISE TO EVERYTHING!!!
+	public void generateTexture(int args[]) { //NEED TO ADD NOISE TO EVERYTHING!!!
 		
 		Pixmap texMap = new Pixmap(32,32,Pixmap.Format.RGBA8888); //create pixmap
 		
