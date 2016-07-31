@@ -39,7 +39,7 @@ public class dirt extends proceduralTile {
 //				float num1 = (ran.nextFloat()+ran1.nextFloat()+ran2.nextFloat()+ran3.nextFloat()+ran4.nextFloat())/5;
 //				float num2 = (ran.nextFloat()+ran1.nextFloat()+ran2.nextFloat()+ran3.nextFloat()+ran4.nextFloat())/5;
 //				float num3 = (ran.nextFloat()+ran1.nextFloat()+ran2.nextFloat()+ran3.nextFloat()+ran4.nextFloat())/5;
-				texMap.setColor(new Color((ran[0] + ran1[0] + ran2[0] + ran3[0] + ran4[0])/5f,(ran[1] + ran1[1] + ran2[1] + ran3[1] + ran4[1])/5f,(ran[2] + ran1[2] + ran2[2] + ran3[2] + ran4[2])/5f, 1));
+				texMap.setColor(new Color((ran[0]*3 + ran1[0] + ran2[0] + ran3[0] + ran4[0])/7f,(ran[1]*3 + ran1[1] + ran2[1] + ran3[1] + ran4[1])/7f,(ran[2]*3 + ran1[2] + ran2[2] + ran3[2] + ran4[2])/7f, 1));
 
 				
 //				//check for dark dirt
@@ -97,7 +97,7 @@ public class dirt extends proceduralTile {
 		Random ran = new Random(1+seed*xP*yP);
 		
 		//check for dark dirt
-		int darkDirtRadius = ran.nextInt(5);
+		int darkDirtRadius = ran.nextInt(4);
 		//well i did SOMETHING good here.... not stones but it'll be usefull haja
 		loop:
 		for(int y = -darkDirtRadius; y < darkDirtRadius; y++){
@@ -109,7 +109,7 @@ public class dirt extends proceduralTile {
 		}
 		
 		//check for light dirt
-		int lightDirtRadius = ran.nextInt(4);
+		int lightDirtRadius = ran.nextInt(5);
 		//well i did SOMETHING good here.... not stones but it'll be usefull haja
 		loop:
 		for(int j = -lightDirtRadius; j < lightDirtRadius; j++){
