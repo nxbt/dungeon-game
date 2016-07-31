@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class dirt extends proceduralTile {
 
 	public dirt(int seed, int x, int y) {
-		super(seed, x, y, new int[]{seed, x, y});
+		super(new int[]{seed, x, y});
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,21 +35,53 @@ public class dirt extends proceduralTile {
 				float num2 = (ran.nextFloat()+ran1.nextFloat()+ran2.nextFloat()+ran3.nextFloat()+ran4.nextFloat())/5;
 				float num3 = (ran.nextFloat()+ran1.nextFloat()+ran2.nextFloat()+ran3.nextFloat()+ran4.nextFloat())/5;
 				texMap.setColor(new Color((100f + num1*60f) / 255f,(50f + num2*20) / 255f,(10f + num3*20) / 255f, 1));
+
+				
 				//check for dark dirt
-				int darkDirtRadius = (int) (Math.random()*5f);
+				int darkDirtRadius = ran.nextInt(5);
 				//well i did SOMETHING good here.... not stones but it'll be usefull haja
 				loop:
-				for(int j = -darkDirtRadius; j < darkDirtRadius; j++){
-					for(int l = -darkDirtRadius; l < darkDirtRadius; l++){
-						if(new Random(1+seed*(curX+j)*(curY+l)).nextFloat() < 0.03f){
+				for(int y = -darkDirtRadius; y < darkDirtRadius; y++){
+					for(int x = -darkDirtRadius; x < darkDirtRadius; x++){
+						if(new Random(1+seed*(curX+x)*(curY+y)).nextFloat() < 0.03f && Math.sqrt(x*x + y*y) < darkDirtRadius){
 							texMap.setColor(new Color((90f + num1*30f) / 255f,(40f + num2*10) / 255f,(5f + num3*10) / 255f, 1));
 							break loop;
 						}
 					}
 				}
 				
+				//check for light dirt
+				int lightDirtRadius = ran.nextInt(4);
+				//well i did SOMETHING good here.... not stones but it'll be usefull haja
+				loop:
+				for(int j = -lightDirtRadius; j < lightDirtRadius; j++){
+					for(int l = -lightDirtRadius; l < lightDirtRadius; l++){
+						Random checker = new Random(1+seed*(curX+j)*(curY+l));
+						checker.nextFloat();
+						if(checker.nextFloat() < 0.03f){
+							texMap.setColor(new Color((130f + num1*70f) / 255f,(60f + num2*30) / 255f,(20f + num3*25) / 255f, 1));
+							break loop;
+						}
+					}
+				}
+				
 				//generate stones... somehow...
-				texMap.drawPixel(i, k);
+				loop:
+					for(int j = -5; j < 5; j++){
+						for(int l = -5; l < 5; l++){
+							Random checker = new Random(1+seed*(curX+j)*(curY+l));
+							checker.nextFloat();
+							checker.nextFloat();
+							if(checker.nextFloat() < 0.001f){
+								int stoneSize = checker.nextInt(5);
+								if(Math.sqrt(j*j+l*l) < stoneSize){
+									texMap.setColor(new Color(0.3f,0.3f,0.3f, 1));
+									break loop;
+								}
+							}
+						}
+					}
+				texMap.drawPixel(i, 31-k);
 			}
 		}
 		texture = new Texture(texMap);

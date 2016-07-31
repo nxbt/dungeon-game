@@ -8,7 +8,7 @@ public abstract class proceduralTile extends proceduralTexture {
 	
 	public int y;
 
-	public proceduralTile(int seed, int x, int y, int[] args) {
+	public proceduralTile(int[] args) {
 		super(32, 32, args);
 		// TODO Auto-generated constructor stub
 	}
