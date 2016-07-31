@@ -1,5 +1,7 @@
 package com.dungeon.game.textures;
 
+import com.badlogic.gdx.graphics.Pixmap;
+
 public class dirt extends proceduralTile {
 
 	public dirt(int seed, int x, int y) {
@@ -12,6 +14,7 @@ public class dirt extends proceduralTile {
 		seed = args[0];
 		x = args[1];
 		y = args[2];
+		Pixmap texMap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
 		
 		int curX;
 		int curY;
