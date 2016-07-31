@@ -15,6 +15,7 @@ import com.dungeon.game.generator.Rooms;
 import com.dungeon.game.generator.VillageRooms;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
+import com.dungeon.game.textures.tiles.Brick;
 import com.dungeon.game.textures.tiles.WoodPlank;
 
 public class Floor {
@@ -59,7 +60,14 @@ public class Floor {
 //				tm[i][k] = new Tile(textures[map[i][k]],map[i][k],rotations[i][k], flips[i][k]);
 				if(map[i][k].id == 0){
 					Texture tex = new WoodPlank(seed, k, i).texture;
-					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[0] = tex;
+					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
+//				}else if(map[i][k].id == 10){
+//					int left = k!=0&&(map[i][k-1].id == 10||map[i][k-1].id == 11||map[i][k-1].id == 12||map[i][k-1].id == 13||map[i][k-1].id == 14)?1:0;
+//					int right = k!=map[0].length-1&&(map[i][k+1].id == 10||map[i][k+1].id == 11||map[i][k+1].id == 12||map[i][k+1].id == 13||map[i][k+1].id == 14)?1:0;
+//					int bot = i!=0&&(map[i-1][k].id == 10||map[i-1][k].id == 11||map[i-1][k].id == 12||map[i-1][k].id == 13||map[i-1][k].id == 14)?1:0;
+//					int top = i!=map.length-1&&(map[i+1][k].id == 10||map[i+1][k].id == 11||map[i+1][k].id == 12||map[i+1][k].id == 13||map[i+1][k].id == 14)?1:0;
+//					Texture tex = new Brick(seed, k, i, left, right, bot, top).texture;
+//					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
 				}
 				tm[i][k] = map[i][k];
 			}

@@ -22,7 +22,7 @@ public class Person extends ProceduralTexture {
 		Color skinColor = new Color((float) (160+Math.random()*80)/255f,(float) (55+Math.random()*70)/255f,(float) (10+Math.random()*40)/255f, 1);
 		//hair vars
 		Color hairColor = Math.random() > 0.66?Color.RED:Math.random() > 0.5?Color.BROWN:Color.YELLOW;
-		int hairStyle = (int) (Math.random()*1);
+		int hairStyle = (int) (Math.random()*2);
 		//eye vars
 		Color eyeColor = Math.random() > 0.66?Color.BLUE:Math.random() > 0.5?Color.BROWN:Color.FOREST;
 		float eyeAngle = (float) (Math.PI/7f);
@@ -54,20 +54,32 @@ public class Person extends ProceduralTexture {
 		texMap.setColor(hairColor);
 		
 		//hair generation
+		int x = 16;
+		int y = 16;
+		int numStrands = 250;
 		switch(hairStyle){
 			case 0:
 				//normal hair
-				int x = 16;
-				int y = 16;
-				int numStrands = 250;
 				for(int i = 0; i < numStrands; i++){
 					float angle = (float) (2f*Math.PI*i/numStrands);
 					int length = 11 + (int)(Math.random()*2);
-					if(angle < Math.PI/3 || angle > 5*Math.PI/3)length = 8 + (int)(Math.random()*3);
+					if(angle < Math.PI/3f || angle > 5f*Math.PI/3f)length = 8 + (int)(Math.random()*3);
 					texMap.setColor(new Color((float) (hairColor.r * (0.8f + Math.random()*0.2f)), (float) (hairColor.g * (0.8f + Math.random()*0.2f)), (float) (hairColor.b * (0.8f + Math.random()*0.2f)), 1));
 					texMap.drawLine(16, 16, 16+(int)(Math.cos(angle)*length), 16+(int)(Math.sin(angle)*length));
 				}
 			break;
+			case 1:
+				//long hair
+				for(int i = 0; i < numStrands; i++){
+					float angle = (float) (2f*Math.PI*i/numStrands);
+					int length = 11 + (int)(Math.random()*2);
+					if(angle < Math.PI/3f || angle > 5f*Math.PI/3f)length = 8 + (int)(Math.random()*3f);
+					else if(angle > Math.PI/2f && angle < Math.PI*3f/2f)length = 13 + (int)(Math.random()*4);
+					texMap.setColor(new Color((float) (hairColor.r * (0.8f + Math.random()*0.2f)), (float) (hairColor.g * (0.8f + Math.random()*0.2f)), (float) (hairColor.b * (0.8f + Math.random()*0.2f)), 1));
+					texMap.drawLine(16, 16, 16+(int)(Math.cos(angle)*length), 16+(int)(Math.sin(angle)*length));
+				}
+			break;
+				
 		}
 		//eye generation
 		texMap.setColor(new Color(0.9f+eyeColor.r*0.1f,0.9f+eyeColor.g*0.1f,0.9f+eyeColor.b*0.1f,1));

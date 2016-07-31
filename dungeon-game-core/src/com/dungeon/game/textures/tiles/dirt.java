@@ -11,7 +11,6 @@ public class Dirt extends ProceduralTile {
 
 	public Dirt(int seed, int x, int y) {
 		super(new int[]{seed, x, y});
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
