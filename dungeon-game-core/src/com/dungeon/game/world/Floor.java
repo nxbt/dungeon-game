@@ -2,7 +2,6 @@ package com.dungeon.game.world;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,7 +15,7 @@ import com.dungeon.game.generator.Rooms;
 import com.dungeon.game.generator.VillageRooms;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
-import com.dungeon.game.utilities.Spritesheet;
+import com.dungeon.game.textures.dirt;
 
 public class Floor {
 	private static final String DEFAULT = "tilemap.png";
@@ -54,10 +53,14 @@ public class Floor {
 //		boolean[][] flips = gen.flips;
 		
 		entities = gen.getEntities();
-
+		int seed = 10000;
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
 //				tm[i][k] = new Tile(textures[map[i][k]],map[i][k],rotations[i][k], flips[i][k]);
+				if(map[i][k].id == 0){
+					Texture tex = new dirt(seed, k, i).texture;
+					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[0] = tex;
+				}
 				tm[i][k] = map[i][k];
 			}
 		}
