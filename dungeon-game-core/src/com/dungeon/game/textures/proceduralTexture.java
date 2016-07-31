@@ -1,7 +1,6 @@
 package com.dungeon.game.textures;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.dungeon.game.utilities.MathUtil;
 
 public abstract class ProceduralTexture {
 	

@@ -5,6 +5,7 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.dungeon.game.utilities.MathUtils;
 
 public class Dirt extends ProceduralTile {
 
@@ -37,7 +38,7 @@ public class Dirt extends ProceduralTile {
 				loop:
 					for(int j = -5; j < 5; j++){
 						for(int l = -5; l < 5; l++){
-							Random checker = getRandomFromSeedAndCords(seed, curX+j, curY+l);
+							Random checker = MathUtils.getRandomFromSeedAndCords(seed, curX+j, curY+l);
 							checker.nextFloat();
 							checker.nextFloat();
 							if(checker.nextFloat() < 0.001f){
@@ -57,7 +58,7 @@ public class Dirt extends ProceduralTile {
 	}
 	
 	private float[] getDirtColor(int xP, int yP){
-		Random ran = getRandomFromSeedAndCords(seed,xP,yP);
+		Random ran = MathUtils.getRandomFromSeedAndCords(seed,xP,yP);
 		
 		//check for dark dirt
 		int darkDirtRadius = ran.nextInt(5);
@@ -67,7 +68,7 @@ public class Dirt extends ProceduralTile {
 		loop:
 		for(int y = -Math.max(darkDirtRadius, lightDirtRadius); y < Math.max(darkDirtRadius, lightDirtRadius); y++){
 			for(int x = -Math.max(darkDirtRadius, lightDirtRadius); x < Math.max(darkDirtRadius, lightDirtRadius); x++){
-				Random checker = getRandomFromSeedAndCords(seed,xP+x,yP+y);
+				Random checker = MathUtils.getRandomFromSeedAndCords(seed,xP+x,yP+y);
 				//check for dark dirt
 				if(checker.nextFloat() < 0.03f && Math.sqrt(x*x + y*y) < darkDirtRadius){
 					return new float[]{(90f + ran.nextFloat()*30f) / 255f,(40f + ran.nextFloat()*10) / 255f,(5f + ran.nextFloat()*10) / 255f};

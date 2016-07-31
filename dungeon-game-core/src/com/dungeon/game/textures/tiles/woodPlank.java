@@ -5,6 +5,7 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.dungeon.game.utilities.MathUtils;
 
 public class WoodPlank extends ProceduralTile {
 
@@ -29,9 +30,12 @@ public class WoodPlank extends ProceduralTile {
 			for(int k = 0; k < 32; k++){
 				curX = x*32+i;
 				curY = y*32+k;
-				Random rand = getRandomFromSeedAndX(seed,(int)(curX/8));
-				if((curX+1)%8==0 || (curX)%8==0 || (curY + rand.nextInt(32)) % 32 <= 1)texMap.setColor(new Color(woodColor.r*0.7f, woodColor.g*0.7f, woodColor.b*0.7f,1));
-				else texMap.setColor(woodColor);
+				Random rand = MathUtils.getRandomFromSeedAndX(seed,(int)(curX/8));
+				Color curColor;
+				if((curX+1)%8==0 || (curX)%8==0 || (curY + rand.nextInt(32)) % 32 <= 1)curColor = new Color(woodColor.r*0.7f, woodColor.g*0.7f, woodColor.b*0.7f,1);
+				else curColor = woodColor;
+				float num = MathUtils.noise(seed, curX, curY, 4);
+				texMap.setColor(new Color(curColor.r*0.9f+num*0.1f, curColor.g*0.9f+num*0.1f, curColor.b*0.9f+num*0.1f, 1));
 				texMap.drawPixel(i, 31-k);
 			}
 		}
