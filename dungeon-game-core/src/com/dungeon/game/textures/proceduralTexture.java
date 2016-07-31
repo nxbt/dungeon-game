@@ -12,7 +12,6 @@ public abstract class proceduralTexture {
 	public int height;
 	
 	public proceduralTexture(int width, int height, int args[]){
-		System.out.println(MathUtil.random(100));
 		this.width = width;
 		this.height = height;
 		generateTexture(args);

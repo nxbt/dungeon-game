@@ -25,7 +25,6 @@ public class Rooms extends Generation {
 		hallEnds = new ArrayList<ArrayList<Rectangle>>();
 		int x = height/2;
 		int y = width/2;
-		System.out.println(centerX);
 		if(world.curDungeon!=null)entities.add(new Stair(world, centerX*Tile.TS-Tile.TS/2, centerY*Tile.TS-Tile.TS/2, false, upTrapX+1, upTrapY+1));
 		roomGenerators = new MethodArray(4){
 			public void a(int x, int y, int width, int height, int dir, Rectangle room){
