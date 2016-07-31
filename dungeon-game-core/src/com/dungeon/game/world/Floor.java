@@ -15,7 +15,7 @@ import com.dungeon.game.generator.Rooms;
 import com.dungeon.game.generator.VillageRooms;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
-import com.dungeon.game.textures.tiles.dirt;
+import com.dungeon.game.textures.tiles.woodPlank;
 
 public class Floor {
 	private static final String DEFAULT = "tilemap.png";
@@ -58,7 +58,7 @@ public class Floor {
 			for(int k = 0;k<tm[i].length;k++){
 //				tm[i][k] = new Tile(textures[map[i][k]],map[i][k],rotations[i][k], flips[i][k]);
 				if(map[i][k].id == 0){
-					Texture tex = new dirt(seed, k, i).texture;
+					Texture tex = new woodPlank(seed, k, i).texture;
 					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[0] = tex;
 				}
 				tm[i][k] = map[i][k];

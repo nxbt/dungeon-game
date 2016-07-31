@@ -34,22 +34,22 @@ public class dirt extends proceduralTile {
 				texMap.setColor(new Color((ran[0]*3 + ran1[0] + ran2[0] + ran3[0] + ran4[0])/7f,(ran[1]*3 + ran1[1] + ran2[1] + ran3[1] + ran4[1])/7f,(ran[2]*3 + ran1[2] + ran2[2] + ran3[2] + ran4[2])/7f, 1));
 				
 				//generate stones... somehow...
-//				loop:
-//					for(int j = -5; j < 5; j++){
-//						for(int l = -5; l < 5; l++){
-//							Random checker = getRandomFromSeedAndCords(seed, curX+j, curY+l);
-//							checker.nextFloat();
-//							checker.nextFloat();
-//							if(checker.nextFloat() < 0.001f){
-//								int stoneSize = checker.nextInt(5);
-//								float dist = (float) Math.sqrt(j*j+l*l);
-//								if(dist < stoneSize){
-//									texMap.setColor(new Color(0.25f+dist/10f,0.25f+dist/10f,0.25f+dist/10f, 1));
-//									break loop;
-//								}
-//							}
-//						}
-//					}
+				loop:
+					for(int j = -5; j < 5; j++){
+						for(int l = -5; l < 5; l++){
+							Random checker = getRandomFromSeedAndCords(seed, curX+j, curY+l);
+							checker.nextFloat();
+							checker.nextFloat();
+							if(checker.nextFloat() < 0.001f){
+								int stoneSize = checker.nextInt(5);
+								float dist = (float) Math.sqrt(j*j+l*l);
+								if(dist < stoneSize){
+									texMap.setColor(new Color(0.25f+dist/10f,0.25f+dist/10f,0.25f+dist/10f, 1));
+									break loop;
+								}
+							}
+						}
+					}
 				texMap.drawPixel(i, 31-k);
 			}
 		}

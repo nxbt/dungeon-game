@@ -17,8 +17,26 @@ public abstract class proceduralTile extends proceduralTexture {
 		// TODO Auto-generated constructor stub
 	}
 	
-	protected Random getRandomFromSeedAndCords(int seed, int x, int y){
-		return new Random((long) (1f+((float)seed)*Math.cos(x)*Math.sin(y)));
+	protected Random getRandomFromSeedAndCords(int seed, int x, int y){ //this is not very efficent...
+		Random xRandomer = new Random(x);
+		Random yRandomer = new Random(y);
+		xRandomer.nextFloat();
+		yRandomer.nextFloat();
+		yRandomer.nextFloat();
+		return new Random((long) (1f+((float)seed)*xRandomer.nextFloat()*yRandomer.nextFloat()));
+	}
+	
+	protected Random getRandomFromSeedAndX(int seed, int x){
+		Random xRandomer = new Random(x);
+		xRandomer.nextFloat();
+		return new Random((long) (1f+((float)seed)*xRandomer.nextFloat()));
+	}
+	
+	protected Random getRandomFromSeedAndY(int seed, int y){
+		Random yRandomer = new Random(y);
+		yRandomer.nextFloat();
+		yRandomer.nextFloat();
+		return new Random((long) (1f+((float)seed)*yRandomer.nextFloat()));
 	}
 
 }
