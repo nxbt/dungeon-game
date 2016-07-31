@@ -35,18 +35,20 @@ public class dirt extends proceduralTile {
 				float num2 = (ran.nextFloat()+ran1.nextFloat()+ran2.nextFloat()+ran3.nextFloat()+ran4.nextFloat())/5;
 				float num3 = (ran.nextFloat()+ran1.nextFloat()+ran2.nextFloat()+ran3.nextFloat()+ran4.nextFloat())/5;
 				texMap.setColor(new Color((100f + num1*60f) / 255f,(50f + num2*20) / 255f,(10f + num3*20) / 255f, 1));
-				//generate stones... somehow...
-				int stoneCheckRadius = (int) (Math.random()*5f);
+				//check for dark dirt
+				int darkDirtRadius = (int) (Math.random()*5f);
 				//well i did SOMETHING good here.... not stones but it'll be usefull haja
 				loop:
-				for(int j = -stoneCheckRadius; j < stoneCheckRadius; j++){
-					for(int l = -stoneCheckRadius; l < stoneCheckRadius; l++){
+				for(int j = -darkDirtRadius; j < darkDirtRadius; j++){
+					for(int l = -darkDirtRadius; l < darkDirtRadius; l++){
 						if(new Random(1+seed*(curX+j)*(curY+l)).nextFloat() < 0.03f){
-							texMap.setColor(0.4f, 0.4f, 0.4f, 1);
+							texMap.setColor(new Color((90f + num1*30f) / 255f,(40f + num2*10) / 255f,(5f + num3*10) / 255f, 1));
 							break loop;
 						}
 					}
 				}
+				
+				//generate stones... somehow...
 				texMap.drawPixel(i, k);
 			}
 		}
