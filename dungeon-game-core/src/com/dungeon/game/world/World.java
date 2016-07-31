@@ -128,6 +128,10 @@ public class World {
 		}
 		CoverFinder.findCover(this, player, entities.get(entities.size() - 4), new int[4], new float[4], true, 10);
 		
+		for(int i = 0; i < 100; i++){
+			System.out.println(com.dungeon.game.utilities.MathUtils.irregularInterVal(100, i, 4, 4));
+		}
+		
 	}
 	
 	public void update() {

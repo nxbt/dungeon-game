@@ -84,4 +84,8 @@ public class MathUtils {
 	public static float perturbedSinNoise(int seed, int x, int y, float period /* period of the side function*/, float perturbPeriod /*higher means smoother perturb*/, float perturbAmp/*higher means more perturb*/){
 		return (float) (1f+Math.sin(((float)x*Math.PI*2f+noise(seed,x,y,perturbPeriod)*perturbAmp)/period))/2f;
 	}
+	
+	public static boolean irregularInterVal(int seed, int x, float period, float perturbAmp){
+		return (x) % period + (int)(getRandomFromSeedAndX(seed, x).nextFloat()*perturbAmp) == 0;
+	}
 }
