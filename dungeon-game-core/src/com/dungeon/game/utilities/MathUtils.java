@@ -33,7 +33,7 @@ public class MathUtils {
 		return fin;
 	}
 
-	public static float noise(int seed, int x, int y, int amp){
+	public static float noise(int seed, int x, int y, float amp){
 		Random rand = new Random(seed);
 		float bl = getRandomFromSeedAndCords(seed, (int)(x/amp), (int)(y/amp)).nextFloat();
 		float tl = getRandomFromSeedAndCords(seed, (int)(x/amp), (int)(y/amp)+1).nextFloat();
@@ -73,15 +73,15 @@ public class MathUtils {
         tDist = amp-bDist;
         
         float value = 0;
-//         value += bl*Math.max(0,(this.magnitude-lDist)*(this.magnitude-bDist));
-//         value += br*(this.magnitude-rDist)*(this.magnitude-bDist);
-//         value += tl*(this.magnitude-lDist)*(this.magnitude-tDist);
-//         value += tr*Math.max(0,(this.magnitude-rDist)*(this.magnitude-tDist));
         value += lv*(amp-lDist);
         value += rv*(amp-rDist);
         value += bv*(amp-bDist);
         value += tv*(amp-tDist);
         return value/(amp*2);
 		
+	}
+	
+	public static float perturbedSinNoise(int seed, int x, int y, float period /* period of the side function*/, float perturbPeriod /*higher means smoother perturb*/, float perturbAmp/*higher means more perturb*/){
+		return (float) (1f+Math.sin(((float)x*Math.PI*2f+noise(seed,x,y,perturbPeriod)*perturbAmp)/period))/2f;
 	}
 }

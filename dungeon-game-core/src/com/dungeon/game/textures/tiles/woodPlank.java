@@ -23,7 +23,8 @@ public class WoodPlank extends ProceduralTile {
 		
 		//variables
 		Random seedConstant = new Random(seed);
-		Color woodColor = seedConstant.nextFloat() > 0.5? new Color(102f / 255f, 51f / 255f, 0f / 255f,1): new Color(94f / 255f, 15f / 255f, 18f / 255f,1);
+		seedConstant.nextFloat();
+		Color woodColor = new Color(102f / 255f, 51f / 255f, 0f / 255f,1);
 		int curX;
 		int curY;
 		for(int i = 0; i < 32; i++){
@@ -31,11 +32,14 @@ public class WoodPlank extends ProceduralTile {
 				curX = x*32+i;
 				curY = y*32+k;
 				Random rand = MathUtils.getRandomFromSeedAndX(seed,(int)(curX/8));
-				Color curColor;
-				if((curX+1)%8==0 || (curX)%8==0 || (curY + rand.nextInt(32)) % 32 <= 1)curColor = new Color(woodColor.r*0.7f, woodColor.g*0.7f, woodColor.b*0.7f,1);
-				else curColor = woodColor;
-				float num = MathUtils.noise(seed, curX, curY, 4);
-				texMap.setColor(new Color(curColor.r*0.9f+num*0.1f, curColor.g*0.9f+num*0.1f, curColor.b*0.9f+num*0.1f, 1));
+				if((curX+1)%8==0 || (curX)%8==0 || (curY + rand.nextInt(32)) % 32 <= 1){
+					float num = MathUtils.noise(seed, curX, curY, 2);
+					texMap.setColor(new Color(woodColor.r*0.77f+num*0.03f, woodColor.g*0.77f+num*0.03f, woodColor.b*0.77f+num*0.03f, 1));
+				}
+				else{
+					float num = MathUtils.perturbedSinNoise(seed, curX, curY, 4, 3, 20);
+					texMap.setColor(new Color(woodColor.r*0.9f+num*0.1f, woodColor.g*0.9f+num*0.1f, woodColor.b*0.9f+num*0.1f, 1));
+				}
 				texMap.drawPixel(i, 31-k);
 			}
 		}
