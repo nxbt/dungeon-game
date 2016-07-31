@@ -74,8 +74,9 @@ public class dirt extends proceduralTile {
 							checker.nextFloat();
 							if(checker.nextFloat() < 0.001f){
 								int stoneSize = checker.nextInt(5);
-								if(Math.sqrt(j*j+l*l) < stoneSize){
-									texMap.setColor(new Color(0.3f,0.3f,0.3f, 1));
+								float dist = (float) Math.sqrt(j*j+l*l);
+								if(dist < stoneSize){
+									texMap.setColor(new Color(0.25f+dist/10f,0.25f+dist/10f,0.25f+dist/10f, 1));
 									break loop;
 								}
 							}
