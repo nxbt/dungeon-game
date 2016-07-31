@@ -88,5 +88,11 @@ public class dirt extends proceduralTile {
 		texture = new Texture(texMap);
 	}
 	
+	private float[] getDirtColor(int x, int y){
+		Random ran = new Random(1+seed*x*y);
+		return new float[]{ran.nextFloat(), ran.nextFloat(), ran.nextFloat()};
+		
+	}
+	
 
 }
