@@ -28,7 +28,7 @@ import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.item.equipable.weapon.Wand;
 import com.dungeon.game.item.equipable.weapon.Weapon;
 import com.dungeon.game.light.Light;
-import com.dungeon.game.textures.proceduralPerson;
+import com.dungeon.game.textures.ProceduralPerson;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -47,7 +47,7 @@ public class Player extends Character {
 		Sprite spr = new Sprite(sprite);
 		spr.setColor(new Color(1, 0, 0, 1));
 		sprite = spr.getTexture();
-		sprite = new proceduralPerson().texture;
+		sprite = new ProceduralPerson().texture;
 		
 		speechColor = Color.BLUE;
 		

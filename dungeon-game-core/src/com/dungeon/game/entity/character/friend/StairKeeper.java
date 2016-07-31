@@ -17,14 +17,14 @@ import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.equipable.weapon.Axe;
 import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.light.Light;
-import com.dungeon.game.textures.proceduralPerson;
+import com.dungeon.game.textures.ProceduralPerson;
 import com.dungeon.game.world.World;
 
 public class StairKeeper extends Friend {
 	
 	public StairKeeper(World world, float x, float y) {
 		super(world, x, y, 32, 32, "mentor.png");
-		sprite = new proceduralPerson().texture;
+		sprite = new ProceduralPerson().texture;
 		
 		speechColor = new Color(0.3f,0.1f,0.4f,1);
 		speechBubble.setColor();	
