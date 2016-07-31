@@ -1,4 +1,4 @@
-package com.dungeon.game.textures;
+package com.dungeon.game.textures.tiles;
 
 import java.util.Random;
 

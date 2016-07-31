@@ -15,7 +15,7 @@ import com.dungeon.game.generator.Rooms;
 import com.dungeon.game.generator.VillageRooms;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
-import com.dungeon.game.textures.dirt;
+import com.dungeon.game.textures.tiles.dirt;
 
 public class Floor {
 	private static final String DEFAULT = "tilemap.png";
