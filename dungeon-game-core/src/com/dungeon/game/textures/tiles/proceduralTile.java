@@ -23,20 +23,26 @@ public abstract class ProceduralTile extends ProceduralTexture {
 		xRandomer.nextFloat();
 		yRandomer.nextFloat();
 		yRandomer.nextFloat();
-		return new Random((long) (1f+((float)seed)*xRandomer.nextFloat()*yRandomer.nextFloat()));
+		Random fin = new Random((long) (1f+((float)seed)*xRandomer.nextFloat()*yRandomer.nextFloat()));
+		fin.nextFloat();
+		return fin;
 	}
 	
 	protected Random getRandomFromSeedAndX(int seed, int x){
 		Random xRandomer = new Random(x);
 		xRandomer.nextFloat();
-		return new Random((long) (1f+((float)seed)*xRandomer.nextFloat()));
+		Random fin = new Random((long) (1f+((float)seed)*xRandomer.nextFloat()));
+		fin.nextFloat();
+		return fin;
 	}
 	
 	protected Random getRandomFromSeedAndY(int seed, int y){
 		Random yRandomer = new Random(y);
 		yRandomer.nextFloat();
 		yRandomer.nextFloat();
-		return new Random((long) (1f+((float)seed)*yRandomer.nextFloat()));
+		Random fin = new Random((long) (1f+((float)seed)*yRandomer.nextFloat()));
+		fin.nextFloat();
+		return fin;
 	}
 
 }
