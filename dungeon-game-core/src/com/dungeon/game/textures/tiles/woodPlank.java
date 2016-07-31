@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 
-public class woodPlank extends proceduralTile {
+public class WoodPlank extends ProceduralTile {
 
-	public woodPlank(int seed, int x, int y) {
+	public WoodPlank(int seed, int x, int y) {
 		super(new int[]{seed, x, y});
 		// TODO Auto-generated constructor stub
 	}
