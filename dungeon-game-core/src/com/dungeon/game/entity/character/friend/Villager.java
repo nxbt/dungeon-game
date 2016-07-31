@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.light.Light;
-import com.dungeon.game.textures.ProceduralPerson;
+import com.dungeon.game.textures.Person;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -17,7 +17,7 @@ public class Villager extends Friend {
 
 	public Villager(World world, float x, float y) {
 		super(world, x, y, 32, 32, "mentor.png");
-		sprite = new ProceduralPerson().texture;
+		sprite = new Person().texture;
 		
 		speechColor = new Color(0.3f,0.1f,0.4f,1);
 		speechBubble.setColor();	

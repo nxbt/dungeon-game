@@ -4,9 +4,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 
-public class ProceduralPerson extends ProceduralTexture {
+public class Person extends ProceduralTexture {
 
-	public ProceduralPerson() {
+	public Person() {
 		super(32, 32, new int[0]);
 		// TODO Auto-generated constructor stub
 	}
