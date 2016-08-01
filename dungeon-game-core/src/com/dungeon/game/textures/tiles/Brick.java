@@ -368,7 +368,88 @@ public class Brick extends ProceduralTile {
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
 					curY = y*32+k;
-					mortar(i, k, curX, curY, brickColor, texMap); // placeholder cause this is hard	
+					Random rand = MathUtils.getRandomFromSeedAndCords(seed, x, y);
+					if(i < 16 && k < 16){ //bottom left corner
+						if(rand.nextFloat() > 0.5f){
+							if(i > 6){
+								verticalBrick(i, k, curX, curY, brickColor, texMap);
+							}else if(k > 6){
+								horizonBrick(i, k, curX, curY, brickColor, texMap);
+							}else{
+								verticalBrick(i, k, curX, curY, brickColor, texMap);
+							}
+						}else{
+							if(k > 6){
+								horizonBrick(i, k, curX, curY, brickColor, texMap);
+							}else if(i > 6){
+								verticalBrick(i, k, curX, curY, brickColor, texMap);
+							}else{
+								horizonBrick(i, k, curX, curY, brickColor, texMap);
+							}
+						}
+						
+					}
+					else if(i < 16 && k >= 16){ //top left corner
+						if(rand.nextFloat() > 0.5f){
+							if(i > 6){
+								verticalBrick(i, k, curX, curY, brickColor, texMap);
+							}else if(k < 25){
+								horizonBrick(i, k, curX, curY, brickColor, texMap);
+							}else{
+								verticalBrick(i, k, curX, curY, brickColor, texMap);
+							}
+						}else{
+							if(k < 25){
+								horizonBrick(i, k, curX, curY, brickColor, texMap);
+							}else if(i > 6){
+								verticalBrick(i, k, curX, curY, brickColor, texMap);
+							}else{
+								horizonBrick(i, k, curX, curY, brickColor, texMap);
+							}
+						}
+						
+					}
+					else if(i >= 16 && k < 16){ //bottom right corner
+						if(rand.nextFloat() > 0.5f){
+							if(i < 25){
+								verticalBrick(i, k, curX, curY, brickColor, texMap);
+							}else if(k > 6){
+								horizonBrick(i, k, curX, curY, brickColor, texMap);
+							}else{
+								verticalBrick(i, k, curX, curY, brickColor, texMap);
+							}
+						}else{
+							if(k > 6){
+								horizonBrick(i, k, curX, curY, brickColor, texMap);
+							}else if(i < 25){
+								verticalBrick(i, k, curX, curY, brickColor, texMap);
+							}else{
+								horizonBrick(i, k, curX, curY, brickColor, texMap);
+							}
+						}
+						
+					}
+					else if(i >= 16 && k >= 16){ //top right corner
+						if(rand.nextFloat() > 0.5f){
+							if(i < 25){
+								verticalBrick(i, k, curX, curY, brickColor, texMap);
+							}else if(k < 25){
+								horizonBrick(i, k, curX, curY, brickColor, texMap);
+							}else{
+								verticalBrick(i, k, curX, curY, brickColor, texMap);
+							}
+						}else{
+							if(k < 25){
+								horizonBrick(i, k, curX, curY, brickColor, texMap);
+							}else if(i < 25){
+								verticalBrick(i, k, curX, curY, brickColor, texMap);
+							}else{
+								horizonBrick(i, k, curX, curY, brickColor, texMap);
+							}
+						}
+						
+					}
+					System.out.println("pls");
 				}
 			}
 		}

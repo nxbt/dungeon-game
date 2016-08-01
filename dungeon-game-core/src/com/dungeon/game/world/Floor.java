@@ -58,6 +58,7 @@ public class Floor {
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
 //				tm[i][k] = new Tile(textures[map[i][k]],map[i][k],rotations[i][k], flips[i][k]);
+				//temp code to test 4 ways
 				if(map[i][k].id == 0){
 					Texture tex = new WoodPlank(seed, k, i).texture;
 					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
