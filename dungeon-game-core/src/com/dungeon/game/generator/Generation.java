@@ -24,8 +24,11 @@ public abstract class Generation {
 	
 	public ArrayList<Area> areas;
 	
+	public int textureSeed;
+	
 	public TileMap tileMap;
-	public Generation(World world, int width, int height){
+	public Generation(World world, int width, int height, int textureSeed){
+		this.textureSeed = textureSeed;
 		tileMap = Floor.tileMap1;
 		areas = new ArrayList<Area>();
 		this.height = height;

@@ -9,8 +9,8 @@ import com.dungeon.game.world.World;
 public class Castle extends Generation {
 	private ArrayList<Rectangle> rooms;
 	
-	public Castle(World world, int width, int height){
-		super(world, width, height);
+	public Castle(World world, int width, int height, int textureSeed){
+		super(world, width, height, textureSeed);
 		rooms = new ArrayList<Rectangle>();
 		int x = height/2;
 		int y = width/2;

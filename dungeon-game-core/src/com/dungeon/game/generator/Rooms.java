@@ -18,8 +18,8 @@ public class Rooms extends Generation {
 	private ArrayList<ArrayList<Rectangle>> hallEnds;
 	private MethodArray roomGenerators;
 	
-	public Rooms(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY){
-		super(world, width, height);
+	public Rooms(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY, int textureSeed){
+		super(world, width, height, textureSeed);
 		rooms = new ArrayList<Rectangle>();
 		halls = new ArrayList<ArrayList<int[]>>();
 		hallEnds = new ArrayList<ArrayList<Rectangle>>();
