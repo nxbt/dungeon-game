@@ -35,7 +35,7 @@ public class WoodPlank extends ProceduralTile {
 				int yOffset = rand.nextInt(32);
 				int barrierZone = (int)((16f+curY+yOffset)/32f);
 				int barrier = (int) (barrierZone*32f-8f+16f*MathUtils.getRandomFromSeedAndY(seed*(int)(curX/8),barrierZone).nextFloat());
-				if((curX+1)%8==0 || (curX)%8==0 || curY+yOffset == barrier || curY+yOffset - 1 == barrier){
+				if((curX)%8==0 || (curX+1)%8==0 || curY+yOffset == barrier || curY+yOffset - 1 == barrier){
 					float num = MathUtils.noise(seed, curX, curY, 2);
 					texMap.setColor(new Color(woodColor.r*0.77f+num*0.03f, woodColor.g*0.77f+num*0.03f, woodColor.b*0.77f+num*0.03f, 1));
 				}
