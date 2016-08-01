@@ -37,24 +37,27 @@ public class Floor {
 	
 	public com.badlogic.gdx.physics.box2d.World box2dWorld;
 	
+	public int seed;
+	
 	public Floor(World world, String type, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY) {
 		this.world = world;
+		
+		seed =(int) (Math.random()*100000);
 		
 		entities = new ArrayList<Entity>();
 		
 		tm = new Tile[height][width];
 		
 		Generation gen;
-		if(type.equals("rooms"))gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY);
-		else if(type.equals("village_rooms"))gen = new VillageRooms(world, width, height,centerX,centerY, upTrapX, upTrapY);
-		else gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY);
+		if(type.equals("rooms"))gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
+		else if(type.equals("village_rooms"))gen = new VillageRooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
+		else gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
 
 		Tile[][] map = gen.map;
 //		int[][] rotations = gen.rotations;
 //		boolean[][] flips = gen.flips;
 		
 		entities = gen.getEntities();
-		int seed = 10000;
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
 //				tm[i][k] = new Tile(textures[map[i][k]],map[i][k],rotations[i][k], flips[i][k]);

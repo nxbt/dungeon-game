@@ -5,12 +5,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.Static;
 import com.dungeon.game.light.Light;
+import com.dungeon.game.textures.tiles.FirePlace;
 import com.dungeon.game.utilities.Spritesheet;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Fireplace extends Static {
 
-	public Fireplace(World world, float x, float y, int orientation) {
+	public Fireplace(World world, float x, float y, int orientation, int seed) {
 		super(world, x, y, 32, 32, "fireplace.png");
 		
 		Pixmap tempMap = new Pixmap(32, 32, Pixmap.Format.RGB888);
@@ -20,6 +22,8 @@ public class Fireplace extends Static {
 		Pixmap rotated = Spritesheet.rotatePixmap(tempMap,orientation);
 		sprite = new Texture(rotated);
 		tempMap.dispose();
+		//maybe seed code must change?
+		sprite = new FirePlace(seed, (int)(x/Tile.TS), (int)(y/Tile.TS), orientation).texture;
 		
 		solid = true;
 		hitbox = new Polygon(new float[]{0,0,32,0,32,32,0,32});
