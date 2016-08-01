@@ -29,15 +29,59 @@ public class Brick extends ProceduralTile {
 		
 		if(sides == 1 && (corners == 10 || corners == 9 || corners == 12 || corners == 4 || corners == 8 || corners == 5 || corners == 7 || corners == 11 || corners == 14 || corners == 13 || corners ==6)){
 //			map[i][k] = tileMap.getTile(thre_id, 3, false);
+			for(int i = 0; i < 32; i++){
+				for(int k = 0; k < 32; k++){
+					curX = x*32+i;
+					curY = y*32+k;
+					if(i < 9){
+						verticalBrick(i, k, curX, curY, brickColor, texMap);
+					}else{
+						horizonBrick(i, k, curX, curY, brickColor, texMap);
+					}
+				}
+			}
 		}
 		else if(sides == 2 && (corners == 3||corners == 6||corners == 10||corners == 8||corners == 2||corners == 12||corners == 13||corners == 7 || corners == 11 || corners == 14 || corners == 9)){
 //			map[i][k] = tileMap.getTile(thre_id, 2, false);
+			for(int i = 0; i < 32; i++){
+				for(int k = 0; k < 32; k++){
+					curX = x*32+i;
+					curY = y*32+k;
+					if(k < 9){
+						horizonBrick(i, k, curX, curY, brickColor, texMap);
+					}else{
+						verticalBrick(i, k, curX, curY, brickColor, texMap);
+					}
+				}
+			}
 		}
 		else if(sides == 4 && (corners == 5||corners == 9||corners == 3||corners == 2||corners == 1||corners == 10||corners == 14||corners == 13 || corners == 7 || corners == 11 || corners == 6)){
 //			map[i][k] = tileMap.getTile(thre_id, 1, false);
+			for(int i = 0; i < 32; i++){
+				for(int k = 0; k < 32; k++){
+					curX = x*32+i;
+					curY = y*32+k;
+					if(i > 22){
+						verticalBrick(i, k, curX, curY, brickColor, texMap);
+					}else{
+						horizonBrick(i, k, curX, curY, brickColor, texMap);
+					}
+				}
+			}
 		}
 		else if(sides == 8 && (corners == 12||corners == 6||corners == 5||corners == 1||corners == 4||corners == 3||corners == 11||corners == 14 || corners == 13 || corners == 7 || corners == 9)){
 //			map[i][k] = tileMap.getTile(thre_id, 0, false);
+			for(int i = 0; i < 32; i++){
+				for(int k = 0; k < 32; k++){
+					curX = x*32+i;
+					curY = y*32+k;
+					if(k > 22){
+						horizonBrick(i, k, curX, curY, brickColor, texMap);
+					}else{
+						verticalBrick(i, k, curX, curY, brickColor, texMap);
+					}
+				}
+			}
 		}
 		else if(sides == 0 && corners == 3){
 //			map[i][k] = tileMap.getTile(thre_id, 1, false);
