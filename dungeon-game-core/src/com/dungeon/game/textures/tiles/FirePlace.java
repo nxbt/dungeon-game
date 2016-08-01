@@ -16,7 +16,20 @@ public class FirePlace extends ProceduralTile {
 		x = args[1];
 		y = args[2];
 		int rotation = args[3];
-		Pixmap texMap = new Brick(seed, x, y, (rotation == 0 || rotation == 2)?2:1, 0).texture.getTextureData().consumePixmap();
+		Pixmap brickMap = new Brick(seed, x, y, (rotation == 0 || rotation == 2)?2:1, 0).texture.getTextureData().consumePixmap();
+		
+		Pixmap texMap = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
+		if(rotation == 0){
+			
+		}else if(rotation == 1){
+			
+		}else if(rotation == 2){
+			
+		}else if(rotation == 3){
+			
+		}
+			
+		brickMap.drawPixmap(texMap, 0, 0);
 		
 		texture = new Texture(texMap);
 
