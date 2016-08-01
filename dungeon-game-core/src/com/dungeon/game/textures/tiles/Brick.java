@@ -94,9 +94,9 @@ public class Brick extends ProceduralTile {
 					curX = x*32+i;
 					curY = y*32+k;
 					if(k > 22){
-						verticalBrick(i, k, curX, curY, brickColor, texMap);
-					}else{
 						horizonBrick(i, k, curX, curY, brickColor, texMap);
+					}else{
+						verticalBrick(i, k, curX, curY, brickColor, texMap);
 						
 					}
 					texMap.drawPixel(i, 31-k);
@@ -110,9 +110,9 @@ public class Brick extends ProceduralTile {
 					curX = x*32+i;
 					curY = y*32+k;
 					if(i < 9){
-						horizonBrick(i, k, curX, curY, brickColor, texMap);
-					}else{
 						verticalBrick(i, k, curX, curY, brickColor, texMap);
+					}else{
+						horizonBrick(i, k, curX, curY, brickColor, texMap);
 						
 					}
 					texMap.drawPixel(i, 31-k);
