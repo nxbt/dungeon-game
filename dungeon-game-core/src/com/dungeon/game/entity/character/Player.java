@@ -28,7 +28,7 @@ import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.item.equipable.weapon.Wand;
 import com.dungeon.game.item.equipable.weapon.Weapon;
 import com.dungeon.game.light.Light;
-import com.dungeon.game.textures.Person;
+import com.dungeon.game.textures.entity.Person;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 

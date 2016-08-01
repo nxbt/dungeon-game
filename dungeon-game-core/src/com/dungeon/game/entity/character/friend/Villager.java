@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.light.Light;
-import com.dungeon.game.textures.Person;
+import com.dungeon.game.textures.entity.Person;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 

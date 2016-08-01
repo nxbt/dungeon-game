@@ -1,8 +1,9 @@
-package com.dungeon.game.textures;
+package com.dungeon.game.textures.entity;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.dungeon.game.textures.ProceduralTexture;
 
 public class Person extends ProceduralTexture {
 

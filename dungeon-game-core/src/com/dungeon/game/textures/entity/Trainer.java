@@ -1,4 +1,4 @@
-package com.dungeon.game.textures;
+package com.dungeon.game.textures.entity;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;

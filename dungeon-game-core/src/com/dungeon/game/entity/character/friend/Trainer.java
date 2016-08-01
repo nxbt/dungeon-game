@@ -12,7 +12,7 @@ public class Trainer extends Friend {
 	public Trainer(World world, float x, float y) {
 		super(world, x, y, 32, 32, "trainer.png");
 		
-		sprite = new com.dungeon.game.textures.Trainer().texture;
+		sprite = new com.dungeon.game.textures.entity.Trainer().texture;
 		
 		speechColor = new Color(0.1f,0.5f,0.1f,1);
 		speechBubble.setColor();	

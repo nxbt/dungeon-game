@@ -17,7 +17,7 @@ import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.equipable.weapon.Axe;
 import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.light.Light;
-import com.dungeon.game.textures.Person;
+import com.dungeon.game.textures.entity.Person;
 import com.dungeon.game.world.World;
 
 public class StairKeeper extends Friend {
