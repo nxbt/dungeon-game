@@ -4,7 +4,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 ##TODO high priority (within a week):
 * change tilemap rendering to pixmap (we had a reason for this...)
 * start proceedurally generated textures
-* change visibity polygons to use EarClippingTraingulator.computeTriangles
+* change visibity polygons to use DelaunayTriangulator.computeTriangles
 
 ##TODO low priority (within a month?):
 * Finish adding procedural shop decoration generation
