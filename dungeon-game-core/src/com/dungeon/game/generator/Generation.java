@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.furniture.Door;
+import com.dungeon.game.entity.furniture.Fireplace;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Floor;
 import com.dungeon.game.world.Tile;
@@ -231,6 +232,12 @@ public abstract class Generation {
 					}
 				}
 			}
+		}
+	}
+	
+	public void generateSprites(){
+		for(Entity e: entities){
+			if(e instanceof Fireplace)((Fireplace) e).genTexture(textureSeed);
 		}
 	}
 	

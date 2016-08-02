@@ -52,6 +52,8 @@ public class Floor {
 		if(type.equals("rooms"))gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
 		else if(type.equals("village_rooms"))gen = new VillageRooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
 		else gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
+		
+		gen.generateSprites();
 
 		Tile[][] map = gen.map;
 //		int[][] rotations = gen.rotations;

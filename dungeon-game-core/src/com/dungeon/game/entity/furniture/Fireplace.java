@@ -11,8 +11,10 @@ import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Fireplace extends Static {
+	
+	private int rotation;
 
-	public Fireplace(World world, float x, float y, int orientation, int seed) {
+	public Fireplace(World world, float x, float y, int orientation) {
 		super(world, x, y, 32, 32, "fireplace.png");
 		
 		Pixmap tempMap = new Pixmap(32, 32, Pixmap.Format.RGB888);
@@ -23,8 +25,7 @@ public class Fireplace extends Static {
 		sprite = new Texture(rotated);
 		tempMap.dispose();
 		//maybe seed code must change?
-		sprite = new FirePlace(seed, (int)(x/Tile.TS), (int)(y/Tile.TS), orientation).texture;
-		
+		this.rotation = orientation;
 		solid = true;
 		hitbox = new Polygon(new float[]{0,0,32,0,32,32,0,32});
 		light = new Light(world, x, y, 250, 100, Light.ORANGE, 40, this);
@@ -48,6 +49,11 @@ public class Fireplace extends Static {
 	public void post() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void genTexture(int seed){ // continuity is shit!
+		System.out.println("test");
+		sprite = new FirePlace(seed, (int)(x)/Tile.TS, (int)y/Tile.TS, rotation).texture;
 	}
 
 }

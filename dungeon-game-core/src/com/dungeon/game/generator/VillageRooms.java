@@ -1001,7 +1001,7 @@ public class VillageRooms extends Generation {
 			}
 		}while(!placedFirepalce&&attempts < 10);
 		
-		roomEntities.add(new Fireplace(world, fireplacePos[1]*Tile.TS+Tile.TS/2, fireplacePos[0]*Tile.TS+Tile.TS/2, fireplaceOrientation == 0?3:fireplaceOrientation == 1?2:fireplaceOrientation == 2?1:0, textureSeed));
+		roomEntities.add(new Fireplace(world, fireplacePos[1]*Tile.TS+Tile.TS/2, fireplacePos[0]*Tile.TS+Tile.TS/2, fireplaceOrientation == 0?3:fireplaceOrientation == 1?2:fireplaceOrientation == 2?1:0));
 		
 		//spawn Carpet
 		roomEntities.add(new Carpet(world,roomMap[0].length/2f*Tile.TS,roomMap.length/2f*Tile.TS,roomMap[0].length*2-2,roomMap.length*2-2, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f)));
