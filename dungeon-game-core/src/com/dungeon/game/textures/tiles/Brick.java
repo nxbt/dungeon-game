@@ -472,7 +472,7 @@ public class Brick extends ProceduralTile {
 			float num = rand1.nextFloat();
 			activeColor = new Color(brickColor.r*0.8f + num*0.2f, brickColor.g*0.8f + num*0.2f, brickColor.b*0.8f + num*0.2f, 1);
 		}
-		float num = MathUtils.noise(seed, curX, curY, 1);
+		float num = MathUtils.noise2d(seed, curX, curY, 1);
 		texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
 		texMap.drawPixel(x, 31-y);
 	}
@@ -493,7 +493,7 @@ public class Brick extends ProceduralTile {
 			float num = rand1.nextFloat();
 			activeColor = new Color(brickColor.r*0.8f + num*0.2f, brickColor.g*0.8f + num*0.2f, brickColor.b*0.8f + num*0.2f, 1);
 		}
-		float num = MathUtils.noise(seed, curX, curY, 1);
+		float num = MathUtils.noise2d(seed, curX, curY, 1);
 		texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
 		texMap.drawPixel(x, 31-y);
 	}
@@ -501,7 +501,7 @@ public class Brick extends ProceduralTile {
 	private void mortar(int x, int y, int curX, int curY, Pixmap texMap){
 		Color activeColor;
 		activeColor = new Color(brickColor.r*0.8f, brickColor.g*0.8f, brickColor.b*0.8f, 1);
-		float num = MathUtils.noise(seed, curX, curY, 1);
+		float num = MathUtils.noise2d(seed, curX, curY, 1);
 		texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
 		texMap.drawPixel(x, 31-y);
 	}

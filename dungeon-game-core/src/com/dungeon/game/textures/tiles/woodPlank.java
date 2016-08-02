@@ -36,7 +36,7 @@ public class WoodPlank extends ProceduralTile {
 				int barrierZone = (int)((16f+curY+yOffset)/32f);
 				int barrier = (int) (barrierZone*32f-8f+16f*MathUtils.getRandomFromSeedAndY(seed*(int)(curX/8),barrierZone).nextFloat());
 				if((curX)%8==0 || (curX+1)%8==0 || curY+yOffset == barrier || curY+yOffset - 1 == barrier){
-					float num = MathUtils.noise(seed, curX, curY, 2);
+					float num = MathUtils.noise2d(seed, curX, curY, 2);
 					texMap.setColor(new Color(woodColor.r*0.77f+num*0.03f, woodColor.g*0.77f+num*0.03f, woodColor.b*0.77f+num*0.03f, 1));
 				}
 				else{
@@ -46,12 +46,12 @@ public class WoodPlank extends ProceduralTile {
 						Random rand1 = MathUtils.getRandomFromSeedAndCords(seed, (int)(curX/8), 1+barrierZone);
 						float numPlank = rand1.nextFloat();
 						activeColor = new Color(woodColor.r*0.9f + numPlank*0.1f, woodColor.g*0.9f + numPlank*0.1f, woodColor.b*0.9f + numPlank*0.1f, 1);
-						num = MathUtils.perturbedSinNoise(MathUtils.getRandomFromSeedAndCords(seed, (int)(curX/8), (1+barrierZone)).nextInt(1000), curX, curY, 4, 3, 20);
+						num = MathUtils.perturbedSinNoise2d(MathUtils.getRandomFromSeedAndCords(seed, (int)(curX/8), (1+barrierZone)).nextInt(1000), curX, curY, 4, 3, 20);
 					}else{
 						Random rand1 = MathUtils.getRandomFromSeedAndCords(seed, (int)(curX/8), barrierZone);
 						float numPlank = rand1.nextFloat();
 						activeColor = new Color(woodColor.r*0.9f + numPlank*0.1f, woodColor.g*0.9f + numPlank*0.1f, woodColor.b*0.9f + numPlank*0.1f, 1);
-						num = MathUtils.perturbedSinNoise(MathUtils.getRandomFromSeedAndCords(seed, (int)(curX/8), (barrierZone)).nextInt(1000), curX, curY, 4, 3, 20);
+						num = MathUtils.perturbedSinNoise2d(MathUtils.getRandomFromSeedAndCords(seed, (int)(curX/8), (barrierZone)).nextInt(1000), curX, curY, 4, 3, 20);
 					}
 					texMap.setColor(new Color(activeColor.r*0.9f+num*0.1f, activeColor.g*0.9f+num*0.1f, activeColor.b*0.9f+num*0.1f, 1));
 				}

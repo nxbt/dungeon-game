@@ -13,6 +13,7 @@ import com.dungeon.game.world.World;
 public class Fireplace extends Static {
 	
 	private int rotation;
+	private FirePlace texture;
 
 	public Fireplace(World world, float x, float y, int orientation) {
 		super(world, x, y, 32, 32, "fireplace.png");
@@ -41,8 +42,8 @@ public class Fireplace extends Static {
 
 	@Override
 	public void calc() {
-		// TODO Auto-generated method stub
-
+		texture.update();
+		sprite = texture.texture;
 	}
 
 	@Override
@@ -52,7 +53,8 @@ public class Fireplace extends Static {
 	}
 	
 	public void genTexture(int seed){ // continuity is shit!
-		sprite = new FirePlace(seed, (int)(x)/Tile.TS, (int)y/Tile.TS, rotation).texture;
+		texture =  new FirePlace(seed, (int)(x)/Tile.TS, (int)y/Tile.TS, rotation);
+		sprite = texture.texture;
 	}
 
 }
