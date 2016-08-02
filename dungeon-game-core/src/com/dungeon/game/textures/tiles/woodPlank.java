@@ -13,9 +13,9 @@ public class WoodPlank extends ProceduralTile {
 	private Color color;
 	
 	private static final Color[] colors = new Color[]{
-//			new Color(102f / 255f, 51f / 255f, 0f / 255f,1),
-//			new Color(245f / 255f, 142f / 255f, 69f / 255f,1),
-//			new Color(122f / 255f, 88f / 255f, 7f / 255f,1),
+			new Color(102f / 255f, 51f / 255f, 0f / 255f,1),
+			new Color(245f / 255f, 142f / 255f, 69f / 255f,1),
+			new Color(122f / 255f, 88f / 255f, 7f / 255f,1),
 			new Color(117f / 255f, 24f / 255f, 6f / 255f,1)
 	};
 
