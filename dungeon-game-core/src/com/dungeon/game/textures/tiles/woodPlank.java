@@ -9,8 +9,8 @@ import com.dungeon.game.utilities.MathUtils;
 
 public class WoodPlank extends ProceduralTile {
 
-	public WoodPlank(int seed, int x, int y) {
-		super(new int[]{seed, x, y});
+	public WoodPlank(int seed, int x, int y, boolean left, boolean right, boolean bot, boolean top) {
+		super(new int[]{seed, x, y, left?1:0, right?1:0, top?1:0, bot?1:0});
 		// TODO Auto-generated constructor stub
 	}
 
@@ -19,6 +19,10 @@ public class WoodPlank extends ProceduralTile {
 		seed = args[0];
 		x = args[1];
 		y = args[2];
+		boolean left = args[3] == 1;
+		boolean right = args[4] == 1;
+		boolean top = args[5] == 1;
+		boolean bot = args[6] == 1;
 		Pixmap texMap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
 		
 		//variables
@@ -35,7 +39,11 @@ public class WoodPlank extends ProceduralTile {
 				int yOffset = rand.nextInt(32);
 				int barrierZone = (int)((16f+curY+yOffset)/32f);
 				int barrier = (int) (barrierZone*32f-8f+16f*MathUtils.getRandomFromSeedAndY(seed*(int)(curX/8),barrierZone).nextFloat());
-				if((curX)%8==0 || (curX+1)%8==0 || curY+yOffset == barrier || curY+yOffset - 1 == barrier){
+				if((left && i == 0) || (right && i == 31) || (bot && k == 0) || (top && k == 31)){
+					float num = MathUtils.noise2d(seed, curX, curY, 2);
+					texMap.setColor(new Color(woodColor.r*0.77f+num*0.03f, woodColor.g*0.77f+num*0.03f, woodColor.b*0.77f+num*0.03f, 1));
+				}
+				else if((curX)%8==0 || (curX+1)%8==0 || curY+yOffset == barrier || curY+yOffset - 1 == barrier){
 					float num = MathUtils.noise2d(seed, curX, curY, 2);
 					texMap.setColor(new Color(woodColor.r*0.77f+num*0.03f, woodColor.g*0.77f+num*0.03f, woodColor.b*0.77f+num*0.03f, 1));
 				}
