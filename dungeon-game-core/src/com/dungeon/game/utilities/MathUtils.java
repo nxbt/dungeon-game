@@ -181,4 +181,10 @@ public class MathUtils {
 	public static float perturbedSinNoise3d(int seed, int x, int y, int t, float period /* period of the side function*/, float perturbPeriod /*higher means smoother perturb*/, float perturbAmp/*higher means more perturb*/){
 		return (float) (1f+Math.sin(((float)((noise1d(seed, t, perturbAmp) * period) + x)*Math.PI*2f+noise3d(seed, x, y, t, perturbPeriod)*perturbAmp)/period))/2f;
 	}
+	
+	public static boolean perturbedGrid2d(int seed, int x, int y, float period, float perturbPeriod, float perturbAmp){
+		int xperturb = (int) (perturbAmp*noise2d(seed, x, y, perturbPeriod));
+		int yperturb = (int) (perturbAmp*noise2d(new Random(seed).nextInt(1000), x, y, perturbPeriod));
+		return (x + xperturb)%period == 0 ^ (y + yperturb)%period == 0;
+	}
 }

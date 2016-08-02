@@ -67,6 +67,7 @@ public class Floor {
 				//temp code to test 4 ways
 				if(map[i][k].id == 0){
 					Texture tex = new WoodPlank(seed, k, i, k != 0 && (map[i][k-1].id != 0), k != map[i].length-1 && (map[i][k+1].id != 0), i != 0 && (map[i-1][k].id != 0), i != map.length-1 && (map[i+1][k].id != 0)).texture;
+//					Texture tex = new Stone(seed, k, i).texture;
 					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
 				}else if(map[i][k].id == 2){
 					Texture tex = new Dirt(seed, k, i).texture;

@@ -41,8 +41,7 @@ public class Dirt extends ProceduralTile {
 		darkColor = remainingColors.remove(colorRand.nextInt(remainingColors.size()));
 		
 		
-		int curX;
-		int curY;
+		int curX, curY;
 		for(int i = 0; i < 32; i++){
 			for(int k = 0; k < 32; k++){
 				curX = x*32+i;
