@@ -9,7 +9,7 @@ import com.dungeon.game.utilities.MathUtils;
 
 public class Brick extends ProceduralTile {
 
-	private static final Color brickColor = new Color(133f / 255f, 5f / 255f, 12f / 255f,1);
+	public static final Color brickColor = new Color(133f / 255f, 5f / 255f, 12f / 255f,1);
 
 	public Brick(int seed, int x, int y, int sides, int corners) {
 		super(new int[]{seed, x, y, sides, corners});
