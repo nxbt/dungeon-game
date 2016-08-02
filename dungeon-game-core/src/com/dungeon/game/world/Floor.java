@@ -16,6 +16,7 @@ import com.dungeon.game.generator.VillageRooms;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
 import com.dungeon.game.textures.tiles.Brick;
+import com.dungeon.game.textures.tiles.Dirt;
 import com.dungeon.game.textures.tiles.WoodPlank;
 
 public class Floor {
@@ -66,6 +67,9 @@ public class Floor {
 				//temp code to test 4 ways
 				if(map[i][k].id == 0){
 					Texture tex = new WoodPlank(seed, k, i, k != 0 && (map[i][k-1].id != 0), k != map[i].length-1 && (map[i][k+1].id != 0), i != 0 && (map[i-1][k].id != 0), i != map.length-1 && (map[i+1][k].id != 0)).texture;
+					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
+				}else if(map[i][k].id == 2){
+					Texture tex = new Dirt(seed, k, i).texture;
 					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
 				}else if(map[i][k].id == 10 || map[i][k].id == 11 || map[i][k].id == 12 || map[i][k].id == 13 || map[i][k].id == 14){
 					int sides = 0;
@@ -165,37 +169,34 @@ public class Floor {
 		areaMap.prepAreas();
 		
 		box2dWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
-		
-//		double lightLocalX = ((double)tm[0].length/2)+0.5;
-//		double lightLocalY = ((double)tm.length/2)+0.5;
-//		for(int i = 0; i <tm.length-1; i++){
-//			for(int k = 0; k <tm.length-1; k++){
-//				if(tm[i][k].data == 1){
-//					
-//					
-//					
-//					
-//					// Create our body definition
-//					BodyDef groundBodyDef =new BodyDef();  
-//					// Set its world position
-//					groundBodyDef.position.set(new Vector2(k*Tile.TS+Tile.TS/2, i*Tile.TS+Tile.TS/2));  
-//
-//					// Create a body from the defintion and add it to the world
-//					Body groundBody = box2dWorld.createBody(groundBodyDef);  
-//
-//					// Create a polygon shape
-//					PolygonShape groundBox = new PolygonShape();  
-//					// Set the polygon shape as a box which is twice the size of our view port and 20 high
-//					// (setAsBox takes half-width and half-height as arguments)
-//					groundBox.setAsBox(Tile.TS/2, Tile.TS/2);
-//					// Create a fixture from our polygon shape and add it to our ground body  
-//					groundBody.createFixture(groundBox, 0.0f); 
-//					// Clean up after ourselves
-//					groundBox.dispose();
-//				}
-//				
-//			}
-//		}
+		for(int i = 0; i <tm.length-1; i++){
+			for(int k = 0; k <tm.length-1; k++){
+				if(tm[i][k].data == 1){
+					
+					
+					
+					
+					// Create our body definition
+					BodyDef groundBodyDef =new BodyDef();  
+					// Set its world position
+					groundBodyDef.position.set(new Vector2(k*Tile.TS+Tile.TS/2, i*Tile.TS+Tile.TS/2));  
+
+					// Create a body from the defintion and add it to the world
+					Body groundBody = box2dWorld.createBody(groundBodyDef);  
+
+					// Create a polygon shape
+					PolygonShape groundBox = new PolygonShape();  
+					// Set the polygon shape as a box which is twice the size of our view port and 20 high
+					// (setAsBox takes half-width and half-height as arguments)
+					groundBox.setAsBox(Tile.TS/2, Tile.TS/2);
+					// Create a fixture from our polygon shape and add it to our ground body  
+					groundBody.createFixture(groundBox, 0.0f); 
+					// Clean up after ourselves
+					groundBox.dispose();
+				}
+				
+			}
+		}
 	}
 	
 	public void update() {
