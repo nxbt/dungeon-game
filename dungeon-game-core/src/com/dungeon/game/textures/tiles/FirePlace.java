@@ -1,9 +1,12 @@
 package com.dungeon.game.textures.tiles;
 
+import java.util.Random;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.utilities.MathUtils;
+import com.dungeon.game.utilities.Spritesheet;
 
 public class FirePlace extends ProceduralTile {
 
@@ -18,126 +21,60 @@ public class FirePlace extends ProceduralTile {
 		x = args[1];
 		y = args[2];
 		int rotation = args[3];
-		Pixmap brickMap = new Brick(seed, x, y, (rotation == 0 || rotation == 2)?2:1, 0).texture.getTextureData().consumePixmap();
-		
 		Pixmap texMap = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
 		Color activeColor;
-		if(rotation == 0){ // need to add the noise from seed!
-			for(int i = 4; i < 28; i++){
-				for(int k = 4; k < 6; k++){
+		for(int i = 4; i < 28; i++){
+			for(int k = 4; k < 6; k++){
+				activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
+				float num = MathUtils.noise(seed, x*32+i, y*32+i, 1);
+				texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
+				texMap.setColor(activeColor);
+				texMap.drawPixel(i, k);
+			}
+			for(int k = 30; k < 32; k++){
+				activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
+				float num = MathUtils.noise(seed, x*32+i, y*32+i, 1);
+				texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
+				texMap.setColor(activeColor);
+				texMap.drawPixel(i, k);
+			}
+			if(i == 4 || i == 5 || i == 26 || i == 27){
+				for(int k = 4; k < 32; k++){
 					activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
 					float num = MathUtils.noise(seed, x*32+i, y*32+i, 1);
 					texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
 					texMap.setColor(activeColor);
 					texMap.drawPixel(i, k);
-				}
-				for(int k = 30; k < 32; k++){
-					activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
-					float num = MathUtils.noise(seed, x*32+i, y*32+i, 1);
-					texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
-					texMap.setColor(activeColor);
-					texMap.drawPixel(i, k);
-				}
-				if(i == 4 || i == 5 || i == 26 || i == 27){
-					for(int k = 4; k < 32; k++){
-						activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
-						float num = MathUtils.noise(seed, x*32+i, y*32+i, 1);
-						texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
-						texMap.setColor(activeColor);
-						texMap.drawPixel(i, k);
-					}
 				}
 			}
-		}else if(rotation == 1){
-			for(int k = 4; k < 28; k++){
-				for(int i = 4; i < 6; i++){
-					activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
-					float num = MathUtils.noise(seed, x*32+i, y*32+i, 1);
-					texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
-					texMap.setColor(activeColor);
+			if(i >= 6 && i <= 25){
+				for(int k = 6; k < 30; k++){
+					texMap.setColor(new Color(0,0,0,0.5f));
 					texMap.drawPixel(i, k);
-				}
-				for(int i = 30; i < 32; i++){
-					activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
-					float num = MathUtils.noise(seed, x*32+i, y*32+i, 1);
-					texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
-					texMap.setColor(activeColor);
-					texMap.drawPixel(i, k);
-				}
-				if(k == 4 || k == 5 || k == 26 || k == 27){
-					for(int i = 4; i < 32; i++){
-						activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
-						float num = MathUtils.noise(seed, x*32+i, y*32+i, 1);
-						texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
-						texMap.setColor(activeColor);
-						texMap.drawPixel(i, k);
-					}
 				}
 			}
-			
-		}else if(rotation == 2){
-			for(int i = 4; i < 28; i++){
-				for(int k = 27; k < 29; k++){
-					activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
-					float num = MathUtils.noise(seed, x*32+i, y*32+i, 1);
-					texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
-					texMap.setColor(activeColor);
-					texMap.drawPixel(i, k);
-				}
-				for(int k = 0; k < 2; k++){
-					activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
-					float num = MathUtils.noise(seed, x*32+i, y*32+i, 1);
-					texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
-					texMap.setColor(activeColor);
-					texMap.drawPixel(i, k);
-				}
-				if(i == 4 || i == 5 || i == 26 || i == 27){
-					for(int k = 0; k < 29; k++){
-						activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
-						float num = MathUtils.noise(seed, x*32+i, y*32+i, 1);
-						texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
-						texMap.setColor(activeColor);
-						texMap.drawPixel(i, k);
-					}
-				}
-			}
-			
-		}else if(rotation == 3){
-			for(int k = 4; k < 28; k++){
-				for(int i = 27; i < 29; i++){
-					activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
-					float num = MathUtils.noise(seed, x*32+i, y*32+i, 1);
-					texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
-					texMap.setColor(activeColor);
-					texMap.drawPixel(i, k);
-				}
-				for(int i = 0; i < 2; i++){
-					activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
-					float num = MathUtils.noise(seed, x*32+i, y*32+i, 1);
-					texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
-					texMap.setColor(activeColor);
-					texMap.drawPixel(i, k);
-				}
-				if(k == 4 || k == 5 || k == 26 || k == 27){
-					for(int i = 0; i < 29; i++){
-						activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
-						float num = MathUtils.noise(seed, x*32+i, y*32+i, 1);
-						texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
-						texMap.setColor(activeColor);
-						texMap.drawPixel(i, k);
-					}
-				}
-			}
-			
 		}
-		brickMap.drawPixmap(texMap, 0, 0);
-		
-		texture = new Texture(brickMap);
+		drawFire(texMap, rotation);
+		texMap = Spritesheet.rotatePixmap(texMap, rotation);
+		texture = new Texture(texMap);
 
 	}
 	
 	public void drawFire(Pixmap texMap, int rotation){
-		
+		Pixmap fireMap = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
+		Random rand = MathUtils.getRandomFromSeedAndCords(seed, x, y);
+		int curX;
+		int curY;
+		for(int i = 6; i < 26; i++){
+			for(int k = 2; k < 26; k++){
+				curX = x*32 + i;
+				curY = y*32 + k;
+				float num = 0.8f+0.2f*MathUtils.perturbedSinNoise(seed, curX, curY, 4, 3, 20);
+				fireMap.setColor(new Color(1, 0, 0, 0.3f+0.7f*num*(32-k)/32));
+				fireMap.drawPixel(i, 31 - k);
+			}
+		}
+		texMap.drawPixmap(fireMap, 0, 0);
 	}
 
 }

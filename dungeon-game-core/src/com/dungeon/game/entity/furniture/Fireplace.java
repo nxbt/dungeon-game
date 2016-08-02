@@ -52,7 +52,6 @@ public class Fireplace extends Static {
 	}
 	
 	public void genTexture(int seed){ // continuity is shit!
-		System.out.println("test");
 		sprite = new FirePlace(seed, (int)(x)/Tile.TS, (int)y/Tile.TS, rotation).texture;
 	}
 
