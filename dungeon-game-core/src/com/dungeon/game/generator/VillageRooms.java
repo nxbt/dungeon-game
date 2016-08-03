@@ -6,23 +6,19 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
-import com.dungeon.game.entity.character.friend.Shopkeeper;
 import com.dungeon.game.entity.character.friend.StairKeeper;
 import com.dungeon.game.entity.character.friend.Trainer;
 import com.dungeon.game.entity.character.friend.Villager;
 import com.dungeon.game.entity.furniture.Bed;
-import com.dungeon.game.entity.furniture.Bookshelf;
 import com.dungeon.game.entity.furniture.Carpet;
 import com.dungeon.game.entity.furniture.Dresser;
 import com.dungeon.game.entity.furniture.Fireplace;
-import com.dungeon.game.entity.furniture.Plant;
-import com.dungeon.game.entity.furniture.ShopDesk1;
-import com.dungeon.game.entity.furniture.ShopDesk2;
 import com.dungeon.game.entity.furniture.SmallTable;
 import com.dungeon.game.entity.furniture.Stair;
 import com.dungeon.game.entity.furniture.Torch;
 import com.dungeon.game.generator.room.GeneralStore;
 import com.dungeon.game.generator.room.Room;
+import com.dungeon.game.generator.room.StairRoom;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -563,8 +559,12 @@ public class VillageRooms extends Generation {
 		for(int i = 0; i < specialRooms.size(); i++){
 			normRooms.remove(specialRooms.get(i));
 		}
-		generateStairRoom(specialRooms.get((int) (specialRooms.size()*Math.random())));
-//		generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
+		
+		Rectangle stairRect = specialRooms.remove((int) (specialRooms.size()*Math.random()));
+		int[] stairDoorFinder = findDoor(stairRect);
+		Room stairRoom = new StairRoom(world, stairRect, stairDoorFinder, tileMap);
+		stairRoom.addToMap(map, entities);
+		
 		Rectangle storeRect = specialRooms.remove((int) (specialRooms.size()*Math.random()));
 		int[] storeDoorFinder = findDoor(storeRect);
 		Room storeRoom = new GeneralStore(world, storeRect, storeDoorFinder, tileMap);
@@ -638,69 +638,6 @@ public class VillageRooms extends Generation {
 		
 		return null;
 		
-	}
-	
-	private void generateStairRoom(Rectangle room) {
-		specialRooms.remove(room);
-		
-		//begining Tranaformations
-		int[] doorFinder = findDoor(room);
-		int[] doorPos = new int[2];
-		int[][] roomMap = rotate(room, doorFinder, doorPos);
-		int doorX =  doorPos[0];
-		int doorY = doorPos[1];
-		
-		
-		//initialize Entity Arrays
-		ArrayList<Entity> roomEntities = new ArrayList<Entity>();
-		
-		//spawn entities and change tiles below
-		
-		//change floor to tiles
-		for(int i = 0; i < roomMap.length; i++){
-			for(int k = 0; k < roomMap[i].length; k++){
-				roomMap[i][k] = 3;
-			}
-		}
-				
-		int x, y;
-		if(roomMap.length%2 == 0)y = roomMap.length/2 - (int) (Math.random()*2);
-		else y = roomMap.length/2;
-		
-		if(roomMap[0].length%2 == 0)x = roomMap[0].length/2 - (int) (Math.random()*2);
-		else x = roomMap[0].length/2;
-		
-		//spawn stairs
-		roomEntities.add(new Stair(world,x*Tile.TS+Tile.TS/2 , y*Tile.TS+Tile.TS/2, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
-		
-		//add pilars
-		roomMap[1][1] = 1;
-		roomMap[1][roomMap[0].length-2] = 1;
-		roomMap[roomMap.length-2][1] = 1;
-		roomMap[roomMap.length-2][roomMap[0].length-2] = 1;
-		
-		//add torches
-		roomEntities.add(new Torch(world, 2*Tile.TS+Tile.TS/4, 1*Tile.TS+Tile.TS/2,0));
-		roomEntities.add(new Torch(world, 1*Tile.TS+Tile.TS/2, 2*Tile.TS+Tile.TS/4,3));
-		
-		roomEntities.add(new Torch(world, (roomMap[0].length-2)*Tile.TS+Tile.TS/2, 2*Tile.TS+Tile.TS/4,3));
-		roomEntities.add(new Torch(world, (roomMap[0].length-3)*Tile.TS+Tile.TS*3/4, 1*Tile.TS+Tile.TS/2,2));
-		
-		roomEntities.add(new Torch(world, 2*Tile.TS+Tile.TS/4, (roomMap.length-2)*Tile.TS+Tile.TS/2,0));
-		roomEntities.add(new Torch(world, 1*Tile.TS+Tile.TS/2, (roomMap.length-3)*Tile.TS+Tile.TS*3/4,1));
-		
-		roomEntities.add(new Torch(world, (roomMap[0].length-3)*Tile.TS+Tile.TS*3/4, (roomMap.length-2)*Tile.TS+Tile.TS/2,2));
-		roomEntities.add(new Torch(world, (roomMap[0].length-2)*Tile.TS+Tile.TS/2, (roomMap.length-3)*Tile.TS+Tile.TS*3/4,1));
-		
-		//spawn hatchkeeper
-		boolean keeperTop = doorY >= roomMap.length/2;
-		if(doorY == roomMap.length/2 && roomMap.length%2 == 1)keeperTop = Math.random()> 0.5;
-		
-		roomEntities.add(new StairKeeper(world, 2*Tile.TS+Tile.TS/2,(keeperTop?roomMap.length - 2:1)*Tile.TS+Tile.TS/2));
-		
-		
-		//ending transformations
-		unrotate(roomMap, room, roomEntities, doorFinder);
 	}
 	
 	private void generateQuarters(Rectangle room){
