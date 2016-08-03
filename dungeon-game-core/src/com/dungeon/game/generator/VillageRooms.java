@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
-import com.dungeon.game.entity.character.friend.StairKeeper;
 import com.dungeon.game.entity.character.friend.Trainer;
 import com.dungeon.game.entity.character.friend.Villager;
 import com.dungeon.game.entity.furniture.Bed;
@@ -15,8 +14,8 @@ import com.dungeon.game.entity.furniture.Dresser;
 import com.dungeon.game.entity.furniture.Fireplace;
 import com.dungeon.game.entity.furniture.SmallTable;
 import com.dungeon.game.entity.furniture.Stair;
-import com.dungeon.game.entity.furniture.Torch;
 import com.dungeon.game.generator.room.GeneralStore;
+import com.dungeon.game.generator.room.Quarters;
 import com.dungeon.game.generator.room.Room;
 import com.dungeon.game.generator.room.StairRoom;
 import com.dungeon.game.pathing.Area;
@@ -569,10 +568,15 @@ public class VillageRooms extends Generation {
 		int[] storeDoorFinder = findDoor(storeRect);
 		Room storeRoom = new GeneralStore(world, storeRect, storeDoorFinder, tileMap);
 		storeRoom.addToMap(map, entities);
+		
 		generateTrainingCenter(specialRooms.get((int) (specialRooms.size()*Math.random())));
-		while(specialRooms.size()>0)generateQuarters(specialRooms.get((int) (specialRooms.size()*Math.random())));
-		for(int i = 0; i < specialRooms.size(); i++){
+		while(specialRooms.size()>0){
 			
+			Rectangle quartersRect = specialRooms.remove((int) (specialRooms.size()*Math.random()));
+			int[] quartersDoorFinder = findDoor(quartersRect);
+			Room quartersRoom = new Quarters(world, quartersRect, quartersDoorFinder, tileMap);
+			quartersRoom.addToMap(map, entities);
+//			generateQuarters(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		}
 	}
 	

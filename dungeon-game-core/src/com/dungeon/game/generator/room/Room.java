@@ -17,7 +17,7 @@ public abstract class Room {
 	
 	protected int[] doorFinder;
 	
-	private boolean[][] occupiedTiles;
+	protected boolean[][] occupiedTiles;
 	
 	protected int[] doorPos;
 	
@@ -48,11 +48,13 @@ public abstract class Room {
 	private void rotate(){
 		if(doorFinder[0]==2||doorFinder[0]==3){
 			room = new Tile[(int) room[0].length][(int) room.length];
+			occupiedTiles = new boolean[room.length][room[0].length];
 			doorPos[0] = 0;
 			doorPos[1] = (int) (doorFinder[1]-x);
 		}
 		else {
 			room = new Tile[(int) room.length][(int) room[0].length];
+			occupiedTiles = new boolean[room.length][room[0].length];
 			doorPos[0] = 0;
 			doorPos[1] = (int) (doorFinder[2]- y);
 		}
@@ -117,6 +119,9 @@ public abstract class Room {
 	
 	protected boolean checkOccupied(int x, int y){
 		return occupiedTiles[y][x];
-		
+	}
+	
+	protected void addToOccupied(int x, int y){
+		if(x >= 0 && x < occupiedTiles[0].length && y >= 0 && y < occupiedTiles.length)occupiedTiles[y][x] = true;
 	}
 }
