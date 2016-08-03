@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.TileMap;
+import com.dungeon.game.world.World;
 
 public abstract class Room {
 	public Tile[][] room;
@@ -14,18 +15,21 @@ public abstract class Room {
 	
 	public ArrayList<Entity> entities;
 	
-	private int[] doorFinder;
+	protected int[] doorFinder;
 	
 	private boolean[][] occupiedTiles;
 	
-	private int[] doorPos;
+	protected int[] doorPos;
 	
 	public int x;
 	public int y;
 	
 	public TileMap tileMap;
 	
-	public Room(Rectangle roomBase, int[] doorFinder, TileMap tileMap){
+	World world;
+	
+	public Room(World world, Rectangle roomBase, int[] doorFinder, TileMap tileMap){
+		this.world = world;
 		x = (int) roomBase.x;
 		y = (int) roomBase.y;
 		this.roomBase = roomBase;
@@ -91,13 +95,13 @@ public abstract class Room {
 		}
 	}
 	
-	public void addToMap(Tile[][] tileMap, ArrayList<Entity> roomEntities){
+	public void addToMap(Tile[][] tileMap, ArrayList<Entity> floorEntities){
 		int x = (int) this.x;
 		int y = (int) this.y;
 		
 		for(int i = 0; i < roomBase.height; i++){
 			for(int k = 0; k < roomBase.width; k++){
-				tileMap[y][x] = room[i][k];
+				if(room[i][k] != null)tileMap[y][x] = room[i][k];
 				x++;
 			}
 			y++;
@@ -107,7 +111,7 @@ public abstract class Room {
 		for(Entity e: entities) {
 			e.x += this.x*Tile.TS;
 			e.y += this.y*Tile.TS;
-			roomEntities.add(e);
+			floorEntities.add(e);
 		}
 	}
 	

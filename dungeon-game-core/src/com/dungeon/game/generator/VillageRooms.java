@@ -21,6 +21,8 @@ import com.dungeon.game.entity.furniture.ShopDesk2;
 import com.dungeon.game.entity.furniture.SmallTable;
 import com.dungeon.game.entity.furniture.Stair;
 import com.dungeon.game.entity.furniture.Torch;
+import com.dungeon.game.generator.room.GeneralStore;
+import com.dungeon.game.generator.room.Room;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -562,7 +564,11 @@ public class VillageRooms extends Generation {
 			normRooms.remove(specialRooms.get(i));
 		}
 		generateStairRoom(specialRooms.get((int) (specialRooms.size()*Math.random())));
-		generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
+//		generateStore(specialRooms.get((int) (specialRooms.size()*Math.random())));
+		Rectangle storeRect = specialRooms.remove((int) (specialRooms.size()*Math.random()));
+		int[] storeDoorFinder = findDoor(storeRect);
+		Room storeRoom = new GeneralStore(world, storeRect, storeDoorFinder, tileMap);
+		storeRoom.addToMap(map, entities);
 		generateTrainingCenter(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		while(specialRooms.size()>0)generateQuarters(specialRooms.get((int) (specialRooms.size()*Math.random())));
 		for(int i = 0; i < specialRooms.size(); i++){
@@ -632,92 +638,6 @@ public class VillageRooms extends Generation {
 		
 		return null;
 		
-	}
-	
-	private void generateStore(Rectangle room){
-		specialRooms.remove(room);
-		
-		//begin transformation
-		
-
-		int[] doorFinder = findDoor(room);
-		int[] doorPos = new int[2];
-		int[][] roomMap = rotate(room, doorFinder, doorPos);
-		int doorX =  doorPos[0];
-		int doorY = doorPos[1];
-		
-		
-		//initialize Entity Arrays
-		ArrayList<Entity> roomEntities = new ArrayList<Entity>();
-		
-		boolean keeperBottom = Math.random()>0.5;
-		if(doorY == 0)keeperBottom = true;
-		else if(doorY == roomMap.length-1)keeperBottom = false;
-		
-		Shopkeeper tempKeeper = new Shopkeeper(world, (roomMap[0].length-1)*Tile.TS+Tile.TS/2, (keeperBottom? 3f/4f:roomMap.length-1+1f/4f)*Tile.TS);
-		tempKeeper.flipX = true;
-		
-		roomEntities.add(tempKeeper);
-		
-		ShopDesk1 desk1 = new ShopDesk1(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*1f/4f, (keeperBottom? 3f/4f:roomMap.length-1+1f/4f)*Tile.TS);
-		ShopDesk2 desk2 = new ShopDesk2(world, (roomMap[0].length-1)*Tile.TS-Tile.TS*-1f/4f, (keeperBottom? 7f/4f:roomMap.length-1-3f/4f)*Tile.TS);
-		
-		if(keeperBottom){
-			desk1.angle = 180;
-			desk2.angle = 180;
-		}else{
-			desk1.flipX = true;
-			desk2.flipX = true;
-		}
-		
-		roomEntities.add(desk1);
-		roomEntities.add(desk2);
-		
-		int[][][] bookMap = new int[1][roomMap[0].length*2][2];
-		for(int i = 0; i < roomMap[0].length*2; i++){
-			if(i == roomMap[0].length*2-1)bookMap[0][i] = new int[]{3,keeperBottom?2:0};
-			else bookMap[0][i] = new int[]{-1,keeperBottom?2:0};
-		}
-		roomEntities.add(new Bookshelf(world, bookMap[0].length*8,(keeperBottom?roomMap.length-1+3f/4f:1f/4f)*Tile.TS, bookMap));
-		
-
-		bookMap = new int[roomMap.length*2-6][1][2];
-		for(int i = 0; i < roomMap.length*2-6; i++){
-			bookMap[i][0] = new int[]{-1,3};
-		}
-		roomEntities.add(new Bookshelf(world, (roomMap[0].length-1f/4f)*Tile.TS,(keeperBottom?roomMap.length-1-bookMap.length/4f+1f/2f:((float)bookMap.length)/4f+1f/2f)*Tile.TS, bookMap));
-		
-		int shelfAreaWidth = (roomMap[0].length-2);
-		int shelfAreaHeight = (roomMap.length-4);
-		
-		if(roomMap.length >= 6){
-			Bookshelf shelf = new Bookshelf(world, roomMap[0].length/2f*Tile.TS-Tile.TS/4,(keeperBottom?roomMap.length-2:2)*Tile.TS, roomMap[0].length*2-5,2);
-			if(!keeperBottom)shelf.flipY = true;
-			roomEntities.add(shelf);
-		}
-		
-		if(keeperBottom){
-			if(doorY!=0)roomEntities.add(new Plant(world,Tile.TS/2,Tile.TS/2));
-		}else{
-			if(doorY!=roomMap.length-1)roomEntities.add(new Plant(world,Tile.TS/2,roomMap.length*Tile.TS-Tile.TS/2));
-		}
-		
-		int x = 1, y = keeperBottom?3:1;
-		for(int i = 0; i < shelfAreaHeight; i++){
-			for(int k = 0; k < shelfAreaWidth; k++){
-				roomMap[y][x] = 3;
-				x++;
-			}
-			y++;
-			x = 1;
-		}
-		
-		//carpet
-		roomEntities.add(new Carpet(world,roomMap[0].length/2f*Tile.TS-Tile.TS/4,roomMap.length/2f*Tile.TS+(keeperBottom?-Tile.TS/4:Tile.TS/4),2*roomMap[0].length-3,2*roomMap.length-3, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f)));
-		
-		//ending transformations
-
-		unrotate(roomMap, room, roomEntities, doorFinder);
 	}
 	
 	private void generateStairRoom(Rectangle room) {

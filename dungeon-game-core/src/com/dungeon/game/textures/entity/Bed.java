@@ -24,7 +24,6 @@ public class Bed extends ProceduralTexture {
 		for(int i = 0; i < 32; i++){
 			for(int k = 0; k < 64; k++){
 				float num = 0.9f+0.1f*MathUtils.noise2d(seed, i, k, 4);
-				System.out.println(num);
 				if(k < 48){ // covers
 					if(i == 0 || i == 31 || k == 0 || k == 47){ // covers outline
 						texMap.setColor(new Color(coversColor.r*0.7f*num, coversColor.g*0.7f*num, coversColor.b*0.7f*num, 1));
