@@ -25,9 +25,9 @@ public class Goon extends Person {
 			float angle = (float) (2f*Math.PI*i/rayNum);
 			texMap.setColor(new Color(0.3f, 0.3f, 0.3f, 1));
 			int length = 13;
-			if((angle > Math.PI/24f && angle < Math.PI / 4f) || (angle > Math.PI*7f/4f && angle < Math.PI*47f/24f))length = 7;
+			if(angle < Math.PI / 4f || angle > Math.PI*7f/4f)length = 11;
 			for(int k = 0; k < length; k++){
-				texMap.setColor(hatColor.r*(0.1f+0.2f*k/13f), hatColor.g*(0.1f+0.2f*k/13f), hatColor.b*(0.1f+0.2f*k/13f), 1);
+				texMap.setColor(hatColor.r*(0.5f+0.1f*k/13f), hatColor.g*(0.5f+0.1f*k/13f), hatColor.b*(0.5f+0.1f*k/13f), 1);
 				texMap.drawPixel(16+(int)Math.round(Math.cos(angle)*k), 16+(int)Math.round(Math.sin(angle)*k));
 			}
 		}

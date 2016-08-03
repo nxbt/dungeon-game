@@ -22,7 +22,7 @@ import com.dungeon.game.entity.character.enemy.Goon;
 import com.dungeon.game.entity.character.friend.Friend;
 import com.dungeon.game.entity.character.friend.Mentor;
 import com.dungeon.game.entity.character.friend.Trainer;
-import com.dungeon.game.entity.furniture.Fireplace;
+import com.dungeon.game.entity.furniture.Bed;
 import com.dungeon.game.entity.furniture.Stair;
 import com.dungeon.game.entity.furniture.TrainingTable;
 import com.dungeon.game.entity.hud.DescBox;

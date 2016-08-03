@@ -877,7 +877,7 @@ public class VillageRooms extends Generation {
 		else if(bedOrientation == 1)bedOrientation = 2;
 		else if(bedOrientation == 2)bedOrientation = 1;
 		else if(bedOrientation == 3)bedOrientation = 0;
-		roomEntities.add(new Bed(world, x, y, bedOrientation, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f)));
+		roomEntities.add(new Bed(world, x, y, bedOrientation));
 		
 		//spawn side table
 		ArrayList<int[]> potentialTableSpots = new ArrayList<int[]>();

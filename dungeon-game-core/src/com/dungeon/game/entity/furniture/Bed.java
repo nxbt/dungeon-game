@@ -10,20 +10,20 @@ import com.dungeon.game.world.World;
 
 public class Bed extends Static {
 
-	public Bed(World world, float x, float y, int orientation, Color color) {
+	public Bed(World world, float x, float y, int orientation) {
 		super(world, x, y, 32, 64, "bed.png");
 		Pixmap tempMap = new Pixmap(32, 64, Pixmap.Format.RGB888);
-		
+
+		textures[0] = new com.dungeon.game.textures.entity.Bed().texture;
 		if(!textures[0].getTextureData().isPrepared()) textures[0].getTextureData().prepare();
 		Pixmap textPixmap = textures[0].getTextureData().consumePixmap();
 		tempMap.drawPixmap(textPixmap, 0, 0);
-		tempMap.setColor(color);
-		tempMap.fillRectangle(0, 0, 32, 64);
 		Pixmap rotated = Spritesheet.rotatePixmap(tempMap,orientation);
 		sprite = new Texture(rotated);
 		tempMap.dispose();
 //		rotated.dispose();
 		solid = true;
+		
 		
 		d_width = orientation%2 == 0?32:64;
 		d_height = orientation%2 == 0?64:32;
