@@ -31,6 +31,8 @@ public class Goon extends Enemy {
 	public Goon(World world, float x, float y) {
 		super(world, x, y, 32, 32, "goon.png");
 		
+		sprite = new com.dungeon.game.textures.entity.Goon().texture;
+		
 		name = "Goon";
 		
 		maxLife = 20;
