@@ -17,6 +17,7 @@ import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
 import com.dungeon.game.textures.tiles.Brick;
 import com.dungeon.game.textures.tiles.Dirt;
+import com.dungeon.game.textures.tiles.FloorTile;
 import com.dungeon.game.textures.tiles.WoodPlank;
 
 public class Floor {
@@ -67,10 +68,13 @@ public class Floor {
 				//temp code to test 4 ways
 				if(map[i][k].id == 0){
 					Texture tex = new WoodPlank(seed, k, i, k != 0 && (map[i][k-1].id != 0), k != map[i].length-1 && (map[i][k+1].id != 0), i != 0 && (map[i-1][k].id != 0), i != map.length-1 && (map[i+1][k].id != 0)).texture;
-//					Texture tex = new Stone(seed, k, i).texture;
+//					Texture tex = new FloorTile(seed, k, i).texture;
 					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
 				}else if(map[i][k].id == 2){
 					Texture tex = new Dirt(seed, k, i).texture;
+					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
+				}else if(map[i][k].id == 3){
+					Texture tex = new FloorTile(seed, k, i).texture;
 					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
 				}else if(map[i][k].id == 10 || map[i][k].id == 11 || map[i][k].id == 12 || map[i][k].id == 13 || map[i][k].id == 14){
 					int sides = 0;

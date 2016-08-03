@@ -80,7 +80,7 @@ public class MathUtils {
 		
 	}
 
-	public static float noise2d(int seed, int x, int y, float amp){
+	public static float noise2d(int seed, float x, float y, float amp){
 		float bl = getRandomFromSeedAndCords(seed, (int)(x/amp), (int)(y/amp)).nextFloat();
 		float tl = getRandomFromSeedAndCords(seed, (int)(x/amp), (int)(y/amp)+1).nextFloat();
 		float br = getRandomFromSeedAndCords(seed, (int)(x/amp)+1, (int)(y/amp)).nextFloat();
@@ -127,7 +127,7 @@ public class MathUtils {
 		
 	}
 	
-	public static float noise3d(int seed, int x, int y, int t, float amp){
+	public static float noise3d(int seed, float x, float y, int t, float amp){
 		float bl = noise1d(getRandomFromSeedAndCords(seed,(int)(x/amp), (int)(y/amp)).nextInt(1000), (int)(t/amp), amp);
 		float tl = noise1d(getRandomFromSeedAndCords(seed,(int)(x/amp), (int)(y/amp+1)).nextInt(1000), (int)(t/amp), amp);
 		float br = noise1d(getRandomFromSeedAndCords(seed,(int)(x/amp+1), (int)(y/amp)).nextInt(1000), (int)(t/amp), amp);
@@ -174,11 +174,11 @@ public class MathUtils {
 		
 	}
 	
-	public static float perturbedSinNoise2d(int seed, int x, int y, float period /* period of the side function*/, float perturbPeriod /*higher means smoother perturb*/, float perturbAmp/*higher means more perturb*/){
+	public static float perturbedSinNoise2d(int seed, float x, float y, float period /* period of the side function*/, float perturbPeriod /*higher means smoother perturb*/, float perturbAmp/*higher means more perturb*/){
 		return (float) (1f+Math.sin(((float)((new Random(seed).nextFloat() * period) + x)*Math.PI*2f+noise2d(seed, x, y, perturbPeriod)*perturbAmp)/period))/2f;
 	}
 	
-	public static float perturbedSinNoise3d(int seed, int x, int y, int t, float period /* period of the side function*/, float perturbPeriod /*higher means smoother perturb*/, float perturbAmp/*higher means more perturb*/){
+	public static float perturbedSinNoise3d(int seed, float x, float y, int t, float period /* period of the side function*/, float perturbPeriod /*higher means smoother perturb*/, float perturbAmp/*higher means more perturb*/){
 		return (float) (1f+Math.sin(((float)((noise1d(seed, t, perturbAmp) * period) + x)*Math.PI*2f+noise3d(seed, x, y, t, perturbPeriod)*perturbAmp)/period))/2f;
 	}
 	

@@ -735,6 +735,14 @@ public class VillageRooms extends Generation {
 		ArrayList<Entity> roomEntities = new ArrayList<Entity>();
 		
 		//spawn entities and change tiles below
+		
+		//change floor to tiles
+		for(int i = 0; i < roomMap.length; i++){
+			for(int k = 0; k < roomMap[i].length; k++){
+				roomMap[i][k] = 3;
+			}
+		}
+				
 		int x, y;
 		if(roomMap.length%2 == 0)y = roomMap.length/2 - (int) (Math.random()*2);
 		else y = roomMap.length/2;
@@ -1030,6 +1038,13 @@ public class VillageRooms extends Generation {
 		//spawn stuff
 		int x = 0,y = 0;
 		ArrayList<int[]> occupiedTiles = new ArrayList<int[]>();
+		
+		//change floor to tiles
+		for(int i = 0; i < roomMap.length; i++){
+			for(int k = 0; k < roomMap[i].length; k++){
+				roomMap[i][k] = 3;
+			}
+		}
 		
 		//generate things!
 		roomEntities.add(new Trainer(world, Tile.TS, Tile.TS));
