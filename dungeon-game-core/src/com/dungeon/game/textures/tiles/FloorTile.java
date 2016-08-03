@@ -12,7 +12,7 @@ public class FloorTile extends ProceduralTile {
 	}
 
 	@Override
-	public void generateTexture(int[] args) {
+	public void generateTexture(int[] args) { //randomize color and maybe make tiles smaller?
 		seed = args[0];
 		x = args[1];
 		y = args[2];
