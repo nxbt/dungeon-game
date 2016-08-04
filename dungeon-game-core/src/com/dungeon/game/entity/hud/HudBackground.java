@@ -2,6 +2,12 @@ package com.dungeon.game.entity.hud;
 
 import java.util.ArrayList;
 
+import com.dungeon.game.entity.hud.button.HelpButton;
+import com.dungeon.game.entity.hud.button.InvButton;
+import com.dungeon.game.entity.hud.button.MenuButton;
+import com.dungeon.game.entity.hud.statusBar.HealthBar;
+import com.dungeon.game.entity.hud.statusBar.ManaBar;
+import com.dungeon.game.entity.hud.statusBar.StamBar;
 import com.dungeon.game.world.World;
 
 public class HudBackground extends Hud {

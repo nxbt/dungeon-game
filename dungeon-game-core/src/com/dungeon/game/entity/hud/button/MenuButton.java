@@ -1,4 +1,4 @@
-package com.dungeon.game.entity.hud;
+package com.dungeon.game.entity.hud.button;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.world.World;

@@ -1,7 +1,8 @@
-package com.dungeon.game.entity.hud;
+package com.dungeon.game.entity.hud.statusBar;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
+import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.world.World;
 
 public abstract class StatusBar extends Hud {

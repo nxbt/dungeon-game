@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dungeon.game.entity.hud.ExitButton;
 import com.dungeon.game.entity.hud.Hud;
+import com.dungeon.game.entity.hud.button.ExitButton;
 import com.dungeon.game.world.World;
 
 public abstract class Window extends Hud {

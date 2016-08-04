@@ -1,20 +1,20 @@
-package com.dungeon.game.entity.hud;
+package com.dungeon.game.entity.hud.statusBar;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.dungeon.game.world.World;
 
-public class HealthBar extends StatusBar {
-	public HealthBar(World world, float x, float y){
+public class StamBar extends StatusBar {
+	public StamBar(World world, float x, float y){
 		super(world, x, y);
-		filler = new TiledDrawable(new TextureRegion(new Texture("heart.png")));
+		filler = new TiledDrawable(new TextureRegion(new Texture("energy.png")));
 	}
 
 	@Override
 	public void calc() {
-		cur = world.player.life;
-		max = world.player.maxLife;
+		cur = world.player.stam;
+		max = world.player.maxStam;
 		super.calc();
 	}
 	

@@ -1,5 +1,6 @@
-package com.dungeon.game.entity.hud;
+package com.dungeon.game.entity.hud.button;
 
+import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.world.World;
 
 public abstract class Button extends Hud {

@@ -1,4 +1,4 @@
-package com.dungeon.game.entity.hud;
+package com.dungeon.game.entity.hud.statusBar;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
