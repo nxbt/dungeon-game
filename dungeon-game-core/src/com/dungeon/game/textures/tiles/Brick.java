@@ -8,6 +8,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.utilities.MathUtils;
 
 public class Brick extends ProceduralTile {
+	
+	private static final Color[] brickColors = new Color[]{
+			new Color(133f / 255f, 5f / 255f, 12f / 255f,1),
+			new Color(66f / 255f, 66f / 255f, 66f / 255f,1),
+			new Color(227f / 255f, 152f / 255f, 51f / 255f,1)
+
+			
+	};
 
 	public Brick(int seed, int x, int y, int sides, int corners) {
 		super(new int[]{seed, x, y, sides, corners});
@@ -494,7 +502,6 @@ public class Brick extends ProceduralTile {
 	public static final Color getColor(int seed){
 		Random rand = new Random(seed);
 		rand.nextFloat();
-		if(rand.nextFloat() < 0.5f)return new Color(133f / 255f, 5f / 255f, 12f / 255f,1);
-		else return new Color(66f / 255f, 66f / 255f, 66f / 255f,1);
+		return brickColors[(int) (rand.nextFloat()*(brickColors.length))];
 	}
 }
