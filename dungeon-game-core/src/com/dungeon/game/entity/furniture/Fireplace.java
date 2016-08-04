@@ -48,8 +48,6 @@ public class Fireplace extends Static {
 
 	@Override
 	public void post() {
-		// TODO Auto-generated method stub
-
 	}
 	
 	public void genTexture(int seed){ // continuity is shit!

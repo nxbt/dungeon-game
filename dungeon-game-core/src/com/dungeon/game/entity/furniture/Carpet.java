@@ -59,7 +59,6 @@ public class Carpet extends Static {
 				tempMap.drawPixmap(rotated, i*16, k*16);
 				tempMap.setColor(color);
 				tempMap.fillRectangle(i*16, k*16, 16, 16);
-//				rotated.dispose();
 			}
 		}
 

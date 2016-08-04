@@ -1,6 +1,5 @@
 package com.dungeon.game.generator;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Intersector;

@@ -3,8 +3,6 @@ package com.dungeon.game.utilities;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-import com.dungeon.game.entity.Entity;
-
 public class MethodArray {
 	
 	public Method[] methods;
@@ -46,7 +44,6 @@ public class MethodArray {
 //		try {
 //			methodArray.methods[0].invoke(methodArray, null);
 //		} catch (Exception e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 //		

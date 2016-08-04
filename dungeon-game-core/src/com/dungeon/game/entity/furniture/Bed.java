@@ -1,6 +1,5 @@
 package com.dungeon.game.entity.furniture;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
@@ -48,14 +47,10 @@ public class Bed extends Static {
 
 	@Override
 	public void calc() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void post() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

@@ -1,14 +1,10 @@
 package com.dungeon.game.item.equipable.weapon.swing;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.item.equipable.weapon.Melee;
-import com.dungeon.game.item.equipable.weapon.part.Part;
-import com.dungeon.game.item.equipable.weapon.swing.sword.Slash;
-import com.dungeon.game.item.equipable.weapon.swing.sword.Stab;
 import com.dungeon.game.world.World;
 
 public abstract class Swing implements Cloneable{

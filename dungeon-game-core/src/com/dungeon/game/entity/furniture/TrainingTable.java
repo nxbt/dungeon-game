@@ -22,8 +22,6 @@ public class TrainingTable extends Static {
 
 	@Override
 	public void calc() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	public void hovered() {

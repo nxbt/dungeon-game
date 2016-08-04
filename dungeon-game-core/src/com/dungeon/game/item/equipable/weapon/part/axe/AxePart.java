@@ -3,7 +3,6 @@ package com.dungeon.game.item.equipable.weapon.part.axe;
 import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.item.equipable.weapon.part.Part;
 import com.dungeon.game.item.equipable.weapon.swing.axe.AxeSwing;
-import com.dungeon.game.item.equipable.weapon.swing.sword.SwordSwing;
 import com.dungeon.game.world.World;
 
 public abstract class AxePart extends Part {

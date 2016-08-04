@@ -19,7 +19,6 @@ public class ScrollBar extends Hud {
 	public void calc(){
 
 		d_height = (int) ((window.d_height - 16)/window.contentHeight * (window.d_height - 16));
-//		subOffY = 
 		
 		super.calc();
 	}

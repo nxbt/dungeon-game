@@ -101,14 +101,6 @@ public class VillageRooms extends Generation {
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(0);
-				if(i == 0){
-//					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
-//					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
-				}
-				if(i==hall.size()-1){
-//					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
-//					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
-				}
 			}
 			addRoomToMap(room, true,special);
 			for(int i = 0; i<(special?0:100);i++){
@@ -155,14 +147,6 @@ public class VillageRooms extends Generation {
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(0);
-				if(i == 0){
-//					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
-//					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
-				}
-				if(i==hall.size()-1){
-//					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
-//					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
-				}
 			}
 			addRoomToMap(room, true,special);
 			for(int i = 0; i<(special?0:100);i++){
@@ -210,14 +194,6 @@ public class VillageRooms extends Generation {
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(0);
-				if(i == 0){
-//					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
-//					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
-				}
-				if(i==hall.size()-1){
-//					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
-//					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
-				}
 			}
 			addRoomToMap(room, true,special);
 			for(int i = 0; i<(special?0:100);i++){
@@ -264,14 +240,6 @@ public class VillageRooms extends Generation {
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(0);
-				if(i == 0){
-//					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
-//					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
-				}
-				if(i==hall.size()-1){
-//					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
-//					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
-				}
 			}
 			addRoomToMap(room, true,special);
 			for(int i = 0; i<(special?0:100);i++){
@@ -377,14 +345,6 @@ public class VillageRooms extends Generation {
 			}
 			for(int i=0;i<hallCoordinates.size();i++){
 				map[hallCoordinates.get(i)[1]][hallCoordinates.get(i)[0]]=tileMap.getTile(0);
-				if(i==0){
-//					if(hallCoordinates.get(0)[2] == 0||hallCoordinates.get(0)[2] == 1)addDoor(hallCoordinates.get(0)[0],hallCoordinates.get(0)[1],0);
-//					if(hallCoordinates.get(0)[2] == 2||hallCoordinates.get(0)[2] == 3)addDoor(hallCoordinates.get(0)[0],hallCoordinates.get(0)[1],1);
-				}
-				if(addHallToArrayList&&i==hallCoordinates.size()-1){
-//					if(hallCoordinates.get(hallCoordinates.size()-1)[2] == 0||hallCoordinates.get(hallCoordinates.size()-1)[2] == 1)addDoor(hallCoordinates.get(hallCoordinates.size()-1)[0],hallCoordinates.get(hallCoordinates.size()-1)[1],0);
-//					if(hallCoordinates.get(hallCoordinates.size()-1)[2] == 2||hallCoordinates.get(hallCoordinates.size()-1)[2] == 3)addDoor(hallCoordinates.get(hallCoordinates.size()-1)[0],hallCoordinates.get(hallCoordinates.size()-1)[1],1);
-				}
 			}
 			
 		}
@@ -530,19 +490,6 @@ public class VillageRooms extends Generation {
 		int width = 1+(int) (Math.random()*(room.width-1));
 		int height = 1+(int) (Math.random()*(room.width-1));
 		entities.add(new Stair(world,(room.x+width)*Tile.TS+Tile.TS/2 , (room.y+height)*Tile.TS+Tile.TS/2, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
-//		for(int i = 0; i < rooms.size(); i++){
-//			if(Math.random()<(i+1)/rooms.size()){
-//				Rectangle room = rooms.get(i);
-//				for(int k = 1; k < room.width-1; k++){
-//					for(int j = 1; j < room.height-1; j++){
-//						if(Math.random()>((k+1)*(j+1))/((room.width-1)*(room.height-1))){
-//							entities.add(new Stair(world,(room.x+k)*Tile.TS , (room.y+j)*Tile.TS, true, 15+(int) (Math.random()*10), 15+((int) Math.random()*10)));
-//							return;
-//						}
-//					}
-//				}
-//			}
-//		}
 	}
 	
 

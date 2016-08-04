@@ -16,14 +16,10 @@ public class SmallTable extends Static {
 
 	@Override
 	public void calc() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void post() {
-		// TODO Auto-generated method stub
-
 	}
 
 }

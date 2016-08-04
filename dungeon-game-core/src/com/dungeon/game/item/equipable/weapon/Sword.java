@@ -2,7 +2,6 @@ package com.dungeon.game.item.equipable.weapon;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.weapon.MeleeGraphic;
 import com.dungeon.game.item.equipable.weapon.part.Part;
