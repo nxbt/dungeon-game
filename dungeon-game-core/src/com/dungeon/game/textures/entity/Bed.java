@@ -23,7 +23,7 @@ public class Bed extends ProceduralTexture {
 		Color pillowColor = new Color(0.6f+0.4f*(float)Math.random(), 0.6f+0.4f*(float)Math.random(), 0.6f+0.4f*(float)Math.random(), 1);
 		for(int i = 0; i < 32; i++){
 			for(int k = 0; k < 64; k++){
-				float num = 0.9f+0.1f*MathUtils.noise2d(seed, i, k, 4);
+				float num = 0.9f+0.1f*MathUtils.reductiveNoise2d(seed, i, k, new float[]{8,4,2,1}, new float[]{4,3,2,1});
 				if(k < 48){ // covers
 					if(i == 0 || i == 31 || k == 0 || k == 47){ // covers outline
 						texMap.setColor(new Color(coversColor.r*0.7f*num, coversColor.g*0.7f*num, coversColor.b*0.7f*num, 1));
