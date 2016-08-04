@@ -174,34 +174,34 @@ public class Floor {
 		areaMap.prepAreas();
 		
 		box2dWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
-//		for(int i = 0; i <tm.length-1; i++){
-//			for(int k = 0; k <tm.length-1; k++){
-//				if(tm[i][k].data == 1){
-//					
-//					
-//					
-//					
-//					// Create our body definition
-//					BodyDef groundBodyDef =new BodyDef();  
-//					// Set its world position
-//					groundBodyDef.position.set(new Vector2(k*Tile.TS+Tile.TS/2, i*Tile.TS+Tile.TS/2));  
-//
-//					// Create a body from the defintion and add it to the world
-//					Body groundBody = box2dWorld.createBody(groundBodyDef);  
-//
-//					// Create a polygon shape
-//					PolygonShape groundBox = new PolygonShape();  
-//					// Set the polygon shape as a box which is twice the size of our view port and 20 high
-//					// (setAsBox takes half-width and half-height as arguments)
-//					groundBox.setAsBox(Tile.TS/2, Tile.TS/2);
-//					// Create a fixture from our polygon shape and add it to our ground body  
-//					groundBody.createFixture(groundBox, 0.0f); 
-//					// Clean up after ourselves
-//					groundBox.dispose();
-//				}
-//				
-//			}
-//		}
+		for(int i = 0; i <tm.length-1; i++){
+			for(int k = 0; k <tm.length-1; k++){
+				if(tm[i][k].data == 1){
+					
+					
+					
+					
+					// Create our body definition
+					BodyDef groundBodyDef =new BodyDef();  
+					// Set its world position
+					groundBodyDef.position.set(new Vector2(k*Tile.TS+Tile.TS/2, i*Tile.TS+Tile.TS/2));  
+
+					// Create a body from the defintion and add it to the world
+					Body groundBody = box2dWorld.createBody(groundBodyDef);  
+
+					// Create a polygon shape
+					PolygonShape groundBox = new PolygonShape();  
+					// Set the polygon shape as a box which is twice the size of our view port and 20 high
+					// (setAsBox takes half-width and half-height as arguments)
+					groundBox.setAsBox(Tile.TS/2, Tile.TS/2);
+					// Create a fixture from our polygon shape and add it to our ground body  
+					groundBody.createFixture(groundBox, 0.0f); 
+					// Clean up after ourselves
+					groundBox.dispose();
+				}
+				
+			}
+		}
 	}
 	
 	public void update() {
