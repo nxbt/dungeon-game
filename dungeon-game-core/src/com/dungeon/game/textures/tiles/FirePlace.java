@@ -27,14 +27,14 @@ public class FirePlace extends ProceduralTile {
 		Color activeColor;
 		for(int i = 4; i < 28; i++){
 			for(int k = 4; k < 6; k++){
-				activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
+				activeColor = new Color(Brick.getColor(seed).r*0.8f, Brick.getColor(seed).g*0.8f, Brick.getColor(seed).b*0.8f, 1);
 				float num = MathUtils.noise2d(seed, x*32+i, y*32+i, 1);
 				outLineMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
 				outLineMap.setColor(activeColor);
 				outLineMap.drawPixel(i, k);
 			}
 			for(int k = 30; k < 32; k++){
-				activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
+				activeColor = new Color(Brick.getColor(seed).r*0.8f, Brick.getColor(seed).g*0.8f, Brick.getColor(seed).b*0.8f, 1);
 				float num = MathUtils.noise2d(seed, x*32+i, y*32+i, 1);
 				outLineMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
 				outLineMap.setColor(activeColor);
@@ -42,7 +42,7 @@ public class FirePlace extends ProceduralTile {
 			}
 			if(i == 4 || i == 5 || i == 26 || i == 27){
 				for(int k = 4; k < 32; k++){
-					activeColor = new Color(Brick.brickColor.r*0.8f, Brick.brickColor.g*0.8f, Brick.brickColor.b*0.8f, 1);
+					activeColor = new Color(Brick.getColor(seed).r*0.8f, Brick.getColor(seed).g*0.8f, Brick.getColor(seed).b*0.8f, 1);
 					float num = MathUtils.noise2d(seed, x*32+i, y*32+i, 1);
 					outLineMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
 					outLineMap.setColor(activeColor);
@@ -68,8 +68,9 @@ public class FirePlace extends ProceduralTile {
 			for(int k = 2; k < 26; k++){
 				curX = x*32 + i;
 				curY = y*32 + k;
-				float num = (0.8f+0.2f*MathUtils.perturbedSinNoise3d(seed, curX, curY, timer, 5, 5, 40))*(32-k)/32;
-				fireMap.setColor(new Color(num, 0, 0, num));
+				float distFromCenter = (float) Math.sqrt((i-16)*(i-16)*2+k*k*0.5);
+				float num = (0.8f+0.2f*MathUtils.perturbedSinNoise3d(seed, curX, curY, timer, 5, 5, 40))*(32-distFromCenter)/32;
+				fireMap.setColor(new Color(1, 0, 0, num));
 				fireMap.drawPixel(i, 31 - k);
 			}
 		}

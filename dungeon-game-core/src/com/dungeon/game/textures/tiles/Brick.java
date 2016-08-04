@@ -9,8 +9,6 @@ import com.dungeon.game.utilities.MathUtils;
 
 public class Brick extends ProceduralTile {
 
-	public static final Color brickColor = new Color(133f / 255f, 5f / 255f, 12f / 255f,1);
-
 	public Brick(int seed, int x, int y, int sides, int corners) {
 		super(new int[]{seed, x, y, sides, corners});
 	}
@@ -446,15 +444,15 @@ public class Brick extends ProceduralTile {
 		int yOffset = rand.nextInt(16);
 		int barrierZone = (int)((8f+curY+yOffset)/16f);
 		int barrier = (int) (barrierZone*16f-4f+8f*MathUtils.getRandomFromSeedAndY(seed*(int)(curX/8),barrierZone).nextFloat());
-		if(curX%8 == 0 || (curX+1)%8 == 0 || curY+yOffset == barrier || curY+yOffset - 1 == barrier)activeColor = new Color(brickColor.r*0.8f, brickColor.g*0.8f, brickColor.b*0.8f, 1);
+		if(curX%8 == 0 || (curX+1)%8 == 0 || curY+yOffset == barrier || curY+yOffset - 1 == barrier)activeColor = new Color(getColor(seed).r*0.8f, getColor(seed).g*0.8f, getColor(seed).b*0.8f, 1);
 		else if(curY+yOffset > barrier){
 			Random rand1 = MathUtils.getRandomFromSeedAndCords(seed, (int)(curX/8), 1+barrierZone);
 			float num = rand1.nextFloat();
-			activeColor = new Color(brickColor.r*0.8f + num*0.2f, brickColor.g*0.8f + num*0.2f, brickColor.b*0.8f + num*0.2f, 1);
+			activeColor = new Color(getColor(seed).r*0.8f + num*0.2f, getColor(seed).g*0.8f + num*0.2f, getColor(seed).b*0.8f + num*0.2f, 1);
 		}else{
 			Random rand1 = MathUtils.getRandomFromSeedAndCords(seed, (int)(curX/8), barrierZone);
 			float num = rand1.nextFloat();
-			activeColor = new Color(brickColor.r*0.8f + num*0.2f, brickColor.g*0.8f + num*0.2f, brickColor.b*0.8f + num*0.2f, 1);
+			activeColor = new Color(getColor(seed).r*0.8f + num*0.2f, getColor(seed).g*0.8f + num*0.2f, getColor(seed).b*0.8f + num*0.2f, 1);
 		}
 		texMap.setColor(addNoise(activeColor, curX, curY));
 		texMap.drawPixel(x, 31-y);
@@ -466,15 +464,15 @@ public class Brick extends ProceduralTile {
 		int xOffset = rand.nextInt(16);
 		int barrierZone = (int)((8f+curX+xOffset)/16f);
 		int barrier = (int) (barrierZone*16f-4f+8f*MathUtils.getRandomFromSeedAndY(seed*(int)(curY/8),barrierZone).nextFloat());
-		if(curY%8 == 0 || (curY+1)%8 == 0 || curX+xOffset == barrier || curX+xOffset - 1 == barrier)activeColor = new Color(brickColor.r*0.8f, brickColor.g*0.8f, brickColor.b*0.8f, 1);
+		if(curY%8 == 0 || (curY+1)%8 == 0 || curX+xOffset == barrier || curX+xOffset - 1 == barrier)activeColor = new Color(getColor(seed).r*0.8f, getColor(seed).g*0.8f, getColor(seed).b*0.8f, 1);
 		else if(curX+xOffset > barrier){
 			Random rand1 = MathUtils.getRandomFromSeedAndCords(seed, (int)(curY/8), 1+barrierZone);
 			float num = rand1.nextFloat();
-			activeColor = new Color(brickColor.r*0.8f + num*0.2f, brickColor.g*0.8f + num*0.2f, brickColor.b*0.8f + num*0.2f, 1);
+			activeColor = new Color(getColor(seed).r*0.8f + num*0.2f, getColor(seed).g*0.8f + num*0.2f, getColor(seed).b*0.8f + num*0.2f, 1);
 		}else{
 			Random rand1 = MathUtils.getRandomFromSeedAndCords(seed, (int)(curY/8), barrierZone);
 			float num = rand1.nextFloat();
-			activeColor = new Color(brickColor.r*0.8f + num*0.2f, brickColor.g*0.8f + num*0.2f, brickColor.b*0.8f + num*0.2f, 1);
+			activeColor = new Color(getColor(seed).r*0.8f + num*0.2f, getColor(seed).g*0.8f + num*0.2f, getColor(seed).b*0.8f + num*0.2f, 1);
 		}
 		texMap.setColor(addNoise(activeColor, curX, curY));
 		texMap.drawPixel(x, 31-y);
@@ -482,7 +480,7 @@ public class Brick extends ProceduralTile {
 	
 	private void mortar(int x, int y, int curX, int curY, Pixmap texMap){
 		Color activeColor;
-		activeColor = new Color(brickColor.r*0.8f, brickColor.g*0.8f, brickColor.b*0.8f, 1);
+		activeColor = new Color(getColor(seed).r*0.8f, getColor(seed).g*0.8f, getColor(seed).b*0.8f, 1);
 		texMap.setColor(addNoise(activeColor, curX, curY));
 		texMap.drawPixel(x, 31-y);
 	}
@@ -491,5 +489,12 @@ public class Brick extends ProceduralTile {
 	private Color addNoise(Color c, int x, int y) {
 		float num = MathUtils.reductiveNoise2d(seed, x, y, new float[]{4,2,1}, new float[]{3,2,1});
 		return new Color(c.r * (0.8f + num*0.4f), c.g * (0.8f + num*0.4f), c.b * (0.8f + num*0.4f), 1);
+	}
+	
+	public static final Color getColor(int seed){
+		Random rand = new Random(seed);
+		rand.nextFloat();
+		if(rand.nextFloat() < 0.5f)return new Color(133f / 255f, 5f / 255f, 12f / 255f,1);
+		else return new Color(66f / 255f, 66f / 255f, 66f / 255f,1);
 	}
 }

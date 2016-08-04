@@ -117,7 +117,7 @@ public abstract class Room {
 		}
 	}
 	
-	protected boolean checkOccupied(int x, int y){
+	protected boolean checkOccupied(int x, int y){ // this is not working...
 		return occupiedTiles[y][x];
 	}
 	
