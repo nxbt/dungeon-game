@@ -548,6 +548,38 @@ public class VillageRooms extends Generation {
 
 	//populate special rooms
 	private void populateSpecialRooms() {
+		//find all rooms with just one door and make them special!
+		for(Rectangle r: rooms){
+			int numDoors = 0;
+			checker:
+			if(!specialRooms.contains(r)){
+				for(int i = 0; i < r.width; i++){
+					if(!Tile.isSolid(map[(int) r.y-1][(int) r.x + i].id)){
+						numDoors++;
+						if(numDoors == 2)break checker;
+					}
+				}
+				for(int i = 0; i < r.width; i++){
+					if(!Tile.isSolid(map[(int) (r.y + r.height)][(int) r.x + i].id)){
+						numDoors++;
+						if(numDoors == 2)break checker;
+					}
+				}
+				for(int i = 0; i < r.height; i++){
+					if(!Tile.isSolid(map[(int) r.y + i][(int) r.x - 1].id)){
+						numDoors++;
+						if(numDoors == 2)break checker;
+					}
+				}
+				for(int i = 0; i < r.height; i++){
+					if(!Tile.isSolid(map[(int) r.y + i][(int) (r.x + r.width)].id)){
+						numDoors++;
+						if(numDoors == 2)break checker;
+					}
+				}
+				specialRooms.add(r);
+			}
+		}
 		normRooms = (ArrayList<Rectangle>) rooms.clone();
 		for(int i = 0; i < specialRooms.size(); i++){
 			normRooms.remove(specialRooms.get(i));
