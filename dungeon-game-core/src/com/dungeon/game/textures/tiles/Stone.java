@@ -21,16 +21,13 @@ public class Stone extends ProceduralTile {
 		y = args[2];
 		Pixmap texMap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
 		int curX, curY;
-		float[] verts = new float[]{5,6,9,3,31,7,16,24,6,19,18,4};
-		DelaunayTriangulator triangulator = new DelaunayTriangulator();
-		System.out.println(triangulator.computeTriangles(verts, false));
 		
 		ArrayList<int[]> nodes = new ArrayList<int[]>();
 		for(int i = -16; i < 48; i++){
 			for(int k = -16; k < 48; k++){
 				curX = x*32+i;
 				curY = y*32+k;
-				if(MathUtils.getRandomFromSeedAndCords(seed, curX, curY).nextFloat() < 0.01){
+				if(MathUtils.getRandomFromSeedAndCords(seed, curX, curY).nextFloat() < 0.01f){
 					nodes.add(new int[]{curX, curY});
 				}
 			}
@@ -47,10 +44,14 @@ public class Stone extends ProceduralTile {
 					float dist = (float) Math.sqrt((curX-node[0])*(curX-node[0])+(curY-node[1])*(curY-node[1]));
 					nodeDists[j] = dist;
 				}
-				
+				int closestNode = 0;
+				for(int j = 1; j < nodeDists.length; j++){
+					if(nodeDists[j] < nodeDists[closestNode])closestNode = j;
+				}
 				for(int j = 0; j < nodeDists.length; j++){
-					for(int l = 0; l < nodeDists.length; l++){
-						if(l != j && Math.abs(nodeDists[j] - nodeDists[l]) < 2)isCrack = true;
+					if(j != closestNode && Math.abs(nodeDists[j] - nodeDists[closestNode]) < 1){
+						isCrack = true;
+						break;
 					}
 				}
 				if(isCrack)texMap.setColor(Color.BLACK);
