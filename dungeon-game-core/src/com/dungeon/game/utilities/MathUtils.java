@@ -187,4 +187,14 @@ public class MathUtils {
 		int yperturb = (int) (perturbAmp*noise2d(new Random(seed).nextInt(1000), x, y, perturbPeriod));
 		return (x + xperturb)%period == 0 ^ (y + yperturb)%period == 0;
 	}
+	
+	public static float reductiveNoise2d(int seed, float x, float y, float[] periods, float[] amps){
+		float totalAmp  = 0;
+		float value = 0;
+		for(int i = 0; i < periods.length; i++){
+			value+=noise2d(seed*(i+1), x, y, periods[i])*amps[i];
+			totalAmp+=amps[i];
+		}
+		return value/totalAmp;
+	}
 }
