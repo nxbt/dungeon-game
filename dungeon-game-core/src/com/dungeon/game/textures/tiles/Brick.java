@@ -489,7 +489,7 @@ public class Brick extends ProceduralTile {
 	
 	
 	private Color addNoise(Color c, int x, int y) {
-		float num = MathUtils.noise2d(seed, x, y, 1);
-		return new Color(c.r * (0.85f + num*0.3f), c.g * (0.85f + num*0.3f), c.b * (0.85f + num*0.3f), 1);
+		float num = MathUtils.reductiveNoise2d(seed, x, y, new float[]{4,2,1}, new float[]{3,2,1});
+		return new Color(c.r * (0.8f + num*0.4f), c.g * (0.8f + num*0.4f), c.b * (0.8f + num*0.4f), 1);
 	}
 }
