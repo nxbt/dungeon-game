@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-1.7.0.jar" sourcepath="libs/gdx-box2d-1.7.0-sources.jar"/>
+	<classpathentry kind="lib" path="libs/box2dlights-1.4.jar" sourcepath="libs/box2dlights-1.4-sources.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-box2d-1.7.0.jar" sourcepath="libs/gdx-box2d-1.7.0-sources.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-controllers-1.7.0.jar" sourcepath="libs/gdx-controllers-1.7.0-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

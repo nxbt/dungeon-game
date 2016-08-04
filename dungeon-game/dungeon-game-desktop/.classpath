@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="src" path="/dungeon-game-core"/>
+	<classpathentry kind="src" path="assets"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-1.7.0.jar" sourcepath="libs/gdx-1.7.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-lwjgl-1.7.0.jar" sourcepath="libs/gdx-backend-lwjgl-1.7.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-box2d-platform-1.7.0-natives-desktop.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-controllers-1.7.0.jar" sourcepath="libs/gdx-controllers-1.7.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-controllers-desktop-1.7.0.jar" sourcepath="libs/gdx-controllers-desktop-1.7.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-controllers-platform-1.7.0-natives-desktop.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-platform-1.7.0-natives-desktop.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/jinput-2.0.5.jar" sourcepath="libs/jinput-2.0.5-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/jinput-platform-2.0.5-natives-linux.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/jinput-platform-2.0.5-natives-osx.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/jinput-platform-2.0.5-natives-windows.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/jlayer-1.0.1-gdx.jar" sourcepath="libs/jlayer-1.0.1-gdx-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/jorbis-0.0.17.jar" sourcepath="libs/jorbis-0.0.17-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/jutils-1.0.0.jar" sourcepath="libs/jutils-1.0.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lwjgl_util-2.9.2.jar" sourcepath="libs/lwjgl_util-2.9.2-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lwjgl-2.9.2.jar" sourcepath="libs/lwjgl-2.9.2-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lwjgl-platform-2.9.2-natives-linux.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lwjgl-platform-2.9.2-natives-osx.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lwjgl-platform-2.9.2-natives-windows.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -3,8 +3,6 @@ package com.dungeon.game.textures.entity;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.dungeon.game.item.equipable.weapon.Sword;
-import com.dungeon.game.textures.ProceduralTexture;
 
 public class Goon extends Person {
 	

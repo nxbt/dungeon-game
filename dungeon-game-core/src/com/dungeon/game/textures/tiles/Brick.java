@@ -23,7 +23,6 @@ public class Brick extends ProceduralTile {
 		Pixmap texMap = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
 		
 		//variables
-
 		int sides = args[3];
 		int corners = args[4];
 		
@@ -31,7 +30,6 @@ public class Brick extends ProceduralTile {
 		int curY;
 		
 		if((sides == 1 && (corners == 10 || corners == 9 || corners == 12 || corners == 4 || corners == 8 || corners == 5 || corners == 7 || corners == 11 || corners == 14 || corners == 13 || corners ==6)) || (sides == 0 && corners == 12)){
-//			map[i][k] = tileMap.getTile(thre_id, 3, false);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -47,7 +45,6 @@ public class Brick extends ProceduralTile {
 			}
 		}
 		else if((sides == 2 && (corners == 3||corners == 6||corners == 10||corners == 8||corners == 2||corners == 12||corners == 13||corners == 7 || corners == 11 || corners == 14 || corners == 9)) || (sides == 0 && corners == 10)){
-//			map[i][k] = tileMap.getTile(thre_id, 2, false);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -63,7 +60,6 @@ public class Brick extends ProceduralTile {
 			}
 		}
 		else if((sides == 4 && (corners == 5||corners == 9||corners == 3||corners == 2||corners == 1||corners == 10||corners == 14||corners == 13 || corners == 7 || corners == 11 || corners == 6)) || (sides == 0 && corners == 3)){
-//			map[i][k] = tileMap.getTile(thre_id, 1, false);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -79,7 +75,6 @@ public class Brick extends ProceduralTile {
 			}
 		}
 		else if(sides == 8 && ((corners == 12||corners == 6||corners == 5||corners == 1||corners == 4||corners == 3||corners == 11||corners == 14 || corners == 13 || corners == 7 || corners == 9)) || ((sides == 0 && corners == 5))){
-//			map[i][k] = tileMap.getTile(thre_id, 0, false);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -95,7 +90,6 @@ public class Brick extends ProceduralTile {
 			}
 		}
 		else if(sides == 1 || sides == 4 || sides == 5) {
-//			map[i][k] = tileMap.getTile(strt_id, 0, false);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -105,7 +99,6 @@ public class Brick extends ProceduralTile {
 			}
 		}
 		else if(sides == 2 || sides == 8 || sides == 10) {
-//			map[i][k] = tileMap.getTile(strt_id, 1, false);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -115,7 +108,6 @@ public class Brick extends ProceduralTile {
 			}
 		}
 		else if(sides == 14) {
-//			map[i][k] = tileMap.getTile(revr_id, 1, false);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -131,7 +123,6 @@ public class Brick extends ProceduralTile {
 			}
 		}
 		else if(sides == 13) {
-//			map[i][k] = tileMap.getTile(revr_id, 0, false);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -147,7 +138,6 @@ public class Brick extends ProceduralTile {
 			}
 		}
 		else if(sides == 11) {
-//			map[i][k] = tileMap.getTile(revr_id, 3, false);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -163,7 +153,6 @@ public class Brick extends ProceduralTile {
 			}
 		}
 		else if(sides == 7) {
-//			map[i][k] = tileMap.getTile(revr_id, 2, false);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -179,7 +168,6 @@ public class Brick extends ProceduralTile {
 			}
 		}
 		else if(sides == 3 || corners == 8) {
-//			map[i][k] = tileMap.getTile(bent_id, 3, true);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -225,7 +213,6 @@ public class Brick extends ProceduralTile {
 			}
 		}
 		else if(sides == 6 || corners == 2) {
-//			map[i][k] = tileMap.getTile(bent_id, 2, false);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -271,7 +258,6 @@ public class Brick extends ProceduralTile {
 			}
 		}
 		else if(sides == 9 || corners == 4) {
-//			map[i][k] = tileMap.getTile(bent_id, 0, false);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -317,7 +303,6 @@ public class Brick extends ProceduralTile {
 			}
 		}
 		else if(sides == 12 || corners == 1) {
-//			map[i][k] = tileMap.getTile(bent_id, 1, true);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -363,7 +348,6 @@ public class Brick extends ProceduralTile {
 			}
 		}
 		else if(sides == 0 && (corners == 6 || corners == 9 || corners == 15 || corners == 14 || corners == 13 || corners == 11 || corners == 7)){
-//			map[i][k] = tileMap.getTile(four_id, 0, false);
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -472,8 +456,7 @@ public class Brick extends ProceduralTile {
 			float num = rand1.nextFloat();
 			activeColor = new Color(brickColor.r*0.8f + num*0.2f, brickColor.g*0.8f + num*0.2f, brickColor.b*0.8f + num*0.2f, 1);
 		}
-		float num = MathUtils.noise2d(seed, curX, curY, 1);
-		texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
+		texMap.setColor(addNoise(activeColor, curX, curY));
 		texMap.drawPixel(x, 31-y);
 	}
 	
@@ -493,17 +476,20 @@ public class Brick extends ProceduralTile {
 			float num = rand1.nextFloat();
 			activeColor = new Color(brickColor.r*0.8f + num*0.2f, brickColor.g*0.8f + num*0.2f, brickColor.b*0.8f + num*0.2f, 1);
 		}
-		float num = MathUtils.noise2d(seed, curX, curY, 1);
-		texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
+		texMap.setColor(addNoise(activeColor, curX, curY));
 		texMap.drawPixel(x, 31-y);
 	}
 	
 	private void mortar(int x, int y, int curX, int curY, Pixmap texMap){
 		Color activeColor;
 		activeColor = new Color(brickColor.r*0.8f, brickColor.g*0.8f, brickColor.b*0.8f, 1);
-		float num = MathUtils.noise2d(seed, curX, curY, 1);
-		texMap.setColor(new Color(activeColor.r*0.95f + num*0.05f, activeColor.g, activeColor.b, 1));
+		texMap.setColor(addNoise(activeColor, curX, curY));
 		texMap.drawPixel(x, 31-y);
 	}
-
+	
+	
+	private Color addNoise(Color c, int x, int y) {
+		float num = MathUtils.noise2d(seed, x, y, 1);
+		return new Color(c.r * (0.85f + num*0.3f), c.g * (0.85f + num*0.3f), c.b * (0.85f + num*0.3f), 1);
+	}
 }

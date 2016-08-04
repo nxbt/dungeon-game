@@ -1,7 +1,5 @@
 package com.dungeon.game.textures.tiles;
 
-import java.util.Random;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -71,12 +69,8 @@ public class FirePlace extends ProceduralTile {
 				curX = x*32 + i;
 				curY = y*32 + k;
 				float num = (0.8f+0.2f*MathUtils.perturbedSinNoise3d(seed, curX, curY, timer, 5, 5, 40))*(32-k)/32;
-//				if(num > 0.5f){
-					fireMap.setColor(new Color(num, 0, 0, num));
-					fireMap.drawPixel(i, 31 - k);
-//				}
-//				float num = MathUtils.perturbedSinNoise3d(seed, curX, curY, timer, 4, 3, 20);
-//				fireMap.setColor(new Color(1*num,1*num,1*num,1));
+				fireMap.setColor(new Color(num, 0, 0, num));
+				fireMap.drawPixel(i, 31 - k);
 			}
 		}
 		Pixmap texMap = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
@@ -85,7 +79,7 @@ public class FirePlace extends ProceduralTile {
 		texMap = Spritesheet.rotatePixmap(texMap, rotation);
 		texture = new Texture(texMap);
 		texMap.dispose();
-		timer+=2;
+		timer+=7;
 	}
 	
 	public void update(){

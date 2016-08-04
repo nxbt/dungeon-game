@@ -9,7 +9,6 @@ public class Person extends ProceduralTexture {
 
 	public Person() {
 		super(32, 32, new int[0]);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
