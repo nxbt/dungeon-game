@@ -1,7 +1,7 @@
 package com.dungeon.game.entity;
 
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.entity.hud.DescWindow;
+import com.dungeon.game.entity.hud.window.DescWindow;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Item;

@@ -1,9 +1,12 @@
-package com.dungeon.game.entity.hud;
+package com.dungeon.game.entity.hud.window;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.entity.hud.HoverZone;
+import com.dungeon.game.entity.hud.PartsInfo;
+import com.dungeon.game.entity.hud.SwingSelection;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.equipable.weapon.Melee;
@@ -33,9 +36,6 @@ public class TrainingWindow extends Window {
 	}
 	
 	public void calc(){
-		slot.x = x + 4;
-		slot.y = y + d_height - 48;
-		slot.calc();
 		if(weapon != (Melee) slot.item){
 			if(weapon!=null){
 				((SwingSelection) getSubEntity("swingSelection")[0]).setSwings();
@@ -53,7 +53,12 @@ public class TrainingWindow extends Window {
 				addSubEntitiy(new HoverZone(world, weapon.getWeightText(), 0, 0, 156, 16),  "statDesc", 4, d_height - 116);
 			}
 		}
+		
 		super.calc();
+		
+		slot.x = x + 4;
+		slot.y = y + d_height - 48;
+		slot.calc();
 	}
 	
 	public void hovered(){

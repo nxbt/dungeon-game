@@ -1,4 +1,4 @@
-package com.dungeon.game.entity.hud;
+package com.dungeon.game.entity.hud.window;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.entity.hud.ExitButton;
+import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.world.World;
 
 public abstract class Window extends Hud {
@@ -25,7 +27,7 @@ public abstract class Window extends Hud {
 	protected float dragOffX;
 	protected float dragOffY;
 	
-	protected float contentHeight;
+	public float contentHeight;
 	
 	public Window(World world, float x, float y) {
 		super(world, x, y, 32, 32, "slot.png");

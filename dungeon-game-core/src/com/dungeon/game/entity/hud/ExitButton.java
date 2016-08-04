@@ -1,5 +1,6 @@
 package com.dungeon.game.entity.hud;
 
+import com.dungeon.game.entity.hud.window.Window;
 import com.dungeon.game.world.World;
 
 public class ExitButton extends Button {

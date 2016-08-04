@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.character.Character;
-import com.dungeon.game.entity.hud.DescWindow;
+import com.dungeon.game.entity.hud.window.DescWindow;
 import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.consumable.Consumable;
