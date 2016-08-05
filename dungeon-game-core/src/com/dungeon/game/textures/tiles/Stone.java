@@ -23,13 +23,26 @@ public class Stone extends ProceduralTile {
 		int curX, curY;
 		
 		ArrayList<int[]> nodes = new ArrayList<int[]>();
-		for(int i = -16; i < 48; i++){
-			for(int k = -16; k < 48; k++){
-				curX = x*32+i;
-				curY = y*32+k;
-				if(MathUtils.getRandomFromSeedAndCords(seed, curX, curY).nextFloat() < 0.01f){
-					nodes.add(new int[]{curX, curY});
-				}
+//		for(int i = -16; i < 48; i++){
+//			for(int k = -16; k < 48; k++){
+//				curX = x*32+i;
+//				curY = y*32+k;
+//				if(MathUtils.getRandomFromSeedAndCords(seed, curX, curY).nextFloat() < 0.01f){
+//					nodes.add(new int[]{curX, curY});
+//				}
+//			}
+//		}
+		System.out.println("begin");
+		for(int i = x*32-16; i <= x*32+48; i+=16){
+			for(int k = y*32-16; k <= y*32+48; k+=16){
+				int specialX, specialY;
+				curX = i;
+				curY = k;
+				specialX = curX+MathUtils.getRandomFromSeedAndCords(seed,(int)(curX/16),(int)(curY/16)).nextInt(16);
+				specialY = curX+MathUtils.getRandomFromSeedAndCords(seed*2,(int)(curX/16),(int)(curY/16)).nextInt(16);
+				nodes.add(new int[]{specialX,specialY});
+				
+				System.out.println(specialX + " 0 " + specialY);
 			}
 		}
 		
