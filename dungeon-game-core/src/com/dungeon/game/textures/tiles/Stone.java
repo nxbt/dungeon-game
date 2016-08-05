@@ -1,18 +1,15 @@
 package com.dungeon.game.textures.tiles;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.DelaunayTriangulator;
 import com.dungeon.game.utilities.MathUtils;
 
 public class Stone extends ProceduralTile {
 	
 	private static final Color[] stoneColors = new Color[]{
-		new Color(133f / 255f, 5f / 255f, 12f / 255f,1),
 		new Color(66f / 255f, 66f / 255f, 66f / 255f,1),
 		new Color(227f / 255f, 152f / 255f, 51f / 255f,1)
 	};
@@ -28,7 +25,7 @@ public class Stone extends ProceduralTile {
 		y = args[2];
 		Pixmap texMap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
 		int curX, curY;
-		Random rand = new Random(seed);
+		Random rand = new Random(seed+1);
 		rand.nextFloat();
 		Color stoneColor = stoneColors[(int) (rand.nextFloat()*(stoneColors.length))];
 		float numR = 0.8f+0.4f*rand.nextFloat();

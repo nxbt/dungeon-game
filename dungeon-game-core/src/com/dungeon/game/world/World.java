@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.dungeon.game.Camera;
 import com.dungeon.game.ai.CoverFinder;
@@ -21,7 +22,6 @@ import com.dungeon.game.entity.character.enemy.Enemy;
 import com.dungeon.game.entity.character.enemy.Goon;
 import com.dungeon.game.entity.character.friend.Friend;
 import com.dungeon.game.entity.character.friend.Mentor;
-import com.dungeon.game.entity.furniture.Fireplace;
 import com.dungeon.game.entity.furniture.Stair;
 import com.dungeon.game.entity.furniture.TrainingTable;
 import com.dungeon.game.entity.hud.DescBox;
@@ -33,6 +33,7 @@ import com.dungeon.game.item.equipable.weapon.part.Part;
 //import com.dungeon.game.light.LightMap;
 import com.dungeon.game.pathing.AreaMap;
 
+import box2dLight.PointLight;
 import box2dLight.RayHandler;
 
 public class World {
@@ -63,14 +64,15 @@ public class World {
 	boolean debug_pathing;
 	boolean debug_frames;
 	boolean debug_sight;
+	boolean debug_light;
+	
+	private com.badlogic.gdx.physics.box2d.World emptyWorld;
+	private PointLight emptyWorldLight;
+	
 	Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	public RayHandler rayHandler;
 	
-//	public LightMap lightMap;
-	
 	public World() {
-		
-		
 		Part.doFuckAll(); //Never Forget
 		
 		rayHandler = new RayHandler(null);
@@ -116,10 +118,15 @@ public class World {
 		fpsFont = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		fpsFont.setColor(Color.RED);
 		
+		emptyWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
+		emptyWorldLight = new PointLight(rayHandler, 10, Color.WHITE, Integer.MAX_VALUE, 0, 0);
+		emptyWorldLight.remove(false);
+		
 		debug_hitbox = false;
 		debug_pathing = false;
 		debug_frames = false; 
 		debug_sight = false;
+		debug_light = false;
 		rayHandler.setWorld(curFloor.box2dWorld);
 		
 		for(Entity e: entities){
@@ -152,12 +159,22 @@ public class World {
 			hudEntities.get(i).update();
 		}
 		
-//		lightMap.update(this);
-		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F9)) debug_frames = !debug_frames;
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F8)) debug_pathing = !debug_pathing;
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F7)) debug_hitbox = !debug_hitbox;
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F10)) debug_sight = !debug_sight;
+		
+		if(Gdx.input.isKeyJustPressed(Input.Keys.F11)) {
+			debug_light = !debug_light;
+			if(debug_light) {
+				rayHandler.setWorld(emptyWorld);
+				emptyWorldLight.add(rayHandler);
+			}
+			else {
+				rayHandler.setWorld(curFloor.box2dWorld);
+				emptyWorldLight.remove(false);
+			}
+		}
 	}
 	
 	public void draw(SpriteBatch batch) {
