@@ -13,8 +13,6 @@ public class Brick extends ProceduralTile {
 			new Color(133f / 255f, 5f / 255f, 12f / 255f,1),
 			new Color(66f / 255f, 66f / 255f, 66f / 255f,1),
 			new Color(227f / 255f, 152f / 255f, 51f / 255f,1)
-
-			
 	};
 
 	public Brick(int seed, int x, int y, int sides, int corners) {
@@ -502,10 +500,10 @@ public class Brick extends ProceduralTile {
 	public static final Color getColor(int seed){
 		Random rand = new Random(seed);
 		rand.nextFloat();
+		Color baseColor = brickColors[(int) (rand.nextFloat()*(brickColors.length))];
 		float numR = 0.8f+0.4f*rand.nextFloat();
 		float numG = 0.8f+0.4f*rand.nextFloat();
 		float numB = 0.8f+0.4f*rand.nextFloat();
-		Color baseColor = brickColors[(int) (rand.nextFloat()*(brickColors.length))];
 		return new Color(baseColor.r*numR, baseColor.g*numG, baseColor.b*numB, 1);
 	}
 }
