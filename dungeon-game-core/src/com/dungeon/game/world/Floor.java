@@ -59,13 +59,10 @@ public class Floor {
 		gen.generateSprites();
 
 		Tile[][] map = gen.map;
-//		int[][] rotations = gen.rotations;
-//		boolean[][] flips = gen.flips;
 		
 		entities = gen.getEntities();
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
-//				tm[i][k] = new Tile(textures[map[i][k]],map[i][k],rotations[i][k], flips[i][k]);
 				//temp code to test 4 ways
 				if(map[i][k].id == 0){
 					Texture tex = new WoodPlank(seed, k, i, k != 0 && (map[i][k-1].id != 0), k != map[i].length-1 && (map[i][k+1].id != 0), i != 0 && (map[i-1][k].id != 0), i != map.length-1 && (map[i+1][k].id != 0)).texture;
@@ -75,9 +72,9 @@ public class Floor {
 					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
 				}else if(map[i][k].id == 3){
 					Texture tex = new Marble(seed, k, i).texture;
+					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
 				}else if(map[i][k].id == 4){
 					Texture tex = new Stone(seed, k, i).texture;
-					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
 					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
 				}else if(map[i][k].id == 10 || map[i][k].id == 11 || map[i][k].id == 12 || map[i][k].id == 13 || map[i][k].id == 14){
 					int sides = 0;
