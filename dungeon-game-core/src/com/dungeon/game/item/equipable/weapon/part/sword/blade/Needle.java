@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 
 public class Needle extends SwordBlade {
 	public Needle(World world, int level) {
-		super(world, "Needle", SPRITES[9], level);
+		super(world, "Needle Blade", SPRITES[9], level);
 		id = 0;
 		allowedSwings = new String[]{
 			"Stab",
@@ -29,5 +29,8 @@ public class Needle extends SwordBlade {
 		weight = getStat(1.75f,0.25f);
 		numSwings = 2;
 	}
-
+	
+	public String getName() {
+		return "Needle";
+	}
 }

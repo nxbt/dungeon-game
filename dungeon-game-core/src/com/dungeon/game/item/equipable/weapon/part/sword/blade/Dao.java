@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 
 public class Dao extends SwordBlade {
 	public Dao(World world, int level) {
-		super(world, "Dao", SPRITES[7], level);
+		super(world, "Dao Blade", SPRITES[7], level);
 		id = 0;
 		allowedSwings = new String[]{
 			"Slash",
@@ -27,5 +27,8 @@ public class Dao extends SwordBlade {
 		weight = getStat(11,1.5f);
 		numSwings = 3;
 	}
-
+	
+	public String getName() {
+		return "Dao";
+	}
 }

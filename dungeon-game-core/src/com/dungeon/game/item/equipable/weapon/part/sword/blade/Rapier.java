@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 
 public class Rapier extends SwordBlade {
 	public Rapier(World world, int level) {
-		super(world, "Rapier", SPRITES[4], level);
+		super(world, "Rapier Blade", SPRITES[4], level);
 		id = 0;
 		allowedSwings = new String[]{
 			"Stab"
@@ -29,5 +29,8 @@ public class Rapier extends SwordBlade {
 		weight = getStat(4.5f,1.5f);
 		numSwings = 4;
 	}
-
+	
+	public String getName() {
+		return "Rapier";
+	}
 }

@@ -28,5 +28,8 @@ public class StoutBlade extends SwordBlade {
 		weight = getStat(17.5f,2.5f);
 		numSwings = 3;
 	}
-
+	
+	public String getName() {
+		return "Stout Sword";
+	}
 }

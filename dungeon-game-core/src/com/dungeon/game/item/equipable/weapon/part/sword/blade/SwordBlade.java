@@ -40,4 +40,8 @@ public abstract class SwordBlade extends SwordPart {
 		batch.draw(slot, x, y, 32, 32);
 		batch.draw(sprite, x, y, 32, 32);
 	}
+	
+	public String getName() {
+		return "Sword";
+	}
 }

@@ -25,5 +25,4 @@ public class BasicBlade extends SwordBlade {
 		weight = getStat(10,2);
 		numSwings = 3;
 	}
-
 }

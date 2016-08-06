@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 
 public class Falchion extends SwordBlade {
 	public Falchion(World world, int level) {
-		super(world, "Falchion", SPRITES[5], level);
+		super(world, "Falchion Blade", SPRITES[5], level);
 		id = 0;
 		allowedSwings = new String[]{
 			"Slash",
@@ -25,5 +25,8 @@ public class Falchion extends SwordBlade {
 		weight = getStat(15,2.5f);
 		numSwings = 2;
 	}
-
+	
+	public String getName() {
+		return "Falchion";
+	}
 }

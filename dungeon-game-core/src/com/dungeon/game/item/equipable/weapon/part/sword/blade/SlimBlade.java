@@ -28,5 +28,8 @@ public class SlimBlade extends SwordBlade {
 		weight = getStat(7.2f,2.1f);
 		numSwings = 3;
 	}
-
+	
+	public String getName() {
+		return "Slim Sword";
+	}
 }

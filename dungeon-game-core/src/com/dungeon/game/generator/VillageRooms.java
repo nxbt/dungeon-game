@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.dungeon.game.entity.Entity;
-import com.dungeon.game.entity.character.friend.Trainer;
 import com.dungeon.game.entity.furniture.Stair;
 import com.dungeon.game.generator.room.GeneralStore;
 import com.dungeon.game.generator.room.Quarters;

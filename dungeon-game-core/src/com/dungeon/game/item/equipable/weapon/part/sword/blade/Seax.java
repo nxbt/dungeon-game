@@ -6,7 +6,7 @@ import com.dungeon.game.world.World;
 public class Seax extends SwordBlade {
 
 	public Seax(World world, int level) {
-		super(world, "Seax", SPRITES[8], level);
+		super(world, "Seax Blade", SPRITES[8], level);
 		id = 0;
 		allowedSwings = new String[]{
 			"Chop",
@@ -26,5 +26,8 @@ public class Seax extends SwordBlade {
 		weight = getStat(13.5f,1.8f);
 		numSwings = 2;
 	}
-
+	
+	public String getName() {
+		return "Seax";
+	}
 }

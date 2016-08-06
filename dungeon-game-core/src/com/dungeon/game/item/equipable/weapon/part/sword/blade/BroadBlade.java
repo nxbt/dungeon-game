@@ -25,5 +25,8 @@ public class BroadBlade extends SwordBlade {
 		weight = getStat(13,4);
 		numSwings = 3;
 	}
-
+	
+	public String getName() {
+		return "Broad Sword";
+	}
 }

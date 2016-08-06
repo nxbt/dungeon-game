@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 
 public class Scimitar extends SwordBlade {
 	public Scimitar(World world, int level) {
-		super(world, "Scimitar", SPRITES[3], level);
+		super(world, "Scimitar Blade", SPRITES[3], level);
 		id = 0;
 		allowedSwings = new String[]{
 			"Slash",
@@ -26,5 +26,8 @@ public class Scimitar extends SwordBlade {
 		weight = getStat(11.3f,1.7f);
 		numSwings = 2;
 	}
-
+	
+	public String getName() {
+		return "Scimitar";
+	}
 }
