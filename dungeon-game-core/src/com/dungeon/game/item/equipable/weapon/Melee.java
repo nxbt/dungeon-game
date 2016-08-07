@@ -45,7 +45,11 @@ public abstract class Melee extends Weapon {
 	public void hit(Character c) {
 		swings.hit(c);
 	}
-
+	
+	public void knockback(Character c) {
+		swings.knockback(c);
+	}
+	
 	public void reset() {
 		swings.reset();
 	}

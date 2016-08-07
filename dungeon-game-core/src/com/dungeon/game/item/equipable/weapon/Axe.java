@@ -46,7 +46,6 @@ public class Axe extends Melee {
 		spr.drawPixmap(bladeMap, 0, 0);
 		spr.drawPixmap(tipMap, 0, 0);
 		sprite = new Texture(spr);
-//		spr.dispose();
 		
 		name = blade.name;
 		

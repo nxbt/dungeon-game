@@ -98,6 +98,11 @@ public class SwingSet{
 		weapon.hasHit = swings[curSwing].hasHit; //update hasHit
 	}
 	
+	public void knockback(Character c){ //called when the weapon hits a weapon
+		swings[curSwing].knockback(c); //call the swing's hit function
+		weapon.hasHit = swings[curSwing].hasHit; //update hasHit
+	}
+	
 	public void setWorld(World w){ //set the world, not sure if this function is neccicary, but using it for now due to use of static variable
 		world = w; //update the world
 		for(int i = 0; i < swings.length; i++)swings[i].world = w; //update all the swings worlds
