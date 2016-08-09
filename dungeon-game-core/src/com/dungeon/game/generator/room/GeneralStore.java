@@ -17,14 +17,14 @@ import com.dungeon.game.world.World;
 
 public class GeneralStore extends Room {
 
-	public GeneralStore(World world, Rectangle roomBase, int[] doorFinder, TileMap tileMap) {
+	public GeneralStore(World world, Rectangle roomBase, int[][] doorFinder, TileMap tileMap) {
 		super(world, roomBase, doorFinder, tileMap);
 	}
 
 	@Override
 	public void generate() {//begin transformation
-		int doorX =  doorPos[0];
-		int doorY = doorPos[1];
+		int doorX =  doorPos[0][0];
+		int doorY = doorPos[0][1];
 		
 		boolean keeperBottom = Math.random()>0.5;
 		if(doorY == 0)keeperBottom = true;

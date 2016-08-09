@@ -15,11 +15,11 @@ public abstract class Room {
 	
 	public ArrayList<Entity> entities;
 	
-	protected int[] doorFinder;
+	protected int[][] doorFinder;
 	
 	protected boolean[][] occupiedTiles;
 	
-	protected int[] doorPos;
+	protected int[][] doorPos;
 	
 	public int x;
 	public int y;
@@ -28,14 +28,14 @@ public abstract class Room {
 	
 	World world;
 	
-	public Room(World world, Rectangle roomBase, int[] doorFinder, TileMap tileMap){
+	public Room(World world, Rectangle roomBase, int[][] doorFinder, TileMap tileMap){
 		this.world = world;
 		x = (int) roomBase.x;
 		y = (int) roomBase.y;
 		this.roomBase = roomBase;
 		this.room = new Tile[(int) roomBase.height][(int) roomBase.width];
 		this.doorFinder = doorFinder;
-		doorPos = new int[2];
+		doorPos = new int[1][2];
 		entities = new ArrayList<Entity>();
 		this.tileMap = tileMap;
 		rotate();
@@ -46,25 +46,25 @@ public abstract class Room {
 	public abstract void generate();
 	
 	private void rotate(){
-		if(doorFinder[0]==2||doorFinder[0]==3){
+		if(doorFinder[0][0]==2||doorFinder[0][0]==3){
 			room = new Tile[(int) room[0].length][(int) room.length];
 			occupiedTiles = new boolean[room.length][room[0].length];
-			doorPos[0] = 0;
-			doorPos[1] = (int) (doorFinder[1]-x);
+			doorPos[0][0] = 0;
+			doorPos[0][1] = (int) (doorFinder[0][1]-x);
 		}
 		else {
 			room = new Tile[(int) room.length][(int) room[0].length];
 			occupiedTiles = new boolean[room.length][room[0].length];
-			doorPos[0] = 0;
-			doorPos[1] = (int) (doorFinder[2]- y);
+			doorPos[0][0] = 0;
+			doorPos[0][1] = (int) (doorFinder[0][2]- y);
 		}
 	}
 	
 	private void unrotate(){
-		if(doorFinder[0]==1||doorFinder[0]==3){
+		if(doorFinder[0][0]==1||doorFinder[0][0]==3){
 			Tile[][] temp = room.clone();
 			
-			if(doorFinder[0]==1) room = new Tile[(int) roomBase.height][(int) roomBase.width];
+			if(doorFinder[0][0]==1) room = new Tile[(int) roomBase.height][(int) roomBase.width];
 			else room = new Tile[(int) roomBase.width][(int) roomBase.height];
 			
 			for(int i = 0; i < temp.length; i++){
@@ -79,7 +79,7 @@ public abstract class Room {
 			}
 		}
 		
-		if(doorFinder[0]==2||doorFinder[0]==3){
+		if(doorFinder[0][0]==2||doorFinder[0][0]==3){
 			Tile[][] temp = room.clone();
 			room = new Tile[(int) roomBase.height][(int) roomBase.width];
 			for(int i = 0; i < temp.length; i++){

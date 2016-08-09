@@ -17,15 +17,15 @@ import com.dungeon.game.world.World;
 
 public class Quarters extends Room {
 
-	public Quarters(World world, Rectangle roomBase, int[] doorFinder, TileMap tileMap) {
+	public Quarters(World world, Rectangle roomBase, int[][] doorFinder, TileMap tileMap) {
 		super(world, roomBase, doorFinder, tileMap);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void generate() {
-		int doorX =  doorPos[0];
-		int doorY = doorPos[1];
+		int doorX =  doorPos[0][0];
+		int doorY = doorPos[0][1];
 		
 		//spawn stuff
 		int x = 0,y = 0;

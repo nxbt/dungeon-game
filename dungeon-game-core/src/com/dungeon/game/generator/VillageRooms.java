@@ -531,24 +531,24 @@ public class VillageRooms extends Generation {
 		}
 		
 		Rectangle stairRect = specialRooms.remove((int) (specialRooms.size()*Math.random()));
-		int[] stairDoorFinder = findDoor(stairRect);
+		int[][] stairDoorFinder = findDoors(stairRect);
 		Room stairRoom = new StairRoom(world, stairRect, stairDoorFinder, tileMap);
 		stairRoom.addToMap(map, entities);
 		
 		Rectangle storeRect = specialRooms.remove((int) (specialRooms.size()*Math.random()));
-		int[] storeDoorFinder = findDoor(storeRect);
+		int[][] storeDoorFinder = findDoors(storeRect);
 		Room storeRoom = new GeneralStore(world, storeRect, storeDoorFinder, tileMap);
 		storeRoom.addToMap(map, entities);
 		
 		Rectangle trainingRect = specialRooms.remove((int) (specialRooms.size()*Math.random()));
-		int[] trainingDoorFinder = findDoor(trainingRect);
+		int[][] trainingDoorFinder = findDoors(trainingRect);
 		Room trainingRoom = new TrainingCenter(world, trainingRect, trainingDoorFinder, tileMap);
 		trainingRoom.addToMap(map, entities);
 		
 		while(specialRooms.size()>0){
 			
 			Rectangle quartersRect = specialRooms.remove((int) (specialRooms.size()*Math.random()));
-			int[] quartersDoorFinder = findDoor(quartersRect);
+			int[][] quartersDoorFinder = findDoors(quartersRect);
 			Room quartersRoom = new Quarters(world, quartersRect, quartersDoorFinder, tileMap);
 			quartersRoom.addToMap(map, entities);
 		}
@@ -569,14 +569,16 @@ public class VillageRooms extends Generation {
 	//carpet (tile)
 	//other decerative entities (sculptures, etc)
 	
-	private int[] findDoor(Rectangle room){
+	private int[][] findDoors(Rectangle room){
+		ArrayList<int[]> doors = new ArrayList<int[]>();
 		int x,y;
 		x = (int) room.x-1;
 		y = (int) room.y;
 		for(int i = 0; i < room.height; i++){
 			if(map[y][x].id==0){
-				map[y][x]=tileMap.getTile(5);
-				return new int[]{0,x,y};
+//				map[y][x]=tileMap.getTile(5);
+//				return new int[]{0,x,y};
+				doors.add(new int[]{0,x,y});
 			}
 
 			y++;
@@ -585,8 +587,9 @@ public class VillageRooms extends Generation {
 		y = (int) room.y;
 		for(int i = 0; i < room.height; i++){
 			if(map[y][x].id==0){
-				map[y][x]=tileMap.getTile(5);
-				return new int[]{1,x,y};
+//				map[y][x]=tileMap.getTile(5);
+//				return new int[]{1,x,y};
+				doors.add(new int[]{1,x,y});
 			}
 
 			y++;
@@ -595,8 +598,9 @@ public class VillageRooms extends Generation {
 		y = (int) room.y-1;
 		for(int i = 0; i < room.width; i++){
 			if(map[y][x].id==0){
-				map[y][x]=tileMap.getTile(5);
-				return new int[]{2,x,y};
+//				map[y][x]=tileMap.getTile(5);
+//				return new int[]{2,x,y};
+				doors.add(new int[]{2,x,y});
 			}
 
 			x++;
@@ -605,13 +609,14 @@ public class VillageRooms extends Generation {
 		y = (int) (room.y+room.height);
 		for(int i = 0; i < room.width; i++){
 			if(map[y][x].id==0){
-				map[y][x]=tileMap.getTile(5);
-				return new int[]{3,x,y};
+//				map[y][x]=tileMap.getTile(5);
+//				return new int[]{3,x,y};
+				doors.add(new int[]{3,x,y});
 			}
 
 			x++;
 		}
-		
-		return null;
+		int[][] ds = doors.toArray(new int[2][]);
+		return ds;
 	}
 }
