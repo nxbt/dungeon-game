@@ -58,6 +58,30 @@ public abstract class Room {
 			doorPos[0][0] = 0;
 			doorPos[0][1] = (int) (doorFinder[0][2]- y);
 		}
+		
+		//find doors
+		
+		if(doorFinder[0][0]==2||doorFinder[0][0]==3){
+			for(int[] i: doorFinder){
+				int[] temp = new int[3];
+				temp[0] = i[0];
+				temp[1] = i[1];
+				temp[2] = i[2];
+				i[1] = temp[2];
+				i[2] = temp[1];
+			}
+		}
+		
+		if(doorFinder[0][0]==1||doorFinder[0][0]==3){
+			for(int[] i: doorFinder){
+				int[] temp = new int[3];
+				temp[0] = i[0];
+				temp[1] = i[1];
+				temp[2] = i[2];
+				i[1] = room[1].length-1-temp[1];
+				i[2] = temp[2];
+			}
+		}
 	}
 	
 	private void unrotate(){

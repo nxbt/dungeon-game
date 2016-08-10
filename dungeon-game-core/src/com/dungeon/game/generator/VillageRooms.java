@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.furniture.Stair;
+import com.dungeon.game.generator.room.Alter;
 import com.dungeon.game.generator.room.GeneralStore;
 import com.dungeon.game.generator.room.Quarters;
 import com.dungeon.game.generator.room.Room;
@@ -39,6 +40,7 @@ public class VillageRooms extends Generation {
 			generateStartRoom(centerX, centerY);
 		}while(specialRooms.size() < 3);
 		populateSpecialRooms();
+		populateNormRooms();
 		
 		makeWalls(10, 11, 12, 13, 14);
 	}
@@ -556,6 +558,12 @@ public class VillageRooms extends Generation {
 	
 	//will be used to populate non-special rooms
 	private void populateNormRooms(){
+		while(normRooms.size()>0){
+			Rectangle altersRect = normRooms.remove((int) (specialRooms.size()*Math.random()));
+			int[][] altersDoorFinder = findDoors(altersRect);
+			Room altersRoom = new Alter(world, altersRect, altersDoorFinder, tileMap);
+			altersRoom.addToMap(map, entities);
+		}
 		
 	}
 	
@@ -616,7 +624,9 @@ public class VillageRooms extends Generation {
 
 			x++;
 		}
-		int[][] ds = doors.toArray(new int[2][]);
+		System.out.println(doors.size());
+		int[][] ds = doors.toArray(new int[doors.size()][3]);
+		System.out.println(ds.length);
 		return ds;
 	}
 }
