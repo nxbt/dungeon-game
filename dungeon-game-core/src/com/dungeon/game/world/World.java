@@ -1,6 +1,7 @@
 package com.dungeon.game.world;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -141,7 +142,22 @@ public class World {
 		cam.update();
 		mouse.update();
 		descBox.update();
-		
+//		class layerComparator implements Comparator {
+//
+//			@Override
+//			public int compare(Object arg0, Object arg1) {
+//				return 0;
+//			}
+//			
+//		}
+		entities.sort(new Comparator<Entity>(){
+
+			@Override
+			public int compare(Entity o1, Entity o2) {
+				return (""+o2.layer).compareTo(""+o1.layer);
+			}
+			
+		});
 		for(int i = 0; i < entities.size(); i++) {
 			entities.get(i).update();
 		}

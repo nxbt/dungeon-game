@@ -12,6 +12,7 @@ public class Torch extends Static {
 
 	public Torch(World world, float x, float y, int orientation) {
 		super(world, x, y, 16, 4, "torch.png");
+		layer = 3;
 Pixmap tempMap = new Pixmap(16, 4, Pixmap.Format.RGB888);
 		
 		if(!textures[0].getTextureData().isPrepared()) textures[0].getTextureData().prepare();

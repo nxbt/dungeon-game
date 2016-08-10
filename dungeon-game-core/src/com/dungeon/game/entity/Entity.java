@@ -10,6 +10,11 @@ import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.World;
 
 public abstract class Entity {
+
+	private static final int FLOOR = 0;
+	private static final int PERSON = 1;
+	private static final int HANDHELD = 2;
+	private static final int ROOF = 3;
 	
 	public float x;
 	public float y;
@@ -46,6 +51,8 @@ public abstract class Entity {
 	
 	public World world;
 	
+	public int layer;
+	
 	public Entity(World world, float x, float y, int width, int height, String filename) {
 		this.x = x;
 		this.y = y;
@@ -59,6 +66,8 @@ public abstract class Entity {
 		d_height = height;
 		
 		this.killMe = false;
+		
+		layer = 1;
 	}
 	
 	public void update() {

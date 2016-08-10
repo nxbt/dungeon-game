@@ -15,6 +15,7 @@ public abstract class Projectile extends Dynamic {
 	
 	public Projectile(World world, float x, float y, float angle, float power, Polygon hitbox, float originX, float originY, int range, int width, int height, String filename) {
 		super(world, x, y, width, height, filename);
+		layer = 2;
 		
 		solid = false;
 		
