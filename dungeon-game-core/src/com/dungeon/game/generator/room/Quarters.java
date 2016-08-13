@@ -32,10 +32,10 @@ public class Quarters extends Room {
 		
 		entities.add(new Villager(world,1*Tile.TS,1*Tile.TS));
 		
-		addToOccupied(doorY,0);
-		addToOccupied(doorY,1);
-		addToOccupied(doorY+1,0);
-		addToOccupied(doorY-1,0);
+		addToOccupied(0, doorY);
+		addToOccupied(1, doorY);
+		addToOccupied(0, doorY+1);
+		addToOccupied(0, doorY-1);
 		 //spawn bed
 		int bedOrientation = (int)(Math.random()*4);
 		int bedX = 0, bedY = 0;
@@ -51,10 +51,10 @@ public class Quarters extends Room {
 			x+=Tile.TS;
 			y*=Tile.TS;
 			y+=Tile.TS/2;
-			addToOccupied(bedY,bedX);
-			addToOccupied(bedY,bedX+1);
-			addToOccupied(bedY+1,bedX+1);
-			addToOccupied(bedY-1,bedX+1);
+			addToOccupied(bedX, bedY);
+			addToOccupied(bedX+1, bedY);
+			addToOccupied(bedX+1, bedY+1);
+			addToOccupied(bedX+1, bedY-1);
 		}else if(bedOrientation == 1){
 			x = (int) (Math.random()*room[0].length);
 			if(doorY < 2){
@@ -69,10 +69,10 @@ public class Quarters extends Room {
 			x+=Tile.TS/2;
 			y*=Tile.TS;
 			y+=Tile.TS;
-			addToOccupied(bedY,bedX);
-			addToOccupied(bedY+1,bedX);
-			addToOccupied(bedY+1,bedX+1);
-			addToOccupied(bedY+1,bedX-1);
+			addToOccupied(bedX, bedY);
+			addToOccupied(bedX, bedY+1);
+			addToOccupied(bedX+1, bedY+1);
+			addToOccupied(bedX-1, bedY+1);
 		}else if(bedOrientation == 2){
 			x = room[0].length-1;
 			y = (int) (Math.random()*room.length);
@@ -81,10 +81,10 @@ public class Quarters extends Room {
 			x*=Tile.TS;
 			y*=Tile.TS;
 			y+=Tile.TS/2;
-			addToOccupied(bedY,bedX);
-			addToOccupied(bedY,bedX-1);
-			addToOccupied(bedY+1,bedX-1);
-			addToOccupied(bedY-1,bedX-1);
+			addToOccupied(bedX, bedY);
+			addToOccupied(bedX-1, bedY);
+			addToOccupied(bedX-1, bedY+1);
+			addToOccupied(bedX-1, bedY-1);
 		}else if(bedOrientation == 3){
 			x = (int) (Math.random()*room[0].length);
 			if(doorY > room.length - 3){
@@ -98,10 +98,10 @@ public class Quarters extends Room {
 			x*=Tile.TS;
 			x+=Tile.TS/2;
 			y*=Tile.TS;
-			addToOccupied(bedY,bedX);
-			addToOccupied(bedY-1,bedX);
-			addToOccupied(bedY-1,bedX+1);
-			addToOccupied(bedY-1,bedX-1);
+			addToOccupied(bedX, bedY);
+			addToOccupied(bedX, bedY-1);
+			addToOccupied(bedX+1, bedY-1);
+			addToOccupied(bedX-1, bedY-1);
 		}
 		if(bedOrientation == 0)bedOrientation = 3;
 		else if(bedOrientation == 1)bedOrientation = 2;
@@ -130,7 +130,7 @@ public class Quarters extends Room {
 		
 		entities.add(new SmallTable(world,potentialTableSpots.get(tableSpot)[1]*Tile.TS+Tile.TS/2,potentialTableSpots.get(tableSpot)[0]*Tile.TS+Tile.TS/2));
 		
-		addToOccupied(potentialTableSpots.get(tableSpot)[0],potentialTableSpots.get(tableSpot)[1]);
+		addToOccupied(potentialTableSpots.get(tableSpot)[1],potentialTableSpots.get(tableSpot)[0]);
 		
 		//spawn dresser
 		int attempts = 0;
@@ -145,8 +145,8 @@ public class Quarters extends Room {
 					if(!checkOccupied(0, i)&&!checkOccupied(0, i+1)){
 						placedDresser = true;
 						dresserPos = new int[]{i,0};
-						addToOccupied(dresserPos[0], dresserPos[1]);
-						addToOccupied(i+1,0);
+						addToOccupied(dresserPos[1], dresserPos[0]);
+						addToOccupied(0,i+1);
 						break;
 					}
 				}
@@ -155,8 +155,8 @@ public class Quarters extends Room {
 					if(!checkOccupied(i, 0)&&!checkOccupied(i+1, 0)){
 						placedDresser = true;
 						dresserPos = new int[]{0,i};
-						addToOccupied(dresserPos[0], dresserPos[1]);
-						addToOccupied(0,i+1);
+						addToOccupied(dresserPos[1], dresserPos[0]);
+						addToOccupied(i+1, 0);
 						break;
 					}
 				}
@@ -165,8 +165,8 @@ public class Quarters extends Room {
 					if(!checkOccupied(room[0].length-1, i)&&!checkOccupied(room[0].length-1, i+1)){
 						placedDresser = true;
 						dresserPos = new int[]{i,room[0].length-1};
-						addToOccupied(dresserPos[0], dresserPos[1]);
-						addToOccupied(i+1,room[0].length-1);
+						addToOccupied(dresserPos[1], dresserPos[0]);
+						addToOccupied(room[0].length-1, i+1);
 						break;
 					}
 				}
@@ -175,8 +175,8 @@ public class Quarters extends Room {
 					if(!checkOccupied(i, room.length-1)&&!checkOccupied(i+1, room.length-1)){
 						placedDresser = true;
 						dresserPos = new int[]{room.length-1,i};
-						addToOccupied(dresserPos[0], dresserPos[1]);
-						addToOccupied(room.length-1,i+1);
+						addToOccupied(dresserPos[1], dresserPos[0]);
+						addToOccupied(i+1, room.length-1);
 						break;
 					}
 				}
@@ -201,7 +201,7 @@ public class Quarters extends Room {
 					if(!checkOccupied(0, i)){
 						placedFirepalce = true;
 						fireplacePos = new int[]{i,0};
-						addToOccupied(fireplacePos[0], fireplacePos[1]);
+						addToOccupied(fireplacePos[1], fireplacePos[0]);
 						fireplacePos[1]--;
 						break;
 					}
@@ -211,7 +211,7 @@ public class Quarters extends Room {
 					if(!checkOccupied(i, 0)){
 						placedFirepalce = true;
 						fireplacePos = new int[]{0,i};
-						addToOccupied(fireplacePos[0], fireplacePos[1]);
+						addToOccupied(fireplacePos[1], fireplacePos[0]);
 						fireplacePos[0]--;
 						break;
 					}
@@ -221,7 +221,7 @@ public class Quarters extends Room {
 					if(!checkOccupied(room[0].length-1, i)){
 						placedFirepalce = true;
 						fireplacePos = new int[]{i,room[0].length-1};
-						addToOccupied(fireplacePos[0], fireplacePos[1]);
+						addToOccupied(fireplacePos[1], fireplacePos[0]);
 						fireplacePos[1]++;
 						break;
 					}
@@ -231,7 +231,7 @@ public class Quarters extends Room {
 					if(!checkOccupied(i, room.length-1)){
 						placedFirepalce = true;
 						fireplacePos = new int[]{room.length-1,i};
-						addToOccupied(fireplacePos[0], fireplacePos[1]);
+						addToOccupied(fireplacePos[1], fireplacePos[0]);
 						fireplacePos[0]++;
 						break;
 					}

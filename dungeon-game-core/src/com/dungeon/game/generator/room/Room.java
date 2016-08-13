@@ -35,7 +35,7 @@ public abstract class Room {
 		this.roomBase = roomBase;
 		this.room = new Tile[(int) roomBase.height][(int) roomBase.width];
 		this.doorFinder = doorFinder;
-		doorPos = new int[1][2];
+		doorPos = new int[doorFinder.length][2];
 		entities = new ArrayList<Entity>();
 		this.tileMap = tileMap;
 		rotate();
@@ -60,31 +60,36 @@ public abstract class Room {
 		}
 		
 		//find doors
+		for(int i = 0; i < doorFinder.length; i++){
+			doorPos[i][0] = doorFinder[i][1]-x;
+			doorPos[i][1] = doorFinder[i][2]-y;
+		}
 		
 		if(doorFinder[0][0]==2||doorFinder[0][0]==3){
-			for(int[] i: doorFinder){
-				int[] temp = new int[3];
-				temp[0] = i[0];
-				temp[1] = i[1];
-				temp[2] = i[2];
-				i[1] = temp[2];
-				i[2] = temp[1];
+			for(int i = 0; i < doorFinder.length; i++){
+				int temp = doorPos[i][0];
+				doorPos[i][0] = doorPos[i][1];
+				doorPos[i][1] = temp;
 			}
 		}
 		
 		if(doorFinder[0][0]==1||doorFinder[0][0]==3){
-			for(int[] i: doorFinder){
-				int[] temp = new int[3];
-				temp[0] = i[0];
-				temp[1] = i[1];
-				temp[2] = i[2];
-				i[1] = room[1].length-1-temp[1];
-				i[2] = temp[2];
+			for(int i = 0; i < doorFinder.length; i++){
+				doorPos[i][0] = room[1].length-1-doorPos[i][0];
 			}
 		}
 	}
 	
 	private void unrotate(){
+		System.out.println(occupiedTiles.length);
+		System.out.println(room.length);
+		System.out.println(occupiedTiles[0].length);
+		System.out.println(room[0].length);
+		for(int i = 0; i < room.length; i++){
+			for(int k = 0; k < room[0].length; k++){
+				if(checkOccupied(k, i))room[i][k] = tileMap.getTile(6);
+			}
+		}
 		if(doorFinder[0][0]==1||doorFinder[0][0]==3){
 			Tile[][] temp = room.clone();
 			

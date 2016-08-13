@@ -624,9 +624,7 @@ public class VillageRooms extends Generation {
 
 			x++;
 		}
-		System.out.println(doors.size());
 		int[][] ds = doors.toArray(new int[doors.size()][3]);
-		System.out.println(ds.length);
 		return ds;
 	}
 }

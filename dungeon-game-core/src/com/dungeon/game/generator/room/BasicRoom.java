@@ -9,7 +9,6 @@ import com.dungeon.game.world.TileMap;
 import com.dungeon.game.world.World;
 
 public class BasicRoom extends Room {
-	int[][] doorPos;
 
 	public BasicRoom(World world, Rectangle roomBase, int[][] doorFinder, TileMap tileMap) {
 		super(world, roomBase, doorFinder, tileMap);
@@ -18,10 +17,7 @@ public class BasicRoom extends Room {
 
 	@Override
 	public void generate() {
-		doorPos = new int[doorFinder.length][2];
-		for(int i = 0; i < doorFinder.length; i++){
-			doorPos[i][0] = doorFinder[i][1];
-			doorPos[i][1] = doorFinder[i][2];
+		for(int i = 0; i < doorPos.length; i++){
 			addToOccupied(doorPos[i][0]+1, doorPos[i][1]);
 			addToOccupied(doorPos[i][0]-1, doorPos[i][1]);
 			addToOccupied(doorPos[i][0], doorPos[i][1]+1);
