@@ -30,6 +30,7 @@ public class Light {
 	private int curFlick;
 	private int offX;
 	private int offY;
+	private boolean isOn;
 	
 	//point light with color
 	public Light(World world, float x, float y, int strength, int rays, Color color, int flickerAmount, Entity ent){
@@ -42,6 +43,7 @@ public class Light {
 		light.remove(false);
 		offX = 0;
 		offY = 0;
+		isOn = false;
 	}
 	//point light without color
 	public Light(World world, float x, float y, int strength, int rays, int flickerAmount, Entity ent){
@@ -54,6 +56,7 @@ public class Light {
 		light.remove(false);
 		offX = 0;
 		offY = 0;
+		isOn = false;
 	}
 	//cone light with color
 	public Light(World world, float x, float y, int strength, int rays, Color color, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
@@ -67,6 +70,7 @@ public class Light {
 		light.remove(false);
 		offX = 0;
 		offY = 0;
+		isOn = false;
 	}
 	//cone light without color
 	public Light(World world, float x, float y, int strength, int rays, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
@@ -80,6 +84,7 @@ public class Light {
 		light.remove(false);
 		offX = 0;
 		offY = 0;
+		isOn = false;
 	}
 	
 	public void update(){
@@ -104,10 +109,14 @@ public class Light {
 	
 	public void load(){
 		light.add(world.rayHandler);
+		isOn = true;
 	}
 	
 	public void unload(){
-		light.remove(false);
+		if(isOn){
+			light.remove(false);
+			isOn = false;
+		}
 	}
 	
 	
@@ -122,6 +131,7 @@ public class Light {
 		light.remove(false);
 		offX = 0;
 		offY = 0;
+		isOn = false;
 	}
 	//point light with color
 	public void changeLight(int x, int y, int strength, int rays, int flickerAmount, Entity ent){
@@ -134,6 +144,7 @@ public class Light {
 		light.remove(false);
 		offX = 0;
 		offY = 0;
+		isOn = false;
 	}
 	
 	//cone light with color
@@ -148,6 +159,7 @@ public class Light {
 		light.remove(false);
 		offX = 0;
 		offY = 0;
+		isOn = false;
 	}
 	//cone light with color
 	public void changeLight(int x, int y, int strength, int rays, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
@@ -161,6 +173,7 @@ public class Light {
 		light.remove(false);
 		offX = 0;
 		offY = 0;
+		isOn = false;
 	}
 	
 
