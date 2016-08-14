@@ -3,6 +3,7 @@ package com.dungeon.game.generator.room;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.furniture.Carpet;
+import com.dungeon.game.entity.furniture.Lamp;
 import com.dungeon.game.entity.furniture.Torch;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.TileMap;
@@ -56,6 +57,7 @@ public class BasicRoom extends Room {
 				addToOccupied(x, y);
 			}
 		}
+		entities.add(new Lamp(world, room[0].length/2f*Tile.TS,room.length/2f*Tile.TS));
 		entities.add(new Carpet(world,room[0].length/2f*Tile.TS,room.length/2f*Tile.TS,room[0].length*2-2,room.length*2-2, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f)));
 		
 		

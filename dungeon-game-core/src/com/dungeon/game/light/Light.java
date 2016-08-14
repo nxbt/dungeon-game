@@ -11,6 +11,7 @@ import box2dLight.PositionalLight;
 
 public class Light {
 
+	public static final Color WHITE = new Color(1,1,1,1);
 	public static final Color RED = new Color(1,0.7f,0.7f,1);
 	public static final Color GREEN = new Color(0.7f,1,0.7f,1);
 	public static final Color BLUE = new Color(0.7f,0.7f,1,1);

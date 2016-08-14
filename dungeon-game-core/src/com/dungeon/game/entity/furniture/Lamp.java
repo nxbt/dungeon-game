@@ -2,6 +2,7 @@ package com.dungeon.game.entity.furniture;
 
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.Static;
+import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
 
 public class Lamp extends Static {
@@ -15,7 +16,11 @@ public class Lamp extends Static {
 		origin_x = 16;
 		origin_y = 16;
 		
-		hitbox = new Polygon(new float[]{8,8,24,8,24,24,8,24});
+		layer = 3;
+
+		light = new Light(world, x, y, 150, 100, Light.WHITE, 40, this);
+		
+		hitbox = new Polygon(new float[]{12,12,20,12,20,20,12,20});
 	}
 
 	@Override
