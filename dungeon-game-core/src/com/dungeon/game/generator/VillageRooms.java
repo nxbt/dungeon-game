@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.furniture.Stair;
+import com.dungeon.game.generator.room.BasicRoom;
 import com.dungeon.game.generator.room.GeneralStore;
 import com.dungeon.game.generator.room.Library;
 import com.dungeon.game.generator.room.Quarters;
@@ -558,11 +559,15 @@ public class VillageRooms extends Generation {
 	
 	//will be used to populate non-special rooms
 	private void populateNormRooms(){
+		Rectangle normRoomsRect;
+		int[][] normRoomsDoorFinder;
+		Room normRoom;
 		while(normRooms.size()>0){
-			Rectangle altersRect = normRooms.remove((int) (specialRooms.size()*Math.random()));
-			int[][] altersDoorFinder = findDoors(altersRect);
-			Room altersRoom = new Library(world, altersRect, altersDoorFinder, tileMap);
-			altersRoom.addToMap(map, entities);
+			normRoomsRect = normRooms.remove((int) (specialRooms.size()*Math.random()));
+			normRoomsDoorFinder = findDoors(normRoomsRect);
+			if(Math.random() > 0.5f)normRoom = new BasicRoom(world, normRoomsRect, normRoomsDoorFinder, tileMap);
+			else normRoom = new Library(world, normRoomsRect, normRoomsDoorFinder, tileMap);
+			normRoom.addToMap(map, entities);
 		}
 		
 	}
