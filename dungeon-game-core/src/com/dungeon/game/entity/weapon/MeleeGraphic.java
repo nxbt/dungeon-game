@@ -24,8 +24,10 @@ public class MeleeGraphic extends HandheldGraphic {
 				if(!((Melee)item).hasHit&& !e.equals(this) && !e.equals(item.owner) && (e instanceof Character || e instanceof MeleeGraphic) && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
 					if(e instanceof MeleeGraphic && ((Melee)((MeleeGraphic) e).item).inAttack()) {
 						target = e;
-						System.out.println(((Melee) item).hasHit);
 						((Melee) item).hasHit = true;
+						System.out.println("fuckckk"); 	
+						((Melee) item).knockback(((MeleeGraphic) target).item.owner);
+						((Melee) (((MeleeGraphic)target).item)).knockback(item.owner);
 						break;
 					}
 					else if(Math.sqrt((x-e.x)*(x-e.x)+(y-e.y)*(y-e.y))<distance){
@@ -35,8 +37,7 @@ public class MeleeGraphic extends HandheldGraphic {
 				}
 			}
 		}
-		if(target != null && target instanceof MeleeGraphic)  ((Melee) item).knockback(((MeleeGraphic) target).item.owner);
-		else if(target != null && target instanceof Character) ((Melee) item).hit((Character) target);
+		if(target != null && target instanceof Character) ((Melee) item).hit((Character) target);
 		super.calc();
 	}
 	
