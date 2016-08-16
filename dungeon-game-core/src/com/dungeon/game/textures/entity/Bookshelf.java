@@ -47,8 +47,36 @@ public class Bookshelf extends ProceduralTexture {
 				int bookNum = (int)(2+Math.random()*2);
 				int totalPages = 14 - 2*bookNum;
 				int[] bookWidths = new int[bookNum];
-				while(totalPages > 0){
-					
+				for(int i = (int)(bookNum*Math.random()); totalPages > 0; i = (i == bookNum -1)?0:i+1){
+					if(bookWidths[i] == 0 || Math.random() < 0.3f){
+						bookWidths[i]++;
+						totalPages--;
+					}
+				}
+				//book lengths max 14 min 10
+				int bookLengths = new int[bookNum];
+				for(int i = 0; i < bookLengths.length; i++){
+					bookLengths[i] = (int)(10+Math.random*4);
+				}
+				
+				//asign the colors of the book covers
+				int bookColors = new int[bookNum];
+				for(int i = 0; i < bookColors.length; i++){
+					bookColors[i] = new Color(0.6f+Math.random()*0.4f, 0.6f+Math.random()*0.4f, 0.6f+Math.random()*0.4f, 1);
+				}
+				
+				//draw them books!
+				int x = 1
+				for(int i = 0; i < bookNum; i++){
+					//draw cover
+					shelf.setColor(bookColors[i]);
+					shelf.drawLine(x,1+bookLengths[i],x+2+bookWidths[i],1+bookLengths[i]);
+					shelf.drawLine(x,1,x,1+bookLengths[i]);
+					shelf.drawLine(x+bookWidths[i]+1,1,x+bookWidths[i]+1,1+bookLengths[i]);
+					//draw pages
+					shelf.setColor(Color.WHITE);
+					shelf.drawRectangle(x+1,1, x+1+bookWidths[i], bookLengths[i]);
+					x+=bookWidths[i]+2;
 				}
 			break;
 			case 1:
