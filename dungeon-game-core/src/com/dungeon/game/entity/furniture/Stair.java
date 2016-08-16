@@ -14,6 +14,8 @@ public class Stair extends Static {
 	public Stair(World world, float x, float y, boolean goDown, int destX, int destY) {
 		super(world, x, y, Tile.TS, Tile.TS, "trapdoor.png");
 		
+		layer = 0;
+		
 		this.destX = destX;
 		this.destY = destY;
 		
