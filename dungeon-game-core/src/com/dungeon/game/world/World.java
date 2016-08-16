@@ -71,8 +71,10 @@ public class World {
 	private com.badlogic.gdx.physics.box2d.World emptyWorld;
 	private PointLight emptyWorldLight;
 	
-	Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
+	private Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	public RayHandler rayHandler;
+	
+	private ArrayList<Entity> drawEnts;
 	
 	public World() {
 		Part.doFuckAll(); //Never Forget
@@ -137,7 +139,7 @@ public class World {
 		}
 		CoverFinder.findCover(this, player, entities.get(entities.size() - 4), new int[4], new float[4], true, 10);
 		
-		
+		drawEnts = new ArrayList<Entity>();
 	}
 	
 	public void update() {
@@ -152,14 +154,6 @@ public class World {
 //			}
 //			
 //		}
-		entities.sort(new Comparator<Entity>(){
-
-			@Override
-			public int compare(Entity o1, Entity o2) {
-				return (""+o2.layer).compareTo(""+o1.layer);
-			}
-			
-		});
 		for(int i = 0; i < entities.size(); i++) {
 			entities.get(i).update();
 		}
@@ -206,10 +200,22 @@ public class World {
 		
 		curFloor.draw(batch, this);
 		
-		for(int i = entities.size()-1; i >= 0; i--) {
-			entities.get(i).draw(batch);
+		drawEnts.clear();
+		for(Entity e: entities)drawEnts.add(e);
+
+		drawEnts.sort(new Comparator<Entity>(){
+
+			@Override
+			public int compare(Entity o1, Entity o2) {
+				return (""+o2.layer).compareTo(""+o1.layer);
+			}
+			
+		});
+		
+		for(int i = drawEnts.size()-1; i >= 0; i--) {
+			drawEnts.get(i).draw(batch);
 		}
-		entities.get(entities.size()-1).draw(batch);//have to draw player twice when using lights
+		drawEnts.get(drawEnts.size()-1).draw(batch);//have to draw player twice when using lights
 		
 
 		rayHandler.setCombinedMatrix(cam.cam);
