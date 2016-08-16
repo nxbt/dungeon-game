@@ -34,9 +34,27 @@ public class Bookshelf extends ProceduralTexture {
 		switch(type){
 			case 0:
 				//draw a normal shelf here!
+				shelf.setColor(new Color(0,0,0,1));
+				shelf.drawRectangle(0,0,16,16);
+				shelf.setColor(new Color(99f/ 255f, 37f / 255f, 11f / 255f, 1));
+				shelf.drawLine(0, 0, 16, 0);
+				shelf.drawLine(0, 0, 0, 16);
+				shelf.drawLine(16, 0, 16, 16);
+				//we have 14 pixels to draw books,
+				//each book needs at least 3 pixles (cover, pages, cover)
+				//figure out how to distribute the pixels
+				//max 4 books, min 2
+				int bookNum = (int)(2+Math.random()*2);
+				int totalPages = 14 - 2*bookNum;
+				int[] bookWidths = new int[bookNum];
+				while(totalPages > 0){
+					
+				}
 			break;
 			case 1:
 				//draw an end shelf here!
+				shelf.setColor(new Color(0,0,0,1));
+				shelf.drawRectangle(0,0,16,16);
 			break;
 		}
 	}
