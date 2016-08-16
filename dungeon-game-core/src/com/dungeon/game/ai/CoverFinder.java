@@ -136,6 +136,14 @@ public class CoverFinder {
 				}
 			}
 		}
+		
+		for(int i = 0; i < coverTiles.size(); i++){
+			int[] t = coverTiles.get(i);
+			if(Math.sqrt((danger.x/Tile.TS - t[0])*(danger.x/Tile.TS - t[0])+(danger.y/Tile.TS - t[1])*(danger.y/Tile.TS - t[1])) < 2){
+				coverTiles.remove(i);
+				i--;
+			}
+		}
 		if(coverTiles.size() == 0)return false;
 		else{
 			//figure out which cover tile is best
