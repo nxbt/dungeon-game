@@ -39,7 +39,12 @@ public class Carpet extends ProceduralTexture {
 	}
 	
 	public void generatePlain(Pixmap texMap, int width, int height){
-		Color carpetColor = new Color((float)(0.3f+0.3f*Math.random()),)
+		Color carpetColor = new Color((float)(0.3f+0.3f*Math.random()), (float)(0.3f+0.3f*Math.random()), (float)(0.3f+0.3f*Math.random()), 1);
+		for(int i = 0; i < width; i++){
+			for(int k = 0; k < height; k++){
+				
+			}
+		}
 	}
 	
 	public void generateChecks(Pixmap texMap, int width, int height){
