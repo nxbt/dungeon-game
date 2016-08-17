@@ -15,14 +15,14 @@ public class Stone extends ProceduralTile {
 	};
 
 	public Stone(int seed, int x, int y) {
-		super(new int[]{seed, x, y});
+		super(new Object[]{seed, x, y});
 	}
 
 	@Override
-	public void generateTexture(int[] args) {
-		seed = args[0];
-		x = args[1];
-		y = args[2];
+	public void generateTexture(Object[] args) {
+		seed = (Integer) args[0];
+		x = (Integer) args[1];
+		y = (Integer) args[2];
 		Pixmap texMap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
 		int curX, curY;
 		Random rand = new Random(seed+1);

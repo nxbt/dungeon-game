@@ -12,7 +12,7 @@ public abstract class ProceduralTile extends ProceduralTexture {
 	
 	public int y;
 
-	public ProceduralTile(int[] args) {
+	public ProceduralTile(Object[] args) {
 		super(32, 32, args);
 		// TODO Auto-generated constructor stub
 	}

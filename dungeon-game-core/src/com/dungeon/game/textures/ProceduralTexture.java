@@ -10,12 +10,12 @@ public abstract class ProceduralTexture {
 	
 	public int height;
 	
-	public ProceduralTexture(int width, int height, int args[]){
+	public ProceduralTexture(int width, int height, Object[] args){
 		this.width = width;
 		this.height = height;
 		generateTexture(args);
 	}
 	
-	public abstract void generateTexture(int[] args);
+	public abstract void generateTexture(Object[] args);
 
 }

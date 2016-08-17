@@ -11,7 +11,7 @@ public class Trainer extends Person {
 		super();
 	}
 	
-	public void generateTexture(int args[]){
+	public void generateTexture(Object[] args){
 		super.generateTexture(args);
 		Pixmap texMap = texture.getTextureData().consumePixmap();
 		

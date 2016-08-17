@@ -13,16 +13,16 @@ public class FirePlace extends ProceduralTile {
 	private int timer;
 
 	public FirePlace(int seed, int x, int y, int rotation) {
-		super(new int[]{seed, x, y, rotation});
+		super(new Object[]{seed, x, y, rotation});
 	}
 
 	@Override
-	public void generateTexture(int[] args) {
+	public void generateTexture(Object[] args) {
 		timer = 0;
-		seed = args[0];
-		x = args[1];
-		y = args[2];
-		rotation = args[3];
+		seed = (Integer) args[0];
+		x = (Integer) args[1];
+		y = (Integer) args[2];
+		rotation = (Integer) args[3];
 		outLineMap = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
 		Color activeColor;
 		for(int i = 4; i < 28; i++){

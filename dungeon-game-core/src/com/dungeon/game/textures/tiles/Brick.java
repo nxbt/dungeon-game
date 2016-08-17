@@ -16,19 +16,19 @@ public class Brick extends ProceduralTile {
 	};
 
 	public Brick(int seed, int x, int y, int sides, int corners) {
-		super(new int[]{seed, x, y, sides, corners});
+		super(new Object[]{seed, x, y, sides, corners});
 	}
 
 	@Override
-	public void generateTexture(int[] args) { //have to find a fix for the 1 pixel mortar
-		seed = args[0];
-		x = args[1];
-		y = args[2];
+	public void generateTexture(Object[] args) { //have to find a fix for the 1 pixel mortar
+		seed = (Integer) args[0];
+		x = (Integer) args[1];
+		y = (Integer) args[2];
 		Pixmap texMap = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
 		
 		//variables
-		int sides = args[3];
-		int corners = args[4];
+		int sides = (Integer) args[3];
+		int corners = (Integer) args[4];
 		
 		int curX;
 		int curY;

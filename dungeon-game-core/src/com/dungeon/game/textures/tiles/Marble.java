@@ -8,14 +8,14 @@ import com.dungeon.game.utilities.MathUtils;
 public class Marble extends ProceduralTile {
 
 	public Marble(int seed, int x, int y) {
-		super(new int[]{seed, x, y});
+		super(new Object[]{seed, x, y});
 	}
 
 	@Override
-	public void generateTexture(int[] args) { //randomize color and maybe make tiles smaller?
-		seed = args[0];
-		x = args[1];
-		y = args[2];
+	public void generateTexture(Object[] args) { //randomize color and maybe make tiles smaller?
+		seed = (Integer) args[0];
+		x = (Integer) args[1];
+		y = (Integer) args[2];
 		Pixmap texMap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
 		Color mortarColor = new Color(150f / 255f, 150f / 255f, 150f / 255f, 1);
 		Color tileColor = new Color(218f / 255f, 214f / 255f, 207f / 255f, 1);

@@ -8,12 +8,12 @@ import com.dungeon.game.textures.ProceduralTexture;
 public class Lamp extends ProceduralTexture {
 
 	public Lamp() {
-		super(32, 32, new int[0]);
+		super(32, 32, new Object[0]);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void generateTexture(int[] args) {
+	public void generateTexture(Object[] args) {
 		Pixmap texMap = new Pixmap(32,32,Pixmap.Format.RGBA8888); //create pixmap
 		float shadeRed = (float) Math.random();
 		float shadeGreen = (float) Math.random();

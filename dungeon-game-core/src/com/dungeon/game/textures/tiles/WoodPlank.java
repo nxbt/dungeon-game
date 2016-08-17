@@ -20,18 +20,18 @@ public class WoodPlank extends ProceduralTile {
 	};
 
 	public WoodPlank(int seed, int x, int y, boolean left, boolean right, boolean bot, boolean top) {
-		super(new int[]{seed, x, y, left?1:0, right?1:0, top?1:0, bot?1:0});
+		super(new Object[]{seed, x, y, left?1:0, right?1:0, top?1:0, bot?1:0});
 	}
 
 	@Override
-	public void generateTexture(int[] args) {
-		seed = args[0];
-		x = args[1];
-		y = args[2];
-		boolean left = args[3] == 1;
-		boolean right = args[4] == 1;
-		boolean top = args[5] == 1;
-		boolean bot = args[6] == 1;
+	public void generateTexture(Object[] args) {
+		seed = (Integer) args[0];
+		x = (Integer) args[1];
+		y = (Integer) args[2];
+		boolean left = (Integer) args[3] == 1;
+		boolean right = (Integer) args[4] == 1;
+		boolean top = (Integer) args[5] == 1;
+		boolean bot = (Integer) args[6] == 1;
 		Pixmap texMap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
 		
 		//variables

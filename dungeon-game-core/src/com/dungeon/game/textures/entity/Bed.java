@@ -9,12 +9,12 @@ import com.dungeon.game.utilities.MathUtils;
 public class Bed extends ProceduralTexture {
 	
 	public Bed() {
-		super(64, 32, new int[0]);
+		super(64, 32, new Object[0]);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void generateTexture(int[] args) {
+	public void generateTexture(Object[] args) {
 		
 		int seed = (int) (Math.random()*1000);
 		

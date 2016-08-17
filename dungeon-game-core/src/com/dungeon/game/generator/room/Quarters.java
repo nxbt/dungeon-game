@@ -244,6 +244,10 @@ public class Quarters extends Room {
 		//spawn Carpet
 		entities.add(new Carpet(world,room[0].length/2f*Tile.TS,room.length/2f*Tile.TS,room[0].length*2-2,room.length*2-2, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f)));
 
+		if(checkOccupied(doorPos[0][0]+1, doorPos[0][1]))room[doorPos[0][1]][doorPos[0][0]+1] = tileMap.getTile(7);
+		if(checkOccupied(doorPos[0][0]-1, doorPos[0][1]))room[doorPos[0][1]][doorPos[0][0]-1] = tileMap.getTile(7);
+		if(checkOccupied(doorPos[0][0], doorPos[0][1]+1))room[doorPos[0][1]+1][doorPos[0][0]] = tileMap.getTile(7);
+		if(checkOccupied(doorPos[0][0], doorPos[0][1]-1))room[doorPos[0][1]-1][doorPos[0][0]] = tileMap.getTile(7);
 	}
 
 }

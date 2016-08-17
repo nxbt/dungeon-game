@@ -10,7 +10,7 @@ public class Goon extends Person {
 		super();
 	}
 	
-	public void generateTexture(int args[]){ // not done yet
+	public void generateTexture(Object[] args){ // not done yet
 		super.generateTexture(args);
 		Pixmap texMap = texture.getTextureData().consumePixmap();
 		

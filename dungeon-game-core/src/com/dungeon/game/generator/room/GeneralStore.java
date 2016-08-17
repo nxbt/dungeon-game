@@ -57,15 +57,15 @@ public class GeneralStore extends Room {
 		
 		int[][][] bookMap = new int[1][room[0].length*2][2];
 		for(int i = 0; i < room[0].length*2; i++){
-			if(i == room[0].length*2-1)bookMap[0][i] = new int[]{3,keeperBottom?2:0};
-			else bookMap[0][i] = new int[]{-1,keeperBottom?2:0};
+			if(i == room[0].length*2-1)bookMap[0][i] = new int[]{1,keeperBottom?2:0};
+			else bookMap[0][i] = new int[]{0,keeperBottom?2:0};
 		}
 		entities.add(new Bookshelf(world, bookMap[0].length*8,(keeperBottom?room.length-1+3f/4f:1f/4f)*Tile.TS, bookMap));
 		
 
 		bookMap = new int[room.length*2-6][1][2];
 		for(int i = 0; i < room.length*2-6; i++){
-			bookMap[i][0] = new int[]{-1,3};
+			bookMap[i][0] = new int[]{0,3};
 		}
 		entities.add(new Bookshelf(world, (room[0].length-1f/4f)*Tile.TS,(keeperBottom?room.length-1-bookMap.length/4f+1f/2f:((float)bookMap.length)/4f+1f/2f)*Tile.TS, bookMap));
 		

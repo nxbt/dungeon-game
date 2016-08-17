@@ -8,11 +8,11 @@ import com.dungeon.game.textures.ProceduralTexture;
 public class Person extends ProceduralTexture {
 
 	public Person() {
-		super(32, 32, new int[0]);
+		super(32, 32, new Object[0]);
 	}
 
 	@Override
-	public void generateTexture(int args[]) { //NEED TO ADD NOISE TO EVERYTHING!!!
+	public void generateTexture(Object[] args) { //NEED TO ADD NOISE TO EVERYTHING!!!
 		
 		Pixmap texMap = new Pixmap(32,32,Pixmap.Format.RGBA8888); //create pixmap
 		

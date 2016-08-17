@@ -20,45 +20,48 @@ public class Bookshelf extends Static{
 			if(!textures[i].getTextureData().isPrepared()) textures[i].getTextureData().prepare();
 			textPixmaps[i] = textures[i].getTextureData().consumePixmap();
 		}
-		
+		int[][][] shelfMap = new int[height][width][2];
 		for(int i = 0; i < width; i++) {
 			for(int k = 0; k < height; k++) {
 				int index = 0;
 				int rotation = 0;
 				if(i == 0 && k == 0){
-					index = (int) (Math.random()*3);
+					index = 0;
 					rotation = width>height?0:3;
 				}else if(i == 0 && k == height - 1){
-					index = (int) (Math.random()*3);
+					index = 0;
 					rotation = width>height?2:3;
 				}else if(i == width - 1 && k == 0){
-					index = (int) (Math.random()*3);
+					index = 0;
 					rotation = width>height?0:1;
 				}else if(i == width - 1 && k == height - 1){
-					index = (int) (Math.random()*3);
+					index = 0;
 					rotation = width>height?2:1;
 				}else if(i == 0){
-					index = (int) (Math.random()*3);
+					index = 0;
 					rotation = 3;
 				}else if(i == width-1){
-					index = (int) (Math.random()*3);
+					index = 0;
 					rotation = 1;
 				}else if(k == 0){
-					index = (int) (Math.random()*3);
+					index = 0;
 					rotation = 0;
 				}else if(k == height-1){
-					index = (int) (Math.random()*3);
+					index = 0;
 					rotation = 2;
 				}else{
 					rotation = 0;
-					index = 3;
+					index = 1;
 				}
+				shelfMap[k][i] = new int[]{index, rotation};
 				Pixmap rotated = Spritesheet.rotatePixmap(textPixmaps[index],rotation);
 				tempMap.drawPixmap(rotated, i*16, k*16);
 			}
 		}
 		
 		sprite = new Texture(tempMap);
+		
+		sprite = new com.dungeon.game.textures.entity.Bookshelf(width, height, shelfMap).texture;
 		
 		tempMap.dispose();
 		
@@ -104,6 +107,8 @@ public class Bookshelf extends Static{
 		}
 		
 		sprite = new Texture(tempMap);
+		
+		sprite = new com.dungeon.game.textures.entity.Bookshelf(width, height, shelfMap).texture;
 		
 		tempMap.dispose();
 		
