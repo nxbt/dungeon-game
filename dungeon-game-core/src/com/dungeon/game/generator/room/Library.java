@@ -40,11 +40,6 @@ public class Library extends Room {
 			addToOccupied(room[0].length - 2, room.length - 1);
 			addToOccupied(room[0].length - 1, room.length - 2);
 		}
-
-		if(checkOccupied(doorPos[0][0]+1, doorPos[0][1]))room[doorPos[0][1]][doorPos[0][0]+1] = tileMap.getTile(7);
-		if(checkOccupied(doorPos[0][0]-1, doorPos[0][1]))room[doorPos[0][1]][doorPos[0][0]-1] = tileMap.getTile(7);
-		if(checkOccupied(doorPos[0][0], doorPos[0][1]+1))room[doorPos[0][1]+1][doorPos[0][0]] = tileMap.getTile(7);
-		if(checkOccupied(doorPos[0][0], doorPos[0][1]-1))room[doorPos[0][1]-1][doorPos[0][0]] = tileMap.getTile(7);
 		
 		int x, y;
 		int length;

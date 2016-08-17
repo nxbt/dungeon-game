@@ -40,6 +40,11 @@ public abstract class Room {
 		this.tileMap = tileMap;
 		rotate();
 		generate();
+		//commented code tests doors
+//		if(checkOccupied(doorPos[0][0]+1, doorPos[0][1]))room[doorPos[0][1]][doorPos[0][0]+1] = tileMap.getTile(7);
+//		if(checkOccupied(doorPos[0][0]-1, doorPos[0][1]))room[doorPos[0][1]][doorPos[0][0]-1] = tileMap.getTile(7);
+//		if(checkOccupied(doorPos[0][0], doorPos[0][1]+1))room[doorPos[0][1]+1][doorPos[0][0]] = tileMap.getTile(7);
+//		if(checkOccupied(doorPos[0][0], doorPos[0][1]-1))room[doorPos[0][1]-1][doorPos[0][0]] = tileMap.getTile(7);
 		unrotate();
 	}
 	
@@ -65,17 +70,17 @@ public abstract class Room {
 			doorPos[i][1] = doorFinder[i][2]-y;
 		}
 		
-		if(doorFinder[0][0]==1||doorFinder[0][0]==3){
-			for(int i = 0; i < doorFinder.length; i++){
-				doorPos[i][0] = room[1].length-1-doorPos[i][0];
-			}
-		}
-		
 		if(doorFinder[0][0]==2||doorFinder[0][0]==3){
 			for(int i = 0; i < doorFinder.length; i++){
 				int temp = doorPos[i][0];
 				doorPos[i][0] = doorPos[i][1];
 				doorPos[i][1] = temp;
+			}
+		}
+		
+		if(doorFinder[0][0]==1||doorFinder[0][0]==3){
+			for(int i = 0; i < doorFinder.length; i++){
+				doorPos[i][0] = room[1].length-1-doorPos[i][0];
 			}
 		}
 	}
