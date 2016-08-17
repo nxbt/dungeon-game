@@ -82,7 +82,36 @@ public class Carpet extends ProceduralTexture {
 	}
 	
 	public void generateOrnimental(Pixmap texMap, int width, int height){
+		int backGroundColor = new Color((float)(0.3f+0.3f*Math.random()), (float)(0.3f+0.3f*Math.random()), (float)(0.3f+0.3f*Math.random()), 1);
+		int borderColor = new Color((float)(0.3f+0.3f*Math.random()), (float)(0.3f+0.3f*Math.random()), (float)(0.3f+0.3f*Math.random()), 1);
+		int highLightColor1 = new Color((float)(0.3f+0.3f*Math.random()), (float)(0.3f+0.3f*Math.random()), (float)(0.3f+0.3f*Math.random()), 1);
+		int highLightColor2 = new Color((float)(0.3f+0.3f*Math.random()), (float)(0.3f+0.3f*Math.random()), (float)(0.3f+0.3f*Math.random()), 1);
 		
+		boolean goesUp = height == width?Math.random < 0.5f:height > width;
+		int borderSize = goesUp?width/5:height/5;
+		int noiseSeed = (int)(Math.random()*1000);
+		for(int i = 0; i < width; i++){
+			for(int k = 0; k < height; k++){
+				//so that the ornimental rug reflects across it's axis
+				int actingI = i;
+				if(goesUp && i > width / 2)acingI = width - 1 - i;
+				int actingK = k;
+				if(!goesUp && k > height / 2)acingK = height - 1 - k;
+				if((actingI < borderSize && i < k) || (actingI > width - 1 - borderSize && width - 1 - actingI < actingK)){
+					//left/right border
+					activeColor = borderColor;
+				}else if(actingK < borderSize || actingK > height - 1 - borderSize){
+					//top/bottom border
+					activeColor = borderColor;
+				}else{
+					activeColor = backGroundColor;
+				}
+				Color activeColor;
+				float num = MathUtils.reductiveNoise2d(noiseSeed, i, k, new float[]{8,4,2,1}, new float[]{4,3,2,1});
+				texMap.setColor(new Color(activeColor.r*(0.9f+0.2f*num), activeColor.g*(0.9f+0.2f*num), activeColor.b*(0.9f+0.2f*num), 1));
+				texMap.drawPixel(i, height - 1 - k);
+			}
+		}
 	}
 	
 	public void generateAbstract(Pixmap texMap, int width, int height){
