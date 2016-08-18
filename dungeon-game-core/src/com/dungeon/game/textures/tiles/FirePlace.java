@@ -3,10 +3,11 @@ package com.dungeon.game.textures.tiles;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.dungeon.game.textures.AnimatedTexture;
 import com.dungeon.game.utilities.MathUtils;
 import com.dungeon.game.utilities.Spritesheet;
 
-public class FirePlace extends ProceduralTile {
+public class FirePlace extends ProceduralTile implements AnimatedTexture {
 	
 	private Pixmap outLineMap;
 	private int rotation;

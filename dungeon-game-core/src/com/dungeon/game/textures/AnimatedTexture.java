@@ -1,6 +1,6 @@
-package com.dungeon.game.textures.tiles;
+package com.dungeon.game.textures;
 
 public interface AnimatedTexture {
-      public int timer;
+      public int timer = 0;
       public abstract void update();
 }

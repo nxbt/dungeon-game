@@ -66,6 +66,8 @@ public class Carpet extends Static {
 		
 		sprite = new Texture(tempMap);
 		
+		sprite = new com.dungeon.game.textures.entity.Carpet(width, height, (int) (Math.random()*2)).texture;
+		
 		tempMap.dispose();
 		
 		d_width = sprite.getWidth();
