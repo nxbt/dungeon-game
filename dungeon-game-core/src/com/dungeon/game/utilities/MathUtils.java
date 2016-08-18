@@ -127,7 +127,7 @@ public class MathUtils {
 		
 	}
 	
-	public static float noise3d(int seed, float x, float y, int t, float amp){
+	public static float noise3d(int seed, float x, float y, float t, float amp){
 		float bl = noise1d(getRandomFromSeedAndCords(seed,(int)(x/amp), (int)(y/amp)).nextInt(1000), (int)(t/amp), amp);
 		float tl = noise1d(getRandomFromSeedAndCords(seed,(int)(x/amp), (int)(y/amp+1)).nextInt(1000), (int)(t/amp), amp);
 		float br = noise1d(getRandomFromSeedAndCords(seed,(int)(x/amp+1), (int)(y/amp)).nextInt(1000), (int)(t/amp), amp);
@@ -193,6 +193,16 @@ public class MathUtils {
 		float value = 0;
 		for(int i = 0; i < periods.length; i++){
 			value+=noise2d(seed*(i+1), x, y, periods[i])*amps[i];
+			totalAmp+=amps[i];
+		}
+		return value/totalAmp;
+	}
+	
+	public static float reductiveNoise3d(int seed, float x, float y, float t, float[] periods, float[] amps){
+		float totalAmp  = 0;
+		float value = 0;
+		for(int i = 0; i < periods.length; i++){
+			value+=noise3d(seed*(i+1), x, y, t, periods[i])*amps[i];
 			totalAmp+=amps[i];
 		}
 		return value/totalAmp;

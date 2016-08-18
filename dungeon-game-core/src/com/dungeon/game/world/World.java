@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.dungeon.game.Camera;
 import com.dungeon.game.ai.CoverFinder;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.Mist;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.character.Player;
 import com.dungeon.game.entity.character.enemy.Enemy;
