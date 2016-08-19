@@ -21,6 +21,7 @@ import com.dungeon.game.textures.tiles.Dirt;
 import com.dungeon.game.textures.tiles.Marble;
 import com.dungeon.game.textures.tiles.Stone;
 import com.dungeon.game.textures.tiles.WoodPlank;
+import com.dungeon.game.utilities.Spritesheet;
 
 public class Floor {
 	private static final String DEFAULT = "tilemap.png";
@@ -107,7 +108,11 @@ public class Floor {
 			for(int k = 0;k<tm[i].length;k++) {
 				if(!tm[i][k].textures[0].getTextureData().isPrepared()) tm[i][k].textures[0].getTextureData().prepare();
 				Pixmap temp = tm[i][k].textures[0].getTextureData().consumePixmap();
+				temp = Spritesheet.rotatePixmap(temp, 1);
+				temp = Spritesheet.flipPixmap(temp);
+				temp = Spritesheet.rotatePixmap(temp, 3);
 				tmPixmap.drawPixmap(temp, k*Tile.TS, (i)*Tile.TS);
+				temp.dispose();
 			}
 		}
 		
