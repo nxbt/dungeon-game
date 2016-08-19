@@ -4,4 +4,9 @@ public class BasicHall {
     private BasicHall(ArrayList<int[]> coordinates){
       super(coordinates);
     }
+    
+    
+	public void generate(){
+	    
+	}
 }
