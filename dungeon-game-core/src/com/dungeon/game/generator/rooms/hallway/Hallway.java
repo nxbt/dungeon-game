@@ -26,7 +26,7 @@ public abstract class Hallway {
 		y = coordinates.get(0)[1];
 		cords = new int[coordinates.size()][2];
 		for(int i = 0; i < coordinates.size(); i++){
-			cords[i] = new int[]{coordinates.get(i)[0] - x, coordinates.get(i)[1] - y};
+			cords[i] = new int[]{coordinates.get(i)[0] - x, coordinates.get(i)[1] - y, coordinates.get(i)[2]};
 		}
 		tiles = new Tile[cords.length];
 
