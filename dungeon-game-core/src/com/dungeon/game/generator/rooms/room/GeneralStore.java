@@ -1,4 +1,4 @@
-package com.dungeon.game.generator.room;
+package com.dungeon.game.generator.rooms.room;
 
 import java.util.ArrayList;
 

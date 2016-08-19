@@ -1,4 +1,4 @@
-package com.dungeon.game.generator.room;
+package com.dungeon.game.generator.rooms.room;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.furniture.Bookshelf;
