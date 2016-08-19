@@ -1,5 +1,5 @@
 # dungeon-game
-The is a top-down rougelike-like game written in Java. Currently being worked on by Brendan Thompson adn Ethan  Bull-Vulpe.
+The is a top-down rougelike-like game written in Java. Currently being worked on by Brendan Thompson and Ethan  Bull-Vulpe.
 
 ##TODO high priority (within a week or two):
 * continue proceedurally generated textures
