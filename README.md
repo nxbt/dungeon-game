@@ -1,23 +1,23 @@
 # dungeon-game
 The is a top-down rougelike-like game written in Java. Currently being worked on by Brendan Thompson adn Ethan  Bull-Vulpe.
 
-##TODO high priority (within a week):
+##TODO high priority (within a week or two):
 * continue proceedurally generated textures
 * implement halls and add rooms to non-village dungeons
 * update libGDX
 * change visibity polygons to use DelaunayTriangulator.computeTriangles
 * update wiki pages
 
-##TODO low priority (within a month?):
+##TODO low priority (within a month or two?):
 * continue adding procedural room decoration
 * Add different shops to towns
 * Upload screenshots to wiki
 
-##TODO very low priority (within a couple months?):
+##TODO very low priority (before final release):
 * Add multithreding!
 * Find artist (? still need ?)
 * Add "sounds" that characters can "hear".
-* Flesh out story.
+* Add a story
 * Add more friendlies
 * Add pathing around entities.
 * Add more enemies.
