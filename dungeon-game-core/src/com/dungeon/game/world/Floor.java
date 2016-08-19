@@ -2,6 +2,7 @@ package com.dungeon.game.world;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -27,6 +28,8 @@ public class Floor {
 	public static final TileMap tileMap1 = new TileMap(DEFAULT);
 	
 	public Tile[][] tm;
+	
+	public Texture tmTexture;
 	
 	public ArrayList<int[]> corners;
 	
@@ -61,6 +64,8 @@ public class Floor {
 		Tile[][] map = gen.map;
 		
 		entities = gen.getEntities();
+		
+		//generates textures
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
 				//temp code to test 4 ways
@@ -95,6 +100,19 @@ public class Floor {
 				tm[i][k] = map[i][k];
 			}
 		}
+		
+		Pixmap tmPixmap = new Pixmap(width*Tile.TS, height*Tile.TS, Pixmap.Format.RGBA8888);
+		
+		for(int i = 0;i<tm.length;i++){
+			for(int k = 0;k<tm[i].length;k++) {
+				if(!tm[i][k].textures[0].getTextureData().isPrepared()) tm[i][k].textures[0].getTextureData().prepare();
+				Pixmap temp = tm[i][k].textures[0].getTextureData().consumePixmap();
+				tmPixmap.drawPixmap(temp, k*Tile.TS, (i)*Tile.TS);
+			}
+		}
+		
+		tmTexture = new Texture(tmPixmap);
+		
 		corners = new ArrayList<int[]>();
 		for(int i = 1; i < tm.length;i++){
 			for(int k = 1; k < tm[i].length; k++){
@@ -177,10 +195,6 @@ public class Floor {
 		for(int i = 0; i <tm.length-1; i++){
 			for(int k = 0; k <tm.length-1; k++){
 				if(tm[i][k].data == 1){
-					
-					
-					
-					
 					// Create our body definition
 					BodyDef groundBodyDef =new BodyDef();  
 					// Set its world position
@@ -209,21 +223,23 @@ public class Floor {
 	}
 	
 	public void draw(SpriteBatch batch, World world) {
-		int startHeight = (int) (world.cam.y-world.cam.height/2)/Tile.TS;
-		int endHeight = (int)(world.cam.y+world.cam.height/2)/Tile.TS+1;
-		int startWidth = (int) (world.cam.x-world.cam.width/2)/Tile.TS;
-		int endWidth = (int)(world.cam.x+world.cam.width/2)/Tile.TS+1;
+		int startHeight = (int) (world.cam.y-world.cam.height/2);
+		int endHeight = (int) (world.cam.y+world.cam.height/2);
+		int startWidth = (int) (world.cam.x-world.cam.width/2);
+		int endWidth = (int) (world.cam.x+world.cam.width/2);
 		
 		startHeight = Math.max(startHeight,0);
-		endHeight = Math.min(endHeight,tm.length);
+		endHeight = Math.min(endHeight,tm.length*Tile.TS);
 		startWidth = Math.max(startWidth,0);
-		endWidth = Math.min(endWidth,tm[0].length);
+		endWidth = Math.min(endWidth,tm[0].length*Tile.TS);
 		
-		for(int i = startHeight; i < endHeight; i++){
-			for(int k = startWidth; k < endWidth; k++){
-				batch.draw(tm[i][k].textures[tm[i][k].rotation+(tm[i][k].flip?4:0)], k*Tile.TS, i*Tile.TS);
-			}
-		}
+//		for(int i = startHeight; i < endHeight; i++){
+//			for(int k = startWidth; k < endWidth; k++){
+//				batch.draw(tm[i][k].textures[tm[i][k].rotation+(tm[i][k].flip?4:0)], k*Tile.TS, i*Tile.TS);
+//			}
+//		}
+		
+		batch.draw(tmTexture, startWidth, startHeight, world.cam.width, world.cam.height, startWidth, startHeight, world.cam.width, world.cam.height, false, true);
 	}
 
 	public static void fixBleeding(TextureRegion[] region) {
