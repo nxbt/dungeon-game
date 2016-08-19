@@ -2,9 +2,11 @@
 The is a top-down rougelike-like game written in Java. Currently being worked on by Brendan Thompson adn Ethan  Bull-Vulpe.
 
 ##TODO high priority (within a week):
-* change tilemap rendering to pixmap (we had a reason for this...)
 * continue proceedurally generated textures
+* implement halls and add rooms to non-village dungeons
+* update libGDX
 * change visibity polygons to use DelaunayTriangulator.computeTriangles
+* update wiki pages
 
 ##TODO low priority (within a month?):
 * continue adding procedural room decoration
@@ -28,3 +30,4 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 
 ##BUG TRACKER
 * popups don't close when going down or up a floor
+* pathfinding crashes when navigating from outside an area.
