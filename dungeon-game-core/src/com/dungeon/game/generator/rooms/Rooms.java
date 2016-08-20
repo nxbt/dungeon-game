@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.furniture.Stair;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.LootGenerator;
+import com.dungeon.game.generator.rooms.hallway.BasicHall;
+import com.dungeon.game.generator.rooms.hallway.Hallway;
 import com.dungeon.game.generator.rooms.room.BasicRoom;
 import com.dungeon.game.generator.rooms.room.EnemyRoom;
 import com.dungeon.game.generator.rooms.room.Library;
@@ -54,6 +56,7 @@ public class Rooms extends Generation {
 		};
 		generateStartRoom(centerX, centerY);
 		populateRooms();
+		populateHallWays();
 		generateStairDown();
 		
 		makeWalls(10, 11, 12, 13, 14);
@@ -453,10 +456,10 @@ public class Rooms extends Generation {
 		for(int i = 0; i<height; i++){
 			for(int k = 0; k<width; k++){
 				map[y][x]=tileMap.getTile(4);
-				if(!addedChest&&i>0&&k>0&&i<height-1&&k<width-1&&Math.random()>1f-(1f/((float)width*(float)height))){
-					entities.add(LootGenerator.getChest(world, 1,x,y));
-					addedChest = true;
-				}
+//				if(!addedChest&&i>0&&k>0&&i<height-1&&k<width-1&&Math.random()>1f-(1f/((float)width*(float)height))){
+//					entities.add(LootGenerator.getChest(world, 1,x,y));
+//					addedChest = true;
+//				}
 //				if(hasEnemies && i>-1&&k>-1&&i<height&&k<width&&Math.random()>0.96){
 //					Goon enemy =  new Goon(world, x*Tile.TS+Tile.TS/2f, y*Tile.TS+Tile.TS/2f);
 //					enemy.angle = (float) (180f-Math.random()*360f);
@@ -483,8 +486,17 @@ public class Rooms extends Generation {
 			normRoom = new EnemyRoom(world, normRoomsRect, normRoomsDoorFinder, tileMap);
 			normRoom.addToMap(map, entities);
 		}
-			
-		
+	}
+	
+
+	
+	private void populateHallWays(){
+		ArrayList<ArrayList<int[]>> halls = (ArrayList<ArrayList<int[]>>) this.halls.clone();
+		Hallway hall;
+		while(halls.size()>0){
+			hall = new BasicHall(world, halls.remove((int) (halls.size()*Math.random())), tileMap);
+			hall.addToMap(map, entities);
+		}
 	}
 	
 

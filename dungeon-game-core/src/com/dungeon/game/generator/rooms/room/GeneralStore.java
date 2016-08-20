@@ -1,10 +1,7 @@
 package com.dungeon.game.generator.rooms.room;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
-import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.friend.Shopkeeper;
 import com.dungeon.game.entity.furniture.Bookshelf;
 import com.dungeon.game.entity.furniture.Carpet;
@@ -37,7 +34,6 @@ public class GeneralStore extends Room {
 		}
 		
 		Shopkeeper tempKeeper = new Shopkeeper(world, (room[0].length-1)*Tile.TS+Tile.TS/2, (keeperBottom? 3f/4f:room.length-1+1f/4f)*Tile.TS);
-		tempKeeper.flipX = true;
 		
 		entities.add(tempKeeper);
 		

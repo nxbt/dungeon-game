@@ -7,6 +7,7 @@ import com.dungeon.game.entity.Entity;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.TileMap;
 import com.dungeon.game.world.World;
+import com.dungeon.game.entity.character.Character;
 
 public abstract class Room {
 	public Tile[][] room;
@@ -105,7 +106,11 @@ public abstract class Room {
 			
 			for(Entity e: entities) {
 				e.x = room[0].length*Tile.TS-e.x;
-				e.flipX  = !e.flipX;
+				if(e instanceof Character){
+					e.angle+=180;
+				}else{
+					e.flipX  = !e.flipX;	
+				}
 			}
 		}
 		

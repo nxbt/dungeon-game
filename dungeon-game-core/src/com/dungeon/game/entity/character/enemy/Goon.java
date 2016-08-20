@@ -55,8 +55,6 @@ public class Goon extends Enemy {
 		d_offx = 0;
 		d_offy = 0;
 		
-		light = new Light(world, x, y, 300, 100, 0, this);
-		
 		int[][] invLayout = new int[][] {
 			//consumables
 			new int[] {1, 8, 8},
