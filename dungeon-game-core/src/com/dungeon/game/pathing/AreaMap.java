@@ -138,6 +138,7 @@ public class AreaMap {
 			path = startArea.findPath(tm, start, end);
 		}
 		else if(startArea == null||endArea == null){
+			System.out.println("PATHFINDING ERROR");
 			return start;
 		}else path = findAreaPath(start, end).getTiles(tm);
 		lastPath = path;

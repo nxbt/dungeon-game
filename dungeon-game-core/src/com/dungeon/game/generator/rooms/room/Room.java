@@ -41,7 +41,7 @@ public abstract class Room {
 		this.tileMap = tileMap;
 		rotate();
 		generate();
-		//commented code tests doors
+//		commented code tests doors
 //		if(checkOccupied(doorPos[0][0]+1, doorPos[0][1]))room[doorPos[0][1]][doorPos[0][0]+1] = tileMap.getTile(7);
 //		if(checkOccupied(doorPos[0][0]-1, doorPos[0][1]))room[doorPos[0][1]][doorPos[0][0]-1] = tileMap.getTile(7);
 //		if(checkOccupied(doorPos[0][0], doorPos[0][1]+1))room[doorPos[0][1]+1][doorPos[0][0]] = tileMap.getTile(7);
@@ -87,11 +87,11 @@ public abstract class Room {
 	}
 	
 	private void unrotate(){
-//		for(int i = 0; i < room.length; i++){
-//			for(int k = 0; k < room[0].length; k++){
-//				if(checkOccupied(k, i) && room[i][k] == null)room[i][k] = tileMap.getTile(6);
-//			}
-//		}
+		for(int i = 0; i < room.length; i++){
+			for(int k = 0; k < room[0].length; k++){
+				if(checkOccupied(k, i))room[i][k] = tileMap.getTile(6);
+			}
+		}
 		if(doorFinder[0][0]==1||doorFinder[0][0]==3){
 			Tile[][] temp = room.clone();
 			
