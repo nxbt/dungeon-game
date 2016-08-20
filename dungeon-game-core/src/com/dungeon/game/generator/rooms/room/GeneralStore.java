@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.character.friend.Shopkeeper;
 import com.dungeon.game.entity.furniture.Bookshelf;
 import com.dungeon.game.entity.furniture.Carpet;
+import com.dungeon.game.entity.furniture.Lamp;
 import com.dungeon.game.entity.furniture.Plant;
 import com.dungeon.game.entity.furniture.ShopDesk1;
 import com.dungeon.game.entity.furniture.ShopDesk2;
@@ -89,6 +90,9 @@ public class GeneralStore extends Room {
 			y++;
 			x = 1;
 		}
+		x = room[0].length*Tile.TS/2;
+		y = keeperBottom?Tile.TS/2:room.length*Tile.TS - Tile.TS/2;
+		entities.add(new Lamp(world, x, y));
 		
 		//carpet
 		entities.add(new Carpet(world,room[0].length/2f*Tile.TS-Tile.TS/4,room.length/2f*Tile.TS+(keeperBottom?-Tile.TS/4:Tile.TS/4),2*room[0].length-3,2*room.length-3, new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f)));
