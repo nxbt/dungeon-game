@@ -4,24 +4,27 @@ import java.util.ArrayList;
 
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.world.Tile;
+import com.dungeon.game.world.TileMap;
 
 public abstract class Hallway {
 	
-	private int[][] cords; //chords of the tiles in the hallway
+	public int[][] cords; //chords of the tiles in the hallway
 	
-	private Tile[] tiles; // the tiles in the hallway
+	public Tile[] tiles; // the tiles in the hallway
 	
-	private ArrayList<int[]> additionalChords; //if the hallway modifies any tiles not IN the hallway
+	public ArrayList<int[]> additionalChords; //if the hallway modifies any tiles not IN the hallway
 	
-	private ArrayList<Tile> additionalTiles; //if the hallway modifies any tiles not IN the hallway
+	public ArrayList<Tile> additionalTiles; //if the hallway modifies any tiles not IN the hallway
 	
-	private ArrayList<Entity> entities;
+	public ArrayList<Entity> entities;
 	
-	private int x; //the x of the first tile in the world
+	public TileMap tileMap;
 	
-	private int y; //the y of the first tile in the world
+	public int x; //the x of the first tile in the world
 	
-	private Hallway(ArrayList<int[]> coordinates){
+	public int y; //the y of the first tile in the world
+	
+	public Hallway(ArrayList<int[]> coordinates, TileMap tileMap){
 		x = coordinates.get(0)[0];
 		y = coordinates.get(0)[1];
 		cords = new int[coordinates.size()][2];
@@ -29,7 +32,7 @@ public abstract class Hallway {
 			cords[i] = new int[]{coordinates.get(i)[0] - x, coordinates.get(i)[1] - y, coordinates.get(i)[2]};
 		}
 		tiles = new Tile[cords.length];
-
+		this.tileMap = tileMap;
 		additionalChords = new ArrayList<int[]>();
 		additionalTiles = new ArrayList<Tile>();
 		

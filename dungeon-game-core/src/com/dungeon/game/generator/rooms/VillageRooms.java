@@ -573,6 +573,10 @@ public class VillageRooms extends Generation {
 		
 	}
 	
+	private void populateHallWays(){
+		ArrayList<int[]>[] halls = (ArrayList<int[]>[]) this.halls.toArray();
+	}
+	
 	//ENTITIES FOR STORE GENERATION
 	//bookshelves (diff sides)
 	//desk (2 parts)
