@@ -70,6 +70,11 @@ public class SpeechPopup extends Hud {
 			else if(lastChar == ':') speechCounter*=10;
 		}
 		else speechCounter--;
+		
+		if(!world.entities.contains(character)) {
+			dismissed = true;
+			close();
+		}
 	}
 	
 	public void updateText(String text) {
