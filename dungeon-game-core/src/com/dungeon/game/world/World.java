@@ -13,19 +13,15 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.dungeon.game.Camera;
 import com.dungeon.game.ai.CoverFinder;
 import com.dungeon.game.entity.Entity;
-import com.dungeon.game.entity.Mist;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.character.Player;
 import com.dungeon.game.entity.character.enemy.Enemy;
 import com.dungeon.game.entity.character.enemy.Goon;
 import com.dungeon.game.entity.character.friend.Friend;
 import com.dungeon.game.entity.character.friend.Mentor;
-import com.dungeon.game.entity.furniture.Lamp;
-import com.dungeon.game.entity.furniture.Stair;
 import com.dungeon.game.entity.furniture.TrainingTable;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.EffectHudBackground;
@@ -72,7 +68,6 @@ public class World {
 	private com.badlogic.gdx.physics.box2d.World emptyWorld;
 	private PointLight emptyWorldLight;
 	
-	private Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	public RayHandler rayHandler;
 	
 	private ArrayList<Entity> drawEnts;
@@ -114,9 +109,7 @@ public class World {
 		entities = curFloor.entities;
 		entities.add(0,player);
 		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+Tile.TS, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
-		entities.add(new Lamp(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2-Tile.TS, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
 		entities.add(new TrainingTable(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2-Tile.TS, curFloor.tm.length/2*Tile.TS+Tile.TS/2));
-		entities.add(new Stair(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2, curFloor.tm.length/2*Tile.TS, true, 10, 10));
 		hudEntities.add(new HudBackground(this));
 		
 		hudEntities.add(new EffectHudBackground(this, cam.width-44, cam.height-44));

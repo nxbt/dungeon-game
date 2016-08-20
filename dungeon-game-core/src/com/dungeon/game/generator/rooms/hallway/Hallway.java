@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.TileMap;
+import com.dungeon.game.world.World;
 
 public abstract class Hallway {
+	
+	public World world;
 	
 	public int[][] cords; //chords of the tiles in the hallway
 	
@@ -24,7 +27,9 @@ public abstract class Hallway {
 	
 	public int y; //the y of the first tile in the world
 	
-	public Hallway(ArrayList<int[]> coordinates, TileMap tileMap){
+	public Hallway(World world, ArrayList<int[]> coordinates, TileMap tileMap){
+		this.world = world;
+		
 		x = coordinates.get(0)[0];
 		y = coordinates.get(0)[1];
 		cords = new int[coordinates.size()][2];

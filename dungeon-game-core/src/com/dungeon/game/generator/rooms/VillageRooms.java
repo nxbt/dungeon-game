@@ -580,7 +580,7 @@ public class VillageRooms extends Generation {
 		ArrayList<ArrayList<int[]>> halls = (ArrayList<ArrayList<int[]>>) this.halls.clone();
 		Hallway hall;
 		while(halls.size()>0){
-			hall = new BasicHall(halls.remove((int) (halls.size()*Math.random())), tileMap);
+			hall = new BasicHall(world, halls.remove((int) (halls.size()*Math.random())), tileMap);
 			hall.addToMap(map, entities);
 		}
 	}
