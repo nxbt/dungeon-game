@@ -16,7 +16,6 @@ public class Library extends Room {
 
 	@Override
 	public void generate() {
-		System.out.println(doorPos.length);
 		for(int i = 0; i < doorPos.length; i++){
 			addToOccupied(doorPos[i][0]+1, doorPos[i][1]);
 			addToOccupied(doorPos[i][0]-1, doorPos[i][1]);

@@ -25,7 +25,6 @@ public class MeleeGraphic extends HandheldGraphic {
 					if(e instanceof MeleeGraphic && ((Melee)((MeleeGraphic) e).item).inAttack()) {
 						target = e;
 						((Melee) item).hasHit = true;
-						System.out.println("fuckckk"); 	
 						((Melee) item).knockback(((MeleeGraphic) target).item.owner);
 						((Melee) (((MeleeGraphic)target).item)).knockback(item.owner);
 						break;
