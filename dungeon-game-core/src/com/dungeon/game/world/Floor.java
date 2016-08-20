@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.generator.Generation;
+import com.dungeon.game.generator.rooms.Castle;
 import com.dungeon.game.generator.rooms.Rooms;
 import com.dungeon.game.generator.rooms.VillageRooms;
 import com.dungeon.game.pathing.Area;
@@ -58,6 +59,7 @@ public class Floor {
 		Generation gen;
 		if(type.equals("rooms"))gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
 		else if(type.equals("village_rooms"))gen = new VillageRooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
+		else if(type.equals("castle"))gen = new Castle(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
 		else gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
 		
 		gen.generateSprites();

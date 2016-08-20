@@ -6,10 +6,10 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.world.World;
 
-public class Castle extends Generation {
+public class CastleOld extends Generation {
 	private ArrayList<Rectangle> rooms;
 	
-	public Castle(World world, int width, int height, int textureSeed){
+	public CastleOld(World world, int width, int height, int textureSeed){
 		super(world, width, height, textureSeed);
 		rooms = new ArrayList<Rectangle>();
 		int x = height/2;
