@@ -238,13 +238,7 @@ public class Floor {
 		startWidth = Math.max(startWidth,0);
 		endWidth = Math.min(endWidth,tm[0].length*Tile.TS);
 		
-//		for(int i = startHeight; i < endHeight; i++){
-//			for(int k = startWidth; k < endWidth; k++){
-//				batch.draw(tm[i][k].textures[tm[i][k].rotation+(tm[i][k].flip?4:0)], k*Tile.TS, i*Tile.TS);
-//			}
-//		}
-		
-		batch.draw(tmTexture, startWidth, startHeight, world.cam.width, world.cam.height, startWidth, startHeight, world.cam.width, world.cam.height, false, true);
+		batch.draw(tmTexture, startWidth, startHeight, endWidth-startWidth, endHeight-startHeight, startWidth, startHeight, endWidth-startWidth, endHeight-startHeight, false, true);
 	}
 
 	public static void fixBleeding(TextureRegion[] region) {
