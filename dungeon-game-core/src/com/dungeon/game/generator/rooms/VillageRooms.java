@@ -601,7 +601,7 @@ public class VillageRooms extends Generation {
 		x = (int) room.x-1;
 		y = (int) room.y;
 		for(int i = 0; i < room.height; i++){
-			if(map[y][x].id==0){
+			if(!Tile.isSolid(map[y][x])){
 //				map[y][x]=tileMap.getTile(5);
 //				return new int[]{0,x,y};
 				doors.add(new int[]{0,x,y});
@@ -612,7 +612,7 @@ public class VillageRooms extends Generation {
 		x = (int) (room.x+room.width);
 		y = (int) room.y;
 		for(int i = 0; i < room.height; i++){
-			if(map[y][x].id==0){
+			if(!Tile.isSolid(map[y][x])){
 //				map[y][x]=tileMap.getTile(5);
 //				return new int[]{1,x,y};
 				doors.add(new int[]{1,x,y});
@@ -623,7 +623,7 @@ public class VillageRooms extends Generation {
 		x = (int) room.x;
 		y = (int) room.y-1;
 		for(int i = 0; i < room.width; i++){
-			if(map[y][x].id==0){
+			if(!Tile.isSolid(map[y][x])){
 //				map[y][x]=tileMap.getTile(5);
 //				return new int[]{2,x,y};
 				doors.add(new int[]{2,x,y});
@@ -634,7 +634,7 @@ public class VillageRooms extends Generation {
 		x = (int) room.x;
 		y = (int) (room.y+room.height);
 		for(int i = 0; i < room.width; i++){
-			if(map[y][x].id==0){
+			if(!Tile.isSolid(map[y][x])){
 //				map[y][x]=tileMap.getTile(5);
 //				return new int[]{3,x,y};
 				doors.add(new int[]{3,x,y});

@@ -4,10 +4,13 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.dungeon.game.entity.character.enemy.Goon;
 import com.dungeon.game.entity.furniture.Stair;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.LootGenerator;
+import com.dungeon.game.generator.rooms.room.BasicRoom;
+import com.dungeon.game.generator.rooms.room.EnemyRoom;
+import com.dungeon.game.generator.rooms.room.Library;
+import com.dungeon.game.generator.rooms.room.Room;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.utilities.MethodArray;
 import com.dungeon.game.world.Tile;
@@ -50,11 +53,12 @@ public class Rooms extends Generation {
 			}
 		};
 		generateStartRoom(centerX, centerY);
+		populateRooms();
 		generateStairDown();
 		
 		makeWalls(10, 11, 12, 13, 14);
 	}
-	
+
 	public boolean generateStartRoom(int x, int y){
 		int originX = x;
 		int originY = y;
@@ -453,17 +457,87 @@ public class Rooms extends Generation {
 					entities.add(LootGenerator.getChest(world, 1,x,y));
 					addedChest = true;
 				}
-				if(hasEnemies && i>-1&&k>-1&&i<height&&k<width&&Math.random()>0.96){
-					Goon enemy =  new Goon(world, x*Tile.TS+Tile.TS/2f, y*Tile.TS+Tile.TS/2f);
-					enemy.angle = (float) (180f-Math.random()*360f);
-					enemy.target_angle = enemy.angle;
-					entities.add(enemy);
-				}
+//				if(hasEnemies && i>-1&&k>-1&&i<height&&k<width&&Math.random()>0.96){
+//					Goon enemy =  new Goon(world, x*Tile.TS+Tile.TS/2f, y*Tile.TS+Tile.TS/2f);
+//					enemy.angle = (float) (180f-Math.random()*360f);
+//					enemy.target_angle = enemy.angle;
+//					entities.add(enemy);
+//				}
 				x++;
 			}
 			y++;
 			x-=width;
 		}
+	}
+
+	
+	private void populateRooms() {
+		ArrayList<Rectangle> rooms = (ArrayList<Rectangle>) this.rooms.clone();
+		rooms.remove(0);
+		Rectangle normRoomsRect;
+		int[][] normRoomsDoorFinder;
+		Room normRoom;
+		while(rooms.size()>0){
+			normRoomsRect = rooms.remove((int) (rooms.size()*Math.random()));
+			normRoomsDoorFinder = findDoors(normRoomsRect);
+			normRoom = new EnemyRoom(world, normRoomsRect, normRoomsDoorFinder, tileMap);
+			normRoom.addToMap(map, entities);
+		}
+			
+		
+	}
+	
+
+	
+	private int[][] findDoors(Rectangle room){
+		ArrayList<int[]> doors = new ArrayList<int[]>();
+		int x,y;
+		x = (int) room.x-1;
+		y = (int) room.y;
+		for(int i = 0; i < room.height; i++){
+			if(!Tile.isSolid(map[y][x])){
+//				map[y][x]=tileMap.getTile(5);
+//				return new int[]{0,x,y};
+				doors.add(new int[]{0,x,y});
+			}
+
+			y++;
+		}
+		x = (int) (room.x+room.width);
+		y = (int) room.y;
+		for(int i = 0; i < room.height; i++){
+			if(!Tile.isSolid(map[y][x])){
+//				map[y][x]=tileMap.getTile(5);
+//				return new int[]{1,x,y};
+				doors.add(new int[]{1,x,y});
+			}
+
+			y++;
+		}
+		x = (int) room.x;
+		y = (int) room.y-1;
+		for(int i = 0; i < room.width; i++){
+			if(!Tile.isSolid(map[y][x])){
+//				map[y][x]=tileMap.getTile(5);
+//				return new int[]{2,x,y};
+				doors.add(new int[]{2,x,y});
+			}
+
+			x++;
+		}
+		x = (int) room.x;
+		y = (int) (room.y+room.height);
+		for(int i = 0; i < room.width; i++){
+			if(!Tile.isSolid(map[y][x])){
+//				map[y][x]=tileMap.getTile(5);
+//				return new int[]{3,x,y};
+				doors.add(new int[]{3,x,y});
+			}
+
+			x++;
+		}
+		int[][] ds = doors.toArray(new int[doors.size()][3]);
+		return ds;
 	}
 	
 	public void generateAreas(){
