@@ -87,11 +87,11 @@ public abstract class Room {
 	}
 	
 	private void unrotate(){
-		for(int i = 0; i < room.length; i++){
-			for(int k = 0; k < room[0].length; k++){
-				if(checkOccupied(k, i))room[i][k] = tileMap.getTile(6);
-			}
-		}
+//		for(int i = 0; i < room.length; i++){
+//			for(int k = 0; k < room[0].length; k++){
+//				if(checkOccupied(k, i))room[i][k] = tileMap.getTile(6);
+//			}
+//		}
 		if(doorFinder[0][0]==1||doorFinder[0][0]==3){
 			Tile[][] temp = room.clone();
 			
