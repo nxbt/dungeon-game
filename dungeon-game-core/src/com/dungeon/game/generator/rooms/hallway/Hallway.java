@@ -47,14 +47,14 @@ public abstract class Hallway {
 	public void addToMap(Tile[][] tileMap, ArrayList<Entity> floorEntities){
 		
 		for(int i = 0; i < cords.length; i++){
-			int x = cords[i][0];
-			int y = cords[i][1];
+			int x = cords[i][0] + this.x;
+			int y = cords[i][1] + this.y;
 			if(tiles[i] != null)tileMap[y][x] = tiles[i];
 		}
 		
 		for(int i = 0; i < additionalChords.size(); i++){
-			int x = additionalChords.get(i)[0];
-			int y = additionalChords.get(i)[1];
+			int x = additionalChords.get(i)[0] + this.x;
+			int y = additionalChords.get(i)[1] + this.y;
 			tileMap[y][x] = additionalTiles.get(i);
 		}
 		

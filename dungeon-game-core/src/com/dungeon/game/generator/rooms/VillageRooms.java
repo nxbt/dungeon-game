@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.furniture.Stair;
 import com.dungeon.game.generator.Generation;
+import com.dungeon.game.generator.rooms.hallway.BasicHall;
+import com.dungeon.game.generator.rooms.hallway.Hallway;
 import com.dungeon.game.generator.rooms.room.BasicRoom;
 import com.dungeon.game.generator.rooms.room.GeneralStore;
 import com.dungeon.game.generator.rooms.room.Library;
@@ -43,6 +45,7 @@ public class VillageRooms extends Generation {
 		}while(specialRooms.size() < 3);
 		populateSpecialRooms();
 		populateNormRooms();
+		populateHallWays();
 		
 		makeWalls(10, 11, 12, 13, 14);
 	}
@@ -574,7 +577,12 @@ public class VillageRooms extends Generation {
 	}
 	
 	private void populateHallWays(){
-		ArrayList<int[]>[] halls = (ArrayList<int[]>[]) this.halls.toArray();
+		ArrayList<ArrayList<int[]>> halls = (ArrayList<ArrayList<int[]>>) this.halls.clone();
+		Hallway hall;
+		while(halls.size()>0){
+			hall = new BasicHall(halls.remove((int) (halls.size()*Math.random())), tileMap);
+			hall.addToMap(map, entities);
+		}
 	}
 	
 	//ENTITIES FOR STORE GENERATION
