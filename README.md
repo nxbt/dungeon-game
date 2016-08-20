@@ -3,7 +3,6 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 
 ##TODO high priority (within a week or two):
 * continue proceedurally generated textures
-* implement halls and add rooms to non-village dungeons
 * make wood texture rotate to make more sense in small hallways
 * update libGDX
 * change visibity polygons to use DelaunayTriangulator.computeTriangles
