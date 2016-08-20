@@ -15,13 +15,13 @@ public class BasicHall extends Hallway {
     
     
 	public void generate(){
-		int count = 0;
+		int count = (int) Math.floor(Math.random()*2)+2;
 		
 	    for(int i = 0; i < tiles.length; i++){
-	    	count += Math.random()>0.5?1:0;
+	    	count--;
 	    	
-	    	if(count == 2) {
-	    		count = 0;
+	    	if(count == 0) {
+	    		count = (int) Math.floor(Math.random()*2)+2;
 				int dir = cords[i][2];
 				
 				if(dir == 0 || dir == 1) dir = Math.random()>0.5?0:2;

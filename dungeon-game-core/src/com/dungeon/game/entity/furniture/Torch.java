@@ -44,7 +44,7 @@ public class Torch extends Static {
 			origin_y = 8;
 		}
 		
-		light = new Light(world, x, y, 50, 100, Light.ORANGE, 40, this);
+		light = new Light(world, x, y, 100, 100, Light.ORANGE, 40, this);
 	}
 
 	@Override
