@@ -53,6 +53,8 @@ public abstract class Entity {
 	
 	public int layer;
 	
+	protected boolean clickable;
+	
 	public Entity(World world, float x, float y, int width, int height, String filename) {
 		this.x = x;
 		this.y = y;
@@ -68,6 +70,8 @@ public abstract class Entity {
 		this.killMe = false;
 		
 		layer = 1;
+		
+		clickable = true;
 	}
 	
 	public void update() {
@@ -119,6 +123,7 @@ public abstract class Entity {
 	public void hovered() {} //optional method called when the mouse hovers over an entity
 	
 	public boolean isHovered(){
+		if(!clickable)return false;
 		return Intersector.isPointInPolygon(getHitbox().getVertices(), 0,getHitbox().getVertices().length,world.mouse.x+world.cam.x-world.cam.width/2,world.mouse.y+world.cam.y-world.cam.height/2);
 		
 	}

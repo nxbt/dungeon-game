@@ -32,6 +32,7 @@ public class HandheldGraphic extends Dynamic {
 		
 		this.origin_x = originX;
 		this.origin_y = originY;
+		clickable = false;
 	}
 
 	@Override

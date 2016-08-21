@@ -80,6 +80,7 @@ public class Carpet extends Static {
 		
 		solid = false;
 		rotate = true;
+		clickable = false;
 	}
 
 	@Override

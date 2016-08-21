@@ -63,6 +63,7 @@ public class Mouse extends Hud  implements InputProcessor {
 		
 		slot = new Slot(world, new int[] {0, 0, 0}, null);
 		slot.renderSlot = false;
+		clickable = false;
 	}
 
 	@Override
@@ -155,7 +156,7 @@ public class Mouse extends Hud  implements InputProcessor {
 			for(int i = 0; i < world.entities.size(); i++) {
 				Entity ent = world.entities.get(i);
 				Polygon itemHBox = ent.getHitbox();
-				if(Intersector.isPointInPolygon(itemHBox.getVertices(), 0,itemHBox.getVertices().length,x+world.cam.x-world.cam.width/2,y+world.cam.y-world.cam.height/2)){
+				if(ent.isHovered()){
 					ent.hovered();
 					canPlace = false;
 					break;
@@ -249,10 +250,6 @@ public class Mouse extends Hud  implements InputProcessor {
 
 	@Override
 	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
-		return false;
-	}
-	
-	public boolean isHovered(){
 		return false;
 	}
 }

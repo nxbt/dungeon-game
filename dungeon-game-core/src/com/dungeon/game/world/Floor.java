@@ -199,8 +199,8 @@ public class Floor {
 		areaMap.prepAreas();
 		
 		box2dWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
-		for(int i = 0; i <tm.length-1; i++){
-			for(int k = 0; k <tm.length-1; k++){
+		for(int i = 0; i <tm.length; i++){
+			for(int k = 0; k <tm.length; k++){
 				if(tm[i][k].data == 1){
 					// Create our body definition
 					BodyDef groundBodyDef =new BodyDef();  

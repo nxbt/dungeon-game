@@ -45,6 +45,7 @@ public class Torch extends Static {
 		}
 		
 		light = new Light(world, x, y, 100, 100, Light.ORANGE, 40, this);
+		clickable = false;
 	}
 
 	@Override
