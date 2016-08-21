@@ -206,7 +206,6 @@ public class Castle extends Generation {
 	
 	private void populateRooms() {
 		ArrayList<Rectangle> rooms = (ArrayList<Rectangle>) this.rooms.clone();
-		rooms.remove(0);
 		Rectangle normRoomsRect;
 		int[][] normRoomsDoorFinder;
 		Room normRoom;

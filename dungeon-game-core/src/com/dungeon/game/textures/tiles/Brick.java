@@ -439,6 +439,35 @@ public class Brick extends ProceduralTile {
 					}
 				}
 			}
+		}else if(sides == 15){
+			for(int i = 0; i < 32; i++){
+				for(int k = 0; k < 32; k++){
+					curX = x*32+i;
+					curY = y*32+k;
+					Random rand = MathUtils.getRandomFromSeedAndCords(seed, x, y);
+					if(i == 0 || k == 0 || i == 31 || k == 31){
+						mortar(i, k, curX, curY, texMap);
+					}
+					else if(i <  9 && k > 8 && k < 23){
+							verticalBrick(i, k, curX, curY, texMap);
+					}else if(i > 22 && k > 8 && k < 23){
+							verticalBrick(i, k, curX, curY, texMap);
+					}else if(k < 9 && i > 8 && i < 23){
+						horizonBrick(i, k, curX, curY, texMap);
+					}else if(k > 22 && i > 8 && i < 23){
+						horizonBrick(i, k, curX, curY, texMap);
+					}else {
+						if(rand.nextFloat() < 0.5f){
+							horizonBrick(i, k, curX, curY, texMap);
+						}else {
+							verticalBrick(i, k, curX, curY, texMap);
+							
+						}
+						
+					}
+				}
+			}
+			
 		}
 		
 		texture = new Texture(texMap);

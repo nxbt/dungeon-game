@@ -229,6 +229,8 @@ public abstract class Generation {
 //						map[i][k] = four_id;
 //						flips[i][k] = false;
 //						rotations[i][k] = 0;
+					}else if(sides == 15){
+						map[i][k] = tileMap.getTile(four_id, 0, false);
 					}
 				}
 			}

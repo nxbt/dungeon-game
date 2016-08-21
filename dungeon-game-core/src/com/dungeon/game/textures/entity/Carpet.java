@@ -49,9 +49,9 @@ public class Carpet extends ProceduralTexture {
 		int noiseSeed = (int)(Math.random()*1000);
 		for(int i = 0; i < width; i++){
 			for(int k = 0; k < height; k++){
-				if(i == 0 || k == 0 || i == width - 1 || k == height - 1){
+				if(i < 2 || k < 2 || i > width - 3 || k > height - 3){
 					float num = MathUtils.reductiveNoise2d(noiseSeed, i, k, new float[]{8,4,2,1}, new float[]{4,3,2,1});
-					texMap.setColor(new Color(carpetColor.r*(0.7f+0.2f*num), carpetColor.g*(0.7f+0.2f*num), carpetColor.b*(0.7f+0.2f*num), 1));
+					texMap.setColor(new Color(carpetColor.r*(0.75f+0.2f*num), carpetColor.g*(0.75f+0.2f*num), carpetColor.b*(0.75f+0.2f*num), 1));
 					
 				}else{
 					float num = MathUtils.reductiveNoise2d(noiseSeed, i, k, new float[]{8,4,2,1}, new float[]{4,3,2,1});
@@ -75,16 +75,10 @@ public class Carpet extends ProceduralTexture {
 				Color activeColor;
 				if(check == 0)activeColor = new Color(color1.r, color1.g, color1.b, 1);
 				else activeColor = new Color(color2.r, color2.g, color2.b, 1);
-				if(i % 16 == 0 || i % 16 == 15 || k % 16 == 0 || k % 16 == 15){
-					activeColor.r = borderColor.r*0.9f;
-					activeColor.g = borderColor.g*0.9f;
-					activeColor.b = borderColor.b*0.9f;
-					if(i == 0 || k == 0 || i == width - 1 || k == height - 1){
-						activeColor.r*=0.8f;
-						activeColor.g*=0.8f;
-						activeColor.b*=0.8f;
-					}
-					
+				if(i < 2 || k < 2 || i > width - 3 || k > height - 3){
+					activeColor.r=borderColor.r*0.8f;
+					activeColor.g=borderColor.g*0.8f;
+					activeColor.b=borderColor.b*0.8f;
 				}
 				float num = MathUtils.reductiveNoise2d(noiseSeed, i, k, new float[]{8,4,2,1}, new float[]{4,3,2,1});
 				texMap.setColor(new Color(activeColor.r*(0.9f+0.2f*num), activeColor.g*(0.9f+0.2f*num), activeColor.b*(0.9f+0.2f*num), 1));
