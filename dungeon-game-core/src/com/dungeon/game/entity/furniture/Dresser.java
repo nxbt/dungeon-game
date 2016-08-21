@@ -42,6 +42,7 @@ public class Dresser extends Container {
 			origin_x = 32;
 			origin_y = 16;
 		}
+		genVisBox();
 		
 		for(int i = 0; i < inv.slot.length; i++){
 			if(Math.random() < 0.10){

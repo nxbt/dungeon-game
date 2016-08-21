@@ -20,6 +20,7 @@ public class Door extends Static {
 		solid = false;
 		
 		hitbox = new Polygon(new float[]{0,0,0,0,0,0,0,0});
+		genVisBox();
 		
 		origin_x = 0;
 		origin_y = 0;

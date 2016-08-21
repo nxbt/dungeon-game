@@ -15,6 +15,7 @@ public class Plant extends Static {
 		origin_y = 16;
 		
 		hitbox = new Polygon(new float[]{8,8,24,8,24,24,8,24});
+		genVisBox();
 	}
 
 	@Override

@@ -21,6 +21,7 @@ public class Drop extends Static {
 		sprite = this.slot.item.sprite;
 		
 		hitbox = new Polygon(new float[]{4,4,28,4,28,28,4,28});
+		genVisBox();
 		
 		origin_x =16;
 		origin_y = 16;

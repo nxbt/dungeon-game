@@ -134,11 +134,11 @@ public class AreaMap {
 		ArrayList<int[]> path;
 		Area startArea = findArea(start);
 		Area endArea = findArea(end);
-		if(startArea.equals(endArea)){
-			path = startArea.findPath(tm, start, end);
-		}
-		else if(startArea == null||endArea == null){
+		if(startArea == null||endArea == null){
 			return start;
+		}
+		else if(startArea.equals(endArea)){
+			path = startArea.findPath(tm, start, end);
 		}else path = findAreaPath(start, end).getTiles(tm);
 		lastPath = path;
 		if(path.size()==1)return path.get(0);

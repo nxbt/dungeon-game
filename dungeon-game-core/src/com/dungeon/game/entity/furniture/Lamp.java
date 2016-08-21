@@ -21,6 +21,7 @@ public class Lamp extends Static {
 		light = new Light(world, x, y, 200, 100, Light.WHITE, 0, this);
 		
 		hitbox = new Polygon(new float[]{12,12,20,12,20,20,12,20});
+		genVisBox();
 	}
 
 	@Override

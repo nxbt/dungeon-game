@@ -45,6 +45,7 @@ public class Shopkeeper extends Friend {
 		fric = 0.5f;
 		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
+		genVisBox();
 		
 		origin_x = 16;
 		origin_y = 16;

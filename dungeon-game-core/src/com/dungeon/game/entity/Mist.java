@@ -16,6 +16,7 @@ public class Mist extends Static {
 		d_width = width;
 		d_height = width;
 		hitbox = new Polygon(new float[]{0,0,0,0,0,0});
+		genVisBox();
 		clickable = false;
 	}
 

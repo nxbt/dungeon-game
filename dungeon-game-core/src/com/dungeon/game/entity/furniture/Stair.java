@@ -25,6 +25,7 @@ public class Stair extends Static {
 		origin_y = 16;
 		
 		hitbox = new Polygon(new float[] {0, 0, 32, 0, 32, 32, 0, 32});
+		genVisBox();
 	}
 
 	@Override

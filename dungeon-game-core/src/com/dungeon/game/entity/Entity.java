@@ -30,6 +30,8 @@ public abstract class Entity {
 	
 	public Polygon hitbox;
 	
+	public Polygon visHitbox;
+	
 	public int d_width;
 	public int d_height;
 	
@@ -110,6 +112,20 @@ public abstract class Entity {
 		return new Polygon(temp_hitbox.getTransformedVertices());
 	}
 	
+	public Polygon getVisbox() {
+		if(visHitbox == null)System.out.println(this.getClass().getName());
+		Polygon temp_hitbox = new Polygon(visHitbox.getVertices());
+		
+		temp_hitbox.setOrigin(origin_x, origin_y);
+		temp_hitbox.translate(-origin_x, -origin_y);
+		if(rotate)temp_hitbox.rotate(angle);
+		temp_hitbox.translate(x, y);
+		temp_hitbox.dirty();
+		
+		
+		return new Polygon(temp_hitbox.getTransformedVertices());
+	}
+	
 	public Rectangle getBoundingBox() {
 		return getHitbox().getBoundingRectangle();
 	}
@@ -135,6 +151,24 @@ public abstract class Entity {
 	public void dead(){
 		if(light!=null)light.light.remove(true);
 	};
+	
+	protected void genVisBox(){
+		if(hitbox != null){
+			float[] verts = hitbox.getVertices().clone();
+			ArrayList<Float> list = new ArrayList<Float>();
+			for(float f: verts)list.add(f);
+			Collections.reverse(list);
+			for(int i = 0; i < verts.length; i++){
+				verts[i] = list.get(i);
+			}
+			for(int i = 0; i < verts.length; i+=2){
+				float temp = verts[i];
+				verts[i] = verts[i+1];
+				verts[i+1] = temp;
+			}
+			visHitbox = new Polygon(verts);
+		}
+	}
 	
 	public abstract void calc(); //called at the beginning of an update cycle
 	

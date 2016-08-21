@@ -43,6 +43,7 @@ public class Torch extends Static {
 			origin_x = 2;
 			origin_y = 8;
 		}
+		genVisBox();
 		
 		light = new Light(world, x, y, 100, 100, Light.ORANGE, 40, this);
 		clickable = false;

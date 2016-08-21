@@ -43,6 +43,7 @@ public class Bed extends Static {
 			origin_x = 32;
 			origin_y = 16;
 		}
+		genVisBox();
 	}
 
 	@Override
