@@ -195,7 +195,10 @@ public class World {
 		curFloor.draw(batch, this);
 		
 		drawEnts.clear();
-		for(Entity e: entities) if(e.x+e.d_width > cam.x-cam.width/2 && e.y+e.d_height > cam.y-cam.height/2 && e.x < cam.x+cam.width/2 && e.y < cam.y+cam.height/2)drawEnts.add(e);
+		for(Entity e: entities){
+			if(e.x + e.d_width/2 > cam.x - cam.width/2 && e.x - e.d_width/2 < cam.x + cam.width/2 && e.y + e.d_height/2 > cam.y - cam.height/2 && e.y - e.d_height/2 < cam.y + cam.height/2)drawEnts.add(e);
+		}
+		System.out.println(drawEnts.size());
 
 		drawEnts.sort(new Comparator<Entity>(){
 
@@ -209,7 +212,7 @@ public class World {
 		for(int i = drawEnts.size()-1; i >= 0; i--) {
 			drawEnts.get(i).draw(batch);
 		}
-//		drawEnts.get(drawEnts.size()-1).draw(batch);//have to draw player twice when using lights
+		if(drawEnts.size() > 0)drawEnts.get(drawEnts.size()-1).draw(batch);//have to draw player twice when using lights
 		
 
 		rayHandler.setCombinedMatrix(cam.cam);
