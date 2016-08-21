@@ -29,7 +29,5 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * reword pathfinding to use heiarchal pathfinding (GDX AI?)
 
 ##BUG TRACKER
-* pathfinding crashes when navigating from outside an area.
-* Map draw error at the top of maps
 * dual wielding will occasionally cause your own weapons to collide, sending you flying.
-* floating torches in castle rooms
+* floating torches in castle rooms and where multiple halls meet
