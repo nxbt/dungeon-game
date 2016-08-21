@@ -209,7 +209,7 @@ public class World {
 		for(int i = drawEnts.size()-1; i >= 0; i--) {
 			drawEnts.get(i).draw(batch);
 		}
-		drawEnts.get(drawEnts.size()-1).draw(batch);//have to draw player twice when using lights
+//		drawEnts.get(drawEnts.size()-1).draw(batch);//have to draw player twice when using lights
 		
 
 		rayHandler.setCombinedMatrix(cam.cam);
