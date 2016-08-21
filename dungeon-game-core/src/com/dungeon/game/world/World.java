@@ -259,10 +259,11 @@ public class World {
 						if(e instanceof Friend)shapeRenderer.setColor(0,1,1,0.2f);
 						if(e instanceof Enemy)shapeRenderer.setColor(1,1,0,0.2f);
 						shapeRenderer.set(ShapeType.Filled);
-						for(Polygon tri: ((Character)e).visTris){
-							float[] points = tri.getVertices();
-							shapeRenderer.triangle(points[0], points[1], points[2], points[3], points[4], points[5]);
-						}
+//						for(Polygon tri: ((Character)e).visTris){
+//							float[] points = tri.getVertices();
+//							shapeRenderer.triangle(points[0], points[1], points[2], points[3], points[4], points[5]);
+//						}
+						shapeRenderer.polygon(((Character) e).visPolygon.getVertices());
 						shapeRenderer.set(ShapeType.Line);
 					}
 					Gdx.gl.glBlendFunc(GL20.GL_ZERO, GL20.GL_ONE);

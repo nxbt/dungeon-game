@@ -127,7 +127,11 @@ public abstract class Room {
 				e.x = e.y;
 				e.y = tempX;
 				e.angle-=90;
-				e.flipX = !e.flipX;
+				if(e instanceof Character){
+					e.angle+=180;
+				}else{
+					e.flipX  = !e.flipX;	
+				}
 			}
 		}
 	}
