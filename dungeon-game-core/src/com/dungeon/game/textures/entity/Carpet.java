@@ -79,6 +79,10 @@ public class Carpet extends ProceduralTexture {
 					activeColor.r=borderColor.r*0.8f;
 					activeColor.g=borderColor.g*0.8f;
 					activeColor.b=borderColor.b*0.8f;
+				}else if(i % 16 == 0 || i % 16 == 15 || k % 16 == 0 || k % 16 == 15){
+					activeColor.r = borderColor.r;
+					activeColor.g = borderColor.g;
+					activeColor.b = borderColor.b;
 				}
 				float num = MathUtils.reductiveNoise2d(noiseSeed, i, k, new float[]{8,4,2,1}, new float[]{4,3,2,1});
 				texMap.setColor(new Color(activeColor.r*(0.9f+0.2f*num), activeColor.g*(0.9f+0.2f*num), activeColor.b*(0.9f+0.2f*num), 1));
