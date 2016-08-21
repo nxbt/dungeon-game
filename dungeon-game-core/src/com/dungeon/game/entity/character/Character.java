@@ -291,7 +291,7 @@ public abstract class Character extends Dynamic {
 			ArrayList<Entity> preSeenEnts = new ArrayList<Entity>(seenEntities);
 			seenEntities = new ArrayList<Entity>();
 			for(Entity e: world.entities){
-				if(Math.sqrt((Math.abs(e.x - x) + e.d_width)*(Math.abs(e.x - x) + e.d_width)+(Math.abs(e.y - y) + e.d_height)*(Math.abs(e.y - y) + e.d_height)) < vision*Tile.TS && !e.equals(this)){
+				if(Math.sqrt((Math.abs(e.x - x) - e.d_width)*(Math.abs(e.x - x) - e.d_width)+(Math.abs(e.y - y) - e.d_height)*(Math.abs(e.y - y) - e.d_height)) < vision*Tile.TS && !e.equals(this)){
 					//for some reason the hitbox of the entity has to be wound the opposite direction, (so clockwise...) thats what this code does
 					//this makes no sense, because the docs say the two polygons have to be wound the same way, but the winding of the visPolygon DOES NOT MATTER
 					float[] verts = e.getHitbox().getVertices();
