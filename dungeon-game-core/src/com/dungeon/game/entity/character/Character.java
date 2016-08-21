@@ -160,6 +160,7 @@ public abstract class Character extends Dynamic {
 		sight();
 		post();
 		calcLight();
+		
 		stagerTimer++;
 		if(stagerTimer == STAGER_TIME)stagerTimer = 0;
 	}

@@ -5,7 +5,7 @@ import java.util.Collections;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.generator.Generation;
-import com.dungeon.game.generator.rooms.room.BasicRoom;
+import com.dungeon.game.generator.rooms.room.EnemyRoom;
 import com.dungeon.game.generator.rooms.room.Room;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.world.Tile;
@@ -30,11 +30,12 @@ public class Castle extends Generation {
 	}
 	
 	private class GenRoom extends Rectangle {
-		
 		private ArrayList<String> expands;
 		private ArrayList<GenRoom> connectedRooms;
+		
 		private GenRoom(int x, int y, int width, int height){
 			super(x, y, width, height);
+			
 			expands = new ArrayList<String>();
 			expands.add("W");
 			expands.add("H");
@@ -43,13 +44,13 @@ public class Castle extends Generation {
 			connectedRooms = new ArrayList<GenRoom>();
 		}
 		
-		public boolean overlaps(GenRoom room){
+		private boolean overlaps(GenRoom room){
 	        if(this == room)return false;
 	        if(x - 1 < room.x + room.width && x + width > room.x - 1 && y - 1 < room.y + room.height && y + height > room.y - 1)return true;
 	        return false;
 		}
 		
-		public void addToMap(){
+		private void addToMap(){
 	        for(int i = 0; i < width; i++){
 	            for(int k = 0; k < height; k++){
 	                 map[(int) (y + k)][(int) (x + i)] = tileMap.getTile(0);
@@ -57,7 +58,7 @@ public class Castle extends Generation {
 	         }
 		}
 		
-		public void expandToFillMap(){
+		private void expandToFillMap(){
 	        int index = (int)(expands.size()*Math.random());
 	        String expand = expands.remove(index);
 	        if(expand == "W"){
@@ -71,7 +72,7 @@ public class Castle extends Generation {
 	        }
 		}
 		
-		public void expandWidthToFillMap(){
+		private void expandWidthToFillMap(){
 	        //width
 	        do{
 	        	width++;
@@ -79,7 +80,7 @@ public class Castle extends Generation {
 	        width--;
 		}
 		
-		public void expandHeightToFillMap(){
+		private void expandHeightToFillMap(){
 	        
 	        //height
 	        do{
@@ -88,7 +89,7 @@ public class Castle extends Generation {
 	        height--;
 		}
 
-		public void expandXToFillMap(){
+		private void expandXToFillMap(){
 	        
 	        //x
 	        do{
@@ -99,7 +100,7 @@ public class Castle extends Generation {
 	        width--;
 		}
 		
-		public void expandYToFillMap(){
+		private void expandYToFillMap(){
 	        
 	        //y
 	        do{
@@ -111,7 +112,7 @@ public class Castle extends Generation {
 		}
 		
 
-	    public boolean isAdjacent(int x, int y){
+		private boolean isAdjacent(int x, int y){
 	        if((x == this.x - 1 || x == this.x + width) && y > this.y - 1 && y < this.y + height)return true;
 	        if((y == this.y - 1 || y == this.y + height) && x > this.x - 1 && x < this.x + width)return true;
 	        return false;
@@ -212,7 +213,7 @@ public class Castle extends Generation {
 		while(rooms.size()>0){
 			normRoomsRect = rooms.remove((int) (rooms.size()*Math.random()));
 			normRoomsDoorFinder = findDoors(normRoomsRect);
-			normRoom = new BasicRoom(world, normRoomsRect, normRoomsDoorFinder, tileMap);
+			normRoom = new EnemyRoom(world, normRoomsRect, normRoomsDoorFinder, tileMap);
 			normRoom.addToMap(map, entities);
 		}
 	}

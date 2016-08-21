@@ -195,7 +195,7 @@ public class World {
 		curFloor.draw(batch, this);
 		
 		drawEnts.clear();
-		for(Entity e: entities)drawEnts.add(e);
+		for(Entity e: entities) if(e.x+e.d_width > cam.x-cam.width/2 && e.y+e.d_height > cam.y-cam.height/2 && e.x < cam.x+cam.width/2 && e.y < cam.y+cam.height/2)drawEnts.add(e);
 
 		drawEnts.sort(new Comparator<Entity>(){
 

@@ -58,7 +58,7 @@ public class Floor {
 		
 		Generation gen;
 		if(type.equals("rooms"))gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
-		else if(type.equals("village_rooms"))gen = new VillageRooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
+		else if(type.equals("villageRooms"))gen = new VillageRooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
 		else if(type.equals("castle"))gen = new Castle(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
 		else gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
 		
