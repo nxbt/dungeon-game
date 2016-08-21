@@ -3,6 +3,7 @@ package com.dungeon.game.ai;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.badlogic.gdx.ai.btree.BehaviorTree;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
@@ -23,11 +24,9 @@ public class CoverFinder {
 		//psuedo code is something like this. any tile that HAS NO LOS to danger that is next to a tile WITH LOS to danger is considered cover when needing to shoot at danger.
 		//otherwise any tile without LOS to danger that is far from danger is cover.
 		ArrayList<float[]> rays = new ArrayList<float[]>(); //{startX,startY,endX,endy}
-		
 		for(int i = -180; i < 180; i+=18){
 			rays.add(new float[]{danger.x,danger.y,danger.x+(float) (Math.cos((i)/180f*Math.PI)*range*(float)Tile.TS),danger.y+(float) (Math.sin((i)/180f*Math.PI)*range*(float)Tile.TS)});
 		}
-		
 		for(int[] corner: world.curFloor.corners){
 			if(Math.sqrt((danger.x-corner[0])*(danger.x-corner[0])+(danger.y-corner[1])*(danger.y-corner[1]))<range*Tile.TS){
 				float angleSeg = (float) (Math.atan2(corner[1]-danger.y,corner[0]-danger.x)*180f/Math.PI);
