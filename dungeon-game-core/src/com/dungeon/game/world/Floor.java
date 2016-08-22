@@ -2,6 +2,9 @@ package com.dungeon.game.world;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.ai.pfa.HierarchicalGraph;
+import com.badlogic.gdx.ai.pfa.HierarchicalPathFinder;
+import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,6 +20,7 @@ import com.dungeon.game.generator.rooms.Rooms;
 import com.dungeon.game.generator.rooms.VillageRooms;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
+import com.dungeon.game.pathing.Pathfinder;
 import com.dungeon.game.textures.tiles.Brick;
 import com.dungeon.game.textures.tiles.Dirt;
 import com.dungeon.game.textures.tiles.Marble;
@@ -46,6 +50,12 @@ public class Floor {
 	public com.badlogic.gdx.physics.box2d.World box2dWorld;
 	
 	public int seed;
+	
+	public HierarchicalPathFinder pathfinder;
+	
+	public HierarchicalGraph heiGraph;
+	
+	public IndexedAStarPathFinder pathAlg;
 	
 	public Floor(World world, String type, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY) {
 		this.world = world;
@@ -223,6 +233,7 @@ public class Floor {
 				
 			}
 		}
+		
 	}
 	
 	public void update() {
