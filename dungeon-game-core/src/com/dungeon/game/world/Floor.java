@@ -17,10 +17,10 @@ import com.dungeon.game.entity.Entity;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.rooms.Castle;
 import com.dungeon.game.generator.rooms.Rooms;
+import com.dungeon.game.generator.rooms.VillageCastle;
 import com.dungeon.game.generator.rooms.VillageRooms;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
-import com.dungeon.game.pathing.Pathfinder;
 import com.dungeon.game.textures.tiles.Brick;
 import com.dungeon.game.textures.tiles.Dirt;
 import com.dungeon.game.textures.tiles.Marble;
@@ -67,10 +67,11 @@ public class Floor {
 		tm = new Tile[height][width];
 		
 		Generation gen;
-		if(type.equals("rooms"))gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
-		else if(type.equals("villageRooms"))gen = new VillageRooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
-		else if(type.equals("castle"))gen = new Castle(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
-		else gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
+		if(type.equals("rooms"))gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed, new Object[0]);
+		else if(type.equals("villageRooms"))gen = new VillageRooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed, new Object[0]);
+		else if(type.equals("castle"))gen = new Castle(world, width, height,centerX,centerY, upTrapX, upTrapY, seed, new Object[0]);
+		else if(type.equals("villageCastle"))gen = new VillageCastle(world, width, height,centerX,centerY, upTrapX, upTrapY, seed, new Object[0]);
+		else gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed, new Object[0]);
 		
 		gen.generateSprites();
 

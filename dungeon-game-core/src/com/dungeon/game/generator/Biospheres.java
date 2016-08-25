@@ -9,8 +9,12 @@ public class Biospheres extends Generation {
 	private ArrayList<Circle> rooms;
 	private ArrayList<ArrayList<int[]>> halls;
 	
-	public Biospheres(World world, int width, int height, int textureSeed){
-		super(world, width, height, textureSeed);
+	public Biospheres(World world, int width, int height, int textureSeed, Object[] args){
+		super(world, width, height, textureSeed, args);
+	}
+	
+	protected void generate(Object[] args){
+		super.generate(args);
 		rooms = new ArrayList<Circle>();
 		halls = new ArrayList<ArrayList<int[]>>();
 		int x = width/2;

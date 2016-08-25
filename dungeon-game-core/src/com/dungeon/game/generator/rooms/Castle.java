@@ -13,12 +13,16 @@ import com.dungeon.game.world.World;
 
 public class Castle extends Generation {
 	
-	private ArrayList<GenRoom> rooms;
+	protected ArrayList<GenRoom> rooms;
 	
-	private ArrayList<int[]> doors;
+	protected ArrayList<int[]> doors;
 
-	public Castle(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY,  int textureSeed) {
-		super(world, width, height, textureSeed);
+	public Castle(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY,  int textureSeed, Object[] args) {
+		super(world, width, height, textureSeed, args);
+	}
+	
+	protected void generate(Object[] args){
+		super.generate(args);
 		rooms = new ArrayList<GenRoom>();
 		doors = new ArrayList<int[]>();
 		
@@ -29,9 +33,9 @@ public class Castle extends Generation {
 		makeWalls(10, 11, 12, 13, 14);
 	}
 	
-	private class GenRoom extends Rectangle {
+	protected class GenRoom extends Rectangle {
 		private ArrayList<String> expands;
-		private ArrayList<GenRoom> connectedRooms;
+		protected ArrayList<GenRoom> connectedRooms;
 		
 		private GenRoom(int x, int y, int width, int height){
 			super(x, y, width, height);
@@ -119,7 +123,7 @@ public class Castle extends Generation {
 	    };
 	}
 	
-	private void createRooms(){
+	protected void createRooms(){
 	    
 	    //create the coom seeds
 	    for(int i = 0; i < 200; i++){
@@ -160,7 +164,7 @@ public class Castle extends Generation {
 	}
 	
 
-	private void createDoors(){
+	protected void createDoors(){
 		ArrayList<int[]> doorCandidates = new ArrayList<int[]>();
 		for(int i = 0; i < width; i++){
 			for(int k = 0; k < width; k++){
@@ -193,7 +197,7 @@ public class Castle extends Generation {
 	
 
 
-	private GenRoom[] getAdjacentRooms(int x, int y){
+	protected GenRoom[] getAdjacentRooms(int x, int y){
 		ArrayList<GenRoom> adjacentRooms = new ArrayList<GenRoom>();
 		for(int i = 0; i < rooms.size(); i++){
 			if(rooms.get(i).isAdjacent(x, y))adjacentRooms.add(rooms.get(i));
@@ -205,7 +209,7 @@ public class Castle extends Generation {
 		return returnArray;
 	}
 	
-	private void populateRooms() {
+	protected void populateRooms() {
 		ArrayList<Rectangle> rooms = (ArrayList<Rectangle>) this.rooms.clone();
 		Rectangle normRoomsRect;
 		int[][] normRoomsDoorFinder;
@@ -218,7 +222,7 @@ public class Castle extends Generation {
 		}
 	}
 	
-	private int[][] findDoors(Rectangle room){
+	protected int[][] findDoors(Rectangle room){
 		ArrayList<int[]> doors = new ArrayList<int[]>();
 		int x,y;
 		x = (int) room.x-1;

@@ -28,11 +28,13 @@ public class VillageRooms extends Generation {
 	
 	//make special room choosing code better?
 	
-	public VillageRooms(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY, int textureSeed){
-		super(world, width, height, textureSeed);
-		int x = height/2;
-		int y = width/2;
-		if(world.curDungeon!=null)entities.add(new Stair(world, centerX*Tile.TS-Tile.TS/2, centerY*Tile.TS-Tile.TS/2, false, upTrapX+1, upTrapY+1));
+	public VillageRooms(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY, int textureSeed, Object[] args){
+		super(world, width, height, textureSeed, new Object[]{centerX, centerY, upTrapX, upTrapY});
+	}
+	
+	protected void generate(Object[] args){
+		super.generate(args);
+		if(world.curDungeon!=null)entities.add(new Stair(world, (Integer)(args[0])*Tile.TS-Tile.TS/2, (Integer)(args[1])*Tile.TS-Tile.TS/2, false, (Integer)(args[2])+1, (Integer)(args[3])+1));
 
 		do{
 			generateClearDungeon();
@@ -41,7 +43,7 @@ public class VillageRooms extends Generation {
 			normRooms = new ArrayList<Rectangle>();
 			halls = new ArrayList<ArrayList<int[]>>();
 			hallEnds = new ArrayList<ArrayList<Rectangle>>();
-			generateStartRoom(centerX, centerY);
+			generateStartRoom((Integer)(args[0]), (Integer)(args[1]));
 		}while(specialRooms.size() < 3);
 		populateSpecialRooms();
 		populateNormRooms();

@@ -28,7 +28,7 @@ public abstract class Generation {
 	public int textureSeed;
 	
 	public TileMap tileMap;
-	public Generation(World world, int width, int height, int textureSeed){
+	public Generation(World world, int width, int height, int textureSeed, Object[] args){
 		this.textureSeed = textureSeed;
 		tileMap = Floor.tileMap1;
 		areas = new ArrayList<Area>();
@@ -38,10 +38,14 @@ public abstract class Generation {
 //		rotations = new int[height][width];
 //		flips = new boolean[height][width];
 		entities = new ArrayList<Entity>();
-		
-		generateClearDungeon();
 		this.world = world;
+		generate(args);
 		
+		
+	}
+	
+	protected void generate(Object[] args){
+		generateClearDungeon();
 		
 	}
 	

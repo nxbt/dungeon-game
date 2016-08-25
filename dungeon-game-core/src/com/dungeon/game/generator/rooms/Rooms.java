@@ -21,14 +21,16 @@ public class Rooms extends Generation {
 	private ArrayList<ArrayList<Rectangle>> hallEnds;
 	private MethodArray roomGenerators;
 	
-	public Rooms(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY, int textureSeed){
-		super(world, width, height, textureSeed);
+	public Rooms(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY, int textureSeed, Object[] args){
+		super(world, width, height, textureSeed, new Object[]{centerX, centerY, upTrapX, upTrapY});
+	}
+	
+	protected void generate(Object[] args){
+		super.generate(args);
 		rooms = new ArrayList<Rectangle>();
 		halls = new ArrayList<ArrayList<int[]>>();
 		hallEnds = new ArrayList<ArrayList<Rectangle>>();
-		int x = height/2;
-		int y = width/2;
-		if(world.curDungeon!=null)entities.add(new Stair(world, centerX*Tile.TS-Tile.TS/2, centerY*Tile.TS-Tile.TS/2, false, upTrapX+1, upTrapY+1));
+		if(world.curDungeon!=null)entities.add(new Stair(world, (Integer)(args[0])*Tile.TS-Tile.TS/2, (Integer)(args[1])*Tile.TS-Tile.TS/2, false, (Integer)(args[2])+1, (Integer)(args[3])+1));
 		roomGenerators = new MethodArray(4){
 			public void a(int x, int y, int width, int height, int dir, Rectangle room){
 				int nextX = (int) (x+width*Math.random());
@@ -51,13 +53,14 @@ public class Rooms extends Generation {
 				generateHallWay(nextX, nextY, dir, room);
 			}
 		};
-		generateStartRoom(centerX, centerY);
+		generateStartRoom((Integer)(args[0]), (Integer)(args[1]));
 		populateRooms();
 		populateHallWays();
 		generateStairDown();
 		
 		makeWalls(10, 11, 12, 13, 14);
 	}
+	
 
 	public boolean generateStartRoom(int x, int y){
 		int originX = x;
