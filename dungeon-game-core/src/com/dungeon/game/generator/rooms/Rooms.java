@@ -16,10 +16,10 @@ import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Rooms extends Generation {
-	private ArrayList<Rectangle> rooms;
-	private ArrayList<ArrayList<int[]>> halls;
-	private ArrayList<ArrayList<Rectangle>> hallEnds;
-	private MethodArray roomGenerators;
+	protected ArrayList<Rectangle> rooms;
+	protected ArrayList<ArrayList<int[]>> halls;
+	protected ArrayList<ArrayList<Rectangle>> hallEnds;
+	protected MethodArray roomGenerators;
 	
 	public Rooms(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY, int textureSeed, Object[] args){
 		super(world, width, height, textureSeed, new Object[]{centerX, centerY, upTrapX, upTrapY});
@@ -106,14 +106,6 @@ public class Rooms extends Generation {
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(4);
-				if(i == 0){
-//					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
-//					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
-				}
-				if(i==hall.size()-1){
-//					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
-//					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
-				}
 			}
 			addRoomToMap(room, true);
 			for(int i = 0; i<100;i++){
@@ -148,14 +140,6 @@ public class Rooms extends Generation {
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(4);
-				if(i == 0){
-//					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
-//					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
-				}
-				if(i==hall.size()-1){
-//					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
-//					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
-				}
 			}
 			addRoomToMap(room, true);
 			for(int i = 0; i<100;i++){
@@ -191,14 +175,6 @@ public class Rooms extends Generation {
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(4);
-				if(i == 0){
-//					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
-//					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
-				}
-				if(i==hall.size()-1){
-//					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
-//					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
-				}
 			}
 			addRoomToMap(room, true);
 			for(int i = 0; i<100;i++){
@@ -233,14 +209,6 @@ public class Rooms extends Generation {
 			hallEnds.add(hallEnd);
 			for(int i=0;i<hall.size();i++){
 				map[hall.get(i)[1]][hall.get(i)[0]]=tileMap.getTile(4);
-				if(i == 0){
-//					if(hall.get(0)[2] == 0||hall.get(0)[2] == 1)addDoor(hall.get(0)[0],hall.get(0)[1],0);
-//					if(hall.get(0)[2] == 2||hall.get(0)[2] == 3)addDoor(hall.get(0)[0],hall.get(0)[1],1);
-				}
-				if(i==hall.size()-1){
-//					if(hall.get(hall.size()-1)[2] == 0||hall.get(hall.size()-1)[2] == 1)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],0);
-//					if(hall.get(hall.size()-1)[2] == 2||hall.get(hall.size()-1)[2] == 3)addDoor(hall.get(hall.size()-1)[0],hall.get(hall.size()-1)[1],1);
-				}
 			}
 			addRoomToMap(room, true);
 			for(int i = 0; i<100;i++){
@@ -409,7 +377,7 @@ public class Rooms extends Generation {
 		return null;
 	}
 
-	private boolean isTileInHall(int x, int y, Rectangle room, ArrayList<int[]> hallTiles) {
+	protected boolean isTileInHall(int x, int y, Rectangle room, ArrayList<int[]> hallTiles) {
 		//loops for all halls
 		for(int i = 0; i< halls.size(); i++){
 			//loops for all tiles
@@ -501,7 +469,7 @@ public class Rooms extends Generation {
 	
 
 	
-	private int[][] findDoors(Rectangle room){
+	protected int[][] findDoors(Rectangle room){
 		ArrayList<int[]> doors = new ArrayList<int[]>();
 		int x,y;
 		x = (int) room.x-1;
