@@ -11,6 +11,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * Add different shops to towns
 * Upload screenshots to wiki
 * implement caves generation
+* reword pathfinding to use heiarchal pathfinding (GDX AI)
 
 ##TODO very low priority (before final release):
 * Add multithreding!
@@ -25,7 +26,6 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * Final Dungeon is culmination of all previous dungeons.
 * only access to 1 dungeon at a time.
 * hidden player "level" controlls dungeon difficulty and loot.
-* reword pathfinding to use heiarchal pathfinding (GDX AI)
 
 ##BUG TRACKER
 * dual wielding will occasionally cause your own weapons to collide, sending you flying.
