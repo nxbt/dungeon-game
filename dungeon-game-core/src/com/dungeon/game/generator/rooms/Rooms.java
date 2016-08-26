@@ -2,7 +2,6 @@ package com.dungeon.game.generator.rooms;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.ai.pfa.HierarchicalGraph;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.furniture.Stair;
@@ -12,7 +11,7 @@ import com.dungeon.game.generator.rooms.hallway.Hallway;
 import com.dungeon.game.generator.rooms.room.EnemyRoom;
 import com.dungeon.game.generator.rooms.room.Room;
 import com.dungeon.game.pathing.Area;
-import com.dungeon.game.pathing.Node;
+import com.dungeon.game.pathing.HierarchicalGraph;
 import com.dungeon.game.utilities.MethodArray;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -559,7 +558,7 @@ public class Rooms extends Generation {
 
 
 	@Override
-	public HierarchicalGraph<Node> getPathGraph() {
+	public HierarchicalGraph getPathGraph() {
 		// NOT COMPLETED, must be completed for new pathfinding to work
 		return null;
 	}

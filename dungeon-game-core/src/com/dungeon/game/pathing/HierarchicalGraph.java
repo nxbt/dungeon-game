@@ -8,11 +8,11 @@ import com.badlogic.gdx.utils.Array;
 
 public class HierarchicalGraph extends IndexedHierarchicalGraph<Node> {
 	
-	private Node[][] nodes;
+	public Node[][] nodes;
 
 	public HierarchicalGraph(Node[][] nodes) { //WTF HOW DO YOU DO THIS??? I think I got it?
 		super(nodes.length);
-		nodes = nodes;
+		this.nodes = nodes;
 	}
 
 	@Override
@@ -33,7 +33,19 @@ public class HierarchicalGraph extends IndexedHierarchicalGraph<Node> {
 	@Override
 	public Node convertNodeBetweenLevels(int inputLevel, Node node, int outputLevel) {
 		// TODO Auto-generated method stub
-		return null;
+		return node;
+	}
+	
+	public Node getClosestNode(float x, float y){
+		Node closeNode = nodes[level][0];
+		float closeNodeDist = closeNode.findDistance(x, y);
+		for(Node n: nodes[level]){
+			if(n.findDistance(x, y) < closeNodeDist){
+				closeNode = n;
+				closeNodeDist = n.findDistance(x, y);
+			}
+		}
+		return closeNode;
 	}
 
 }

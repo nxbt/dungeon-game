@@ -2,10 +2,9 @@ package com.dungeon.game.generator;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.ai.pfa.HierarchicalGraph;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.dungeon.game.pathing.Node;
+import com.dungeon.game.pathing.HierarchicalGraph;
 import com.dungeon.game.world.World;
 
 public class CastleOld extends Generation {
@@ -232,7 +231,7 @@ public class CastleOld extends Generation {
 	public void generateAreas() {}
 
 	@Override
-	public HierarchicalGraph<Node> getPathGraph() {
+	public HierarchicalGraph getPathGraph() {
 		// NOT COMPLETED FOR THIS OBSOLETE GENERATION
 		return null;
 	}

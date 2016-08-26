@@ -226,6 +226,14 @@ public class World {
 			
 			shapeRenderer.setProjectionMatrix(cam.cam.combined);
 			
+			if(debug_pathing){
+				shapeRenderer.setColor(Color.ORANGE);
+				shapeRenderer.set(ShapeType.Filled);
+				for(Node n :curFloor.heiGraph.nodes[0]){
+					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 2);
+				}
+			}
+			
 			for(Entity e: entities){
 				if(debug_hitbox) {
 					if(e.solid) shapeRenderer.setColor(Color.RED);

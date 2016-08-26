@@ -1,83 +1,100 @@
 package com.dungeon.game.pathing;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
+import com.badlogic.gdx.ai.pfa.GraphPath;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.world.Tile;
+import com.dungeon.game.world.World;
 
-public class Path {
-	protected int[] start; //start position of the path
-	protected int[] end; //end position of the path
-	ArrayList<Area> areas; //areas along the path
-	public Path(Area area, int[] start, int[] end){ // constructor used to create initial path
-		areas = new ArrayList<Area>();
-		areas.add(area);
-		this.start = start;
-		this.end = end;
+public class Path implements GraphPath<Node> {
+	
+	private ArrayList<Node> nodes;
+	
+	public World world;
+	
+	public Path(World world){
+		super();
+		this.world = world;
+		nodes = new ArrayList<Node>();
 	}
-	public Path(Path path, Area area){ //constructor used to create paths
-		areas = new ArrayList<Area>(path.areas);
-		areas.add(area);
-		start = new int[]{path.start[0],path.start[1]};
-		end = new int[]{path.end[0],path.end[1]};
+
+	@Override
+	public Iterator<Node> iterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return nodes.size();
+	}
+
+	@Override
+	public Node get(int index) {
+		return nodes.get(index);
+	}
+
+	@Override
+	public void add(Node node) {
+		nodes.add(node);
+	}
+
+	@Override
+	public void clear() {
+		nodes.clear();
+	}
+
+	@Override
+	public void reverse() {
+		Collections.reverse(nodes);
 	}
 	
-	public Area getLastArea(){
-		return areas.get(areas.size()-1);
-	}
-	
-	public boolean isAreaOnPath(Area area){
-		return areas.contains(area);
-	}
-	
-	public ArrayList<Area> getExpandAreas(){
-		ArrayList<Area>  expandAreas = new ArrayList<Area>();
-		for(Area area: getLastArea().adjacentAreas){
-			if(!isAreaOnPath(area)){
-				expandAreas.add(area);
-			}
+	public ArrayList<int[]> getPath(){
+		ArrayList<int[]> path = new ArrayList<int[]>();
+		for(int i = 0; i < nodes.size(); i++){
+			path.add(new int[]{(int) nodes.get(i).x,(int) nodes.get(i).y});
 		}
-		return expandAreas;
+		return path;
+		
 	}
 	
-	
-	public ArrayList<int[]> getTiles(Tile[][] tm){
-		ArrayList<int[]> Tiles = new ArrayList<int[]>();
-		//find tiles in 3 stages
-		//start point to edge
-		//intermediate areas
-		for(Area area: areas){
-			ArrayList<int[]> subPath;
-			if(area.equals(areas.get(0))){
-				subPath = area.getMinPath(tm, start,null, areas.get(areas.indexOf(area)+1));
-			}else if(area.equals(getLastArea())){
-				int[] startPoint = area.findAdjacentEdge(Tiles.get(Tiles.size()-1));
-				subPath = area.findPath(tm, startPoint, end);
-			}else {
-				int[] startPoint = area.findAdjacentEdge(Tiles.get(Tiles.size()-1));
-				subPath = area.getMinPath(tm, startPoint,areas.get(areas.indexOf(area)-1), areas.get(areas.indexOf(area)+1));
-	
+	public int[] getTargTile(){
+		ArrayList<int[]> path = getPath();
+		boolean changeDestination;
+		Vector2 startPoint_bl = new Vector2(path.get(0)[0]*Tile.TS,path.get(0)[1]*Tile.TS);
+		Vector2 startPoint_br = new Vector2(path.get(0)[0]*Tile.TS+Tile.TS,path.get(0)[1]*Tile.TS);
+		Vector2 startPoint_tl = new Vector2(path.get(0)[0]*Tile.TS,path.get(0)[1]*Tile.TS+Tile.TS);
+		Vector2 startPoint_tr = new Vector2(path.get(0)[0]*Tile.TS+Tile.TS,path.get(0)[1]*Tile.TS+Tile.TS);
+		Vector2 endPoint_bl;
+		Vector2 endPoint_br;
+		Vector2 endPoint_tl;
+		Vector2 endPoint_tr;
+		int[] destination = path.get(1);
+		Polygon tilePolygon;
+		for(int[] point: path){
+			changeDestination = true;
+			endPoint_bl = new Vector2(point[0]*Tile.TS,point[1]*Tile.TS);
+			endPoint_br = new Vector2(point[0]*Tile.TS+Tile.TS,point[1]*Tile.TS);
+			endPoint_tl = new Vector2(point[0]*Tile.TS,point[1]*Tile.TS+Tile.TS);
+			endPoint_tr = new Vector2(point[0]*Tile.TS+Tile.TS,point[1]*Tile.TS+Tile.TS);
+			for(int i = Math.min(path.get(0)[1], point[1]); i <= Math.max(path.get(0)[1], point[1]);i++){
+				for(int k = Math.min(path.get(0)[0], point[0]); k<= Math.max(path.get(0)[0], point[0]);k++){	
+					tilePolygon = new Polygon(new float[]{k*Tile.TS, i*Tile.TS,(k+1)*Tile.TS, i*Tile.TS,(k+1)*Tile.TS, (i+1)*Tile.TS, k*Tile.TS, (i+1)*Tile.TS});
+					if(world.curFloor.tm[i][k].data==1&&(Intersector.intersectSegmentPolygon(startPoint_bl, endPoint_bl, tilePolygon)||Intersector.intersectSegmentPolygon(startPoint_br, endPoint_br, tilePolygon)||Intersector.intersectSegmentPolygon(startPoint_tl, endPoint_tl, tilePolygon)||Intersector.intersectSegmentPolygon(startPoint_tr, endPoint_tr, tilePolygon))){
+						changeDestination = false;
+					}
+				}
 			}
-			for(int[] point: subPath){
-				Tiles.add(point);
-			}
+			if(changeDestination)destination = point;
+			else break;
 		}
-		//edge to end point
-		return Tiles;
+		return destination;
 	}
-	
-	public int getLength(Tile[][] tm){
-		return getTiles(tm).size();
-	}
-	public int getLengthUpTo(Tile[][] tm, Area lastArea) {
-		Path path = new Path(this.areas.get(0), this.start, lastArea.getCenter());
-		for(Area area: areas){
-			if(areas.indexOf(area)!=0){
-				path = new Path(path, area);
-				if(area.equals(lastArea))break;
-			}
-		}
-		return path.getLength(tm);
-	}
-	
-	
+
 }

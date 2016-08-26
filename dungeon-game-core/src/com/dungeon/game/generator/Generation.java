@@ -2,11 +2,11 @@ package com.dungeon.game.generator;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.ai.pfa.HierarchicalGraph;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.furniture.Door;
 import com.dungeon.game.entity.furniture.Fireplace;
 import com.dungeon.game.pathing.Area;
+import com.dungeon.game.pathing.HierarchicalGraph;
 import com.dungeon.game.pathing.Node;
 import com.dungeon.game.world.Floor;
 import com.dungeon.game.world.Tile;
@@ -251,5 +251,5 @@ public abstract class Generation {
 	
 	public abstract void generateAreas();
 	
-	public abstract HierarchicalGraph<Node> getPathGraph();
+	public abstract HierarchicalGraph getPathGraph();
 }

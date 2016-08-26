@@ -3,13 +3,12 @@ package com.dungeon.game.generator.rooms;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.badlogic.gdx.ai.pfa.HierarchicalGraph;
-import com.badlogic.gdx.ai.pfa.indexed.IndexedHierarchicalGraph;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.rooms.room.EnemyRoom;
 import com.dungeon.game.generator.rooms.room.Room;
 import com.dungeon.game.pathing.Area;
+import com.dungeon.game.pathing.HierarchicalGraph;
 import com.dungeon.game.pathing.Node;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -298,7 +297,7 @@ public class Castle extends Generation {
 
 
 	@Override
-	public HierarchicalGraph<Node> getPathGraph() {
+	public HierarchicalGraph getPathGraph() {
 		ArrayList<Node> tileNodes = new ArrayList<Node>();
 		ArrayList<Node> zoneNodes = new ArrayList<Node>();
 		
@@ -308,12 +307,20 @@ public class Castle extends Generation {
 			for(int i = (int) room.x; i < room.x + room.width; i++){
 				for(int k = (int) room.y; k < room.y + room.height; k++){
 					if(!Tile.isSolid(map[k][i])){
-						Node node = new Node(i, k, 1);
+						Node node = new Node(i + 0.5f, k + 0.5f, 1);
 						tileNodes.add(node);
 						nodeArray[i][k] = node;
 					}
 				}
 			}
+		}
+		for(int[] d: doors){
+			int x = d[0];
+			int y = d[1];
+			Node node = new Node(x + 0.5f, y + 0.5f, 1);
+			tileNodes.add(node);
+			nodeArray[x][y] = node;
+			
 		}
 		
 		for(int i = 0; i <  nodeArray.length; i++){
@@ -327,9 +334,9 @@ public class Castle extends Generation {
 				}
 			}
 		}
-		com.dungeon.game.pathing.HierarchicalGraph hiearchicalGraph = new com.dungeon.game.pathing.HierarchicalGraph(null);
+		com.dungeon.game.pathing.HierarchicalGraph hiearchicalGraph = new com.dungeon.game.pathing.HierarchicalGraph(new Node[][]{tileNodes.toArray(new Node[tileNodes.size()])});
 		
-		return null;
+		return hiearchicalGraph;
 	}
 	
 	

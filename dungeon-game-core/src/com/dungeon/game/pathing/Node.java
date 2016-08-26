@@ -2,6 +2,7 @@ package com.dungeon.game.pathing;
 
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.utils.Array;
+import com.dungeon.game.world.Tile;
 
 public class Node {
 	
@@ -12,7 +13,7 @@ public class Node {
 	public float x; //x and y of nodes are in tiles not pixels
 	public float y;
 	
-	public Node(int x, int y, float cost){
+	public Node(float x, float y, float cost){
 		index = CUR_INDEX;
 		CUR_INDEX++;
 		this.cost = cost;
@@ -34,6 +35,10 @@ public class Node {
 	
 	public static void resetIndex(){
 		CUR_INDEX = 0;
+	}
+	
+	public float findDistance(float x, float y){
+		return (float) Math.sqrt((x-this.x*Tile.TS) * (x-this.x*Tile.TS) + (y-this.y*Tile.TS) * (y-this.y*Tile.TS));
 	}
 	
 }
