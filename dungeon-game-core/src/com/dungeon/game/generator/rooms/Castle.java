@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import com.badlogic.gdx.ai.pfa.HierarchicalGraph;
+import com.badlogic.gdx.ai.pfa.indexed.IndexedHierarchicalGraph;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.rooms.room.EnemyRoom;
@@ -326,6 +327,7 @@ public class Castle extends Generation {
 				}
 			}
 		}
+		com.dungeon.game.pathing.HierarchicalGraph hiearchicalGraph = new com.dungeon.game.pathing.HierarchicalGraph(null);
 		
 		return null;
 	}
