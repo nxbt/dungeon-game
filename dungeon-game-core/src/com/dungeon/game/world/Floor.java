@@ -21,6 +21,7 @@ import com.dungeon.game.generator.rooms.VillageCastle;
 import com.dungeon.game.generator.rooms.VillageRooms;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
+import com.dungeon.game.pathing.Node;
 import com.dungeon.game.textures.tiles.Brick;
 import com.dungeon.game.textures.tiles.Dirt;
 import com.dungeon.game.textures.tiles.Marble;
@@ -51,11 +52,11 @@ public class Floor {
 	
 	public int seed;
 	
-	public HierarchicalPathFinder pathfinder;
+	public HierarchicalPathFinder<Node> pathfinder;
 	
-	public HierarchicalGraph heiGraph;
+	public HierarchicalGraph<Node> heiGraph;
 	
-	public IndexedAStarPathFinder pathAlg;
+	public IndexedAStarPathFinder<Node> pathAlg;
 	
 	public Floor(World world, String type, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY) {
 		this.world = world;

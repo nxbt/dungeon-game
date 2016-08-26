@@ -3,11 +3,13 @@ package com.dungeon.game.generator.rooms;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.badlogic.gdx.ai.pfa.HierarchicalGraph;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.rooms.room.EnemyRoom;
 import com.dungeon.game.generator.rooms.room.Room;
 import com.dungeon.game.pathing.Area;
+import com.dungeon.game.pathing.Node;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -290,6 +292,42 @@ public class Castle extends Generation {
 				}
 			}
 		}
+	}
+	
+
+
+	@Override
+	public HierarchicalGraph<Node> getPathGraph() {
+		ArrayList<Node> tileNodes = new ArrayList<Node>();
+		ArrayList<Node> zoneNodes = new ArrayList<Node>();
+		
+		Node[][] nodeArray = new Node[width][height];
+		//generate nodes for each tile
+		for(GenRoom room: rooms){
+			for(int i = (int) room.x; i < room.x + room.width; i++){
+				for(int k = (int) room.y; k < room.y + room.height; k++){
+					if(!Tile.isSolid(map[k][i])){
+						Node node = new Node(i, k, 1);
+						tileNodes.add(node);
+						nodeArray[i][k] = node;
+					}
+				}
+			}
+		}
+		
+		for(int i = 0; i <  nodeArray.length; i++){
+			for(int k = 0; k <  nodeArray[0].length; k++){
+				Node n = nodeArray[i][k];
+				if(n != null){
+					if(i > 0 && nodeArray[i - 1][k] != null)n.madeConnection(nodeArray[i - 1][k], (n.cost + nodeArray[i - 1][k].cost) / 2f);
+					if(i < nodeArray.length - 1 && nodeArray[i + 1][k] != null)n.madeConnection(nodeArray[i + 1][k], (n.cost + nodeArray[i + 1][k].cost) / 2f);
+					if(k > 0 && nodeArray[i][k - 1] != null)n.madeConnection(nodeArray[i][k - 1], (n.cost + nodeArray[i][k - 1].cost) / 2f);
+					if(i < nodeArray.length - 1 && nodeArray[i][k + 1] != null)n.madeConnection(nodeArray[i][k + 1], (n.cost + nodeArray[i][k + 1].cost) / 2f);
+				}
+			}
+		}
+		
+		return null;
 	}
 	
 	

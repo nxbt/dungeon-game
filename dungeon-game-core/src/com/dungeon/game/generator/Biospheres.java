@@ -2,7 +2,9 @@ package com.dungeon.game.generator;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.ai.pfa.HierarchicalGraph;
 import com.badlogic.gdx.math.Circle;
+import com.dungeon.game.pathing.Node;
 import com.dungeon.game.world.World;
 
 public class Biospheres extends Generation {
@@ -51,7 +53,11 @@ public class Biospheres extends Generation {
 	}
 
 	@Override
-	public void generateAreas() {
-		
+	public void generateAreas() {}
+
+	@Override
+	public HierarchicalGraph<Node> getPathGraph() {
+		// NOT COMPLETED FOR THIS INCOMPLETE GENERATION
+		return null;
 	}
 }
