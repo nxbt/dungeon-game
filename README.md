@@ -14,7 +14,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * Upload screenshots to wiki
 * implement caves generation
 * implement catacombs generation
-* implement mixed generation
+* implement mixed (/recursive?) generation
 
 ##TODO very low priority (before final release):
 * Add multithreding!
