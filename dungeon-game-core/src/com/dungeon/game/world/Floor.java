@@ -2,6 +2,11 @@ package com.dungeon.game.world;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.ai.pfa.Connection;
+import com.badlogic.gdx.ai.pfa.Heuristic;
+import com.badlogic.gdx.ai.pfa.HierarchicalPathFinder;
+import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
+import com.badlogic.gdx.ai.pfa.indexed.IndexedGraph;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,13 +15,18 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.utils.Array;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.rooms.Castle;
 import com.dungeon.game.generator.rooms.Rooms;
+import com.dungeon.game.generator.rooms.VillageCastle;
 import com.dungeon.game.generator.rooms.VillageRooms;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
+import com.dungeon.game.pathing.HierarchicalGraph;
+import com.dungeon.game.pathing.Node;
+import com.dungeon.game.pathing.Path;
 import com.dungeon.game.textures.tiles.Brick;
 import com.dungeon.game.textures.tiles.Dirt;
 import com.dungeon.game.textures.tiles.Marble;
@@ -47,6 +57,12 @@ public class Floor {
 	
 	public int seed;
 	
+	public HierarchicalPathFinder<Node> pathfinder;
+	
+	public HierarchicalGraph heiGraph;
+	
+	public IndexedAStarPathFinder<Node> pathAlg;
+	
 	public Floor(World world, String type, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY) {
 		this.world = world;
 		
@@ -57,10 +73,11 @@ public class Floor {
 		tm = new Tile[height][width];
 		
 		Generation gen;
-		if(type.equals("rooms"))gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
-		else if(type.equals("villageRooms"))gen = new VillageRooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
-		else if(type.equals("castle"))gen = new Castle(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
-		else gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed);
+		if(type.equals("rooms"))gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed, new Object[0]);
+		else if(type.equals("villageRooms"))gen = new VillageRooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed, new Object[0]);
+		else if(type.equals("castle"))gen = new Castle(world, width, height,centerX,centerY, upTrapX, upTrapY, seed, new Object[0]);
+		else if(type.equals("villageCastle"))gen = new VillageCastle(world, width, height,centerX,centerY, upTrapX, upTrapY, seed, new Object[0]);
+		else gen = new Rooms(world, width, height,centerX,centerY, upTrapX, upTrapY, seed, new Object[0]);
 		
 		gen.generateSprites();
 
@@ -198,6 +215,19 @@ public class Floor {
 		}
 		areaMap.prepAreas();
 		
+		heiGraph = gen.getPathGraph();
+		pathAlg = new IndexedAStarPathFinder<Node>(heiGraph);
+		pathfinder = new HierarchicalPathFinder<Node>(heiGraph, pathAlg);
+		heiGraph.setLevel(0);
+		pathfinder.searchNodePath(heiGraph.nodes[0][0], heiGraph.nodes[0][1], new Heuristic<Node>(){
+
+			@Override
+			public float estimate(Node node, Node endNode) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+		}, new Path(world));
 		box2dWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
 		for(int i = 0; i <tm.length; i++){
 			for(int k = 0; k <tm.length; k++){
@@ -223,6 +253,7 @@ public class Floor {
 				
 			}
 		}
+		
 	}
 	
 	public void update() {

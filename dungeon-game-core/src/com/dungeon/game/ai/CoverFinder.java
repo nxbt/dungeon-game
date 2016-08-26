@@ -3,6 +3,7 @@ package com.dungeon.game.ai;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.badlogic.gdx.ai.btree.BehaviorTree;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
@@ -23,11 +24,9 @@ public class CoverFinder {
 		//psuedo code is something like this. any tile that HAS NO LOS to danger that is next to a tile WITH LOS to danger is considered cover when needing to shoot at danger.
 		//otherwise any tile without LOS to danger that is far from danger is cover.
 		ArrayList<float[]> rays = new ArrayList<float[]>(); //{startX,startY,endX,endy}
-		
 		for(int i = -180; i < 180; i+=18){
 			rays.add(new float[]{danger.x,danger.y,danger.x+(float) (Math.cos((i)/180f*Math.PI)*range*(float)Tile.TS),danger.y+(float) (Math.sin((i)/180f*Math.PI)*range*(float)Tile.TS)});
 		}
-		
 		for(int[] corner: world.curFloor.corners){
 			if(Math.sqrt((danger.x-corner[0])*(danger.x-corner[0])+(danger.y-corner[1])*(danger.y-corner[1]))<range*Tile.TS){
 				float angleSeg = (float) (Math.atan2(corner[1]-danger.y,corner[0]-danger.x)*180f/Math.PI);
@@ -84,13 +83,7 @@ public class CoverFinder {
 		//create the visPolygon
 
 		Polygon dangerPolygon = new Polygon(finalVerticies);
-		
-		ArrayList<Polygon> dangerTris = new ArrayList<Polygon>();
-		for(int i = 0; i < (dangerPolygon.getVertices().length/2)-1;i++){
-			dangerTris.add(new Polygon(new float[]{danger.x,danger.y,dangerPolygon.getVertices()[i*2],dangerPolygon.getVertices()[i*2+1],dangerPolygon.getVertices()[i*2+2],dangerPolygon.getVertices()[i*2+3]}));
-		}
-		dangerTris.add(new Polygon(new float[]{danger.x,danger.y,dangerPolygon.getVertices()[dangerPolygon.getVertices().length-2],dangerPolygon.getVertices()[dangerPolygon.getVertices().length-1],dangerPolygon.getVertices()[0],dangerPolygon.getVertices()[1]}));
-		//find cover tiles
+
 		ArrayList<int[]> coverTiles = new ArrayList<int[]>();
 		//fix for off the map
 		int startX = Math.max((int) Math.ceil(danger.x/Tile.TS - range), 0);
@@ -101,11 +94,8 @@ public class CoverFinder {
 			for(int k = startY; k < endY; k++){
 				if(world.curFloor.tm[k][i].data == 0 && Math.sqrt((i-danger.x/32)*(i-danger.x/32)+(k-danger.y/32)*(k-danger.y/32)) < range){
 					boolean cover = false;
-					for(Polygon p: dangerTris){
-						if(Intersector.overlapConvexPolygons(p, new Polygon(new float[]{i*Tile.TS, k*Tile.TS,(i+1)*Tile.TS, k*Tile.TS,(i+1)*Tile.TS, (k+1)*Tile.TS,i*Tile.TS, (k+1)*Tile.TS}))){
-							cover = true;
-							break;
-						}
+					if(Intersector.intersectPolygons(dangerPolygon, new Polygon(new float[]{i*Tile.TS, k*Tile.TS,i*Tile.TS, (k+1)*Tile.TS,(i+1)*Tile.TS, (k+1)*Tile.TS,(i+1)*Tile.TS, k*Tile.TS}), new Polygon())){
+						cover = true;
 					}
 					if(cover){
 						cover = false;
@@ -119,10 +109,8 @@ public class CoverFinder {
 							int x = t[0];
 							int y = t[1];
 							if(world.curFloor.tm[y][x].data == 0){
-								for(Polygon p: dangerTris){
-									if(Intersector.overlapConvexPolygons(p, new Polygon(new float[]{x*Tile.TS, y*Tile.TS,(x+1)*Tile.TS, y*Tile.TS,(x+1)*Tile.TS, (y+1)*Tile.TS,x*Tile.TS, (y+1)*Tile.TS}))){
-										tileIsBlocking = false;
-									}
+								if(Intersector.intersectPolygons(dangerPolygon, new Polygon(new float[]{x*Tile.TS, y*Tile.TS,x*Tile.TS, (y+1)*Tile.TS,(x+1)*Tile.TS, (y+1)*Tile.TS,(x+1)*Tile.TS, y*Tile.TS}), new Polygon())){
+									tileIsBlocking = false;
 								}
 							}else tileIsBlocking = false;
 							if(tileIsBlocking){

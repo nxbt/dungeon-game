@@ -4,13 +4,18 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.dungeon.game.pathing.HierarchicalGraph;
 import com.dungeon.game.world.World;
 
 public class CastleOld extends Generation {
 	private ArrayList<Rectangle> rooms;
 	
-	public CastleOld(World world, int width, int height, int textureSeed){
-		super(world, width, height, textureSeed);
+	public CastleOld(World world, int width, int height, int textureSeed, Object[] args){
+		super(world, width, height, textureSeed, args);
+	}
+	
+	protected void generate(Object[] args){
+		super.generate(args);
 		rooms = new ArrayList<Rectangle>();
 		int x = height/2;
 		int y = width/2;
@@ -224,4 +229,10 @@ public class CastleOld extends Generation {
 
 	@Override
 	public void generateAreas() {}
+
+	@Override
+	public HierarchicalGraph getPathGraph() {
+		// NOT COMPLETED FOR THIS OBSOLETE GENERATION
+		return null;
+	}
 }

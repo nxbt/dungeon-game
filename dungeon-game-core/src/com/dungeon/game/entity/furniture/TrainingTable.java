@@ -15,6 +15,7 @@ public class TrainingTable extends Static {
 		window = new TrainingWindow(world, 0, 0);
 		
 		hitbox = new Polygon(new float[]{1,1,31,1,31,31,1,31});
+		genVisBox();
 		
 		solid = true;
 		

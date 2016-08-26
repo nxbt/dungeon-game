@@ -29,6 +29,7 @@ public abstract class Projectile extends Dynamic {
 		rotate = true;
 		
 		this.hitbox = hitbox;
+		genVisBox();
 		
 		this.origin_x = originX;
 		this.origin_y = originY;

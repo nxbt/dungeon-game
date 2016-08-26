@@ -29,6 +29,7 @@ public class HandheldGraphic extends Dynamic {
 		this.item = item;
 		rotate = true;
 		this.hitbox = hitbox;
+		genVisBox();
 		
 		this.origin_x = originX;
 		this.origin_y = originY;

@@ -2,6 +2,7 @@ package com.dungeon.game.entity.character;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -93,8 +94,6 @@ public abstract class Character extends Dynamic {
 	
 	public Polygon visPolygon;
 	
-	public ArrayList<Polygon> visTris;
-	
 	public Texture face;
 
 	public Color speechColor;
@@ -119,7 +118,6 @@ public abstract class Character extends Dynamic {
 		effects = new ArrayList<Effect>();
 		
 		visPolygon = new Polygon(new float[]{0,0,0,0,0,0});
-		visTris = new ArrayList<Polygon>();
 
 		solid = true;
 		
@@ -290,23 +288,28 @@ public abstract class Character extends Dynamic {
 			//create the visPolygon
 	
 			visPolygon = new Polygon(finalVerticies);
-			
-			visTris = new ArrayList<Polygon>();
-			for(int i = 0; i < (visPolygon.getVertices().length/2)-1;i++){
-				visTris.add(new Polygon(new float[]{x,y,visPolygon.getVertices()[i*2],visPolygon.getVertices()[i*2+1],visPolygon.getVertices()[i*2+2],visPolygon.getVertices()[i*2+3]}));
-			}
-			visTris.add(new Polygon(new float[]{x,y,visPolygon.getVertices()[visPolygon.getVertices().length-2],visPolygon.getVertices()[visPolygon.getVertices().length-1],visPolygon.getVertices()[0],visPolygon.getVertices()[1]}));
-		
 			ArrayList<Entity> preSeenEnts = new ArrayList<Entity>(seenEntities);
 			seenEntities = new ArrayList<Entity>();
 			for(Entity e: world.entities){
-				if(!e.equals(this)){
-					for(Polygon tri: visTris){
-						if(Intersector.overlapConvexPolygons(e.getHitbox(),tri)){
-							if(!knownEntities.contains(e))knownEntities.add(e);
-							seenEntities.add(e);
-							break;
-						}
+				if(Math.sqrt((Math.abs(e.x - x) - e.d_width)*(Math.abs(e.x - x) - e.d_width)+(Math.abs(e.y - y) - e.d_height)*(Math.abs(e.y - y) - e.d_height)) < vision*Tile.TS && !e.equals(this)){
+					//for some reason the hitbox of the entity has to be wound the opposite direction, (so clockwise...) thats what this code does
+					//this makes no sense, because the docs say the two polygons have to be wound the same way, but the winding of the visPolygon DOES NOT MATTER
+//					float[] verts = e.getHitbox().getVertices();
+//					ArrayList<Float> list = new ArrayList<Float>();
+//					for(float f: verts)list.add(f);
+//					Collections.reverse(list);
+//					for(int i = 0; i < verts.length; i++){
+//						verts[i] = list.get(i);
+//					}
+//					for(int i = 0; i < verts.length; i+=2){
+//						float temp = verts[i];
+//						verts[i] = verts[i+1];
+//						verts[i+1] = temp;
+//					}
+//					Polygon hitbox = new Polygon(verts);
+					if(Intersector.intersectPolygons(visPolygon, e.getVisbox(), new Polygon())){
+						if(!knownEntities.contains(e))knownEntities.add(e);
+						seenEntities.add(e);
 					}
 				}
 			}

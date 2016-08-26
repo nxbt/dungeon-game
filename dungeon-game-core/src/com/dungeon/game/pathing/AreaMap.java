@@ -11,7 +11,7 @@ public class AreaMap {
 	private ArrayList<Area> areas; //contains data for all areas;
 	private Tile[][] tm; //contains tile data for the entire areaMap;
 	
-	private ArrayList<ArrayList<Path>> minPaths;
+	private ArrayList<ArrayList<PathOld>> minPaths;
 	
 	public ArrayList<int[]> lastPath;
 	
@@ -51,11 +51,11 @@ public class AreaMap {
 	}
 	
 	private void calculateAreaMinPaths(){
-		minPaths = new ArrayList<ArrayList<Path>>();
+		minPaths = new ArrayList<ArrayList<PathOld>>();
 		for(Area area: areas){
-			minPaths.add(new ArrayList<Path>());
+			minPaths.add(new ArrayList<PathOld>());
 			for(Area a: areas){
-				Path minPath = null;
+				PathOld minPath = null;
 				if(!area.equals(a)){
 					minPath = findMinPath(area.getCenter(), a.getCenter());
 				}
@@ -79,21 +79,21 @@ public class AreaMap {
 		return null;
 	}
 	
-	public Path findMinPath(int[] start, int[] end){
+	public PathOld findMinPath(int[] start, int[] end){
 		Area startArea = findArea(start);
 		Area endArea = findArea(end);
 		startArea.begin();
 		endArea.begin();
 		
-		ArrayList<Path> paths = new ArrayList<Path>();
-		paths.add(new Path(startArea,start,end));
+		ArrayList<PathOld> paths = new ArrayList<PathOld>();
+		paths.add(new PathOld(startArea,start,end));
 		for(int i = 0; i < paths.size(); i++){
-			Path path = paths.get(i);
+			PathOld path = paths.get(i);
 			if(!path.getLastArea().equals(endArea)){
 				for(Area area: path.getExpandAreas()){
 					boolean toAdd = true;
-					Path p = new Path(path, area);
-					for(Path pth: paths){
+					PathOld p = new PathOld(path, area);
+					for(PathOld pth: paths){
 						if(pth.isAreaOnPath(p.getLastArea())){
 							if(p.getLength(tm)>=pth.getLengthUpTo(tm, p.getLastArea())){
 								toAdd = false;
@@ -108,20 +108,20 @@ public class AreaMap {
 			}
 		}
 		//WHY IS THIS MORE THAN 1???
-		Path shortestPath = paths.get(0);
+		PathOld shortestPath = paths.get(0);
 		if(paths.size()>2){
-			for(Path path: paths){
+			for(PathOld path: paths){
 				if(path.getLength(tm)<shortestPath.getLength(tm))shortestPath = path;
 			}
 		}
 		
 		return shortestPath;
 	}
-	public Path findAreaPath(int[] start, int[] end){
+	public PathOld findAreaPath(int[] start, int[] end){
     		Area startArea = findArea(start);
     		Area endArea = findArea(end);
     		if(startArea!=null&&endArea!=null){
-    			Path path = minPaths.get(areas.indexOf(startArea)).get(areas.indexOf(endArea));
+    			PathOld path = minPaths.get(areas.indexOf(startArea)).get(areas.indexOf(endArea));
         		path.start = start;
         		path.end = end;
         		
@@ -134,11 +134,11 @@ public class AreaMap {
 		ArrayList<int[]> path;
 		Area startArea = findArea(start);
 		Area endArea = findArea(end);
-		if(startArea.equals(endArea)){
-			path = startArea.findPath(tm, start, end);
-		}
-		else if(startArea == null||endArea == null){
+		if(startArea == null||endArea == null){
 			return start;
+		}
+		else if(startArea.equals(endArea)){
+			path = startArea.findPath(tm, start, end);
 		}else path = findAreaPath(start, end).getTiles(tm);
 		lastPath = path;
 		if(path.size()==1)return path.get(0);

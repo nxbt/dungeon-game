@@ -6,6 +6,8 @@ import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.furniture.Door;
 import com.dungeon.game.entity.furniture.Fireplace;
 import com.dungeon.game.pathing.Area;
+import com.dungeon.game.pathing.HierarchicalGraph;
+import com.dungeon.game.pathing.Node;
 import com.dungeon.game.world.Floor;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.TileMap;
@@ -28,7 +30,7 @@ public abstract class Generation {
 	public int textureSeed;
 	
 	public TileMap tileMap;
-	public Generation(World world, int width, int height, int textureSeed){
+	public Generation(World world, int width, int height, int textureSeed, Object[] args){
 		this.textureSeed = textureSeed;
 		tileMap = Floor.tileMap1;
 		areas = new ArrayList<Area>();
@@ -38,10 +40,14 @@ public abstract class Generation {
 //		rotations = new int[height][width];
 //		flips = new boolean[height][width];
 		entities = new ArrayList<Entity>();
-		
-		generateClearDungeon();
 		this.world = world;
+		generate(args);
 		
+		
+	}
+	
+	protected void generate(Object[] args){
+		generateClearDungeon();
 		
 	}
 	
@@ -244,4 +250,6 @@ public abstract class Generation {
 	}
 	
 	public abstract void generateAreas();
+	
+	public abstract HierarchicalGraph getPathGraph();
 }

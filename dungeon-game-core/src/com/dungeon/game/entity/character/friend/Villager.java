@@ -1,10 +1,13 @@
 package com.dungeon.game.entity.character.friend;
 
+import com.badlogic.gdx.ai.pfa.Heuristic;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.light.Light;
+import com.dungeon.game.pathing.Node;
+import com.dungeon.game.pathing.Path;
 import com.dungeon.game.textures.entity.Person;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -46,6 +49,7 @@ public class Villager extends Friend {
 		fric = 0.5f;
 		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
+		genVisBox();
 		
 		origin_x = 16;
 		origin_y = 16;
@@ -88,8 +92,25 @@ public class Villager extends Friend {
 				if(targetTile[0]!=(int)(x/Tile.TS)||targetTile[1]!=(int)(y/Tile.TS))foundTile = true;
 			}
 		}
-		if(stagerTimer == 0)targetTile = world.areaMap.findPath(new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (wanderTile[0]),(int) (wanderTile[1])});
-		path = world.areaMap.lastPath;
+//		if(stagerTimer == 0)targetTile = world.areaMap.findPath(new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (wanderTile[0]),(int) (wanderTile[1])});
+//		path = world.areaMap.lastPath;
+		
+		if(stagerTimer == 0){
+			Path p = new Path(world);
+			world.curFloor.heiGraph.setLevel(0);
+			world.curFloor.pathfinder.searchNodePath(world.curFloor.heiGraph.getClosestNode(x, y), world.curFloor.heiGraph.nodes[0][1], new Heuristic<Node>(){
+
+				@Override
+				public float estimate(Node node, Node endNode) {
+					// TODO Auto-generated method stub
+					return 1;
+				}
+				
+			}, p);
+			path = p.getPath();
+			
+			if(path.size() > 0)targetTile = p.getTargTile();
+		}
 		
 		if(targetTile!=null){
 			moveTo = targetTile;

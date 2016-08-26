@@ -10,6 +10,7 @@ public class SmallTable extends Static {
 		super(world, x, y, 16, 16, "bedside.png");
 		solid = true;
 		hitbox = new Polygon(new float[]{1,1,15,1,15,15,1,15});
+		genVisBox();
 		origin_x = 8;
 		origin_y = 8;
 	}

@@ -12,7 +12,7 @@ public class DungeonGame extends ApplicationAdapter {
 	
 	@Override
 	public void create() {
-		Gdx.graphics.setDisplayMode(1280, 720, false);
+		Gdx.graphics.setWindowedMode(1280, 720);
 		
 		batch = new SpriteBatch();
 		

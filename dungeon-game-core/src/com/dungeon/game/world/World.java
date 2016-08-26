@@ -31,6 +31,7 @@ import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.item.equipable.weapon.part.Part;
 //import com.dungeon.game.light.LightMap;
 import com.dungeon.game.pathing.AreaMap;
+import com.dungeon.game.pathing.Node;
 
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
@@ -225,6 +226,14 @@ public class World {
 			
 			shapeRenderer.setProjectionMatrix(cam.cam.combined);
 			
+			if(debug_pathing){
+				shapeRenderer.setColor(Color.ORANGE);
+				shapeRenderer.set(ShapeType.Filled);
+				for(Node n :curFloor.heiGraph.nodes[0]){
+					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 2);
+				}
+			}
+			
 			for(Entity e: entities){
 				if(debug_hitbox) {
 					if(e.solid) shapeRenderer.setColor(Color.RED);
@@ -259,10 +268,11 @@ public class World {
 						if(e instanceof Friend)shapeRenderer.setColor(0,1,1,0.2f);
 						if(e instanceof Enemy)shapeRenderer.setColor(1,1,0,0.2f);
 						shapeRenderer.set(ShapeType.Filled);
-						for(Polygon tri: ((Character)e).visTris){
-							float[] points = tri.getVertices();
-							shapeRenderer.triangle(points[0], points[1], points[2], points[3], points[4], points[5]);
-						}
+//						for(Polygon tri: ((Character)e).visTris){
+//							float[] points = tri.getVertices();
+//							shapeRenderer.triangle(points[0], points[1], points[2], points[3], points[4], points[5]);
+//						}
+						shapeRenderer.polygon(((Character) e).visPolygon.getVertices());
 						shapeRenderer.set(ShapeType.Line);
 					}
 					Gdx.gl.glBlendFunc(GL20.GL_ZERO, GL20.GL_ONE);

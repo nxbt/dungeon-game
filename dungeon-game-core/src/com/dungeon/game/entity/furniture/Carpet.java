@@ -74,6 +74,7 @@ public class Carpet extends Static {
 		d_height = sprite.getHeight();
 		
 		hitbox = new Polygon(new float[] {0,0,width*16,0,width*16,height*16,0,height*16});
+		genVisBox();
 		
 		origin_x = d_width/2;
 		origin_y = d_height/2;

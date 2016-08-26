@@ -10,6 +10,7 @@ public class ShopDesk1 extends Static {
 		super(world, x, y, 16, 48, "desk1.png");
 		
 		hitbox = new Polygon(new float[] {0,0,16,0,16,48,0,48});
+		genVisBox();
 		
 		origin_x = 8;
 		origin_y = 24;
