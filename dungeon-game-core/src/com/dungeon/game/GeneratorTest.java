@@ -14,11 +14,21 @@ public class GeneratorTest extends ApplicationAdapter {
 	
 	HierarchicalGraph pathGraph;
 	
+	Camera cam;
+	
 	@Override
-	public void create() {
+	public void create() { //shit ton of bugs here!
 		Gdx.graphics.setWindowedMode(1280, 720);
 		
 		batch = new SpriteBatch();
+		
+		generation = new CastleRooms(50, 50);
+		
+		tileMap = generation.map;
+		
+		pathGraph = generation.getPathGraph();
+		
+		cam = new Camera();
 	}
 
 	@Override
