@@ -204,11 +204,11 @@ public class Floor {
 		}
 		
 		gen.generateAreas();
-		areaMap = new AreaMap(tm);
-		for(Area area: gen.areas){
-			areaMap.addArea(area);
-		}
-		areaMap.prepAreas();
+//		areaMap = new AreaMap(tm);
+//		for(Area area: gen.areas){
+//			areaMap.addArea(area);
+//		}
+//		areaMap.prepAreas();
 		
 		heiGraph = gen.getPathGraph();
 		pathAlg = new IndexedAStarPathFinder<Node>(heiGraph);

@@ -31,6 +31,7 @@ import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.item.equipable.weapon.part.Part;
 //import com.dungeon.game.light.LightMap;
 import com.dungeon.game.pathing.AreaMap;
+import com.dungeon.game.pathing.Connection;
 import com.dungeon.game.pathing.Node;
 
 import box2dLight.PointLight;
@@ -65,6 +66,7 @@ public class World {
 	boolean debug_frames;
 	boolean debug_sight;
 	boolean debug_light;
+	boolean debug_pause;
 	
 	private com.badlogic.gdx.physics.box2d.World emptyWorld;
 	private PointLight emptyWorldLight;
@@ -127,6 +129,7 @@ public class World {
 		debug_frames = false; 
 		debug_sight = false;
 		debug_light = false;
+		debug_pause = false;
 		rayHandler.setWorld(curFloor.box2dWorld);
 		
 		for(Entity e: entities){
@@ -149,8 +152,12 @@ public class World {
 //			}
 //			
 //		}
-		for(int i = 0; i < entities.size(); i++) {
-			entities.get(i).update();
+		if(debug_pause){
+			player.update();
+		}else{
+			for(int i = 0; i < entities.size(); i++) {
+				entities.get(i).update();
+			}
 		}
 		
 		for(int i = 0; i < entities.size(); i++) {
@@ -170,6 +177,7 @@ public class World {
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F8)) debug_pathing = !debug_pathing;
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F7)) debug_hitbox = !debug_hitbox;
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F10)) debug_sight = !debug_sight;
+		if(Gdx.input.isKeyJustPressed(Input.Keys.F6)) debug_pause = !debug_pause;
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F11)) {
 			debug_light = !debug_light;
@@ -227,10 +235,20 @@ public class World {
 			shapeRenderer.setProjectionMatrix(cam.cam.combined);
 			
 			if(debug_pathing){
-				shapeRenderer.setColor(Color.ORANGE);
 				shapeRenderer.set(ShapeType.Filled);
-				for(Node n :curFloor.heiGraph.nodes[0]){
+				for(Node n :curFloor.heiGraph.nodes[1]){
+					shapeRenderer.setColor(Color.ORANGE);
 					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 2);
+					for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.getConnections()){
+						shapeRenderer.setColor(Color.WHITE);
+						shapeRenderer.line(n.x*Tile.TS, n.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS);
+					}
+					for(Node n1: n.downNodes){
+						for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n1.getConnections()){
+							shapeRenderer.setColor(Color.BLACK);
+							shapeRenderer.line(n1.x*Tile.TS, n1.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS);
+						}
+					}
 				}
 			}
 			

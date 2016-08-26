@@ -3,6 +3,7 @@ package com.dungeon.game.generator;
 import java.util.ArrayList;
 
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.character.friend.Villager;
 import com.dungeon.game.entity.furniture.Door;
 import com.dungeon.game.entity.furniture.Fireplace;
 import com.dungeon.game.pathing.Area;

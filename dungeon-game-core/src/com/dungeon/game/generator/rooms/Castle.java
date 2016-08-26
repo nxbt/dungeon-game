@@ -298,16 +298,21 @@ public class Castle extends Generation {
 
 	@Override
 	public HierarchicalGraph getPathGraph() {
+		Node.resetIndex(2);
 		ArrayList<Node> tileNodes = new ArrayList<Node>();
 		ArrayList<Node> zoneNodes = new ArrayList<Node>();
 		
 		Node[][] nodeArray = new Node[width][height];
 		//generate nodes for each tile
 		for(GenRoom room: rooms){
+			Node zoneNode = new Node(room.x+room.width/2, room.y+room.height/2, 1, 1);
+			zoneNodes.add(zoneNode);
 			for(int i = (int) room.x; i < room.x + room.width; i++){
 				for(int k = (int) room.y; k < room.y + room.height; k++){
 					if(!Tile.isSolid(map[k][i])){
-						Node node = new Node(i + 0.5f, k + 0.5f, 1);
+						Node node = new Node(i + 0.5f, k + 0.5f, 1, 0);
+						node.upNode = zoneNode;
+						zoneNode.downNodes.add(node);
 						tileNodes.add(node);
 						nodeArray[i][k] = node;
 					}
@@ -317,8 +322,12 @@ public class Castle extends Generation {
 		for(int[] d: doors){
 			int x = d[0];
 			int y = d[1];
-			Node node = new Node(x + 0.5f, y + 0.5f, 1);
+			Node zoneNode = new Node(x + 0.5f, y + 0.5f, 1, 1);
+			zoneNodes.add(zoneNode);
+			Node node = new Node(x + 0.5f, y + 0.5f, 1, 0);
 			tileNodes.add(node);
+			node.upNode = zoneNode;
+			zoneNode.downNodes.add(node);
 			nodeArray[x][y] = node;
 			
 		}
@@ -327,14 +336,25 @@ public class Castle extends Generation {
 			for(int k = 0; k <  nodeArray[0].length; k++){
 				Node n = nodeArray[i][k];
 				if(n != null){
-					if(i > 0 && nodeArray[i - 1][k] != null)n.madeConnection(nodeArray[i - 1][k], (n.cost + nodeArray[i - 1][k].cost) / 2f);
-					if(i < nodeArray.length - 1 && nodeArray[i + 1][k] != null)n.madeConnection(nodeArray[i + 1][k], (n.cost + nodeArray[i + 1][k].cost) / 2f);
-					if(k > 0 && nodeArray[i][k - 1] != null)n.madeConnection(nodeArray[i][k - 1], (n.cost + nodeArray[i][k - 1].cost) / 2f);
-					if(i < nodeArray.length - 1 && nodeArray[i][k + 1] != null)n.madeConnection(nodeArray[i][k + 1], (n.cost + nodeArray[i][k + 1].cost) / 2f);
+					if(i > 0 && nodeArray[i - 1][k] != null)n.makeConnection(nodeArray[i - 1][k], (n.cost + nodeArray[i - 1][k].cost) / 2f);
+					if(i < nodeArray.length - 1 && nodeArray[i + 1][k] != null)n.makeConnection(nodeArray[i + 1][k], (n.cost + nodeArray[i + 1][k].cost) / 2f);
+					if(k > 0 && nodeArray[i][k - 1] != null)n.makeConnection(nodeArray[i][k - 1], (n.cost + nodeArray[i][k - 1].cost) / 2f);
+					if(i < nodeArray.length - 1 && nodeArray[i][k + 1] != null)n.makeConnection(nodeArray[i][k + 1], (n.cost + nodeArray[i][k + 1].cost) / 2f);
 				}
 			}
 		}
-		com.dungeon.game.pathing.HierarchicalGraph hiearchicalGraph = new com.dungeon.game.pathing.HierarchicalGraph(new Node[][]{tileNodes.toArray(new Node[tileNodes.size()])});
+		
+		for(Node n1: zoneNodes){
+			for(Node n2: zoneNodes){
+				if(n1.isAdjacentTo(n2)){
+					n1.makeConnection(n2, 1);
+				}
+			}
+		}
+		for(Node n1: zoneNodes){
+			n1.findDownNode();
+		}
+		com.dungeon.game.pathing.HierarchicalGraph hiearchicalGraph = new com.dungeon.game.pathing.HierarchicalGraph(new Node[][]{tileNodes.toArray(new Node[tileNodes.size()]), zoneNodes.toArray(new Node[zoneNodes.size()])});
 		
 		return hiearchicalGraph;
 	}

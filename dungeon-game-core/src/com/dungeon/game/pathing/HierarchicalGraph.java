@@ -1,10 +1,9 @@
 package com.dungeon.game.pathing;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedHierarchicalGraph;
 import com.badlogic.gdx.utils.Array;
+import com.dungeon.game.world.Tile;
 
 public class HierarchicalGraph extends IndexedHierarchicalGraph<Node> {
 	
@@ -32,8 +31,30 @@ public class HierarchicalGraph extends IndexedHierarchicalGraph<Node> {
 
 	@Override
 	public Node convertNodeBetweenLevels(int inputLevel, Node node, int outputLevel) {
-		// TODO Auto-generated method stub
-		return node;
+		Node curNode = node;
+		int curLevel = inputLevel;
+		while(curLevel != outputLevel){
+			if(curLevel < outputLevel){
+				curLevel++;
+				if(curNode.upNode == null)System.out.println("up fuuuck " + inputLevel + " " + outputLevel + " " + node.name);
+				curNode = curNode.upNode;
+			}else{
+				curLevel--;
+				if(curNode.downNode == null)System.out.println("down fuuuck " + inputLevel + " " + outputLevel + " " + node.name);
+				curNode = curNode.downNode;
+//				if(curNode.downNodes.size() == 0)System.out.println(curNode.name);
+//				Node closeNode = curNode.downNodes.get(0);
+//				float closeNodeDist = closeNode.findDistance(node.x*Tile.TS, node.y*Tile.TS);
+//				for(Node n: curNode.downNodes){
+//					if(n.findDistance(node.x*Tile.TS, node.y*Tile.TS) < closeNodeDist){
+//						closeNode = n;
+//						closeNodeDist = n.findDistance(node.x*Tile.TS, node.y*Tile.TS);
+//					}
+//				}
+//				curNode = closeNode;
+			}
+		}
+		return curNode;
 	}
 	
 	public Node getClosestNode(float x, float y){
