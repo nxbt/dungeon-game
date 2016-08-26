@@ -5,13 +5,16 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * continue proceedurally generated textures
 * make wood texture rotate to make more sense in small hallways
 * update wiki pages
+* finish reworking pathfinding to use heiarchal pathfinding (GDX AI)
+* add logical pathfinding around entities
 
 ##TODO low priority (within a month or two?):
 * continue adding procedural room decoration
 * Add different shops to towns
 * Upload screenshots to wiki
 * implement caves generation
-* reword pathfinding to use heiarchal pathfinding (GDX AI)
+* implement catacombs generation
+* implement mixed generation
 
 ##TODO very low priority (before final release):
 * Add multithreding!
