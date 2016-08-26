@@ -92,8 +92,6 @@ public class Villager extends Friend {
 				if(targetTile[0]!=(int)(x/Tile.TS)||targetTile[1]!=(int)(y/Tile.TS))foundTile = true;
 			}
 		}
-//		if(stagerTimer == 0)targetTile = world.areaMap.findPath(new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (wanderTile[0]),(int) (wanderTile[1])});
-//		path = world.areaMap.lastPath;
 		
 		if(stagerTimer == 0){
 			Path p = new Path(world);
@@ -102,8 +100,7 @@ public class Villager extends Friend {
 
 				@Override
 				public float estimate(Node node, Node endNode) {
-					// TODO Auto-generated method stub
-					return 1;
+					return node.findDistance(endNode.x, endNode.y);
 				}
 				
 			}, p);
