@@ -322,7 +322,13 @@ public class Castle extends Generation {
 		for(int[] d: doors){
 			int x = d[0];
 			int y = d[1];
-			Node zoneNode = new Node(x + 0.5f, y + 0.5f, 1, 1);
+			Node zoneNode = zoneNodes.get(0);
+			for(int i = 0; i < rooms.size(); i++){
+				if(rooms.get(i).isAdjacent(x, y)){
+					zoneNode = zoneNodes.get(i);
+					break;
+				}
+			}
 			zoneNodes.add(zoneNode);
 			Node node = new Node(x + 0.5f, y + 0.5f, 1, 0);
 			tileNodes.add(node);
@@ -346,13 +352,13 @@ public class Castle extends Generation {
 		
 		for(Node n1: zoneNodes){
 			for(Node n2: zoneNodes){
-				if(n1.isAdjacentTo(n2)){
+				if(!n1.equals(n2) && n1.isAdjacentTo(n2)){
 					n1.makeConnection(n2, 1);
 				}
 			}
 		}
-		for(Node n1: zoneNodes){
-			n1.findDownNode();
+		for(Node n: zoneNodes){
+			n.findDownNode();
 		}
 		com.dungeon.game.pathing.HierarchicalGraph hiearchicalGraph = new com.dungeon.game.pathing.HierarchicalGraph(new Node[][]{tileNodes.toArray(new Node[tileNodes.size()]), zoneNodes.toArray(new Node[zoneNodes.size()])});
 		

@@ -1,5 +1,7 @@
 package com.dungeon.game.entity.character.friend;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
@@ -65,6 +67,8 @@ public class Villager extends Friend {
 		moveTo[0] = wanderTile[0];
 		moveTo[1] = wanderTile[1];
 		
+		path =  new ArrayList<int[]>();
+		
 		
 		dialogue = new Dialogue(world, this);
 
@@ -93,11 +97,19 @@ public class Villager extends Friend {
 				Path p = new Path(world);
 				world.curFloor.heiGraph.setLevel(0);
 				world.curFloor.pathfinder.searchNodePath(world.curFloor.heiGraph.getClosestNode(x, y), world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2), new Heuristic(), p);
-				if(path != null && path.size() > 0){
+				path = p.getPath();
+				if(path.size() > 0){
 					targetTile = p.getTargTile();	
 					if(targetTile[0]!=(int)(x/Tile.TS)||targetTile[1]!=(int)(y/Tile.TS))foundTile = true;	
 				}
-				if(path == null || path.size() == 0){
+				if(p.nodes.size() == 0){
+					world.curFloor.heiGraph.setLevel(0);
+					Node n = world.curFloor.heiGraph.getClosestNode(x, y);
+					System.out.println("from node connections: "+ n.getConnections().size);
+					Node n2 = world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2);
+					System.out.println("to node connections: "+ n2.getConnections().size);
+				}
+				if(path.size() == 0){
 					System.out.println("failed to find path. Shit.");
 					world.tempPathingDebug.add(new float[]{world.curFloor.heiGraph.getClosestNode(x, y).x*Tile.TS, world.curFloor.heiGraph.getClosestNode(x, y).y*Tile.TS, world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2).x*Tile.TS, world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2).y *Tile.TS});
 					break;
@@ -111,8 +123,14 @@ public class Villager extends Friend {
 			world.curFloor.pathfinder.searchNodePath(world.curFloor.heiGraph.getClosestNode(x, y), world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2), new Heuristic(), p);
 			path = p.getPath();
 			
-			if(path != null && path.size() > 0)targetTile = p.getTargTile();
-			if(path == null || path.size() == 0){
+			if(path.size() > 0)targetTile = p.getTargTile();
+			if(p.nodes.size() == 0){
+				Node n = world.curFloor.heiGraph.getClosestNode(x, y);
+				System.out.println("from node connections: "+ n.getConnections().size);
+				Node n2 = world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2);
+				System.out.println("to node connections: "+ n2.getConnections().size);
+			}
+			if(path.size() == 0){
 				System.out.println("failed to find path. Shit.");
 				world.tempPathingDebug.add(new float[]{world.curFloor.heiGraph.getClosestNode(x, y).x*Tile.TS, world.curFloor.heiGraph.getClosestNode(x, y).y*Tile.TS, world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2).x*Tile.TS, world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2).y *Tile.TS});
 

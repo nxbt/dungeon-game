@@ -13,7 +13,7 @@ import com.dungeon.game.world.World;
 
 public class Path implements GraphPath<Node> {
 	
-	private ArrayList<Node> nodes;
+	public ArrayList<Node> nodes;
 	
 	public World world;
 	

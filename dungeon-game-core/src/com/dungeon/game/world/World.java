@@ -256,7 +256,18 @@ public class World {
 							}
 						}
 					}
+
+					for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.getConnections()){
+						for(com.badlogic.gdx.ai.pfa.Connection<Node> c2: c.getToNode().getConnections()){
+							if(c2.getToNode().equals(n)){
+								shapeRenderer.setColor(Color.CYAN);
+								shapeRenderer.rectLine(n.x*Tile.TS, n.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS, 5);
+								break;
+							}
+						}
+					}
 				}
+				
 			}
 			
 			for(Entity e: entities){
@@ -274,23 +285,23 @@ public class World {
 					shapeRenderer.set(ShapeType.Line);
 				}
 				
-//				if(debug_pathing && e instanceof Character && ((Character)e).moveTo!=null&&((Character)e).path!=null){
-//					shapeRenderer.setColor(Color.BLUE);
-//					shapeRenderer.rect(((Character)e).moveTo[0]*Tile.TS, ((Character)e).moveTo[1]*Tile.TS, Tile.TS, Tile.TS);
-//					shapeRenderer.line(e.x, e.y, ((Character)e).moveTo[0]*Tile.TS+Tile.TS/2, ((Character)e).moveTo[1]*Tile.TS+Tile.TS/2);
-//					int[] prePoint = new int[]{0,0};
-//					shapeRenderer.setColor(Color.YELLOW);
-//					for(int[] point:((Character)e).path){
-//						if(((Character)e).path.indexOf(point)>0){
-//							shapeRenderer.line(prePoint[0]*Tile.TS+Tile.TS/2, prePoint[1]*Tile.TS+Tile.TS/2,point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
-//						}
-//						prePoint = point;
-//					}
-//					if(e instanceof Goon && ((Goon)e).lineOfCover != null){
-//						shapeRenderer.setColor(Color.CORAL);
-//						shapeRenderer.line(((Goon)e).lineOfCover[0], ((Goon)e).lineOfCover[1], ((Goon)e).lineOfCover[2], ((Goon)e).lineOfCover[3]);
-//					}
-//				}
+				if(debug_pathing && e instanceof Character && ((Character)e).moveTo!=null&&((Character)e).path!=null){
+					shapeRenderer.setColor(Color.BLUE);
+					shapeRenderer.rect(((Character)e).moveTo[0]*Tile.TS, ((Character)e).moveTo[1]*Tile.TS, Tile.TS, Tile.TS);
+					shapeRenderer.line(e.x, e.y, ((Character)e).moveTo[0]*Tile.TS+Tile.TS/2, ((Character)e).moveTo[1]*Tile.TS+Tile.TS/2);
+					int[] prePoint = new int[]{0,0};
+					shapeRenderer.setColor(Color.YELLOW);
+					for(int[] point:((Character)e).path){
+						if(((Character)e).path.indexOf(point)>0){
+							shapeRenderer.line(prePoint[0]*Tile.TS+Tile.TS/2, prePoint[1]*Tile.TS+Tile.TS/2,point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
+						}
+						prePoint = point;
+					}
+					if(e instanceof Goon && ((Goon)e).lineOfCover != null){
+						shapeRenderer.setColor(Color.CORAL);
+						shapeRenderer.line(((Goon)e).lineOfCover[0], ((Goon)e).lineOfCover[1], ((Goon)e).lineOfCover[2], ((Goon)e).lineOfCover[3]);
+					}
+				}
 				
 				if(debug_sight) {
 					Gdx.gl.glEnable(GL20.GL_BLEND);
