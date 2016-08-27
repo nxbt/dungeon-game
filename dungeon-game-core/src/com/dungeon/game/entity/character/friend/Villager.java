@@ -97,7 +97,11 @@ public class Villager extends Friend {
 					targetTile = p.getTargTile();	
 					if(targetTile[0]!=(int)(x/Tile.TS)||targetTile[1]!=(int)(y/Tile.TS))foundTile = true;	
 				}
-				if(path == null || path.size() == 0)break;
+				if(path == null || path.size() == 0){
+					System.out.println("failed to find path. Shit.");
+					world.tempPathingDebug.add(new float[]{world.curFloor.heiGraph.getClosestNode(x, y).x*Tile.TS, world.curFloor.heiGraph.getClosestNode(x, y).y*Tile.TS, world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2).x*Tile.TS, world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2).y *Tile.TS});
+					break;
+				}
 			}
 		}
 		
@@ -108,6 +112,11 @@ public class Villager extends Friend {
 			path = p.getPath();
 			
 			if(path != null && path.size() > 0)targetTile = p.getTargTile();
+			if(path == null || path.size() == 0){
+				System.out.println("failed to find path. Shit.");
+				world.tempPathingDebug.add(new float[]{world.curFloor.heiGraph.getClosestNode(x, y).x*Tile.TS, world.curFloor.heiGraph.getClosestNode(x, y).y*Tile.TS, world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2).x*Tile.TS, world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2).y *Tile.TS});
+
+			}
 		}
 		
 		if(targetTile!=null){

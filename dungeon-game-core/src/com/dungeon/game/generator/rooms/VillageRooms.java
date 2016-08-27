@@ -64,7 +64,7 @@ public class VillageRooms extends Rooms {
 			hallEnds = new ArrayList<ArrayList<Rectangle>>();
 			generateStartRoom((Integer)(args[1]), (Integer)(args[2]));
 		}while(specialRooms.size() < 3);
-		if(args.length > 0 && !args[0].equals("test")){
+		if(args.length == 0 ||  !args[0].equals("test")){
 			populateSpecialRooms();
 			populateNormRooms();
 			populateHallWays();

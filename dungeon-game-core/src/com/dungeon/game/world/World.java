@@ -75,6 +75,8 @@ public class World {
 	
 	private ArrayList<Entity> drawEnts;
 	
+	public ArrayList<float[]> tempPathingDebug;
+	
 	public World(boolean generate) {
 		Part.doFuckAll(); //Never Forget
 		
@@ -86,6 +88,7 @@ public class World {
 		cam = new Camera(this);
 		hudCam = new Camera(this);
 		player = new Player(this, 0, 0);
+		tempPathingDebug = new ArrayList<float[]>();
 		if(generate){
 			
 			
@@ -238,18 +241,19 @@ public class World {
 			shapeRenderer.setProjectionMatrix(cam.cam.combined);
 			
 			if(debug_pathing){
-				shapeRenderer.set(ShapeType.Filled);
+				shapeRenderer.set(ShapeType.Line);
 				for(Node n :curFloor.heiGraph.nodes[1]){
 					shapeRenderer.setColor(Color.ORANGE);
 					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 2);
-					for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.getConnections()){
-						shapeRenderer.setColor(Color.WHITE);
-						shapeRenderer.line(n.x*Tile.TS, n.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS);
-					}
 					for(Node n1: n.downNodes){
 						for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n1.getConnections()){
-							shapeRenderer.setColor(Color.BLACK);
-							shapeRenderer.line(n1.x*Tile.TS, n1.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS);
+							for(com.badlogic.gdx.ai.pfa.Connection<Node> c2: c.getToNode().getConnections()){
+								if(c2.getToNode().equals(n1)){
+									shapeRenderer.setColor(Color.BLACK);
+									shapeRenderer.line(n1.x*Tile.TS, n1.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS);
+									break;
+								}
+							}
 						}
 					}
 				}
@@ -261,25 +265,32 @@ public class World {
 					else shapeRenderer.setColor(Color.GREEN);
 					
 					shapeRenderer.polygon(e.getHitbox().getVertices());	
+
+					shapeRenderer.set(ShapeType.Filled);
+					shapeRenderer.setColor(Color.CYAN);
+					for(float[] p: tempPathingDebug){
+						shapeRenderer.rectLine(p[0], p[1], p[2], p[3], 3);
+					}
+					shapeRenderer.set(ShapeType.Line);
 				}
 				
-				if(debug_pathing && e instanceof Character && ((Character)e).moveTo!=null&&((Character)e).path!=null){
-					shapeRenderer.setColor(Color.BLUE);
-					shapeRenderer.rect(((Character)e).moveTo[0]*Tile.TS, ((Character)e).moveTo[1]*Tile.TS, Tile.TS, Tile.TS);
-					shapeRenderer.line(e.x, e.y, ((Character)e).moveTo[0]*Tile.TS+Tile.TS/2, ((Character)e).moveTo[1]*Tile.TS+Tile.TS/2);
-					int[] prePoint = new int[]{0,0};
-					shapeRenderer.setColor(Color.YELLOW);
-					for(int[] point:((Character)e).path){
-						if(((Character)e).path.indexOf(point)>0){
-							shapeRenderer.line(prePoint[0]*Tile.TS+Tile.TS/2, prePoint[1]*Tile.TS+Tile.TS/2,point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
-						}
-						prePoint = point;
-					}
-					if(e instanceof Goon && ((Goon)e).lineOfCover != null){
-						shapeRenderer.setColor(Color.CORAL);
-						shapeRenderer.line(((Goon)e).lineOfCover[0], ((Goon)e).lineOfCover[1], ((Goon)e).lineOfCover[2], ((Goon)e).lineOfCover[3]);
-					}
-				}
+//				if(debug_pathing && e instanceof Character && ((Character)e).moveTo!=null&&((Character)e).path!=null){
+//					shapeRenderer.setColor(Color.BLUE);
+//					shapeRenderer.rect(((Character)e).moveTo[0]*Tile.TS, ((Character)e).moveTo[1]*Tile.TS, Tile.TS, Tile.TS);
+//					shapeRenderer.line(e.x, e.y, ((Character)e).moveTo[0]*Tile.TS+Tile.TS/2, ((Character)e).moveTo[1]*Tile.TS+Tile.TS/2);
+//					int[] prePoint = new int[]{0,0};
+//					shapeRenderer.setColor(Color.YELLOW);
+//					for(int[] point:((Character)e).path){
+//						if(((Character)e).path.indexOf(point)>0){
+//							shapeRenderer.line(prePoint[0]*Tile.TS+Tile.TS/2, prePoint[1]*Tile.TS+Tile.TS/2,point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
+//						}
+//						prePoint = point;
+//					}
+//					if(e instanceof Goon && ((Goon)e).lineOfCover != null){
+//						shapeRenderer.setColor(Color.CORAL);
+//						shapeRenderer.line(((Goon)e).lineOfCover[0], ((Goon)e).lineOfCover[1], ((Goon)e).lineOfCover[2], ((Goon)e).lineOfCover[3]);
+//					}
+//				}
 				
 				if(debug_sight) {
 					Gdx.gl.glEnable(GL20.GL_BLEND);

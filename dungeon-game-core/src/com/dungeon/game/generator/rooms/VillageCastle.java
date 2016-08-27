@@ -37,7 +37,7 @@ public class VillageCastle extends Castle {
 		createRooms();
 		createDoors();
 		if(generateSpecialRooms()){
-			if(args.length > 0 && !args[0].equals("test")){
+			if(args.length == 0 ||  !args[0].equals("test")){
 				populateSpecialRooms();
 				populateNormRooms();
 			}
