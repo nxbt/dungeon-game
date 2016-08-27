@@ -322,7 +322,7 @@ public class Castle extends Generation {
 		for(int[] d: doors){
 			int x = d[0];
 			int y = d[1];
-			Node zoneNode = zoneNodes.get(0);
+			Node zoneNode = null;
 			for(int i = 0; i < rooms.size(); i++){
 				if(rooms.get(i).isAdjacent(x, y)){
 					zoneNode = zoneNodes.get(i);
