@@ -16,7 +16,7 @@ public class DungeonGame extends ApplicationAdapter {
 		
 		batch = new SpriteBatch();
 		
-		world = new World();
+		world = new World(true);
 	}
 
 	@Override

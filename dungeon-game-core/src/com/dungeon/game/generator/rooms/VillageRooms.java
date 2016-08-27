@@ -32,7 +32,7 @@ public class VillageRooms extends Rooms {
 	
 	protected void generate(Object[] args){
 		generateClearDungeon();
-		if(world.curDungeon!=null)entities.add(new Stair(world, (Integer)(args[0])*Tile.TS-Tile.TS/2, (Integer)(args[1])*Tile.TS-Tile.TS/2, false, (Integer)(args[2])+1, (Integer)(args[3])+1));
+		if(world.curDungeon!=null)entities.add(new Stair(world, (Integer)(args[1])*Tile.TS-Tile.TS/2, (Integer)(args[2])*Tile.TS-Tile.TS/2, false, (Integer)(args[3])+1, (Integer)(args[4])+1));
 		roomGenerators = new MethodArray(4){
 			public void a(int x, int y, int width, int height, int dir, Rectangle room){
 				int nextX = (int) (x+width*Math.random());
@@ -62,13 +62,15 @@ public class VillageRooms extends Rooms {
 			normRooms = new ArrayList<Rectangle>();
 			halls = new ArrayList<ArrayList<int[]>>();
 			hallEnds = new ArrayList<ArrayList<Rectangle>>();
-			generateStartRoom((Integer)(args[0]), (Integer)(args[1]));
+			generateStartRoom((Integer)(args[1]), (Integer)(args[2]));
 		}while(specialRooms.size() < 3);
-		populateSpecialRooms();
-		populateNormRooms();
-		populateHallWays();
+		if(args.length > 0 && !args[0].equals("test")){
+			populateSpecialRooms();
+			populateNormRooms();
+			populateHallWays();
+			makeWalls(10, 11, 12, 13, 14);
+		}
 		
-		makeWalls(10, 11, 12, 13, 14);
 	}
 	
 

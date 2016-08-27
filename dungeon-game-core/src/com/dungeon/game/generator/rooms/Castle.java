@@ -31,7 +31,7 @@ public class Castle extends Generation {
 		generateClearDungeon();
 		createRooms();
 		createDoors();
-		populateRooms();
+		if(args.length > 0 && !args[0].equals("test"))populateRooms();
 		makeWalls(10, 11, 12, 13, 14);
 	}
 	

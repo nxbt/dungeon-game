@@ -75,7 +75,7 @@ public class World {
 	
 	private ArrayList<Entity> drawEnts;
 	
-	public World() {
+	public World(boolean generate) {
 		Part.doFuckAll(); //Never Forget
 		
 		rayHandler = new RayHandler(null);
@@ -83,61 +83,64 @@ public class World {
 		rayHandler.setAmbientLight(new Color(0,0,0,0));
 		RayHandler.useDiffuseLight(true);
 		hudBatch = new SpriteBatch();
-		
 		cam = new Camera(this);
 		hudCam = new Camera(this);
-		
 		player = new Player(this, 0, 0);
-		
-		shapeRenderer = new ShapeRenderer();
-		
-		dungeons = new ArrayList<Dungeon>();
-		
-		dungeons.add(new Dungeon(this));
-		
-		curDungeon = dungeons.get(0);
-		curFloor = curDungeon.floors.get(0);
-		
-		player.x = curFloor.tm[0].length/2*Tile.TS-Tile.TS/2;
-		player.y = curFloor.tm.length/2*Tile.TS-Tile.TS/2;
-		
-		areaMap = curFloor.areaMap;
-		
-		entities = new ArrayList<Entity>();
-		hudEntities = new ArrayList<Hud>();
-		
-		mouse = new Mouse(this, 0, 0);
-		descBox = new DescBox(this);
-		
-		entities = curFloor.entities;
-		entities.add(0,player);
-		entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+Tile.TS, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
-		entities.add(new TrainingTable(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2-Tile.TS, curFloor.tm.length/2*Tile.TS+Tile.TS/2));
-		hudEntities.add(new HudBackground(this));
-		
-		hudEntities.add(new EffectHudBackground(this, cam.width-44, cam.height-44));
-		
-		fpsFont = new BitmapFont(Gdx.files.internal("main_text.fnt"));
-		fpsFont.setColor(Color.RED);
-		
-		emptyWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
-		emptyWorldLight = new PointLight(rayHandler, 10, Color.WHITE, Integer.MAX_VALUE, 0, 0);
-		emptyWorldLight.remove(false);
-		
-		debug_hitbox = false;
-		debug_pathing = false;
-		debug_frames = false; 
-		debug_sight = false;
-		debug_light = false;
-		debug_pause = false;
-		rayHandler.setWorld(curFloor.box2dWorld);
-		
-		for(Entity e: entities){
-			if(e.light != null)e.light.load();
+		if(generate){
+			
+			
+			
+			shapeRenderer = new ShapeRenderer();
+			
+			dungeons = new ArrayList<Dungeon>();
+			
+			dungeons.add(new Dungeon(this));
+			
+			curDungeon = dungeons.get(0);
+			curFloor = curDungeon.floors.get(0);
+			
+			player.x = curFloor.tm[0].length/2*Tile.TS-Tile.TS/2;
+			player.y = curFloor.tm.length/2*Tile.TS-Tile.TS/2;
+			
+			areaMap = curFloor.areaMap;
+			
+			entities = new ArrayList<Entity>();
+			hudEntities = new ArrayList<Hud>();
+			
+			mouse = new Mouse(this, 0, 0);
+			descBox = new DescBox(this);
+			
+			entities = curFloor.entities;
+			entities.add(0,player);
+			entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+Tile.TS, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
+			entities.add(new TrainingTable(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2-Tile.TS, curFloor.tm.length/2*Tile.TS+Tile.TS/2));
+			hudEntities.add(new HudBackground(this));
+			
+			hudEntities.add(new EffectHudBackground(this, cam.width-44, cam.height-44));
+			
+			fpsFont = new BitmapFont(Gdx.files.internal("main_text.fnt"));
+			fpsFont.setColor(Color.RED);
+			
+			emptyWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
+			emptyWorldLight = new PointLight(rayHandler, 10, Color.WHITE, Integer.MAX_VALUE, 0, 0);
+			emptyWorldLight.remove(false);
+			
+			debug_hitbox = false;
+			debug_pathing = false;
+			debug_frames = false; 
+			debug_sight = false;
+			debug_light = false;
+			debug_pause = false;
+			rayHandler.setWorld(curFloor.box2dWorld);
+			
+			for(Entity e: entities){
+				if(e.light != null)e.light.load();
+			}
+//			CoverFinder.findCover(this, player, entities.get(entities.size() - 4), new int[4], new float[4], true, 10);
+			
+			drawEnts = new ArrayList<Entity>();
+			
 		}
-//		CoverFinder.findCover(this, player, entities.get(entities.size() - 4), new int[4], new float[4], true, 10);
-		
-		drawEnts = new ArrayList<Entity>();
 	}
 	
 	public void update() {
