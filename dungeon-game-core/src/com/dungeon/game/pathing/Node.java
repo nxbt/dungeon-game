@@ -18,6 +18,7 @@ public class Node {
 	public Node downNode;
 	public ArrayList<Node> downNodes;
 	public String name;
+	public int level;
 	
 	public Node(float x, float y, float cost, int level){
 		index = CUR_INDICES[level];
@@ -27,6 +28,7 @@ public class Node {
 		this.y = y;
 		this.name = "level "+level;
 		downNodes = new ArrayList<Node>();
+		this.level = level;
 	}
 	
 	public void makeConnection(Node end, float cost){
