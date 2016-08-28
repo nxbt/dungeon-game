@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="src" path="/dungeon-game-core"/>
-	<classpathentry kind="src" path="assets"/>s
+	<classpathentry kind="src" path="assets"/>
 	<classpathentry exported="true" kind="lib" path="libs/gdx-1.9.3.jar" sourcepath="libs/gdx-1.9.3-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-lwjgl-1.9.3.jar" sourcepath="libs/gdx-backend-lwjgl-1.9.3-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/gdx-box2d-platform-1.9.3-natives-desktop.jar"/>
@@ -23,5 +23,6 @@
 	<classpathentry exported="true" kind="lib" path="libs/lwjgl-platform-2.9.2-natives-linux.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/lwjgl-platform-2.9.2-natives-osx.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/lwjgl-platform-2.9.2-natives-windows.jar"/>
+	<classpathentry kind="lib" path="/dungeon-game-core/libs/gdx-ai-1.8.0.jar" sourcepath="/dungeon-game-core/libs/gdx-ai-1.8.0-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
