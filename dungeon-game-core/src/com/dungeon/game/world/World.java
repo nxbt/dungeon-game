@@ -11,15 +11,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.Camera;
-import com.dungeon.game.ai.CoverFinder;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.character.Player;
 import com.dungeon.game.entity.character.enemy.Enemy;
-import com.dungeon.game.entity.character.enemy.Goon;
 import com.dungeon.game.entity.character.friend.Friend;
 import com.dungeon.game.entity.character.friend.Mentor;
 import com.dungeon.game.entity.furniture.TrainingTable;
@@ -29,9 +26,7 @@ import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.HudBackground;
 import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.item.equipable.weapon.part.Part;
-//import com.dungeon.game.light.LightMap;
 import com.dungeon.game.pathing.AreaMap;
-import com.dungeon.game.pathing.Connection;
 import com.dungeon.game.pathing.Node;
 
 import box2dLight.PointLight;
@@ -139,7 +134,6 @@ public class World {
 			for(Entity e: entities){
 				if(e.light != null)e.light.load();
 			}
-//			CoverFinder.findCover(this, player, entities.get(entities.size() - 4), new int[4], new float[4], true, 10);
 			
 			drawEnts = new ArrayList<Entity>();
 			
@@ -150,14 +144,7 @@ public class World {
 		cam.update();
 		mouse.update();
 		descBox.update();
-//		class layerComparator implements Comparator {
-//
-//			@Override
-//			public int compare(Object arg0, Object arg1) {
-//				return 0;
-//			}
-//			
-//		}
+		
 		if(debug_pause){
 			player.update();
 		}else{
@@ -244,28 +231,63 @@ public class World {
 				for(Node n :curFloor.heiGraph.nodes[1]){
 					shapeRenderer.setColor(Color.ORANGE);
 					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 2);
-					for(Node n1: n.downNodes){
-						for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n1.getConnections()){
-							for(com.badlogic.gdx.ai.pfa.Connection<Node> c2: c.getToNode().getConnections()){
-								if(c2.getToNode().equals(n1)){
-									shapeRenderer.setColor(Color.BLACK);
-									shapeRenderer.line(n1.x*Tile.TS, n1.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS);
-									break;
-								}
-							}
-						}
-					}
-
+					
+					shapeRenderer.setColor(Color.BLACK);
+					
+//					for(Node n1: n.downNodes){
+////						for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n1.getConnections()){
+////							for(com.badlogic.gdx.ai.pfa.Connection<Node> c2: c.getToNode().getConnections()){
+////								if(c2.getToNode().equals(n1)){
+////									shapeRenderer.setColor(Color.BLACK);
+////									shapeRenderer.line(n1.x*Tile.TS, n1.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS);
+////									break;
+////								}
+////							}
+////						}
+//						if(n1.upNode.equals(n)) shapeRenderer.line(n.x*Tile.TS, n.y*Tile.TS, n1.x*Tile.TS, n1.y*Tile.TS);
+//					}
+//
 					for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.getConnections()){
-						for(com.badlogic.gdx.ai.pfa.Connection<Node> c2: c.getToNode().getConnections()){
-							if(c2.getToNode().equals(n)){
+//						for(com.badlogic.gdx.ai.pfa.Connection<Node> c2: c.getToNode().getConnections()){
+//							if(c2.getToNode().equals(n)){
 								shapeRenderer.setColor(Color.CYAN);
 								shapeRenderer.rectLine(n.x*Tile.TS, n.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS, 5);
-								break;
-							}
-						}
+//								break;
+//							}
+//						}
 					}
 				}
+				
+				for(Node n :curFloor.heiGraph.nodes[0]){
+					shapeRenderer.setColor(Color.ORANGE);
+					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 2);
+					
+					shapeRenderer.setColor(Color.BLACK);
+					
+//					for(Node n1: n.downNodes){
+////						for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n1.getConnections()){
+////							for(com.badlogic.gdx.ai.pfa.Connection<Node> c2: c.getToNode().getConnections()){
+////								if(c2.getToNode().equals(n1)){
+////									shapeRenderer.setColor(Color.BLACK);
+////									shapeRenderer.line(n1.x*Tile.TS, n1.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS);
+////									break;
+////								}
+////							}
+////						}
+//						if(n1.upNode.equals(n)) shapeRenderer.line(n.x*Tile.TS, n.y*Tile.TS, n1.x*Tile.TS, n1.y*Tile.TS);
+//					}
+//
+					for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.getConnections()){
+//						for(com.badlogic.gdx.ai.pfa.Connection<Node> c2: c.getToNode().getConnections()){
+//							if(c2.getToNode().equals(n)){
+								shapeRenderer.setColor(Color.FOREST);
+								shapeRenderer.rectLine(n.x*Tile.TS, n.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS, 5);
+//								break;
+//							}
+//						}
+					}
+				}
+				
 				if(mouse.path != null){
 					shapeRenderer.setColor(Color.BLUE);
 					int[] prePoint = new int[]{0,0};
