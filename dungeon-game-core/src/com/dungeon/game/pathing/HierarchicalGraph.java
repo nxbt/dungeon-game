@@ -33,11 +33,11 @@ public class HierarchicalGraph extends IndexedHierarchicalGraph<Node> {
 	@Override
 	public Node convertNodeBetweenLevels(int inputLevel, Node node, int outputLevel) {
 		if(inputLevel == 0 && outputLevel == 1){
-			if(node.upNode == null)System.out.println("up null");
+			if(node.upNode == null)System.out.println("up null " + inputLevel + " " + outputLevel + " " + node.name);
 			return node.upNode;
 		}
 		else if(inputLevel == 1 && outputLevel == 0) {
-			if(node.downNode == null)System.out.println("down null");
+			if(node.downNode == null)System.out.println("down null " + inputLevel + " " + outputLevel + " " + node.name);
 			return node.downNode;
 		}
 		else if(inputLevel == outputLevel){

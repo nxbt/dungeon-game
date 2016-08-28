@@ -1,5 +1,7 @@
 package com.dungeon.game.entity.hud;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -13,6 +15,9 @@ import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.hud.window.Window;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Item;
+import com.dungeon.game.pathing.Heuristic;
+import com.dungeon.game.pathing.Node;
+import com.dungeon.game.pathing.Path;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -43,6 +48,12 @@ public class Mouse extends Hud  implements InputProcessor {
 	private float sensitivity;
 	
 	public Slot slot;
+	
+	public Node toNode;
+	
+	public Node fromNode;
+	
+	public ArrayList<int[]> path;
 	
 	public Mouse(World world, float x, float y){
 		super(world, x, y, 16, 16, "crosshair.png");
@@ -125,6 +136,24 @@ public class Mouse extends Hud  implements InputProcessor {
 		}else{
 			mb_pressed = false;
 			mb_released = false;
+		}
+		
+		if(lb_pressed){
+			world.curFloor.heiGraph.setLevel(0);
+			fromNode = world.curFloor.heiGraph.getClosestNode(x+world.cam.x-world.cam.width/2, y+world.cam.y-world.cam.height/2);
+		}
+		
+		if(rb_pressed){
+			world.curFloor.heiGraph.setLevel(0);
+			toNode = world.curFloor.heiGraph.getClosestNode(x+world.cam.x-world.cam.width/2, y+world.cam.y-world.cam.height/2);
+		}
+		
+		if(fromNode != null && toNode != null){
+			world.curFloor.heiGraph.setLevel(0);
+			Path p = new Path(world);
+			world.curFloor.pathfinder.searchNodePath(fromNode, toNode, new Heuristic(), p);
+			path = p.getPath();
+			if(path.size() == 0)System.out.println("fuck me OH MY GOD WHY FUCK.");
 		}
 		
 		onHud = false;
