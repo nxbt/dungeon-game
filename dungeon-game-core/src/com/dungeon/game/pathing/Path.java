@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
-public class Path implements GraphPath<Node> {
+public class Path implements GraphPath<Node> { //try seach connection path???
 	
 	public ArrayList<Node> nodes;
 	
