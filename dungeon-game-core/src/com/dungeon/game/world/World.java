@@ -239,7 +239,6 @@ public class World {
 			shapeRenderer.setAutoShapeType(true);
 			
 			shapeRenderer.setProjectionMatrix(cam.cam.combined);
-			
 			if(debug_pathing){
 				shapeRenderer.set(ShapeType.Line);
 				for(Node n :curFloor.heiGraph.nodes[1]){

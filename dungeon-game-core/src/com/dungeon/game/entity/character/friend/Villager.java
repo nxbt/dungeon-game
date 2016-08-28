@@ -92,7 +92,7 @@ public class Villager extends Friend {
 			boolean foundTile = false;
 			while(!foundTile){
 				do{
-					wanderTile = new int[]{(int)(Math.random()*world.curFloor.tm[0].length),(int)(Math.random()*world.curFloor.tm.length)};
+					wanderTile = new int[]{1+(int)(Math.random()*world.curFloor.tm[0].length-1),1+(int)(Math.random()*world.curFloor.tm.length-1)};
 				}while(Tile.isSolid(world.curFloor.tm[wanderTile[1]][wanderTile[0]]));
 				Path p = new Path(world);
 				world.curFloor.heiGraph.setLevel(0);
@@ -125,12 +125,13 @@ public class Villager extends Friend {
 			
 			if(path.size() > 0)targetTile = p.getTargTile();
 			if(p.nodes.size() == 0){
+				world.curFloor.heiGraph.setLevel(0);
 				Node n = world.curFloor.heiGraph.getClosestNode(x, y);
 				System.out.println("from node connections: "+ n.getConnections().size);
 				Node n2 = world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2);
 				System.out.println("to node connections: "+ n2.getConnections().size);
 			}
-			if(path.size() == 0){
+			if(path.size() == 0){					
 				System.out.println("failed to find path. Shit.");
 				world.tempPathingDebug.add(new float[]{world.curFloor.heiGraph.getClosestNode(x, y).x*Tile.TS, world.curFloor.heiGraph.getClosestNode(x, y).y*Tile.TS, world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2).x*Tile.TS, world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2).y *Tile.TS});
 
