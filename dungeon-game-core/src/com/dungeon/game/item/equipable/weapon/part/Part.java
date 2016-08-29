@@ -113,12 +113,6 @@ public abstract class Part extends Item implements Cloneable{
 	
 	
 	public abstract void setStats(float level);
-	
-	
-	//does fuck all. VERY IMPORTANT. (actually though: if you delete it the game will be kill)
-	public static final void doFuckAll(){
-		
-	}
 
 	public static float getStat(float base, float dev) {
 		return (float) (base + (Math.random()*2*dev) - dev);

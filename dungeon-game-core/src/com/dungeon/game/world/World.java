@@ -73,8 +73,6 @@ public class World {
 	public ArrayList<float[]> tempPathingDebug;
 	
 	public World(boolean generate) {
-		Part.doFuckAll(); //Never Forget
-		
 		rayHandler = new RayHandler(null);
 		rayHandler.setBlurNum(15);
 		rayHandler.setAmbientLight(new Color(0,0,0,0));
