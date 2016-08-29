@@ -345,7 +345,7 @@ public class Castle extends Generation {
 					if(i > 0 && nodeArray[i - 1][k] != null)n.makeConnection(nodeArray[i - 1][k], (n.cost + nodeArray[i - 1][k].cost) / 2f);
 					if(i < nodeArray.length - 1 && nodeArray[i + 1][k] != null)n.makeConnection(nodeArray[i + 1][k], (n.cost + nodeArray[i + 1][k].cost) / 2f);
 					if(k > 0 && nodeArray[i][k - 1] != null)n.makeConnection(nodeArray[i][k - 1], (n.cost + nodeArray[i][k - 1].cost) / 2f);
-					if(i < nodeArray.length - 1 && nodeArray[i][k + 1] != null)n.makeConnection(nodeArray[i][k + 1], (n.cost + nodeArray[i][k + 1].cost) / 2f);
+					if(k < nodeArray[0].length - 1 && nodeArray[i][k + 1] != null)n.makeConnection(nodeArray[i][k + 1], (n.cost + nodeArray[i][k + 1].cost) / 2f);
 				}
 			}
 		}

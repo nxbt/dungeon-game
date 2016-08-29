@@ -25,13 +25,11 @@ public class Path implements GraphPath<Node> { //try seach connection path???
 
 	@Override
 	public Iterator<Node> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return nodes.iterator();
 	}
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return nodes.size();
 	}
 
