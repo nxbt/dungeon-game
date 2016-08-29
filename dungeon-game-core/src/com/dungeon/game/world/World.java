@@ -57,12 +57,13 @@ public class World {
 	
 	private BitmapFont fpsFont;
 	
-	boolean debug_hitbox;
-	boolean debug_pathing;
-	boolean debug_frames;
-	boolean debug_sight;
-	boolean debug_light;
-	boolean debug_pause;
+	public boolean debug_hitbox;
+	public boolean debug_pathing;
+	public boolean debug_frames;
+	public boolean debug_sight;
+	public boolean debug_light;
+	public boolean debug_pause;
+	public boolean debug_freeCam;
 	
 	private com.badlogic.gdx.physics.box2d.World emptyWorld;
 	private PointLight emptyWorldLight;
@@ -125,6 +126,7 @@ public class World {
 			debug_sight = false;
 			debug_light = false;
 			debug_pause = false;
+			debug_freeCam = false;
 			rayHandler.setWorld(curFloor.box2dWorld);
 			
 			for(Entity e: entities){
@@ -167,6 +169,7 @@ public class World {
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F7)) debug_hitbox = !debug_hitbox;
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F10)) debug_sight = !debug_sight;
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F6)) debug_pause = !debug_pause;
+		if(Gdx.input.isKeyJustPressed(Input.Keys.F5)) debug_freeCam = !debug_freeCam;
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.F11)) {
 			debug_light = !debug_light;

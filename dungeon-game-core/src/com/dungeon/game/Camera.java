@@ -36,7 +36,12 @@ public class Camera {
 	}
 	
 	public void update(){
-		if(world.player.actionState[2]) {
+		if(world.debug_freeCam){
+			x += ((world.mouse.x - width / 2));
+			y += ((world.mouse.y - height / 2));
+			world.mouse.x = width / 2;
+			world.mouse.y = height / 2;
+		}else if(world.player.actionState[2]) {
 			x += (world.player.x - x) * TWEEN;
 			y += (world.player.y - y) * TWEEN;
 		}
@@ -48,7 +53,6 @@ public class Camera {
 			x += ((4*world.player.x+world.player.focusedEntity.x)/5 - x)*TWEEN;
 			y += ((4*world.player.y+world.player.focusedEntity.y)/5 - y)*TWEEN;
 		}
-		
 		cam.position.set(x, y, 0);
 		cam.update();
 	}
