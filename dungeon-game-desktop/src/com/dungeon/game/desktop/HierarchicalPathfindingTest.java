@@ -153,9 +153,11 @@ public class HierarchicalPathfindingTest extends ApplicationAdapter {
 						
 						//then we need to check if there is already a connection between the two nodes' level one nodes
 						boolean upNodesConnected = false;
-						for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.upNode.getConnections()){
-							if(c.getToNode().equals(levelZeroNodesByIndex[i - 1][k].upNode))upNodesConnected = true;
-						}
+						if(!n.upNode.equals(levelZeroNodesByIndex[i - 1][k].upNode)){
+							for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.upNode.getConnections()){
+								if(c.getToNode().equals(levelZeroNodesByIndex[i - 1][k].upNode))upNodesConnected = true;
+							}
+						}else upNodesConnected = true;
 						//if there is not already a connection, then make one!
 						if(!upNodesConnected)n.upNode.makeConnection(levelZeroNodesByIndex[i - 1][k].upNode, 1);
 					}
@@ -166,9 +168,11 @@ public class HierarchicalPathfindingTest extends ApplicationAdapter {
 						
 						//then we need to check if there is already a connection between the two nodes' level one nodes
 						boolean upNodesConnected = false;
-						for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.upNode.getConnections()){
-							if(c.getToNode().equals(levelZeroNodesByIndex[i + 1][k].upNode))upNodesConnected = true;
-						}
+						if(!n.upNode.equals(levelZeroNodesByIndex[i + 1][k].upNode)){
+							for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.upNode.getConnections()){
+								if(c.getToNode().equals(levelZeroNodesByIndex[i + 1][k].upNode))upNodesConnected = true;
+							}
+						}else upNodesConnected = true;
 						//if there is not already a connection, then make one!
 						if(!upNodesConnected)n.upNode.makeConnection(levelZeroNodesByIndex[i + 1][k].upNode, 1);
 					}
@@ -179,9 +183,11 @@ public class HierarchicalPathfindingTest extends ApplicationAdapter {
 						
 						//then we need to check if there is already a connection between the two nodes' level one nodes
 						boolean upNodesConnected = false;
-						for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.upNode.getConnections()){
-							if(c.getToNode().equals(levelZeroNodesByIndex[i][k - 1].upNode))upNodesConnected = true;
-						}
+						if(!n.upNode.equals(levelZeroNodesByIndex[i][k - 1].upNode)){
+							for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.upNode.getConnections()){
+								if(c.getToNode().equals(levelZeroNodesByIndex[i][k - 1].upNode))upNodesConnected = true;
+							}
+						}else upNodesConnected = true;
 						//if there is not already a connection, then make one!
 						if(!upNodesConnected)n.upNode.makeConnection(levelZeroNodesByIndex[i][k - 1].upNode, 1);
 					}
@@ -192,9 +198,11 @@ public class HierarchicalPathfindingTest extends ApplicationAdapter {
 						
 						//then we need to check if there is already a connection between the two nodes' level one nodes
 						boolean upNodesConnected = false;
-						for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.upNode.getConnections()){
-							if(c.getToNode().equals(levelZeroNodesByIndex[i][k + 1].upNode))upNodesConnected = true;
-						}
+						if(!n.upNode.equals(levelZeroNodesByIndex[i][k + 1].upNode)){
+							for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.upNode.getConnections()){
+								if(c.getToNode().equals(levelZeroNodesByIndex[i][k + 1].upNode))upNodesConnected = true;
+							}
+						}else upNodesConnected = true;
 						//if there is not already a connection, then make one!
 						if(!upNodesConnected)n.upNode.makeConnection(levelZeroNodesByIndex[i][k + 1].upNode, 1);
 					}
@@ -234,6 +242,7 @@ public class HierarchicalPathfindingTest extends ApplicationAdapter {
 		
 		//if both the start node and end node are set, but not equal, find the path between them
 		if(startNode != null && endNode != null && !startNode.equals(endNode)){
+			pathfinder = new HierarchicalPathFinder<Node>(graph, new IndexedAStarPathFinder<Node>(graph)); //only works if we reconstruct the pathfinder before finding every path
 			graph.setLevel(0);
 			path.clear();
 			pathfinder.searchNodePath(startNode, endNode, new Heuristic(), path);
@@ -257,12 +266,35 @@ public class HierarchicalPathfindingTest extends ApplicationAdapter {
 			shapeRenderer.setColor(n.color); //get the color of the corresponding node
 			shapeRenderer.circle(scale*n.x, scale*n.y, 50);
 			
+			//this commented code will draw connections between level 1 nodes
+//			shapeRenderer.setColor(Color.BROWN);
+//			for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.getConnections()){
+//				for(com.badlogic.gdx.ai.pfa.Connection<Node> c2: c.getToNode().getConnections()){
+//					if(c2.getToNode().equals(n)){
+//						shapeRenderer.rectLine(scale*n.x, scale*n.y, scale*c.getToNode().x, scale*c.getToNode().y, 3);
+//						break;
+//						
+//					}
+//				}
+//			}
 		}
 		
 		//draw all level zero nodes
 		for(Node n: graph.nodes[0]){
 			shapeRenderer.setColor(n.color); //get the color of the node
 			shapeRenderer.circle(scale*n.x, scale*n.y, 20);
+			
+			//this commented code will draw connections between level 0 nodes
+//			shapeRenderer.setColor(Color.BROWN);
+//			for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.getConnections()){
+//				for(com.badlogic.gdx.ai.pfa.Connection<Node> c2: c.getToNode().getConnections()){
+//					if(c2.getToNode().equals(n)){
+//						shapeRenderer.rectLine(scale*n.x, scale*n.y, scale*c.getToNode().x, scale*c.getToNode().y, 3);
+//						break;
+//						
+//					}
+//				}
+//			}
 		}
 		
 		shapeRenderer.set(ShapeType.Filled);

@@ -20,8 +20,10 @@ import com.dungeon.game.generator.rooms.VillageCastle;
 import com.dungeon.game.generator.rooms.VillageRooms;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
+import com.dungeon.game.pathing.Heuristic;
 import com.dungeon.game.pathing.HierarchicalGraph;
 import com.dungeon.game.pathing.Node;
+import com.dungeon.game.pathing.Path;
 import com.dungeon.game.textures.tiles.Brick;
 import com.dungeon.game.textures.tiles.Dirt;
 import com.dungeon.game.textures.tiles.Marble;
@@ -278,5 +280,11 @@ public class Floor {
 	    float invTexHeight = 1f / region.getTexture().getHeight();
 	    region.setRegion((x + fix) * invTexWidth, (y + fix) * invTexHeight, (x + width - fix) * invTexWidth, (y + height - fix) * invTexHeight); // Trims
 	                                                                                                                                                // region
+	}
+	
+	public void findPath(Node s, Node e, Heuristic h, Path p){
+		pathfinder = new HierarchicalPathFinder<Node>(heiGraph, new IndexedAStarPathFinder<Node>(heiGraph));
+		world.curFloor.heiGraph.setLevel(0);
+		pathfinder.searchNodePath(s, e, h, p);
 	}
 }
