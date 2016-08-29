@@ -7,6 +7,8 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * update wiki pages
 * add logical pathfinding around entities and logical group movement
 * swap x and y
+* make doors open away from the player
+* make locked doors have a different texture
 
 ##TODO low priority (within a month or two?):
 * continue adding procedural room decoration
@@ -33,3 +35,4 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 ##BUG TRACKER
 * dual wielding will occasionally cause your own weapons to collide, sending you flying.
 * floating torches in castle rooms and where multiple halls meet
+* characters on the border of a wall will have a visPoly that crashes
