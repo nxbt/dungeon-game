@@ -42,7 +42,7 @@ public class GeneratorTest extends ApplicationAdapter {
 		int width = 50;
 		int height = 50;
 		
-		generation = new Rooms(new World(false), width, height, width/2, height/2, width/2, height/2, 0, new Object[]{"test"});
+		generation = new Castle(new World(false), width, height, width/2, height/2, width/2, height/2, 0, new Object[]{"test"});
 		
 		tileMap = generation.map;
 		

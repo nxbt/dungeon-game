@@ -84,9 +84,6 @@ public class World {
 		player = new Player(this, 0, 0);
 		tempPathingDebug = new ArrayList<float[]>();
 		if(generate){
-			
-			
-			
 			shapeRenderer = new ShapeRenderer();
 			
 			dungeons = new ArrayList<Dungeon>();

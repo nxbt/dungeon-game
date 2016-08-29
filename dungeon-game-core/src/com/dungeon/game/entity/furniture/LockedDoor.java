@@ -5,13 +5,13 @@ import com.dungeon.game.world.World;
 
 public class LockedDoor extends Door {
 	
-	private int rotation;
+	public int rotation;
 	
-	private int tileX;
-	private int tileY;
+	public int tileX;
+	public int tileY;
 
 	public LockedDoor(World world, float x, float y, int rotation) {
-		super(world, x, y, rotation, false);
+		super(world, x, y, rotation);
 		this.rotation = rotation;
 		tileX = (int) x;
 		tileY = (int) y;
@@ -29,7 +29,7 @@ public class LockedDoor extends Door {
 	
 	public void unlock(){
 		killMe = true;
-		world.entities.add(new Door(world, tileX, tileY, rotation, true));
+		world.entities.add(new Door(world, this));
 	}
 
 }

@@ -8,12 +8,24 @@ import com.dungeon.game.world.World;
 public class Door extends Static {
 	
 	private boolean open;
-
-	public Door(World world, float x, float y, int rotation, boolean open) {
+	
+	public Door(World world, LockedDoor door){
+		super(world, door.x, door.y, 32, 32, "slot.png");
+		construct(door.tileX, door.tileY, door.rotation);
+		open = true;
+		solid = false;
+		this.sprite = door.sprite;
+	}
+	
+	public Door(World world, float x, float y, int rotation) {
 		super(world, x, y, 32, 32, "slot.png");
+		construct(x, y, rotation);
+		this.sprite = new com.dungeon.game.textures.entity.Door(rotation).texture;
+	}
+
+	public void construct(float x, float y, int rotation) {
 		
-		this.open = open;
-		
+		layer = 3;
 		if(rotation == 0 || rotation == 2){
 			dWidth = 32;
 			dHeight = 8;

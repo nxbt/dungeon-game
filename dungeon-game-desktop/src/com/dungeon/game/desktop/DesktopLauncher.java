@@ -9,7 +9,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		boolean launchGenTest = false;
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-//		config.useGL30 = true;
+		
 		if(launchGenTest) new LwjglApplication(new GeneratorTest(), config);
 			else new LwjglApplication(new DungeonGame(), config);
 	}

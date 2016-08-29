@@ -25,6 +25,7 @@ public class TutorialGenerator extends Generation {
 		addToMap(startRoom);
 		map[43][42] = tileMap.getTile(0);
 		entities.add(new LockedDoor(world, 42, 43, 1));
+		entities.add(new Door(world, 43, 43, 1));
 		
 		Room startRoomRoom = new EmptyRoom(world, startRoom, findDoors(startRoom), tileMap);
 		startRoomRoom.addToMap(map, entities);
