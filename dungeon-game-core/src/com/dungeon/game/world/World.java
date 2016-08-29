@@ -226,7 +226,7 @@ public class World {
 				shapeRenderer.set(ShapeType.Line);
 				for(Node n :curFloor.heiGraph.nodes[1]){
 					shapeRenderer.setColor(Color.ORANGE);
-					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 2);
+//					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 2);
 					
 					shapeRenderer.setColor(Color.BLACK);
 					
@@ -255,8 +255,8 @@ public class World {
 				}
 				
 				for(Node n :curFloor.heiGraph.nodes[0]){
-					shapeRenderer.setColor(Color.ORANGE);
-					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 2);
+					shapeRenderer.setColor(Color.PURPLE);
+					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 1);
 					
 					shapeRenderer.setColor(Color.BLACK);
 					

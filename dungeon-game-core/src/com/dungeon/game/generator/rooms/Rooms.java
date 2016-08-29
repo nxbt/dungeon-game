@@ -12,6 +12,7 @@ import com.dungeon.game.generator.rooms.room.EnemyRoom;
 import com.dungeon.game.generator.rooms.room.Room;
 import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.HierarchicalGraph;
+import com.dungeon.game.pathing.Node;
 import com.dungeon.game.utilities.MethodArray;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -23,7 +24,7 @@ public class Rooms extends Generation {
 	protected MethodArray roomGenerators;
 	
 	public Rooms(World world, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY, int textureSeed, Object[] args){
-		super(world, width, height, textureSeed, new Object[]{args[0], centerX, centerY, upTrapX, upTrapY});
+		super(world, width, height, textureSeed, new Object[]{args.length > 0 ? args[0]: "nope", centerX, centerY, upTrapX, upTrapY});
 	}
 	
 	protected void generate(Object[] args){
@@ -33,7 +34,7 @@ public class Rooms extends Generation {
 		hallEnds = new ArrayList<ArrayList<Rectangle>>();
 		if(world.curDungeon!=null)entities.add(new Stair(world, (Integer)(args[1])*Tile.TS-Tile.TS/2, (Integer)(args[2])*Tile.TS-Tile.TS/2, false, (Integer)(args[3])+1, (Integer)(args[4])+1));
 		roomGenerators = new MethodArray(4){
-			public void a(int x, int y, int width, int height, int dir, Rectangle room){
+			public void a(int x, int y, int width, int height, int dir, Rectangle room){ //these "unused" methods are def used.
 				int nextX = (int) (x+width*Math.random());
 				int nextY = y;
 				generateHallWay(nextX, nextY-1, dir, room);
@@ -561,7 +562,65 @@ public class Rooms extends Generation {
 
 	@Override
 	public HierarchicalGraph getPathGraph() {
-		// NOT COMPLETED, must be completed for new pathfinding to work
-		return null;
+		Node.resetIndex(2);
+		ArrayList<Node> tileNodes = new ArrayList<Node>();
+		ArrayList<Node> zoneNodes = new ArrayList<Node>();
+		
+		Node[][] nodeArray = new Node[width][height];
+		//generate nodes for each tile
+		for(Rectangle room: rooms){
+			Node zoneNode = new Node(room.x+room.width/2, room.y+room.height/2, 1, 1);
+			zoneNodes.add(zoneNode);
+			for(int i = (int) room.x; i < room.x + room.width; i++){
+				for(int k = (int) room.y; k < room.y + room.height; k++){
+					if(!Tile.isSolid(map[k][i])){
+						Node node = new Node(i + 0.5f, k + 0.5f, 1, 0);
+						node.upNode = zoneNode;
+						zoneNode.downNodes.add(node);
+						tileNodes.add(node);
+						nodeArray[i][k] = node;
+					}
+				}
+			}
+		}
+		for(ArrayList<int[]> h: halls){
+			Node zoneNode = new Node(h.get(h.size()/2)[0] + 0.5f, h.get(h.size()/2)[1] + 0.5f, 1, 1);
+			zoneNodes.add(zoneNode);
+			for(int[] p: h){
+				Node node = new Node(p[0] + 0.5f, p[1] + 0.5f, 1, 0);
+				tileNodes.add(node);
+				node.upNode = zoneNode;
+				zoneNode.downNodes.add(node);
+				nodeArray[p[0]][p[1] ] = node;
+				
+			}
+			
+		}
+		
+		for(int i = 0; i <  nodeArray.length; i++){
+			for(int k = 0; k <  nodeArray[0].length; k++){
+				Node n = nodeArray[i][k];
+				if(n != null){
+					if(i > 0 && nodeArray[i - 1][k] != null)n.makeConnection(nodeArray[i - 1][k], (n.cost + nodeArray[i - 1][k].cost) / 2f);
+					if(i < nodeArray.length - 1 && nodeArray[i + 1][k] != null)n.makeConnection(nodeArray[i + 1][k], (n.cost + nodeArray[i + 1][k].cost) / 2f);
+					if(k > 0 && nodeArray[i][k - 1] != null)n.makeConnection(nodeArray[i][k - 1], (n.cost + nodeArray[i][k - 1].cost) / 2f);
+					if(k < nodeArray[0].length - 1 && nodeArray[i][k + 1] != null)n.makeConnection(nodeArray[i][k + 1], (n.cost + nodeArray[i][k + 1].cost) / 2f);
+				}
+			}
+		}
+		
+		for(Node n1: zoneNodes){
+			for(Node n2: zoneNodes){
+				if(!n1.equals(n2) && n1.isAdjacentTo(n2)){
+					n1.makeConnection(n2, 1);
+				}
+			}
+		}
+		for(Node n: zoneNodes){
+			n.findDownNode();
+		}
+		com.dungeon.game.pathing.HierarchicalGraph hiearchicalGraph = new com.dungeon.game.pathing.HierarchicalGraph(new Node[][]{tileNodes.toArray(new Node[tileNodes.size()]), zoneNodes.toArray(new Node[zoneNodes.size()])});
+		
+		return hiearchicalGraph;
 	}
 }
