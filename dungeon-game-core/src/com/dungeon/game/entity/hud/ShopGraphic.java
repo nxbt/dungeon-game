@@ -21,12 +21,12 @@ public class ShopGraphic extends InvGraphic {
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.GOLD);
 		
-		d_width = 0;
-		d_height = 14;
+		dWidth = 0;
+		dHeight = 14;
 		this.inv = shop;
 		for(Slot slot: inv.slot){
-			if(slot.x + 100>d_width) d_width = (int) (slot.x + 100);
-			if(slot.y + 50>d_height) d_height = (int) (slot.y + 50);
+			if(slot.x + 100>dWidth) dWidth = (int) (slot.x + 100);
+			if(slot.y + 50>dHeight) dHeight = (int) (slot.y + 50);
 		}
 	}
 

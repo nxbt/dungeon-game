@@ -13,8 +13,8 @@ public class Mist extends Static {
 		texture = new com.dungeon.game.textures.entity.Mist((int)(Math.random()*1000), (int)x, (int)y, width, height);
 		sprite = texture.texture;
 		
-		d_width = width;
-		d_height = width;
+		dWidth = width;
+		dHeight = width;
 		hitbox = new Polygon(new float[]{0,0,0,0,0,0});
 		genVisBox();
 		clickable = false;

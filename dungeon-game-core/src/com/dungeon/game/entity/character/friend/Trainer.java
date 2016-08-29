@@ -43,8 +43,8 @@ public class Trainer extends Friend {
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();
 		
-		origin_x = 16;
-		origin_y = 16;
+		originX = 16;
+		originY = 16;
 		
 		// \u200B to create pause;
 		dialogue = new Dialogue(world, this);

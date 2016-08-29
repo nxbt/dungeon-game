@@ -24,8 +24,8 @@ public class SwingSelection extends Hud {
 		for(int i = 1; i < weapon.swings.swings.length; i++){
 			curSwings[i-1] = weapon.swings.swings[i].getClass().getSimpleName();
 		}
-		d_width = 100;
-		d_height = 212;
+		dWidth = 100;
+		dHeight = 212;
 		for(int i = 0; i < allowedSwings.length; i++){
 			try {
 				addSubEntitiy(new SwingGraphic(world, 0, 0, (Swing) weapon.swingClass.getDeclaredMethod("getSwingByName", new Class<?>[]{World.class, String.class}).invoke(null, world, allowedSwings[i]), true), "Allowed Swing", 4, (allowedSwings.length-1)*18 - 18 * i + 4);
@@ -35,7 +35,7 @@ public class SwingSelection extends Hud {
 		}
 		for(int i = 0; i < curSwings.length; i++){
 			try {
-				addSubEntitiy(new SwingGraphic(world, 0, 0, (Swing) weapon.swingClass.getDeclaredMethod("getSwingByName", new Class<?>[]{World.class, String.class}).invoke(null, world, curSwings[i]), false), "Selected Swing", 4, d_height - 18 * i - 22);
+				addSubEntitiy(new SwingGraphic(world, 0, 0, (Swing) weapon.swingClass.getDeclaredMethod("getSwingByName", new Class<?>[]{World.class, String.class}).invoke(null, world, curSwings[i]), false), "Selected Swing", 4, dHeight - 18 * i - 22);
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 
@@ -64,7 +64,7 @@ public class SwingSelection extends Hud {
 	}
 	
 	public void draw(SpriteBatch batch){
-		BACKGROUND.draw(batch, x, y, d_width, d_height);
+		BACKGROUND.draw(batch, x, y, dWidth, dHeight);
 		//draw the subEntities!
 		for(int i = 0; i < subEntities.size(); i++){
 			subEntities.get(i).draw(batch);

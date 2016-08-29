@@ -33,7 +33,7 @@ public abstract class StatusBar extends Hud {
 	
 	@Override
 	public void draw(SpriteBatch batch) {
-		filler.draw(batch, x, y, d_width, d_height*percent);
-		batch.draw(sprite, x, y, d_width, d_height);
+		filler.draw(batch, x, y, dWidth, dHeight*percent);
+		batch.draw(sprite, x, y, dWidth, dHeight);
 	}
 }

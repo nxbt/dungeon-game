@@ -10,8 +10,8 @@ public class HoverZone extends Hud {
 	public HoverZone(World world, String text, float x, float y, int width, int height) {
 		super(world, x, y, 32, 32, "slot.png");
 		this.text = text;
-		this.d_width = width;
-		this.d_height = height;
+		this.dWidth = width;
+		this.dHeight = height;
 	}
 
 	@Override

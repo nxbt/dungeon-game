@@ -37,8 +37,8 @@ public class Fireplace extends Static {
 		else if(orientation == 3)light.setOffset(18, 0);
 
 		rotate = true;
-		origin_x = 16;
-		origin_y = 16;
+		originX = 16;
+		originY = 16;
 	}
 
 	@Override

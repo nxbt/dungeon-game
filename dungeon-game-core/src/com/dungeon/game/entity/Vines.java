@@ -8,8 +8,8 @@ public class Vines extends Static {
 	public Vines(World world) {
 		super(world, 0, 0, 32, 32, "tangled.png");
 		
-		origin_x = 16;
-		origin_y = 16;
+		originX = 16;
+		originY = 16;
 		hitbox = new Polygon(new float[]{0,0,0,0,0,0});
 		genVisBox();
 	}

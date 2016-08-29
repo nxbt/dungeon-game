@@ -12,8 +12,8 @@ public class ShopDesk2 extends Static {
 		hitbox = new Polygon(new float[] {0,0,48,0,48,16,0,16});
 		genVisBox();
 		
-		origin_x = 24;
-		origin_y = 8;
+		originX = 24;
+		originY = 8;
 		
 		rotate = true;
 		

@@ -23,8 +23,8 @@ public abstract class Entity {
 	public float x;
 	public float y;
 	
-	public float origin_x;
-	public float origin_y;
+	public float originX;
+	public float originY;
 	
 	public float angle;
 	
@@ -32,11 +32,11 @@ public abstract class Entity {
 	
 	public Polygon visHitbox;
 	
-	public int d_width;
-	public int d_height;
+	public int dWidth;
+	public int dHeight;
 	
-	public int d_offx;
-	public int d_offy;
+	public int dOffX;
+	public int dOffY;
 	
 	public boolean solid;
 	
@@ -70,8 +70,8 @@ public abstract class Entity {
 		textures = Spritesheet.getSprites(filename, width, height);
 		changeSprite(0);
 		
-		d_width = width;
-		d_height = height;
+		dWidth = width;
+		dHeight = height;
 		
 		this.killMe = false;
 		
@@ -87,13 +87,13 @@ public abstract class Entity {
 	}
 	
 	public void draw(SpriteBatch batch) {
-		batch.draw(/*Texture*/ sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_y+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),flipX,flipY);
+		batch.draw(/*Texture*/ sprite,/*x*/ x-originX+dOffX,/*y*/ y-originY+dOffY,/*originX*/originX,/*originY*/originY,/*width*/ dWidth,/*height*/ dHeight,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),flipX,flipY);
 	}
 	
 	public float[] getDrawCenter(){
 //		float temp_angle = (float) (Math.atan(origin_y/origin_x)*180/Math.PI+angle);
 		float temp_angle = 45+angle;
-		float temp_len = (float) Math.sqrt(origin_x*origin_x+origin_y*origin_y);
+		float temp_len = (float) Math.sqrt(originX*originX+originY*originY);
 		float temp_x = (float) (Math.cos(temp_angle/180*Math.PI)*temp_len);
 		float temp_y = (float) (Math.sin(temp_angle/180*Math.PI)*temp_len);
 		return new float[]{temp_x,temp_y};
@@ -102,8 +102,8 @@ public abstract class Entity {
 	public Polygon getHitbox() {
 		Polygon temp_hitbox = new Polygon(hitbox.getVertices());
 		
-		temp_hitbox.setOrigin(origin_x, origin_y);
-		temp_hitbox.translate(-origin_x, -origin_y);
+		temp_hitbox.setOrigin(originX, originY);
+		temp_hitbox.translate(-originX, -originY);
 		if(rotate)temp_hitbox.rotate(angle);
 		temp_hitbox.translate(x, y);
 		temp_hitbox.dirty();
@@ -116,8 +116,8 @@ public abstract class Entity {
 		if(visHitbox == null)System.out.println(this.getClass().getName());
 		Polygon temp_hitbox = new Polygon(visHitbox.getVertices());
 		
-		temp_hitbox.setOrigin(origin_x, origin_y);
-		temp_hitbox.translate(-origin_x, -origin_y);
+		temp_hitbox.setOrigin(originX, originY);
+		temp_hitbox.translate(-originX, -originY);
 		if(rotate)temp_hitbox.rotate(angle);
 		temp_hitbox.translate(x, y);
 		temp_hitbox.dirty();

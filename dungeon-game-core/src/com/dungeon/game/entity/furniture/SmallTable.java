@@ -11,8 +11,8 @@ public class SmallTable extends Static {
 		solid = true;
 		hitbox = new Polygon(new float[]{1,1,15,1,15,15,1,15});
 		genVisBox();
-		origin_x = 8;
-		origin_y = 8;
+		originX = 8;
+		originY = 8;
 	}
 
 	@Override

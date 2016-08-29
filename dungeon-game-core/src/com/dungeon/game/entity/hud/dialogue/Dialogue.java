@@ -32,8 +32,8 @@ public class Dialogue extends Hud {
 		characters = new ArrayList<Character>();
 		characters.add(character);
 		characters.add(world.player);
-		d_width = world.cam.width;
-		d_height = world.cam.height;
+		dWidth = world.cam.width;
+		dHeight = world.cam.height;
 	}
 	
 	public void calc(){
@@ -46,9 +46,9 @@ public class Dialogue extends Hud {
 		int heightCounter = 88;
 		for(SpeechBubble bubble: speechBubbles){
 			bubble.y = heightCounter;
-			heightCounter+=bubble.d_height+8;
+			heightCounter+=bubble.dHeight+8;
 			if(bubble.character.equals(characters.get(0)))bubble.x = 8;
-			else if(bubble.character.equals(characters.get(1)))bubble.x = world.cam.width-bubble.d_width-8;
+			else if(bubble.character.equals(characters.get(1)))bubble.x = world.cam.width-bubble.dWidth-8;
 			if(!bubble.done())bubble.update();
 		}
 		if(speechBubbles.get(0) instanceof InvBubble && ((InvBubble)speechBubbles.get(0)).madeChoice) {
@@ -113,16 +113,16 @@ public class Dialogue extends Hud {
 					SPEECH_BUBBLE_START0.draw(batch, bubble.x+4, char0ConnectorStart-4, 32, bubble.y-char0ConnectorStart+8);
 					madeChar0Start = true;
 				}
-				char0ConnectorStart = bubble.y+bubble.d_height;
+				char0ConnectorStart = bubble.y+bubble.dHeight;
 			}
 			
 			if(bubble.character.equals(characters.get(1))){
-				if(madeChar1Start)SPEECH_BUBBLE_CONNECTOR.draw(batch, bubble.x+bubble.d_width-20, char1ConnectorStart-4, 16, bubble.y-char1ConnectorStart+8);
+				if(madeChar1Start)SPEECH_BUBBLE_CONNECTOR.draw(batch, bubble.x+bubble.dWidth-20, char1ConnectorStart-4, 16, bubble.y-char1ConnectorStart+8);
 				else{
-					SPEECH_BUBBLE_START1.draw(batch, bubble.x+bubble.d_width-36, char1ConnectorStart-4, 32, bubble.y-char1ConnectorStart+8);
+					SPEECH_BUBBLE_START1.draw(batch, bubble.x+bubble.dWidth-36, char1ConnectorStart-4, 32, bubble.y-char1ConnectorStart+8);
 					madeChar1Start = true;
 				}
-				char1ConnectorStart = bubble.y+bubble.d_height;
+				char1ConnectorStart = bubble.y+bubble.dHeight;
 			}
 		}
 

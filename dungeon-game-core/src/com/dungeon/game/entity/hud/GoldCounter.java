@@ -36,7 +36,7 @@ public class GoldCounter extends Hud {
 	
 	public void draw(SpriteBatch batch){
 		super.draw(batch);
-		BACKGROUND.draw(batch, x+24, y, backgroundWidth, d_height-d_offy);
+		BACKGROUND.draw(batch, x+24, y, backgroundWidth, dHeight-dOffY);
 		font.draw(batch, value, x+26, y+font.getScaleY()*12+2);
 	}
 

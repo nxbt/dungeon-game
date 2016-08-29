@@ -48,7 +48,7 @@ public class Container extends Static{
 	@Override
 	public void calc() {
 		if(world.hudEntities.contains(inv.graphic)) {
-			if((Math.sqrt(Math.pow((x+d_width/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+d_height/2) - (world.player.y + world.player.d_height/2), 2))) >= world.player.REACH){
+			if((Math.sqrt(Math.pow((x+dWidth/2) - (world.player.x + world.player.dWidth/2), 2) + Math.pow((y+dHeight/2) - (world.player.y + world.player.dHeight/2), 2))) >= world.player.REACH){
 				inv.graphic.close();
 			}
 			for(int i = 0; i< world.curFloor.tm.length;i++){

@@ -14,6 +14,7 @@ import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
+import com.dungeon.game.item.Key;
 import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.equipable.Equipable;
@@ -73,11 +74,11 @@ public class Player extends Character {
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();
 		
-		origin_x = 16;
-		origin_y = 16;
+		originX = 16;
+		originY = 16;
 		
-		d_offx = 0;
-		d_offy = 0;
+		dOffX = 0;
+		dOffY = 0;
 		
 		solid = true;
 		
@@ -151,6 +152,8 @@ public class Player extends Character {
 		inv.addItem(new Bow(world, 10, 10));
 		inv.addItem(new Wand(world));
 		inv.addItem(new WoolShirt(world, speechColor));
+		inv.addItem(new Key(world));
+		inv.addItem(new Key(world));
 		
 		inv.slot[1].item.stack = 5;
 		

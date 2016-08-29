@@ -47,8 +47,8 @@ public class Shopkeeper extends Friend {
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();
 		
-		origin_x = 16;
-		origin_y = 16;
+		originX = 16;
+		originY = 16;
 
 		Shop shop = new Shop(world, new int[][]{new int[]{0,10,10},new int[]{0,10,60},new int[]{0,10,110}},new int[]{10,200,20}, this, 10, 10);
 		shop.slot[0].item = new Arrow(world);

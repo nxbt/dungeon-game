@@ -24,8 +24,8 @@ public class TrainingWindow extends Window {
 	public TrainingWindow(World world, float x, float y) {
 		super(world, x, y);
 		
-		d_width = 300;
-		d_height = 232;
+		dWidth = 300;
+		dHeight = 232;
 		
 		slot = new Slot(world, new int[]{Item.HAND, 0, 0}, null);
 		
@@ -47,17 +47,17 @@ public class TrainingWindow extends Window {
 			if(weapon != null){
 				addSubEntitiy(new PartsInfo(world, 0, 0, weapon),  "partsInfo", 4, 4);
 				addSubEntitiy(new SwingSelection(world, 0, 0, weapon),  "swingSelection", 168, 4);
-				addSubEntitiy(new HoverZone(world, weapon.getDamageText(), 0, 0, 156, 16),  "statDesc", 4, d_height - 66);
-				addSubEntitiy(new HoverZone(world, weapon.getSpeedText(), 0, 0, 156, 16),  "statDesc", 4, d_height - 84);
-				addSubEntitiy(new HoverZone(world, weapon.getKnockText(), 0, 0, 156, 16),  "statDesc", 4, d_height - 100);
-				addSubEntitiy(new HoverZone(world, weapon.getWeightText(), 0, 0, 156, 16),  "statDesc", 4, d_height - 116);
+				addSubEntitiy(new HoverZone(world, weapon.getDamageText(), 0, 0, 156, 16),  "statDesc", 4, dHeight - 66);
+				addSubEntitiy(new HoverZone(world, weapon.getSpeedText(), 0, 0, 156, 16),  "statDesc", 4, dHeight - 84);
+				addSubEntitiy(new HoverZone(world, weapon.getKnockText(), 0, 0, 156, 16),  "statDesc", 4, dHeight - 100);
+				addSubEntitiy(new HoverZone(world, weapon.getWeightText(), 0, 0, 156, 16),  "statDesc", 4, dHeight - 116);
 			}
 		}
 		
 		super.calc();
 		
 		slot.x = x + 4;
-		slot.y = y + d_height - 48;
+		slot.y = y + dHeight - 48;
 		slot.calc();
 	}
 	
@@ -76,16 +76,16 @@ public class TrainingWindow extends Window {
 		super.draw(batch);
 		slot.draw(batch, 0, 0);
 		if(weapon != null){
-			font.draw(batch, weapon.name, x + 38, y + d_height - 26);
+			font.draw(batch, weapon.name, x + 38, y + dHeight - 26);
 			String dmg = "" + Math.round(weapon.damage*10)/10f;
 			String spd = "" + Math.round(weapon.speed*10)/10f;
 			String knk = "" + Math.round(weapon.knockback*10)/10f;
 			String wgt = "" + Math.round(weapon.weight*10)/10f;
-			font.draw(batch, "Damage:\nSpeed:\nKnock:\nWeight:", x + 4, y + d_height - 50);
-			font.draw(batch, dmg, TextHelper.alignRight(dmg, x + 160), y + d_height - 50);
-			font.draw(batch, spd, TextHelper.alignRight(spd, x + 160), y + d_height - 66);
-			font.draw(batch, knk, TextHelper.alignRight(knk, x + 160), y + d_height - 82);
-			font.draw(batch, wgt, TextHelper.alignRight(wgt, x + 160), y + d_height - 98);
+			font.draw(batch, "Damage:\nSpeed:\nKnock:\nWeight:", x + 4, y + dHeight - 50);
+			font.draw(batch, dmg, TextHelper.alignRight(dmg, x + 160), y + dHeight - 50);
+			font.draw(batch, spd, TextHelper.alignRight(spd, x + 160), y + dHeight - 66);
+			font.draw(batch, knk, TextHelper.alignRight(knk, x + 160), y + dHeight - 82);
+			font.draw(batch, wgt, TextHelper.alignRight(wgt, x + 160), y + dHeight - 98);
 		}
 	}
 

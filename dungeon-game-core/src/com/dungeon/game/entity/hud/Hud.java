@@ -47,7 +47,7 @@ public abstract class Hud extends Static {
 	}
 	
 	public boolean isHovered(){
-		return (world.mouse.x > x && world.mouse.x < x + d_width && world.mouse.y > y && world.mouse.y < y + d_height);
+		return (world.mouse.x > x && world.mouse.x < x + dWidth && world.mouse.y > y && world.mouse.y < y + dHeight);
 	}
 	
 	public void setSubOff(String id, int x, int y){

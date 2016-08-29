@@ -82,7 +82,7 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 	}
 	
 	public void calc() {
-		if(world.mouse.lb_pressed&&world.mouse.x>x&&world.mouse.x<x+d_width){
+		if(world.mouse.lb_pressed&&world.mouse.x>x&&world.mouse.x<x+dWidth){
 			if(world.mouse.y>y&&world.mouse.y<y+yOffsets[0]){
 				choice = 0;
 				madeChoice = true;
@@ -113,7 +113,7 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 		int max_line_length = 0;
 		
 
-		d_height = 8;
+		dHeight = 8;
 		
 		ArrayList<String> tempChoiceShorts = new ArrayList<String>();
 		availableChoiceShorts = new ArrayList<String>();
@@ -150,12 +150,12 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 			if(tempChoiceShorts.get(i).equals("")){
 				availableChoiceShorts.set(i, "");
 			}
-			d_height += lines.size() * 16;
-			yOffsets[i] = d_height;
+			dHeight += lines.size() * 16;
+			yOffsets[i] = dHeight;
 		}
 		
 
-		d_width = max_line_length * 9 + 16;
+		dWidth = max_line_length * 9 + 16;
 		
 	}
 	
@@ -167,7 +167,7 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 	}
 	
 	public void draw(SpriteBatch batch) {		
-		SPEECH_BUBBLE.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
+		SPEECH_BUBBLE.draw(batch, x, y, dWidth-dOffX, dHeight-dOffY);
 		for(int i = 0; i < availableChoices.size(); i++){
 			font.draw(batch, availableChoiceShorts.get(i), x+8, y+yOffsets[i]-6);
 		}

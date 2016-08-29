@@ -49,12 +49,6 @@ public class Mouse extends Hud  implements InputProcessor {
 	
 	public Slot slot;
 	
-	public Node toNode;
-	
-	public Node fromNode;
-	
-	public ArrayList<int[]> path;
-	
 	public Mouse(World world, float x, float y){
 		super(world, x, y, 16, 16, "crosshair.png");
 		
@@ -64,11 +58,11 @@ public class Mouse extends Hud  implements InputProcessor {
 		
 		sprite = CROSS;
 		
-		d_width = 16;
-		d_height = 16;
+		dWidth = 16;
+		dHeight = 16;
 		
-		d_offx = -8;
-		d_offy = -8;
+		dOffX = -8;
+		dOffY = -8;
 		
 		sensitivity = 0.5f;
 		
@@ -138,24 +132,6 @@ public class Mouse extends Hud  implements InputProcessor {
 			mb_released = false;
 		}
 		
-		if(lb_pressed){
-			world.curFloor.heiGraph.setLevel(0);
-			fromNode = world.curFloor.heiGraph.getClosestNode(x+world.cam.x-world.cam.width/2, y+world.cam.y-world.cam.height/2);
-		}
-		
-		if(rb_pressed){
-			world.curFloor.heiGraph.setLevel(0);
-			toNode = world.curFloor.heiGraph.getClosestNode(x+world.cam.x-world.cam.width/2, y+world.cam.y-world.cam.height/2);
-		}
-		
-		if(fromNode != null && toNode != null){
-			world.curFloor.heiGraph.setLevel(0);
-			Path p = new Path(world);
-			world.curFloor.pathfinder.searchNodePath(fromNode, toNode, new Heuristic(), p);
-			path = p.getPath();
-			if(path.size() == 0)System.out.println("fuck me OH MY GOD WHY FUCK.");
-		}
-		
 		onHud = false;
 		int toMoveToFront=0;
 		for(int i = 0; i < world.hudEntities.size(); i++) {
@@ -168,7 +144,7 @@ public class Mouse extends Hud  implements InputProcessor {
 			}
 		}
 		
-		canPickup = (!onHud &&  Math.sqrt(Math.pow((x+world.cam.x-world.cam.width/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+world.cam.y-world.cam.height/2) - (world.player.y + world.player.d_height/2), 2)) <= world.player.REACH) && !world.player.fightMode;
+		canPickup = (!onHud &&  Math.sqrt(Math.pow((x+world.cam.x-world.cam.width/2) - (world.player.x + world.player.dWidth/2), 2) + Math.pow((y+world.cam.y-world.cam.height/2) - (world.player.y + world.player.dHeight/2), 2)) <= world.player.REACH) && !world.player.fightMode;
 		for(int i = 0; i< world.curFloor.tm.length;i++){
 			for(int k = 0; k <world.curFloor.tm[i].length;k++){
 				if(world.curFloor.tm[i][k].data==1){
@@ -186,7 +162,7 @@ public class Mouse extends Hud  implements InputProcessor {
 				Entity ent = world.entities.get(i);
 				Polygon itemHBox = ent.getHitbox();
 				if(ent.isHovered()){
-					ent.hovered();
+					if(canPlace)ent.hovered();
 					canPlace = false;
 					break;
 				}
@@ -218,14 +194,14 @@ public class Mouse extends Hud  implements InputProcessor {
 		if (!world.player.fightMode) {
 			sprite = ARROW;
 			
-			d_offx = -2;
-			d_offy = -14;
+			dOffX = -2;
+			dOffY = -14;
 		}
 		else {
 			sprite = CROSS;
 			
-			d_offx = -8;
-			d_offy = -8;
+			dOffX = -8;
+			dOffY = -8;
 		}
 	}
 

@@ -11,14 +11,14 @@ public class EffectHudBackground extends Hud {
 
 	public EffectHudBackground(World world, float x, float y) {
 		super(world, x, y, 32, 32, "slot.png");
-		d_width = 44;
+		dWidth = 44;
 	}
 
 	@Override
 	public void calc() {
-		if(world.player.effectGraphics.size()>0)d_height = world.player.effectGraphics.size()*36+8;
-		else d_height = 0;
-		y = world.cam.height - d_height; 
+		if(world.player.effectGraphics.size()>0)dHeight = world.player.effectGraphics.size()*36+8;
+		else dHeight = 0;
+		y = world.cam.height - dHeight; 
 		super.calc();
 
 	}
@@ -27,7 +27,7 @@ public class EffectHudBackground extends Hud {
 	public void post() {}
 	
 	public void draw(SpriteBatch batch){
-		if(d_height>0)BACKGROUND.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
+		if(dHeight>0)BACKGROUND.draw(batch, x, y, dWidth-dOffX, dHeight-dOffY);
 	}
 
 }

@@ -3,6 +3,8 @@ package com.dungeon.game.generator;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.dungeon.game.entity.furniture.Door;
+import com.dungeon.game.entity.furniture.LockedDoor;
 import com.dungeon.game.generator.rooms.room.EmptyRoom;
 import com.dungeon.game.generator.rooms.room.Room;
 import com.dungeon.game.pathing.HierarchicalGraph;
@@ -22,6 +24,7 @@ public class TutorialGenerator extends Generation {
 		Rectangle startRoom = new Rectangle(43, 43, 5, 5);
 		addToMap(startRoom);
 		map[43][42] = tileMap.getTile(0);
+		entities.add(new LockedDoor(world, 42, 43, 1));
 		
 		Room startRoomRoom = new EmptyRoom(world, startRoom, findDoors(startRoom), tileMap);
 		startRoomRoom.addToMap(map, entities);
@@ -35,7 +38,6 @@ public class TutorialGenerator extends Generation {
 
 	
 	private void addToMap(Rectangle room){
-		System.out.println("working");
         for(int i = 0; i < room.width; i++){
             for(int k = 0; k < room.height; k++){
                  map[(int) (room.y + k)][(int) (room.x + i)] = tileMap.getTile(0);

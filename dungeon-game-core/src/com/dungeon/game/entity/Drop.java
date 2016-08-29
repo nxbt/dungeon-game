@@ -23,8 +23,8 @@ public class Drop extends Static {
 		hitbox = new Polygon(new float[]{4,4,28,4,28,28,4,28});
 		genVisBox();
 		
-		origin_x =16;
-		origin_y = 16;
+		originX =16;
+		originY = 16;
 		
 		angle = (float) (180f-Math.random()*360);
 	}

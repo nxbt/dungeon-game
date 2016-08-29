@@ -24,24 +24,24 @@ public class Torch extends Static {
 		
 		solid = false;
 		
-		d_width = orientation%2 == 0?16:4;
-		d_height = orientation%2 == 0?4:16;
+		dWidth = orientation%2 == 0?16:4;
+		dHeight = orientation%2 == 0?4:16;
 		
 		rotate = true;
 		
-		origin_x = 16;
-		origin_y = 16;
+		originX = 16;
+		originY = 16;
 		
 
 		if(orientation%2==0){
 			hitbox = new Polygon(new float[]{0,0,16,0,16,4,0,4});
-			origin_x = 8;
-			origin_y = 2;
+			originX = 8;
+			originY = 2;
 		}
 		else{
 			hitbox = new Polygon(new float[]{0,0,4,0,4,16,0,16});
-			origin_x = 2;
-			origin_y = 8;
+			originX = 2;
+			originY = 8;
 		}
 		genVisBox();
 		

@@ -16,7 +16,7 @@ public class Chest extends Container {
 		hitbox = new Polygon(new float[]{0,0,32,0,32,32,0,32});
 		genVisBox();
 		
-		origin_x = 16;
-		origin_y = 16;
+		originX = 16;
+		originY = 16;
 	}
 }

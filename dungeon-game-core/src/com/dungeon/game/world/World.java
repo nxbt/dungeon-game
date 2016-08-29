@@ -287,18 +287,6 @@ public class World {
 //					}
 				}
 				
-				if(mouse.path != null){
-					shapeRenderer.setColor(Color.BLUE);
-					int[] prePoint = new int[]{0,0};
-					shapeRenderer.setColor(Color.YELLOW);
-					for(int[] point: mouse.path){
-						if(mouse.path.indexOf(point)>0){
-							shapeRenderer.line(prePoint[0]*Tile.TS+Tile.TS/2, prePoint[1]*Tile.TS+Tile.TS/2,point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
-						}
-						prePoint = point;
-					}
-				}
-				
 			}
 			
 			for(Entity e: entities){

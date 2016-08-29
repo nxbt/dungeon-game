@@ -24,13 +24,13 @@ public class ShopDisplayBubble extends InvDisplayBubble{
 		for(int i = 0; i < inv.slot.length; i++){
 			inv.slot[i].x = 8+i%3*80;
 			inv.slot[i].y = 8+(int)(i/3)*40;
-			if(d_width < inv.slot[i].x+40)d_width = (int) (inv.slot[i].x+80);
-			if(d_height < inv.slot[i].y+40)d_height = (int) (inv.slot[i].y+40);
+			if(dWidth < inv.slot[i].x+40)dWidth = (int) (inv.slot[i].x+80);
+			if(dHeight < inv.slot[i].y+40)dHeight = (int) (inv.slot[i].y+40);
 		}
 	}
 	
 	public void draw(SpriteBatch batch) {		
-		SPEECH_BUBBLE.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
+		SPEECH_BUBBLE.draw(batch, x, y, dWidth-dOffX, dHeight-dOffY);
 		
 		for(int i = 0; i < inv.slot.length; i++) {
 			inv.slot[i].draw(batch, (int)x, (int)y);

@@ -21,8 +21,6 @@ public abstract class Generation {
 	protected int height;
 	
 	public Tile[][] map;
-//	public int[][] rotations;
-//	public boolean[][] flips;
 	
 	protected ArrayList<Entity> entities;
 	
@@ -38,8 +36,6 @@ public abstract class Generation {
 		this.height = height;
 		this.width = width;
 		map = new Tile[height][width];
-//		rotations = new int[height][width];
-//		flips = new boolean[height][width];
 		entities = new ArrayList<Entity>();
 		this.world = world;
 		generate(args);
@@ -63,11 +59,6 @@ public abstract class Generation {
 //				flips[i][k] = false;
 			}
 		}
-	}
-	
-	public void addDoor(int x, int y, int dir){
-		if(dir==0)entities.add(new Door(world, x*Tile.TS,y*Tile.TS,0));
-		if(dir==1)entities.add(new Door(world, x*Tile.TS,y*Tile.TS,1));
 	}
 	
 	public void makeWalls(int strt_id, int bent_id, int revr_id, int thre_id, int four_id) {

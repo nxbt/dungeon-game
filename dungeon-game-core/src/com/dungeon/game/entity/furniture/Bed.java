@@ -24,24 +24,24 @@ public class Bed extends Static {
 		solid = true;
 		
 		
-		d_width = orientation%2 == 0?32:64;
-		d_height = orientation%2 == 0?64:32;
+		dWidth = orientation%2 == 0?32:64;
+		dHeight = orientation%2 == 0?64:32;
 		
 		rotate = true;
 		
-		origin_x = 16;
-		origin_y = 32;
+		originX = 16;
+		originY = 32;
 		
 
 		if(orientation%2==0){
 			hitbox = new Polygon(new float[]{0,0,32,0,32,64,0,64});
-			origin_x = 16;
-			origin_y = 32;
+			originX = 16;
+			originY = 32;
 		}
 		else{
 			hitbox = new Polygon(new float[]{0,0,64,0,64,32,0,32});
-			origin_x = 32;
-			origin_y = 16;
+			originX = 32;
+			originY = 16;
 		}
 		genVisBox();
 	}

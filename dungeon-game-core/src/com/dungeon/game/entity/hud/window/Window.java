@@ -34,8 +34,8 @@ public abstract class Window extends Hud {
 		
 		scroll = 0;
 		
-		d_width = 100;
-		d_height = 200;
+		dWidth = 100;
+		dHeight = 200;
 		
 		exitButton = new ExitButton(world, this);
 		
@@ -61,9 +61,9 @@ public abstract class Window extends Hud {
 		}
 		
 		if(x < 0) x = 0;
-		if(y < -d_height+14) y = -d_height+14;
-		if(x+d_width > world.cam.width) x = world.cam.width-d_width;
-		if(y+d_height > world.cam.height) y = world.cam.height-d_height;
+		if(y < -dHeight+14) y = -dHeight+14;
+		if(x+dWidth > world.cam.width) x = world.cam.width-dWidth;
+		if(y+dHeight > world.cam.height) y = world.cam.height-dHeight;
 		
 		if(world.hudEntities.indexOf(this) != world.hudEntities.indexOf(exitButton)+1) {
 			world.hudEntities.remove(exitButton);
@@ -82,7 +82,7 @@ public abstract class Window extends Hud {
 	public void hovered() {
 		scroll += world.mouse.scroll;
 		
-		if(world.mouse.x>x&&world.mouse.x<x+d_width&&world.mouse.y>y+d_height-14&&world.mouse.y<y+d_height&&world.mouse.lb_pressed){
+		if(world.mouse.x>x&&world.mouse.x<x+dWidth&&world.mouse.y>y+dHeight-14&&world.mouse.y<y+dHeight&&world.mouse.lb_pressed){
 			dragOffX = (world.mouse.x-x);
 			dragOffY = (world.mouse.y-y);
 			drag = true;
@@ -93,11 +93,11 @@ public abstract class Window extends Hud {
 	}
 	
 	public void draw(SpriteBatch batch) {
-		WINDOW.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
-		float scrollThickness = (d_height - 16)/contentHeight;
+		WINDOW.draw(batch, x, y, dWidth-dOffX, dHeight-dOffY);
+		float scrollThickness = (dHeight - 16)/contentHeight;
 		if(scrollThickness < 1){
-			float scrollHeight = ((scroll * 16) / (contentHeight))*(d_height - 16);
-			SCROLL_BAR.draw(batch, x + d_width - 7, y + 2 + (d_height - 16) - scrollHeight - scrollThickness * (d_height - 16), 5, scrollThickness * (d_height - 16));
+			float scrollHeight = ((scroll * 16) / (contentHeight))*(dHeight - 16);
+			SCROLL_BAR.draw(batch, x + dWidth - 7, y + 2 + (dHeight - 16) - scrollHeight - scrollThickness * (dHeight - 16), 5, scrollThickness * (dHeight - 16));
 		}
 		//draw the subEntities!
 		for(int i = 0; i < subEntities.size(); i++){

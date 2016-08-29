@@ -173,9 +173,9 @@ public class SpeechBubble extends Hud implements Cloneable {
 			endText = "";
 		}
 		
-		d_height = lines.size() * 16 + 8;
+		dHeight = lines.size() * 16 + 8;
 		
-		d_width = max_line_length * 9 + 16;
+		dWidth = max_line_length * 9 + 16;
 	}
 	
 	public boolean done(){
@@ -213,8 +213,8 @@ public class SpeechBubble extends Hud implements Cloneable {
 	public void post() {}
 	
 	public void draw(SpriteBatch batch) {		
-			SPEECH_BUBBLE.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
-			font.draw(batch, text, x+8, y+d_height-6);
+			SPEECH_BUBBLE.draw(batch, x, y, dWidth-dOffX, dHeight-dOffY);
+			font.draw(batch, text, x+8, y+dHeight-6);
 			
 	}
 

@@ -17,14 +17,14 @@ public class InvDisplayBubble extends SpeechBubble {
 		
 		updateText("none");
 		
-		d_width = 0;
-		d_height = 0;
+		dWidth = 0;
+		dHeight = 0;
 		
 		for(int i = 0; i < inv.slot.length; i++){
 			inv.slot[i].x = 8+i%6*40;
 			inv.slot[i].y = 8+(int)(i/6)*40;
-			if(d_width < inv.slot[i].x+40)d_width = (int) (inv.slot[i].x+40);
-			if(d_height < inv.slot[i].y+40)d_height = (int) (inv.slot[i].y+40);
+			if(dWidth < inv.slot[i].x+40)dWidth = (int) (inv.slot[i].x+40);
+			if(dHeight < inv.slot[i].y+40)dHeight = (int) (inv.slot[i].y+40);
 		}
 	}
 	
@@ -32,13 +32,13 @@ public class InvDisplayBubble extends SpeechBubble {
 		inv.update();
 		inv.graphic.x = x;
 		inv.graphic.y = y;
-		if(world.mouse.x > x&&world.mouse.x < x+d_width&&world.mouse.y > y&&world.mouse.y < y+d_height){
+		if(world.mouse.x > x&&world.mouse.x < x+dWidth&&world.mouse.y > y&&world.mouse.y < y+dHeight){
 			inv.hovered();
 		}
 	}
 	
 	public void draw(SpriteBatch batch) {		
-		SPEECH_BUBBLE.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
+		SPEECH_BUBBLE.draw(batch, x, y, dWidth-dOffX, dHeight-dOffY);
 		
 		for(Slot s: inv.slot) {
 			s.draw(batch, (int)x, (int)y);

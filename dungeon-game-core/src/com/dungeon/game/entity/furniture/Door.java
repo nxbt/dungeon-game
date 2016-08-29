@@ -1,96 +1,77 @@
 package com.dungeon.game.entity.furniture;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.Static;
-import com.dungeon.game.item.Item;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
-//TODO: rework cuz shit
 public class Door extends Static {
-	public boolean open;
-	public int dir; 
-	public Door(World world, float x, float y, int dir) {
-		super(world, x, y, 32, 4, "door.png");
+	
+	private boolean open;
+
+	public Door(World world, float x, float y, int rotation, boolean open) {
+		super(world, x, y, 32, 32, "slot.png");
 		
-		name = "door";
-		solid = false;
+		this.open = open;
 		
-		hitbox = new Polygon(new float[]{0,0,0,0,0,0,0,0});
+		if(rotation == 0 || rotation == 2){
+			dWidth = 32;
+			dHeight = 8;
+			hitbox = new Polygon(new float[]{0,0,32,0,32,8,0,8});
+		}else{
+			dWidth = 8;
+			dHeight = 32;
+			hitbox = new Polygon(new float[]{0,0,8,0,8,32,0,32});
+		}
 		genVisBox();
 		
-		origin_x = 0;
-		origin_y = 0;
+		solid = true;
+		rotate = true;
 		
-		open = false;
-		this.dir = dir;
-		if(dir == 0){
-			d_offx = 0;
-			d_offy = 14;
-		}else {
-			d_offx = 18;
-			d_offy = 0;
+		if(rotation == 0){
+			originX = 0;
+			originY = 4;
+			this.x = x*Tile.TS;
+			this.y = y*Tile.TS + Tile.TS/2;
+		}else if(rotation == 1){
+			originX = 4;
+			originY = 0;
+			this.x = x*Tile.TS + Tile.TS/2;
+			this.y = y*Tile.TS;
+		}else if(rotation == 2){
+			originX = 32;
+			originY = 4;
+			this.x = x*Tile.TS + Tile.TS;
+			this.y = y*Tile.TS + Tile.TS/2;
+		}else if(rotation == 3){
+			originX = 4;
+			originY = 32;
+			this.x = x*Tile.TS + Tile.TS/2;
+			this.y = y*Tile.TS + Tile.TS;
 		}
+		
 	}
 	
-	private void open(){
+	public void toggle(){
 		open = !open;
-		if(dir==0){
-			if(open){
-
-				d_offx = 4;
-				d_offy = 14;
-			}else{
-				d_offx = 0;
-				d_offy = 14;
-			}
-		}else {
-			if(open){
-
-				d_offx = 14;
-				d_offy = 0;
-			}else{
-				d_offx = 18;
-				d_offy = 0;
-			}
-		}
+		if(open) solid = false;
 	}
 
 	@Override
 	public void calc() {
-		boolean canOpen = true;
-		if(world.mouse.rb_pressed&&world.mouse.x > x-world.cam.x+world.cam.width/2 && world.mouse.x < x+Item.SIZE-world.cam.x+world.cam.width/2 && world.mouse.y > y-world.cam.y+world.cam.height/2 && world.mouse.y < y+Item.SIZE-world.cam.y+world.cam.height/2){
-			if(Math.sqrt(Math.pow((x+d_width/2) - (world.player.x + world.player.d_width/2), 2) + Math.pow((y+d_height/2) - (world.player.y + world.player.d_height/2), 2)) <= world.player.REACH){
-				for(int i = 0; i< world.curFloor.tm.length;i++){
-					for(int k = 0; k <world.curFloor.tm[i].length;k++){
-						if(world.curFloor.tm[k][i].data==1){
-							float[] verticies = new float[]{i*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,k*Tile.TS,(i+1)*Tile.TS,(k+1)*Tile.TS,(i)*Tile.TS,(k+1)*Tile.TS};
-							if(Intersector.intersectSegmentPolygon(new Vector2(x+d_width/2,y+d_height/2), new Vector2(world.player.x + world.player.d_width/2,world.player.y + world.player.d_height/2), new Polygon(verticies))){
-								canOpen = false;
-							}
-						}
-					}
-				}
-				if(canOpen){
-					open();
-				}
-			}
-		}
-	}
-	
-	@Override
-	public void draw(SpriteBatch batch) {
-		if(dir ==0){
-			if(!open)batch.draw(sprite, x+d_offx, y+d_offy, d_width, d_height);
-			else batch.draw(sprite, x+d_offx, y+d_offy, 0, 0, d_width, d_height, 1, 1, 90, 0, 0, sprite.getWidth(), sprite.getHeight(), flipX, flipY);
-		}else {
-			if(!open)batch.draw(sprite, x+d_offx, y+d_offy, 0, 0, d_width, d_height, 1, 1, 90, 0, 0, sprite.getWidth(), sprite.getHeight(), flipX, flipY);
-			else batch.draw(sprite, x+d_offx, y+d_offy, d_width, d_height);
-		}
+		if(open && angle < 90) angle+=10;
+		else if(!open && angle > 0) angle-=10;
+		
+		if(angle == 0) solid = true;
 	}
 
-	public void post() {}
+	@Override
+	public void post() {
+		
+	}
+	
+	public void hovered(){
+		if(world.mouse.lb_pressed)toggle();
+	}
+	
 }

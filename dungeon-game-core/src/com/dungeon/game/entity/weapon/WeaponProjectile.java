@@ -38,8 +38,8 @@ public class WeaponProjectile extends Projectile {
 		Slot tempSlot = new Slot(world, new int[]{0,0,0},null);
 		tempSlot.item = ammo;
 		
-		float xDiff = origin_x-16;
-		float yDiff = origin_y-16;
+		float xDiff = originX-16;
+		float yDiff = originY-16;
 		
 		float len = (float)Math.sqrt(xDiff * xDiff + yDiff * yDiff);
 		

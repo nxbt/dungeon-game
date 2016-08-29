@@ -25,8 +25,8 @@ public class DescBox extends Hud {
 	public DescBox(World world) {
 		super(world, 0, 0, Item.SIZE, Item.SIZE, "slot.png");
 		
-		d_offx = 16;
-		d_offy = 0;
+		dOffX = 16;
+		dOffY = 0;
 		
 		x = 30;
 		y = 30;
@@ -76,19 +76,19 @@ public class DescBox extends Hud {
 			this.text += lines.get(i) + "\n";
 		}
 		
-		d_height = lines.size() * 16 + 8;
+		dHeight = lines.size() * 16 + 8;
 		
-		d_width = max_line_length * 9 + 27;
+		dWidth = max_line_length * 9 + 27;
 	}
 	
 	public void draw(SpriteBatch batch) {
 		if(!text.equals("")) {
-			if(x + d_width > screenWidth) x -= d_width - 32;
-			if(y + d_height > screenHeight) y -= d_height + 16;
+			if(x + dWidth > screenWidth) x -= dWidth - 32;
+			if(y + dHeight > screenHeight) y -= dHeight + 16;
 			
-			DESC_BOX.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
+			DESC_BOX.draw(batch, x, y, dWidth-dOffX, dHeight-dOffY);
 			
-			desc.draw(batch, text, x+6, y+d_height-6);
+			desc.draw(batch, text, x+6, y+dHeight-6);
 			
 			text = "";
 		}

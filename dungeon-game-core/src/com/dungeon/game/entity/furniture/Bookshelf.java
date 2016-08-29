@@ -65,14 +65,14 @@ public class Bookshelf extends Static{
 		
 		tempMap.dispose();
 		
-		d_width = sprite.getWidth();
-		d_height = sprite.getHeight();
+		dWidth = sprite.getWidth();
+		dHeight = sprite.getHeight();
 		
 		hitbox = new Polygon(new float[] {0,0,width*16,0,width*16,height*16,0,height*16});
 		genVisBox();
 		
-		origin_x = d_width/2;
-		origin_y = d_height/2;
+		originX = dWidth/2;
+		originY = dHeight/2;
 		
 		solid = true;
 		rotate = true;
@@ -114,14 +114,14 @@ public class Bookshelf extends Static{
 		tempMap.dispose();
 		
 		
-		d_width = sprite.getWidth();
-		d_height = sprite.getHeight();
+		dWidth = sprite.getWidth();
+		dHeight = sprite.getHeight();
 		
 		hitbox = new Polygon(new float[] {0,0,width*16,0,width*16,height*16,0,height*16});
 		genVisBox();
 		
-		origin_x = d_width/2;
-		origin_y = d_height/2;
+		originX = dWidth/2;
+		originY = dHeight/2;
 		
 		solid = true;
 		rotate = true;

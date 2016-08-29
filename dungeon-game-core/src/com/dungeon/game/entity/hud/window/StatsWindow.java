@@ -27,8 +27,8 @@ public class StatsWindow extends Window {
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.WHITE);
 		
-		this.d_width = 230;
-		this.d_height = 238;
+		this.dWidth = 230;
+		this.dHeight = 238;
 	}
 	
 	public String fixDesc(String text) {
@@ -66,11 +66,11 @@ public class StatsWindow extends Window {
 	
 	public void subDraw(SpriteBatch batch) {
 		batch.draw(VERT_PORTRAT, x+2, y+2);
-		font.draw(batch, "Name: " + character.name, x+2, y+d_height - 14);
-		font.draw(batch, fixDesc("Description: " + character.desc), x+2, y+d_height - 26);
-		font.draw(batch, "Health:  "+ (int)Math.ceil(character.life) + "/" +  (int)Math.ceil(character.maxLife), x+78, y+d_height - 92);
-		font.draw(batch, "Stanima: "+ (int)Math.ceil(character.life) + "/" +  (int)Math.ceil(character.maxLife), x+78, y+d_height - 104);
-		font.draw(batch, "Mana:    "+ (int)Math.ceil(character.life) + "/" +  (int)Math.ceil(character.maxLife), x+78, y+d_height - 116);
+		font.draw(batch, "Name: " + character.name, x+2, y+dHeight - 14);
+		font.draw(batch, fixDesc("Description: " + character.desc), x+2, y+dHeight - 26);
+		font.draw(batch, "Health:  "+ (int)Math.ceil(character.life) + "/" +  (int)Math.ceil(character.maxLife), x+78, y+dHeight - 92);
+		font.draw(batch, "Stanima: "+ (int)Math.ceil(character.life) + "/" +  (int)Math.ceil(character.maxLife), x+78, y+dHeight - 104);
+		font.draw(batch, "Mana:    "+ (int)Math.ceil(character.life) + "/" +  (int)Math.ceil(character.maxLife), x+78, y+dHeight - 116);
 	}
 
 }

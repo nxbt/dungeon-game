@@ -33,7 +33,7 @@ public class DescWindow extends Window {
 
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
-		font.draw(batch, drawText, x+6, y+d_height-16);
+		font.draw(batch, drawText, x+6, y+dHeight-16);
 	}
 	
 	public void updateText(Item item) {
@@ -70,11 +70,11 @@ public class DescWindow extends Window {
 			contentHeight = lines.size() * 16;
 		}
 		
-		d_height = lines.size() * 16 + 18;
+		dHeight = lines.size() * 16 + 18;
 		
-		d_width = max_line_length * 9 + 27;
+		dWidth = max_line_length * 9 + 27;
 		
-		if(d_height > 100) d_height = 240;
+		if(dHeight > 100) dHeight = 240;
 	}
 	
 }

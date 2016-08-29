@@ -10,8 +10,8 @@ public class MenuButton extends Button {
 		
 		sprite = new Texture("menuButton.png");
 		
-		this.d_width = sprite.getWidth();
-		this.d_height = sprite.getHeight();
+		this.dWidth = sprite.getWidth();
+		this.dHeight = sprite.getHeight();
 	}
 
 	@Override

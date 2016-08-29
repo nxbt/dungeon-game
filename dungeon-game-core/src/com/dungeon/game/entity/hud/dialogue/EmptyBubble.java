@@ -7,8 +7,8 @@ public class EmptyBubble extends SpeechBubble {
 
 	public EmptyBubble(World world, Character character, int width, int height) {
 		super(world, character);
-		d_width = width;
-		d_height = height;
+		dWidth = width;
+		dHeight = height;
 	}
 
 }

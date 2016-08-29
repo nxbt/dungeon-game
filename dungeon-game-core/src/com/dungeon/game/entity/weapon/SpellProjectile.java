@@ -20,8 +20,8 @@ public class SpellProjectile extends Projectile {
 		
 		sprite = spell.sprite;
 		
-		d_width = sprite.getWidth();
-		d_height = sprite.getHeight();
+		dWidth = sprite.getWidth();
+		dHeight = sprite.getHeight();
 		
 		owner = weapon.owner;
 	}

@@ -50,7 +50,7 @@ public class HudSlot extends Hud {
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
 		if(slot.item!=null){
-			batch.draw(/*Texture*/ slot.item.sprite,/*x*/ x-origin_x+d_offx,/*y*/ y-origin_y+d_offy,/*originX*/origin_x,/*originY*/origin_y,/*width*/ d_width,/*height*/ d_height,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
+			batch.draw(/*Texture*/ slot.item.sprite,/*x*/ x-originX+dOffX,/*y*/ y-originY+dOffY,/*originX*/originX,/*originY*/originY,/*width*/ dWidth,/*height*/ dHeight,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),false,false);
 			if(slot.item.stack > 1) {
 				
 				font.draw(batch, Integer.toString(slot.item.stack), (float) (x+Item.SIZE-font.getScaleX()*(Math.floor(Math.log10(slot.item.stack))+ 1)*7)-4, y+font.getScaleY()*12+1);

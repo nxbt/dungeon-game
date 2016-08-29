@@ -50,11 +50,11 @@ public class Goon extends Enemy {
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();
 		
-		origin_x = 16;
-		origin_y = 16;
+		originX = 16;
+		originY = 16;
 		
-		d_offx = 0;
-		d_offy = 0;
+		dOffX = 0;
+		dOffY = 0;
 		
 		int[][] invLayout = new int[][] {
 			//consumables

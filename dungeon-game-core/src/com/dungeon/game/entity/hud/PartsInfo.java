@@ -22,8 +22,8 @@ public class PartsInfo extends Hud {
 
 	public PartsInfo(World world, float x, float y, Weapon weapon) {
 		super(world, x, y, 32, 32, "slot.png");
-		d_width = 160;
-		d_height = 116;
+		dWidth = 160;
+		dHeight = 116;
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.WHITE);
@@ -42,7 +42,7 @@ public class PartsInfo extends Hud {
 	public void hovered(){
 		super.hovered();
 		for(int i = 0; i < parts.length; i++){
-			if(world.mouse.x > x + 76 && world.mouse.x < x + 76 + 32 && world.mouse.y > y + d_height - 50 - i * 32 && world.mouse.y < y + d_height - 50 - i * 32 + 32){
+			if(world.mouse.x > x + 76 && world.mouse.x < x + 76 + 32 && world.mouse.y > y + dHeight - 50 - i * 32 && world.mouse.y < y + dHeight - 50 - i * 32 + 32){
 				parts[i].hovered();
 
 				break;
@@ -55,10 +55,10 @@ public class PartsInfo extends Hud {
 	}
 	
 	public void draw(SpriteBatch batch) {
-			BACKGROUND.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
-			font.draw(batch, "Parts: ", TextHelper.alignCenter("Parts: ", x + d_width/2), y + d_height - 4);
+			BACKGROUND.draw(batch, x, y, dWidth-dOffX, dHeight-dOffY);
+			font.draw(batch, "Parts: ", TextHelper.alignCenter("Parts: ", x + dWidth/2), y + dHeight - 4);
 			for(int i = 0; i < parts.length; i++){
-				parts[i].draw(batch, x + 76, y + d_height - 50 - i * 32);
+				parts[i].draw(batch, x + 76, y + dHeight - 50 - i * 32);
 			}
 	}
 

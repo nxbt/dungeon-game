@@ -21,8 +21,8 @@ public class SwingGraphic extends Hud {
 		super(world, x, y, 32, 32, "slot.png");
 		this.swing = swing;
 		this.readOnly = readOnly;
-		this.d_width = 92;
-		this.d_height = 16;
+		this.dWidth = 92;
+		this.dHeight = 16;
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.WHITE);
@@ -40,7 +40,7 @@ public class SwingGraphic extends Hud {
 	}
 	
 	public void draw(SpriteBatch batch){
-		BACKGROUND.draw(batch, x, y, d_width, d_height);
+		BACKGROUND.draw(batch, x, y, dWidth, dHeight);
 		font.draw(batch, swing.name, x + 4, y + 14);
 	}
 

@@ -42,6 +42,7 @@ public abstract class Item implements Cloneable {
 		changeSprite(0);
 		
 		stack = 1;
+		maxStack = 10;
 	}
 	
 	public Item clone() {

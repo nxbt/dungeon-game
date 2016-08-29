@@ -14,12 +14,12 @@ public class ScrollBar extends Hud {
 	public ScrollBar(World world, float x, float y, Window window) {
 		super(world, x, y, 32, 32, "slot.png");
 		this.window = window;
-		d_width = 5;
+		dWidth = 5;
 	}
 	
 	public void calc(){
 
-		d_height = (int) ((window.d_height - 16)/window.contentHeight * (window.d_height - 16));
+		dHeight = (int) ((window.dHeight - 16)/window.contentHeight * (window.dHeight - 16));
 		
 		super.calc();
 	}

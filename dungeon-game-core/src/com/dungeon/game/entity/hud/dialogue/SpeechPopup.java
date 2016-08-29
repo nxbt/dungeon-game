@@ -33,11 +33,11 @@ public class SpeechPopup extends Hud {
 	public SpeechPopup(World world, Friend character) {
 		super(world, 0, 0, Item.SIZE, Item.SIZE, "slot.png");
 		this.character = character;
-		d_width = 200;
-		d_height = 100;
+		dWidth = 200;
+		dHeight = 100;
 		
-		d_offx = 16;
-		d_offy = 0;
+		dOffX = 16;
+		dOffY = 0;
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.getData().setScale(1f);
@@ -127,9 +127,9 @@ public class SpeechPopup extends Hud {
 			endText = "";
 		}
 		
-		d_height = lines.size() * 16 + 18;
+		dHeight = lines.size() * 16 + 18;
 		
-		d_width = max_line_length * 9 + 38;
+		dWidth = max_line_length * 9 + 38;
 	}
 	
 	public void hovered(){
@@ -167,9 +167,9 @@ public class SpeechPopup extends Hud {
 	public void draw(SpriteBatch batch) {
 		batch.setColor(1,1,1,0.8f);
 		if(!dismissed&&!text.equals("")) {
-			SPEECH_POPUP.draw(batch, x, y, d_width-d_offx, d_height-d_offy);
+			SPEECH_POPUP.draw(batch, x, y, dWidth-dOffX, dHeight-dOffY);
 			
-			font.draw(batch, text, x+16, y+d_height-6);
+			font.draw(batch, text, x+16, y+dHeight-6);
 		}
 
 		batch.setColor(1,1,1,1);

@@ -13,8 +13,8 @@ public class Lamp extends Static {
 
 		solid = true;
 		
-		origin_x = 16;
-		origin_y = 16;
+		originX = 16;
+		originY = 16;
 		
 		layer = 3;
 

@@ -53,8 +53,8 @@ public class Villager extends Friend {
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();
 		
-		origin_x = 16;
-		origin_y = 16;
+		originX = 16;
+		originY = 16;
 		
 		wanderTile = new int[2];
 		
