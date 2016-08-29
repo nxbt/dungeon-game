@@ -108,9 +108,9 @@ public class World {
 			descBox = new DescBox(this);
 			
 			entities = curFloor.entities;
+			
 			entities.add(0,player);
-			entities.add(new Mentor(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2+Tile.TS, curFloor.tm.length/2*Tile.TS-Tile.TS/2));
-			entities.add(new TrainingTable(this, curFloor.tm[0].length/2*Tile.TS-Tile.TS/2-Tile.TS, curFloor.tm.length/2*Tile.TS+Tile.TS/2));
+			
 			hudEntities.add(new HudBackground(this));
 			
 			hudEntities.add(new EffectHudBackground(this, cam.width-44, cam.height-44));

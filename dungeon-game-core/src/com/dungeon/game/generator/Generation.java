@@ -49,7 +49,6 @@ public abstract class Generation {
 	
 	protected void generate(Object[] args){
 		generateClearDungeon();
-		
 	}
 	
 	public ArrayList<Entity> getEntities(){

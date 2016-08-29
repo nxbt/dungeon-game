@@ -28,7 +28,6 @@ public class Castle extends Generation {
 		rooms = new ArrayList<GenRoom>();
 		doors = new ArrayList<int[]>();
 		
-		generateClearDungeon();
 		createRooms();
 		createDoors();
 		if(args.length == 0 ||  !args[0].equals("test"))populateRooms();

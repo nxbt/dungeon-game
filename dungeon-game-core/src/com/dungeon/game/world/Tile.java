@@ -45,9 +45,7 @@ public class Tile implements Cloneable{
 			newTile = (Tile) super.clone();
 			newTile.textures = new Texture[textures.length];
 			for(int i = 0 ; i < textures.length; i++){
-				if(!textures[i].getTextureData().isPrepared())textures[i].getTextureData().prepare();
-				Pixmap temp = textures[i].getTextureData().consumePixmap(); //cloneing the textures allowes us to customize the tex of each tile, but increases loading time and storage. worth?
-				newTile.textures[i] = new Texture(temp);
+				newTile.textures[i] = textures[i];
 			}
 			newTile.rotation = rotation;
 			newTile.flip = flip;
