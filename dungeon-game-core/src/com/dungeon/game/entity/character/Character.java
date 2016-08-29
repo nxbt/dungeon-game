@@ -307,8 +307,8 @@ public abstract class Character extends Dynamic {
 //						verts[i+1] = temp;
 //					}
 //					Polygon hitbox = new Polygon(verts);
-					if(visPolygon.getVertices().length >=6 && Intersector.intersectPolygons(visPolygon, e.getVisbox(), new Polygon())){
-						if(!knownEntities.contains(e))knownEntities.add(e);
+					if(Intersector.intersectPolygons(visPolygon, e.getVisbox(), new Polygon())){
+						if(!knownEntities.contains(e))knownEntities.add(e); //some bug here...
 						seenEntities.add(e);
 					}
 				}
