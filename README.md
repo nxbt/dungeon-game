@@ -5,7 +5,6 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * continue proceedurally generated textures
 * make wood texture rotate to make more sense in small hallways
 * update wiki pages
-* finish reworking pathfinding to use heiarchal pathfinding (GDX AI)
 * add logical pathfinding around entities and logical group movement
 
 ##TODO low priority (within a month or two?):
