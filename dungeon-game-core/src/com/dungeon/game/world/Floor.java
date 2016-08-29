@@ -19,7 +19,6 @@ import com.dungeon.game.generator.rooms.Castle;
 import com.dungeon.game.generator.rooms.Rooms;
 import com.dungeon.game.generator.rooms.VillageCastle;
 import com.dungeon.game.generator.rooms.VillageRooms;
-import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.AreaMap;
 import com.dungeon.game.pathing.Heuristic;
 import com.dungeon.game.pathing.HierarchicalGraph;
@@ -208,11 +207,6 @@ public class Floor {
 		}
 		
 		gen.generateAreas();
-//		areaMap = new AreaMap(tm);
-//		for(Area area: gen.areas){
-//			areaMap.addArea(area);
-//		}
-//		areaMap.prepAreas();
 		
 		heiGraph = gen.getPathGraph();
 		pathAlg = new IndexedAStarPathFinder<Node>(heiGraph);
@@ -258,9 +252,9 @@ public class Floor {
 		int endWidth = (int) (world.cam.x+world.cam.width/2);
 		
 		startHeight = Math.max(startHeight,0);
-		endHeight = Math.min(endHeight,tm.length*Tile.TS);
+		endHeight = Math.min(endHeight,tm.length*Tile.TS)+1;
 		startWidth = Math.max(startWidth,0);
-		endWidth = Math.min(endWidth,tm[0].length*Tile.TS);
+		endWidth = Math.min(endWidth,tm[0].length*Tile.TS)+1;
 		
 		batch.draw(tmTexture, startWidth, startHeight, endWidth-startWidth, endHeight-startHeight, startWidth, startHeight, endWidth-startWidth, endHeight-startHeight, false, true);
 	}

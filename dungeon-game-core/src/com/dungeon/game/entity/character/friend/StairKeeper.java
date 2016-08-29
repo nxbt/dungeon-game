@@ -67,8 +67,7 @@ public class StairKeeper extends Friend {
 		
 		// \u200B to create pause;
 		dialogue = new Dialogue(world, this);
-
-//		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"Hello... I am the keeper of the stairs...", "below"));
+		
 		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this, new Criteria[] {new Invert(world, new Said(world, dialogue, "have answer")), new True(world)}, new String[] {"Hello... I am the keeper of the stairs...", "Hello again, traveler."}, new String[] {"below", "another question"}));
 		dialogue.potentialBubbles.put("below", new SpeechBubble(world, this,"The stairs to the below.", "have you"));
 	

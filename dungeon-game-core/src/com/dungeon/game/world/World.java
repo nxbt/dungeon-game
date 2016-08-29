@@ -19,14 +19,11 @@ import com.dungeon.game.entity.character.Player;
 import com.dungeon.game.entity.character.enemy.Enemy;
 import com.dungeon.game.entity.character.enemy.Goon;
 import com.dungeon.game.entity.character.friend.Friend;
-import com.dungeon.game.entity.character.friend.Mentor;
-import com.dungeon.game.entity.furniture.TrainingTable;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.HudBackground;
 import com.dungeon.game.entity.hud.Mouse;
-import com.dungeon.game.item.equipable.weapon.part.Part;
 import com.dungeon.game.pathing.AreaMap;
 import com.dungeon.game.pathing.Node;
 

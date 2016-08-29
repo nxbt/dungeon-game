@@ -14,19 +14,9 @@ import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
-import com.dungeon.game.item.Key;
-import com.dungeon.game.item.ammo.Arrow;
-import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.equipable.Equipable;
-import com.dungeon.game.item.equipable.FlashLight;
 import com.dungeon.game.item.equipable.Hand;
-import com.dungeon.game.item.equipable.Lantern;
-import com.dungeon.game.item.equipable.armor.WoolShirt;
-import com.dungeon.game.item.equipable.weapon.Axe;
-import com.dungeon.game.item.equipable.weapon.Bow;
 import com.dungeon.game.item.equipable.weapon.Medium;
-import com.dungeon.game.item.equipable.weapon.Sword;
-import com.dungeon.game.item.equipable.weapon.Wand;
 import com.dungeon.game.item.equipable.weapon.Weapon;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.textures.entity.Person;
@@ -136,26 +126,6 @@ public class Player extends Character {
 		inv = new Inventory(world, invLayout, 10, 100);
 		equipSlots = new Slot[]{inv.slot[30],inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41]};
 		equipItems = new Equipable[equipSlots.length];
-		inv.slot[6].item = new FlashLight(world);
-		inv.slot[31].item = new Lantern(world);
-		inv.slot[1].item = new LifePotion(world);
-		inv.slot[5].item = new Arrow(world);
-		inv.slot[5].item.stack = 10;
-		inv.addItem(new Sword(world, 1));
-		inv.addItem(new Sword(world, 1));
-		inv.addItem(new Sword(world, 1));
-		inv.addItem(new Sword(world, 1));
-		inv.addItem(new Axe(world, 1));
-		inv.addItem(new Axe(world, 1));
-		inv.addItem(new Axe(world, 1));
-		inv.addItem(new Axe(world, 1));
-		inv.addItem(new Bow(world, 10, 10));
-		inv.addItem(new Wand(world));
-		inv.addItem(new WoolShirt(world, speechColor));
-		inv.addItem(new Key(world));
-		inv.addItem(new Key(world));
-		
-		inv.slot[1].item.stack = 5;
 		
 		actionState = new boolean[] {false, false, false};
 		

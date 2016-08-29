@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Drop;
+import com.dungeon.game.entity.character.friend.Guide;
+import com.dungeon.game.entity.furniture.Door;
 import com.dungeon.game.entity.furniture.LockedDoor;
-import com.dungeon.game.generator.rooms.room.EmptyRoom;
-import com.dungeon.game.generator.rooms.room.Room;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Key;
 import com.dungeon.game.pathing.HierarchicalGraph;
@@ -23,19 +23,23 @@ public class TutorialGenerator extends Generation {
 	public void generate(Object[] args){
 		super.generate(args);
 		Rectangle workingRoom;
-
+		
+		
 		workingRoom = new Rectangle(48, 52, 1, 1);
 		addToMap(workingRoom);
 		entities.add(new LockedDoor(world, 48, 52, 0));
 		
+		//start Room
 		workingRoom = new Rectangle(45, 45, 7, 7);
 		addToMap(workingRoom);
-		Room startRoomRoom = new EmptyRoom(world, workingRoom, findDoors(workingRoom), tileMap);
-		startRoomRoom.addToMap(map, entities);
 		
+		entities.add(new Guide(world, 45*Tile.TS+Tile.TS/2, 51*Tile.TS+Tile.TS/2));
+		
+		//first hallway
 		workingRoom = new Rectangle(30, 53, 23, 2);
 		addToMap(workingRoom);
-
+		
+		//room with key on floor
 		workingRoom = new Rectangle(30, 55, 5, 8);
 		addToMap(workingRoom);
 		Slot s = new Slot(world, new int[]{0, 0, 0}, null);
@@ -44,13 +48,56 @@ public class TutorialGenerator extends Generation {
 		
 		workingRoom = new Rectangle(32, 63, 1, 1);
 		addToMap(workingRoom);
-		entities.add(new LockedDoor(world, 32, 63, 2));
+		entities.add(new LockedDoor(world, 32, 63, 0));
 		
-
-		workingRoom = new Rectangle(30, 64, 20, 2);
+		//second hallway
+		workingRoom = new Rectangle(30, 64, 27, 2);
 		addToMap(workingRoom);
 		
+		//loot rooms top
+		
+		workingRoom = new Rectangle(39, 59, 5, 4);
+		addToMap(workingRoom);
+
+		workingRoom = new Rectangle(49, 59, 5, 4);
+		addToMap(workingRoom);
+
+		workingRoom = new Rectangle(41, 63, 1, 1);
+		addToMap(workingRoom);
+		entities.add(new Door(world, 41, 63, 0));
+		
+		workingRoom = new Rectangle(51, 63, 1, 1);
+		addToMap(workingRoom);
+		entities.add(new Door(world, 51, 63, 2));
+		
+		//loot rooms bottom
+		
+		workingRoom = new Rectangle(34, 67, 5, 4);
+		addToMap(workingRoom);
+
+		workingRoom = new Rectangle(44, 67, 5, 4);
+		addToMap(workingRoom);
+
+		workingRoom = new Rectangle(36, 66, 1, 1);
+		addToMap(workingRoom);
+		entities.add(new Door(world, 36, 66, 2));
+		
+		workingRoom = new Rectangle(46, 66, 1, 1);
+		addToMap(workingRoom);
+		entities.add(new Door(world, 46, 66, 2));
+		
 		makeWalls(10, 11, 12, 13, 14);
+		
+		//DummyRoom
+		workingRoom = new Rectangle(58, 60, 11, 11);
+		addToMap(workingRoom);
+		
+		workingRoom = new Rectangle(57, 64, 1, 1);
+		addToMap(workingRoom);
+		entities.add(new Door(world, 57, 64, 1));
+		
+		makeWalls(10, 11, 12, 13, 14);
+		
 		
 		
 	}
