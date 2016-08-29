@@ -6,6 +6,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * make wood texture rotate to make more sense in small hallways
 * update wiki pages
 * add logical pathfinding around entities and logical group movement
+* swap x and y
 
 ##TODO low priority (within a month or two?):
 * continue adding procedural room decoration
