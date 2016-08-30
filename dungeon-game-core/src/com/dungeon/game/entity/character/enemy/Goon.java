@@ -215,7 +215,6 @@ public class Goon extends Enemy {
 		}
 	}
 	
-	//HAVE TO IMPLEMENT FIGHT MODE FOR NON-PLAYERS
 	public void handleEquips() {
 		for(int i = 0; i < equipSlots.length; i++){
 			if(equipSlots[i].item == null){

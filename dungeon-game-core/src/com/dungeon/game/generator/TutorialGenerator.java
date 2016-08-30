@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Drop;
+import com.dungeon.game.entity.character.enemy.Dummy;
 import com.dungeon.game.entity.character.friend.Guide;
 import com.dungeon.game.entity.furniture.Chest;
 import com.dungeon.game.entity.furniture.Door;
@@ -209,6 +210,10 @@ public class TutorialGenerator extends Generation {
 		tileNodes.remove(nodeArray[66][62]);
 		nodeArray[66][62] = null;
 		
+		entities.add(new Dummy(world, 63*Tile.TS+Tile.TS/2, 65*Tile.TS+Tile.TS/2));
+		entities.add(new Dummy(world, 66*Tile.TS+Tile.TS/2, 66*Tile.TS+Tile.TS/2));
+		entities.add(new Dummy(world, 65*Tile.TS+Tile.TS/2, 63*Tile.TS+Tile.TS/2));
+		
 		workingRoom = new Rectangle(57, 64, 1, 1);
 		addToMap(workingRoom);
 		entities.add(new LockedDoor(world, 57, 64, 1));
@@ -240,8 +245,6 @@ public class TutorialGenerator extends Generation {
 		y = (int) room.y;
 		for(int i = 0; i < room.height; i++){
 			if(!Tile.isSolid(map[y][x])){
-//				map[y][x]=tileMap.getTile(5);
-//				return new int[]{0,x,y};
 				doors.add(new int[]{0,x,y});
 			}
 
@@ -251,8 +254,6 @@ public class TutorialGenerator extends Generation {
 		y = (int) room.y;
 		for(int i = 0; i < room.height; i++){
 			if(!Tile.isSolid(map[y][x])){
-//				map[y][x]=tileMap.getTile(5);
-//				return new int[]{1,x,y};
 				doors.add(new int[]{1,x,y});
 			}
 
@@ -262,8 +263,6 @@ public class TutorialGenerator extends Generation {
 		y = (int) room.y-1;
 		for(int i = 0; i < room.width; i++){
 			if(!Tile.isSolid(map[y][x])){
-//				map[y][x]=tileMap.getTile(5);
-//				return new int[]{2,x,y};
 				doors.add(new int[]{2,x,y});
 			}
 
@@ -273,8 +272,6 @@ public class TutorialGenerator extends Generation {
 		y = (int) (room.y+room.height);
 		for(int i = 0; i < room.width; i++){
 			if(!Tile.isSolid(map[y][x])){
-//				map[y][x]=tileMap.getTile(5);
-//				return new int[]{3,x,y};
 				doors.add(new int[]{3,x,y});
 			}
 

@@ -127,6 +127,11 @@ public class Mouse extends Hud  implements InputProcessor {
 			mb_released = false;
 		}
 		
+		if(world.debug_freeCam && mb_pressed){
+			world.player.x = x+world.cam.x-world.cam.width/2;
+			world.player.y = y+world.cam.y-world.cam.height/2;
+		}
+		
 //		if(lb_down)for(int i = 0; i < 40; i++)world.entities.add(Ember.get(world, x+world.cam.x-world.cam.width/2, y+world.cam.y-world.cam.height/2, 90, 2));
 		
 		onHud = false;
