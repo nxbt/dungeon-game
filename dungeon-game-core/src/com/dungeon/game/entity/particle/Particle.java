@@ -1,6 +1,5 @@
 package com.dungeon.game.entity.particle;
 
-import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.Static;
 import com.dungeon.game.world.World;
 
@@ -31,12 +30,30 @@ public abstract class Particle extends Static {
 		x+=dx;
 		y+=dy;
 		duration--;
-		if(duration == 0)killMe = true;
+		if(duration == 0){
+			killMe = true;
+			dispose();
+		}
 
 	}
 	
-	public void dead(){
+	public void dead(){}
+	
+	public void set(World world, float x, float y, int duration, float dx, float dy){
+		this.world = world;
+		
+		this.x = x;
+		this.y = y;
+		
+		this.duration = duration;
+		
+		this.dx = dx;
+		this.dy = dy;
+		
+		killMe = false;
 		
 	}
+	
+	public abstract void dispose();
 
 }

@@ -24,6 +24,7 @@ import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.HudBackground;
 import com.dungeon.game.entity.hud.Mouse;
+import com.dungeon.game.entity.particle.Poof;
 import com.dungeon.game.pathing.Node;
 
 import box2dLight.PointLight;
@@ -69,6 +70,7 @@ public class World {
 	public ArrayList<float[]> tempPathingDebug;
 	
 	public World(boolean generate) {
+		Poof.init();
 		rayHandler = new RayHandler(null);
 		rayHandler.setBlurNum(15);
 		rayHandler.setAmbientLight(new Color(0,0,0,0));

@@ -51,4 +51,10 @@ public class Blood extends Particle {
 		return (float) (vel *(0.7f+Math.random())*1.3f);
 	}
 
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

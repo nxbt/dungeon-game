@@ -85,6 +85,10 @@ public class Drop extends Static {
 		if(slot.item == null) killMe = true;
 		else sprite = slot.item.sprite;
 	}
+	
+	public void dead(){
+		
+	}
 
 	@Override
 	public void calc() {}
