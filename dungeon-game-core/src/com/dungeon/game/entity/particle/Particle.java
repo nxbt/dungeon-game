@@ -34,5 +34,9 @@ public abstract class Particle extends Static {
 		if(duration == 0)killMe = true;
 
 	}
+	
+	public void dead(){
+		
+	}
 
 }

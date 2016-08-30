@@ -58,6 +58,7 @@ public abstract class Enemy extends Character {
 	}
 	
 	public void dead(){
+		super.dead();
 		if(equipItems[0]!=null)equipItems[0].unequip();
 		if(equipItems[1]!=null)equipItems[1].unequip();
 		
@@ -81,6 +82,5 @@ public abstract class Enemy extends Character {
 			
 			world.entities.add(goldDrop);
 		}
-		if(light!=null)light.light.remove(true);
 	}
 }

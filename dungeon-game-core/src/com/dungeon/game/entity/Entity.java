@@ -149,6 +149,7 @@ public abstract class Entity {
 
 	public void dead(){
 		if(light!=null)light.light.remove(true);
+		sprite.dispose();
 	};
 	
 	protected void genVisBox(){
