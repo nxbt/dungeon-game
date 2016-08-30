@@ -99,6 +99,8 @@ public abstract class Character extends Dynamic {
 	public Color speechColor;
 	public String desc;
 	
+	public boolean bleeds;
+	
 	public Character(World world, float x, float y, int width, int height, String filename) {
 		super(world, x, y, width, height, filename);
 		
@@ -139,6 +141,8 @@ public abstract class Character extends Dynamic {
 		poisn_resist = 0;
 		
 		desc = "On this stage, we are all players. Even this guy.";
+		
+		bleeds = true;
 	}
 
 	public void norm() {

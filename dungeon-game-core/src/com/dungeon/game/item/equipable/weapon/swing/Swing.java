@@ -176,7 +176,7 @@ public abstract class Swing implements Cloneable{
 		Vector2 knockVec = new Vector2(); //create a knockback vector
 		knockVec.x = (xSword*(1-knockRatio)+xOwner*(knockRatio))*knockMult; //set the x of the knockVec based on the knockRatio and the knockMult
 		knockVec.y = (ySword*(1-knockRatio)+yOwner*(knockRatio))*knockMult; //set the y of the knockVec based on the knockRatio and the knockMult
-		for(int i = 0; i < weapon.damage*3; i++)world.entities.add(Blood.get(world, c.x, c.y, knockVec.angle(), knockVec.len()*1.3f));
+		if(c.bleeds)for(int i = 0; i < weapon.damage*3; i++)world.entities.add(Blood.get(world, c.x, c.y, knockVec.angle(), knockVec.len()*1.3f));
 		c.acel(knockVec, false); //knock that ***** about!
 	}
 	

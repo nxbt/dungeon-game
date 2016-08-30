@@ -16,7 +16,7 @@ public class Dummy extends Enemy {
 		
 		name = "Dummy";
 		
-		maxLife = 100;
+		maxLife = 60;
 		maxStam = 0;
 		maxMana = 0;
 		
@@ -41,6 +41,8 @@ public class Dummy extends Enemy {
 		
 		dOffX = 0;
 		dOffY = 0;
+		
+		bleeds = false;
 	}
 
 	@Override
