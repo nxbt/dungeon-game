@@ -612,7 +612,7 @@ public class Rooms extends Generation {
 		for(Node n1: zoneNodes){
 			for(Node n2: zoneNodes){
 				if(!n1.equals(n2) && n1.isAdjacentTo(n2)){
-					n1.makeConnection(n2, 1);
+					n1.makeConnection(n2, n1.findDistance(n2.x, n2.y));
 				}
 			}
 		}
