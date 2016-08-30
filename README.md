@@ -36,3 +36,4 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * dual wielding will occasionally cause your own weapons to collide, sending you flying.
 * floating torches in castle rooms and where multiple halls meet
 * characters on the border of a wall will have a visPoly that crashes
+* Dialogue bubbles jump after empty dialogue skip
