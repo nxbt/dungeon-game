@@ -50,11 +50,10 @@ public class Blood extends Particle {
 
 	@Override
 	public void post() {
-		// TODO Auto-generated method stub
 	}
 	
 	public static float getAngle(float angle){
-		return (float) ((angle+45f-Math.random()*90)*Math.PI/180f);
+		return (float) ((angle+20f-Math.random()*40)*Math.PI/180f);
 	}
 	
 	public static float getVel(float vel){
