@@ -13,6 +13,7 @@ import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.InvBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
+import com.dungeon.game.entity.particle.Poof;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.item.Key;
 import com.dungeon.game.light.Light;
@@ -178,15 +179,19 @@ public class Guide extends Friend {
 		
 		if(stage == 0 && world.player.y > 53*Tile.TS) {
 			stage = 1;
+			for(int i = 0; i < 20; i++)world.entities.add(new Poof(world, x, y));
 			x = 30*Tile.TS + Tile.TS/2;
 			y = 62*Tile.TS + Tile.TS/2;
+			for(int i = 0; i < 20; i++)world.entities.add(new Poof(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(1);
 		}
 		else if(stage == 1 && world.player.y > 63*Tile.TS) {
 			stage = 2;
+			for(int i = 0; i < 20; i++)world.entities.add(new Poof(world, x, y));
 			x = 30*Tile.TS + Tile.TS/2;
 			y = 65*Tile.TS + Tile.TS/2;
+			for(int i = 0; i < 20; i++)world.entities.add(new Poof(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(2);
 		}
