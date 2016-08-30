@@ -225,12 +225,6 @@ public class World {
 			shapeRenderer.setProjectionMatrix(cam.cam.combined);
 			if(debug_pathing){
 				shapeRenderer.set(ShapeType.Line);
-				for(Node n :curFloor.heiGraph.nodes[1]){
-					shapeRenderer.setColor(Color.ORANGE);
-					
-					shapeRenderer.setColor(Color.BLACK);
-				}
-				
 				for(Node n :curFloor.heiGraph.nodes[0]){
 					shapeRenderer.setColor(Color.PURPLE);
 					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 1);
@@ -241,11 +235,11 @@ public class World {
 			}
 			
 			for(Entity e: entities){
-				if(debug_hitbox) {
+				if(debug_hitbox && e.hitbox != null) {
 					if(e.solid) shapeRenderer.setColor(Color.RED);
 					else shapeRenderer.setColor(Color.GREEN);
 					
-					shapeRenderer.polygon(e.getHitbox().getVertices());	
+					shapeRenderer.polygon(e.getHitbox().getVertices());
 
 					shapeRenderer.set(ShapeType.Filled);
 					shapeRenderer.setColor(Color.CYAN);

@@ -31,7 +31,7 @@ public class Light {
 	private int curFlick;
 	private int offX;
 	private int offY;
-	private boolean isOn;
+	public boolean isOn;
 	
 	//point light with color
 	public Light(World world, float x, float y, int strength, int rays, Color color, int flickerAmount, Entity ent){

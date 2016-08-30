@@ -54,14 +54,24 @@ public class TutorialGenerator extends Generation {
 		zoneNodes.remove(0);
 
 		entities.add(new Guide(world, 45*Tile.TS+Tile.TS/2, 51*Tile.TS+Tile.TS/2));
-		entities.add(new Torch(world, 50, 50, 0));
-		entities.add(new Torch(world, 50, 50, 1));
-		entities.add(new Torch(world, 50, 50, 2));
-		entities.add(new Torch(world, 50, 50, 3));
+		entities.add(new Torch(world, 45, 46, 0));
+		entities.add(new Torch(world, 45, 50, 0));
+		entities.add(new Torch(world, 50, 45, 3));
+		entities.add(new Torch(world, 51, 48, 2));
+		entities.add(new Torch(world, 47, 51, 1));
+		entities.add(new Torch(world, 49, 51, 1));
 		
 		//first hallway
 		workingRoom = new Rectangle(30, 53, 23, 2);
 		addToMap(workingRoom);
+		
+		entities.add(new Torch(world, 51, 54, 1));
+		entities.add(new Torch(world, 46, 53, 3));
+		entities.add(new Torch(world, 43, 54, 1));
+		entities.add(new Torch(world, 40, 54, 1));
+		entities.add(new Torch(world, 38, 53, 3));
+		entities.add(new Torch(world, 34, 53, 3));
+		entities.add(new Torch(world, 30, 54, 0));
 		
 		//room with key on floor
 		workingRoom = new Rectangle(30, 55, 5, 8);
@@ -73,6 +83,12 @@ public class TutorialGenerator extends Generation {
 		workingRoom = new Rectangle(32, 63, 1, 1);
 		addToMap(workingRoom);
 		entities.add(new LockedDoor(world, 32, 63, 0));
+		
+		entities.add(new Torch(world, 34, 56, 2));
+		entities.add(new Torch(world, 34, 59, 2));
+		entities.add(new Torch(world, 30, 58, 0));
+		entities.add(new Torch(world, 31, 62, 1));
+		entities.add(new Torch(world, 33, 62, 1));
 		
 		//second hallway
 		workingRoom = new Rectangle(30, 64, 27, 2);

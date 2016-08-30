@@ -18,7 +18,6 @@ public abstract class Pool<N> {
 	}
 	
 	public N get(){
-		System.out.println(pool.size());
 		if(pool.size() > 0)return pool.remove(0);
 		else {
 			total++;

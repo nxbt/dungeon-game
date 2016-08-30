@@ -14,6 +14,7 @@ import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
+import com.dungeon.game.item.Key;
 import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
@@ -134,6 +135,7 @@ public class Player extends Character {
 		inv.addItem(new Sword(world, 1));
 		inv.addItem(new Sword(world, 1));
 		inv.addItem(new LifePotion(world), 10);
+		inv.addItem(new Key(world), 10);
 		
 		equipSlots = new Slot[]{inv.slot[30],inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41]};
 		equipItems = new Equipable[equipSlots.length];
@@ -144,7 +146,7 @@ public class Player extends Character {
 
 		addEffect(new StamRegen(world, -1, 0.1f));
 		
-		vision = 10;
+		vision = 20;
 		hearing = 10;
 		gold = 0;
 		clickable = false;

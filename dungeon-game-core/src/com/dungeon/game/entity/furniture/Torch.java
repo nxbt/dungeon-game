@@ -61,12 +61,16 @@ public class Torch extends Static {
 		}
 		genVisBox();
 		
-		light = new Light(world, x, y, 100, 100, Light.ORANGE, 40, this);
+		light = new Light(world, x, y, 150, 100, Light.ORANGE, 40, this);
+		
 		clickable = false;
 	}
 
 	@Override
 	public void calc() {
+		if(!light.isOn && world.player.knownEntities.contains(this)) light.load();
+		else if(light.isOn && !world.player.knownEntities.contains(this)) light.unload();
+			
 		if(flipX){
 			if(orientaiton == 0 || orientaiton == 2){ //pls work?
 				originX = 16 - originX;
