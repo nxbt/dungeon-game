@@ -44,12 +44,19 @@ public class Dialogue extends Hud {
 		
 		if(world.player.fightMode) close();
 		int heightCounter = 88;
-		for(SpeechBubble bubble: speechBubbles){
+		for(int i = 0; i < speechBubbles.size(); i++){
+			SpeechBubble bubble = speechBubbles.get(i);
+			
 			bubble.y = heightCounter;
 			heightCounter+=bubble.dHeight+8;
 			if(bubble.character.equals(characters.get(0)))bubble.x = 8;
 			else if(bubble.character.equals(characters.get(1)))bubble.x = world.cam.width-bubble.dWidth-8;
 			if(!bubble.done())bubble.update();
+			
+			if(bubble.endText != null && bubble.endText.equals("")) {
+				speechBubbles.add(0,(SpeechBubble) potentialBubbles.get(speechBubbles.get(0).getProceedKey()).clone());
+				speechBubbles.remove(1);
+			}
 		}
 		if(speechBubbles.get(0) instanceof InvBubble && ((InvBubble)speechBubbles.get(0)).madeChoice) {
 			speechBubbles.remove(1);

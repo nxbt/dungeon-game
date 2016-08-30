@@ -123,7 +123,6 @@ public class Guide extends Friend {
 		
 		dialogue = new Dialogue(world, this);
 		
-		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"By the way, you can also click on me to talk, even if there's no popup bubble.", "what floor"));
 		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this, new Criteria[] {new Invert(world, new Said(world, dialogue, "pick up")), new True(world)}, new String[] {"By the way, you can also click on me to talk, even if there's no popup bubble.", "Didn't catch that?"}, new String[] {"what floor", "pick up"}));
 		
 		dialogue.potentialBubbles.put("what floor", new SpeechBubble(world, this,"Another locked door... But what's that on the floor?", "what floor answer"));
