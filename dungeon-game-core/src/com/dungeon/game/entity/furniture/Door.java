@@ -14,13 +14,19 @@ public class Door extends Static {
 		construct(door.tileX, door.tileY, door.rotation);
 		open = true;
 		solid = false;
-		this.sprite = door.sprite;
+		this.sprite = new com.dungeon.game.textures.entity.Door(door.rotation, false).texture;
 	}
 	
 	public Door(World world, float x, float y, int rotation) {
 		super(world, x, y, 32, 32, "slot.png");
 		construct(x, y, rotation);
-		this.sprite = new com.dungeon.game.textures.entity.Door(rotation).texture;
+		this.sprite = new com.dungeon.game.textures.entity.Door(rotation, false).texture;
+	}
+	
+	public Door(World world, float x, float y, int rotation, boolean isLocked) {
+		super(world, x, y, 32, 32, "slot.png");
+		construct(x, y, rotation);
+		this.sprite = new com.dungeon.game.textures.entity.Door(rotation, isLocked).texture;
 	}
 
 	public void construct(float x, float y, int rotation) {

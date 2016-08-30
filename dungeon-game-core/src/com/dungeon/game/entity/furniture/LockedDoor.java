@@ -11,7 +11,7 @@ public class LockedDoor extends Door {
 	public int tileY;
 
 	public LockedDoor(World world, float x, float y, int rotation) {
-		super(world, x, y, rotation);
+		super(world, x, y, rotation, true);
 		this.rotation = rotation;
 		tileX = (int) x;
 		tileY = (int) y;

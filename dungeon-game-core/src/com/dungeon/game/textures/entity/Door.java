@@ -8,14 +8,18 @@ import com.dungeon.game.utilities.Spritesheet;
 
 public class Door extends ProceduralTexture {
 
-	public Door(int rotation) {
-		super(32, 8, new Object[]{rotation});
+	public Door(int rotation, boolean locked) {
+		super(32, 8, new Object[]{rotation, locked});
 	}
 
 	@Override
 	public void generateTexture(Object[] args) {
 		Pixmap texMap = new Pixmap(32, 8,Pixmap.Format.RGBA8888); //create pixmap
 		Color doorColor = new Color(163f / 255f, 60f / 255f, 8f / 255f, 255f);
+		if((Boolean) args[1]){
+			doorColor.mul(0.7f);
+			doorColor.a = 1;
+		}
 		texMap.setColor(doorColor);
 		texMap.fillRectangle(0, 0, 32, 8);
 		texMap.setColor(new Color(doorColor.r*0.8f, doorColor.g*0.8f, doorColor.b*0.8f, 1));
