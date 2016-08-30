@@ -130,12 +130,6 @@ public class TutorialGenerator extends Generation {
              } 
          }
 	}
-
-	@Override
-	public void generateAreas() {
-		// TODO Auto-generated method stub
-
-	}
 	
 	protected int[][] findDoors(Rectangle room){
 		ArrayList<int[]> doors = new ArrayList<int[]>();

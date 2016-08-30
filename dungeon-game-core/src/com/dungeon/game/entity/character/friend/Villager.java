@@ -94,8 +94,7 @@ public class Villager extends Friend {
 					wanderTile = new int[]{1+(int)(Math.random()*world.curFloor.tm[0].length-1),1+(int)(Math.random()*world.curFloor.tm.length-1)};
 				}while(Tile.isSolid(world.curFloor.tm[wanderTile[1]][wanderTile[0]]));
 				Path p = new Path(world);
-//				world.curFloor.findPath(world.curFloor.heiGraph.getClosestNode(x, y), world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2), new Heuristic(), p);
-				world.curFloor.findPath(world.curFloor.heiGraph.getClosestNode(x, y), world.curFloor.heiGraph.getClosestNode(world.player.x, world.player.y), new Heuristic(), p);
+				world.curFloor.findPath(world.curFloor.heiGraph.getClosestNode(x, y), world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2), new Heuristic(), p);
 				path = p.getPath();
 				if(path.size() > 0){
 					targetTile = p.getTargTile();	
@@ -109,8 +108,7 @@ public class Villager extends Friend {
 		
 		if(stagerTimer == 0){
 			Path p = new Path(world);
-//			world.curFloor.findPath(world.curFloor.heiGraph.getClosestNode(x, y), world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2), new Heuristic(), p);
-			world.curFloor.findPath(world.curFloor.heiGraph.getClosestNode(x, y), world.curFloor.heiGraph.getClosestNode(world.player.x, world.player.y), new Heuristic(), p);
+			world.curFloor.findPath(world.curFloor.heiGraph.getClosestNode(x, y), world.curFloor.heiGraph.getClosestNode(wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2), new Heuristic(), p);
 
 			path = p.getPath();
 			

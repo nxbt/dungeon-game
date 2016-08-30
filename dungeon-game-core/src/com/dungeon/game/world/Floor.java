@@ -19,7 +19,6 @@ import com.dungeon.game.generator.rooms.Castle;
 import com.dungeon.game.generator.rooms.Rooms;
 import com.dungeon.game.generator.rooms.VillageCastle;
 import com.dungeon.game.generator.rooms.VillageRooms;
-import com.dungeon.game.pathing.AreaMap;
 import com.dungeon.game.pathing.Heuristic;
 import com.dungeon.game.pathing.HierarchicalGraph;
 import com.dungeon.game.pathing.Node;
@@ -45,8 +44,6 @@ public class Floor {
 	public ArrayList<float[]> edges;
 	
 	public ArrayList<Entity> entities;
-
-	public AreaMap areaMap;
 	
 	protected World world;
 	
@@ -205,8 +202,6 @@ public class Floor {
 				edge[2] += 0.001f;
 			}
 		}
-		
-		gen.generateAreas();
 		
 		heiGraph = gen.getPathGraph();
 		pathAlg = new IndexedAStarPathFinder<Node>(heiGraph);

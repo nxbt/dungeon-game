@@ -228,9 +228,6 @@ public class CastleOld extends Generation {
 	}
 
 	@Override
-	public void generateAreas() {}
-
-	@Override
 	public HierarchicalGraph getPathGraph() {
 		// NOT COMPLETED FOR THIS OBSOLETE GENERATION
 		return null;

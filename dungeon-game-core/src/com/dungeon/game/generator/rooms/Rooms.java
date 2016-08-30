@@ -10,7 +10,6 @@ import com.dungeon.game.generator.rooms.hallway.BasicHall;
 import com.dungeon.game.generator.rooms.hallway.Hallway;
 import com.dungeon.game.generator.rooms.room.EnemyRoom;
 import com.dungeon.game.generator.rooms.room.Room;
-import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.HierarchicalGraph;
 import com.dungeon.game.pathing.Node;
 import com.dungeon.game.utilities.MethodArray;
@@ -522,21 +521,6 @@ public class Rooms extends Generation {
 		}
 		int[][] ds = doors.toArray(new int[doors.size()][3]);
 		return ds;
-	}
-	
-	public void generateAreas(){
-		for(Rectangle room: rooms){
-			Area area = new Area();
-			area.addRectangleToArea((int)room.x, (int)room.y, (int)room.width, (int)room.height);
-			areas.add(area);
-		}
-		for(ArrayList<int[]> hall: halls){
-			Area area = new Area();
-			for(int[] point: hall){
-				area.addPointToArea(point);
-			}
-			areas.add(area);
-		}
 	}
 	
 	public void generateStairDown(){

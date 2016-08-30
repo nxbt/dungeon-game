@@ -14,9 +14,11 @@ import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
+import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.weapon.Medium;
+import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.item.equipable.weapon.Weapon;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.textures.entity.Person;
@@ -123,6 +125,12 @@ public class Player extends Character {
 		
 		
 		inv = new Inventory(world, invLayout, 10, 100);
+		inv.addItem(new Sword(world, 3));
+		inv.addItem(new LifePotion(world));
+		inv.addItem(new LifePotion(world));
+		inv.addItem(new LifePotion(world));
+		inv.addItem(new LifePotion(world));
+		inv.addItem(new LifePotion(world));
 		equipSlots = new Slot[]{inv.slot[30],inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41]};
 		equipItems = new Equipable[equipSlots.length];
 		

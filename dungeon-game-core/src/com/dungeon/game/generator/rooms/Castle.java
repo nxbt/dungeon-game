@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.rooms.room.EnemyRoom;
 import com.dungeon.game.generator.rooms.room.Room;
-import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.HierarchicalGraph;
 import com.dungeon.game.pathing.Node;
 import com.dungeon.game.world.Tile;
@@ -272,25 +271,6 @@ public class Castle extends Generation {
 		}
 		int[][] ds = doors.toArray(new int[doors.size()][3]);
 		return ds;
-	}
-	
-
-
-	@Override
-	public void generateAreas() {
-		for(GenRoom room: rooms){
-			Area area = new Area();
-			area.addRectangleToArea((int)room.x, (int)room.y, (int)room.width, (int)room.height);
-			areas.add(area);
-		}
-		for(int[] door: doors){
-			for(int i = 0; i < rooms.size(); i++){
-				if(rooms.get(i).isAdjacent(door[0], door[1])){
-					areas.get(i).addPointToArea(door);
-					break;
-				}
-			}
-		}
 	}
 	
 

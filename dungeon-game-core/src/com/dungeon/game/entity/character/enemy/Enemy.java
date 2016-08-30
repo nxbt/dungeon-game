@@ -8,6 +8,8 @@ import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Item;
+import com.dungeon.game.pathing.Heuristic;
+import com.dungeon.game.pathing.Path;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -23,8 +25,12 @@ public abstract class Enemy extends Character {
 	protected void findPath(ArrayList<Entity> entities, float[] target){
 		float targetX = x;
 		float targetY = y;
-		if(stagerTimer == 0)targetTile = world.areaMap.findPath(new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (target[0]/Tile.TS),(int) (target[1]/Tile.TS)});
-		path = world.areaMap.lastPath;
+		if(stagerTimer == 0){
+			Path p = new Path(world);
+			world.curFloor.findPath(world.curFloor.heiGraph.getClosestNode(x, y), world.curFloor.heiGraph.getClosestNode(target[0] + 0.5f, target[1] + 0.5f), new Heuristic(), p);//new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (target[0]/Tile.TS),(int) (target[1]/Tile.TS)});
+			path = p.getPath();
+			if(path.size() > 0) targetTile = p.getTargTile();
+		}
 		if(targetTile!=null){
 				moveTo = targetTile;
 				targetX = targetTile[0]*Tile.TS+Tile.TS/2;

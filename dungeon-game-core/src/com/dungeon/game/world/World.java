@@ -24,7 +24,6 @@ import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.HudBackground;
 import com.dungeon.game.entity.hud.Mouse;
-import com.dungeon.game.pathing.AreaMap;
 import com.dungeon.game.pathing.Node;
 
 import box2dLight.PointLight;
@@ -49,8 +48,6 @@ public class World {
 	public Mouse mouse;
 	
 	public DescBox descBox;
-	
-	public AreaMap areaMap;
 	
 	private BitmapFont fpsFont;
 	
@@ -93,8 +90,6 @@ public class World {
 			
 			player.x = curFloor.tm[0].length/2*Tile.TS-Tile.TS/2;
 			player.y = curFloor.tm.length/2*Tile.TS-Tile.TS/2;
-			
-			areaMap = curFloor.areaMap;
 			
 			entities = new ArrayList<Entity>();
 			hudEntities = new ArrayList<Hud>();
@@ -330,7 +325,6 @@ public class World {
 		curFloor = curDungeon.floors.get(floor);
 		entities = curFloor.entities;
 		entities.add(0,player);
-		areaMap = curFloor.areaMap;
 		player.x = destX*Tile.TS-Tile.TS/2;
 		player.y = destY*Tile.TS-Tile.TS/2;
 		for(Entity e: entities){

@@ -2,10 +2,8 @@ package com.dungeon.game.generator.rooms;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.furniture.Stair;
-import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.rooms.hallway.BasicHall;
 import com.dungeon.game.generator.rooms.hallway.Hallway;
 import com.dungeon.game.generator.rooms.room.BasicRoom;
@@ -15,7 +13,6 @@ import com.dungeon.game.generator.rooms.room.Quarters;
 import com.dungeon.game.generator.rooms.room.Room;
 import com.dungeon.game.generator.rooms.room.StairRoom;
 import com.dungeon.game.generator.rooms.room.TrainingCenter;
-import com.dungeon.game.pathing.Area;
 import com.dungeon.game.utilities.MethodArray;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;

@@ -3,12 +3,8 @@ package com.dungeon.game.generator;
 import java.util.ArrayList;
 
 import com.dungeon.game.entity.Entity;
-import com.dungeon.game.entity.character.friend.Villager;
-import com.dungeon.game.entity.furniture.Door;
 import com.dungeon.game.entity.furniture.Fireplace;
-import com.dungeon.game.pathing.Area;
 import com.dungeon.game.pathing.HierarchicalGraph;
-import com.dungeon.game.pathing.Node;
 import com.dungeon.game.world.Floor;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.TileMap;
@@ -24,15 +20,12 @@ public abstract class Generation {
 	
 	protected ArrayList<Entity> entities;
 	
-	public ArrayList<Area> areas;
-	
 	public int textureSeed;
 	
 	public TileMap tileMap;
 	public Generation(World world, int width, int height, int textureSeed, Object[] args){
 		this.textureSeed = textureSeed;
 		tileMap = Floor.tileMap1;
-		areas = new ArrayList<Area>();
 		this.height = height;
 		this.width = width;
 		map = new Tile[height][width];
@@ -239,8 +232,6 @@ public abstract class Generation {
 			if(e instanceof Fireplace)((Fireplace) e).genTexture(textureSeed);
 		}
 	}
-	
-	public abstract void generateAreas();
 	
 	public abstract HierarchicalGraph getPathGraph();
 }

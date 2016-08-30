@@ -52,9 +52,6 @@ public class Biospheres extends Generation {
 	}
 
 	@Override
-	public void generateAreas() {}
-
-	@Override
 	public HierarchicalGraph getPathGraph() {
 		// NOT COMPLETED FOR THIS INCOMPLETE GENERATION
 		return null;
