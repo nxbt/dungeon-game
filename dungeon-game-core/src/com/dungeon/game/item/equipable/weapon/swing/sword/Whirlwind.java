@@ -17,7 +17,7 @@ public class Whirlwind extends SwordSwing {
 			endingZone = LEFT;
 			weapon.graphic.toFlip = true;
 		}else{
-			setStats(true, 10, 10, -90, -90, 30, 10, 270, 270, 0.5f, 1.4f, -90, 0.7f, 2);
+			setStats(true, 10, 10, -90, -90, 30, 10, 270, 270, 0.5f, 1.4f, 90, 0.7f, 2);
 			endingZone = RIGHT;
 			weapon.graphic.toFlip = false;
 		}

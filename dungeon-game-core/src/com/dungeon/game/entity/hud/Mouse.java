@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.Drop;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.hud.window.Window;
-import com.dungeon.game.entity.particle.Poof;
+import com.dungeon.game.entity.particle.Blood;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.world.Tile;

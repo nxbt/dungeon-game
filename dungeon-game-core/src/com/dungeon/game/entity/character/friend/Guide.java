@@ -53,6 +53,10 @@ public class Guide extends Friend {
 		stam = maxStam;
 		mana = maxMana;
 		
+		//temp
+		maxLife = 10000;
+		life = maxLife;
+		
 		acel = 1.5f;
 		mvel = 5;
 		fric = 0.5f;

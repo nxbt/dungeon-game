@@ -22,8 +22,7 @@ public abstract class Friend extends Character {
 		super(world, x, y, width, height, filename);
 		
 		speechBubble = new SpeechPopup(world,this);	
-		
-		addEffect(new Immune(world, -1));
+//		addEffect(new Immune(world, -1));
 	}
 	
 	public void hovered() {
