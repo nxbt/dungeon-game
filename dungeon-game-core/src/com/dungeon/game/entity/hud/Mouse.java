@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.Drop;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.hud.window.Window;
+import com.dungeon.game.entity.particle.Blood;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.world.Tile;
@@ -127,7 +128,7 @@ public class Mouse extends Hud  implements InputProcessor {
 			mb_released = false;
 		}
 		
-//		if(lb_down)for(int i = 0; i < 40; i++)world.entities.add(Poof.get(world, x+world.cam.x-world.cam.width/2, y+world.cam.y-world.cam.height/2));
+//		if(lb_down)for(int i = 0; i < 40; i++)world.entities.add(Blood.get(world, x+world.cam.x-world.cam.width/2, y+world.cam.y-world.cam.height/2, 90, 15));
 		
 		onHud = false;
 		int toMoveToFront=0;

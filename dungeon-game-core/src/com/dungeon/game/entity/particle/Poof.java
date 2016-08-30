@@ -26,7 +26,7 @@ public class Poof extends Particle {
 	}
 
 	public Poof() {
-		super(null, 0, 0, 60, 0, 0);
+		super();
 		
 		dWidth = 4;
 		dHeight = 4;

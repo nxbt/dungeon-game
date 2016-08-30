@@ -11,14 +11,10 @@ public abstract class Particle extends Static {
 	
 	protected float dy;
 
-	public Particle(World world, float x, float y, int duration, float dx, float dy) {
-		super(world, x, y, 32, 32, "slot.png");
-		this.duration = duration;
+	public Particle() {
+		super(null, 0, 0, 32, 32, "slot.png");
 		layer = 4;
 		clickable = false;
-		
-		this.dx = dx;
-		this.dy = dy;
 	}
 	
 	public void update() {
