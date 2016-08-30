@@ -9,6 +9,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * swap x and y
 * make doors open away from the player
 * make particles poolable?
+* textures have to be disposed...
 
 ##TODO low priority (within a month or two?):
 * continue adding procedural room decoration
