@@ -155,6 +155,7 @@ public class Guide extends Friend {
 			stage = 1;
 			x = 30*Tile.TS + Tile.TS/2;
 			y = 62*Tile.TS + Tile.TS/2;
+			speechBubble.dismissed = false;
 			dialogue = dialogues.get(1);
 		}
 		

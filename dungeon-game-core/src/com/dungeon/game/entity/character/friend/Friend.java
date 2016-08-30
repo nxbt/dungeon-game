@@ -36,9 +36,8 @@ public abstract class Friend extends Character {
 	
 	public void showPopupBubble(String text) {
 		if(seenEntities.contains(world.player)){
-			if(!world.player.fightMode&&speechBubble.endText.equals("")) {
+			if(!speechBubble.dismissed && !world.player.fightMode&&speechBubble.endText.equals("")) {
 				if(!world.hudEntities.contains(dialogue))speechBubble.updateText(text);
-				speechBubble.dismissed = false;
 			}
 			
 		}

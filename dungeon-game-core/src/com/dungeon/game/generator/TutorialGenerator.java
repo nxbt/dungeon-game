@@ -105,7 +105,7 @@ public class TutorialGenerator extends Generation {
 		
 		workingRoom = new Rectangle(57, 64, 1, 1);
 		addToMap(workingRoom);
-		entities.add(new Door(world, 57, 64, 1));
+		entities.add(new LockedDoor(world, 57, 64, 1));
 		
 		makeWalls(10, 11, 12, 13, 14);
 	}
