@@ -5,7 +5,7 @@ import com.dungeon.game.world.World;
 public class Key extends Item {
 
 	public Key(World world) {
-		super(world, "stick.png");
+		super(world, "key.png");
 		
 		name = "Key";
 		desc = "It opens doors dumbass.";
