@@ -8,7 +8,6 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * add logical pathfinding around entities and logical group movement
 * swap x and y
 * make doors open away from the player
-* make particles poolable?
 * textures have to be disposed...
 
 ##TODO low priority (within a month or two?):
