@@ -123,9 +123,13 @@ public class Guide extends Friend {
 		
 		dialogue = new Dialogue(world, this);
 		
-		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this, new Criteria[] {new Invert(world, new Said(world, dialogue, "pick up")), new True(world)}, new String[] {"By the way, you can also click on me to talk, even if there's no popup bubble.", "Didn't catch that?"}, new String[] {"what floor", "pick up"}));
+		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this, new Criteria[] {new Invert(world, new Said(world, dialogue, "what floor")), new True(world)}, new String[] {"By the way, you can also click on me to talk, even if there's no popup bubble.", "Didn't catch that?"}, new String[] {"what floor", "tell again"}));
 		
-		dialogue.potentialBubbles.put("what floor", new SpeechBubble(world, this,"Another locked door... But what's that on the floor?", "what floor answer"));
+//		dialogue.potentialBubbles.put("what floor", new SpeechBubble(world, this,"Another locked door... But what's that on the floor?", "what floor answer"));
+		dialogue.potentialBubbles.put("what floor", new SpeechBubble(world, this,
+				new Criteria[]{new HasItem(world, new Key(world), world.player), new True(world)},
+				new String[]{"I see you already picked up the key. Good.", "Another locked door... But what's that on the floor?"}, 
+				new String[]{"use key", "what floor answer"}));
 		
 		dialogue.potentialBubbles.put("what floor answer", new SpeechChoice(world, 
 				new String[]{"I don't know.", "Dust.", "A key."}, 
@@ -138,7 +142,14 @@ public class Guide extends Friend {
 		
 		dialogue.potentialBubbles.put("key", new SpeechBubble(world, this,"Yep! You have a good eye.", "pick up"));
 		
+		dialogue.potentialBubbles.put("tell again", new SpeechBubble(world, this,
+				new Criteria[]{new HasItem(world, new Key(world), world.player), new True(world)},
+				new String[]{"", ""}, 
+				new String[]{"use key", "pick up"}));
+		
 		dialogue.potentialBubbles.put("pick up", new SpeechBubble(world, this,"Click on the key to grab it off the ground. Then open the door with it.", "end"));
+		
+		dialogue.potentialBubbles.put("use key", new SpeechBubble(world, this,"Open the door with the key.", "end"));
 		
 		dialogues.add(dialogue);
 		

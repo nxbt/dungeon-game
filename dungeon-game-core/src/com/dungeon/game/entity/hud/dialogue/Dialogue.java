@@ -56,6 +56,7 @@ public class Dialogue extends Hud {
 			if(bubble.endText != null && bubble.endText.equals("")) {
 				speechBubbles.add(0,(SpeechBubble) potentialBubbles.get(speechBubbles.get(0).getProceedKey()).clone());
 				speechBubbles.remove(1);
+				i--;
 			}
 		}
 		if(speechBubbles.get(0) instanceof InvBubble && ((InvBubble)speechBubbles.get(0)).madeChoice) {
