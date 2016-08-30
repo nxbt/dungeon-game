@@ -8,13 +8,18 @@ public abstract class Particle extends Static {
 	
 	protected int duration;
 	
-	protected Vector2 moveVec;
+	protected float dx;
+	
+	protected float dy;
 
 	public Particle(World world, float x, float y, int duration, float dx, float dy) {
 		super(world, x, y, 32, 32, "slot.png");
 		this.duration = duration;
 		layer = 4;
-		moveVec = new Vector2(dx, dy);
+		clickable = false;
+		
+		this.dx = dx;
+		this.dy = dy;
 	}
 	
 	public void update() {
@@ -23,8 +28,8 @@ public abstract class Particle extends Static {
 
 	@Override
 	public void calc() {
-		x+=moveVec.x;
-		y+=moveVec.y;
+		x+=dx;
+		y+=dy;
 		duration--;
 		if(duration == 0)killMe = true;
 

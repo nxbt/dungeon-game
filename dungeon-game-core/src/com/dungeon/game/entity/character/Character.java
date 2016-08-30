@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.particle.Particle;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.equipable.Equipable;
@@ -306,7 +307,7 @@ public abstract class Character extends Dynamic {
 //						verts[i+1] = temp;
 //					}
 //					Polygon hitbox = new Polygon(verts);
-					if(Intersector.intersectPolygons(visPolygon, e.getVisbox(), new Polygon())){
+					if(!(e instanceof Particle) && Intersector.intersectPolygons(visPolygon, e.getVisbox(), new Polygon())){
 						if(!knownEntities.contains(e))knownEntities.add(e); //some bug here...
 						seenEntities.add(e);
 					}

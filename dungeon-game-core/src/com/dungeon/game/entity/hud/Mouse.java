@@ -156,7 +156,6 @@ public class Mouse extends Hud  implements InputProcessor {
 		if(!onHud){
 			for(int i = 0; i < world.entities.size(); i++) {
 				Entity ent = world.entities.get(i);
-				Polygon itemHBox = ent.getHitbox();
 				if(ent.isHovered()){
 					if(canPlace)ent.hovered();
 					canPlace = false;

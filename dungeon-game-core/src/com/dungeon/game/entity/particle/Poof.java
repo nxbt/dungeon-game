@@ -4,6 +4,19 @@ import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.world.World;
 
 public class Poof extends Particle {
+	
+	private static final com.dungeon.game.textures.entity.particle.Poof[] poofs = new com.dungeon.game.textures.entity.particle.Poof[]{
+			new com.dungeon.game.textures.entity.particle.Poof(),
+			new com.dungeon.game.textures.entity.particle.Poof(),
+			new com.dungeon.game.textures.entity.particle.Poof(),
+			new com.dungeon.game.textures.entity.particle.Poof(),
+			new com.dungeon.game.textures.entity.particle.Poof(),
+			new com.dungeon.game.textures.entity.particle.Poof(),
+			new com.dungeon.game.textures.entity.particle.Poof(),
+			new com.dungeon.game.textures.entity.particle.Poof(),
+			new com.dungeon.game.textures.entity.particle.Poof(),
+			new com.dungeon.game.textures.entity.particle.Poof()
+	};
 
 	public Poof(World world, float x, float y) {
 		super(world, x, y, 60, (float)(5f - Math.random()*10f), (float) (5f - Math.random() * 10f));
@@ -14,16 +27,13 @@ public class Poof extends Particle {
 		originX = 2;
 		originY = 2;
 		
-		sprite = new com.dungeon.game.textures.entity.particle.Poof().texture;
-		
-		hitbox = new Polygon(new float[]{0,0,4,0,4,4,0,4});
-		genVisBox();
+		sprite = poofs[(int) (Math.random()*poofs.length)].texture;
 	}
 	
 	public void calc() {
-		moveVec.x*=0.8f;
-		moveVec.y*=0.8f;
-		if(moveVec.len() < 0.2f)killMe = true;
+		dx*=0.8f;
+		dy*=0.8f;
+		if(Math.abs(dx) + Math.abs(dy) < 0.4f)killMe = true;
 		super.calc();
 	}
 
