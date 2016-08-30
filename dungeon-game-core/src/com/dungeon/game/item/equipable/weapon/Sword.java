@@ -20,10 +20,21 @@ public class Sword extends Melee {
 	public Sword(World world, int level) {
 		super(world, "sword.png");
 		
+		constructor(level, (int) (Math.random()*SwordBlade.NUM),(int) (Math.random()*SwordGuard.NUM), (int) (Math.random()*SwordHilt.NUM));
+	}
+	
+	public Sword(World world, int level, int bladeNum, int guardNum, int hiltNum) {
+		super(world, "sword.png");
+		
+		constructor(level, bladeNum, guardNum, hiltNum);
+	}
+	
+	public void constructor(int level, int bladeNum, int guardNum, int hiltNum) {
+		
 		try {
-			blade = (Part) SwordBlade.parts[(int) (Math.random()*SwordBlade.NUM)].newInstance(world, level);
-			guard = (Part) SwordGuard.parts[(int) (Math.random()*SwordGuard.NUM)].newInstance(world, level);
-			hilt = (Part) SwordHilt.parts[(int) (Math.random()*SwordHilt.NUM)].newInstance(world, level);
+			blade = (Part) SwordBlade.parts[bladeNum].newInstance(world, level);
+			guard = (Part) SwordGuard.parts[guardNum].newInstance(world, level);
+			hilt = (Part) SwordHilt.parts[hiltNum].newInstance(world, level);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

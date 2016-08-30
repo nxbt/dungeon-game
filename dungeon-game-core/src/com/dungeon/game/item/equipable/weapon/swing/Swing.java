@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.particle.Blood;
+import com.dungeon.game.entity.particle.Poof;
 import com.dungeon.game.item.equipable.weapon.Melee;
 import com.dungeon.game.world.World;
 
@@ -176,7 +177,8 @@ public abstract class Swing implements Cloneable{
 		Vector2 knockVec = new Vector2(); //create a knockback vector
 		knockVec.x = (xSword*(1-knockRatio)+xOwner*(knockRatio))*knockMult; //set the x of the knockVec based on the knockRatio and the knockMult
 		knockVec.y = (ySword*(1-knockRatio)+yOwner*(knockRatio))*knockMult; //set the y of the knockVec based on the knockRatio and the knockMult
-		if(c.bleeds)for(int i = 0; i < weapon.damage*3; i++)world.entities.add(Blood.get(world, c.x, c.y, knockVec.angle(), knockVec.len()*1.3f));
+		if(c.bleeds)for(int i = 0; i < weapon.damage*(c.killMe? 5:3); i++)world.entities.add(Blood.get(world, c.x, c.y, knockVec.angle(), knockVec.len()*1.3f));
+		else if(c.killMe)for(int i = 0; i < weapon.damage*8; i++)world.entities.add(Poof.get(world, c.x, c.y));
 		c.acel(knockVec, false); //knock that ***** about!
 	}
 	

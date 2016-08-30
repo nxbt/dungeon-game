@@ -1,6 +1,5 @@
 package com.dungeon.game.entity.character.friend;
 
-import com.dungeon.game.effect.resistance.Immune;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechPopup;

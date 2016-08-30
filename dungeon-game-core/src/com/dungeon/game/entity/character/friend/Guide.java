@@ -16,6 +16,7 @@ import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
 import com.dungeon.game.entity.particle.Poof;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.item.Key;
+import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.textures.entity.Person;
 import com.dungeon.game.world.Tile;
@@ -130,7 +131,6 @@ public class Guide extends Friend {
 		
 		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this, new Criteria[] {new Invert(world, new Said(world, dialogue, "what floor")), new True(world)}, new String[] {"By the way, you can also click on me to talk, even if there's no popup bubble.", "Didn't catch that?"}, new String[] {"what floor", "tell again"}));
 		
-//		dialogue.potentialBubbles.put("what floor", new SpeechBubble(world, this,"Another locked door... But what's that on the floor?", "what floor answer"));
 		dialogue.potentialBubbles.put("what floor", new SpeechBubble(world, this,
 				new Criteria[]{new HasItem(world, new Key(world), world.player), new True(world)},
 				new String[]{"I see you already picked up the key. Good.", "Another locked door... But what's that on the floor?"}, 
@@ -172,6 +172,35 @@ public class Guide extends Friend {
 		
 		dialogues.add(dialogue);
 		
+		dialogue = new Dialogue(world, this);
+		
+		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this, new Criteria[] {new HasItem(world, new Key(world), world.player), new True(world)}, new String[] {"If you've got everthing you want, proceed through the door.", "Still looking for that key? I'm sure it's somewhere in here..."}, new String[] {"end", "end"}));
+		
+		dialogues.add(dialogue);
+		
+		dialogue = new Dialogue(world, this);
+		
+		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this, new Criteria[] {new Invert(world, new Said(world, dialogue, "sword explain")), new True(world)}, new String[] {"Now, to learn to fight!", "Need to hear that again?"}, new String[] {"tell dummy", "sword explain"}));
+		
+		dialogue.potentialBubbles.put("tell dummy", new SpeechBubble(world, this,"There are three dummies in this room. One of them has a key inside.", "tell sword"));
+		
+		dialogue.potentialBubbles.put("tell sword", new SpeechBubble(world, this,"Here: take this sword and use it to uh... 'kill' these dummies.", "give sword"));
+		
+		invent = new Inventory(world, new int[][]{new int[]{0,0,0}}, 0, 0, true);
+		invent.slot[0].item = new Sword(world, 1, 0, 0, 0);
+		dialogue.potentialBubbles.put("give sword", new InvBubble(world, this, invent , "check sword"));
+		
+		dialogue.potentialBubbles.put("check sword", new SpeechBubble(world, this,
+				new Criteria[]{new HasItem(world, new Sword(world, 1), world.player), new True(world)},
+				new String[]{"Now to learn to use it.", "...Good try. Good try. Here, try again."}, 
+				new String[]{"sword explain", "give sword"}));
+		
+		dialogue.potentialBubbles.put("sword explain", new SpeechBubble(world, this,"The first thing you need to do is equip the sword. Open up your inventory, then grab the sword and place it in one of the slots marked with a sword.", "sword explain 2"));
+		
+		dialogue.potentialBubbles.put("sword explain 2", new SpeechBubble(world, this,"To use the sword, you first have to enter fight mode. You can toggle fight mode with the SPACE BAR. When in fight mode, you will be able to use any equiped weapons with the left mouse button for your left hand and right mouse button for your right hand. However, you will not be able to open your inventory or interact with objects while in fight mode.", "end"));
+		
+		dialogues.add(dialogue);
+		
 		dialogue = dialogues.get(0);
 	}
 
@@ -179,7 +208,8 @@ public class Guide extends Friend {
 	public void calc() {
 		if(stage == 0) showPopupBubble("Hello. Click on this to talk to me!");
 		else if(stage == 1) showPopupBubble("Good job.");
-		else if(stage == 2) showPopupBubble("");
+		else if(stage == 2 || stage == 3) showPopupBubble("");
+		
 		
 		if(stage == 0 && world.player.y > 53*Tile.TS) {
 			stage = 1;
@@ -198,6 +228,24 @@ public class Guide extends Friend {
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(2);
+		}
+		else if(stage==2 && world.player.x > 45*Tile.TS) {
+			stage = 3;
+			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
+			x = 56*Tile.TS + Tile.TS/2;
+			y = 65*Tile.TS + Tile.TS/2;
+			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
+			speechBubble.dismissed = false;
+			dialogue = dialogues.get(3);
+		}
+		else if(stage==3 && world.player.x > 57*Tile.TS) {
+			stage = 4;
+			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
+			x = 58*Tile.TS + Tile.TS/2;
+			y = 65*Tile.TS + Tile.TS/2;
+			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
+			speechBubble.dismissed = false;
+			dialogue = dialogues.get(4);
 		}
 		
 		if(seenEntities.contains(world.player)) {
