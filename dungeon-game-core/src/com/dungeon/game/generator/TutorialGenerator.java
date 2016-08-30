@@ -52,7 +52,6 @@ public class TutorialGenerator extends Generation {
 		//first hallway
 		workingRoom = new Rectangle(30, 53, 23, 2);
 		addToMap(workingRoom);
-		entities.add(new Villager(world, 31*Tile.TS+Tile.TS/2, 54*Tile.TS+Tile.TS/2));
 		
 		//room with key on floor
 		workingRoom = new Rectangle(30, 55, 5, 8);
