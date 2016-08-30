@@ -1,8 +1,8 @@
 package com.dungeon.game.inventory;
 
-import com.dungeon.game.world.World;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.hud.ShopGraphic;
+import com.dungeon.game.world.World;
 
 public class Shop extends Inventory {
 	

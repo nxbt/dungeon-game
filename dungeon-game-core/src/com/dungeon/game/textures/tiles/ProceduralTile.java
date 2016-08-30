@@ -1,7 +1,5 @@
 package com.dungeon.game.textures.tiles;
 
-import java.util.Random;
-
 import com.dungeon.game.textures.ProceduralTexture;
 
 public abstract class ProceduralTile extends ProceduralTexture {

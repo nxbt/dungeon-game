@@ -1,9 +1,6 @@
 package com.dungeon.game.generator.rooms.room;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.math.Rectangle;
-import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.friend.StairKeeper;
 import com.dungeon.game.entity.furniture.Stair;
 import com.dungeon.game.entity.furniture.Torch;

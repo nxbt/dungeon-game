@@ -69,6 +69,12 @@ public class Inventory {
 		return null;
 	}
 	
+	public Item addItem(Item item, int count) {
+		item.stack = count;
+		
+		return addItem(item);
+	}
+	
 	public Item addItem(Item item) {
 		for(Slot s: slot) {
 			if(s.item != null && !s.item.equals(item) && s.item.getClass().equals(item.getClass()) && s.item.stack < s.item.maxStack) {

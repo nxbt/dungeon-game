@@ -3,7 +3,6 @@ package com.dungeon.game.pathing;
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedHierarchicalGraph;
 import com.badlogic.gdx.utils.Array;
-import com.dungeon.game.world.Tile;
 
 public class HierarchicalGraph extends IndexedHierarchicalGraph<Node> {
 	

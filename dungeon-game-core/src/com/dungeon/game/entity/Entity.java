@@ -1,7 +1,6 @@
 package com.dungeon.game.entity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 import com.badlogic.gdx.graphics.Texture;

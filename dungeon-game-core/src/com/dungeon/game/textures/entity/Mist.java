@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.dungeon.game.textures.AnimatedTexture;
 import com.dungeon.game.textures.ProceduralTexture;
 import com.dungeon.game.utilities.MathUtils;
-import com.dungeon.game.world.Tile;
 
 public class Mist extends ProceduralTexture implements AnimatedTexture {
 	

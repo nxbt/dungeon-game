@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
-import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.friend.Villager;
 import com.dungeon.game.entity.furniture.Bed;
 import com.dungeon.game.entity.furniture.Carpet;

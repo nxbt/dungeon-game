@@ -1,7 +1,5 @@
 package com.dungeon.game.entity.hud;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -15,9 +13,6 @@ import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.hud.window.Window;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Item;
-import com.dungeon.game.pathing.Heuristic;
-import com.dungeon.game.pathing.Node;
-import com.dungeon.game.pathing.Path;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 

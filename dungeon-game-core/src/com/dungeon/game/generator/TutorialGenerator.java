@@ -2,14 +2,18 @@ package com.dungeon.game.generator;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Drop;
 import com.dungeon.game.entity.character.friend.Guide;
-import com.dungeon.game.entity.character.friend.Villager;
+import com.dungeon.game.entity.furniture.Chest;
 import com.dungeon.game.entity.furniture.Door;
 import com.dungeon.game.entity.furniture.LockedDoor;
 import com.dungeon.game.inventory.Slot;
+import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Key;
+import com.dungeon.game.item.equipable.armor.WoolPants;
+import com.dungeon.game.item.equipable.armor.WoolShirt;
 import com.dungeon.game.pathing.HierarchicalGraph;
 import com.dungeon.game.pathing.Node;
 import com.dungeon.game.world.Tile;
@@ -68,7 +72,7 @@ public class TutorialGenerator extends Generation {
 		workingRoom = new Rectangle(30, 64, 27, 2);
 		addToMap(workingRoom);
 		
-		//loot rooms top
+		//loot rooms bottom
 		
 		workingRoom = new Rectangle(39, 59, 5, 4);
 		addToMap(workingRoom);
@@ -84,7 +88,17 @@ public class TutorialGenerator extends Generation {
 		addToMap(workingRoom);
 		entities.add(new Door(world, 51, 63, 2));
 		
-		//loot rooms bottom
+		Chest chest = new Chest(world, 39*Tile.TS+Tile.TS/2, 59*Tile.TS+Tile.TS/2);
+		chest.inv.addItem(new Gold(world),5);
+		
+		entities.add(chest);
+		
+		chest = new Chest(world, 50*Tile.TS+Tile.TS/2, 61*Tile.TS+Tile.TS/2);
+		chest.inv.addItem(new WoolPants(world, new Color(0.2f, 0.2f,0.7f,0.5f)));
+		
+		entities.add(chest);
+		
+		//loot rooms top
 		
 		workingRoom = new Rectangle(34, 67, 5, 4);
 		addToMap(workingRoom);
@@ -99,6 +113,16 @@ public class TutorialGenerator extends Generation {
 		workingRoom = new Rectangle(46, 66, 1, 1);
 		addToMap(workingRoom);
 		entities.add(new Door(world, 46, 66, 2));
+		
+		chest = new Chest(world, 36*Tile.TS+Tile.TS/2, 70*Tile.TS+Tile.TS/2);
+		chest.inv.addItem(new WoolShirt(world, new Color(0.7f, 0.2f,0.2f,0.5f)));
+		
+		entities.add(chest);
+		
+		chest = new Chest(world, 47*Tile.TS+Tile.TS/2, 69*Tile.TS+Tile.TS/2);
+		chest.inv.addItem(new Key(world));
+		
+		entities.add(chest);
 		
 		makeWalls(10, 11, 12, 13, 14);
 		

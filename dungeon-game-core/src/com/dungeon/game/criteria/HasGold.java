@@ -1,7 +1,7 @@
 package com.dungeon.game.criteria;
 
-import com.dungeon.game.world.World;
 import com.dungeon.game.entity.character.Character;
+import com.dungeon.game.world.World;
 
 public class HasGold extends Criteria{
 	private int amount;

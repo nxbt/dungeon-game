@@ -1,12 +1,9 @@
 package com.dungeon.game.generator.rooms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import com.badlogic.gdx.math.Rectangle;
-import com.dungeon.game.generator.rooms.Castle.GenRoom;
 import com.dungeon.game.generator.rooms.room.BasicRoom;
-import com.dungeon.game.generator.rooms.room.EnemyRoom;
 import com.dungeon.game.generator.rooms.room.GeneralStore;
 import com.dungeon.game.generator.rooms.room.Library;
 import com.dungeon.game.generator.rooms.room.Quarters;

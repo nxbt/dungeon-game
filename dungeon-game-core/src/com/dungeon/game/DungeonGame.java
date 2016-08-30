@@ -3,7 +3,7 @@ package com.dungeon.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dungeon.game.world.*;
+import com.dungeon.game.world.World;
 
 public class DungeonGame extends ApplicationAdapter {
 	SpriteBatch batch;

@@ -1,6 +1,5 @@
 package com.dungeon.game.world;
 
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Tile implements Cloneable{

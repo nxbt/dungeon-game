@@ -11,8 +11,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.rooms.Castle;
-import com.dungeon.game.generator.rooms.Rooms;
-import com.dungeon.game.generator.rooms.VillageRooms;
 import com.dungeon.game.pathing.HierarchicalGraph;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;

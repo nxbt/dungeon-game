@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.TileMap;
 import com.dungeon.game.world.World;
-import com.dungeon.game.entity.character.Character;
 
 public abstract class Room {
 	public Tile[][] room;
