@@ -68,7 +68,7 @@ public class Torch extends Static {
 	@Override
 	public void calc() {
 		if(flipX){
-			if(orientaiton == 0 || orientaiton == 2){
+			if(orientaiton == 0 || orientaiton == 2){ //pls work?
 				originX = 16 - originX;
 			}else originY = 16 - originY;
 		}
