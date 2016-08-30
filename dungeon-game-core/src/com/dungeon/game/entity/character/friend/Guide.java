@@ -153,6 +153,20 @@ public class Guide extends Friend {
 		
 		dialogues.add(dialogue);
 		
+		dialogue = new Dialogue(world, this);
+		
+		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"See how all of the doors in this hallway are lighter? That's because they're open.", "except"));
+		
+		dialogue.potentialBubbles.put("except", new SpeechBubble(world, this,"Except that door at the end. That one's locked.", "find key"));
+		
+		dialogue.potentialBubbles.put("find key", new SpeechBubble(world, this,"These are all storage rooms. There should be a key somewhere here... why don't you look for it?", "how to chest"));
+		
+		dialogue.potentialBubbles.put("how to chest", new SpeechBubble(world, this,"Left click on a container to open its inventory. If you open up your inventory, you can move items you find into it.", "feel free"));
+		
+		dialogue.potentialBubbles.put("feel free", new SpeechBubble(world, this,"Feel free to take anything you find.", "end"));
+		
+		dialogues.add(dialogue);
+		
 		dialogue = dialogues.get(0);
 	}
 
@@ -160,6 +174,7 @@ public class Guide extends Friend {
 	public void calc() {
 		if(stage == 0) showPopupBubble("Hello. Click on this to talk to me!");
 		else if(stage == 1) showPopupBubble("Good job.");
+		else if(stage == 2) showPopupBubble("");
 		
 		if(stage == 0 && world.player.y > 53*Tile.TS) {
 			stage = 1;
@@ -167,6 +182,13 @@ public class Guide extends Friend {
 			y = 62*Tile.TS + Tile.TS/2;
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(1);
+		}
+		else if(stage == 1 && world.player.y > 63*Tile.TS) {
+			stage = 2;
+			x = 30*Tile.TS + Tile.TS/2;
+			y = 65*Tile.TS + Tile.TS/2;
+			speechBubble.dismissed = false;
+			dialogue = dialogues.get(2);
 		}
 		
 		if(seenEntities.contains(world.player)) {
