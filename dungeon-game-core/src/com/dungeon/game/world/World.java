@@ -226,32 +226,8 @@ public class World {
 				shapeRenderer.set(ShapeType.Line);
 				for(Node n :curFloor.heiGraph.nodes[1]){
 					shapeRenderer.setColor(Color.ORANGE);
-//					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 2);
 					
 					shapeRenderer.setColor(Color.BLACK);
-					
-//					for(Node n1: n.downNodes){
-////						for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n1.getConnections()){
-////							for(com.badlogic.gdx.ai.pfa.Connection<Node> c2: c.getToNode().getConnections()){
-////								if(c2.getToNode().equals(n1)){
-////									shapeRenderer.setColor(Color.BLACK);
-////									shapeRenderer.line(n1.x*Tile.TS, n1.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS);
-////									break;
-////								}
-////							}
-////						}
-//						if(n1.upNode.equals(n)) shapeRenderer.line(n.x*Tile.TS, n.y*Tile.TS, n1.x*Tile.TS, n1.y*Tile.TS);
-//					}
-//
-//					for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.getConnections()){
-////						for(com.badlogic.gdx.ai.pfa.Connection<Node> c2: c.getToNode().getConnections()){
-////							if(c2.getToNode().equals(n)){
-//								shapeRenderer.setColor(Color.CYAN);
-//								shapeRenderer.rectLine(n.x*Tile.TS, n.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS, 5);
-////								break;
-////							}
-////						}
-//					}
 				}
 				
 				for(Node n :curFloor.heiGraph.nodes[0]){
@@ -259,29 +235,6 @@ public class World {
 					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 1);
 					
 					shapeRenderer.setColor(Color.BLACK);
-					
-//					for(Node n1: n.downNodes){
-////						for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n1.getConnections()){
-////							for(com.badlogic.gdx.ai.pfa.Connection<Node> c2: c.getToNode().getConnections()){
-////								if(c2.getToNode().equals(n1)){
-////									shapeRenderer.setColor(Color.BLACK);
-////									shapeRenderer.line(n1.x*Tile.TS, n1.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS);
-////									break;
-////								}
-////							}
-////						}
-//						if(n1.upNode.equals(n)) shapeRenderer.line(n.x*Tile.TS, n.y*Tile.TS, n1.x*Tile.TS, n1.y*Tile.TS);
-//					}
-//
-//					for(com.badlogic.gdx.ai.pfa.Connection<Node> c: n.getConnections()){
-////						for(com.badlogic.gdx.ai.pfa.Connection<Node> c2: c.getToNode().getConnections()){
-////							if(c2.getToNode().equals(n)){
-//								shapeRenderer.setColor(Color.FOREST);
-//								shapeRenderer.rectLine(n.x*Tile.TS, n.y*Tile.TS, c.getToNode().x*Tile.TS, c.getToNode().y*Tile.TS, 5);
-////								break;
-////							}
-////						}
-//					}
 				}
 				
 			}
