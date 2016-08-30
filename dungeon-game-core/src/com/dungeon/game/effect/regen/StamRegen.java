@@ -6,9 +6,12 @@ import com.dungeon.game.world.World;
 public class StamRegen extends Effect {
 	private float rate;
 	
+	private float curRate;
+	
 	public StamRegen(World world, int duration, float rate) {
 		super(world, "Stamina Regen", duration);
 		this.rate = rate;
+		curRate = rate;
 	}
 	
 	public StamRegen(World world, int duration, int total) {
@@ -17,6 +20,11 @@ public class StamRegen extends Effect {
 	}
 	
 	public void calc(Character character){
-		character.gain_stam(rate);
+		if(character.attacking) curRate = 0;
+		
+		character.gain_stam(curRate);
+		
+		if(curRate < rate) curRate += rate/180;
+		else if(curRate > rate) curRate = rate;
 	}
 }

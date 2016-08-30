@@ -63,7 +63,7 @@ public abstract class Character extends Dynamic {
 	
 	public boolean fightMode;
 	
-	protected boolean attacking;
+	public boolean attacking;
 	
 	public float armor;
 	
