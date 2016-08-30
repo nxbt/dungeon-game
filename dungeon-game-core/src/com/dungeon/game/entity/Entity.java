@@ -135,6 +135,8 @@ public abstract class Entity {
 	
 	public void calcLight(){
 		if(light!=null){
+			if(!light.isOn && world.player.knownEntities.contains(this)) light.load();
+			else if(light.isOn && !world.player.knownEntities.contains(this)) light.unload();
 			light.update();
 		}
 	}

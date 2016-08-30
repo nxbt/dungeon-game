@@ -68,8 +68,6 @@ public class Torch extends Static {
 
 	@Override
 	public void calc() {
-		if(!light.isOn && world.player.knownEntities.contains(this)) light.load();
-		else if(light.isOn && !world.player.knownEntities.contains(this)) light.unload();
 			
 		if(flipX){
 			if(orientaiton == 0 || orientaiton == 2){ //pls work?

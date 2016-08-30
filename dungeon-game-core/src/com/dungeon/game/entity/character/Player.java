@@ -252,6 +252,12 @@ public class Player extends Character {
 		if(!actionState[2] && world.hudEntities.indexOf(inv.graphic) >= 0) actionState[2] = true;
 		else if(actionState[2] && world.hudEntities.indexOf(inv.graphic) == -1) actionState[2] = false;
 	}
+	
+	public void calcLight(){
+		if(light!=null){
+			light.update();
+		}
+	}
 
 
 	@Override

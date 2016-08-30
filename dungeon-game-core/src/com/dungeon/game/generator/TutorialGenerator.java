@@ -8,6 +8,7 @@ import com.dungeon.game.entity.Drop;
 import com.dungeon.game.entity.character.friend.Guide;
 import com.dungeon.game.entity.furniture.Chest;
 import com.dungeon.game.entity.furniture.Door;
+import com.dungeon.game.entity.furniture.Lamp;
 import com.dungeon.game.entity.furniture.LockedDoor;
 import com.dungeon.game.entity.furniture.Torch;
 import com.dungeon.game.inventory.Slot;
@@ -93,14 +94,27 @@ public class TutorialGenerator extends Generation {
 		//second hallway
 		workingRoom = new Rectangle(30, 64, 27, 2);
 		addToMap(workingRoom);
+
+		entities.add(new Torch(world, 30, 65, 0));
+		entities.add(new Torch(world, 34, 65, 1));
+		entities.add(new Torch(world, 38, 64, 3));
+		entities.add(new Torch(world, 42, 65, 1));
+		entities.add(new Torch(world, 46, 64, 3));
+		entities.add(new Torch(world, 51, 65, 1));
+		entities.add(new Torch(world, 56, 65, 2));
+		
 		
 		//loot rooms bottom
 		
 		workingRoom = new Rectangle(39, 59, 5, 4);
 		addToMap(workingRoom);
+		
+		entities.add(new Lamp(world, 41*Tile.TS + Tile.TS/2, 60*Tile.TS + Tile.TS/2));
 
 		workingRoom = new Rectangle(49, 59, 5, 4);
 		addToMap(workingRoom);
+
+		entities.add(new Lamp(world, 52*Tile.TS + Tile.TS/2, 61*Tile.TS + Tile.TS/2));
 
 		workingRoom = new Rectangle(41, 63, 1, 1);
 		addToMap(workingRoom);
@@ -124,9 +138,15 @@ public class TutorialGenerator extends Generation {
 		
 		workingRoom = new Rectangle(34, 67, 5, 4);
 		addToMap(workingRoom);
+		
+
+		
+		entities.add(new Lamp(world, 38*Tile.TS + Tile.TS/2, 68*Tile.TS + Tile.TS/2));
 
 		workingRoom = new Rectangle(44, 67, 5, 4);
 		addToMap(workingRoom);
+		
+		entities.add(new Lamp(world, 44*Tile.TS + Tile.TS/2, 70*Tile.TS + Tile.TS/2));
 
 		workingRoom = new Rectangle(36, 66, 1, 1);
 		addToMap(workingRoom);
@@ -151,6 +171,43 @@ public class TutorialGenerator extends Generation {
 		//DummyRoom
 		workingRoom = new Rectangle(58, 60, 11, 11);
 		addToMap(workingRoom);
+		
+		map[62][60] = tileMap.getTile(1);
+		entities.add(new Torch(world, 59, 62, 2));
+		entities.add(new Torch(world, 61, 62, 0));
+		entities.add(new Torch(world, 60, 61, 1));
+		entities.add(new Torch(world, 60, 63, 3));
+		zoneNodes.get(zoneNodes.size() - 1).downNodes.remove(nodeArray[60][62]);
+		tileNodes.remove(nodeArray[60][62]);
+		nodeArray[60][62] = null;
+
+		map[68][66] = tileMap.getTile(1);
+		entities.add(new Torch(world, 65, 68, 2));
+		entities.add(new Torch(world, 67, 68, 0));
+		entities.add(new Torch(world, 66, 67, 1));
+		entities.add(new Torch(world, 66, 69, 3));
+		zoneNodes.get(zoneNodes.size() - 1).downNodes.remove(nodeArray[66][68]);
+		tileNodes.remove(nodeArray[66][68]);
+		nodeArray[66][68] = null;
+		
+
+		map[68][60] = tileMap.getTile(1);
+		entities.add(new Torch(world, 59, 68, 2));
+		entities.add(new Torch(world, 61, 68, 0));
+		entities.add(new Torch(world, 60, 67, 1));
+		entities.add(new Torch(world, 60, 69, 3));
+		zoneNodes.get(zoneNodes.size() - 1).downNodes.remove(nodeArray[60][68]);
+		tileNodes.remove(nodeArray[60][68]);
+		nodeArray[60][68] = null;
+		
+		map[62][66] = tileMap.getTile(1);
+		entities.add(new Torch(world, 65, 62, 2));
+		entities.add(new Torch(world, 67, 62, 0));
+		entities.add(new Torch(world, 66, 61, 1));
+		entities.add(new Torch(world, 66, 63, 3));
+		zoneNodes.get(zoneNodes.size() - 1).downNodes.remove(nodeArray[66][62]);
+		tileNodes.remove(nodeArray[66][62]);
+		nodeArray[66][62] = null;
 		
 		workingRoom = new Rectangle(57, 64, 1, 1);
 		addToMap(workingRoom);
