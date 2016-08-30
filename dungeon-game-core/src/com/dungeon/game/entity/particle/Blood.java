@@ -44,10 +44,6 @@ public class Blood extends Particle {
 		dx*=0.8f;
 		dy*=0.8f;
 		alpha = duration/(float)(totalTime);
-//		if(Math.sqrt(dx*dx+dy*dy) < 0.4f){
-//			killMe = true;
-//			dispose();
-//		}
 		super.calc();
 	}
 

@@ -9,6 +9,7 @@ import com.dungeon.game.entity.character.friend.Guide;
 import com.dungeon.game.entity.furniture.Chest;
 import com.dungeon.game.entity.furniture.Door;
 import com.dungeon.game.entity.furniture.LockedDoor;
+import com.dungeon.game.entity.furniture.Torch;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Key;
@@ -42,6 +43,7 @@ public class TutorialGenerator extends Generation {
 		addToMap(workingRoom);
 		entities.add(new LockedDoor(world, 48, 52, 0));
 		
+		
 		//start Room
 		workingRoom = new Rectangle(45, 45, 7, 7);
 		addToMap(workingRoom);
@@ -52,6 +54,10 @@ public class TutorialGenerator extends Generation {
 		zoneNodes.remove(0);
 
 		entities.add(new Guide(world, 45*Tile.TS+Tile.TS/2, 51*Tile.TS+Tile.TS/2));
+		entities.add(new Torch(world, 50, 50, 0));
+		entities.add(new Torch(world, 50, 50, 1));
+		entities.add(new Torch(world, 50, 50, 2));
+		entities.add(new Torch(world, 50, 50, 3));
 		
 		//first hallway
 		workingRoom = new Rectangle(30, 53, 23, 2);

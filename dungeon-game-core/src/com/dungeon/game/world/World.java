@@ -25,6 +25,7 @@ import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.HudBackground;
 import com.dungeon.game.entity.hud.Mouse;
 import com.dungeon.game.entity.particle.Blood;
+import com.dungeon.game.entity.particle.Ember;
 import com.dungeon.game.entity.particle.Poof;
 import com.dungeon.game.pathing.Node;
 
@@ -73,6 +74,7 @@ public class World {
 	public World(boolean generate) {
 		Poof.init();
 		Blood.init();
+		Ember.init();
 		rayHandler = new RayHandler(null);
 		rayHandler.setBlurNum(15);
 		rayHandler.setAmbientLight(new Color(0,0,0,0));

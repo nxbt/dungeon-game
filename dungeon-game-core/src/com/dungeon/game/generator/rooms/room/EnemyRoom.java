@@ -28,7 +28,7 @@ public class EnemyRoom extends Room {
 		for(int i = 0; i < room.length; i++){
 			y = i;
 			if(!checkOccupied(x, y) && Math.random() < 0.2){
-				entities.add(new Torch(world, x*Tile.TS+Tile.TS/4, y*Tile.TS+Tile.TS/2,0));
+				entities.add(new Torch(world, x, y,0));
 				addToOccupied(x, y);
 			}
 		}
@@ -36,7 +36,7 @@ public class EnemyRoom extends Room {
 		for(int i = 0; i < room.length; i++){
 			y = i;
 			if(!checkOccupied(x, y) && Math.random() < 0.2){
-				entities.add(new Torch(world, x*Tile.TS+Tile.TS*3/4, y*Tile.TS+Tile.TS/2,2));
+				entities.add(new Torch(world, x, y,2));
 				addToOccupied(x, y);
 			}
 		}
@@ -44,7 +44,7 @@ public class EnemyRoom extends Room {
 		for(int i = 0; i < room[0].length; i++){
 			x = i;
 			if(checkOccupied(x, y) && Math.random() < 0.2){
-				entities.add(new Torch(world, x*Tile.TS+Tile.TS/2, y*Tile.TS+Tile.TS/4,3));
+				entities.add(new Torch(world, x, y,3));
 				addToOccupied(x, y);
 			}
 		}
@@ -52,7 +52,7 @@ public class EnemyRoom extends Room {
 		for(int i = 0; i < room[0].length; i++){
 			x = i;
 			if(checkOccupied(x, y) && Math.random() < 0.2){
-				entities.add(new Torch(world, x*Tile.TS+Tile.TS/2, y*Tile.TS+Tile.TS*3/4,1));
+				entities.add(new Torch(world, x, y,1));
 				addToOccupied(x, y);
 			}
 		}

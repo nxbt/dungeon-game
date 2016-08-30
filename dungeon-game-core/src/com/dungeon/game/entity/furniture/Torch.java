@@ -4,14 +4,18 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.Static;
+import com.dungeon.game.entity.particle.Ember;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.utilities.Spritesheet;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Torch extends Static {
+	
+	private int orientaiton;
 
 	public Torch(World world, float x, float y, int orientation) {
-		super(world, x, y, 16, 4, "torch.png");
+		super(world, x*Tile.TS + Tile.TS/2, y*Tile.TS + Tile.TS/2, 16, 4, "torch.png");
 		layer = 3;
 		Pixmap tempMap = new Pixmap(16, 4, Pixmap.Format.RGB888);
 		
@@ -24,24 +28,36 @@ public class Torch extends Static {
 		
 		solid = false;
 		
+		this.orientaiton = orientation;
+		
 		dWidth = orientation%2 == 0?16:4;
 		dHeight = orientation%2 == 0?4:16;
 		
 		rotate = true;
 		
-		originX = 16;
-		originY = 16;
+		if(orientation == 0){
+			originX = 16;
+			originY = 2;
+		}else if(orientation == 1) {
+			originX = 2;
+			originY = 0;
+			
+		}else if(orientation == 2) {
+			originX = 0;
+			originY = 2;
+			
+		}else if(orientation == 3) {
+			originX = 2;
+			originY = 16;
+			
+		}
 		
 
 		if(orientation%2==0){
 			hitbox = new Polygon(new float[]{0,0,16,0,16,4,0,4});
-			originX = 8;
-			originY = 2;
 		}
 		else{
 			hitbox = new Polygon(new float[]{0,0,4,0,4,16,0,16});
-			originX = 2;
-			originY = 8;
 		}
 		genVisBox();
 		
@@ -51,8 +67,14 @@ public class Torch extends Static {
 
 	@Override
 	public void calc() {
-		
-
+		if(flipX){
+			if(orientaiton == 0 || orientaiton == 2){
+				originX = 16 - originX;
+			}else originY = 16 - originY;
+		}
+		if(Math.random() < 0.05) {
+			world.entities.add(Ember.get(world, x, y, 0, 0));
+		}
 	}
 
 	@Override

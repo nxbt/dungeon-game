@@ -46,17 +46,17 @@ public class StairRoom extends Room {
 		room[room.length-2][room[0].length-2] =  tileMap.getTile(1);
 		
 		//add torches
-		entities.add(new Torch(world, 2*Tile.TS+Tile.TS/4, 1*Tile.TS+Tile.TS/2,0));
-		entities.add(new Torch(world, 1*Tile.TS+Tile.TS/2, 2*Tile.TS+Tile.TS/4,3));
+		entities.add(new Torch(world, 2, 1,0));
+		entities.add(new Torch(world, 1, 2,3));
 		
-		entities.add(new Torch(world, (room[0].length-2)*Tile.TS+Tile.TS/2, 2*Tile.TS+Tile.TS/4,3));
-		entities.add(new Torch(world, (room[0].length-3)*Tile.TS+Tile.TS*3/4, 1*Tile.TS+Tile.TS/2,2));
+		entities.add(new Torch(world, (room[0].length-2), 2,3));
+		entities.add(new Torch(world, (room[0].length-3), 1,2));
 		
-		entities.add(new Torch(world, 2*Tile.TS+Tile.TS/4, (room.length-2)*Tile.TS+Tile.TS/2,0));
-		entities.add(new Torch(world, 1*Tile.TS+Tile.TS/2, (room.length-3)*Tile.TS+Tile.TS*3/4,1));
+		entities.add(new Torch(world, 2, (room.length-2),0));
+		entities.add(new Torch(world, 1, (room.length-3),1));
 		
-		entities.add(new Torch(world, (room[0].length-3)*Tile.TS+Tile.TS*3/4, (room.length-2)*Tile.TS+Tile.TS/2,2));
-		entities.add(new Torch(world, (room[0].length-2)*Tile.TS+Tile.TS/2, (room.length-3)*Tile.TS+Tile.TS*3/4,1));
+		entities.add(new Torch(world, (room[0].length-3), (room.length-2) ,2));
+		entities.add(new Torch(world, (room[0].length-2), (room.length-3), 1));
 		
 		//spawn hatchkeeper
 		boolean keeperTop = doorY >= room.length/2;

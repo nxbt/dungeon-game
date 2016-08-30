@@ -59,24 +59,10 @@ public class BasicHall extends Hallway {
 					
 				}
 				
-				
-				
 				//check if we need to change the dir because the next tile is a different dir
 
-				int x = cords[i][0]*Tile.TS+Tile.TS/2;
-				int y = cords[i][1]*Tile.TS+Tile.TS/2;
-				
-				if(dir == 0){
-					x -= Tile.TS/4;
-				}else if(dir == 1){
-					y += Tile.TS/4;
-				}else if(dir == 2){
-					x += Tile.TS/4;
-				}else if(dir == 3){
-					y -= Tile.TS/4;
-				}
-				
-				
+				int x = cords[i][0];
+				int y = cords[i][1];
 				
 				entities.add(new Torch(world, x, y, dir));
 	    	}
