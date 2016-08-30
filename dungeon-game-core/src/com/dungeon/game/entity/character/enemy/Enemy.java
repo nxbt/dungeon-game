@@ -27,6 +27,7 @@ public abstract class Enemy extends Character {
 		float targetY = y;
 		if(stagerTimer == 0){
 			Path p = new Path(world);
+			world.curFloor.heiGraph.setLevel(0);
 			world.curFloor.findPath(world.curFloor.heiGraph.getClosestNode(x, y), world.curFloor.heiGraph.getClosestNode(target[0] + 0.5f, target[1] + 0.5f), new Heuristic(), p);//new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (target[0]/Tile.TS),(int) (target[1]/Tile.TS)});
 			path = p.getPath();
 			if(path.size() > 0) targetTile = p.getTargTile();
