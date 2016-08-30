@@ -41,6 +41,8 @@ public class TutorialGenerator extends Generation {
 		//start Room
 		workingRoom = new Rectangle(45, 45, 7, 7);
 		addToMap(workingRoom);
+		
+		//seriously, wtf pathfinding!
 		tileNodes.get(0).upNode = zoneNodes.get(1);
 		zoneNodes.get(1).downNodes.add(tileNodes.get(0));
 		zoneNodes.remove(0);
