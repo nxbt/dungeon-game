@@ -1,5 +1,6 @@
 package com.dungeon.game.entity.particle;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dungeon.game.entity.Static;
 import com.dungeon.game.world.World;
 
@@ -10,6 +11,8 @@ public abstract class Particle extends Static {
 	protected float dx;
 	
 	protected float dy;
+	
+	protected float alpha;
 
 	public Particle() {
 		super(null, 0, 0, 32, 32, "slot.png");
@@ -48,8 +51,18 @@ public abstract class Particle extends Static {
 		
 		killMe = false;
 		
+		alpha = 1;
+		
 	}
 	
 	public abstract void dispose();
+	
+
+	
+	public void draw(SpriteBatch batch) {
+		batch.setColor(1, 1, 1, alpha);
+		batch.draw(/*Texture*/ sprite,/*x*/ x-originX+dOffX,/*y*/ y-originY+dOffY,/*originX*/originX,/*originY*/originY,/*width*/ dWidth,/*height*/ dHeight,/*scaleX*/1,/*scaleY*/1,/*rotation*/angle,/*uselss shit to the right*/0,0,sprite.getWidth(),sprite.getHeight(),flipX,flipY);
+		batch.setColor(1, 1, 1, 1);
+	}
 
 }

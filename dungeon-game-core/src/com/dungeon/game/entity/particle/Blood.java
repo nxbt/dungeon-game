@@ -5,6 +5,8 @@ import com.dungeon.game.world.World;
 
 public class Blood extends Particle {
 	
+	private int totalTime;
+	
 	public static final Pool<Blood> pool = new Pool<Blood>(500){
 
 		@Override
@@ -41,10 +43,11 @@ public class Blood extends Particle {
 	public void calc() {
 		dx*=0.8f;
 		dy*=0.8f;
-		if(Math.sqrt(dx*dx+dy*dy) < 0.4f){
-			killMe = true;
-			dispose();
-		}
+		alpha = duration/(float)(totalTime);
+//		if(Math.sqrt(dx*dx+dy*dy) < 0.4f){
+//			killMe = true;
+//			dispose();
+//		}
 		super.calc();
 	}
 
@@ -66,8 +69,8 @@ public class Blood extends Particle {
 	}
 	
 	public void set(World world, float x, float y, float angle, float vel){
-		super.set(world, x, y, 60, (float)(Math.cos(getAngle(angle)) * getVel(vel)), (float) (Math.sin(getAngle(angle))* getVel(vel)));
-		
+		totalTime = (int) (50+Math.random()*200);
+		super.set(world, x, y, totalTime, (float)(Math.cos(getAngle(angle)) * getVel(vel)), (float) (Math.sin(getAngle(angle))* getVel(vel)));
 	}
 
 }
