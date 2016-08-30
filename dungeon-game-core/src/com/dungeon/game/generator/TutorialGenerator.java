@@ -34,7 +34,6 @@ public class TutorialGenerator extends Generation {
 		nodeArray = new Node[width][height];
 		Rectangle workingRoom;
 		
-		
 		workingRoom = new Rectangle(48, 52, 1, 1);
 		addToMap(workingRoom);
 		entities.add(new LockedDoor(world, 48, 52, 0));
@@ -42,13 +41,16 @@ public class TutorialGenerator extends Generation {
 		//start Room
 		workingRoom = new Rectangle(45, 45, 7, 7);
 		addToMap(workingRoom);
+		tileNodes.get(0).upNode = zoneNodes.get(1);
+		zoneNodes.get(1).downNodes.add(tileNodes.get(0));
+		zoneNodes.remove(0);
 
 		entities.add(new Guide(world, 45*Tile.TS+Tile.TS/2, 51*Tile.TS+Tile.TS/2));
-		entities.add(new Villager(world, 45*Tile.TS+Tile.TS/2, 51*Tile.TS+Tile.TS/2));
 		
 		//first hallway
 		workingRoom = new Rectangle(30, 53, 23, 2);
 		addToMap(workingRoom);
+		entities.add(new Villager(world, 31*Tile.TS+Tile.TS/2, 54*Tile.TS+Tile.TS/2));
 		
 		//room with key on floor
 		workingRoom = new Rectangle(30, 55, 5, 8);
