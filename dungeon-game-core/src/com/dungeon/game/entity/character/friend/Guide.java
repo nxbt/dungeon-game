@@ -235,7 +235,11 @@ public class Guide extends Friend {
 
 		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"Hmm... Looks like he got out.", "nice"));
 		
-		dialogue.potentialBubbles.put("nice", new SpeechBubble(world, this,"But you handled it! I didn't realize he'd put that door through so much...", "nice"));
+		dialogue.potentialBubbles.put("nice", new SpeechBubble(world, this,"But you handled it! I didn't realize he'd put that door through so much...", "sorry"));
+
+		dialogue.potentialBubbles.put("sorry", new SpeechBubble(world, this,"So sorry about that. But you've clearly proven yourself competent. You are truely an adventurer.", "exit"));
+		
+		dialogue.potentialBubbles.put("exit", new SpeechBubble(world, this,"Proceed to the left through the door to begin your journy!", "end"));
 		
 		dialogues.add(dialogue);
 		

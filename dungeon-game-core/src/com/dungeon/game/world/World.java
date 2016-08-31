@@ -331,7 +331,8 @@ public class World {
 		entities.remove(player);
 		if(curDungeon.floors.size() <= floor) {
 			//generate new floor
-			curDungeon.floors.add(new Floor(this, "rooms", 50,50,destX,destY,(int)(x/Tile.TS),(int)(y/Tile.TS)));
+			if(floor == 0 || (dungeons.indexOf(curDungeon) == 0 && floor == 1))curDungeon.floors.add(new Floor(this, "villageCastle", 50,50,destX,destY,(int)(x/Tile.TS),(int)(y/Tile.TS)));
+			else curDungeon.floors.add(new Floor(this, "rooms", 50,50,destX,destY,(int)(x/Tile.TS),(int)(y/Tile.TS)));
 		}
 		curFloor = curDungeon.floors.get(floor);
 		entities = curFloor.entities;

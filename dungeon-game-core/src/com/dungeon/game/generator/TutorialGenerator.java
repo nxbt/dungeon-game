@@ -14,6 +14,7 @@ import com.dungeon.game.entity.furniture.Chest;
 import com.dungeon.game.entity.furniture.Door;
 import com.dungeon.game.entity.furniture.Lamp;
 import com.dungeon.game.entity.furniture.LockedDoor;
+import com.dungeon.game.entity.furniture.Stair;
 import com.dungeon.game.entity.furniture.Torch;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Gold;
@@ -344,6 +345,14 @@ public class TutorialGenerator extends Generation {
 
 		entities.add(new Drop(world, 70*Tile.TS + Tile.TS/3, 25*Tile.TS + Tile.TS/4, s));
 		entities.add(new Skeleton(world, 70*Tile.TS + Tile.TS/2, 25*Tile.TS + Tile.TS/2));
+		
+		//hallway 4
+		
+
+		workingRoom = new Rectangle(59, 20, 5, 3);
+		addToMap(workingRoom);
+		
+		entities.add(new Stair(world, 60*Tile.TS + Tile.TS/2, 21*Tile.TS + Tile.TS/2, true, 25, 25));
 		
 		makeWalls(10, 11, 12, 13, 14);
 	}

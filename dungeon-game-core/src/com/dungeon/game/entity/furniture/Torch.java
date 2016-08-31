@@ -12,9 +12,7 @@ import com.dungeon.game.world.World;
 
 public class Torch extends Static {
 	
-	private int orientaiton;
-	
-	private boolean flippedSprite;
+	private int orientation;
 
 	public Torch(World world, float x, float y, int orientation) {
 		super(world, x*Tile.TS + Tile.TS/2, y*Tile.TS + Tile.TS/2, 16, 4, "torch.png");
@@ -30,27 +28,31 @@ public class Torch extends Static {
 		
 		solid = false;
 		
-		this.orientaiton = orientation;
-		
 		dWidth = orientation%2 == 0?16:4;
 		dHeight = orientation%2 == 0?4:16;
+		
+		this.orientation = orientation;
 		
 		rotate = true;
 		
 		if(orientation == 0){
-			originX = 16;
+			this.x-=Tile.TS/4;
+			originX = 8;
 			originY = 2;
 		}else if(orientation == 1) {
+			this.y+=Tile.TS/4;
 			originX = 2;
-			originY = 0;
+			originY = 8;
 			
 		}else if(orientation == 2) {
-			originX = 0;
+			this.x+=Tile.TS/4;
+			originX = 8;
 			originY = 2;
 			
 		}else if(orientation == 3) {
+			this.y-=Tile.TS/4;
 			originX = 2;
-			originY = 16;
+			originY = 8;
 			
 		}
 		
@@ -70,15 +72,29 @@ public class Torch extends Static {
 
 	@Override
 	public void calc() {
-			
-		if(flipX && !flippedSprite){
-			if(orientaiton == 0 || orientaiton == 2){ //pls work?
-				originX = 16 - originX;
-			}else originY = 16 - originY;
-			flippedSprite = true;
-		}
 		if(Math.random() < 0.05) {
-			world.entities.add(Ember.get(world, x, y, 0, 0));
+			float xOff = 0;
+			float yOff = 0;
+			if(orientation == 0){
+				if(flipX)xOff-=Tile.TS/4;
+				else xOff+=Tile.TS/4;
+			}else if(orientation == 1) {
+				yOff-=Tile.TS/4;
+				
+			}else if(orientation == 2) {
+				if(flipX)xOff+=Tile.TS/4;
+				else xOff-=Tile.TS/4;
+				
+			}else if(orientation == 3) {
+				yOff+=Tile.TS/4;
+				
+			}
+
+//			x' = x*cos q - y*sin q
+//			y' = x*sin q + y*cos q 
+			
+
+			world.entities.add(Ember.get(world, (float)(x + xOff*Math.cos(angle/180f*Math.PI) - yOff*Math.sin(angle/180f*Math.PI)), (float) (y + xOff*Math.sin(angle/180f*Math.PI) + yOff*Math.cos(angle/180f*Math.PI)), 0, 0));
 		}
 	}
 
