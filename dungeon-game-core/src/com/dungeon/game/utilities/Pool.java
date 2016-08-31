@@ -15,6 +15,7 @@ public abstract class Pool<N> {
 	public Pool(int num){
 		pool = new ArrayList<N>();
 		for(int i = 0; i < num; i++)pool.add(getNew());
+		total = num;
 	}
 	
 	public N get(){

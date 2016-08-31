@@ -11,12 +11,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.particle.BodyChunk;
 import com.dungeon.game.entity.particle.Particle;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.weapon.Weapon;
+import com.dungeon.game.textures.entity.Person;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -533,6 +535,14 @@ public abstract class Character extends Dynamic {
 				equipItems[1].unequip();
 				equipItems[1] = null;
 			}
+		}
+	}
+	
+	public void dead(){
+		super.dead();
+		Particle[] chunks = BodyChunk.getChunks(world, x, y, sprite, moveVec.angleRad(), moveVec.len(), angle, bleeds);
+		for(Particle c: chunks){
+			world.entities.add(c);
 		}
 	}
 }

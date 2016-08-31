@@ -11,7 +11,9 @@ public class BodyChunk extends Particle {
 	
 	private int totalTime;
 	
-	public static final Pool<BodyChunk> pool = new Pool<BodyChunk>(100){
+	private com.dungeon.game.textures.entity.particle.BodyChunk texture;
+	
+	public static final Pool<BodyChunk> pool = new Pool<BodyChunk>(200){
 
 		@Override
 		public BodyChunk getNew() {
@@ -25,10 +27,15 @@ public class BodyChunk extends Particle {
 		p.dispose();
 	}
 	
-	public static BodyChunk get(World world, float x, float y, Pixmap pix, int texX, int texY){
+	public static BodyChunk get(World world, float x, float y, Pixmap pix, int texX, int texY, float angle, float vel, float spriteAngle){
 		BodyChunk p = pool.get();
-		p.set(world, x + texX, y + texY, pix, texX, texY);
+		int texXOff = texX - pix.getWidth()/2;
+		int texYOff = texY - pix.getHeight()/2;
+		float rotationAngle = (float) (spriteAngle/180f*Math.PI);
+		p.set(world, (float) (x + texXOff*Math.cos(rotationAngle) - texYOff*Math.sin(rotationAngle)), (float) (y + texXOff*Math.sin(rotationAngle) + texYOff*Math.cos(rotationAngle)), pix, texX, texY, angle, vel, spriteAngle);
 		return p;
+//		x' = x*cos q - y*sin q
+//		y' = x*sin q + y*cos q 
 	}
 	
 
@@ -40,8 +47,6 @@ public class BodyChunk extends Particle {
 		
 		originX = 2;
 		originY = 2;
-		
-		sprite = new com.dungeon.game.textures.entity.particle.Blood().texture;
 	}
 	
 	public void calc() {
@@ -65,28 +70,34 @@ public class BodyChunk extends Particle {
 
 	@Override
 	public void dispose() {
+		if(texture != null)texture.dispose();
 		pool.dispose(this);
 	}
 	
-	public void set(World world, float x, float y, Pixmap pix, int texX, int texY){
+	public void set(World world, float x, float y, Pixmap pix, int texX, int texY, float angle, float vel, float spriteAngle){
 		totalTime = (int) (50+Math.random()*200);
-		sprite = new com.dungeon.game.textures.entity.particle.BodyChunk(pix, texX, texY).texture;
-		super.set(world, x, y, totalTime, 0, 0);
+		texture = com.dungeon.game.textures.entity.particle.BodyChunk.get(pix, texX, texY);
+		sprite = texture.texture;
+		super.set(world, x, y, totalTime, (float) (2-Math.random()*4+Math.cos(angle)*vel), (float) (2-Math.random()*4+Math.sin(angle)*vel));
+		this.angle = spriteAngle;
 	}
 
 	
-	public static BodyChunk[] getChunks(World world, float xPos, float yPos, Texture tex){
-		xPos-=tex.getWidth()/2;
-		yPos-=tex.getHeight()/2;
-		ArrayList<BodyChunk> chunks = new ArrayList<BodyChunk>();
+	public static Particle[] getChunks(World world, float xPos, float yPos, Texture tex, float angle, float vel, float spriteAngle, boolean bleeds){
+		ArrayList<Particle> chunks = new ArrayList<Particle>();
 		if(!tex.getTextureData().isPrepared())tex.getTextureData().prepare();
 		Pixmap pix = tex.getTextureData().consumePixmap();
 		for(int x = 0; x < pix.getWidth(); x+=4){
 			for(int y = 0; y < pix.getHeight(); y+=4){
-				chunks.add(get(world, xPos, yPos, pix, x, y));
+				chunks.add(get(world, xPos, yPos, pix, x, y, angle, vel, spriteAngle));
+				if(bleeds){
+					chunks.add(Blood.get(world, xPos, yPos, (float) (angle*180f/Math.PI), vel));
+				}else {
+					chunks.add(Poof.get(world, xPos, yPos, (float) (angle*180f/Math.PI), vel));
+				}
 			}
 		}
-		return chunks.toArray(new BodyChunk[chunks.size()]);
+		return chunks.toArray(new Particle[chunks.size()]);
 	}
 
 }

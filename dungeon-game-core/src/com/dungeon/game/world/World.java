@@ -77,6 +77,7 @@ public class World {
 		Blood.init();
 		Ember.init();
 		BodyChunk.init();
+		com.dungeon.game.textures.entity.particle.BodyChunk.init();
 		rayHandler = new RayHandler(null);
 		rayHandler.setBlurNum(15);
 		rayHandler.setAmbientLight(new Color(0,0,0,0));

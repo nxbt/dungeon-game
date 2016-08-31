@@ -49,4 +49,8 @@ public class WeaponProjectile extends Projectile {
 		drop.angle = this.angle;
 		world.entities.add(drop);
 	}
+	
+	public void dead(){
+		if(light!=null)light.light.remove(true);
+	}
 }
