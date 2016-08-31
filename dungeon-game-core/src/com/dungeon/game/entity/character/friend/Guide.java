@@ -16,6 +16,7 @@ import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
 import com.dungeon.game.entity.particle.Poof;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.item.Key;
+import com.dungeon.game.item.equipable.Lantern;
 import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.textures.entity.Person;
@@ -197,6 +198,37 @@ public class Guide extends Friend {
 		
 		dialogues.add(dialogue);
 		
+		dialogue = new Dialogue(world, this);
+		
+		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this, new Criteria[] {new Invert(world, new Said(world, dialogue, "lantern explain")), new True(world)}, new String[] {"Looks like the lights are out in here...", "What me to tell you that again?"}, new String[] {"tell lantern", "lantern explain"}));
+		
+		dialogue.potentialBubbles.put("tell lantern", new SpeechBubble(world, this,"Take this lantern to get through this room.", "give lantern"));
+		
+		invent = new Inventory(world, new int[][]{new int[]{0,0,0}}, 0, 0, true);
+		invent.slot[0].item = new Lantern(world);
+		dialogue.potentialBubbles.put("give lantern", new InvBubble(world, this, invent , "check lantern"));
+		
+		dialogue.potentialBubbles.put("check lantern", new SpeechBubble(world, this,
+				new Criteria[]{new HasItem(world, new Lantern(world), world.player), new True(world)},
+				new String[]{"", "Like, seriously. Take the lantern."}, 
+				new String[]{"lantern explain", "give lantern"}));
+		
+		dialogue.potentialBubbles.put("lantern explain", new SpeechBubble(world, this,"The lantern is a handheld item, so you can equip it just like a sword. However, you don't need to enter fight mode to use it.", "goodbye"));
+		
+		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world, this,"See you on the other side.\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B\u200B Of the room.", "end"));
+		
+		dialogues.add(dialogue);
+		
+		dialogue = new Dialogue(world, this);
+		
+		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"Well done. You made it.", "exit"));
+		
+		dialogue.potentialBubbles.put("exit", new SpeechBubble(world, this,"You're almost a proper adventurer. Just go through the door and around the corner.", "ignore"));
+		
+		dialogue.potentialBubbles.put("ignore", new SpeechBubble(world, this,"Uh... just ignore the rooms in the hall. Nothing of interest.", "end"));
+		
+		dialogues.add(dialogue);
+		
 		dialogue = dialogues.get(0);
 	}
 
@@ -205,7 +237,7 @@ public class Guide extends Friend {
 		if(stage == 0) showPopupBubble("Hello. Click on this to talk to me!");
 		else if(stage == 1) showPopupBubble("Good job.");
 		else if(stage == 2 || stage == 3) showPopupBubble("");
-		
+		else if(stage == 6) showPopupBubble("Hey! Over Here!");
 		
 		if(stage == 0 && world.player.y > 53*Tile.TS) {
 			stage = 1;
@@ -242,6 +274,24 @@ public class Guide extends Friend {
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(4);
+		}
+		else if(stage==4 && world.player.y < 59*Tile.TS) {
+			stage = 5;
+			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
+			x = 64*Tile.TS + Tile.TS/2;
+			y = 58*Tile.TS + Tile.TS/2;
+			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
+			speechBubble.dismissed = false;
+			dialogue = dialogues.get(5);
+		}
+		else if(stage==5 && world.player.y < 45*Tile.TS && world.player.inv.contains(new Lantern(world)) != null) {
+			stage = 6;
+			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
+			x = 66*Tile.TS + Tile.TS/2;
+			y = 40*Tile.TS + Tile.TS/2;
+			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
+			speechBubble.dismissed = false;
+			dialogue = dialogues.get(6);
 		}
 		
 		if(seenEntities.contains(world.player)) {

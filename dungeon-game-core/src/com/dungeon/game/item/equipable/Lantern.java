@@ -13,7 +13,7 @@ public class Lantern extends Hand {
 		name = "Lantern";
 		desc = "A small, hand held Lantern.";
 		graphic = new HandheldGraphic(world,this, new Polygon(new float[]{0,0,32,0,32,32,0,32}), 16, 16);
-		graphic.light = new Light(world, graphic.x, graphic.y, 70, 100, Light.ORANGE, 30, graphic);
+		graphic.light = new Light(world, graphic.x, graphic.y, 120, 100, Light.ORANGE, 30, graphic);
 	}
 
 	@Override
