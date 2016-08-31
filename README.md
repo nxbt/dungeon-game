@@ -2,7 +2,6 @@
 The is a top-down rougelike-like game written in Java. Currently being worked on by Brendan Thompson and Ethan  Bull-Vulpe.
 
 ##TODO high priority (within a week or two):
-* finish tutorial sequence
 * set up playtesting sessions
 * swap x and y in arrays
 * make doors open away from the player
