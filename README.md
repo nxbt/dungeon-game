@@ -6,7 +6,6 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * swap x and y in arrays
 * make doors open away from the player
 * add gold keys and doors
-* add method to inventory to add item to a random slot
 
 ##TODO low priority (within a month or two?):
 * continue adding procedural room decoration
@@ -18,6 +17,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * implement caves generation
 * implement catacombs generation
 * implement mixed (/recursive?) generation
+* rework pathfinding again because libGDX pathfinding is meh
 
 ##TODO very low priority (before final release):
 * add multithreding!
