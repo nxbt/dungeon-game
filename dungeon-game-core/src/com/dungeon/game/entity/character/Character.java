@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.particle.Blood;
 import com.dungeon.game.entity.particle.BodyChunk;
 import com.dungeon.game.entity.particle.Footprint;
 import com.dungeon.game.entity.particle.Particle;
@@ -172,10 +173,10 @@ public abstract class Character extends Dynamic {
 		effect();
 		move();
 		phys();
+		footPrints();
 		sight();
 		post();
 		calcLight();
-		footPrints();
 		
 		stagerTimer++;
 		if(stagerTimer == STAGER_TIME)stagerTimer = 0;
@@ -394,8 +395,10 @@ public abstract class Character extends Dynamic {
 				printTimer = 0;
 			}
 			else printTimer++;
-//			x' = x*cos q - y*sin q
-//			y' = x*sin q + y*cos q 
+		}
+		
+		if(bleeds && Math.random() > 0.9f + 0.4f*(life/maxLife)){
+			world.entities.add(Blood.get(world, x, y, (float) (Math.random()*360f), (float) (Math.random()*3f)));
 		}
 	}
 

@@ -1,5 +1,6 @@
 package com.dungeon.game.entity.character.friend;
 
+import com.dungeon.game.effect.resistance.Immune;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechPopup;
@@ -21,7 +22,7 @@ public abstract class Friend extends Character {
 		super(world, x, y, width, height, filename);
 		
 		speechBubble = new SpeechPopup(world,this);	
-//		addEffect(new Immune(world, -1));
+		addEffect(new Immune(world, -1));
 	}
 	
 	public void hovered() {
