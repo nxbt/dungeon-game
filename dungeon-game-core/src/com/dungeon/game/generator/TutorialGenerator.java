@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Drop;
+import com.dungeon.game.entity.Skeleton;
 import com.dungeon.game.entity.character.enemy.Dummy;
+import com.dungeon.game.entity.character.enemy.TutorialGoon;
 import com.dungeon.game.entity.character.friend.Guide;
+import com.dungeon.game.entity.furniture.Bar;
 import com.dungeon.game.entity.furniture.Chest;
 import com.dungeon.game.entity.furniture.Door;
 import com.dungeon.game.entity.furniture.Lamp;
@@ -210,6 +213,8 @@ public class TutorialGenerator extends Generation {
 		entities.add(new Torch(world, 62, 60, 3));
 		entities.add(new Torch(world, 64, 60, 3));
 		
+		//dark room
+		
 		workingRoom = new Rectangle(57, 64, 1, 1);
 		addToMap(workingRoom);
 		entities.add(new LockedDoor(world, 57, 64, 1));
@@ -276,12 +281,76 @@ public class TutorialGenerator extends Generation {
 		addToMap(workingRoom);
 		entities.add(new Door(world, 65, 39, 2));
 		
+		//hallway 3
+		workingRoom = new Rectangle(64, 20, 3, 19);
+		addToMap(workingRoom);
+
+		entities.add(new Torch(world, 64, 38, 1));
+		entities.add(new Torch(world, 66, 38, 1));
+
+		entities.add(new Torch(world, 64, 32, 0));
+		entities.add(new Torch(world, 66, 29, 2));
+		entities.add(new Torch(world, 64, 25, 0));
+		entities.add(new Torch(world, 65, 20, 3));
+		
+		//cell 1
+		workingRoom = new Rectangle(67, 32, 1, 1);
+		addToMap(workingRoom);
+		entities.add(new LockedDoor(world, 67, 32, 1));
+		
+		workingRoom = new Rectangle(68, 32, 4, 4);
+		addToMap(workingRoom);
+		entities.add(new Torch(world, 71, 32, 2));
+		Chest c = new Chest(world, 71*Tile.TS + Tile.TS/2, 33*Tile.TS + Tile.TS/2);
+		c.inv.addItem(new Gold(world, 100));
+		entities.add(c);
+		TutorialGoon g = new TutorialGoon(world, 71*Tile.TS + Tile.TS/2, 35*Tile.TS + Tile.TS/2);
+		g.equipSlots[0].item = null;
+		entities.add(g);
+		
+
+		workingRoom = new Rectangle(67, 34, 1, 1);
+		addToMap(workingRoom);
+		entities.add(new Bar(world, 67, 34, 1));
+		
+
+		//cell 2
+		workingRoom = new Rectangle(63, 29, 1, 1);
+		addToMap(workingRoom);
+		
+		workingRoom = new Rectangle(59, 27, 4, 4);
+		addToMap(workingRoom);
+		entities.add(new Torch(world, 59, 29, 0));
+		c = new Chest(world, 59*Tile.TS + Tile.TS/2, 27*Tile.TS + Tile.TS/2);
+		c.inv.addItem(new Key(world));
+		c.inv.addItem(new Gold(world, 10));
+		entities.add(c);
+		
+		entities.add(new TutorialGoon(world, 59*Tile.TS + Tile.TS/2, 29*Tile.TS + Tile.TS/2));
+		
+
+		//cell 3
+		workingRoom = new Rectangle(67, 25, 1, 1);
+		addToMap(workingRoom);
+		entities.add(new LockedDoor(world, 67, 25, 1));
+		
+		workingRoom = new Rectangle(68, 24, 4, 4);
+		addToMap(workingRoom);
+		entities.add(new Torch(world, 71, 25, 2));
+		
+		s = new Slot(world, new int[]{0, 0, 0}, null);
+		
+		s.item = new Gold(world, 30);
+
+		entities.add(new Drop(world, 70*Tile.TS + Tile.TS/3, 25*Tile.TS + Tile.TS/4, s));
+		entities.add(new Skeleton(world, 70*Tile.TS + Tile.TS/2, 25*Tile.TS + Tile.TS/2));
+		
 		makeWalls(10, 11, 12, 13, 14);
 	}
 	
 	private void removeNode(int x, int y){
 		nodeArray[x][y].upNode.downNodes.remove(nodeArray[x][y]);
-		tileNodes.remove(nodeArray[x][y]);
+//		tileNodes.remove(nodeArray[x][y]);
 		nodeArray[x][y] = null;
 	}
 	

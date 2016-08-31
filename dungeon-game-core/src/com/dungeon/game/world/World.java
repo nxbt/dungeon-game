@@ -306,7 +306,13 @@ public class World {
 		mouse.draw(batch);
 		descBox.draw(batch);
 		
-		if(debug_frames) fpsFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 60f, cam.height-8f);
+		if(debug_frames){
+			fpsFont.setColor(Color.RED);
+			fpsFont.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 60f, cam.height-8f);
+			fpsFont.setColor(Color.GREEN);
+			fpsFont.draw(batch, "X: " + (int)(mouse.x+cam.x-cam.width/2)/32, 60f, cam.height-20f);
+			fpsFont.draw(batch, "Y: " + (int)(mouse.y+cam.y-cam.height/2)/32, 60f, cam.height-32f);
+		}
 		
 		batch.end();
 	}

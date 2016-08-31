@@ -2,39 +2,31 @@ package com.dungeon.game.entity.character.enemy;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
-import com.dungeon.game.ai.CoverFinder;
-import com.dungeon.game.effect.regen.ManaRegen;
 import com.dungeon.game.effect.regen.StamRegen;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
-import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
-import com.dungeon.game.item.equipable.weapon.Bow;
-import com.dungeon.game.item.equipable.weapon.Melee;
 import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.item.equipable.weapon.Weapon;
-import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
-public class Goon extends Enemy {
+public class TutorialGoon extends Enemy {
 	
 	boolean ranged;
 	
-	//temp
 	public float[] lineOfCover;
 
-	public Goon(World world, float x, float y) {
+	public TutorialGoon(World world, float x, float y) {
 		super(world, x, y, 32, 32, "goon.png");
 		
 		sprite = new com.dungeon.game.textures.entity.Goon().texture;
 		
 		name = "Goon";
 		
-		maxLife = 20;
+		maxLife = 15;
 		maxStam = 100;
 		maxMana = 0;
 		
@@ -42,8 +34,8 @@ public class Goon extends Enemy {
 		stam = maxStam;
 		mana = maxMana;
 		
-		acel = 1.5f;
-		mvel = 5;
+		acel = 1f;
+		mvel = 3.5f;
 		fric = 0.5f;
 		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
@@ -110,27 +102,16 @@ public class Goon extends Enemy {
 		equipSlots = new Slot[]{inv.slot[30],inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41]};
 		equipItems = new Equipable[equipSlots.length];
 
-		if(Math.random()>0.5){
-			inv.slot[30].item = new Bow(world, (float) (0.3 + Math.random()*0.6), 10);
-			inv.slot[30].item.dropChance = 0.5f;
-			inv.slot[20].item = new Arrow(world);
-			inv.slot[20].item.stack = 12;
-			inv.slot[20].item.dropChance = 0.5f;
-			ranged = true;
-		}
-		else {
-			inv.slot[30].item = new Sword(world, 1);
-			inv.slot[30].item.dropChance = 0.5f;
-			ranged = false;
-		}
+		inv.slot[30].item = new Sword(world, 1, 1, 1, 1);
+		inv.slot[30].item.dropChance = 0.5f;
+		ranged = false;
+
 		
 		
 		vision = 10;
 		hearing = 10;
 		
 		effects.add(new StamRegen(world, -1, 0.1f));
-		
-		gold = (int) Math.round(Math.random()*20);
 	}
 
 	@Override
@@ -142,41 +123,16 @@ public class Goon extends Enemy {
 		entities.remove(world.player);
 		entities.remove(this);
 		if(knownEntities.contains(world.player)){
-			if(equipItems[0] instanceof Melee){
 				if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{world.player.x,world.player.y});
 				target_angle = move_angle;
 				if(flipX)target_angle+=180;
 				if(target_angle > 360)target_angle-=360;
-			}else{
-				lineOfCover = new float[4];
-				int[] coverPos = new int[4];
-				CoverFinder.findCover(world, this, world.player, coverPos, lineOfCover, true, 10);
-				if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{coverPos[0]*Tile.TS,coverPos[1]*Tile.TS});
-				target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
-				if(Intersector.distanceSegmentPoint(lineOfCover[0], lineOfCover[1], lineOfCover[2], lineOfCover[3], x, y) < 4){
-					if(((Bow)equipItems[0]).stageTimer < 45){
-						//move into cover to hide from player
-						move_angle = (float) (Math.atan2(lineOfCover[3] - y, lineOfCover[2] - x)/Math.PI*180f);
-					}else{
-						//move out of cover to get LOS on player
-						move_angle = (float) (Math.atan2(lineOfCover[1] - y, lineOfCover[0] - x)/Math.PI*180f);
-					}
-						
-				}
-			}
 		}
 		attacking = false;
 		if(equipItems[0] != null){
 			boolean attack = false;
 			boolean down = true;
 			boolean click = false;
-			if(ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<300){
-				if(((Bow)equipItems[0]).stage == Bow.REST)click = true;
-				else click = false;
-				if(((Bow)equipItems[0]).stageTimer < 45 || !(Math.sqrt((x - lineOfCover[0])*(x - lineOfCover[0])+(y - lineOfCover[1])*(y - lineOfCover[1])) < 4))down = true;
-				else down = false;
-				attack = true;
-			}
 			if(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat")){
 				attack = false;
 			}

@@ -31,7 +31,7 @@ public class Door extends Static {
 
 	public void construct(float x, float y, int rotation) {
 		
-		layer = 3;
+		layer = ROOF;
 		if(rotation == 0 || rotation == 2){
 			dWidth = 32;
 			dHeight = 8;
