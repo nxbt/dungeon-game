@@ -27,6 +27,7 @@ public class Drop extends Static {
 		originY = 16;
 		
 		angle = (float) (180f-Math.random()*360);
+		layer = FOOTPRINT;
 	}
 	
 	@Override

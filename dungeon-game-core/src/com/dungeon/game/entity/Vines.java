@@ -12,6 +12,8 @@ public class Vines extends Static {
 		originY = 16;
 		hitbox = new Polygon(new float[]{0,0,0,0,0,0});
 		genVisBox();
+		
+		layer = HANDHELD;
 	}
 
 	@Override

@@ -14,10 +14,12 @@ import com.dungeon.game.world.World;
 
 public abstract class Entity {
 
-	private static final int FLOOR = 0;
-	private static final int PERSON = 1;
-	private static final int HANDHELD = 2;
-	private static final int ROOF = 3;
+	protected static final int FLOOR = 0;
+	protected static final int FOOTPRINT = 1;
+	protected static final int PERSON = 2;
+	protected static final int HANDHELD = 3;
+	protected static final int ROOF = 4;
+	protected static final int PARTICLE = 5;
 	
 	public float x;
 	public float y;
@@ -74,7 +76,7 @@ public abstract class Entity {
 		
 		this.killMe = false;
 		
-		layer = 1;
+		layer = PERSON; //default layer
 		
 		clickable = true;
 	}

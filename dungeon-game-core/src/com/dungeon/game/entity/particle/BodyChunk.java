@@ -42,6 +42,8 @@ public class BodyChunk extends Particle {
 	public BodyChunk() {
 		super();
 		
+		layer = FOOTPRINT;
+		
 		dWidth = 4;
 		dHeight = 4;
 		

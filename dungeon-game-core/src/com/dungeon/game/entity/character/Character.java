@@ -12,13 +12,14 @@ import com.dungeon.game.effect.Effect;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.particle.BodyChunk;
+import com.dungeon.game.entity.particle.Footprint;
 import com.dungeon.game.entity.particle.Particle;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.weapon.Weapon;
-import com.dungeon.game.textures.entity.Person;
+import com.dungeon.game.utilities.Pool;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -103,6 +104,12 @@ public abstract class Character extends Dynamic {
 	
 	public boolean bleeds;
 	
+	protected Pool<Footprint> printPool;
+	
+	private int printTimer;
+	
+	protected int printTime;
+	
 	public Character(World world, float x, float y, int width, int height, String filename) {
 		super(world, x, y, width, height, filename);
 		
@@ -145,6 +152,10 @@ public abstract class Character extends Dynamic {
 		desc = "On this stage, we are all players. Even this guy.";
 		
 		bleeds = true;
+		
+		printTime = 7;
+		
+		layer = PERSON;
 	}
 
 	public void norm() {
@@ -164,6 +175,7 @@ public abstract class Character extends Dynamic {
 		sight();
 		post();
 		calcLight();
+		footPrints();
 		
 		stagerTimer++;
 		if(stagerTimer == STAGER_TIME)stagerTimer = 0;
@@ -360,6 +372,31 @@ public abstract class Character extends Dynamic {
 			
 		}
 		
+	}
+	
+	protected void footPrints(){
+		if(printPool != null && moveVec.len() > 0){
+			if(printTimer == printTime){
+				float xOffSet = 0;
+				float yOffSet = 5;
+				float angle = moveVec.angleRad();
+				float x = this.x - (float) (yOffSet*Math.sin(angle));
+				float y = this.y + (float) (yOffSet*Math.cos(angle));
+				world.entities.add(Footprint.get(world, printPool, x, y, moveVec.angle()));
+				printTimer++;
+			}else if(printTimer == printTime * 2){
+				float xOffSet = 0;
+				float yOffSet = -5;
+				float angle = moveVec.angleRad();
+				float x = this.x - (float) (yOffSet*Math.sin(angle));
+				float y = this.y + (float) (yOffSet*Math.cos(angle));
+				world.entities.add(Footprint.get(world, printPool, x, y, moveVec.angle()));
+				printTimer = 0;
+			}
+			else printTimer++;
+//			x' = x*cos q - y*sin q
+//			y' = x*sin q + y*cos q 
+		}
 	}
 
 	protected void activations(){

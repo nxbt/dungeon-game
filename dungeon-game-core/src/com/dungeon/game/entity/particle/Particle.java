@@ -16,7 +16,7 @@ public abstract class Particle extends Static {
 
 	public Particle() {
 		super(null, 0, 0, 32, 32, "slot.png");
-		layer = 4;
+		layer = PARTICLE;
 		clickable = false;
 		rotate = true;
 	}

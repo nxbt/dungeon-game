@@ -18,7 +18,7 @@ public class Torch extends Static {
 
 	public Torch(World world, float x, float y, int orientation) {
 		super(world, x*Tile.TS + Tile.TS/2, y*Tile.TS + Tile.TS/2, 16, 4, "torch.png");
-		layer = 3;
+		layer = ROOF;
 		Pixmap tempMap = new Pixmap(16, 4, Pixmap.Format.RGB888);
 		
 		if(!textures[0].getTextureData().isPrepared()) textures[0].getTextureData().prepare();

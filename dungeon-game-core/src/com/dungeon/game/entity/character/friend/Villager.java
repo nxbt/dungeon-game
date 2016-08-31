@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.entity.character.PrintPools;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.light.Light;
@@ -72,6 +73,8 @@ public class Villager extends Friend {
 		dialogue = new Dialogue(world, this);
 
 		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"U halfin a gigle m8?", "end"));
+		
+		printPool = PrintPools.humanPool;
 
 	}
 

@@ -14,7 +14,7 @@ public class Carpet extends Static {
 
 	public Carpet(World world, float x, float y, int width, int height, Color color) {
 		super(world, x, y, 16, 16, "carpet.png");
-		layer = 0;
+		layer = FLOOR;
 		Pixmap tempMap = new Pixmap(width*16, height*16, Pixmap.Format.RGB888);
 		
 		Pixmap[] textPixmaps = new Pixmap[textures.length];

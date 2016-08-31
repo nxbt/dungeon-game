@@ -151,6 +151,8 @@ public class Player extends Character {
 		hearing = 10;
 		gold = 0;
 		clickable = false;
+		
+		printPool = PrintPools.humanPool;
 	}
 	
 	public void calc() {

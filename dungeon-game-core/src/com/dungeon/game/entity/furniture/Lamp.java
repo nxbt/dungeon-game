@@ -16,7 +16,7 @@ public class Lamp extends Static {
 		originX = 16;
 		originY = 16;
 		
-		layer = 3;
+		layer = ROOF;
 
 		light = new Light(world, x, y, 200, 100, Light.WHITE, 0, this);
 		
