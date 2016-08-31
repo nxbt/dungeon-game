@@ -9,6 +9,8 @@ import com.dungeon.game.criteria.HasItem;
 import com.dungeon.game.criteria.Invert;
 import com.dungeon.game.criteria.Said;
 import com.dungeon.game.criteria.True;
+import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.character.enemy.TutorialGoon;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.InvBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
@@ -229,6 +231,14 @@ public class Guide extends Friend {
 		
 		dialogues.add(dialogue);
 		
+		dialogue = new Dialogue(world, this);
+
+		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"Hmm... Looks like he got out.", "nice"));
+		
+		dialogue.potentialBubbles.put("nice", new SpeechBubble(world, this,"But you handled it! I didn't realize he'd put that door through so much...", "nice"));
+		
+		dialogues.add(dialogue);
+		
 		dialogue = dialogues.get(0);
 	}
 
@@ -236,7 +246,7 @@ public class Guide extends Friend {
 	public void calc() {
 		if(stage == 0) showPopupBubble("Hello. Click on this to talk to me!");
 		else if(stage == 1) showPopupBubble("Good job.");
-		else if(stage == 2 || stage == 3) showPopupBubble("");
+		else if(stage == 2 || stage == 3 || stage == 4 || stage == 5 || stage == 7) showPopupBubble("");
 		else if(stage == 6) showPopupBubble("Hey! Over Here!");
 		
 		if(stage == 0 && world.player.y > 53*Tile.TS) {
@@ -292,6 +302,21 @@ public class Guide extends Friend {
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(6);
+		}
+		else if(stage==6){
+			int numFound = 0;
+			for(Entity e: world.entities){
+				if(e instanceof TutorialGoon)numFound++;
+			}
+			if(numFound == 1){
+				stage = 7;
+				for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
+				x = 66*Tile.TS + Tile.TS/2;
+				y = 20*Tile.TS + Tile.TS/2;
+				for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
+				speechBubble.dismissed = false;
+				dialogue = dialogues.get(7);
+			}
 		}
 		
 		if(seenEntities.contains(world.player)) {
