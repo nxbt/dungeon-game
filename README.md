@@ -6,6 +6,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * set up playtesting sessions
 * swap x and y in arrays
 * make doors open away from the player
+* add gold keys and doors
 
 ##TODO low priority (within a month or two?):
 * continue adding procedural room decoration
