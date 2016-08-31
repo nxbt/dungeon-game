@@ -33,6 +33,8 @@ public class Light {
 	private int offY;
 	public boolean isOn;
 	
+	private int normStrength;
+	
 	//point light with color
 	public Light(World world, float x, float y, int strength, int rays, Color color, int flickerAmount, Entity ent){
 		this.world = world;
@@ -40,6 +42,7 @@ public class Light {
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
+		normStrength = strength;
 		curFlick = 0;
 		light.remove(false);
 		offX = 0;
@@ -53,6 +56,7 @@ public class Light {
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
+		normStrength = strength;
 		curFlick = 0;
 		light.remove(false);
 		offX = 0;
@@ -66,6 +70,7 @@ public class Light {
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
+		normStrength = strength;
 		curFlick = 0;
 		this.angleOff = angleOff;
 		light.remove(false);
@@ -80,6 +85,7 @@ public class Light {
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
+		normStrength = strength;
 		curFlick = 0;
 		this.angleOff = angleOff;
 		light.remove(false);
@@ -89,6 +95,11 @@ public class Light {
 	}
 	
 	public void update(){
+		if(strength < normStrength) {
+			strength+= normStrength/15;
+			if(strength > normStrength) strength = normStrength;
+			if(flickerAmount==0) light.setDistance(strength);
+		}
 		int actingOffX = offX;
 		int actingOffY = offY;
 		if(ent.flipX)actingOffX*=-1;
@@ -111,6 +122,7 @@ public class Light {
 	public void load(){
 		light.add(world.rayHandler);
 		isOn = true;
+		strength = 0;
 	}
 	
 	public void unload(){
@@ -128,6 +140,7 @@ public class Light {
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
+		normStrength = strength;
 		curFlick = 0;
 		light.remove(false);
 		offX = 0;
@@ -141,6 +154,7 @@ public class Light {
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
+		normStrength = strength;
 		curFlick = 0;
 		light.remove(false);
 		offX = 0;
@@ -155,6 +169,7 @@ public class Light {
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
+		normStrength = strength;
 		curFlick = 0;
 		this.angleOff = angleOff;
 		light.remove(false);
@@ -169,6 +184,7 @@ public class Light {
 		this.ent = ent;
 		this.flickerAmount = flickerAmount;
 		this.strength = strength;
+		normStrength = strength;
 		curFlick = 0;
 		this.angleOff = angleOff;
 		light.remove(false);
