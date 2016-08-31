@@ -13,6 +13,8 @@ import com.dungeon.game.world.World;
 public class Torch extends Static {
 	
 	private int orientaiton;
+	
+	private boolean flippedSprite;
 
 	public Torch(World world, float x, float y, int orientation) {
 		super(world, x*Tile.TS + Tile.TS/2, y*Tile.TS + Tile.TS/2, 16, 4, "torch.png");
@@ -69,10 +71,11 @@ public class Torch extends Static {
 	@Override
 	public void calc() {
 			
-		if(flipX){
+		if(flipX && !flippedSprite){
 			if(orientaiton == 0 || orientaiton == 2){ //pls work?
 				originX = 16 - originX;
 			}else originY = 16 - originY;
+			flippedSprite = true;
 		}
 		if(Math.random() < 0.05) {
 			world.entities.add(Ember.get(world, x, y, 0, 0));
