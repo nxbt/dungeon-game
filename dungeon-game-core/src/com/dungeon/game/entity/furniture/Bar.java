@@ -9,6 +9,8 @@ public class Bar extends Static {
 
 	public Bar(World world, float x, float y, int rotation) {
 		super(world, x*Tile.TS + Tile.TS/2, y*Tile.TS + Tile.TS/2, 32, 32, "slot.png");
+		
+		sprite = new com.dungeon.game.textures.entity.Bar(rotation).texture;
 
 		originX = 16;
 		originY = 16;

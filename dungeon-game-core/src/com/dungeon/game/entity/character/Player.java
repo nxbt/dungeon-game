@@ -126,17 +126,17 @@ public class Player extends Character {
 		
 		inv = new Inventory(world, invLayout, 10, 100);
 		
-		inv.addItem(new Sword(world, 1));
-		inv.addItem(new Sword(world, 1));
-		inv.addItem(new Sword(world, 1));
-		inv.addItem(new Sword(world, 1));
-		inv.addItem(new Sword(world, 1));
-		inv.addItem(new Sword(world, 1));
-		inv.addItem(new Sword(world, 1));
-		inv.addItem(new Sword(world, 1));
-		inv.addItem(new Sword(world, 1));
-		inv.addItem(new LifePotion(world), 10);
-		inv.addItem(new Key(world), 10);
+//		inv.addItem(new Sword(world, 1));
+//		inv.addItem(new Sword(world, 1));
+//		inv.addItem(new Sword(world, 1));
+//		inv.addItem(new Sword(world, 1));
+//		inv.addItem(new Sword(world, 1));
+//		inv.addItem(new Sword(world, 1));
+//		inv.addItem(new Sword(world, 1));
+//		inv.addItem(new Sword(world, 1));
+//		inv.addItem(new Sword(world, 1));
+//		inv.addItem(new LifePotion(world), 10);
+//		inv.addItem(new Key(world), 10);
 		
 		equipSlots = new Slot[]{inv.slot[30],inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41]};
 		equipItems = new Equipable[equipSlots.length];
