@@ -18,6 +18,7 @@ import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
 import com.dungeon.game.entity.particle.Poof;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.item.Key;
+import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.equipable.Lantern;
 import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.light.Light;
@@ -235,8 +236,19 @@ public class Guide extends Friend {
 
 		dialogue.potentialBubbles.put("start", new SpeechBubble(world, this,"Hmm... Looks like he got out.", "nice"));
 		
-		dialogue.potentialBubbles.put("nice", new SpeechBubble(world, this,"But you handled it! I didn't realize he'd put that door through so much...", "sorry"));
+		dialogue.potentialBubbles.put("nice", new SpeechBubble(world, this,"But you handled it! I didn't realize he'd put that door through so much...", "tell potion"));
 
+		dialogue.potentialBubbles.put("tell potion", new SpeechBubble(world, this,"Here, have this heath potion to heal up.", "give potion"));
+		
+		invent = new Inventory(world, new int[][]{new int[]{0,0,0}}, 0, 0, true);
+		invent.slot[0].item = new LifePotion(world);
+		dialogue.potentialBubbles.put("give potion", new InvBubble(world, this, invent , "check potion"));
+		
+		dialogue.potentialBubbles.put("check potion", new SpeechBubble(world, this,
+				new Criteria[]{new HasItem(world, new Lantern(world), world.player), new True(world)},
+				new String[]{"You can use the potion in a couble of ways: Middle clicking on it in your inventor. Or moving it to one of the consumable slots in your inventory, marked with a potion, and then clicking on it, or pressing the corresponding number key.", "So uh... you don't want the potion? Okay."}, 
+				new String[]{"sorry", "sorry"}));
+		
 		dialogue.potentialBubbles.put("sorry", new SpeechBubble(world, this,"So sorry about that. But you've clearly proven yourself competent. You are truely an adventurer.", "exit"));
 		
 		dialogue.potentialBubbles.put("exit", new SpeechBubble(world, this,"Proceed to the left through the door to begin your journy!", "end"));

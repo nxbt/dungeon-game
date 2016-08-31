@@ -197,7 +197,7 @@ public class Goon extends Enemy {
 	
 	@Override
 	protected void activations() {
-		if(!ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<90){
+		if(!ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<90 && stam > 20){
 			if(Math.random() < 0.9)rightActivated = true;
 			else rightActivated = false;
 			if(Math.random() < 0.9)leftActivated = true;
