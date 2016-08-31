@@ -1,6 +1,7 @@
 package com.dungeon.game.inventory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.dungeon.game.entity.hud.InvGraphic;
 import com.dungeon.game.item.Item;
@@ -98,6 +99,42 @@ public class Inventory {
 			}
 		}
 		
+		return item;
+	}
+	
+	public Item addItemRand(Item item, int count){
+		item.stack = count;
+		return addItemRand(item);
+		
+	}
+	
+	public Item addItemRand(Item item){
+		ArrayList<Slot> slot = new ArrayList<Slot>();
+		for(Slot s: this.slot){
+			if(s.item == null || s.item.getClass().equals(item.getClass()))slot.add(s);
+		}
+		Collections.shuffle(slot);
+		for(Slot s: slot) {
+			if(s.item != null && !s.item.equals(item) && s.item.getClass().equals(item.getClass()) && s.item.stack < s.item.maxStack) {
+				if(s.item.stack + item.stack > s.item.maxStack) {
+					item.stack -= s.item.maxStack-s.item.stack;
+					s.item.stack = s.item.maxStack;
+				}
+				else {
+					s.item.stack += item.stack;
+					item = null;
+					break;
+				}
+				
+			}
+		}
+		if(item != null) for(Slot s: slot) {
+			if(s.item == null && s.type == 0) {
+				s.item = item;
+				item = null;
+				break;
+			}
+		}
 		return item;
 	}
 	

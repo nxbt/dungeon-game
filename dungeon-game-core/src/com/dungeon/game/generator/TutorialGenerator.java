@@ -130,12 +130,12 @@ public class TutorialGenerator extends Generation {
 		entities.add(new Door(world, 51, 63, 2));
 		
 		Chest chest = new Chest(world, 39*Tile.TS+Tile.TS/2, 59*Tile.TS+Tile.TS/2);
-		chest.inv.addItem(new Gold(world),5);
+		chest.inv.addItemRand(new Gold(world),5);
 		
 		entities.add(chest);
 		
 		chest = new Chest(world, 50*Tile.TS+Tile.TS/2, 61*Tile.TS+Tile.TS/2);
-		chest.inv.addItem(new WoolPants(world, new Color(0.2f, 0.2f,0.7f,0.5f)));
+		chest.inv.addItemRand(new WoolPants(world, new Color(0.2f, 0.2f,0.7f,0.5f)));
 		
 		entities.add(chest);
 		
@@ -162,12 +162,12 @@ public class TutorialGenerator extends Generation {
 		entities.add(new Door(world, 46, 66, 2));
 		
 		chest = new Chest(world, 36*Tile.TS+Tile.TS/2, 70*Tile.TS+Tile.TS/2);
-		chest.inv.addItem(new WoolShirt(world, new Color(0.7f, 0.2f,0.2f,0.5f)));
+		chest.inv.addItemRand(new WoolShirt(world, new Color(0.7f, 0.2f,0.2f,0.5f)));
 		
 		entities.add(chest);
 		
 		chest = new Chest(world, 47*Tile.TS+Tile.TS/2, 69*Tile.TS+Tile.TS/2);
-		chest.inv.addItem(new Key(world));
+		chest.inv.addItemRand(new Key(world));
 		
 		entities.add(chest);
 		
@@ -303,7 +303,7 @@ public class TutorialGenerator extends Generation {
 		addToMap(workingRoom);
 		entities.add(new Torch(world, 71, 32, 2));
 		Chest c = new Chest(world, 71*Tile.TS + Tile.TS/2, 33*Tile.TS + Tile.TS/2);
-		c.inv.addItem(new Gold(world, 100));
+		c.inv.addItemRand(new Gold(world, 100));
 		entities.add(c);
 		TutorialGoon g = new TutorialGoon(world, 71*Tile.TS + Tile.TS/2, 35*Tile.TS + Tile.TS/2);
 		g.equipSlots[0].item = null;
@@ -323,8 +323,8 @@ public class TutorialGenerator extends Generation {
 		addToMap(workingRoom);
 		entities.add(new Torch(world, 59, 29, 0));
 		c = new Chest(world, 59*Tile.TS + Tile.TS/2, 27*Tile.TS + Tile.TS/2);
-		c.inv.addItem(new Key(world));
-		c.inv.addItem(new Gold(world, 10));
+		c.inv.addItemRand(new Key(world));
+		c.inv.addItemRand(new Gold(world, 10));
 		entities.add(c);
 		
 		entities.add(new TutorialGoon(world, 59*Tile.TS + Tile.TS/2, 29*Tile.TS + Tile.TS/2));
