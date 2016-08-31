@@ -36,3 +36,4 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * floating torches in castle rooms and where multiple halls meet (and other places)
 * characters on the border of a wall will have a visPoly that crashes
 * dialogue bubbles jump after empty dialogue skip (fixed?)
+* fireplaces turn on at the wrong times
