@@ -17,6 +17,7 @@ import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.weapon.Medium;
+import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.item.equipable.weapon.Weapon;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.textures.entity.Person;
@@ -124,9 +125,9 @@ public class Player extends Character {
 		inv = new Inventory(world, invLayout, 10, 100);
 		
 //		inv.addItem(new Sword(world, 1));
-//		inv.addItem(new Sword(world, 1));
-//		inv.addItem(new Sword(world, 1));
-//		inv.addItem(new Sword(world, 1));
+//		inv.addItem(new Sword(world, 2));
+//		inv.addItem(new Sword(world, 3));
+//		inv.addItem(new Sword(world, 4));
 //		inv.addItem(new Sword(world, 1));
 //		inv.addItem(new Sword(world, 1));
 //		inv.addItem(new Sword(world, 1));
