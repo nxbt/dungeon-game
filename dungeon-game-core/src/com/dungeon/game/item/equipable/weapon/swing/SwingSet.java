@@ -100,7 +100,7 @@ public class SwingSet{
 	}
 	
 	public void knockback(Character c){ //called when the weapon hits a weapon
-		swings[curSwing].knockback(c); //call the swing's hit function
+		swings[curSwing].knockback(c, false); //call the swing's hit function
 		weapon.hasHit = swings[curSwing].hasHit; //update hasHit
 	}
 	

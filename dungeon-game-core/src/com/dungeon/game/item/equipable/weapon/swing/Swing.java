@@ -163,10 +163,10 @@ public abstract class Swing implements Cloneable{
 		
 		if(!c.knownEntities.contains(weapon.owner))c.knownEntities.add(weapon.owner); //the target now knows where the attacker is!
 		if(!cleave)hasHit = true; //if the weapon is not a cleave weapon, then we update hashit, so it can't hit another enemy this swing.
-		if(c.damage(weapon.damage*dmgMult, weapon.getEffects())>0) knockback(c); //if the target takes at least 1 dmg...
+		if(c.damage(weapon.damage*dmgMult, weapon.getEffects())>0) knockback(c, true); //if the target takes at least 1 dmg...
 	}
 	
-	public void knockback(Character c) {
+	public void knockback(Character c, boolean makeBlood) {
 		if(weapon.hasHit) hasHit = true;
 		
 		float weaponangle = weapon.graphic.angle+135; // get the angle the tip of the sword is pointing so we can calc knockback
@@ -177,7 +177,7 @@ public abstract class Swing implements Cloneable{
 		Vector2 knockVec = new Vector2(); //create a knockback vector
 		knockVec.x = (xSword*(1-knockRatio)+xOwner*(knockRatio))*knockMult; //set the x of the knockVec based on the knockRatio and the knockMult
 		knockVec.y = (ySword*(1-knockRatio)+yOwner*(knockRatio))*knockMult; //set the y of the knockVec based on the knockRatio and the knockMult
-		if(c.bleeds)for(int i = 0; i < weapon.damage*3; i++)world.entities.add(Blood.get(world, c.x, c.y, knockVec.angle(), knockVec.len()*1.3f));
+		if(c.bleeds && makeBlood)for(int i = 0; i < weapon.damage*3; i++)world.entities.add(Blood.get(world, c.x, c.y, knockVec.angle(), knockVec.len()*1.3f));
 		c.acel(knockVec, false); //knock that ***** about!
 	}
 	
