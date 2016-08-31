@@ -28,6 +28,7 @@ import com.dungeon.game.entity.particle.Blood;
 import com.dungeon.game.entity.particle.BodyChunk;
 import com.dungeon.game.entity.particle.Ember;
 import com.dungeon.game.entity.particle.Poof;
+import com.dungeon.game.generator.objects.GenRoom;
 import com.dungeon.game.pathing.Node;
 
 import box2dLight.PointLight;
@@ -77,6 +78,7 @@ public class World {
 		Blood.init();
 		Ember.init();
 		BodyChunk.init();
+		
 		com.dungeon.game.textures.entity.particle.BodyChunk.init();
 		rayHandler = new RayHandler(null);
 		rayHandler.setBlurNum(15);
