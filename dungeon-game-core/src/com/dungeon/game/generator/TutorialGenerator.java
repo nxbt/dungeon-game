@@ -178,18 +178,14 @@ public class TutorialGenerator extends Generation {
 		entities.add(new Torch(world, 61, 62, 0));
 		entities.add(new Torch(world, 60, 61, 1));
 		entities.add(new Torch(world, 60, 63, 3));
-		zoneNodes.get(zoneNodes.size() - 1).downNodes.remove(nodeArray[60][62]);
-		tileNodes.remove(nodeArray[60][62]);
-		nodeArray[60][62] = null;
+		removeNode(60, 62);
 
 		map[68][66] = tileMap.getTile(1);
 		entities.add(new Torch(world, 65, 68, 2));
 		entities.add(new Torch(world, 67, 68, 0));
 		entities.add(new Torch(world, 66, 67, 1));
 		entities.add(new Torch(world, 66, 69, 3));
-		zoneNodes.get(zoneNodes.size() - 1).downNodes.remove(nodeArray[66][68]);
-		tileNodes.remove(nodeArray[66][68]);
-		nodeArray[66][68] = null;
+		removeNode(66, 68);
 		
 
 		map[68][60] = tileMap.getTile(1);
@@ -197,22 +193,22 @@ public class TutorialGenerator extends Generation {
 		entities.add(new Torch(world, 61, 68, 0));
 		entities.add(new Torch(world, 60, 67, 1));
 		entities.add(new Torch(world, 60, 69, 3));
-		zoneNodes.get(zoneNodes.size() - 1).downNodes.remove(nodeArray[60][68]);
-		tileNodes.remove(nodeArray[60][68]);
-		nodeArray[60][68] = null;
+		removeNode(60, 68);
 		
 		map[62][66] = tileMap.getTile(1);
 		entities.add(new Torch(world, 65, 62, 2));
 		entities.add(new Torch(world, 67, 62, 0));
 		entities.add(new Torch(world, 66, 61, 1));
 		entities.add(new Torch(world, 66, 63, 3));
-		zoneNodes.get(zoneNodes.size() - 1).downNodes.remove(nodeArray[66][62]);
-		tileNodes.remove(nodeArray[66][62]);
-		nodeArray[66][62] = null;
+		removeNode(66, 62);
 		
 		entities.add(new Dummy(world, 63*Tile.TS+Tile.TS/2, 65*Tile.TS+Tile.TS/2));
 		entities.add(new Dummy(world, 66*Tile.TS+Tile.TS/2, 66*Tile.TS+Tile.TS/2));
 		entities.add(new Dummy(world, 65*Tile.TS+Tile.TS/2, 63*Tile.TS+Tile.TS/2));
+		
+
+		entities.add(new Torch(world, 62, 60, 3));
+		entities.add(new Torch(world, 64, 60, 3));
 		
 		workingRoom = new Rectangle(57, 64, 1, 1);
 		addToMap(workingRoom);
@@ -222,7 +218,71 @@ public class TutorialGenerator extends Generation {
 		addToMap(workingRoom);
 		entities.add(new LockedDoor(world, 63, 59, 0));
 		
+		workingRoom = new Rectangle(59, 40, 12, 19);
+		addToMap(workingRoom);
+		
+
+		entities.add(new Torch(world, 65, 58, 1));
+		int x, y;
+		y = 55;
+		for(x = 61; x < 69 ; x++){
+			removeNode(x, y);
+			map[y][x] = tileMap.getTile(1);
+		}
+		
+		y = 52;
+		for(x = 59; x < 63 ; x++){
+			removeNode(x, y);
+			map[y][x] = tileMap.getTile(1);
+		}
+		
+		for(x = 68; x < 71 ; x++){
+			removeNode(x, y);
+			map[y][x] = tileMap.getTile(1);
+		}
+		x = 65;
+		for(y = 50; y < 55  ; y++){
+			removeNode(x, y);
+			map[y][x] = tileMap.getTile(1);
+		}
+
+		x = 62;
+		for(y = 46; y < 52  ; y++){
+			removeNode(x, y);
+			map[y][x] = tileMap.getTile(1);
+		}
+
+		y = 46;
+		for(x = 63; x < 69 ; x++){
+			removeNode(x, y);
+			map[y][x] = tileMap.getTile(1);
+		}
+		
+		y = 43;
+		for(x = 61; x < 69 ; x++){
+			removeNode(x, y);
+			map[y][x] = tileMap.getTile(1);
+		}
+		
+		x = 60;
+		for(y = 43; y < 50  ; y++){
+			removeNode(x, y);
+			map[y][x] = tileMap.getTile(1);
+		}
+		
+
+		
+		workingRoom = new Rectangle(65, 39, 1, 1);
+		addToMap(workingRoom);
+		entities.add(new LockedDoor(world, 65, 39, 2));
+		
 		makeWalls(10, 11, 12, 13, 14);
+	}
+	
+	private void removeNode(int x, int y){
+		nodeArray[x][y].upNode.downNodes.remove(nodeArray[x][y]);
+		tileNodes.remove(nodeArray[x][y]);
+		nodeArray[x][y] = null;
 	}
 	
 
