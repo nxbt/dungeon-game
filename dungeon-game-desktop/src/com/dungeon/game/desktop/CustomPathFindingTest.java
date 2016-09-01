@@ -29,6 +29,14 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 			else new LwjglApplication(new CustomPathFindingTest(), config);
 	}
 	
+	private static final int[][] indexArray = new int[][]{
+		new int[]{0, 0, 0, 0, 0},
+		new int[]{0, 1, 1, 1, 0},
+		new int[]{0, 1, 1, 1, 0},
+		new int[]{0, 1, 1, 1, 0},
+		new int[]{0, 0, 0, 0, 0},
+	};
+	
 	private ShapeRenderer shapeRenderer; //the shapeRenderer
 	
 	private OrthographicCamera cam; // the camera
@@ -61,7 +69,7 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		cam.zoom = 4f;
 		view = new FitViewport(640, 360, cam);
 		view.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		cam.position.set(3*scale, 3*scale, 0);
+		cam.position.set(indexArray.length / 2 *scale, indexArray.length / 2 * scale, 0);
 		
 		//set mouse X and Y to 0 my default
 		mouseX = 0;
@@ -69,17 +77,25 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		mouseY = 0;
 		
 		GraphLevel gl = new GraphLevel();
-		Node[] nodes = new Node[5];
-		nodes[0] = gl.addNode(0, 0);
-		nodes[1] = gl.addNode(1, 1);
-		nodes[2] = gl.addNode(2, 2);
-		nodes[3] = gl.addNode(3, 3);
-		nodes[4] = gl.addNode(4, 4);
-
-		nodes[0].addConnection(nodes[1], 1);
-		nodes[1].addConnection(nodes[2], 1);
-		nodes[2].addConnection(nodes[3], 1);
-		nodes[3].addConnection(nodes[4], 1);
+		Node[][] nodeArray = new Node[indexArray.length][indexArray[0].length];
+		
+		for(int x = 0; x < indexArray.length; x++){
+			for(int y = 0; y < indexArray[0].length; y++){
+				if(indexArray[x][y] == 1)nodeArray[x][y] = gl.addNode(x, y);
+			}
+		}
+		
+		for(int x = 0; x < nodeArray.length; x++){
+			for(int y = 0; y < nodeArray[0].length; y++){
+				if(nodeArray[x][y] != null){
+					if(x > 0 && nodeArray[x - 1][y] != null)nodeArray[x][y].addConnection(nodeArray[x - 1][y], 1);
+					if(x < nodeArray.length - 1 && nodeArray[x + 1][y] != null)nodeArray[x][y].addConnection(nodeArray[x + 1][y], 1);
+					if(y > 0 && nodeArray[x][y - 1] != null)nodeArray[x][y].addConnection(nodeArray[x][y - 1], 1);
+					if(y < nodeArray.length - 1 && nodeArray[x][y + 1] != null)nodeArray[x][y].addConnection(nodeArray[x][y + 1], 1);
+				}
+			}
+		}
+		
 		Graph graph = new Graph(new GraphLevel[]{gl});
 		
 		pathfinder = new Pathfinder(graph);
@@ -102,7 +118,7 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		
 		if(endNode != null && startNode != null){
 			path = pathfinder.findPath(startNode, endNode, 0);
-			System.out.println(path.nodes.get(0).index);
+			System.out.println(path.nodes.size());
 		}
 
 		//clear the screen
@@ -117,22 +133,36 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		
 		shapeRenderer.setColor(Color.GREEN);
 		for(Node n: pathfinder.graph.graphLevels[0].nodes){
-			shapeRenderer.circle(n.x*scale, n.y*scale, 30)
-			;
+			shapeRenderer.setColor(Color.GREEN);
+			shapeRenderer.circle(n.x*scale, n.y*scale, 30);
 			if(n.equals(startNode) && n.equals(endNode)){
 				shapeRenderer.setColor(Color.GRAY);
 				shapeRenderer.circle(n.x*scale, n.y*scale, 20);
-				shapeRenderer.setColor(Color.GREEN);
 				
 			}else if(n.equals(startNode)){
 				shapeRenderer.setColor(Color.WHITE);
 				shapeRenderer.circle(n.x*scale, n.y*scale, 20);
-				shapeRenderer.setColor(Color.GREEN);
 				
 			}else if(n.equals(endNode)){
 				shapeRenderer.setColor(Color.BLACK);
 				shapeRenderer.circle(n.x*scale, n.y*scale, 20);
-				shapeRenderer.setColor(Color.GREEN);
+			}
+			shapeRenderer.setColor(Color.ORANGE);
+			for(Node n2: n.outNodes){
+				if(n2.inNodes.contains(n)){
+					shapeRenderer.rectLine(n.x*scale,n.y*scale, n2.x*scale, n2.y*scale, 20);
+				}
+			}
+		}
+		
+		if(path != null){
+			shapeRenderer.setColor(Color.GRAY);
+			Node prevNode = path.nodes.get(0);
+			for(Node n: path.nodes){
+				if(prevNode != null){
+					shapeRenderer.rectLine(prevNode.x*scale, prevNode.y*scale, n.x*scale, n.y*scale, 15);
+				}
+				prevNode = n;
 			}
 		}
 		

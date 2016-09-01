@@ -71,11 +71,18 @@ public class Pathfinder {
 			if(queue.size() == 0)searching = false;
 		}
 		
+//		for(int i = 0; i < closed.length; i++){
+//			System.out.println("Index: " + i + " IsClosed: " + closed[i] + " Cost: " + totalCost[i] + " Pointing at Index: " + ((pointing[i] == null)?"null":pointing[i].index));
+//		}
+		
 		Path p = new Path(endNode);
 		searching = true;
 		while(searching){
-			if(p.nodes.get(p.nodes.size() - 1).index == startNode.index)break;
-			p.addNode(pointing[p.nodes.get(p.nodes.size() - 1).index]);
+			if(p.nodes.get(0).index == startNode.index){
+				searching = false;
+				break;
+			}
+			p.addNode(pointing[p.nodes.get(0).index]);
 		}
 		return p;
 	}
