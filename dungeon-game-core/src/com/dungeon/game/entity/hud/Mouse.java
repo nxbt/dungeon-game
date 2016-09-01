@@ -11,11 +11,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.Drop;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.hud.window.Window;
-import com.dungeon.game.entity.particle.BodyChunk;
-import com.dungeon.game.entity.particle.Particle;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Item;
-import com.dungeon.game.textures.entity.Person;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -135,13 +132,6 @@ public class Mouse extends Hud  implements InputProcessor {
 			world.player.y = y+world.cam.y-world.cam.height/2;
 		}
 		
-//		if(lb_down)for(int i = 0; i < 40; i++)world.entities.add(Ember.get(world, x+world.cam.x-world.cam.width/2, y+world.cam.y-world.cam.height/2, 90, 2));
-//		if(lb_pressed){
-//			Particle[] chunks = BodyChunk.getChunks(world, x+world.cam.x-world.cam.width/2, y+world.cam.y-world.cam.height/2, new Person().texture, (float) Math.PI/2f*3f, 5, 45, true);
-//			for(Particle c: chunks){
-//				world.entities.add(c);
-//			}
-//		}
 		onHud = false;
 		int toMoveToFront=0;
 		for(int i = 0; i < world.hudEntities.size(); i++) {
@@ -215,10 +205,10 @@ public class Mouse extends Hud  implements InputProcessor {
 	}
 
 	public void draw(SpriteBatch batch) {
+		super.draw(batch);
 		if(slot.item != null) {
-			slot.draw(batch, (int)x-Item.SIZE/2, (int)y-Item.SIZE/2);
+			slot.draw(batch, (int)x, (int)y-Item.SIZE);
 		}
-		else super.draw(batch);
 	}
 	
 	public void post() {

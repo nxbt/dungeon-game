@@ -354,6 +354,8 @@ public class TutorialGenerator extends Generation {
 		
 		entities.add(new Stair(world, 60*Tile.TS + Tile.TS/2, 21*Tile.TS + Tile.TS/2, true, 25, 25));
 		
+		entities.add(new Torch(world, 59, 21, 0));
+		
 		makeWalls(10, 11, 12, 13, 14);
 	}
 	

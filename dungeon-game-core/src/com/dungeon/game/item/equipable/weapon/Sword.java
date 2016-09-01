@@ -30,9 +30,6 @@ public class Sword extends Melee {
 	}
 	
 	public void constructor(int level, int bladeNum, int guardNum, int hiltNum) {
-		
-		System.out.println("swordLevel: " +level);
-		
 		try {
 			blade = (Part) SwordBlade.parts[bladeNum].newInstance(world, level);
 			guard = (Part) SwordGuard.parts[guardNum].newInstance(world, level);
