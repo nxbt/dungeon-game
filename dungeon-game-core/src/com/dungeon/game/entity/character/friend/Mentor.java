@@ -79,7 +79,7 @@ public class Mentor extends Friend {
 		
 		dialogue.potentialBubbles.put("wares", new SpeechBubble(world, this, "Absolutely, here-", "shit shop"));
 		
-		dialogue.potentialBubbles.put("shit shop", new InvBubble(world, this, shop, "goodbye"));
+		dialogue.potentialBubbles.put("shit shop", new InvBubble(world, this, shop, "I don't want you're shit", "I'm good. Thanks.", "goodbye"));
 		
 		dialogue.potentialBubbles.put("lie defence", new SpeechChoice(world, 
 				new String[]{"What's it to you?", "What if I wanted two?", "Didn't know you cared."}, 
@@ -107,7 +107,7 @@ public class Mentor extends Friend {
 		
 		Inventory invent = new Inventory(world, new int[][]{new int[]{0,0,0}}, 0, 0, true);
 		invent.slot[0].item = new Sword(world, 1);
-		dialogue.potentialBubbles.put("give sword", new InvBubble(world, this, invent , "goodbye"));
+		dialogue.potentialBubbles.put("give sword", new InvBubble(world, this, invent, "Thanks", "Thanks", "goodbye"));
 		
 		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world, this, "See ya!", "end"));
 	}

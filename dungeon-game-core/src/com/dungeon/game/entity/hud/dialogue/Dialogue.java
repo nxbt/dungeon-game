@@ -27,7 +27,16 @@ public class Dialogue extends Hud {
 	
 	public Dialogue(World world, Character character){
 		super(world,0,0, Item.SIZE, Item.SIZE, "slot.png");
-		speechBubbles = new ArrayList<SpeechBubble>();
+		speechBubbles = new ArrayList<SpeechBubble>(){
+			
+			private static final long serialVersionUID = 143536969991507988L;
+
+			public void add(int index, SpeechBubble b){
+				if(b.endText != null && b.endText.equals("")){
+					 add(index, potentialBubbles.get(b.getProceedKey()).clone());
+				}else super.add(index, b);
+			}
+		};
 		potentialBubbles = new HashMap<String, SpeechBubble>();
 		characters = new ArrayList<Character>();
 		characters.add(character);
@@ -52,12 +61,6 @@ public class Dialogue extends Hud {
 			if(bubble.character.equals(characters.get(0)))bubble.x = 8;
 			else if(bubble.character.equals(characters.get(1)))bubble.x = world.cam.width-bubble.dWidth-8;
 			if(!bubble.done())bubble.update();
-			
-			if(bubble.endText != null && bubble.endText.equals("")) {
-				speechBubbles.add(0,(SpeechBubble) potentialBubbles.get(speechBubbles.get(0).getProceedKey()).clone());
-				speechBubbles.remove(1);
-				i--;
-			}
 		}
 		if(speechBubbles.get(0) instanceof InvBubble && ((InvBubble)speechBubbles.get(0)).madeChoice) {
 			speechBubbles.remove(1);

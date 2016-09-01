@@ -154,4 +154,11 @@ public class Inventory {
 		}
 		return drops;
 	}
+
+	public boolean isEmpty() {
+		for(Slot s: slot){
+			if(s.item != null)return false;
+		}
+		return true;
+	}
 }

@@ -113,11 +113,11 @@ public class Guide extends Friend {
 		
 		Inventory invent = new Inventory(world, new int[][]{new int[]{0,0,0}}, 0, 0, true);
 		invent.slot[0].item = new Key(world);
-		dialogue.potentialBubbles.put("give key", new InvBubble(world, this, invent , "check key"));
+		dialogue.potentialBubbles.put("give key", new InvBubble(world, this, invent , "Thanks", "", "check key"));
 		
 		dialogue.potentialBubbles.put("check key", new SpeechBubble(world, this,
 		new Criteria[]{new HasItem(world, new Key(world), world.player), new True(world)},
-		new String[]{"Good.", "Uhh... you missed it. Try again. Remember, click on the key to add it to your inventory."}, 
+		new String[]{"", "Uhh... you missed it. Try again. Remember, click on the key to add it to your inventory."}, 
 		new String[]{"open door", "give key"}));
 		
 		dialogue.potentialBubbles.put("open door", new SpeechBubble(world, this,"Now to open the door, first open your inventory with the E key. Then, click on the key to grab it. Finally, click on the door with the key to use it.", "over"));
@@ -188,7 +188,7 @@ public class Guide extends Friend {
 		
 		invent = new Inventory(world, new int[][]{new int[]{0,0,0}}, 0, 0, true);
 		invent.slot[0].item = new Sword(world, 1, 0, 0, 0);
-		dialogue.potentialBubbles.put("give sword", new InvBubble(world, this, invent , "check sword"));
+		dialogue.potentialBubbles.put("give sword", new InvBubble(world, this, invent , "Thanks", "", "check sword"));
 		
 		dialogue.potentialBubbles.put("check sword", new SpeechBubble(world, this,
 				new Criteria[]{new HasItem(world, new Sword(world, 1), world.player), new True(world)},
@@ -209,7 +209,7 @@ public class Guide extends Friend {
 		
 		invent = new Inventory(world, new int[][]{new int[]{0,0,0}}, 0, 0, true);
 		invent.slot[0].item = new Lantern(world);
-		dialogue.potentialBubbles.put("give lantern", new InvBubble(world, this, invent , "check lantern"));
+		dialogue.potentialBubbles.put("give lantern", new InvBubble(world, this, invent , "Thanks", "", "check lantern"));
 		
 		dialogue.potentialBubbles.put("check lantern", new SpeechBubble(world, this,
 				new Criteria[]{new HasItem(world, new Lantern(world), world.player), new True(world)},
@@ -242,7 +242,7 @@ public class Guide extends Friend {
 		
 		invent = new Inventory(world, new int[][]{new int[]{0,0,0}}, 0, 0, true);
 		invent.slot[0].item = new LifePotion(world);
-		dialogue.potentialBubbles.put("give potion", new InvBubble(world, this, invent , "check potion"));
+		dialogue.potentialBubbles.put("give potion", new InvBubble(world, this, invent , "Thanks", "",  "check potion"));
 		
 		dialogue.potentialBubbles.put("check potion", new SpeechBubble(world, this,
 				new Criteria[]{new HasItem(world, new Lantern(world), world.player), new True(world)},

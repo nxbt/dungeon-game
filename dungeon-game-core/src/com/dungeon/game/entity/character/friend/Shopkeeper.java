@@ -71,7 +71,7 @@ public class Shopkeeper extends Friend {
 		
 		dialogue.potentialBubbles.put("talk", new SpeechBubble(world, this, "Talk to me if anything interests you.", "end"));
 		
-		dialogue.potentialBubbles.put("shop", new InvBubble(world, this, shop, "goodbye"));
+		dialogue.potentialBubbles.put("shop", new InvBubble(world, this, shop, "That's all", "That's all, thanks.", "goodbye"));
 		
 		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world, this, "Come again.", "end"));
 	}

@@ -10,14 +10,25 @@ public class InvBubble extends SpeechChoice {
 	public Inventory inv;
 	public InvDisplayBubble bubble;
 	
-	public InvBubble(World world, Character character, Inventory inv, String key) {
-		super(world, new String[]{"Close"},new String[]{""},new String[]{key});
+	public InvBubble(World world, Character character, Inventory inv, String choiceShort, String choiceLong, String key) {
+		super(world, new String[]{choiceShort},new String[]{choiceLong},new String[]{key});
 		this.inv = inv;
 		
 		hasBeenSaid = false;
 		
 		if(inv instanceof Shop) bubble = new ShopDisplayBubble(world, character, (Shop)inv);
 		else bubble = new InvDisplayBubble(world, character, inv);
+	}
+	
+	public void calc(){
+		System.out.println("checking if empty");
+		if(inv.isEmpty() && !inAnimation){
+			System.out.println("EMPTY");
+			choice = 0;
+			inAnimation = true;
+			animationFrames = 40;
+		}
+		super.calc();
 	}
 
 }

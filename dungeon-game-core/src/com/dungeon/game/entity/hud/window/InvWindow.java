@@ -1,7 +1,6 @@
 package com.dungeon.game.entity.hud.window;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dungeon.game.entity.Entity;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.world.World;

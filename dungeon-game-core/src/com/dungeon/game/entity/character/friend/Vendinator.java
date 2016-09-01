@@ -77,7 +77,7 @@ public class Vendinator extends Friend {
 				new String[]{"Umm... okay.", "Well what do you have?", "Yeah... no thanks.", "No way, I'm outta here."},
 				new String[]{"shop", "shop", "dismiss", "goodbye"}));
 		
-		dialogue.potentialBubbles.put("shop", new InvBubble(world, this, shop, "goodbye"));
+		dialogue.potentialBubbles.put("shop", new InvBubble(world, this, shop, "Thanks", "Fuck you you stupid pice of robot shit.", "goodbye"));
 		
 		dialogue.potentialBubbles.put("dismiss", new SpeechBubble(world,this, "THEN...\u200B\u200B\u200B\u200B\u200B\u200B LEAVE.", "end"));
 		dialogue.potentialBubbles.put("goodbye", new SpeechBubble(world,this, "GOODBYE!", "end"));

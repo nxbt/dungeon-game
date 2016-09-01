@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.world.World;
+import com.dungeon.game.entity.character.Character;
 
 public class Camera {
 	public OrthographicCamera cam;
@@ -41,7 +42,7 @@ public class Camera {
 			y += ((world.mouse.y - height / 2));
 			world.mouse.x = width / 2;
 			world.mouse.y = height / 2;
-		}else if(world.player.actionState[2]) {
+		}else if(world.player.actionState[2] && !(world.player.focusedEntity instanceof Character)) {
 			x += (world.player.x - x) * TWEEN;
 			y += (world.player.y - y) * TWEEN;
 		}

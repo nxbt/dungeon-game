@@ -36,6 +36,8 @@ public class Player extends Character {
 	
 	public Entity focusedEntity;
 	
+	private boolean talking;
+	
 	public Player(World world, float x, float y) {
 		super(world, x, y, 32, 32, "person.png");
 		
@@ -157,6 +159,8 @@ public class Player extends Character {
 	}
 	
 	public void calc() {
+		talking = focusedEntity instanceof Character;
+		
 		if(focusedEntity == null) focusedEntity = world.mouse;
 		
 		for(EffectGraphic eg: effectGraphics){
@@ -178,17 +182,19 @@ public class Player extends Character {
 			eg.update();
 		}
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1))inv.slot[0].consume(this);
-		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2))inv.slot[1].consume(this);
-		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3))inv.slot[2].consume(this);
-		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4))inv.slot[3].consume(this);
-		if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5))inv.slot[4].consume(this);
+		if(!talking) {
+			if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1))inv.slot[0].consume(this);
+			if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2))inv.slot[1].consume(this);
+			if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3))inv.slot[2].consume(this);
+			if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4))inv.slot[3].consume(this);
+			if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5))inv.slot[4].consume(this);
+		}
 		
 		if(actionState[2]) target_angle = angle;
 		else if(Hud.class.isInstance(focusedEntity)) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y+world.cam.y-world.cam.height/2-(y), focusedEntity.x+world.cam.x-world.cam.width/2-(x)));
 		else if(focusedEntity != null) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y-y, focusedEntity.x-x));
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !attacking && world.mouse.slot.item == null) {
+		if(!talking && Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !attacking && world.mouse.slot.item == null) {
 			toggleFightMode();
 			actionState[0] = !actionState[0];
 		}
@@ -215,10 +221,12 @@ public class Player extends Character {
 		boolean inp_up = false;
 		boolean inp_dn = false;
 		
-		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)  || Gdx.input.isKeyPressed(Input.Keys.A)) inp_lt = true;
-		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) inp_rt = true;
-		if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) inp_up = true;
-		if(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) inp_dn = true;
+		if(!talking) {
+			if(Gdx.input.isKeyPressed(Input.Keys.LEFT)  || Gdx.input.isKeyPressed(Input.Keys.A)) inp_lt = true;
+			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) inp_rt = true;
+			if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) inp_up = true;
+			if(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) inp_dn = true;
+		}
 		
 		if(inp_up && inp_rt) move_angle = 45;
 		else if(inp_up && inp_lt) move_angle = 135;

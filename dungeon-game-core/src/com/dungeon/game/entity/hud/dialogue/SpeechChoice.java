@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,6 +17,13 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 	protected int[] yOffsets;
 	protected boolean madeChoice;
 	protected int choice;
+	private int keyChoice;
+	
+	protected boolean inAnimation;
+	
+	protected int animationFrames;
+	
+	private int delay;
 	
 	public Criteria[] choiceCriteria; //controls which choices are available
 	public Criteria[][] choiceShortCriteria; //controls what the short text is for each choice 
@@ -73,7 +81,12 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 		hasBeenSaid = false;
 		
 		madeChoice = false;
-		choice = 0;
+		
+		inAnimation = false;
+		
+		choice = -1;
+		keyChoice = -1;
+		delay = 15;
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		Color temp = character.speechColor;
 		temp.a = 0.7f;
@@ -82,16 +95,64 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 	}
 	
 	public void calc() {
-		if(world.mouse.lb_pressed&&world.mouse.x>x&&world.mouse.x<x+dWidth){
-			if(world.mouse.y>y&&world.mouse.y<y+yOffsets[0]){
-				choice = 0;
-				madeChoice = true;
+		if(!inAnimation){
+			if(delay > 0) {
+				delay--;
+				return;
 			}
-			for(int i = 1; i < availableChoices.size(); i++){
-				if(world.mouse.y>y+yOffsets[i-1]&&world.mouse.y<y+yOffsets[i]){
+			if(Gdx.input.isKeyJustPressed(Keys.W) || Gdx.input.isKeyJustPressed(Keys.UP)) {
+				keyChoice++;
+				if(keyChoice > choiceShorts.length-1) keyChoice = 0;
+			}
+			else if(Gdx.input.isKeyJustPressed(Keys.S) || Gdx.input.isKeyJustPressed(Keys.DOWN)) {
+				keyChoice--;
+				if(keyChoice < 0) keyChoice = choiceShorts.length-1;
+			}
+			choice = keyChoice;
+			
+			for(int i = 0; i < choiceShorts.length; i++) {
+				if(Gdx.input.isKeyJustPressed(choiceShorts.length-1-i+8)) {
 					choice = i;
-					madeChoice = true;
+					inAnimation = true;
+					animationFrames = 40;
+					return;
 				}
+			}
+			
+			if(world.mouse.x>x&&world.mouse.x<x+dWidth){
+				if(world.mouse.y>y&&world.mouse.y<y+yOffsets[0]){
+					choice = 0;
+					keyChoice = -1;
+					if(world.mouse.lb_pressed){
+						inAnimation = true;
+						animationFrames = 40;
+						return;
+					}
+				}
+				for(int i = 1; i < availableChoices.size(); i++){
+					if(world.mouse.y>y+yOffsets[i-1]&&world.mouse.y<y+yOffsets[i]){
+						choice = i;
+						keyChoice = -1;
+						if(world.mouse.lb_pressed){
+							inAnimation = true;
+							animationFrames = 40;
+							return;
+						}
+					}
+				}
+			}
+			
+			if((Gdx.input.isKeyJustPressed(Keys.ENTER) || Gdx.input.isKeyJustPressed(Keys.SPACE)) && choice != -1) {
+				inAnimation = true;
+				animationFrames = 40;
+				return;
+			}
+		}else {
+			//progress the animation
+			animationFrames--;
+			if(Gdx.input.isKeyJustPressed(Keys.ENTER) || Gdx.input.isKeyJustPressed(Keys.SPACE) || world.mouse.lb_pressed)animationFrames = 0;
+			if(animationFrames == 0){
+				madeChoice = true;
 			}
 		}
 	}
@@ -155,7 +216,7 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 		}
 		
 
-		dWidth = max_line_length * 9 + 16;
+		dWidth = max_line_length * 11 + 16;
 		
 	}
 	
@@ -166,13 +227,16 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 		return (SpeechChoice) temp;
 	}
 	
-	public void draw(SpriteBatch batch) {		
+	public void draw(SpriteBatch batch) {
 		SPEECH_BUBBLE.draw(batch, x, y, dWidth-dOffX, dHeight-dOffY);
 		for(int i = 0; i < availableChoices.size(); i++){
-			font.draw(batch, availableChoiceShorts.get(i), x+8, y+yOffsets[i]-6);
+			if(i == choice) {
+				font.getData().setScale(1.2f);
+				font.draw(batch, availableChoiceShorts.get(i), x+8, y+yOffsets[i]-5);
+				font.getData().setScale(1f);
+			}
+			else if(!inAnimation)font.draw(batch, availableChoiceShorts.get(i), x+8, y+yOffsets[i]-6);
 		}
-		
-		
 	}
 
 	public SpeechBubble getChoiceBubble() {
