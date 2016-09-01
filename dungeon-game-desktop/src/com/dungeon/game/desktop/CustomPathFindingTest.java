@@ -7,6 +7,8 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -30,14 +32,24 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 	}
 	
 	private static final int[][] indexArray = new int[][]{
-		new int[]{1, 1, 1, 1, 1},
-		new int[]{1, 0, 1, 0, 1},
-		new int[]{1, 1, 1, 0, 1},
-		new int[]{0, 1, 0, 1, 1},
-		new int[]{0, 1, 1, 1, 0},
+		new int[]{(int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7)},
+		new int[]{(int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7)},
+		new int[]{(int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7)},
+		new int[]{(int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7)},
+		new int[]{(int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7)},
+	};
+	
+	private static final int[][] costArray = new int[][]{
+		new int[]{(int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5)},
+		new int[]{(int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5)},
+		new int[]{(int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5)},
+		new int[]{(int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5)},
+		new int[]{(int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5)},
 	};
 	
 	private ShapeRenderer shapeRenderer; //the shapeRenderer
+	
+	private SpriteBatch batch;
 	
 	private OrthographicCamera cam; // the camera
 	
@@ -57,12 +69,21 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 	
 	private Path path;
 	
+	private BitmapFont font;
+	
 	public void create(){
 		Gdx.graphics.setWindowedMode(1280, 720); 
 		
 		Gdx.input.setCursorCatched(true);
 		
+		batch = new SpriteBatch();
+		
 		shapeRenderer = new ShapeRenderer();
+		
+		
+		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
+		font.setColor(Color.RED);
+		font.getData().setScale(2);
 		
 		//create the camera and viewport
 		cam = new OrthographicCamera();
@@ -81,17 +102,17 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		
 		for(int x = 0; x < indexArray.length; x++){
 			for(int y = 0; y < indexArray[0].length; y++){
-				if(indexArray[x][y] == 1)nodeArray[x][y] = gl.addNode(x, y);
+				/*if(indexArray[x][y] == 1)*/nodeArray[x][y] = gl.addNode(x, y);
 			}
 		}
 		
 		for(int x = 0; x < nodeArray.length; x++){
 			for(int y = 0; y < nodeArray[0].length; y++){
 				if(nodeArray[x][y] != null){
-					if(x > 0 && nodeArray[x - 1][y] != null)nodeArray[x][y].addConnection(nodeArray[x - 1][y], 1);
-					if(x < nodeArray.length - 1 && nodeArray[x + 1][y] != null)nodeArray[x][y].addConnection(nodeArray[x + 1][y], 1);
-					if(y > 0 && nodeArray[x][y - 1] != null)nodeArray[x][y].addConnection(nodeArray[x][y - 1], 1);
-					if(y < nodeArray.length - 1 && nodeArray[x][y + 1] != null)nodeArray[x][y].addConnection(nodeArray[x][y + 1], 1);
+					if(x > 0 && nodeArray[x - 1][y] != null)nodeArray[x][y].addConnection(nodeArray[x - 1][y], (costArray[x][y] + costArray[x - 1][y])/2f);
+					if(x < nodeArray.length - 1 && nodeArray[x + 1][y] != null)nodeArray[x][y].addConnection(nodeArray[x + 1][y], (costArray[x][y] + costArray[x + 1][y])/2f);
+					if(y > 0 && nodeArray[x][y - 1] != null)nodeArray[x][y].addConnection(nodeArray[x][y - 1], (costArray[x][y] + costArray[x][y - 1])/2f);
+					if(y < nodeArray.length - 1 && nodeArray[x][y + 1] != null)nodeArray[x][y].addConnection(nodeArray[x][y + 1], (costArray[x][y] + costArray[x][y + 1])/2f);
 				}
 			}
 		}
@@ -118,7 +139,7 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		
 		if(endNode != null && startNode != null){
 			path = pathfinder.findPath(startNode, endNode, 0);
-			System.out.println(path.nodes.size());
+			System.out.println(path.cost);
 		}
 
 		//clear the screen
@@ -135,6 +156,11 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		for(Node n: pathfinder.graph.graphLevels[0].nodes){
 			shapeRenderer.setColor(Color.GREEN);
 			shapeRenderer.circle(n.x*scale, n.y*scale, 30);
+			for(int i = 0; i < n.outNodes.size(); i++){
+				Node n2 = n.outNodes.get(i);
+				shapeRenderer.setColor(new Color(0, n.costs.get(i)/5f, 0, 1));
+				shapeRenderer.rectLine(n.x*scale,n.y*scale, n2.x*scale, n2.y*scale, 20);
+			}
 			if(n.equals(startNode) && n.equals(endNode)){
 				shapeRenderer.setColor(Color.GRAY);
 				shapeRenderer.circle(n.x*scale, n.y*scale, 20);
@@ -146,12 +172,6 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 			}else if(n.equals(endNode)){
 				shapeRenderer.setColor(Color.BLACK);
 				shapeRenderer.circle(n.x*scale, n.y*scale, 20);
-			}
-			shapeRenderer.setColor(Color.ORANGE);
-			for(Node n2: n.outNodes){
-				if(n2.inNodes.contains(n)){
-					shapeRenderer.rectLine(n.x*scale,n.y*scale, n2.x*scale, n2.y*scale, 20);
-				}
 			}
 		}
 		
@@ -171,5 +191,17 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		shapeRenderer.setColor(Color.GRAY);
 		shapeRenderer.circle(mouseX, mouseY, 5);
 		shapeRenderer.end();
+		
+
+		
+		batch.begin();
+		batch.setProjectionMatrix(cam.combined);
+		for(Node n: pathfinder.graph.graphLevels[0].nodes){
+			for(int i = 0; i < n.outNodes.size(); i++){
+				Node n2 = n.outNodes.get(i);
+				font.draw(batch, ""+n.costs.get(i), (n.x+n2.x)*scale/2f - 26, (n.y+n2.y)*scale/2f + 12);
+			}
+		}
+		batch.end();
 	}
 }
