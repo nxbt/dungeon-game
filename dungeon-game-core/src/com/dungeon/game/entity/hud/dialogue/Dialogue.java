@@ -6,8 +6,10 @@ import java.util.HashMap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.hud.Hud;
+import com.dungeon.game.entity.hud.window.Window;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
@@ -46,12 +48,6 @@ public class Dialogue extends Hud {
 	}
 	
 	public void calc(){
-		if(world.hudEntities.indexOf(this) != 0) {
-			world.hudEntities.remove(this);
-			world.hudEntities.add(0,this);
-		}
-		
-		if(world.player.fightMode) close();
 		int heightCounter = 88;
 		for(int i = 0; i < speechBubbles.size(); i++){
 			SpeechBubble bubble = speechBubbles.get(i);
@@ -95,6 +91,14 @@ public class Dialogue extends Hud {
 		
 		speechBubbles.clear();
 		speechBubbles.add((SpeechBubble) potentialBubbles.get("start").clone());
+		
+		for(int i = 0; i < world.hudEntities.size(); i++) {
+			Entity e = world.hudEntities.get(i);
+			if(e instanceof Window) {
+				((Window) e).close();
+				i--;
+			}
+		}
 	}
 	
 	public void close() {

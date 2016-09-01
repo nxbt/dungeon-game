@@ -21,9 +21,7 @@ public class InvBubble extends SpeechChoice {
 	}
 	
 	public void calc(){
-		System.out.println("checking if empty");
 		if(inv.isEmpty() && !inAnimation){
-			System.out.println("EMPTY");
 			choice = 0;
 			inAnimation = true;
 			animationFrames = 40;
