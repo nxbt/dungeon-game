@@ -25,6 +25,8 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 	
 	private int delay;
 	
+	private boolean hoveredCalled;
+	
 	public Criteria[] choiceCriteria; //controls which choices are available
 	public Criteria[][] choiceShortCriteria; //controls what the short text is for each choice 
 	public String[][] choiceShorts; //contains short text for each choice
@@ -95,11 +97,28 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 	}
 	
 	public void calc() {
-		if(!inAnimation){
-			if(delay > 0) {
-				delay--;
-				return;
+		if(delay > 0) {
+			delay--;
+			return;
+		}
+		if(!hoveredCalled) choice = keyChoice;
+		hoveredCalled = false;
+		
+		if(inAnimation){
+			//progress the animation
+			if(animationFrames != 40 && (Gdx.input.isKeyJustPressed(Keys.ENTER) || Gdx.input.isKeyJustPressed(Keys.SPACE) || world.mouse.lb_pressed)){
+				animationFrames = 1;
 			}
+			animationFrames--;
+			if(animationFrames == 0){
+				madeChoice = true;
+			}
+		}
+	}
+	
+	public void hovered(){
+		hoveredCalled = true;
+		if(!inAnimation && delay == 0){
 			if(Gdx.input.isKeyJustPressed(Keys.W) || Gdx.input.isKeyJustPressed(Keys.UP)) {
 				keyChoice++;
 				if(keyChoice > choiceShorts.length-1) keyChoice = 0;
@@ -147,14 +166,8 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 				animationFrames = 40;
 				return;
 			}
-		}else {
-			//progress the animation
-			animationFrames--;
-			if(Gdx.input.isKeyJustPressed(Keys.ENTER) || Gdx.input.isKeyJustPressed(Keys.SPACE) || world.mouse.lb_pressed)animationFrames = 0;
-			if(animationFrames == 0){
-				madeChoice = true;
-			}
 		}
+		
 	}
 	
 	public boolean done(){

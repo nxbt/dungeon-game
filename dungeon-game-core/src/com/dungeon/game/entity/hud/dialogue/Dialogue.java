@@ -48,6 +48,10 @@ public class Dialogue extends Hud {
 	}
 	
 	public void calc(){
+		if(speechBubbles.size() > 0 && speechBubbles.get(0) instanceof SpeechChoice && done()){
+			speechBubbles.add(0, ((SpeechChoice)speechBubbles.get(0)).getChoiceBubble());
+			speechBubbles.remove(1);
+		}
 		int heightCounter = 88;
 		for(int i = 0; i < speechBubbles.size(); i++){
 			SpeechBubble bubble = speechBubbles.get(i);
@@ -64,12 +68,8 @@ public class Dialogue extends Hud {
 	}
 	
 	public void hovered() {
-		if(speechBubbles.size() > 0 && done()&&(world.mouse.lb_pressed || speechBubbles.get(0) instanceof SpeechChoice)){
-			if(speechBubbles.get(0) instanceof SpeechChoice){
-				speechBubbles.add(0, ((SpeechChoice)speechBubbles.get(0)).getChoiceBubble());
-				speechBubbles.remove(1);
-			}
-			else if(speechBubbles.get(0).getProceedKey().equals("end")) close();
+		if(speechBubbles.size() > 0 && done()&&(world.mouse.lb_pressed)){
+			if(speechBubbles.get(0).getProceedKey().equals("end")) close();
 			else {
 				speechBubbles.add(0,(SpeechBubble) potentialBubbles.get(speechBubbles.get(0).getProceedKey()).clone());
 				
@@ -77,6 +77,9 @@ public class Dialogue extends Hud {
 					speechBubbles.add(1, ((InvBubble)speechBubbles.get(0)).bubble);
 				}
 			}
+		}
+		for(SpeechBubble b: speechBubbles){
+			b.hovered();
 		}
 	}
 	

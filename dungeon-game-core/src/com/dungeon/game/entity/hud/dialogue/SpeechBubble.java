@@ -99,9 +99,6 @@ public class SpeechBubble extends Hud implements Cloneable {
 	
 	@Override
 	public void calc() {
-		if(world.mouse.lb_pressed && !began) {
-			text = endText;
-		}
 		if(speechCounter == 0){
 			int textLength = text.length();
 			int endTextLength = endText.length();
@@ -122,6 +119,12 @@ public class SpeechBubble extends Hud implements Cloneable {
 		}else speechCounter--;
 		
 		if(began) began = false;
+	}
+	
+	public void hovered(){
+		if(world.mouse.lb_pressed && !began) {
+			text = endText;
+		}
 	}
 	
 	public void updateText(String text) {

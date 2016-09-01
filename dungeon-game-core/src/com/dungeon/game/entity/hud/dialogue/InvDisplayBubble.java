@@ -26,9 +26,10 @@ public class InvDisplayBubble extends SpeechBubble {
 			if(dWidth < inv.slot[i].x+40)dWidth = (int) (inv.slot[i].x+40);
 			if(dHeight < inv.slot[i].y+40)dHeight = (int) (inv.slot[i].y+40);
 		}
+		
 	}
 	
-	public void update(){
+	public void hovered(){
 		inv.update();
 		inv.graphic.x = x;
 		inv.graphic.y = y;

@@ -21,12 +21,12 @@ public class InvBubble extends SpeechChoice {
 	}
 	
 	public void calc(){
+		super.calc();
 		if(inv.isEmpty() && !inAnimation){
 			choice = 0;
 			inAnimation = true;
 			animationFrames = 40;
 		}
-		super.calc();
 	}
 
 }
