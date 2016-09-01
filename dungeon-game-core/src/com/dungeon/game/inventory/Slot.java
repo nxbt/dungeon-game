@@ -144,17 +144,19 @@ public class Slot {
 		calc();
 	}
 	
-	public void draw(SpriteBatch batch, int xoff, int yoff) {
-		if(renderSlot)batch.draw(slotTex, x+xoff, y+yoff, Item.SIZE, Item.SIZE);
+	public void draw(SpriteBatch batch, float xoff, float yoff) {
+		draw(batch, xoff, yoff, Item.SIZE, Item.SIZE);
+	}
+	
+	public void draw(SpriteBatch batch, float xoff, float yoff, float width, float height) {
+		if(renderSlot)batch.draw(slotTex, x+xoff, y+yoff, width, height);
 		if(item!=null){
-			batch.draw(item.sprite, x+xoff, y+yoff, Item.SIZE, Item.SIZE);
+			batch.draw(item.sprite, x+xoff, y+yoff, width, height);
 			
 			if(item.stack > 1) {
-				
-				font.draw(batch, Integer.toString(item.stack), (float) (x+xoff+Item.SIZE-font.getScaleX()*(Math.floor(Math.log10(item.stack))+ 1)*7)-4, y+yoff+font.getScaleY()*12+1);
+				font.draw(batch, Integer.toString(item.stack), (float) (x+xoff+width-font.getScaleX()*(Math.floor(Math.log10(item.stack))+ 1)*7)-4, y+yoff+font.getScaleY()*12+1);
 			}
 		}
-			
 	}
 	
 	public boolean consume(Character user) {

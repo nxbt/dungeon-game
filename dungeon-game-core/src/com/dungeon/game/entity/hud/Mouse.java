@@ -207,7 +207,7 @@ public class Mouse extends Hud  implements InputProcessor {
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
 		if(slot.item != null) {
-			slot.draw(batch, (int)x, (int)y-Item.SIZE);
+			slot.draw(batch, x+Item.SIZE/8, y-Item.SIZE*7/8, Item.SIZE*3/4, Item.SIZE*3/4);
 		}
 	}
 	
