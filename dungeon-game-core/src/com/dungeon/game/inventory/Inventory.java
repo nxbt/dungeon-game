@@ -3,7 +3,7 @@ package com.dungeon.game.inventory;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.dungeon.game.entity.hud.InvGraphic;
+import com.dungeon.game.entity.hud.window.InvWindow;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
@@ -11,7 +11,7 @@ public class Inventory {
 	
 	public Slot[] slot;
 	
-	public InvGraphic graphic;
+	public InvWindow graphic;
 	
 	protected World world;
 	
@@ -24,7 +24,7 @@ public class Inventory {
 			slot[i] = new Slot(world, layout[i], this);
 		}
 		
-		this.graphic = new InvGraphic(world, this, x, y);
+		this.graphic = new InvWindow(world, this, x, y);
 	}
 	
 	public Inventory(World world, int[][] layout, float x, float y, boolean isDialogue) {
@@ -36,7 +36,7 @@ public class Inventory {
 			slot[i] = new DialogueSlot(world, layout[i], this);
 		}
 		
-		this.graphic = new InvGraphic(world, this, x, y);
+		this.graphic = new InvWindow(world, this, x, y);
 	}
 	
 	public void hovered() {

@@ -12,6 +12,7 @@ import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.hud.EffectGraphic;
 import com.dungeon.game.entity.hud.EffectHudBackground;
 import com.dungeon.game.entity.hud.Hud;
+import com.dungeon.game.entity.hud.window.InvWindow;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Key;
@@ -198,7 +199,15 @@ public class Player extends Character {
 			if(world.hudEntities.indexOf(inv.graphic) == -1) {
 				inv.graphic.open();
 			}
-			else if(world.hudEntities.contains(inv.graphic))inv.graphic.close();
+			else {
+				for(int i = 0; i < world.hudEntities.size(); i++) {
+					Entity e = world.hudEntities.get(i);
+					if(e instanceof InvWindow)  {
+						((InvWindow) e).close();
+						i--;
+					}
+				}
+			}
 		}
 		
 		boolean inp_lt = false;
@@ -251,9 +260,6 @@ public class Player extends Character {
 			mvel = 5;
 			torq = 10;
 		}
-		
-		if(!actionState[2] && world.hudEntities.indexOf(inv.graphic) >= 0) actionState[2] = true;
-		else if(actionState[2] && world.hudEntities.indexOf(inv.graphic) == -1) actionState[2] = false;
 	}
 	
 	public void calcLight(){

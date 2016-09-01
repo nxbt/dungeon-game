@@ -1,16 +1,16 @@
-package com.dungeon.game.entity.hud;
+package com.dungeon.game.entity.hud.window;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dungeon.game.entity.hud.window.Window;
+import com.dungeon.game.entity.Entity;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.world.World;
 
-public class InvGraphic extends Window {
+public class InvWindow extends Window {
 	
 	public Inventory inv;
 
-	public InvGraphic(World world, Inventory inv, float x, float y) {
+	public InvWindow(World world, Inventory inv, float x, float y) {
 		super(world, x, y);
 		dWidth = 0;
 		dHeight = 14;
@@ -41,4 +41,8 @@ public class InvGraphic extends Window {
 		}
 	}
 
+	public void open() {
+		super.open();
+		if(!world.hudEntities.contains(world.player.inv.graphic)) world.player.inv.graphic.open();
+	}
 }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.button.ExitButton;
 import com.dungeon.game.world.World;
@@ -110,11 +111,18 @@ public abstract class Window extends Hud {
 	public void open() {
 		world.hudEntities.add(0, this);
 		world.hudEntities.add(0, exitButton);
+		world.player.actionState[2] = true;
 	}
 	
 	public void close() {
 		world.hudEntities.remove(this);
 		world.hudEntities.remove(exitButton);
 		drag = false;
+		
+		for(Entity e: world.hudEntities) {
+			if(e instanceof Window) return;
+		}
+		
+		world.player.actionState[2] = false;
 	}
 }

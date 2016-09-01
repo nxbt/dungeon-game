@@ -5,12 +5,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.entity.hud.window.InvWindow;
 import com.dungeon.game.inventory.Shop;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.world.World;
 
-public class ShopGraphic extends InvGraphic {
+public class ShopGraphic extends InvWindow {
 	private static final Texture COIN = new Texture("coin.png");
 
 	private BitmapFont font;
