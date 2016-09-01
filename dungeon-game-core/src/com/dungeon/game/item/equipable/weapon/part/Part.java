@@ -84,6 +84,8 @@ public abstract class Part extends Item implements Cloneable{
 		hitEffects = new ArrayList<Effect>();
 		
 		hitbox = null; // deafault hitbox is null
+		
+		System.out.println("partLevel: " +level);
 	}
 
 	public void hovered(){
