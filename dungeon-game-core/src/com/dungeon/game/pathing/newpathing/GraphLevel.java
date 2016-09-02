@@ -2,6 +2,8 @@ package com.dungeon.game.pathing.newpathing;
 
 import java.util.ArrayList;
 
+import com.dungeon.game.world.Tile;
+
 public class GraphLevel {
 	private int nodeIndexCounter;
 	
@@ -18,14 +20,14 @@ public class GraphLevel {
 		nodeIndexCounter++;
 		return n;
 	}
-	
 	public Node getCloseNode(float x, float y){
 		Node closeNode = nodes.get(0);
 		float closeNodeDist = closeNode.findDistance(x, y);
 		for(Node n: nodes){
-			if(n.findDistance(x, y) < closeNodeDist){
+			float dist = n.findDistance(x, y);
+			if(dist < closeNodeDist){
 				closeNode = n;
-				closeNodeDist = n.findDistance(x, y);
+				closeNodeDist = dist;
 			}
 		}
 		return closeNode;

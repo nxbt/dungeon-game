@@ -158,12 +158,19 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		Graph graph = new Graph(new GraphLevel[]{gl0, gl1});
 		
 		pathfinder = new Pathfinder(graph);
+		
+		long begin = System.nanoTime();
+		for(int i = 0; i < 1000; i++){
+			pathfinder.graph.graphLevels[0].getCloseNode((float)(Math.random()*100*Tile.TS), (float) (Math.random()*100*Tile.TS));
+		}
+		
+		System.out.println("Average time to getCloseNode: " + ((double)(System.nanoTime() - begin)/(double)(1000000))/1000.0 + "ms");
 	}
 	
 	public void render(){
 		//move the mouse
-		mouseX += Gdx.input.getDeltaX();
-		mouseY -= Gdx.input.getDeltaY();
+		mouseX += Gdx.input.getDeltaX()*4;
+		mouseY -= Gdx.input.getDeltaY()*4;
 		
 		boolean nodeChange = false;
 		

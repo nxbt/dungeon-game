@@ -7,25 +7,28 @@ public class Pathfinder {
 	
 	public Graph graph;
 	
+	private long start;
+	
 	public Pathfinder(Graph graph){
 		this.graph = graph;
 	}
 	
 	public Path findPath(float sX, float sY, float eX, float eY){ //find path between two given points
-		long start = System.nanoTime();
-		
+		start = System.nanoTime();
+		//literally half the time is taken up by this....
 		Node startNode = graph.graphLevels[0].getCloseNode(sX, sY);
 		Node endNode = graph.graphLevels[0].getCloseNode(eX, eY);
+		
+		System.out.println("Time to find start and end nodes: " + ((double)(System.nanoTime() - start)/(double)(1000000)) + "ms");
+		start = System.nanoTime();
 		Node curStartNode = startNode;
 		Node curEndNode = endNode;
 		int level = 0;
 		do{
-			if(level == graph.graphLevels.length - 1 || curStartNode.upNode.equals(curEndNode.upNode)){
+			if(level == graph.levels - 1 || curStartNode.upNode.equals(curEndNode.upNode)){
 				Path p = findPath(startNode, endNode, level);
-
-				long end = System.nanoTime();
-
-				System.out.println("Time to find path: " + ((double)(end - start)/(double)(1000000)) + "ms");
+				
+				System.out.println("TOTAL TIME: " + ((double)(System.nanoTime() - start)/(double)(1000000)) + "ms");
 				
 				return p;
 			}else{
@@ -33,7 +36,7 @@ public class Pathfinder {
 				curEndNode = curEndNode.upNode;
 				level++;
 			}
-		}while(level < graph.graphLevels.length);
+		}while(level < graph.levels);
 		//the code should NEVER GET HERE... oh shit it does...
 		//but just in case
 		Path p = findPath(startNode, endNode, level);
@@ -41,11 +44,11 @@ public class Pathfinder {
 //		long end = System.nanoTime();
 //
 //		System.out.println("Time to find path: " + (end - start)/1000000l);
-		
 		return p;
 	}
 	
 	public Path findPath(Node level0StartNode, Node level0EndNode, int level){ //find path between the two nodes at the given level
+		long a, b;
 		Node startNode = level0StartNode;
 		Node endNode = level0EndNode;
 		for(int i = 0; i < level; i++){
@@ -81,6 +84,7 @@ public class Pathfinder {
 			}
 		};
 		
+		b = System.nanoTime();
 		queue.add(startNode);
 		//this aint gonna work perfect, oh shit... it did?
 		while(searching){
@@ -107,6 +111,12 @@ public class Pathfinder {
 			if(queue.size() == 0)searching = false;
 		}
 		
+
+		
+		a = System.nanoTime();
+
+		System.out.println("Time to run queue: " + ((double)(a - b)/(double)(1000000)) + "ms");
+		
 		Path p = new Path(endNode);
 		searching = true;
 		while(searching){
@@ -116,6 +126,10 @@ public class Pathfinder {
 			}
 			p.addNode(pointing[p.nodes.get(0).index]);
 		}
+
+		b = System.nanoTime();
+
+		System.out.println("Time make path from queue: " + ((double)(b - a)/(double)(1000000)) + "ms");
 		
 		if(level == 0)return p;
 		return findPath(p, level0StartNode, level - 1);

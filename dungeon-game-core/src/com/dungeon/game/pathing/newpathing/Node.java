@@ -15,6 +15,10 @@ public class Node {
 	public float x; //x position of this node
 	public float y; //y postion of this node
 	
+	public float xDistance;
+	
+	public float yDistance;
+	
 	public int index; //index for the indexed pathfinder to use
 	
 	public Node downNode; //the node that this one links to on the graphLevel below this one
@@ -26,6 +30,8 @@ public class Node {
 	public Node(float x, float y, int index){
 		this.x = x;
 		this.y = y;
+		xDistance = x * Tile.TS;
+		yDistance = y * Tile.TS;
 		this.index = index;
 		outNodes = new ArrayList<Node>();
 		inNodes = new ArrayList<Node>();
@@ -42,6 +48,8 @@ public class Node {
 	
 	//returns the distance between the given point and this node
 	public float findDistance(float x, float y){
-		return (float) Math.sqrt((x-this.x*Tile.TS) * (x-this.x*Tile.TS) + (y-this.y*Tile.TS) * (y-this.y*Tile.TS));
+		float xDiff = (x-xDistance);
+		float yDiff = (y-yDistance);
+		return (float) Math.sqrt(xDiff*xDiff + yDiff*yDiff);
 	}
 }
