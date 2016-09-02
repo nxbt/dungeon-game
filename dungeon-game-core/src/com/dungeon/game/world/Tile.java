@@ -1,32 +1,17 @@
 package com.dungeon.game.world;
 
-import com.badlogic.gdx.graphics.Texture;
-
 public class Tile implements Cloneable{
 	public static final int TS = 32;
 	public int id;
 	public int data;
 	public boolean flip;
 	public int rotation;
-	public Texture[] textures;
 	public static final int[] SOLIDS = new int[]{1,10,11,12,13,14,15};
 	
-	public Tile(Texture[] spritesheet, int id) {
+	public Tile(int id) {
 		this.id = id;
 		data = (isSolid(id)) ? 1:0;
 		rotation = 0;
-		
-		textures = spritesheet;
-	}
-	
-	public Tile(Texture[] spritesheet, int id, int rotation, boolean flip) {
-		this.id = id;
-		data = (isSolid(id)) ? 1:0;
-		
-		this.rotation = rotation;
-		this.flip = flip;
-		
-		textures = spritesheet;
 	}
 	
 	public static boolean isSolid(int id){
@@ -38,17 +23,9 @@ public class Tile implements Cloneable{
 		return isSolid(tile.id);
 	}
 	
-	public Tile clone(int rotation, boolean flip){
-		Tile newTile;
+	public Tile clone(){
 		try {
-			newTile = (Tile) super.clone();
-			newTile.textures = new Texture[textures.length];
-			for(int i = 0 ; i < textures.length; i++){
-				newTile.textures[i] = textures[i];
-			}
-			newTile.rotation = rotation;
-			newTile.flip = flip;
-			return newTile;
+			return (Tile) super.clone();
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 			return null;

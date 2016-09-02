@@ -169,8 +169,6 @@ public class TutorialGenerator extends Generation {
 		
 		entities.add(chest);
 		
-		makeWalls(10, 11, 12, 13, 14);
-		
 		//DummyRoom
 		workingRoom = new Rectangle(58, 60, 11, 11);
 		addToMap(workingRoom);
@@ -354,7 +352,7 @@ public class TutorialGenerator extends Generation {
 		
 		entities.add(new Torch(world, 59, 21, 0));
 		
-		makeWalls(10, 11, 12, 13, 14);
+		makeWalls(10);
 	}
 	
 	private void removeNode(int x, int y){

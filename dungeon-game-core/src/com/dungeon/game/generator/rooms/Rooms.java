@@ -60,7 +60,7 @@ public class Rooms extends Generation {
 			populateRooms();
 			populateHallWays();
 			generateStairDown();
-			makeWalls(10, 11, 12, 13, 14);
+			makeWalls(10);
 		}
 		
 	}

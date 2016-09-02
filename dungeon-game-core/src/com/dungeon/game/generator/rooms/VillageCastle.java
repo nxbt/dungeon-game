@@ -38,7 +38,7 @@ public class VillageCastle extends Castle {
 				populateSpecialRooms();
 				populateNormRooms();
 			}
-			makeWalls(10, 11, 12, 13, 14);
+			makeWalls(10);
 		}else generate(args);
 	}
 	

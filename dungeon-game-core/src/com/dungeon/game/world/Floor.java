@@ -2,8 +2,6 @@ package com.dungeon.game.world;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.ai.pfa.HierarchicalPathFinder;
-import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,9 +17,6 @@ import com.dungeon.game.generator.rooms.Castle;
 import com.dungeon.game.generator.rooms.Rooms;
 import com.dungeon.game.generator.rooms.VillageCastle;
 import com.dungeon.game.generator.rooms.VillageRooms;
-import com.dungeon.game.pathing.Heuristic;
-import com.dungeon.game.pathing.Node;
-import com.dungeon.game.pathing.Path;
 import com.dungeon.game.pathing.newpathing.Graph;
 import com.dungeon.game.pathing.newpathing.Pathfinder;
 import com.dungeon.game.textures.tiles.Brick;
@@ -77,22 +72,21 @@ public class Floor {
 		
 		entities = gen.getEntities();
 		
+		Pixmap tmPixmap = new Pixmap(width*Tile.TS, height*Tile.TS, Pixmap.Format.RGBA8888);
+		
 		//generates textures
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
+				Texture tex = null;
 				//temp code to test 4 ways
 				if(map[i][k].id == 0){
-					Texture tex = new WoodPlank(seed, k, i, k != 0 && (map[i][k-1].id != 0), k != map[i].length-1 && (map[i][k+1].id != 0), i != 0 && (map[i-1][k].id != 0), i != map.length-1 && (map[i+1][k].id != 0)).texture;
-					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
+					tex = new WoodPlank(seed, k, i, k != 0 && (map[i][k-1].id != 0), k != map[i].length-1 && (map[i][k+1].id != 0), i != 0 && (map[i-1][k].id != 0), i != map.length-1 && (map[i+1][k].id != 0)).texture;
 				}else if(map[i][k].id == 2){
-					Texture tex = new Dirt(seed, k, i).texture;
-					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
+					tex = new Dirt(seed, k, i).texture;
 				}else if(map[i][k].id == 3){
-					Texture tex = new Marble(seed, k, i).texture;
-					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
+					tex = new Marble(seed, k, i).texture;
 				}else if(map[i][k].id == 4){
-					Texture tex = new Stone(seed, k, i).texture;
-					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
+					tex = new Stone(seed, k, i).texture;
 				}else if(map[i][k].id == 10 || map[i][k].id == 11 || map[i][k].id == 12 || map[i][k].id == 13 || map[i][k].id == 14){
 					int sides = 0;
 					int corners = 0;
@@ -106,19 +100,14 @@ public class Floor {
 					if(i != map.length-1 && k != 0 && !Tile.isSolid(map[i+1][k-1])) corners += 2; //upper left
 					if(i != 0 && k != map[i].length-1 && !Tile.isSolid(map[i-1][k+1])) corners += 4; //bottom right
 					if(i != map.length-1 && k != map[i].length-1 && !Tile.isSolid(map[i+1][k+1])) corners += 8; //upper right
-					Texture tex = new Brick(seed, k, i, sides, corners).texture;
-					for(int j = 0; j < map[i][k].textures.length; j++)map[i][k].textures[j] = tex;
+					
+					tex = new Brick(seed, k, i, sides, corners).texture;
 				}
 				tm[i][k] = map[i][k];
-			}
-		}
-		
-		Pixmap tmPixmap = new Pixmap(width*Tile.TS, height*Tile.TS, Pixmap.Format.RGBA8888);
-		
-		for(int i = 0;i<tm.length;i++){
-			for(int k = 0;k<tm[i].length;k++) {
-				if(!tm[i][k].textures[0].getTextureData().isPrepared()) tm[i][k].textures[0].getTextureData().prepare();
-				Pixmap temp = tm[i][k].textures[0].getTextureData().consumePixmap();
+				
+				if(tex == null)tex = new Texture(new Pixmap(Tile.TS, Tile.TS, Pixmap.Format.RGBA8888));
+				
+				Pixmap temp = tex.getTextureData().consumePixmap();
 				temp = Spritesheet.rotatePixmap(temp, 1);
 				temp = Spritesheet.flipPixmap(temp);
 				temp = Spritesheet.rotatePixmap(temp, 3);
@@ -128,6 +117,12 @@ public class Floor {
 		}
 		
 		tmTexture = new Texture(tmPixmap);
+		
+		for(int i = 0;i<tm.length;i++){
+			for(int k = 0;k<tm[i].length;k++) {
+			}
+		}
+		
 		
 		corners = new ArrayList<int[]>();
 		for(int i = 1; i < tm.length;i++){

@@ -31,7 +31,7 @@ public class Castle extends Generation {
 		createRooms();
 		createDoors();
 		if(args.length == 0 ||  !args[0].equals("test"))populateRooms();
-		makeWalls(10, 11, 12, 13, 14);
+		makeWalls(10);
 	}
 	
 	protected class GenRoom extends Rectangle {
