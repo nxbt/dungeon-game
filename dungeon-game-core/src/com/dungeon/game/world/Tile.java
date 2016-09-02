@@ -4,14 +4,11 @@ public class Tile implements Cloneable{
 	public static final int TS = 32;
 	public int id;
 	public int data;
-	public boolean flip;
-	public int rotation;
 	public static final int[] SOLIDS = new int[]{1,10,11,12,13,14,15};
 	
 	public Tile(int id) {
 		this.id = id;
 		data = (isSolid(id)) ? 1:0;
-		rotation = 0;
 	}
 	
 	public static boolean isSolid(int id){

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.furniture.Fireplace;
-import com.dungeon.game.pathing.HierarchicalGraph;
 import com.dungeon.game.pathing.newpathing.Graph;
 import com.dungeon.game.world.Floor;
 import com.dungeon.game.world.Tile;
@@ -71,7 +70,7 @@ public abstract class Generation {
 					if(i != map.length-1 && k != 0 && !Tile.isSolid(map[i+1][k-1])) corners += 2; //upper left
 					if(i != 0 && k != map[i].length-1 && !Tile.isSolid(map[i-1][k+1])) corners += 4; //bottom right
 					if(i != map.length-1 && k != map[i].length-1 && !Tile.isSolid(map[i+1][k+1])) corners += 8; //upper right
-					if(!(sides == 15 && corners == 15)){
+					if(!(sides == 0 && corners == 0)){
 						map[i][k] = tileMap.getTile(id);
 					}
 				}

@@ -9,7 +9,6 @@ import com.dungeon.game.entity.Skeleton;
 import com.dungeon.game.entity.character.enemy.Dummy;
 import com.dungeon.game.entity.character.enemy.TutorialGoon;
 import com.dungeon.game.entity.character.friend.Guide;
-import com.dungeon.game.entity.character.friend.Villager;
 import com.dungeon.game.entity.furniture.Bar;
 import com.dungeon.game.entity.furniture.Chest;
 import com.dungeon.game.entity.furniture.Door;

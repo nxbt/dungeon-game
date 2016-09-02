@@ -113,16 +113,11 @@ public class Floor {
 				temp = Spritesheet.rotatePixmap(temp, 3);
 				tmPixmap.drawPixmap(temp, k*Tile.TS, (i)*Tile.TS);
 				temp.dispose();
+				tex.dispose();
 			}
 		}
 		
 		tmTexture = new Texture(tmPixmap);
-		
-		for(int i = 0;i<tm.length;i++){
-			for(int k = 0;k<tm[i].length;k++) {
-			}
-		}
-		
 		
 		corners = new ArrayList<int[]>();
 		for(int i = 1; i < tm.length;i++){
