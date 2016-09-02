@@ -12,24 +12,37 @@ public class Pathfinder {
 	}
 	
 	public Path findPath(float sX, float sY, float eX, float eY){ //find path between two given points
+		long start = System.nanoTime();
+		
 		Node startNode = graph.graphLevels[0].getCloseNode(sX, sY);
 		Node endNode = graph.graphLevels[0].getCloseNode(eX, eY);
 		Node curStartNode = startNode;
 		Node curEndNode = endNode;
-		System.out.println(curStartNode.index);
-		System.out.println(curEndNode.index);
 		int level = 0;
 		do{
-			if(curStartNode.upNode.equals(curEndNode.upNode)){
-				System.out.println(level);
-				return findPath(startNode, endNode, level);
+			if(level == graph.graphLevels.length - 1 || curStartNode.upNode.equals(curEndNode.upNode)){
+				Path p = findPath(startNode, endNode, level);
+
+				long end = System.nanoTime();
+
+				System.out.println("Time to find path: " + (end - start)/1000000l);
+				
+				return p;
 			}else{
 				curStartNode = curStartNode.upNode;
 				curEndNode = curEndNode.upNode;
 				level++;
 			}
 		}while(level < graph.graphLevels.length);
-		return findPath(startNode, endNode, level);
+		//the code should NEVER GET HERE... oh shit it does...
+		//but just in case
+		Path p = findPath(startNode, endNode, level);
+
+//		long end = System.nanoTime();
+//
+//		System.out.println("Time to find path: " + (end - start)/1000000l);
+		
+		return p;
 	}
 	
 	public Path findPath(Node level0StartNode, Node level0EndNode, int level){ //find path between the two nodes at the given level
@@ -40,6 +53,7 @@ public class Pathfinder {
 			endNode = endNode.upNode;
 		}
 		final boolean[] closed = new boolean[graph.graphLevels[level].nodes.size()];
+		final boolean[] inqueue = new boolean[graph.graphLevels[level].nodes.size()];
 		final Node[] pointing = new Node[graph.graphLevels[level].nodes.size()];
 		final float[] totalCost = new float[graph.graphLevels[level].nodes.size()];
 		boolean searching = true;
@@ -68,20 +82,26 @@ public class Pathfinder {
 		};
 		
 		queue.add(startNode);
-		
 		//this aint gonna work perfect, oh shit... it did?
 		while(searching){
 			Node n = queue.remove(0);
 			int index = n.index;
 			closed[index] = true;
+
+			if(n.equals(endNode)){
+				searching = false;
+				break;
+			}
 			for(Node n1: n.outNodes){
 				if(!closed[n1.index]){
 					if(totalCost[n.index] + n.costs.get(n.outNodes.indexOf(n1)) < totalCost[n1.index]){
 						pointing[n1.index] = n;
 						totalCost[n1.index] = totalCost[n.index] + n.costs.get(n.outNodes.indexOf(n1));
 					}
-					if(n1.equals(endNode))searching = false;
-					queue.add(n1);
+					if(!inqueue[n1.index]){
+						queue.add(n1);
+						inqueue[n1.index] = true;
+					}
 				}
 			}
 			if(queue.size() == 0)searching = false;
@@ -96,6 +116,7 @@ public class Pathfinder {
 			}
 			p.addNode(pointing[p.nodes.get(0).index]);
 		}
+		
 		if(level == 0)return p;
 		return findPath(p, level0StartNode, level - 1);
 	}
@@ -145,15 +166,16 @@ public class Pathfinder {
 			Node n = queue.remove(0);
 			int index = n.index;
 			closed[index] = true;
+			if(n.upNode.equals(endUpNode)){
+				endNode = n;
+				searching = false;
+				break;
+			}
 			for(Node n1: n.outNodes){
 				if(!closed[n1.index]){
 					if(totalCost[n.index] + n.costs.get(n.outNodes.indexOf(n1)) < totalCost[n1.index]){
 						pointing[n1.index] = n;
 						totalCost[n1.index] = totalCost[n.index] + n.costs.get(n.outNodes.indexOf(n1));
-					}
-					if(n1.upNode.equals(endUpNode)){
-						endNode = n1;
-						searching = false;
 					}
 					queue.add(n1);
 				}

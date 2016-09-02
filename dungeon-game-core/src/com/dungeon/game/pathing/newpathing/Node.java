@@ -19,7 +19,7 @@ public class Node {
 	
 	public Node downNode; //the node that this one links to on the graphLevel below this one
 	
-	public Node downNodes; //all nodes that link up to this one from the graph level below
+	public ArrayList<Node> downNodes; //all nodes that link up to this one from the graph level below
 	
 	public Node upNode; //the node that this one links to on the graphLevel above this one
 	
@@ -30,6 +30,7 @@ public class Node {
 		outNodes = new ArrayList<Node>();
 		inNodes = new ArrayList<Node>();
 		costs = new ArrayList<Float>();
+		downNodes = new ArrayList<Node>();
 	}
 	
 	//adds an adjacent node with the corresponding cost
