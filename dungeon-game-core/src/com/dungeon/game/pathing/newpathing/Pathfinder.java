@@ -13,14 +13,28 @@ public class Pathfinder {
 	public Path findPath(int sX, int sY, int eX, int eY){ //find path between two given points
 		Node startNode = graph.graphLevels[0].getCloseNode(sX, sY);
 		Node endNode = graph.graphLevels[0].getCloseNode(eX, eY);
-		
-		if(startNode.upNode.equals(endNode.upNode)){
-			
-		}
-		return null;
+		Node curStartNode = startNode;
+		Node curEndNode = endNode;
+		int level = 0;
+		do{
+			if(curStartNode.upNode.equals(curEndNode.upNode)){
+				return findPath(startNode, endNode, level);
+			}else{
+				curStartNode = curStartNode.upNode;
+				curEndNode = curEndNode.upNode;
+				level++;
+			}
+		}while(level < graph.graphLevels.length);
+		return findPath(startNode, endNode, level);
 	}
 	
-	public Path findPath(Node startNode, Node endNode, int level){ //find path between the two nodes at the given level
+	public Path findPath(Node level0StartNode, Node level0EndNode, int level){ //find path between the two nodes at the given level
+		Node startNode = level0StartNode;
+		Node endNode = level0EndNode;
+		for(int i = 0; i < level; i++){
+			startNode = startNode.upNode;
+			endNode = endNode.upNode;
+		}
 		final boolean[] closed = new boolean[graph.graphLevels[level].nodes.size()];
 		final Node[] pointing = new Node[graph.graphLevels[level].nodes.size()];
 		final float[] totalCost = new float[graph.graphLevels[level].nodes.size()];
@@ -84,7 +98,12 @@ public class Pathfinder {
 			}
 			p.addNode(pointing[p.nodes.get(0).index]);
 		}
-		return p;
+		if(level == 0)return p;
+		return findPath(p, level0StartNode, level0EndNode, level - 1);
+	}
+	
+	public Path findPath(Path p, Node level0StartNode, Node level0EndNode, int level){ //maybe we don't need the end node i thinky think!
+		return null; //need to finish dis sheet;
 	}
 
 }
