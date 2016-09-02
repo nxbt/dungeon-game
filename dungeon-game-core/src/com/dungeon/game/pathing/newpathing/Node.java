@@ -52,4 +52,21 @@ public class Node {
 		float yDiff = (y-yDistance);
 		return (float) Math.sqrt(xDiff*xDiff + yDiff*yDiff);
 	}
+	
+	public void setDownNode(){
+		Node closeNode = downNodes.get(0);
+		for(Node n: downNodes){
+			if(n.findDistance(x, y) < closeNode.findDistance(x, y))closeNode = n;
+		}
+		downNode = closeNode;
+	}
+	
+	public boolean isAdjacentTo(Node other) {
+		for(Node n: downNodes){
+			for(Node n2: n.outNodes){
+				if(n2.upNode.equals(other))return true;
+			}
+		}
+		return false;
+	}
 }

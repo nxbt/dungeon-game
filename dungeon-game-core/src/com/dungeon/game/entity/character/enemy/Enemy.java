@@ -9,7 +9,7 @@ import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.pathing.Heuristic;
-import com.dungeon.game.pathing.Path;
+import com.dungeon.game.pathing.newpathing.Path;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -26,11 +26,9 @@ public abstract class Enemy extends Character {
 		float targetX = x;
 		float targetY = y;
 		if(stagerTimer == 0){
-			Path p = new Path(world);
-			world.curFloor.heiGraph.setLevel(0);
-			world.curFloor.findPath(world.curFloor.heiGraph.getClosestNode(x, y), world.curFloor.heiGraph.getClosestNode(target[0] + 0.5f, target[1] + 0.5f), new Heuristic(), p);//new int[]{(int) (x/Tile.TS),(int) (y/Tile.TS)},new int[]{(int) (target[0]/Tile.TS),(int) (target[1]/Tile.TS)});
+			Path p = world.curFloor.pathfinder.findPath(x, y, target[0], target[1]);
 			path = p.getPath();
-			if(path.size() > 0) targetTile = p.getTargTile();
+			if(path.size() > 0) targetTile = Path.getTargTile(world, path);
 		}
 		if(targetTile!=null){
 				moveTo = targetTile;

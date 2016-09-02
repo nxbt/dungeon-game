@@ -136,6 +136,9 @@ public class Pathfinder {
 	}
 	
 	public Path findPath(Path p, Node level0StartNode, int level){ //is there a clever af way to combine the two pathfinding functions without sacrificing efficency?
+		System.out.println("we no shit boiz");
+		long a, b;
+		Node startUpNode = p.nodes.get(0);
 		Node startNode = level0StartNode;
 		Node endUpNode = p.nodes.get(1);
 		Node endNode = null;
@@ -146,6 +149,7 @@ public class Pathfinder {
 		//get a path from startNode to any node with endUpNode as it's upnode on the current level;
 		
 		final boolean[] closed = new boolean[graph.graphLevels[level].nodes.size()];
+		final boolean[] inqueue = new boolean[graph.graphLevels[level].nodes.size()];
 		final Node[] pointing = new Node[graph.graphLevels[level].nodes.size()];
 		final float[] totalCost = new float[graph.graphLevels[level].nodes.size()];
 		boolean searching = true;
@@ -172,11 +176,13 @@ public class Pathfinder {
 				return true;
 			}
 		};
-		
+		a = System.nanoTime();
 		queue.add(startNode);
 		
 		//this aint gonna work perfect, oh shit... it did?
+		int iterations = 0;
 		while(searching){
+			iterations++;
 			Node n = queue.remove(0);
 			int index = n.index;
 			closed[index] = true;
@@ -185,17 +191,25 @@ public class Pathfinder {
 				searching = false;
 				break;
 			}
-			for(Node n1: n.outNodes){
-				if(!closed[n1.index]){
-					if(totalCost[n.index] + n.costs.get(n.outNodes.indexOf(n1)) < totalCost[n1.index]){
-						pointing[n1.index] = n;
-						totalCost[n1.index] = totalCost[n.index] + n.costs.get(n.outNodes.indexOf(n1));
+			if(n.upNode.equals(startUpNode)){
+				for(Node n1: n.outNodes){
+					if(!closed[n1.index]){
+						if(totalCost[n.index] + n.costs.get(n.outNodes.indexOf(n1)) < totalCost[n1.index]){
+							pointing[n1.index] = n;
+							totalCost[n1.index] = totalCost[n.index] + n.costs.get(n.outNodes.indexOf(n1));
+						}
+						if(!inqueue[n1.index]){
+							queue.add(n1);
+							inqueue[n1.index] = true;
+						}
 					}
-					queue.add(n1);
 				}
 			}
 			if(queue.size() == 0)searching = false;
 		}
+		System.out.println("Queue iterations: "+iterations);
+		b = System.nanoTime();
+		System.out.println("Time make queue in room: " + ((double)(b - a)/(double)(1000000)) + "ms");
 		
 		p = new Path(endNode);
 		searching = true;
@@ -206,6 +220,9 @@ public class Pathfinder {
 			}
 			p.addNode(pointing[p.nodes.get(0).index]);
 		}
+
+		a = System.nanoTime();
+		System.out.println("Time make path from queue in room: " + ((double)(a - b)/(double)(1000000)) + "ms");
 		if(level == 0)return p;
 		return findPath(p, level0StartNode, level - 1);
 	}

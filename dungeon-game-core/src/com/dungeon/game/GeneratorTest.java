@@ -24,8 +24,6 @@ public class GeneratorTest extends ApplicationAdapter {
 	
 	Tile[][] tileMap;
 	
-	HierarchicalGraph pathGraph;
-	
 	OrthographicCamera cam;
 	
 	Viewport view;
@@ -43,8 +41,6 @@ public class GeneratorTest extends ApplicationAdapter {
 		generation = new Castle(new World(false), width, height, width/2, height/2, width/2, height/2, 0, new Object[]{"test"});
 		
 		tileMap = generation.map;
-		
-		pathGraph = generation.getPathGraph();
 		
 		cam = new OrthographicCamera();
 		cam.zoom = 1;

@@ -9,6 +9,7 @@ import com.dungeon.game.entity.Skeleton;
 import com.dungeon.game.entity.character.enemy.Dummy;
 import com.dungeon.game.entity.character.enemy.TutorialGoon;
 import com.dungeon.game.entity.character.friend.Guide;
+import com.dungeon.game.entity.character.friend.Villager;
 import com.dungeon.game.entity.furniture.Bar;
 import com.dungeon.game.entity.furniture.Chest;
 import com.dungeon.game.entity.furniture.Door;
@@ -21,43 +22,41 @@ import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Key;
 import com.dungeon.game.item.equipable.armor.WoolPants;
 import com.dungeon.game.item.equipable.armor.WoolShirt;
-import com.dungeon.game.pathing.HierarchicalGraph;
-import com.dungeon.game.pathing.Node;
+import com.dungeon.game.pathing.newpathing.Graph;
+import com.dungeon.game.pathing.newpathing.GraphLevel;
+import com.dungeon.game.pathing.newpathing.Node;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class TutorialGenerator extends Generation {
 	
-	private ArrayList<Node> tileNodes;
-	private ArrayList<Node> zoneNodes;
-	
 	private Node[][] nodeArray;
+
+	private GraphLevel gl0;
+	
+	private GraphLevel gl1;
 
 	public TutorialGenerator(World world, int textureSeed) {
 		super(world, 100, 100, textureSeed, new Object[0]);
 	}
 	
 	public void generate(Object[] args){
+
+		gl0 = new GraphLevel();
+		gl1 = new GraphLevel();
 		super.generate(args);
-		Node.resetIndex(2);
-		tileNodes = new ArrayList<Node>();
-		zoneNodes = new ArrayList<Node>();
 		nodeArray = new Node[width][height];
 		Rectangle workingRoom;
 		
 		workingRoom = new Rectangle(48, 52, 1, 1);
 		addToMap(workingRoom);
 		entities.add(new LockedDoor(world, 48, 52, 0));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
 		
 		
 		//start Room
 		workingRoom = new Rectangle(45, 45, 7, 7);
 		addToMap(workingRoom);
-		
-		//seriously, wtf pathfinding!
-		tileNodes.get(0).upNode = zoneNodes.get(1);
-		zoneNodes.get(1).downNodes.add(tileNodes.get(0));
-		zoneNodes.remove(0);
 
 		entities.add(new Guide(world, 45*Tile.TS+Tile.TS/2, 51*Tile.TS+Tile.TS/2));
 		entities.add(new Torch(world, 45, 46, 0));
@@ -361,22 +360,19 @@ public class TutorialGenerator extends Generation {
 	
 	private void removeNode(int x, int y){
 		nodeArray[x][y].upNode.downNodes.remove(nodeArray[x][y]);
-//		tileNodes.remove(nodeArray[x][y]);
 		nodeArray[x][y] = null;
 	}
 	
 
 	
 	private void addToMap(Rectangle room){
-		Node zoneNode = new Node(room.x+room.width/2, room.y+room.height/2, 1, 1);
-		zoneNodes.add(zoneNode);
+		Node zoneNode = gl1.addNode(room.x+room.width/2, room.y+room.height/2);
         for(int i = 0; i < room.width; i++){
             for(int k = 0; k < room.height; k++){
             	map[(int) (room.y + k)][(int) (room.x + i)] = tileMap.getTile(0);
-				Node node = new Node((room.x + i) + 0.5f, (room.y + k) + 0.5f, 1, 0);
+				Node node = gl0.addNode(room.x + i + 0.5f, room.y + k + 0.5f);
 				node.upNode = zoneNode;
 				zoneNode.downNodes.add(node);
-				tileNodes.add(node);
 				nodeArray[(int) (room.x + i)][(int) (room.y + k)] = node;
              } 
          }
@@ -426,32 +422,32 @@ public class TutorialGenerator extends Generation {
 	}
 
 	@Override
-	public HierarchicalGraph getPathGraph() {
+	public Graph getPathGraph() {
 		for(int i = 0; i <  nodeArray.length; i++){
 			for(int k = 0; k <  nodeArray[0].length; k++){
 				Node n = nodeArray[i][k];
 				if(n != null){
-					if(i > 0 && nodeArray[i - 1][k] != null)n.makeConnection(nodeArray[i - 1][k], (n.cost + nodeArray[i - 1][k].cost) / 2f);
-					if(i < nodeArray.length - 1 && nodeArray[i + 1][k] != null)n.makeConnection(nodeArray[i + 1][k], (n.cost + nodeArray[i + 1][k].cost) / 2f);
-					if(k > 0 && nodeArray[i][k - 1] != null)n.makeConnection(nodeArray[i][k - 1], (n.cost + nodeArray[i][k - 1].cost) / 2f);
-					if(k < nodeArray[0].length - 1 && nodeArray[i][k + 1] != null)n.makeConnection(nodeArray[i][k + 1], (n.cost + nodeArray[i][k + 1].cost) / 2f);
+					if(i > 0 && nodeArray[i - 1][k] != null)n.addConnection(nodeArray[i - 1][k], 1);
+					if(i < nodeArray.length - 1 && nodeArray[i + 1][k] != null)n.addConnection(nodeArray[i + 1][k], 1);
+					if(k > 0 && nodeArray[i][k - 1] != null)n.addConnection(nodeArray[i][k - 1], 1);
+					if(k < nodeArray[0].length - 1 && nodeArray[i][k + 1] != null)n.addConnection(nodeArray[i][k + 1], 1);
 				}
 			}
 		}
 		
-		for(Node n1: zoneNodes){
-			for(Node n2: zoneNodes){
+		for(Node n1: gl1.nodes){
+			for(Node n2:  gl1.nodes){
 				if(!n1.equals(n2) && n1.isAdjacentTo(n2)){
-					n1.makeConnection(n2, n1.findDistance(n2.x, n2.y));
+					n1.addConnection(n2, n1.findDistance(n2.x, n2.y));
 				}
 			}
 		}
-		for(Node n: zoneNodes){
-			n.findDownNode();
+		for(Node n: gl1.nodes){
+			n.setDownNode();
 		}
-		com.dungeon.game.pathing.HierarchicalGraph hiearchicalGraph = new com.dungeon.game.pathing.HierarchicalGraph(new Node[][]{tileNodes.toArray(new Node[tileNodes.size()]), zoneNodes.toArray(new Node[zoneNodes.size()])});
+
 		
-		return hiearchicalGraph;
+		return new Graph(new GraphLevel[]{gl0, gl1});
 	}
 
 }

@@ -29,7 +29,7 @@ import com.dungeon.game.entity.particle.BodyChunk;
 import com.dungeon.game.entity.particle.Ember;
 import com.dungeon.game.entity.particle.Poof;
 import com.dungeon.game.generator.objects.GenRoom;
-import com.dungeon.game.pathing.Node;
+import com.dungeon.game.pathing.newpathing.Node;
 
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
@@ -230,11 +230,15 @@ public class World {
 			shapeRenderer.setProjectionMatrix(cam.cam.combined);
 			if(debug_pathing){
 				shapeRenderer.set(ShapeType.Line);
-				for(Node n :curFloor.heiGraph.nodes[0]){
+				for(Node n :curFloor.pathfinder.graph.graphLevels[0].nodes){
 					shapeRenderer.setColor(Color.PURPLE);
 					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 1);
-					
 					shapeRenderer.setColor(Color.BLACK);
+					for(Node n2: n.outNodes){
+						if(n2.outNodes.contains(n)){
+							shapeRenderer.line(n.x*Tile.TS, n.y*Tile.TS, n2.x*Tile.TS, n2.y*Tile.TS);
+						}
+					}
 				}
 				
 			}

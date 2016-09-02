@@ -59,7 +59,6 @@ public class Path implements GraphPath<Node> { //try seach connection path???
 			path.add(new int[]{(int) nodes.get(i).x,(int) nodes.get(i).y});
 		}
 		return path;
-		
 	}
 	
 	public int[] getTargTile(){

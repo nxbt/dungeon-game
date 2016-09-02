@@ -20,9 +20,10 @@ import com.dungeon.game.generator.rooms.Rooms;
 import com.dungeon.game.generator.rooms.VillageCastle;
 import com.dungeon.game.generator.rooms.VillageRooms;
 import com.dungeon.game.pathing.Heuristic;
-import com.dungeon.game.pathing.HierarchicalGraph;
 import com.dungeon.game.pathing.Node;
 import com.dungeon.game.pathing.Path;
+import com.dungeon.game.pathing.newpathing.Graph;
+import com.dungeon.game.pathing.newpathing.Pathfinder;
 import com.dungeon.game.textures.tiles.Brick;
 import com.dungeon.game.textures.tiles.Dirt;
 import com.dungeon.game.textures.tiles.Marble;
@@ -51,11 +52,7 @@ public class Floor {
 	
 	public int seed;
 	
-	public HierarchicalPathFinder<Node> pathfinder;
-	
-	public HierarchicalGraph heiGraph;
-	
-	public IndexedAStarPathFinder<Node> pathAlg;
+	public Pathfinder pathfinder;
 	
 	public Floor(World world, String type, int width, int height, int centerX, int centerY, int upTrapX, int upTrapY) {
 		this.world = world;
@@ -202,11 +199,8 @@ public class Floor {
 				edge[2] += 0.001f;
 			}
 		}
-		
-		heiGraph = gen.getPathGraph();
-		pathAlg = new IndexedAStarPathFinder<Node>(heiGraph);
-		pathfinder = new HierarchicalPathFinder<Node>(heiGraph, pathAlg);
-		heiGraph.setLevel(0);
+		Graph graph = gen.getPathGraph();
+		pathfinder = new Pathfinder(graph);
 		
 		box2dWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
 		for(int i = 0; i <tm.length; i++){
@@ -271,11 +265,5 @@ public class Floor {
 	    float invTexHeight = 1f / region.getTexture().getHeight();
 	    region.setRegion((x + fix) * invTexWidth, (y + fix) * invTexHeight, (x + width - fix) * invTexWidth, (y + height - fix) * invTexHeight); // Trims
 	                                                                                                                                                // region
-	}
-	
-	public void findPath(Node s, Node e, Heuristic h, Path p){
-		pathfinder = new HierarchicalPathFinder<Node>(heiGraph, new IndexedAStarPathFinder<Node>(heiGraph));
-		world.curFloor.heiGraph.setLevel(0);
-		pathfinder.searchNodePath(s, e, h, p);
 	}
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.furniture.Fireplace;
 import com.dungeon.game.pathing.HierarchicalGraph;
+import com.dungeon.game.pathing.newpathing.Graph;
 import com.dungeon.game.world.Floor;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.TileMap;
@@ -233,5 +234,5 @@ public abstract class Generation {
 		}
 	}
 	
-	public abstract HierarchicalGraph getPathGraph();
+	public abstract Graph getPathGraph();
 }
