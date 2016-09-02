@@ -17,7 +17,6 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * implement caves generation
 * implement catacombs generation
 * implement mixed (/recursive?) generation
-* rework pathfinding again because libGDX pathfinding is meh
 
 ##TODO very low priority (before final release):
 * add multithreding!
