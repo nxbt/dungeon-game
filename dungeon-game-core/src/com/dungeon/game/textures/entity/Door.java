@@ -21,6 +21,7 @@ public class Door extends ProceduralTexture {
 		texMap.setColor(new Color(doorColor.r*0.8f, doorColor.g*0.8f, doorColor.b*0.8f, 1));
 		texMap.drawRectangle(0, 0, 32, 8);
 		
+		if((Boolean) args[1]) {
 			texMap.setColor(Color.BLACK);
 			texMap.drawLine(13, 6, 18, 6);
 			texMap.drawLine(14, 5, 17, 5);
