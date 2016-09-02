@@ -145,17 +145,12 @@ public class World {
 		cam.update();
 		mouse.update();
 		descBox.update();
-//		long l;
 		if(debug_pause){
 			player.update();
 		}else{
-//			l = System.nanoTime();
 			for(int i = 0; i < entities.size(); i++) {
-//				long e = System.nanoTime();
 				entities.get(i).update();
-//				System.out.println(entities.get(i).getClass().getSimpleName() + " Updated in: " + (float)(System.nanoTime() - e)/16000000f + " frames");
 			}
-//			System.out.println("Entities in: " + (float)(System.nanoTime() - l)/16000000f + " frames");
 		}
 		
 		for(int i = 0; i < entities.size(); i++) {

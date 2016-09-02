@@ -207,7 +207,7 @@ public abstract class Character extends Dynamic {
 				else turnRight = false;
 			}else if(tempAngle<=180&&tempTargetAngle>=180){
 				if(tempTargetAngle-180>tempAngle)turnRight = false;
-				else turnRight = true;
+				else turnRight = true;	
 			}
 			
 			float difference = 0;
@@ -244,11 +244,10 @@ public abstract class Character extends Dynamic {
 	
 	public void sight(){
 		if(staggerTimer==0){
-			System.out.println(this.getClass().getSimpleName());
 			
 			ArrayList<float[]> rays = new ArrayList<float[]>(); //{startX,startY,endX,endy}
 			
-			for(int i = -180; i < 180; i+=18){
+			for(int i = -180; i <= 180 - Math.min(100/vision, 60); i+=Math.min(100/vision, 60)){
 				rays.add(new float[]{x,y,x+(float) (Math.cos((i)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((i)/180f*Math.PI)*vision*(float)Tile.TS),x+(float) (Math.cos((i)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((i)/180f*Math.PI)*vision*(float)Tile.TS)});
 			}
 			
