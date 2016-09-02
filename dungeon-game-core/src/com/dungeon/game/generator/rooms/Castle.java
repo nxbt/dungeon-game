@@ -329,7 +329,7 @@ public class Castle extends Generation {
 		for(Node n1: gl1.nodes){
 			for(Node n2: gl1.nodes){
 				if(!n1.equals(n2) && n1.isAdjacentTo(n2)){
-					n1.addConnection(n2, n1.findDistance(n2.x, n2.y));
+					n1.addConnection(n2, n1.findDistance(n2.x*Tile.TS, n2.y*Tile.TS));
 				}
 			}
 		}

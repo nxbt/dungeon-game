@@ -10,8 +10,9 @@ import com.dungeon.game.generator.rooms.hallway.BasicHall;
 import com.dungeon.game.generator.rooms.hallway.Hallway;
 import com.dungeon.game.generator.rooms.room.EnemyRoom;
 import com.dungeon.game.generator.rooms.room.Room;
-import com.dungeon.game.pathing.HierarchicalGraph;
-import com.dungeon.game.pathing.Node;
+import com.dungeon.game.pathing.newpathing.Graph;
+import com.dungeon.game.pathing.newpathing.GraphLevel;
+import com.dungeon.game.pathing.newpathing.Node;
 import com.dungeon.game.utilities.MethodArray;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -545,34 +546,30 @@ public class Rooms extends Generation {
 
 
 	@Override
-	public HierarchicalGraph getPathGraph() {
-		Node.resetIndex(2);
-		ArrayList<Node> tileNodes = new ArrayList<Node>();
-		ArrayList<Node> zoneNodes = new ArrayList<Node>();
+	public Graph getPathGraph() {
+		
+		GraphLevel gl0 = new GraphLevel();
+		GraphLevel gl1 = new GraphLevel();
 		
 		Node[][] nodeArray = new Node[width][height];
 		//generate nodes for each tile
 		for(Rectangle room: rooms){
-			Node zoneNode = new Node(room.x+room.width/2, room.y+room.height/2, 1, 1);
-			zoneNodes.add(zoneNode);
+			Node zoneNode = gl1.addNode(room.x+room.width/2, room.y+room.height/2);
 			for(int i = (int) room.x; i < room.x + room.width; i++){
 				for(int k = (int) room.y; k < room.y + room.height; k++){
 					if(!Tile.isSolid(map[k][i])){
-						Node node = new Node(i + 0.5f, k + 0.5f, 1, 0);
+						Node node = gl0.addNode(i + 0.5f, k + 0.5f);
 						node.upNode = zoneNode;
 						zoneNode.downNodes.add(node);
-						tileNodes.add(node);
 						nodeArray[i][k] = node;
 					}
 				}
 			}
 		}
 		for(ArrayList<int[]> h: halls){
-			Node zoneNode = new Node(h.get(h.size()/2)[0] + 0.5f, h.get(h.size()/2)[1] + 0.5f, 1, 1);
-			zoneNodes.add(zoneNode);
+			Node zoneNode = gl1.addNode(h.get(h.size()/2)[0] + 0.5f, h.get(h.size()/2)[1] + 0.5f);
 			for(int[] p: h){
-				Node node = new Node(p[0] + 0.5f, p[1] + 0.5f, 1, 0);
-				tileNodes.add(node);
+				Node node = gl0.addNode(p[0] + 0.5f, p[1] + 0.5f);
 				node.upNode = zoneNode;
 				zoneNode.downNodes.add(node);
 				nodeArray[p[0]][p[1] ] = node;
@@ -585,26 +582,25 @@ public class Rooms extends Generation {
 			for(int k = 0; k <  nodeArray[0].length; k++){
 				Node n = nodeArray[i][k];
 				if(n != null){
-					if(i > 0 && nodeArray[i - 1][k] != null)n.makeConnection(nodeArray[i - 1][k], (n.cost + nodeArray[i - 1][k].cost) / 2f);
-					if(i < nodeArray.length - 1 && nodeArray[i + 1][k] != null)n.makeConnection(nodeArray[i + 1][k], (n.cost + nodeArray[i + 1][k].cost) / 2f);
-					if(k > 0 && nodeArray[i][k - 1] != null)n.makeConnection(nodeArray[i][k - 1], (n.cost + nodeArray[i][k - 1].cost) / 2f);
-					if(k < nodeArray[0].length - 1 && nodeArray[i][k + 1] != null)n.makeConnection(nodeArray[i][k + 1], (n.cost + nodeArray[i][k + 1].cost) / 2f);
+					if(i > 0 && nodeArray[i - 1][k] != null)n.addConnection(nodeArray[i - 1][k], 1);
+					if(i < nodeArray.length - 1 && nodeArray[i + 1][k] != null)n.addConnection(nodeArray[i + 1][k], 1);
+					if(k > 0 && nodeArray[i][k - 1] != null)n.addConnection(nodeArray[i][k - 1], 1);
+					if(k < nodeArray[0].length - 1 && nodeArray[i][k + 1] != null)n.addConnection(nodeArray[i][k + 1], 1);
 				}
 			}
 		}
 		
-		for(Node n1: zoneNodes){
-			for(Node n2: zoneNodes){
+		for(Node n1: gl1.nodes){
+			for(Node n2: gl1.nodes){
 				if(!n1.equals(n2) && n1.isAdjacentTo(n2)){
-					n1.makeConnection(n2, n1.findDistance(n2.x, n2.y));
+					n1.addConnection(n2, n1.findDistance(n2.x*Tile.TS, n2.y*Tile.TS));
 				}
 			}
 		}
-		for(Node n: zoneNodes){
-			n.findDownNode();
+		for(Node n: gl1.nodes){
+			n.setDownNode();
 		}
-		com.dungeon.game.pathing.HierarchicalGraph hiearchicalGraph = new com.dungeon.game.pathing.HierarchicalGraph(new Node[][]{tileNodes.toArray(new Node[tileNodes.size()]), zoneNodes.toArray(new Node[zoneNodes.size()])});
 		
-		return hiearchicalGraph;
+		return new Graph(new GraphLevel[]{gl0, gl1});
 	}
 }

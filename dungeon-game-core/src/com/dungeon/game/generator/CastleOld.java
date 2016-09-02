@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.dungeon.game.pathing.HierarchicalGraph;
+import com.dungeon.game.pathing.newpathing.Graph;
 import com.dungeon.game.world.World;
 
 public class CastleOld extends Generation {
@@ -228,7 +228,7 @@ public class CastleOld extends Generation {
 	}
 
 	@Override
-	public HierarchicalGraph getPathGraph() {
+	public Graph getPathGraph() {
 		// NOT COMPLETED FOR THIS OBSOLETE GENERATION
 		return null;
 	}

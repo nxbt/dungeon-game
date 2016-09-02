@@ -376,7 +376,7 @@ public abstract class Character extends Dynamic {
 	}
 	
 	protected void footPrints(){
-		if(printPool != null && moveVec.len() > 0){
+		if(printPool != null && moveVec.len() > 0.1){
 			if(printTimer == printTime){
 				float xOffSet = 0;
 				float yOffSet = 5;
