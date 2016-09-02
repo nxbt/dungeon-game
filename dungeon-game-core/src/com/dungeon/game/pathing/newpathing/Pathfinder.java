@@ -25,7 +25,7 @@ public class Pathfinder {
 
 				long end = System.nanoTime();
 
-				System.out.println("Time to find path: " + (end - start)/1000000l + "ms");
+				System.out.println("Time to find path: " + ((double)(end - start)/(double)(1000000)) + "ms");
 				
 				return p;
 			}else{
