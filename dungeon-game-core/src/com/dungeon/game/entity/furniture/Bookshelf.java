@@ -129,9 +129,7 @@ public class Bookshelf extends Static{
 
 
 	@Override
-	public void calc() {
-		
-	}
+	public void calc() {}
 
 	@Override
 	public void post() {}

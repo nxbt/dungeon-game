@@ -94,13 +94,17 @@ public class Villager extends Friend {
 			do{
 				wanderTile = new int[]{1+(int)(Math.random()*world.curFloor.tm[0].length-1),1+(int)(Math.random()*world.curFloor.tm.length-1)};
 			}while(Tile.isSolid(world.curFloor.tm[wanderTile[1]][wanderTile[0]]));
-			Path p = world.curFloor.pathfinder.findPath(x, y, wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2);
-			path = p.getPath();
+//			Path p = world.curFloor.pathfinder.findPath(x, y, wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2);
+//			path = p.getPath();
+//			targetTile = Path.getTargTile(world, path);
 		}
 		
-		if(stagerTimer == 0){
+		if(staggerTimer == 0){
+//			long s = System.nanoTime();
 			Path p = world.curFloor.pathfinder.findPath(x, y, wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2);
 			path = p.getPath();
+			targetTile = Path.getTargTile(world, path);
+//			System.out.println("Path found in: " + (float)(System.nanoTime() - s)/16000000f + " frames");
 		}
 		
 		if(targetTile!=null){

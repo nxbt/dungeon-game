@@ -72,7 +72,7 @@ public class Torch extends Static {
 
 	@Override
 	public void calc() {
-		if(Math.random() < 0.05) {
+		if(x > world.cam.x - world.cam.width/2 && x < world.cam.x + world.cam.width/2 && y > world.cam.y - world.cam.height/2 && y < world.cam.y + world.cam.height/2 && Math.random() < 0.05) {
 			float xOff = 0;
 			float yOff = 0;
 			if(orientation == 0){

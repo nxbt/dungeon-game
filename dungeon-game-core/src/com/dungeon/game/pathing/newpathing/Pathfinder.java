@@ -1,26 +1,25 @@
 package com.dungeon.game.pathing.newpathing;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Pathfinder {
 	
 	public Graph graph;
 	
-	private long start;
+//	private long start;
 	
 	public Pathfinder(Graph graph){
 		this.graph = graph;
 	}
 	
 	public Path findPath(float sX, float sY, float eX, float eY){ //find path between two given points
-		start = System.nanoTime();
+//		start = System.nanoTime();
 		//literally half the time is taken up by this....
 		Node startNode = graph.graphLevels[0].getCloseNode(sX, sY);
 		Node endNode = graph.graphLevels[0].getCloseNode(eX, eY);
 		
-		System.out.println("Time to find start and end nodes: " + ((double)(System.nanoTime() - start)/(double)(1000000)) + "ms");
-		start = System.nanoTime();
+		//System.out.println("Time to find start and end nodes: " + ((double)(System.nanoTime() - start)/(double)(1000000)) + "ms");
+//		start = System.nanoTime();
 		Node curStartNode = startNode;
 		Node curEndNode = endNode;
 		int level = 0;
@@ -28,7 +27,7 @@ public class Pathfinder {
 			if(level == graph.levels - 1 || curStartNode.upNode.equals(curEndNode.upNode)){
 				Path p = findPath(startNode, endNode, level);
 				
-				System.out.println("TOTAL TIME: " + ((double)(System.nanoTime() - start)/(double)(1000000)) + "ms");
+				//System.out.println("TOTAL TIME: " + ((double)(System.nanoTime() - start)/(double)(1000000)) + "ms");
 				
 				return p;
 			}else{
@@ -43,12 +42,12 @@ public class Pathfinder {
 
 //		long end = System.nanoTime();
 //
-//		System.out.println("Time to find path: " + (end - start)/1000000l);
+//		//System.out.println("Time to find path: " + (end - start)/1000000l);
 		return p;
 	}
 	
 	public Path findPath(Node level0StartNode, Node level0EndNode, int level){ //find path between the two nodes at the given level
-		long a, b;
+//		long a, b;
 		Node startNode = level0StartNode;
 		Node endNode = level0EndNode;
 		for(int i = 0; i < level; i++){
@@ -84,7 +83,7 @@ public class Pathfinder {
 			}
 		};
 		
-		b = System.nanoTime();
+//		b = System.nanoTime();
 		queue.add(startNode);
 		//this aint gonna work perfect, oh shit... it did?
 		while(searching){
@@ -113,9 +112,9 @@ public class Pathfinder {
 		
 
 		
-		a = System.nanoTime();
+//		a = System.nanoTime();
 
-		System.out.println("Time to run queue: " + ((double)(a - b)/(double)(1000000)) + "ms");
+		//System.out.println("Time to run queue: " + ((double)(a - b)/(double)(1000000)) + "ms");
 		
 		Path p = new Path(endNode);
 		searching = true;
@@ -127,17 +126,17 @@ public class Pathfinder {
 			p.addNode(pointing[p.nodes.get(0).index]);
 		}
 
-		b = System.nanoTime();
+//		b = System.nanoTime();
 
-		System.out.println("Time make path from queue: " + ((double)(b - a)/(double)(1000000)) + "ms");
+		//System.out.println("Time make path from queue: " + ((double)(b - a)/(double)(1000000)) + "ms");
 		
 		if(level == 0)return p;
 		return findPath(p, level0StartNode, level - 1);
 	}
 	
 	public Path findPath(Path p, Node level0StartNode, int level){ //is there a clever af way to combine the two pathfinding functions without sacrificing efficency?
-		System.out.println("we no shit boiz");
-		long a, b;
+		//System.out.println("we no shit boiz");
+//		long a, b;
 		Node startUpNode = p.nodes.get(0);
 		Node startNode = level0StartNode;
 		Node endUpNode = p.nodes.get(1);
@@ -176,13 +175,13 @@ public class Pathfinder {
 				return true;
 			}
 		};
-		a = System.nanoTime();
+//		a = System.nanoTime();
 		queue.add(startNode);
 		
 		//this aint gonna work perfect, oh shit... it did?
-		int iterations = 0;
+//		int iterations = 0;
 		while(searching){
-			iterations++;
+//			iterations++;
 			Node n = queue.remove(0);
 			int index = n.index;
 			closed[index] = true;
@@ -207,9 +206,9 @@ public class Pathfinder {
 			}
 			if(queue.size() == 0)searching = false;
 		}
-		System.out.println("Queue iterations: "+iterations);
-		b = System.nanoTime();
-		System.out.println("Time make queue in room: " + ((double)(b - a)/(double)(1000000)) + "ms");
+		//System.out.println("Queue iterations: "+iterations);
+//		b = System.nanoTime();
+		//System.out.println("Time make queue in room: " + ((double)(b - a)/(double)(1000000)) + "ms");
 		
 		p = new Path(endNode);
 		searching = true;
@@ -221,8 +220,8 @@ public class Pathfinder {
 			p.addNode(pointing[p.nodes.get(0).index]);
 		}
 
-		a = System.nanoTime();
-		System.out.println("Time make path from queue in room: " + ((double)(a - b)/(double)(1000000)) + "ms");
+//		a = System.nanoTime();
+		//System.out.println("Time make path from queue in room: " + ((double)(a - b)/(double)(1000000)) + "ms");
 		if(level == 0)return p;
 		return findPath(p, level0StartNode, level - 1);
 	}

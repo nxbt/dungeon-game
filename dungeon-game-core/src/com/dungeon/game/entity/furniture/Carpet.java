@@ -85,15 +85,9 @@ public class Carpet extends Static {
 	}
 
 	@Override
-	public void calc() {
-		
-		
-	}
+	public void calc() {}
 
 	@Override
-	public void post() {
-		
-		
-	}
+	public void post() {}
 
 }

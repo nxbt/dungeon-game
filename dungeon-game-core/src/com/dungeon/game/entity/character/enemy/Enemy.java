@@ -25,7 +25,7 @@ public abstract class Enemy extends Character {
 	protected void findPath(ArrayList<Entity> entities, float[] target){
 		float targetX = x;
 		float targetY = y;
-		if(stagerTimer == 0){
+		if(staggerTimer == 0){
 			Path p = world.curFloor.pathfinder.findPath(x, y, target[0], target[1]);
 			path = p.getPath();
 			if(path.size() > 0) targetTile = Path.getTargTile(world, path);

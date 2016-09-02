@@ -51,6 +51,38 @@ public class TutorialGenerator extends Generation {
 		workingRoom = new Rectangle(48, 52, 1, 1);
 		addToMap(workingRoom);
 		entities.add(new LockedDoor(world, 48, 52, 0));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 65*Tile.TS, 48*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
+		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
 		entities.add(new Villager(world, 50*Tile.TS, 50*Tile.TS));
 		
 		

@@ -30,11 +30,11 @@ public abstract class Character extends Dynamic {
 	public int[] moveTo;
 	public ArrayList<int[]> path;
 	
-	private static final int STAGER_TIME = 3;
+	private static final int STAGGER_TIME = 5;
 	
-	private static int stager = 0;
+	private static int stagger = 0;
 	
-	protected int stagerTimer;
+	protected int staggerTimer;
 	public float torq;
 	
 	public float move_angle;
@@ -113,10 +113,10 @@ public abstract class Character extends Dynamic {
 	
 	public Character(World world, float x, float y, int width, int height, String filename) {
 		super(world, x, y, width, height, filename);
-		
-		stagerTimer = stager;
-		stager++;
-		if(stager == STAGER_TIME)stager = 0;
+
+		staggerTimer = stagger;
+		stagger++;
+		if(stagger == STAGGER_TIME)stagger = 0;
 		immune = false;
 		
 		vision = 0;
@@ -178,8 +178,8 @@ public abstract class Character extends Dynamic {
 		post();
 		calcLight();
 		
-		stagerTimer++;
-		if(stagerTimer == STAGER_TIME)stagerTimer = 0;
+		staggerTimer++;
+		if(staggerTimer == STAGGER_TIME)staggerTimer = 0;
 	}
 
 	public void move() {
@@ -243,7 +243,7 @@ public abstract class Character extends Dynamic {
 	}
 	
 	public void sight(){
-		if(stagerTimer==0){
+		if(staggerTimer==0){
 			
 			ArrayList<float[]> rays = new ArrayList<float[]>(); //{startX,startY,endX,endy}
 			

@@ -43,8 +43,8 @@ public class Fireplace extends Static {
 
 	@Override
 	public void calc() {
-		texture.update();
-		sprite = texture.texture;
+//		texture.update();
+//		sprite = texture.texture;
 	}
 
 	@Override
