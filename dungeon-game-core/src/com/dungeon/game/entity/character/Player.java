@@ -152,7 +152,7 @@ public class Player extends Character {
 		
 		vision = 20;
 		hearing = 10;
-		gold = 0;
+		gold = 1000;
 		clickable = false;
 		
 		printPool = PrintPools.humanPool;

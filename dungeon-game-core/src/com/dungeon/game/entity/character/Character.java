@@ -311,24 +311,13 @@ public abstract class Character extends Dynamic {
 			seenEntities = new ArrayList<Entity>();
 			for(Entity e: world.entities){
 				if(Math.sqrt((Math.abs(e.x - x) - e.dWidth)*(Math.abs(e.x - x) - e.dWidth)+(Math.abs(e.y - y) - e.dHeight)*(Math.abs(e.y - y) - e.dHeight)) < vision*Tile.TS && !e.equals(this)){
-					//for some reason the hitbox of the entity has to be wound the opposite direction, (so clockwise...) thats what this code does
-					//this makes no sense, because the docs say the two polygons have to be wound the same way, but the winding of the visPolygon DOES NOT MATTER
-//					float[] verts = e.getHitbox().getVertices();
-//					ArrayList<Float> list = new ArrayList<Float>();
-//					for(float f: verts)list.add(f);
-//					Collections.reverse(list);
-//					for(int i = 0; i < verts.length; i++){
-//						verts[i] = list.get(i);
-//					}
-//					for(int i = 0; i < verts.length; i+=2){
-//						float temp = verts[i];
-//						verts[i] = verts[i+1];
-//						verts[i+1] = temp;
-//					}
-//					Polygon hitbox = new Polygon(verts);
-					if(!(e instanceof Particle) && Intersector.intersectPolygons(visPolygon, e.getVisbox(), new Polygon())){
-						if(!knownEntities.contains(e))knownEntities.add(e); //some bug here...
-						seenEntities.add(e);
+					try {
+						if(!(e instanceof Particle) && Intersector.intersectPolygons(visPolygon, e.getVisbox(), new Polygon())){
+							if(!knownEntities.contains(e))knownEntities.add(e); //some bug here...
+							seenEntities.add(e);
+						}
+					} catch(Exception error) {
+						System.out.println(error);
 					}
 				}
 			}

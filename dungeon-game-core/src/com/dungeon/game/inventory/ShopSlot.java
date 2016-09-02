@@ -2,7 +2,6 @@ package com.dungeon.game.inventory;
 
 import com.dungeon.game.entity.hud.window.DescWindow;
 import com.dungeon.game.item.Item;
-import com.dungeon.game.item.consumable.Consumable;
 import com.dungeon.game.world.World;
 
 public class ShopSlot extends Slot {
@@ -31,6 +30,15 @@ public class ShopSlot extends Slot {
 					}
 				}
 				else if(world.mouse.lb_pressed) {
+					if(world.player.spendGold(cost)){
+						Item temp = item.clone();
+						temp.stack = 1;
+						if(world.player.inv.addItem(temp) == null)item.stack--;
+						else world.player.gold+=cost;
+					}
+				}
+				else if(world.mouse.rb_pressed) {
+					
 					if(world.player.gold >= cost) {
 						int canBuy = Math.min(world.player.gold/cost,item.stack);
 						Item temp = item.clone();
@@ -41,19 +49,6 @@ public class ShopSlot extends Slot {
 						}
 						item.stack-=canBuy;
 						world.player.gold -= canBuy*cost;
-					}
-				}
-				else if(world.mouse.rb_pressed) {
-					if(world.player.spendGold(cost)){
-						Item temp = item.clone();
-						temp.stack = 1;
-						if(world.player.inv.addItem(temp) == null)item.stack--;
-						else world.player.gold+=cost;
-					}
-				}
-				else if(world.mouse.mb_pressed) {
-					if(item != null && item instanceof Consumable) {
-						consume(world.player);
 					}
 				}
 			}

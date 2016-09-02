@@ -12,7 +12,7 @@ public class Stair extends Static {
 	int destY;
 	
 	public Stair(World world, float x, float y, boolean goDown, int destX, int destY) {
-		super(world, x, y, Tile.TS, Tile.TS, "trapdoor.png");
+		super(world, x, y, 32, 32, "trapdoor.png");
 		
 		layer = FLOOR;
 		

@@ -29,9 +29,9 @@ public class GoldCounter extends Hud {
 			else value += 1111;
 		}
 		else if(value > world.player.gold) {
-			if(world.player.gold-value > 11) value -= 1;
-			else if(world.player.gold-value > 111) value -= 11;
-			else if(world.player.gold-value > 1111) value -= 111;
+			if(value-world.player.gold < 11) value -= 1;
+			else if(value-world.player.gold < 111) value -= 11;
+			else if(value-world.player.gold < 1111) value -= 111;
 			else value -= 1111;
 		}
 		if(value > 99999) value = 99999;

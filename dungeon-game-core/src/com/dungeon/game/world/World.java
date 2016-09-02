@@ -247,7 +247,7 @@ public class World {
 					if(e.solid) shapeRenderer.setColor(Color.RED);
 					else shapeRenderer.setColor(Color.GREEN);
 					
-					shapeRenderer.polygon(e.getHitbox().getVertices());
+					shapeRenderer.polygon(e.getVisbox().getVertices());
 
 					shapeRenderer.set(ShapeType.Filled);
 					shapeRenderer.setColor(Color.CYAN);

@@ -27,18 +27,27 @@ public class Fireplace extends Static {
 		tempMap.dispose();
 		//maybe seed code must change?
 		this.rotation = orientation;
-		solid = true;
-		hitbox = new Polygon(new float[]{0,0,32,0,32,32,0,32});
-		genVisBox();
+		solid = false;
+		hitbox = new Polygon(new float[]{-2,-2,34,-2,34,34,-2,34});
 		light = new Light(world, x, y, 500, 100, Light.ORANGE, 40, this);
-		if(orientation == 0)light.setOffset(0, -18);
-		else if(orientation == 1)light.setOffset(-18, 0);
-		else if(orientation == 2)light.setOffset(0, 18);
-		else if(orientation == 3)light.setOffset(18, 0);
-
-		rotate = true;
+		
 		originX = 16;
 		originY = 16;
+		rotate = true;
+		
+		if(orientation == 0) {
+			light.setOffset(0, -18);
+		}
+		else if(orientation == 1) {
+			light.setOffset(-18, 0);
+		}
+		else if(orientation == 2) {
+			light.setOffset(0, 18);
+		}
+		else if(orientation == 3) {
+			light.setOffset(18, 0);
+		}
+		genVisBox();
 	}
 
 	@Override
