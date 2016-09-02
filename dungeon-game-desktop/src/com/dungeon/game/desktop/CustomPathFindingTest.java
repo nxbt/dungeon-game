@@ -70,8 +70,8 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		font.setColor(Color.RED);
 		font.getData().setScale(4);
 		
-		int width = 25;
-		int height = 25;
+		int width = 100;
+		int height = 100;
 
 		int[][] indexArray  = new int[width][height];
 		int[][] costArray  = new int[width][height];
@@ -85,7 +85,7 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		
 		//create the camera and viewport
 		cam = new OrthographicCamera();
-		cam.zoom = 7f;
+		cam.zoom = 30f;
 		view = new FitViewport(640, 360, cam);
 		view.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		cam.position.set(indexArray.length / 2 *scale, indexArray.length / 2 * scale, 0);
@@ -109,7 +109,7 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 			for(int y = 0; y < height; y++){
 				Node n = gl0.addNode(x + 0.5f, y + 0.5f);
 				nodeArray[x][y] = n;
-				int upNodeIndex = (int)(y/5) + (int)(x/5)*5;
+				int upNodeIndex = (int)(y/5) + (int)(x/5)*20;
 				n.upNode = gl1.nodes.get(upNodeIndex);
 				level1NodeCosts[x/5][y/5] += costArray[x][y];
 				if(x%5 == 2 && y%5 == 2)gl1.nodes.get(upNodeIndex).downNode = n;
@@ -226,7 +226,7 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 			Node prevNode = path.nodes.get(0);
 			for(Node n: path.nodes){
 				if(prevNode != null){
-					shapeRenderer.rectLine(prevNode.x*scale, prevNode.y*scale, n.x*scale, n.y*scale, 15);
+					shapeRenderer.rectLine(prevNode.x*scale, prevNode.y*scale, n.x*scale, n.y*scale, 50);
 				}
 				prevNode = n;
 			}
@@ -235,7 +235,7 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		
 		shapeRenderer.set(ShapeType.Filled);
 		shapeRenderer.setColor(Color.GRAY);
-		shapeRenderer.circle(mouseX, mouseY, 5);
+		shapeRenderer.circle(mouseX, mouseY, 50);
 		shapeRenderer.end();
 		
 
