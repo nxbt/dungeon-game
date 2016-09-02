@@ -31,21 +31,9 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 			else new LwjglApplication(new CustomPathFindingTest(), config);
 	}
 	
-	private static final int[][] indexArray = new int[][]{
-		new int[]{(int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7)},
-		new int[]{(int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7)},
-		new int[]{(int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7)},
-		new int[]{(int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7)},
-		new int[]{(int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7), (int) (Math.random() + 0.7)},
-	};
+	private int[][] indexArray;
 	
-	private static final int[][] costArray = new int[][]{
-		new int[]{(int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5)},
-		new int[]{(int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5)},
-		new int[]{(int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5)},
-		new int[]{(int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5)},
-		new int[]{(int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5), (int) (Math.random()*5)},
-	};
+	private int[][] costArray;
 	
 	private ShapeRenderer shapeRenderer; //the shapeRenderer
 	
@@ -84,6 +72,9 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.RED);
 		font.getData().setScale(2);
+
+		indexArray  = new int[5][5];
+		costArray  = new int[5][5];
 		
 		//create the camera and viewport
 		cam = new OrthographicCamera();
@@ -94,30 +85,67 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		
 		//set mouse X and Y to 0 my default
 		mouseX = 0;
-		
 		mouseY = 0;
+
+		GraphLevel gl0 = new GraphLevel();
+		GraphLevel gl1 = new GraphLevel();
+
+		gl0.addNode(0, 0);
+		gl0.addNode(0, 1);
 		
-		GraphLevel gl = new GraphLevel();
-		Node[][] nodeArray = new Node[indexArray.length][indexArray[0].length];
+		gl0.addNode(2, 0);
+		gl0.addNode(2, 1);
+
+		gl0.nodes.get(0).addConnection(gl0.nodes.get(1), 1);
+		gl0.nodes.get(1).addConnection(gl0.nodes.get(0), 1);
 		
-		for(int x = 0; x < indexArray.length; x++){
-			for(int y = 0; y < indexArray[0].length; y++){
-				/*if(indexArray[x][y] == 1)*/nodeArray[x][y] = gl.addNode(x, y);
-			}
-		}
+
+		gl0.nodes.get(2).addConnection(gl0.nodes.get(3), 1);
+		gl0.nodes.get(3).addConnection(gl0.nodes.get(2), 1);
 		
-		for(int x = 0; x < nodeArray.length; x++){
-			for(int y = 0; y < nodeArray[0].length; y++){
-				if(nodeArray[x][y] != null){
-					if(x > 0 && nodeArray[x - 1][y] != null)nodeArray[x][y].addConnection(nodeArray[x - 1][y], (costArray[x][y] + costArray[x - 1][y])/2f);
-					if(x < nodeArray.length - 1 && nodeArray[x + 1][y] != null)nodeArray[x][y].addConnection(nodeArray[x + 1][y], (costArray[x][y] + costArray[x + 1][y])/2f);
-					if(y > 0 && nodeArray[x][y - 1] != null)nodeArray[x][y].addConnection(nodeArray[x][y - 1], (costArray[x][y] + costArray[x][y - 1])/2f);
-					if(y < nodeArray.length - 1 && nodeArray[x][y + 1] != null)nodeArray[x][y].addConnection(nodeArray[x][y + 1], (costArray[x][y] + costArray[x][y + 1])/2f);
-				}
-			}
-		}
+
+		gl0.nodes.get(0).addConnection(gl0.nodes.get(2), 1);
+		gl0.nodes.get(2).addConnection(gl0.nodes.get(0), 1);
 		
-		Graph graph = new Graph(new GraphLevel[]{gl});
+
+		gl0.nodes.get(1).addConnection(gl0.nodes.get(3), 1);
+		gl0.nodes.get(3).addConnection(gl0.nodes.get(1), 1);
+
+		gl1.addNode(0, 0.5f);
+		gl1.addNode(2, 0.5f);
+		
+
+		gl1.nodes.get(0).addConnection(gl1.nodes.get(1), 1);
+		gl1.nodes.get(1).addConnection(gl1.nodes.get(0), 1);
+
+		gl0.nodes.get(0).upNode = gl1.nodes.get(0);
+		gl0.nodes.get(1).upNode = gl1.nodes.get(0);
+		
+		gl0.nodes.get(2).upNode = gl1.nodes.get(1);
+		gl0.nodes.get(3).upNode = gl1.nodes.get(1);
+
+		gl1.nodes.get(0).downNode = gl0.nodes.get(0);
+		gl1.nodes.get(1).downNode = gl0.nodes.get(2);
+//		Node[][] nodeArray = new Node[indexArray.length][indexArray[0].length];
+//		
+//		for(int x = 0; x < indexArray.length; x++){
+//			for(int y = 0; y < indexArray[0].length; y++){
+//				/*if(indexArray[x][y] == 1)*/nodeArray[x][y] = gl.addNode(x, y);
+//			}
+//		}
+//		
+//		for(int x = 0; x < nodeArray.length; x++){
+//			for(int y = 0; y < nodeArray[0].length; y++){
+//				if(nodeArray[x][y] != null){
+//					if(x > 0 && nodeArray[x - 1][y] != null)nodeArray[x][y].addConnection(nodeArray[x - 1][y], (costArray[x][y] + costArray[x - 1][y])/2f);
+//					if(x < nodeArray.length - 1 && nodeArray[x + 1][y] != null)nodeArray[x][y].addConnection(nodeArray[x + 1][y], (costArray[x][y] + costArray[x + 1][y])/2f);
+//					if(y > 0 && nodeArray[x][y - 1] != null)nodeArray[x][y].addConnection(nodeArray[x][y - 1], (costArray[x][y] + costArray[x][y - 1])/2f);
+//					if(y < nodeArray.length - 1 && nodeArray[x][y + 1] != null)nodeArray[x][y].addConnection(nodeArray[x][y + 1], (costArray[x][y] + costArray[x][y + 1])/2f);
+//				}
+//			}
+//		}
+		
+		Graph graph = new Graph(new GraphLevel[]{gl0, gl1});
 		
 		pathfinder = new Pathfinder(graph);
 	}
@@ -138,8 +166,8 @@ public class CustomPathFindingTest extends ApplicationAdapter {
 		}
 		
 		if(endNode != null && startNode != null){
-			path = pathfinder.findPath(startNode, endNode, 0);
-			System.out.println(path.cost);
+			path = pathfinder.findPath(startNode.x*Tile.TS, startNode.y*Tile.TS, endNode.x*Tile.TS, endNode.y*Tile.TS);
+//			System.out.println(path.cost);
 		}
 
 		//clear the screen

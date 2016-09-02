@@ -11,14 +11,17 @@ public class Pathfinder {
 		this.graph = graph;
 	}
 	
-	public Path findPath(int sX, int sY, int eX, int eY){ //find path between two given points
+	public Path findPath(float sX, float sY, float eX, float eY){ //find path between two given points
 		Node startNode = graph.graphLevels[0].getCloseNode(sX, sY);
 		Node endNode = graph.graphLevels[0].getCloseNode(eX, eY);
 		Node curStartNode = startNode;
 		Node curEndNode = endNode;
+		System.out.println(curStartNode.index);
+		System.out.println(curEndNode.index);
 		int level = 0;
 		do{
 			if(curStartNode.upNode.equals(curEndNode.upNode)){
+				System.out.println(level);
 				return findPath(startNode, endNode, level);
 			}else{
 				curStartNode = curStartNode.upNode;
