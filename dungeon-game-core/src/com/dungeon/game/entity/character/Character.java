@@ -30,7 +30,7 @@ public abstract class Character extends Dynamic {
 	public int[] moveTo;
 	public ArrayList<int[]> path;
 	
-	private static final int STAGGER_TIME = 5;
+	private static final int STAGGER_TIME = 10;
 	
 	private static int stagger = 0;
 	
@@ -244,29 +244,30 @@ public abstract class Character extends Dynamic {
 	
 	public void sight(){
 		if(staggerTimer==0){
+			System.out.println(this.getClass().getSimpleName());
 			
 			ArrayList<float[]> rays = new ArrayList<float[]>(); //{startX,startY,endX,endy}
 			
 			for(int i = -180; i < 180; i+=18){
-				rays.add(new float[]{x,y,x+(float) (Math.cos((i)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((i)/180f*Math.PI)*vision*(float)Tile.TS)});
+				rays.add(new float[]{x,y,x+(float) (Math.cos((i)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((i)/180f*Math.PI)*vision*(float)Tile.TS),x+(float) (Math.cos((i)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((i)/180f*Math.PI)*vision*(float)Tile.TS)});
 			}
 			
 			for(int[] corner: world.curFloor.corners){
 				if(Math.sqrt((x-corner[0])*(x-corner[0])+(y-corner[1])*(y-corner[1]))<vision*Tile.TS){
 					float angleSeg = (float) (Math.atan2(corner[1]-y,corner[0]-x)*180f/Math.PI);
 					if(corner[2] == 0) {
-						rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg+0.01f)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg+0.01)/180f*Math.PI)*vision*(float)Tile.TS)});
-						rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg-0.01f)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg-0.01)/180f*Math.PI)*vision*(float)Tile.TS)});
+						rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg+0.01f)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg+0.01)/180f*Math.PI)*vision*(float)Tile.TS), corner[0], corner[1]});
+						rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg-0.01f)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg-0.01)/180f*Math.PI)*vision*(float)Tile.TS), corner[0], corner[1]});
 					}
 					else {
-						rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg)/180f*Math.PI)*vision*(float)Tile.TS)});
+						rays.add(new float[]{x,y,x+(float) (Math.cos((angleSeg)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((angleSeg)/180f*Math.PI)*vision*(float)Tile.TS), corner[0], corner[1]});
 					}
 				}
 			}
 			
 			//calculate the verticies
 			
-			float[][] verticies = new float[rays.size()][2];
+			ArrayList<float[]> verticies = new ArrayList<float[]>();
 	
 			ArrayList<float[]> edges = new ArrayList<float[]>();
 			
@@ -281,13 +282,13 @@ public abstract class Character extends Dynamic {
 				for(float[] edge: edges){
 					Intersector.intersectSegments(rays.get(i)[0],rays.get(i)[1], endVertex.x,endVertex.y, edge[0],edge[1], edge[2],edge[3],endVertex);
 				}
-				verticies[i] = (new float[]{endVertex.x, endVertex.y});
+				if(Math.sqrt((rays.get(i)[0] - endVertex.x)*(rays.get(i)[0] - endVertex.x) + (rays.get(i)[1] - endVertex.y)*(rays.get(i)[1] - endVertex.y)) + Tile.TS/2 > Math.sqrt((rays.get(i)[0] - rays.get(i)[4])*(rays.get(i)[0] - rays.get(i)[4]) + (rays.get(i)[1] - rays.get(i)[5])*(rays.get(i)[1] - rays.get(i)[5])))verticies.add(new float[]{endVertex.x, endVertex.y});
 			}
 			
 			//calculate the angles of each vertex
-			float[] vertexAngles = new float[verticies.length];
-			for(int i = 0; i < verticies.length; i++){
-				vertexAngles[i] = (float) Math.atan2(verticies[i][1]-y,verticies[i][0]-x);
+			float[] vertexAngles = new float[verticies.size()];
+			for(int i = 0; i < verticies.size(); i++){
+				vertexAngles[i] = (float) Math.atan2(verticies.get(i)[1]-y,verticies.get(i)[0]-x);
 			}
 			
 			//reorder points to be in counterclockwise fashion.

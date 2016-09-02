@@ -284,15 +284,21 @@ public class World {
 					Gdx.gl.glEnable(GL20.GL_BLEND);
 					Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 					if(e instanceof Character){
-						if(e instanceof Player)shapeRenderer.setColor(1,0,1,0.2f);
-						if(e instanceof Friend)shapeRenderer.setColor(0,1,1,0.2f);
-						if(e instanceof Enemy)shapeRenderer.setColor(1,1,0,0.2f);
+						if(e instanceof Player)shapeRenderer.setColor(1,0,1,1);
+						if(e instanceof Friend)shapeRenderer.setColor(0,1,1,1);
+						if(e instanceof Enemy)shapeRenderer.setColor(1,1,0,1);
 						shapeRenderer.set(ShapeType.Filled);
 //						for(Polygon tri: ((Character)e).visTris){
 //							float[] points = tri.getVertices();
 //							shapeRenderer.triangle(points[0], points[1], points[2], points[3], points[4], points[5]);
 //						}
 						shapeRenderer.polygon(((Character) e).visPolygon.getVertices());
+						float[] verts = ((Character) e).visPolygon.getVertices();
+						shapeRenderer.set(ShapeType.Filled);
+						shapeRenderer.setColor(Color.RED);
+						for(int i = 1; i < verts.length; i+=2){
+							shapeRenderer.circle(verts[i-1], verts[i], 4);
+						}
 						shapeRenderer.set(ShapeType.Line);
 					}
 					Gdx.gl.glBlendFunc(GL20.GL_ZERO, GL20.GL_ONE);
