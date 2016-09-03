@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.TutorialGenerator;
@@ -208,7 +209,9 @@ public class Floor {
 			for(int k = 0; k <tm.length; k++){
 				if(tm[i][k].data == 1){
 					// Create our body definition
-					BodyDef groundBodyDef =new BodyDef();  
+					BodyDef groundBodyDef = new BodyDef();
+					
+					groundBodyDef.type = BodyType.StaticBody;
 					// Set its world position
 					groundBodyDef.position.set(new Vector2(k*Tile.TS+Tile.TS/2, i*Tile.TS+Tile.TS/2));  
 
