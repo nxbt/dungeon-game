@@ -6,6 +6,9 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -54,11 +57,12 @@ public abstract class Dynamic extends Entity {
 				moveVec.y -= moveVec.y/vel*fric;
 			}
 		}
+//		
+//		x += moveVec.x;
+//		y += moveVec.y;
+		if(box2dBody != null)box2dBody.setLinearVelocity(moveVec.x, moveVec.y);
 		
-		x += moveVec.x;
-		y += moveVec.y;
-		
-		if(moveVec.x != 0 || moveVec.y != 0)col(true,originalPos);
+//		if(moveVec.x != 0 || moveVec.y != 0)col(true,originalPos);
 	}
 	
 	//fix collision to stop gliching into walls
@@ -267,5 +271,28 @@ public abstract class Dynamic extends Entity {
 	
 	public float getVel(){
 		return (float) Math.sqrt(moveVec.x*moveVec.x+moveVec.y*moveVec.y);
+	}
+	
+	public void getBody(com.badlogic.gdx.physics.box2d.World world){
+		// Create our body definition
+		BodyDef bodyDef = new BodyDef();
+		
+		bodyDef.type = BodyType.DynamicBody;
+		// Set its world position
+		bodyDef.position.set(new Vector2(x, y));  
+
+		// Create a body from the defintion and add it to the world
+		box2dBody = world.createBody(bodyDef);  
+
+		// Create a polygon shape
+		PolygonShape shape = new PolygonShape();  
+		// Set the polygon shape as a box which is twice the size of our view port and 20 high
+		// (setAsBox takes half-width and half-height as arguments)
+		shape.set(hitbox.getVertices());
+		// Create a fixture from our polygon shape and add it to our ground body  
+		box2dBody.createFixture(shape, 0.0f);
+		// Clean up after ourselves
+		shape.dispose();
+		
 	}
 }

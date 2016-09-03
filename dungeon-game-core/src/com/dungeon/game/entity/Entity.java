@@ -8,8 +8,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.utilities.Spritesheet;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public abstract class Entity {
@@ -61,6 +67,8 @@ public abstract class Entity {
 	public int layer;
 	
 	protected boolean clickable;
+	
+	public Body box2dBody;
 	
 	public Entity(World world, float x, float y, int width, int height, String filename) {
 		this.x = x;
@@ -174,9 +182,18 @@ public abstract class Entity {
 		}
 	}
 	
+	public void goToBodyPostion(){
+		if(box2dBody != null){
+			x = box2dBody.getPosition().x + originX;
+			y = box2dBody.getPosition().y + originY;
+		}
+	}
+	
 	public abstract void calc(); //called at the beginning of an update cycle
 	
 	public abstract void post(); //called at the end of an update cycle
+	
+	public abstract void getBody(com.badlogic.gdx.physics.box2d.World world);
 	
 	
 }

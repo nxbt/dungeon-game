@@ -229,6 +229,8 @@ public class Floor {
 			}
 		}
 		
+		world.player.getBody(box2dWorld);
+		
 	}
 	
 	public void update() {
