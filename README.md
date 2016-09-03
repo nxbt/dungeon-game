@@ -34,5 +34,4 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 
 ##BUG TRACKER
 * floating torches in castle rooms and where multiple halls meet (and other places)
-* characters on the border of a wall will have a visPoly that crashes
-* fireplaces turn on at the wrong times
+* fireplaces turn on when they should not
