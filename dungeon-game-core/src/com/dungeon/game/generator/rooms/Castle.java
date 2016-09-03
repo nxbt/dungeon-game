@@ -3,13 +3,17 @@ package com.dungeon.game.generator.rooms;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
+import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.Static;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.rooms.room.EnemyRoom;
 import com.dungeon.game.generator.rooms.room.Room;
-import com.dungeon.game.pathing.newpathing.Node;
 import com.dungeon.game.pathing.newpathing.Graph;
 import com.dungeon.game.pathing.newpathing.GraphLevel;
+import com.dungeon.game.pathing.newpathing.Node;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -287,7 +291,17 @@ public class Castle extends Generation {
 			Node zoneNode = gl1.addNode(room.x + room.width/2, room.y + room.height/2);
 			for(int i = (int) room.x; i < room.x + room.width; i++){
 				for(int k = (int) room.y; k < room.y + room.height; k++){
-					if(!Tile.isSolid(map[k][i])){
+					//the commented code makes nodes withs solid static entities disapear
+//					boolean intersectsEntity = false;
+//					for(Entity e: entities){
+//						if(e instanceof Static && e.solid){
+//							if(Intersector.overlapConvexPolygons(e.getHitbox(), new Polygon(new float[]{(i)*Tile.TS + 1, (k)*Tile.TS + 1, (i+1)*Tile.TS - 1, (k)*Tile.TS + 1, (i+1)*Tile.TS - 1, (k+1)*Tile.TS - 1, (i)*Tile.TS + 1, (k+1)*Tile.TS - 1}))){
+//								intersectsEntity = true;
+//								break;
+//							}
+//						}
+//					}
+					if(!Tile.isSolid(map[k][i])/* && !intersectsEntity*/){
 						Node node = gl0.addNode(i + 0.5f, k + 0.5f);
 						node.upNode = zoneNode;
 						zoneNode.downNodes.add(node);
