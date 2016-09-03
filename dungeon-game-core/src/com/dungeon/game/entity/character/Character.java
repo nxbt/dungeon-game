@@ -30,7 +30,7 @@ public abstract class Character extends Dynamic {
 	public int[] moveTo;
 	public ArrayList<int[]> path;
 	
-	private static final int STAGGER_TIME = 10;
+	private static final int STAGGER_TIME = 3;
 	
 	private static int stagger = 0;
 	
@@ -247,7 +247,7 @@ public abstract class Character extends Dynamic {
 			
 			ArrayList<float[]> rays = new ArrayList<float[]>(); //{startX,startY,endX,endy}
 			
-			for(int i = -180; i <= 180 - Math.min(100/vision, 60); i+=Math.min(100/vision, 60)){
+			for(int i = -180; i <= 180; i+=5){
 				rays.add(new float[]{x,y,x+(float) (Math.cos((i)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((i)/180f*Math.PI)*vision*(float)Tile.TS),x+(float) (Math.cos((i)/180f*Math.PI)*vision*(float)Tile.TS),y+(float) (Math.sin((i)/180f*Math.PI)*vision*(float)Tile.TS)});
 			}
 			
@@ -367,7 +367,6 @@ public abstract class Character extends Dynamic {
 	protected void footPrints(){
 		if(printPool != null && moveVec.len() > 0.1){
 			if(printTimer == printTime){
-				float xOffSet = 0;
 				float yOffSet = 5;
 				float angle = moveVec.angleRad();
 				float x = this.x - (float) (yOffSet*Math.sin(angle));
@@ -375,7 +374,6 @@ public abstract class Character extends Dynamic {
 				world.entities.add(Footprint.get(world, printPool, x, y, moveVec.angle()));
 				printTimer++;
 			}else if(printTimer == printTime * 2){
-				float xOffSet = 0;
 				float yOffSet = -5;
 				float angle = moveVec.angleRad();
 				float x = this.x - (float) (yOffSet*Math.sin(angle));

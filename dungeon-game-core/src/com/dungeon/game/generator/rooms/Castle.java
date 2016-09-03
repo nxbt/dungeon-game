@@ -3,11 +3,7 @@ package com.dungeon.game.generator.rooms;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
-import com.dungeon.game.entity.Entity;
-import com.dungeon.game.entity.Static;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.rooms.room.EnemyRoom;
 import com.dungeon.game.generator.rooms.room.Room;
@@ -39,6 +35,8 @@ public class Castle extends Generation {
 	}
 	
 	protected class GenRoom extends Rectangle {
+		private static final long serialVersionUID = -5657038050225544037L;
+		
 		private ArrayList<String> expands;
 		protected ArrayList<GenRoom> connectedRooms;
 		
@@ -215,6 +213,7 @@ public class Castle extends Generation {
 	}
 	
 	protected void populateRooms() {
+		@SuppressWarnings("unchecked")
 		ArrayList<Rectangle> rooms = (ArrayList<Rectangle>) this.rooms.clone();
 		Rectangle normRoomsRect;
 		int[][] normRoomsDoorFinder;

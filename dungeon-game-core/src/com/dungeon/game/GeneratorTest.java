@@ -4,19 +4,16 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.rooms.Castle;
-import com.dungeon.game.pathing.HierarchicalGraph;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class GeneratorTest extends ApplicationAdapter {
-	private SpriteBatch batch;
 
 	public ShapeRenderer shapeRenderer;
 	
@@ -31,8 +28,6 @@ public class GeneratorTest extends ApplicationAdapter {
 	@Override
 	public void create() { //shit ton of bugs here!
 		Gdx.graphics.setWindowedMode(1280, 720);
-		
-		batch = new SpriteBatch();
 		
 		shapeRenderer = new ShapeRenderer();
 		int width = 50;

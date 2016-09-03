@@ -34,21 +34,25 @@ public class Rooms extends Generation {
 		hallEnds = new ArrayList<ArrayList<Rectangle>>();
 		if(world.curDungeon!=null)entities.add(new Stair(world, (Integer)(args[1])*Tile.TS-Tile.TS/2, (Integer)(args[2])*Tile.TS-Tile.TS/2, false, (Integer)(args[3])+1, (Integer)(args[4])+1));
 		roomGenerators = new MethodArray(4){
+			@SuppressWarnings("unused")
 			public void a(int x, int y, int width, int height, int dir, Rectangle room){ //these "unused" methods are def used.
 				int nextX = (int) (x+width*Math.random());
 				int nextY = y;
 				generateHallWay(nextX, nextY-1, dir, room);
 			}
+			@SuppressWarnings("unused")
 			public void b(int x, int y, int width, int height, int dir, Rectangle room){
 				int nextX = (int) (x+width*Math.random());
 				int nextY = y+height;
 				generateHallWay(nextX, nextY, dir, room);
 			}
+			@SuppressWarnings("unused")
 			public void c(int x, int y, int width, int height, int dir, Rectangle room){
 				int nextX = x;
 				int nextY = (int) (y+height*Math.random());
 				generateHallWay(nextX-1, nextY, dir, room);
 			}
+			@SuppressWarnings("unused")
 			public void d(int x, int y, int width, int height, int dir, Rectangle room){
 				int nextX = x+width;
 				int nextY = (int) (y+height*Math.random());

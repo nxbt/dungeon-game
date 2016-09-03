@@ -3,7 +3,6 @@ package com.dungeon.game.generator.rooms.hallway;
 import java.util.ArrayList;
 
 import com.dungeon.game.entity.furniture.Torch;
-import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.TileMap;
 import com.dungeon.game.world.World;
 

@@ -1,7 +1,5 @@
 package com.dungeon.game.entity.particle;
 
-import java.util.Random;
-
 import com.dungeon.game.utilities.Pool;
 import com.dungeon.game.world.World;
 

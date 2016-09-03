@@ -21,7 +21,6 @@ public class GeneralStore extends Room {
 
 	@Override
 	public void generate() {//begin transformation
-		int doorX =  doorPos[0][0];
 		int doorY = doorPos[0][1];
 		
 		boolean keeperBottom = Math.random()>0.5;

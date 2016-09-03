@@ -13,10 +13,10 @@ public class TrainingCenter extends Room {
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void generate() {
-		int doorX =  doorPos[0][0];
-		int doorY = doorPos[0][1];;
+		int doorY = doorPos[0][1];
 		
 		//spawn stuff
 		int x = 0,y = 0;

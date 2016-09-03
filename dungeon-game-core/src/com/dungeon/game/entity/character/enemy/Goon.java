@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.ai.CoverFinder;
-import com.dungeon.game.effect.regen.ManaRegen;
 import com.dungeon.game.effect.regen.StamRegen;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.inventory.Inventory;

@@ -66,6 +66,7 @@ public class Player extends Character {
 		mvel = 5;
 		fric = 0.5f;
 		
+//		hitbox = new Polygon(new float[]{30,16,28,23,23,28,16,30,9,28,4,23,2,16,4,9,9,4,16,2,23,4,28,9});
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();
 		

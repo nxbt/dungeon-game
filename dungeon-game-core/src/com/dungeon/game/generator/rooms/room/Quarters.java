@@ -23,7 +23,6 @@ public class Quarters extends Room {
 
 	@Override
 	public void generate() {
-		int doorX =  doorPos[0][0];
 		int doorY = doorPos[0][1];
 		
 		//spawn stuff

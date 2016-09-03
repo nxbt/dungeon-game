@@ -1,11 +1,8 @@
 package com.dungeon.game.world;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

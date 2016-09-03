@@ -14,8 +14,6 @@ import com.dungeon.game.world.World;
 public class PartsInfo extends Hud {
 	private final NinePatch BACKGROUND = new NinePatch(new Texture("desc_box.png"), 4, 4, 4, 4);
 	
-	private Weapon weapon;
-	
 	private Part[] parts;
 	
 	private BitmapFont font;
@@ -27,8 +25,6 @@ public class PartsInfo extends Hud {
 		
 		font = new BitmapFont(Gdx.files.internal("main_text.fnt"));
 		font.setColor(Color.WHITE);
-		
-		this.weapon = weapon;
 		
 		parts = weapon.getParts();
 		
