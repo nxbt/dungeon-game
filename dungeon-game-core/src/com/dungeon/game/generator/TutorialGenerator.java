@@ -21,9 +21,9 @@ import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Key;
 import com.dungeon.game.item.equipable.armor.WoolPants;
 import com.dungeon.game.item.equipable.armor.WoolShirt;
-import com.dungeon.game.pathing.newpathing.Graph;
-import com.dungeon.game.pathing.newpathing.GraphLevel;
-import com.dungeon.game.pathing.newpathing.Node;
+import com.dungeon.game.pathing.Graph;
+import com.dungeon.game.pathing.GraphLevel;
+import com.dungeon.game.pathing.Node;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 

@@ -8,7 +8,7 @@ import com.dungeon.game.entity.character.PrintPools;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.light.Light;
-import com.dungeon.game.pathing.newpathing.Path;
+import com.dungeon.game.pathing.Path;
 import com.dungeon.game.textures.entity.Person;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;

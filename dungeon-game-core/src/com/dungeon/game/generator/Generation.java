@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.furniture.Fireplace;
-import com.dungeon.game.pathing.newpathing.Graph;
+import com.dungeon.game.pathing.Graph;
 import com.dungeon.game.world.Floor;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.TileMap;

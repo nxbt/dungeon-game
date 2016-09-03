@@ -28,7 +28,7 @@ import com.dungeon.game.entity.particle.Blood;
 import com.dungeon.game.entity.particle.BodyChunk;
 import com.dungeon.game.entity.particle.Ember;
 import com.dungeon.game.entity.particle.Poof;
-import com.dungeon.game.pathing.newpathing.Node;
+import com.dungeon.game.pathing.Node;
 
 import box2dLight.PointLight;
 import box2dLight.RayHandler;

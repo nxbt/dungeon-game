@@ -1,56 +1,39 @@
 package com.dungeon.game.pathing;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 
-import com.badlogic.gdx.ai.pfa.GraphPath;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
-public class Path implements GraphPath<Node> { //try seach connection path???
+public class Path implements Cloneable{
 	
-	public ArrayList<Node> nodes;
 	
-	public World world;
+	public ArrayList<Node> nodes; //the nodes on this path, first first, last last
 	
-	public Path(World world){
-		super();
-		this.world = world;
+	public float cost; //do we need this?
+	
+	public Path(Node n){
 		nodes = new ArrayList<Node>();
+		nodes.add(0, n);
+		cost = 0;
 	}
-
-	@Override
-	public Iterator<Node> iterator() {
-		return nodes.iterator();
+	
+	public void addNode(Node n){
+		Node prev = nodes.get(0); //n should always have a connection from n, if not it will crash, but thats better than adding an if check!
+		cost+=n.costs.get(n.outNodes.indexOf(prev));
+		nodes.add(0, n);
 	}
-
-	@Override
-	public int getCount() {
-		return nodes.size();
-	}
-
-	@Override
-	public Node get(int index) {
-		return nodes.get(index);
-	}
-
-	@Override
-	public void add(Node node) {
-		nodes.add(node);
-	}
-
-	@Override
-	public void clear() {
-		nodes.clear();
-	}
-
-	@Override
-	public void reverse() {
-		Collections.reverse(nodes);
+	
+	public Path clone() {
+		try {
+			return (Path) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public ArrayList<int[]> getPath(){
@@ -61,8 +44,8 @@ public class Path implements GraphPath<Node> { //try seach connection path???
 		return path;
 	}
 	
-	public int[] getTargTile(){
-		ArrayList<int[]> path = getPath();
+	public static int[] getTargTile(World world, ArrayList<int[]> path){
+		if(path.size() == 1)return path.get(0);
 		boolean changeDestination;
 		Vector2 startPoint_bl = new Vector2(path.get(0)[0]*Tile.TS,path.get(0)[1]*Tile.TS);
 		Vector2 startPoint_br = new Vector2(path.get(0)[0]*Tile.TS+Tile.TS,path.get(0)[1]*Tile.TS);

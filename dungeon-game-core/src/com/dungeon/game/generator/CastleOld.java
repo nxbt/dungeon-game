@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.dungeon.game.pathing.newpathing.Graph;
+import com.dungeon.game.pathing.Graph;
 import com.dungeon.game.world.World;
 
 public class CastleOld extends Generation {

@@ -7,9 +7,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.rooms.room.EnemyRoom;
 import com.dungeon.game.generator.rooms.room.Room;
-import com.dungeon.game.pathing.newpathing.Graph;
-import com.dungeon.game.pathing.newpathing.GraphLevel;
-import com.dungeon.game.pathing.newpathing.Node;
+import com.dungeon.game.pathing.Graph;
+import com.dungeon.game.pathing.GraphLevel;
+import com.dungeon.game.pathing.Node;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 

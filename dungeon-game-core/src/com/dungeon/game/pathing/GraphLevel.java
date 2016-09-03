@@ -1,8 +1,6 @@
-package com.dungeon.game.pathing.newpathing;
+package com.dungeon.game.pathing;
 
 import java.util.ArrayList;
-
-import com.dungeon.game.world.Tile;
 
 public class GraphLevel {
 	private int nodeIndexCounter;

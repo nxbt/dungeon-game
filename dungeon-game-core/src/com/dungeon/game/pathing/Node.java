@@ -2,78 +2,71 @@ package com.dungeon.game.pathing;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.ai.pfa.Connection;
-import com.badlogic.gdx.utils.Array;
 import com.dungeon.game.world.Tile;
 
 public class Node {
 	
-	private static int[] CUR_INDICES;
-	private Array<Connection<Node>> connections = new Array<Connection<Node>>();
-	public float cost;
-	private int index;
-	public float x; //x and y of nodes are in tiles not pixels
-	public float y;
-	public Node upNode;
-	public Node downNode;
-	public ArrayList<Node> downNodes;
-	public String name;
-	public int level;
+	public ArrayList<Node> outNodes; //node that can be moved to from this one
 	
-	public Node(float x, float y, float cost, int level){
-		index = CUR_INDICES[level];
-		CUR_INDICES[level]++;
-		this.cost = cost;
+	public ArrayList<Node> inNodes; //this node can be moved to from these nodes;
+	
+	public ArrayList<Float> costs; //cost of moving to the corresponding node
+	
+	public float x; //x position of this node
+	public float y; //y postion of this node
+	
+	public float xDistance;
+	
+	public float yDistance;
+	
+	public int index; //index for the indexed pathfinder to use
+	
+	public Node downNode; //the node that this one links to on the graphLevel below this one
+	
+	public ArrayList<Node> downNodes; //all nodes that link up to this one from the graph level below
+	
+	public Node upNode; //the node that this one links to on the graphLevel above this one
+	
+	public Node(float x, float y, int index){
 		this.x = x;
 		this.y = y;
-		this.name = "level "+level;
+		xDistance = x * Tile.TS;
+		yDistance = y * Tile.TS;
+		this.index = index;
+		outNodes = new ArrayList<Node>();
+		inNodes = new ArrayList<Node>();
+		costs = new ArrayList<Float>();
 		downNodes = new ArrayList<Node>();
-		this.level = level;
 	}
 	
-	public void makeConnection(Node end, float cost){
-		connections.add(new com.dungeon.game.pathing.Connection(this, end, cost));
+	//adds an adjacent node with the corresponding cost
+	public void addConnection(Node n, float c){
+		outNodes.add(n);
+		n.inNodes.add(this);
+		costs.add(c);
 	}
 	
-	public int getIndex(){
-		return index;
-	}
-	
-	public Array<Connection<Node>> getConnections(){
-		return connections;
-	}
-	
-	public static void resetIndex(int levels){
-		CUR_INDICES = new int[levels];
-		for(int i = 0; i < CUR_INDICES.length; i++){
-			CUR_INDICES[i] = 0;
-		}
-	}
-	
+	//returns the distance between the given point and this node
 	public float findDistance(float x, float y){
-		return (float) Math.sqrt((x-this.x*Tile.TS) * (x-this.x*Tile.TS) + (y-this.y*Tile.TS) * (y-this.y*Tile.TS));
+		float xDiff = (x-xDistance);
+		float yDiff = (y-yDistance);
+		return (float) Math.sqrt(xDiff*xDiff + yDiff*yDiff);
 	}
-
-	public boolean isAdjacentTo(Node n2) {
+	
+	public void setDownNode(){
+		Node closeNode = downNodes.get(0);
 		for(Node n: downNodes){
-			for(Connection<Node> c: n.connections){
-				if(c.getToNode().upNode.equals(n2))return true;
+			if(n.findDistance(x, y) < closeNode.findDistance(x, y))closeNode = n;
+		}
+		downNode = closeNode;
+	}
+	
+	public boolean isAdjacentTo(Node other) {
+		for(Node n: downNodes){
+			for(Node n2: n.outNodes){
+				if(n2.upNode.equals(other))return true;
 			}
 		}
 		return false;
 	}
-	
-	public void findDownNode(){
-		Node closeNode = downNodes.get(0);
-		float closeNodeDist = closeNode.findDistance(x*Tile.TS, y*Tile.TS);
-		for(Node n: downNodes){
-			if(n.findDistance(x*Tile.TS, y*Tile.TS) < closeNodeDist){
-				closeNode = n;
-				closeNodeDist = n.findDistance(x*Tile.TS, y*Tile.TS);
-			}
-		}
-		downNode = closeNode;
-		if(downNode == null)System.out.println("FUCKITY");
-	}
-	
 }

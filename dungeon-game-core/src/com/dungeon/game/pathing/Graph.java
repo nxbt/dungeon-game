@@ -1,4 +1,4 @@
-package com.dungeon.game.pathing.newpathing;
+package com.dungeon.game.pathing;
 
 public class Graph {
 	
