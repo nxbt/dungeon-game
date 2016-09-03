@@ -220,7 +220,7 @@ public class World {
 		curFloor.box2dWorld.step(1, 1, 1);
 		rayHandler.setCombinedMatrix(cam.cam);
 		rayHandler.updateAndRender();
-//		debugRenderer.render(curFloor.box2dWorld, cam.cam.combined);
+		debugRenderer.render(curFloor.box2dWorld, cam.cam.combined);
 		
 		batch.end();
 		
