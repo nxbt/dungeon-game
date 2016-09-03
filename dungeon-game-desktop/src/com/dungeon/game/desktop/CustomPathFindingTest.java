@@ -15,11 +15,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.dungeon.game.GeneratorTest;
-import com.dungeon.game.pathing.newpathing.Graph;
-import com.dungeon.game.pathing.newpathing.GraphLevel;
-import com.dungeon.game.pathing.newpathing.Node;
-import com.dungeon.game.pathing.newpathing.Path;
-import com.dungeon.game.pathing.newpathing.Pathfinder;
+import com.dungeon.game.pathing.Graph;
+import com.dungeon.game.pathing.GraphLevel;
+import com.dungeon.game.pathing.Node;
+import com.dungeon.game.pathing.Path;
+import com.dungeon.game.pathing.Pathfinder;
 import com.dungeon.game.world.Tile;
 
 public class CustomPathFindingTest extends ApplicationAdapter {
