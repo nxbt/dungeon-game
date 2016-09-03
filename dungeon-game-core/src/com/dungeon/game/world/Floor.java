@@ -1,8 +1,11 @@
 package com.dungeon.game.world;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -117,7 +120,15 @@ public class Floor {
 			}
 		}
 		
+		//how to load pixmap from file
+//		tmPixmap = new Pixmap(new FileHandle("tilemap.png"));
+		
 		tmTexture = new Texture(tmPixmap);
+		
+		//how to save pixmap to file;
+//		PixmapIO.writePNG(new FileHandle("tilemap.png"), tmPixmap);
+		
+		tmPixmap.dispose();
 		
 		corners = new ArrayList<int[]>();
 		for(int i = 1; i < tm.length;i++){
