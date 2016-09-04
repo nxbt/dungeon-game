@@ -204,7 +204,13 @@ public class Floor {
 		box2dWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
 		for(int i = 0; i <tm.length; i++){
 			for(int k = 0; k <tm.length; k++){
-				if(tm[i][k].data == 1){
+				if(!Tile.isSolid(tm[i][k]))continue;
+				boolean makeSolid = false;
+				if(i > 0 && !Tile.isSolid(tm[i-1][k])) makeSolid = true;
+				else if(k > 0 && !Tile.isSolid(tm[i][k-1])) makeSolid = true;
+				else if(k < tm[i].length-1 &&!Tile.isSolid( tm[i][k+1])) makeSolid = true;
+				else if(i < tm.length-1 && !Tile.isSolid(tm[i+1][k])) makeSolid = true;
+				if(makeSolid){
 					// Create our body definition
 					BodyDef groundBodyDef = new BodyDef();
 					
