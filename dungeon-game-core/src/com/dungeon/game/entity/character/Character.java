@@ -283,6 +283,9 @@ public abstract class Character extends Dynamic {
 				}
 				if(Math.sqrt((rays.get(i)[0] - endVertex.x)*(rays.get(i)[0] - endVertex.x) + (rays.get(i)[1] - endVertex.y)*(rays.get(i)[1] - endVertex.y)) + Tile.TS/2 > Math.sqrt((rays.get(i)[0] - rays.get(i)[4])*(rays.get(i)[0] - rays.get(i)[4]) + (rays.get(i)[1] - rays.get(i)[5])*(rays.get(i)[1] - rays.get(i)[5])))verticies.add(new float[]{endVertex.x, endVertex.y});
 			}
+			while(verticies.size() < 3){
+				verticies.add(new float[]{x, y});
+			}
 			
 			//calculate the angles of each vertex
 			float[] vertexAngles = new float[verticies.size()];
@@ -305,7 +308,6 @@ public abstract class Character extends Dynamic {
 			}
 			
 			//create the visPolygon
-	
 			visPolygon = new Polygon(finalVerticies);
 			ArrayList<Entity> preSeenEnts = new ArrayList<Entity>(seenEntities);
 			seenEntities = new ArrayList<Entity>();

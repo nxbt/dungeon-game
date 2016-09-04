@@ -235,7 +235,7 @@ public class Floor {
 			}
 		}
 		
-//		for(Entity e: entities)if(e.hitbox != null)e.getBody(box2dWorld);
+		for(Entity e: entities)if(e.hitbox != null)e.getBody(box2dWorld);
 		
 		world.player.getBody(box2dWorld);
 		
