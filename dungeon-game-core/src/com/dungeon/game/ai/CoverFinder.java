@@ -115,7 +115,6 @@ public class CoverFinder {
 							if(tileIsBlocking){
 								coverTiles.add(new int[]{i, k, x, y});
 								cover = true;
-//								world.curFloor.tm[k][i] = new Tile(world.curFloor.textures, 3);
 								break;
 							}
 						}
@@ -165,7 +164,7 @@ public class CoverFinder {
 				lineOfCover[2] = pos[2]*Tile.TS + Tile.TS / 2;
 				lineOfCover[3] = pos[3]*Tile.TS + Tile.TS * (world.curFloor.tm[pos[3]+1][pos[2]].data == 1?0.5f:1.5f);
 			}
-//			world.curFloor.tm[pos[1]][pos[0]] = new Tile(world.curFloor.textures, 4);
+			
 			return true;
 		}
 		
