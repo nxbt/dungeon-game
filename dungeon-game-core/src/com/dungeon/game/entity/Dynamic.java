@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -44,23 +45,23 @@ public abstract class Dynamic extends Entity {
 	
 	//calculates velocity and collisions for object
 	public void phys() {
-		float[] originalPos = new float[]{x,y};
-		
-		float vel = getVel();
-		if(moveVec.x != 0 || moveVec.y != 0){
-			if(vel < fric) {
-				moveVec.x = 0;
-				moveVec.y = 0;
-			}
-			else {
-				moveVec.x -= moveVec.x/vel*fric;
-				moveVec.y -= moveVec.y/vel*fric;
-			}
-		}
+//		float[] originalPos = new float[]{x,y};
+//		
+//		float vel = getVel();
+//		if(moveVec.x != 0 || moveVec.y != 0){
+//			if(vel < fric) {
+//				moveVec.x = 0;
+//				moveVec.y = 0;
+//			}
+//			else {
+//				moveVec.x -= moveVec.x/vel*fric;
+//				moveVec.y -= moveVec.y/vel*fric;
+//			}
+//		}
 //		
 //		x += moveVec.x;
 //		y += moveVec.y;
-		if(box2dBody != null)box2dBody.setLinearVelocity(moveVec.x, moveVec.y);
+		if(box2dBody != null)box2dBody.applyForceToCenter(-box2dBody.getLinearVelocity().x*fric, -box2dBody.getLinearVelocity().y*fric, true);
 		
 //		if(moveVec.x != 0 || moveVec.y != 0)col(true,originalPos);
 	}
@@ -253,20 +254,21 @@ public abstract class Dynamic extends Entity {
 	}
 	
 	public void acel(Vector2 vector, boolean trim){
-		double velPre = getVel();
-		moveVec.x+=vector.x;
-		moveVec.y+=vector.y;
-		double velAft = getVel();
-		if(trim&&velAft>mvel){
-			if(velPre<mvel){
-
-				moveVec.x = (float) (moveVec.x/velAft*mvel);
-				moveVec.y = (float) (moveVec.y/velAft*mvel);
-			}else{
-				moveVec.x = (float) (moveVec.x/velAft*velPre);
-				moveVec.y = (float) (moveVec.y/velAft*velPre);
-			}
-		}
+		if(box2dBody != null)box2dBody.applyForceToCenter(vector.x, vector.y, true);
+//		double velPre = getVel();
+//		moveVec.x+=vector.x;
+//		moveVec.y+=vector.y;
+//		double velAft = getVel();
+//		if(trim&&velAft>mvel){
+//			if(velPre<mvel){
+//
+//				moveVec.x = (float) (moveVec.x/velAft*mvel);
+//				moveVec.y = (float) (moveVec.y/velAft*mvel);
+//			}else{
+//				moveVec.x = (float) (moveVec.x/velAft*velPre);
+//				moveVec.y = (float) (moveVec.y/velAft*velPre);
+//			}
+//		}
 	}
 	
 	public float getVel(){
@@ -290,7 +292,7 @@ public abstract class Dynamic extends Entity {
 		// (setAsBox takes half-width and half-height as arguments)
 		shape.set(hitbox.getVertices());
 		// Create a fixture from our polygon shape and add it to our ground body  
-		box2dBody.createFixture(shape, 0.0f);
+		Fixture fixture = box2dBody.createFixture(shape, 0.0f);
 		// Clean up after ourselves
 		shape.dispose();
 		

@@ -33,9 +33,11 @@ public abstract class Static extends Entity {
 		
 		// Create a fixture from our polygon shape and add it to our ground body  
 		Fixture f = box2dBody.createFixture(shape, 0.0f);
-		Filter filter = new Filter();
-		filter.maskBits = 0;
-		f.setFilterData(filter);
+		if(!solid){
+			Filter filter = new Filter();
+			filter.maskBits = 0;
+			f.setFilterData(filter);
+		}
 		// Clean up after ourselves
 		shape.dispose();
 		

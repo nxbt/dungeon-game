@@ -152,6 +152,8 @@ public class World {
 				entities.get(i).update();
 			}
 		}
+
+		curFloor.box2dWorld.step(1, 5, 5);
 		
 		for(int i = 0; i < entities.size(); i++) {
 			entities.get(i).goToBodyPostion();
@@ -216,11 +218,9 @@ public class World {
 			drawEnts.get(i).draw(batch);
 		}
 		if(drawEnts.size() > 0)drawEnts.get(drawEnts.size()-1).draw(batch);//have to draw player twice when using lights
-		
-		curFloor.box2dWorld.step(1, 1, 1);
 		rayHandler.setCombinedMatrix(cam.cam);
 		rayHandler.updateAndRender();
-		debugRenderer.render(curFloor.box2dWorld, cam.cam.combined);
+		if(debug_hitbox)debugRenderer.render(curFloor.box2dWorld, cam.cam.combined);
 		
 		batch.end();
 		
