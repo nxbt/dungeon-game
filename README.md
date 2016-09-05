@@ -7,6 +7,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * make doors open away from the player
 * add gold keys and doors
 * relplace the booleans for flip with functions (so hitbox and visbox can be flipped)
+* move physics over to box2d
 
 ##TODO low priority (within a month or two?):
 * continue adding procedural room decoration
