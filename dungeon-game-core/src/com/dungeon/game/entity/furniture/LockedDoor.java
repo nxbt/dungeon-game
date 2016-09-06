@@ -1,5 +1,7 @@
 package com.dungeon.game.entity.furniture;
 
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.dungeon.game.item.Key;
 import com.dungeon.game.world.World;
 

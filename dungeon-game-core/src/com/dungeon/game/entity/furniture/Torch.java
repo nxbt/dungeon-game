@@ -36,21 +36,21 @@ public class Torch extends Static {
 		rotate = true;
 		
 		if(orientation == 0){
-//			this.x-=Tile.TS/4;
+			this.x-=Tile.TS/4;
 			originX = 8;
 			originY = 2;
 		}else if(orientation == 1) {
-//			this.y+=Tile.TS/4;
+			this.y+=Tile.TS/4;
 			originX = 2;
 			originY = 8;
 			
 		}else if(orientation == 2) {
-//			this.x+=Tile.TS/4;
+			this.x+=Tile.TS/4;
 			originX = 8;
 			originY = 2;
 			
 		}else if(orientation == 3) {
-//			this.y-=Tile.TS/4;
+			this.y-=Tile.TS/4;
 			originX = 2;
 			originY = 8;
 			

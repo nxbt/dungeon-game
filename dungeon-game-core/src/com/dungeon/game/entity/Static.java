@@ -19,36 +19,13 @@ public abstract class Static extends Entity {
 		BodyDef bodyDef = new BodyDef();
 		
 		bodyDef.type = BodyType.KinematicBody;
+		
 		// Set its world position
 		bodyDef.position.set(new Vector2(x/Tile.PPM, y/Tile.PPM));  
 
 		// Create a body from the defintion and add it to the world
-		box2dBody = world.createBody(bodyDef);  
-
-		// Create a polygon shape
-		PolygonShape shape = new PolygonShape();  
-		// Set the polygon shape as a box which is twice the size of our view port and 20 high
-		// (setAsBox takes half-width and half-height as arguments)
-		float[] verts = hitbox.getVertices().clone();
-		for(int i = 0; i < verts.length; i++){
-			verts[i]/=Tile.PPM;
-		}
-		shape.set(verts);
+		body = world.createBody(bodyDef);  
 		
-		// Create a fixture from our polygon shape and add it to our ground body  
-		Fixture f = box2dBody.createFixture(shape, 0.0f);
-		Filter filter = new Filter();
-		filter.categoryBits = 0x0002;
-		if(solid){
-			filter.maskBits = -1;
-		}
-		else{
-			filter.maskBits = 0;
-		}
-		f.setFriction(0);
-		f.setFilterData(filter);
-		// Clean up after ourselves
-		shape.dispose();
-		
+		super.getBody(world);
 	}
 }

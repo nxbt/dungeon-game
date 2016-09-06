@@ -1,6 +1,8 @@
 package com.dungeon.game.entity.furniture;
 
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.dungeon.game.entity.Static;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -69,7 +71,6 @@ public class Door extends Static {
 		}
 		
 	}
-	
 	public void toggle(){
 		open = !open;
 		if(open) solid = false;
@@ -90,6 +91,16 @@ public class Door extends Static {
 	
 	public void hovered(){
 		if(world.mouse.lb_pressed)toggle();
+	}
+	
+
+	
+	public void getBody(com.badlogic.gdx.physics.box2d.World world) {
+		super.getBody(world);
+		Fixture f = body.getFixtureList().get(0);
+		Filter filter = f.getFilterData();
+		filter.categoryBits = 0x0001;
+		f.setFilterData(filter);
 	}
 	
 }

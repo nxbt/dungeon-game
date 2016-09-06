@@ -232,13 +232,15 @@ public abstract class Character extends Dynamic {
 			else {
 				difference = angleModifier2+Math.abs(angleModifier1-360);
 			}
-			
-			if(difference < torq) angle = target_angle;
-			else if(turnRight)angle+=torq;
-			else angle-=torq;
-				
-			if(angle > 180) angle -= 360;
-			if(angle < -180) angle += 360;
+			if(difference < torq) {
+				body.setTransform(body.getPosition(), (float) (target_angle*Math.PI/180f));
+				body.setAngularVelocity(0);
+				body.setAwake(true);
+			}
+			else if(turnRight)body.setAngularVelocity((float) (torq*Math.PI/180));
+			else body.setAngularVelocity((float) (-torq*Math.PI/180));
+			if(body.getAngle() > Math.PI)body.setTransform(body.getPosition(), (float) (body.getAngle() - Math.PI*2f));			
+			else if(body.getAngle() < -Math.PI)body.setTransform(body.getPosition(), (float) (body.getAngle() + Math.PI*2f));
 		}
 	}
 	

@@ -7,10 +7,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -45,27 +42,7 @@ public abstract class Dynamic extends Entity {
 	public void norm() {}
 	
 	//calculates velocity and collisions for object
-	public void phys() {
-//		float[] originalPos = new float[]{x,y};
-//		
-//		float vel = getVel();
-//		if(moveVec.x != 0 || moveVec.y != 0){
-//			if(vel < fric) {
-//				moveVec.x = 0;
-//				moveVec.y = 0;
-//			}
-//			else {
-//				moveVec.x -= moveVec.x/vel*fric;
-//				moveVec.y -= moveVec.y/vel*fric;
-//			}
-//		}
-//		
-//		x += moveVec.x;
-//		y += moveVec.y;
-		if(box2dBody != null)box2dBody.applyForceToCenter(-box2dBody.getLinearVelocity().x*fric, -box2dBody.getLinearVelocity().y*fric, true);
-		
-//		if(moveVec.x != 0 || moveVec.y != 0)col(true,originalPos);
-	}
+	public void phys() {}
 	
 	//fix collision to stop gliching into walls
 	
@@ -255,21 +232,7 @@ public abstract class Dynamic extends Entity {
 	}
 	
 	public void acel(Vector2 vector, boolean trim){
-		if(box2dBody != null)box2dBody.applyForceToCenter(vector.x, vector.y, true);
-//		double velPre = getVel();
-//		moveVec.x+=vector.x;
-//		moveVec.y+=vector.y;
-//		double velAft = getVel();
-//		if(trim&&velAft>mvel){
-//			if(velPre<mvel){
-//
-//				moveVec.x = (float) (moveVec.x/velAft*mvel);
-//				moveVec.y = (float) (moveVec.y/velAft*mvel);
-//			}else{
-//				moveVec.x = (float) (moveVec.x/velAft*velPre);
-//				moveVec.y = (float) (moveVec.y/velAft*velPre);
-//			}
-//		}
+		if(body != null)body.applyForceToCenter(vector.x, vector.y, true);
 	}
 	
 	public float getVel(){
@@ -281,35 +244,13 @@ public abstract class Dynamic extends Entity {
 		BodyDef bodyDef = new BodyDef();
 		
 		bodyDef.type = BodyType.DynamicBody;
+		
 		// Set its world position
 		bodyDef.position.set(new Vector2(x/Tile.PPM, y/Tile.PPM));  
 
 		// Create a body from the defintion and add it to the world
-		box2dBody = world.createBody(bodyDef);  
-
-		// Create a polygon shape
-		PolygonShape shape = new PolygonShape();  
-		// Set the polygon shape as a box which is twice the size of our view port and 20 high
-		// (setAsBox takes half-width and half-height as arguments)
-		float[] verts = hitbox.getVertices().clone();
-		for(int i = 0; i < verts.length; i++){
-			verts[i]/=Tile.PPM;
-		}
-		shape.set(verts);
-		// Create a fixture from our polygon shape and add it to our ground body  
-		Fixture f = box2dBody.createFixture(shape, 0.0f);
-		Filter filter = new Filter();
-		filter.categoryBits = 0x0002;
-		if(solid){
-			filter.maskBits = -1;
-		}
-		else{
-			filter.maskBits = 0;
-		}
-		f.setFriction(0);
-		f.setFilterData(filter);
-		// Clean up after ourselves
-		shape.dispose();
+		body = world.createBody(bodyDef);  
 		
+		super.getBody(world);
 	}
 }

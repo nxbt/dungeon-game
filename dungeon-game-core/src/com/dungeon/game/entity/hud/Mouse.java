@@ -128,7 +128,7 @@ public class Mouse extends Hud  implements InputProcessor {
 		}
 		
 		if(world.debug_freeCam && mb_pressed){
-			world.player.box2dBody.setTransform((x+world.cam.x-world.cam.width/2) / Tile.PPM, (y+world.cam.y-world.cam.height/2) / Tile.PPM, 0);
+			world.player.body.setTransform((x+world.cam.x-world.cam.width/2) / Tile.PPM, (y+world.cam.y-world.cam.height/2) / Tile.PPM, 0);
 		}
 		
 		onHud = false;
