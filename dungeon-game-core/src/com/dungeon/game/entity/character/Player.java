@@ -7,11 +7,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.dungeon.game.effect.regen.StamRegen;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.hud.EffectGraphic;
@@ -24,6 +19,7 @@ import com.dungeon.game.item.Key;
 import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
+import com.dungeon.game.item.equipable.Lantern;
 import com.dungeon.game.item.equipable.weapon.Medium;
 import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.item.equipable.weapon.Weapon;
@@ -53,7 +49,7 @@ public class Player extends Character {
 		
 		speechColor = Color.BLUE;
 		
-		light = new Light(world, x, y, 20, 100, 0, this);
+		light = new Light(world, x, y, 1, 100, 0, this);
 		
 		name = "Player";
 		
@@ -67,9 +63,9 @@ public class Player extends Character {
 		stam = maxStam;
 		mana = maxMana;
 		
-		acel = 1.5f;
-		mvel = 5;
-		fric = 0.5f;
+		acel = 0.5f;
+		mvel = 2;
+		fric = 0.1f;
 		
 //		hitbox = new Polygon(new float[]{30,16,28,23,23,28,16,30,9,28,4,23,2,16,4,9,9,4,16,2,23,4,28,9});
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
@@ -146,6 +142,7 @@ public class Player extends Character {
 		inv.addItem(new Sword(world, 1));
 		inv.addItem(new LifePotion(world), 10);
 		inv.addItem(new Key(world), 10);
+		inv.addItem(new Lantern(world));
 		
 		equipSlots = new Slot[]{inv.slot[30],inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41]};
 		equipItems = new Equipable[equipSlots.length];

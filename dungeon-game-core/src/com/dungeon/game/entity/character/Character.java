@@ -185,8 +185,8 @@ public abstract class Character extends Dynamic {
 	public void move() {
 		
 		Vector2 acelVec = new Vector2();
-		acelVec.x = (float) (Math.cos(move_angle*Math.PI/180)*acel);
-		acelVec.y = (float) (Math.sin(move_angle*Math.PI/180)*acel);
+		acelVec.x = (float) (Math.cos(move_angle*Math.PI/180)*acel/Tile.PPM);
+		acelVec.y = (float) (Math.sin(move_angle*Math.PI/180)*acel/Tile.PPM);
 		if(!stun && move_angle != 361)acel( acelVec, true );
 		
 		boolean turnRight = true;

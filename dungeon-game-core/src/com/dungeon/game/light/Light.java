@@ -3,6 +3,7 @@ package com.dungeon.game.light;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.Entity;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 import box2dLight.ConeLight;
@@ -106,12 +107,12 @@ public class Light {
 		if(ent.flipY)actingOffY*=-1;
 		int f_x = (int) (Math.cos(ent.angle/180*Math.PI)*actingOffX - Math.sin(ent.angle/180*Math.PI)*actingOffY);
 		int f_y = (int) (Math.sin(ent.angle/180*Math.PI)*actingOffX + Math.cos(ent.angle/180*Math.PI)*actingOffY);
-		light.setPosition(new Vector2(ent.x + f_x,ent.y + f_y));
+		light.setPosition(new Vector2((ent.x + f_x) / Tile.PPM,(ent.y + f_y) / Tile.PPM));
 		if(light instanceof ConeLight)((ConeLight) light).setDirection(ent.angle+angleOff);
-		if(flickerAmount > 0){
-			curFlick = (int) ((Math.random()*flickerAmount + 5*curFlick)/6); //wont this keep increasing? meh, idk, I think it needs work anyway. I'll agree the old one was bad though
-			light.setDistance(strength+curFlick);
-		}
+//		if(flickerAmount > 0){
+//			curFlick = (int) ((Math.random()*flickerAmount + 5*curFlick)/6); //wont this keep increasing? meh, idk, I think it needs work anyway. I'll agree the old one was bad though
+//			light.setDistance(strength+curFlick);
+//		}
 	}
 	
 	public void setOffset(int x ,int y){

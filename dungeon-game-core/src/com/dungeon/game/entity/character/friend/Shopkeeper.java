@@ -23,7 +23,7 @@ public class Shopkeeper extends Friend {
 		
 		name = "Shopkeeper";
 		
-		light = new Light(world, x, y, 20, 100, 0, this);
+		light = new Light(world, x, y, 1, 100, 0, this);
 		
 		torq = 10;
 		

@@ -80,10 +80,10 @@ public class World {
 		Blood.init();
 		Ember.init();
 		BodyChunk.init();
-		
 		com.dungeon.game.textures.entity.particle.BodyChunk.init();
+		RayHandler.setGammaCorrection(false);
 		rayHandler = new RayHandler(null);
-		rayHandler.setBlurNum(15);
+		rayHandler.setBlurNum(0);
 		rayHandler.setAmbientLight(new Color(0,0,0,0));
 		RayHandler.useDiffuseLight(true);
 		hudBatch = new SpriteBatch();
@@ -218,9 +218,9 @@ public class World {
 			drawEnts.get(i).draw(batch);
 		}
 		if(drawEnts.size() > 0)drawEnts.get(drawEnts.size()-1).draw(batch);//have to draw player twice when using lights
-		rayHandler.setCombinedMatrix(cam.cam);
+		rayHandler.setCombinedMatrix(cam.lightCam);
 		rayHandler.updateAndRender();
-		if(debug_hitbox)debugRenderer.render(curFloor.box2dWorld, cam.cam.combined);
+		if(debug_hitbox)debugRenderer.render(curFloor.box2dWorld, cam.lightCam.combined);
 		
 		batch.end();
 		
@@ -245,19 +245,19 @@ public class World {
 			}
 			
 			for(Entity e: entities){
-				if(debug_hitbox && e.hitbox != null) {
-					if(e.solid) shapeRenderer.setColor(Color.RED);
-					else shapeRenderer.setColor(Color.GREEN);
-					
-					shapeRenderer.polygon(e.getVisbox().getVertices());
-
-					shapeRenderer.set(ShapeType.Filled);
-					shapeRenderer.setColor(Color.CYAN);
-					for(float[] p: tempPathingDebug){
-						shapeRenderer.rectLine(p[0], p[1], p[2], p[3], 3);
-					}
-					shapeRenderer.set(ShapeType.Line);
-				}
+//				if(debug_hitbox && e.hitbox != null) {
+//					if(e.solid) shapeRenderer.setColor(Color.RED);
+//					else shapeRenderer.setColor(Color.GREEN);
+//					
+//					shapeRenderer.polygon(e.getVisbox().getVertices());
+//
+//					shapeRenderer.set(ShapeType.Filled);
+//					shapeRenderer.setColor(Color.CYAN);
+//					for(float[] p: tempPathingDebug){
+//						shapeRenderer.rectLine(p[0], p[1], p[2], p[3], 3);
+//					}
+//					shapeRenderer.set(ShapeType.Line);
+//				}
 				
 				if(debug_pathing && e instanceof Character && ((Character)e).moveTo!=null&&((Character)e).path!=null){
 					shapeRenderer.setColor(Color.BLUE);

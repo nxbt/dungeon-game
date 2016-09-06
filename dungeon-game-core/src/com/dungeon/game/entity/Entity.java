@@ -184,8 +184,8 @@ public abstract class Entity {
 	
 	public void goToBodyPostion(){
 		if(box2dBody != null){
-			x = box2dBody.getPosition().x + originX;
-			y = box2dBody.getPosition().y + originY;
+			x = box2dBody.getPosition().x*Tile.PPM + originX;
+			y = box2dBody.getPosition().y*Tile.PPM + originY;
 		}
 	}
 	

@@ -33,7 +33,7 @@ public class Fireball extends Spell {
 		float yOff = (float) (Math.sin((angle+135)/180*Math.PI)*30);
 		
 		SpellProjectile fireball = new SpellProjectile(world, medium, this, (x+xOff), (y+yOff), angle, 6, new Polygon(new float[]{0,28,4,28,4,32,0,32}), 0, 32, 70, Item.SIZE, Item.SIZE, "fireball.png");
-		fireball.light = new Light(world, 0, 0, 100, 100, Light.ORANGE, 30, fireball);
+		fireball.light = new Light(world, 0, 0, 4, 100, Light.ORANGE, 30, fireball);
 		fireball.light.load();
 		
 		world.entities.add(fireball);

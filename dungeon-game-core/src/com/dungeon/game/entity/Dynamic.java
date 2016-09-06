@@ -281,7 +281,7 @@ public abstract class Dynamic extends Entity {
 		
 		bodyDef.type = BodyType.DynamicBody;
 		// Set its world position
-		bodyDef.position.set(new Vector2(x, y));  
+		bodyDef.position.set(new Vector2(x/Tile.PPM, y/Tile.PPM));  
 
 		// Create a body from the defintion and add it to the world
 		box2dBody = world.createBody(bodyDef);  
@@ -290,7 +290,11 @@ public abstract class Dynamic extends Entity {
 		PolygonShape shape = new PolygonShape();  
 		// Set the polygon shape as a box which is twice the size of our view port and 20 high
 		// (setAsBox takes half-width and half-height as arguments)
-		shape.set(hitbox.getVertices());
+		float[] verts = hitbox.getVertices();
+		for(int i = 0; i < verts.length; i++){
+			verts[i]/=Tile.PPM;
+		}
+		shape.set(verts);
 		// Create a fixture from our polygon shape and add it to our ground body  
 		Fixture fixture = box2dBody.createFixture(shape, 0.0f);
 		// Clean up after ourselves

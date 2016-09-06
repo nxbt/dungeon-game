@@ -5,11 +5,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.dungeon.game.entity.hud.Hud;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 import com.dungeon.game.entity.character.Character;
 
 public class Camera {
 	public OrthographicCamera cam;
+	
+	public OrthographicCamera lightCam;
 	
 	public Viewport view;
 	
@@ -28,9 +31,12 @@ public class Camera {
 		this.y = 0;
 		
 		this.world = world;
-		
+
 		cam = new OrthographicCamera(width, height);
 		cam.position.set(this.x+width/2, this.y+height/2, 0);
+		lightCam = new OrthographicCamera(width, height);
+		lightCam.position.set(this.x+width/2, this.y+height/2, 0);
+		lightCam.zoom = 1f/Tile.PPM;
 		
 		view = new FitViewport(width, height, cam);
 		view.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -55,6 +61,8 @@ public class Camera {
 			y += ((4*world.player.y+world.player.focusedEntity.y)/5 - y)*TWEEN;
 		}
 		cam.position.set(x, y, 0);
+		lightCam.position.set(x/Tile.PPM, y/Tile.PPM, 0);
 		cam.update();
+		lightCam.update();
 	}
 }
