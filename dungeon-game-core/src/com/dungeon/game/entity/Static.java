@@ -29,7 +29,7 @@ public abstract class Static extends Entity {
 		PolygonShape shape = new PolygonShape();  
 		// Set the polygon shape as a box which is twice the size of our view port and 20 high
 		// (setAsBox takes half-width and half-height as arguments)
-		float[] verts = hitbox.getVertices();
+		float[] verts = hitbox.getVertices().clone();
 		for(int i = 0; i < verts.length; i++){
 			verts[i]/=Tile.PPM;
 		}
@@ -37,11 +37,19 @@ public abstract class Static extends Entity {
 		
 		// Create a fixture from our polygon shape and add it to our ground body  
 		Fixture f = box2dBody.createFixture(shape, 0.0f);
-		if(!solid){
-			Filter filter = new Filter();
+		Filter filter = new Filter();
+		if(solid){
 			filter.maskBits = 0;
-			f.setFilterData(filter);
+			filter.groupIndex = 1;
+			filter.categoryBits = 0;
 		}
+		else{
+			filter.maskBits = 0;
+			filter.groupIndex = 0;
+			filter.categoryBits = 0;
+		}
+		f.setFriction(0);
+		f.setFilterData(filter);
 		// Clean up after ourselves
 		shape.dispose();
 		

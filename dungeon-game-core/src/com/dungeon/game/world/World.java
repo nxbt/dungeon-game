@@ -84,7 +84,7 @@ public class World {
 		RayHandler.setGammaCorrection(false);
 		rayHandler = new RayHandler(null);
 		rayHandler.setBlurNum(0);
-		rayHandler.setAmbientLight(new Color(0,0,0,0));
+		rayHandler.setAmbientLight(new Color(0,0,0,1));
 		RayHandler.useDiffuseLight(true);
 		hudBatch = new SpriteBatch();
 		cam = new Camera(this);

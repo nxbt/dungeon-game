@@ -7,9 +7,10 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
@@ -290,13 +291,26 @@ public abstract class Dynamic extends Entity {
 		PolygonShape shape = new PolygonShape();  
 		// Set the polygon shape as a box which is twice the size of our view port and 20 high
 		// (setAsBox takes half-width and half-height as arguments)
-		float[] verts = hitbox.getVertices();
+		float[] verts = hitbox.getVertices().clone();
 		for(int i = 0; i < verts.length; i++){
 			verts[i]/=Tile.PPM;
 		}
 		shape.set(verts);
 		// Create a fixture from our polygon shape and add it to our ground body  
-		Fixture fixture = box2dBody.createFixture(shape, 0.0f);
+		Fixture f = box2dBody.createFixture(shape, 0.0f);
+		Filter filter = new Filter();
+		if(solid){
+			filter.maskBits = 1;
+			filter.groupIndex = 1;
+			filter.categoryBits = 1;
+		}
+		else{
+			filter.maskBits = 0;
+			filter.groupIndex = 0;
+			filter.categoryBits = 0;
+		}
+		f.setFriction(0);
+		f.setFilterData(filter);
 		// Clean up after ourselves
 		shape.dispose();
 		
