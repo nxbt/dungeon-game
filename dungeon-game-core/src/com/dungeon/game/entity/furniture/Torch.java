@@ -36,21 +36,21 @@ public class Torch extends Static {
 		rotate = true;
 		
 		if(orientation == 0){
-			this.x-=Tile.TS/4;
+//			this.x-=Tile.TS/4;
 			originX = 8;
 			originY = 2;
 		}else if(orientation == 1) {
-			this.y+=Tile.TS/4;
+//			this.y+=Tile.TS/4;
 			originX = 2;
 			originY = 8;
 			
 		}else if(orientation == 2) {
-			this.x+=Tile.TS/4;
+//			this.x+=Tile.TS/4;
 			originX = 8;
 			originY = 2;
 			
 		}else if(orientation == 3) {
-			this.y-=Tile.TS/4;
+//			this.y-=Tile.TS/4;
 			originX = 2;
 			originY = 8;
 			
@@ -65,7 +65,7 @@ public class Torch extends Static {
 		}
 		genVisBox();
 		
-//		light = new Light(world, x, y, 12, 100, Light.ORANGE, 40, this);
+		light = new Light(world, x, y, 12, 100, Light.ORANGE, 40, this);
 		
 		clickable = false;
 	}

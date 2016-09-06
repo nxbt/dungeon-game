@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
@@ -31,6 +32,7 @@ import com.dungeon.game.entity.particle.Ember;
 import com.dungeon.game.entity.particle.Poof;
 import com.dungeon.game.pathing.Node;
 
+import box2dLight.Light;
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
 
@@ -83,9 +85,12 @@ public class World {
 		com.dungeon.game.textures.entity.particle.BodyChunk.init();
 		RayHandler.setGammaCorrection(false);
 		rayHandler = new RayHandler(null);
-		rayHandler.setBlurNum(0);
+		rayHandler.setBlurNum(5);
 		rayHandler.setAmbientLight(new Color(0,0,0,1));
 		RayHandler.useDiffuseLight(true);
+		Filter f = new Filter();
+		f.maskBits = 0x0001;
+		Light.setGlobalContactFilter(f);
 		hudBatch = new SpriteBatch();
 		cam = new Camera(this);
 		hudCam = new Camera(this);
