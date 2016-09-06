@@ -65,7 +65,7 @@ public class Torch extends Static {
 		}
 		genVisBox();
 		
-		light = new Light(world, x, y, 12, 100, Light.ORANGE, 40, this);
+		light = new Light(world, x, y, 10, 100, Light.ORANGE, 1.5f, this);
 		
 		clickable = false;
 	}

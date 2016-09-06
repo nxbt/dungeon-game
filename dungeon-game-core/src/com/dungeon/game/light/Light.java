@@ -27,17 +27,17 @@ public class Light {
 	public PositionalLight light;
 	private Entity ent;
 	private int angleOff;
-	private int flickerAmount;
-	private int strength;
-	private int curFlick;
+	private float flickerAmount;
+	private float strength;
+	private float curFlick;
 	private int offX;
 	private int offY;
 	public boolean isOn;
 	
-	private int normStrength;
+	private float normStrength;
 	
 	//point light with color
-	public Light(World world, float x, float y, int strength, int rays, Color color, int flickerAmount, Entity ent){
+	public Light(World world, float x, float y, float strength, int rays, Color color, float flickerAmount, Entity ent){
 		this.world = world;
 		light = new PointLight(world.rayHandler, rays, color, strength, x, y);
 		this.ent = ent;
@@ -51,7 +51,7 @@ public class Light {
 		isOn = false;
 	}
 	//point light without color
-	public Light(World world, float x, float y, int strength, int rays, int flickerAmount, Entity ent){
+	public Light(World world, float x, float y, float strength, int rays, float flickerAmount, Entity ent){
 		this.world = world;
 		light = new PointLight(world.rayHandler, rays, DEF, strength, x, y);
 		this.ent = ent;
@@ -65,7 +65,7 @@ public class Light {
 		isOn = false;
 	}
 	//cone light with color
-	public Light(World world, float x, float y, int strength, int rays, Color color, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
+	public Light(World world, float x, float y, float strength, int rays, Color color, int dirDeg, int coneDeg, int angleOff, float flickerAmount, Entity ent){
 		this.world = world;
 		light = new ConeLight(world.rayHandler, rays, color, strength, x, y, dirDeg, coneDeg);
 		this.ent = ent;
@@ -80,7 +80,7 @@ public class Light {
 		isOn = false;
 	}
 	//cone light without color
-	public Light(World world, float x, float y, int strength, int rays, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
+	public Light(World world, float x, float y, float strength, int rays, int dirDeg, int coneDeg, int angleOff, float flickerAmount, Entity ent){
 		this.world = world;
 		light = new ConeLight(world.rayHandler, rays, DEF, strength, x, y, dirDeg, coneDeg);
 		this.ent = ent;
@@ -109,10 +109,10 @@ public class Light {
 		int f_y = (int) (Math.sin(ent.angle/180*Math.PI)*actingOffX + Math.cos(ent.angle/180*Math.PI)*actingOffY);
 		light.setPosition(new Vector2((ent.x + f_x) / Tile.PPM,(ent.y + f_y) / Tile.PPM));
 		if(light instanceof ConeLight)((ConeLight) light).setDirection(ent.angle+angleOff);
-//		if(flickerAmount > 0){
-//			curFlick = (int) ((Math.random()*flickerAmount + 5*curFlick)/6); //wont this keep increasing? meh, idk, I think it needs work anyway. I'll agree the old one was bad though
-//			light.setDistance(strength+curFlick);
-//		}
+		if(flickerAmount > 0){
+			curFlick = (float) ((Math.random()*flickerAmount + 5*curFlick)/6);
+			light.setDistance(strength+curFlick);
+		}
 	}
 	
 	public void setOffset(int x ,int y){
@@ -135,7 +135,7 @@ public class Light {
 	
 	
 	//point light with color
-	public void changeLight(int x, int y, int strength, int rays, Color color, int flickerAmount, Entity ent){
+	public void changeLight(int x, int y, float strength, int rays, Color color, float flickerAmount, Entity ent){
 		light.remove();
 		light = new PointLight(world.rayHandler, rays, color, strength, x, y);
 		this.ent = ent;
@@ -149,7 +149,7 @@ public class Light {
 		isOn = false;
 	}
 	//point light with color
-	public void changeLight(int x, int y, int strength, int rays, int flickerAmount, Entity ent){
+	public void changeLight(int x, int y, float strength, int rays, float flickerAmount, Entity ent){
 		light.remove();
 		light = new PointLight(world.rayHandler, rays, DEF, strength, x, y);
 		this.ent = ent;
@@ -164,7 +164,7 @@ public class Light {
 	}
 	
 	//cone light with color
-	public void changeLight(int x, int y, int strength, int rays, Color color, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
+	public void changeLight(int x, int y, float strength, int rays, Color color, int dirDeg, int coneDeg, int angleOff, float flickerAmount, Entity ent){
 		light.remove();
 		light = new ConeLight(world.rayHandler, rays, color, strength, x, y, dirDeg, coneDeg);
 		this.ent = ent;
@@ -179,7 +179,7 @@ public class Light {
 		isOn = false;
 	}
 	//cone light with color
-	public void changeLight(int x, int y, int strength, int rays, int dirDeg, int coneDeg, int angleOff, int flickerAmount, Entity ent){
+	public void changeLight(int x, int y, float strength, int rays, int dirDeg, int coneDeg, int angleOff, float flickerAmount, Entity ent){
 		light.remove();
 		light = new ConeLight(world.rayHandler, rays, DEF, strength, x, y, dirDeg, coneDeg);
 		this.ent = ent;

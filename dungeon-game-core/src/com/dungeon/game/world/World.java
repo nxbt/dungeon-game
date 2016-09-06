@@ -86,7 +86,7 @@ public class World {
 		RayHandler.setGammaCorrection(false);
 		rayHandler = new RayHandler(null);
 		rayHandler.setBlurNum(5);
-		rayHandler.setAmbientLight(new Color(0,0,0,1));
+		rayHandler.setAmbientLight(new Color(0,0,0,0));
 		RayHandler.useDiffuseLight(true);
 		Filter f = new Filter();
 		f.maskBits = 0x0001;
