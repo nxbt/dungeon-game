@@ -34,8 +34,6 @@ public class BodyChunk extends Particle {
 		float rotationAngle = (float) (spriteAngle/180f*Math.PI);
 		p.set(world, (float) (x + texXOff*Math.cos(rotationAngle) - texYOff*Math.sin(rotationAngle)), (float) (y + texXOff*Math.sin(rotationAngle) + texYOff*Math.cos(rotationAngle)), pix, texX, texY, angle, vel, spriteAngle);
 		return p;
-//		x' = x*cos q - y*sin q
-//		y' = x*sin q + y*cos q 
 	}
 	
 

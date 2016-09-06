@@ -574,7 +574,7 @@ public abstract class Character extends Dynamic {
 	
 	public void dead(){
 		super.dead();
-		Particle[] chunks = BodyChunk.getChunks(world, x, y, sprite, moveVec.angleRad(), moveVec.len(), angle, bleeds);
+		Particle[] chunks = BodyChunk.getChunks(world, x, y, sprite, body.getLinearVelocity().angleRad(), body.getLinearVelocity().len()*Tile.PPM, angle, bleeds);
 		for(Particle c: chunks){
 			world.entities.add(c);
 		}
