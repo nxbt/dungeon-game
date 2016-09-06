@@ -193,7 +193,7 @@ public class Player extends Character {
 			if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5))inv.slot[4].consume(this);
 		}
 		
-		if(actionState[2]) target_angle = angle;
+		if(actionState[2]) target_angle = (float) (body.getAngle()/Math.PI*180f);
 		else if(Hud.class.isInstance(focusedEntity)) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y+world.cam.y-world.cam.height/2-(y), focusedEntity.x+world.cam.x-world.cam.width/2-(x)));
 		else if(focusedEntity != null) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y-y, focusedEntity.x-x));
 		

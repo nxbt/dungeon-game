@@ -186,15 +186,12 @@ public abstract class Character extends Dynamic {
 	}
 
 	public void move() {
-		
 		Vector2 acelVec = new Vector2();
 		acelVec.x = (float) (Math.cos(move_angle*Math.PI/180)*acel/Tile.PPM);
 		acelVec.y = (float) (Math.sin(move_angle*Math.PI/180)*acel/Tile.PPM);
-		if(!stun && move_angle != 361)acel( acelVec, true );
+		if(!stun && move_angle != 361)acel(acelVec, true);
 		
 		boolean turnRight = true;
-		@SuppressWarnings("unused")
-		float originalAngle = angle;
 		if(angle != target_angle) {
 			float tempAngle = angle+180;
 			float tempTargetAngle = target_angle+180;
@@ -235,9 +232,10 @@ public abstract class Character extends Dynamic {
 			else {
 				difference = angleModifier2+Math.abs(angleModifier1-360);
 			}
+			body.setAngularVelocity(0);
+			
 			if(difference < torq) {
 				body.setTransform(body.getPosition(), (float) (target_angle*Math.PI/180f));
-				body.setAngularVelocity(0);
 				body.setAwake(true);
 			}
 			else if(turnRight)body.setAngularVelocity((float) (torq*Math.PI/180));
