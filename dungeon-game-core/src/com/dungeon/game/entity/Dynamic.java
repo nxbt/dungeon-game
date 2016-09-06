@@ -299,15 +299,12 @@ public abstract class Dynamic extends Entity {
 		// Create a fixture from our polygon shape and add it to our ground body  
 		Fixture f = box2dBody.createFixture(shape, 0.0f);
 		Filter filter = new Filter();
+		filter.categoryBits = 0x0002;
 		if(solid){
-			filter.maskBits = 1;
-			filter.groupIndex = 1;
-			filter.categoryBits = 1;
+			filter.maskBits = -1;
 		}
 		else{
 			filter.maskBits = 0;
-			filter.groupIndex = 0;
-			filter.categoryBits = 0;
 		}
 		f.setFriction(0);
 		f.setFilterData(filter);
