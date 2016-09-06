@@ -69,6 +69,8 @@ public abstract class Entity {
 	
 	public Body body;
 	
+	public boolean bodyMade;
+	
 	public Entity(World world, float x, float y, int width, int height, String filename) {
 		this.x = x;
 		this.y = y;
@@ -86,6 +88,8 @@ public abstract class Entity {
 		layer = PERSON; //default layer
 		
 		clickable = true;
+		
+		bodyMade = false;
 	}
 	
 	public void update() {
@@ -221,6 +225,9 @@ public abstract class Entity {
 		// Clean up after ourselves
 		body.setLinearDamping(0.1f);
 		shape.dispose();
+		body.setTransform(body.getPosition(), (float) (angle/180*Math.PI));
+		
+		bodyMade = true;
 	}
 	
 	

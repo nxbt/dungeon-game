@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Entity;
@@ -575,5 +578,27 @@ public abstract class Character extends Dynamic {
 		for(Particle c: chunks){
 			world.entities.add(c);
 		}
+	}
+	
+	public void getBody(com.badlogic.gdx.physics.box2d.World world) {
+		super.getBody(world);
+		
+		CircleShape shape = new CircleShape();
+		
+		shape.setRadius(0.9f);
+		
+		body.destroyFixture(body.getFixtureList().get(0));
+		
+		Fixture f = body.createFixture(shape, 0.0f);
+		Filter filter = new Filter();
+		filter.categoryBits = 0x0002;
+		if(solid){
+			filter.maskBits = -1;
+		}
+		else{
+			filter.maskBits = 0;
+		}
+		f.setFriction(0);
+		f.setFilterData(filter);
 	}
 }

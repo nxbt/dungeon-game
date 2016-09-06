@@ -21,10 +21,10 @@ public class DungeonGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		long s = System.nanoTime();
+//		long s = System.nanoTime();
 		world.update();
 		world.draw(batch);
-		System.out.println("Frame in: " + (float)(System.nanoTime() - s)/16000000f + " frames");
+//		System.out.println("Frame in: " + (float)(System.nanoTime() - s)/16000000f + " frames");
 	}
 	
 	@Override

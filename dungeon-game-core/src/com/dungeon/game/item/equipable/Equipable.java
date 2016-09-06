@@ -45,7 +45,6 @@ public abstract class Equipable extends Item {
 	};
 	
 	public void onUnequip(){
-
 		for(Effect e: passiveEffects)e.killMe = true;
 	};
 	
@@ -55,7 +54,6 @@ public abstract class Equipable extends Item {
 	}
 	
 	public void unequip(){
-		
 		onUnequip();
 		this.owner = null;
 	}

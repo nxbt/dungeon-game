@@ -154,6 +154,7 @@ public class World {
 			player.update();
 		}else{
 			for(int i = 0; i < entities.size(); i++) {
+				if(!entities.get(i).bodyMade)entities.get(i).getBody(curFloor.box2dWorld);
 				entities.get(i).update();
 			}
 		}
@@ -165,6 +166,7 @@ public class World {
 			if(entities.get(i).killMe) {
 				if(entities.get(i) instanceof Character)((Character)entities.get(i)).endEffects();
 				entities.get(i).dead();
+				if(entities.get(i).body != null)curFloor.box2dWorld.destroyBody(entities.get(i).body);
 				entities.remove(i);
 				i--;
 			}
