@@ -216,7 +216,7 @@ public class Floor {
 					
 					groundBodyDef.type = BodyType.StaticBody;
 					// Set its world position
-					groundBodyDef.position.set(new Vector2(k*Tile.TS+Tile.TS/2, i*Tile.TS+Tile.TS/2));  
+					groundBodyDef.position.set(new Vector2(k+16/Tile.PPM, i+16/Tile.PPM));  
 
 					// Create a body from the defintion and add it to the world
 					Body groundBody = box2dWorld.createBody(groundBodyDef);  
@@ -225,7 +225,7 @@ public class Floor {
 					PolygonShape groundBox = new PolygonShape();  
 					// Set the polygon shape as a box which is twice the size of our view port and 20 high
 					// (setAsBox takes half-width and half-height as arguments)
-					groundBox.setAsBox(Tile.TS/2, Tile.TS/2);
+					groundBox.setAsBox(16/Tile.PPM, 16/Tile.PPM);
 					// Create a fixture from our polygon shape and add it to our ground body  
 					groundBody.createFixture(groundBox, 0.0f); 
 					// Clean up after ourselves
