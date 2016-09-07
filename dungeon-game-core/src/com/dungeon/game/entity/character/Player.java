@@ -16,10 +16,12 @@ import com.dungeon.game.entity.hud.window.InvWindow;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Key;
+import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.Lantern;
+import com.dungeon.game.item.equipable.weapon.Bow;
 import com.dungeon.game.item.equipable.weapon.Medium;
 import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.item.equipable.weapon.Weapon;
@@ -143,6 +145,8 @@ public class Player extends Character {
 		inv.addItem(new LifePotion(world), 10);
 		inv.addItem(new Key(world), 10);
 		inv.addItem(new Lantern(world));
+		inv.addItem(new Bow(world, 1, 10));
+		inv.addItem(new Arrow(world), 12);
 		
 		equipSlots = new Slot[]{inv.slot[30],inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41]};
 		equipItems = new Equipable[equipSlots.length];

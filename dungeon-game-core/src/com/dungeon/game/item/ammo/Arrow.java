@@ -8,6 +8,7 @@ import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.WeaponProjectile;
 import com.dungeon.game.item.equipable.weapon.Ranged;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Arrow extends Ammo {
@@ -24,18 +25,17 @@ public class Arrow extends Ammo {
 	}
 
 	@Override
-	public void hit(Character character, Ranged weapon, WeaponProjectile projectile) {;
-		float damage = this.damage*weapon.dmgMod*projectile.getVel()/10;
+	public void hit(Character character, Ranged weapon, WeaponProjectile projectile) {
+		float damage = this.damage*weapon.dmgMod*projectile.body.getLinearVelocity().len()/5*Tile.PPM;
 		
 		ArrayList<Effect> effects = new ArrayList<Effect>();
 		effects.add(new Stun(world, 30));
-		
 		if(character.damage(damage, weapon.getEffects())>0){
 			
 			Vector2 knockback = new Vector2();
 			
-			knockback.x = projectile.moveVec.x;
-			knockback.y = projectile.moveVec.y;
+			knockback.x = projectile.body.getLinearVelocity().x;
+			knockback.y = projectile.body.getLinearVelocity().y;
 			
 			character.acel(knockback, false);
 		}
