@@ -198,6 +198,7 @@ public class Floor {
 				edge[2] += 0.001f;
 			}
 		}
+		
 		Graph graph = gen.getPathGraph();
 		pathfinder = new Pathfinder(graph);
 		
@@ -236,6 +237,8 @@ public class Floor {
 		}
 		
 		for(Entity e: entities)if(e.hitbox != null)e.getBody(box2dWorld);
+		
+		System.out.println("got entity boxes");
 		
 		world.player.getBody(box2dWorld);
 		

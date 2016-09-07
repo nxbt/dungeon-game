@@ -65,7 +65,6 @@ public class EnemyRoom extends Room {
 				x = (int)(room[0].length*Math.random());
 				y = (int)(room.length*Math.random());
 			}while(checkOccupied(x, y));
-			
 			entities.add(new Goon(world, x*Tile.TS + Tile.TS/2, y*Tile.TS + Tile.TS/2));
 			
 			addToOccupied(x, y);

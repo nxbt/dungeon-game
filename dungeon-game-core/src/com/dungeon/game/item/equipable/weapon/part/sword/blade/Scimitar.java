@@ -15,7 +15,7 @@ public class Scimitar extends SwordBlade {
 			"Stab"
 		};
 		repeatable = true;
-		hitbox = new Polygon(new float[]{3,26,5,19,12,12,22,7,25,10,17,14,10,21,7,23,5,30});
+		hitbox = new Polygon(new float[]{2,24,23,7,25,10,13,22,10,28,5,28,5,32,1,31});
 	}
 
 	@Override

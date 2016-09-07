@@ -40,10 +40,11 @@ public class Goon extends Enemy {
 		life = maxLife;
 		stam = maxStam;
 		mana = maxMana;
+
 		
-		acel = 1.5f;
-		mvel = 5;
-		fric = 0.5f;
+		acel = 0.5f;
+		mvel = 2;
+		fric = 0.1f;
 		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();

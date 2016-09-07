@@ -12,6 +12,8 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.dungeon.game.entity.weapon.HandheldGraphic;
+import com.dungeon.game.entity.weapon.MeleeGraphic;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.Tile;
@@ -209,6 +211,7 @@ public abstract class Entity {
 			verts[i]/=Tile.PPM;
 		}
 		shape.set(verts);
+		
 		
 		// Create a fixture from our polygon shape and add it to our ground body  
 		Fixture f = body.createFixture(shape, 0.0f);

@@ -34,9 +34,9 @@ public class TutorialGoon extends Enemy {
 		stam = maxStam;
 		mana = maxMana;
 		
-		acel = 1f;
-		mvel = 3.5f;
-		fric = 0.5f;
+		acel = 0.5f;
+		mvel = 2;
+		fric = 0.1f;
 		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();

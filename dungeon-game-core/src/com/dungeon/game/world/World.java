@@ -341,6 +341,8 @@ public class World {
 				}
 			}
 		}
+		curFloor.box2dWorld.destroyBody(player.body);
+		player.bodyMade = false;
 		entities.remove(player);
 		if(curDungeon.floors.size() <= floor) {
 			//generate new floor
