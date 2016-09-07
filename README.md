@@ -10,7 +10,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * refactor speed and friction
 * implement deltaTime (tried to do this but there are some issues)
 * stationary characters path to where they're standing
-* player can't be pushed
+* player can't be pushed (kinematic body does not work)
 
 ##TODO low priority (within a month or two?):
 * continue adding procedural room decoration
