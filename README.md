@@ -10,7 +10,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * move physics over to box2d
 * refactor speed and friction
 * make guide path to his location
-* implement deltaTime (tried to do this but there are some issues and we keep getting a C++ error when equiping a weapon)
+* implement deltaTime (tried to do this but there are some issues)
 
 ##TODO low priority (within a month or two?):
 * continue adding procedural room decoration
