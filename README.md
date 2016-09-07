@@ -11,6 +11,8 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * refactor speed and friction
 * make guide path to his location
 * implement deltaTime (tried to do this but there are some issues)
+* stationary characters path to where they're standing
+* player can't be pushed
 
 ##TODO low priority (within a month or two?):
 * continue adding procedural room decoration
@@ -40,3 +42,4 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * floating torches in castle rooms and where multiple halls meet (and other places)
 * fireplaces turn on when they should not
 * Pathfinding crashes if no path is found
+* Doors let light through if opened and closed
