@@ -31,7 +31,7 @@ public class StairKeeper extends Friend {
 		
 		name = "Stair Keeper";
 		
-		light = new Light(world, x, y, 20, 100, 0, this);
+		light = new Light(world, x, y, 1, 100, 0, this);
 		
 		torq = 5;
 		
@@ -48,9 +48,8 @@ public class StairKeeper extends Friend {
 		stam = maxStam;
 		mana = maxMana;
 		
-		acel = 1.5f;
-		mvel = 5;
-		fric = 0.5f;
+		acel = 4f;
+		fric = 0.4f;
 		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();

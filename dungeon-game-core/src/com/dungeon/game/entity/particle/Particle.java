@@ -19,6 +19,8 @@ public abstract class Particle extends Static {
 		layer = PARTICLE;
 		clickable = false;
 		rotate = true;
+		
+		bodyMade = true;
 	}
 	
 	public void update() {

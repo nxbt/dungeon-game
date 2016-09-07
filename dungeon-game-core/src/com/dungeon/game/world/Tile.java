@@ -2,6 +2,7 @@ package com.dungeon.game.world;
 
 public class Tile implements Cloneable{
 	public static final int TS = 32;
+	public static final float PPM = 16f; // pixels per meter
 	public int id;
 	public int data;
 	public static final int[] SOLIDS = new int[]{1,10,11,12,13,14,15};

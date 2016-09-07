@@ -75,6 +75,9 @@ public class Floor {
 		
 		Pixmap tmPixmap = new Pixmap(width*Tile.TS, height*Tile.TS, Pixmap.Format.RGBA8888);
 		
+
+		Brick.floorColor = Brick.getColor(seed);
+		
 		//generates textures
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){
@@ -198,19 +201,26 @@ public class Floor {
 				edge[2] += 0.001f;
 			}
 		}
+		
 		Graph graph = gen.getPathGraph();
 		pathfinder = new Pathfinder(graph);
 		
 		box2dWorld = new com.badlogic.gdx.physics.box2d.World(new Vector2(0,0), true);
 		for(int i = 0; i <tm.length; i++){
 			for(int k = 0; k <tm.length; k++){
-				if(tm[i][k].data == 1){
+				if(!Tile.isSolid(tm[i][k]))continue;
+				boolean makeSolid = false;
+				if(i > 0 && !Tile.isSolid(tm[i-1][k])) makeSolid = true;
+				else if(k > 0 && !Tile.isSolid(tm[i][k-1])) makeSolid = true;
+				else if(k < tm[i].length-1 &&!Tile.isSolid( tm[i][k+1])) makeSolid = true;
+				else if(i < tm.length-1 && !Tile.isSolid(tm[i+1][k])) makeSolid = true;
+				if(makeSolid){
 					// Create our body definition
 					BodyDef groundBodyDef = new BodyDef();
 					
 					groundBodyDef.type = BodyType.StaticBody;
 					// Set its world position
-					groundBodyDef.position.set(new Vector2(k*Tile.TS+Tile.TS/2, i*Tile.TS+Tile.TS/2));  
+					groundBodyDef.position.set(new Vector2(k*2+16/Tile.PPM, i*2+16/Tile.PPM));  
 
 					// Create a body from the defintion and add it to the world
 					Body groundBody = box2dWorld.createBody(groundBodyDef);  
@@ -219,7 +229,7 @@ public class Floor {
 					PolygonShape groundBox = new PolygonShape();  
 					// Set the polygon shape as a box which is twice the size of our view port and 20 high
 					// (setAsBox takes half-width and half-height as arguments)
-					groundBox.setAsBox(Tile.TS/2, Tile.TS/2);
+					groundBox.setAsBox(16/Tile.PPM, 16/Tile.PPM);
 					// Create a fixture from our polygon shape and add it to our ground body  
 					groundBody.createFixture(groundBox, 0.0f); 
 					// Clean up after ourselves
@@ -228,6 +238,12 @@ public class Floor {
 				
 			}
 		}
+		
+		for(Entity e: entities)if(e.hitbox != null)e.getBody(box2dWorld);
+		
+		System.out.println("got entity boxes");
+		
+		world.player.getBody(box2dWorld);
 		
 	}
 	

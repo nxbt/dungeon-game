@@ -7,6 +7,7 @@ import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.utilities.Spritesheet;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class HandheldGraphic extends Dynamic {
@@ -52,9 +53,7 @@ public class HandheldGraphic extends Dynamic {
 		if(left){
 			float xMove = (float) (Math.cos((item.owner.angle+graphic_pAngle)/180*Math.PI)*graphic_dist);
 			float yMove = (float) (Math.sin((item.owner.angle+graphic_pAngle)/180*Math.PI)*graphic_dist);
-			x = (float) (item.owner.x)+xMove;
-			y = (float) (item.owner.y)+yMove;
-			angle = item.owner.angle-135+graphic_angle;
+			if(body != null) body.setTransform(((float) (item.owner.x)+xMove)/Tile.PPM, ((float) (item.owner.y)+yMove)/Tile.PPM, (float) ((item.owner.angle-135+graphic_angle)*Math.PI/180));
 			if(toFlip && !flipped){ // it works don't ask questions
 				sprite = item.sprite;
 				if(!sprite.getTextureData().isPrepared())sprite.getTextureData().prepare();
@@ -69,9 +68,7 @@ public class HandheldGraphic extends Dynamic {
 		}else{
 			float xMove = (float) (Math.cos((item.owner.angle-graphic_pAngle)/180*Math.PI)*graphic_dist);
 			float yMove = (float) (Math.sin((item.owner.angle-graphic_pAngle)/180*Math.PI)*graphic_dist);
-			x = (float) (item.owner.x)+xMove;
-			y = (float) (item.owner.y)+yMove;
-			angle = item.owner.angle-135-graphic_angle;
+			if(body != null) body.setTransform(((float) (item.owner.x)+xMove)/Tile.PPM, ((float) (item.owner.y)+yMove)/Tile.PPM, (float) ((item.owner.angle-135-graphic_angle)*Math.PI/180));
 			if(toFlip && !flipped){
 				sprite = item.sprite;
 				flipped = true;

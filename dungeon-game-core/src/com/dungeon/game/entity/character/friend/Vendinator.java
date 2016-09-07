@@ -41,7 +41,6 @@ public class Vendinator extends Friend {
 		mana = maxMana;
 		
 		acel = 0;
-		mvel = 0;
 		fric = 0;
 		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});

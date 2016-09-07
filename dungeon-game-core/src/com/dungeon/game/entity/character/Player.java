@@ -16,9 +16,12 @@ import com.dungeon.game.entity.hud.window.InvWindow;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Key;
+import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.consumable.LifePotion;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
+import com.dungeon.game.item.equipable.Lantern;
+import com.dungeon.game.item.equipable.weapon.Bow;
 import com.dungeon.game.item.equipable.weapon.Medium;
 import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.item.equipable.weapon.Weapon;
@@ -48,7 +51,7 @@ public class Player extends Character {
 		
 		speechColor = Color.BLUE;
 		
-		light = new Light(world, x, y, 20, 100, 0, this);
+		light = new Light(world, x, y, 1, 100, 0, this);
 		
 		name = "Player";
 		
@@ -62,11 +65,9 @@ public class Player extends Character {
 		stam = maxStam;
 		mana = maxMana;
 		
-		acel = 1.5f;
-		mvel = 5;
-		fric = 0.5f;
+		acel = 3.5f;
+		fric = 0.3f;
 		
-//		hitbox = new Polygon(new float[]{30,16,28,23,23,28,16,30,9,28,4,23,2,16,4,9,9,4,16,2,23,4,28,9});
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();
 		
@@ -141,6 +142,9 @@ public class Player extends Character {
 		inv.addItem(new Sword(world, 1));
 		inv.addItem(new LifePotion(world), 10);
 		inv.addItem(new Key(world), 10);
+		inv.addItem(new Lantern(world));
+		inv.addItem(new Bow(world, 1, 10));
+		inv.addItem(new Arrow(world), 12);
 		
 		equipSlots = new Slot[]{inv.slot[30],inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41]};
 		equipItems = new Equipable[equipSlots.length];
@@ -191,7 +195,7 @@ public class Player extends Character {
 			if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5))inv.slot[4].consume(this);
 		}
 		
-		if(actionState[2]) target_angle = angle;
+		if(actionState[2]) target_angle = (float) (body.getAngle()/Math.PI*180f);
 		else if(Hud.class.isInstance(focusedEntity)) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y+world.cam.y-world.cam.height/2-(y), focusedEntity.x+world.cam.x-world.cam.width/2-(x)));
 		else if(focusedEntity != null) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y-y, focusedEntity.x-x));
 		
@@ -259,15 +263,6 @@ public class Player extends Character {
 				if(Gdx.input.isKeyJustPressed(Input.Keys.P))((Medium)inv.slot[31].item).nextSpell();
 				if(((Medium)inv.slot[31].item).cooldown>0)((Medium)inv.slot[31].item).cooldown--;
 			}
-		}
-		
-		if(attacking){
-			mvel = 2.5f;
-			torq = 3;
-		}
-		else{
-			mvel = 5;
-			torq = 10;
 		}
 	}
 	

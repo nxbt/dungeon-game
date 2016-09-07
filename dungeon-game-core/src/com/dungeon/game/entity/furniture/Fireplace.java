@@ -29,7 +29,7 @@ public class Fireplace extends Static {
 		this.rotation = orientation;
 		solid = false;
 		hitbox = new Polygon(new float[]{-2,-2,34,-2,34,34,-2,34});
-		light = new Light(world, x, y, 500, 100, Light.ORANGE, 40, this);
+		light = new Light(world, x, y, 16, 100, Light.ORANGE, 40, this);
 		
 		originX = 16;
 		originY = 16;

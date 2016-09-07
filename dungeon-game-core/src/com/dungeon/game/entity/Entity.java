@@ -8,8 +8,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.dungeon.game.entity.weapon.HandheldGraphic;
+import com.dungeon.game.entity.weapon.MeleeGraphic;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.utilities.Spritesheet;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public abstract class Entity {
@@ -62,6 +69,10 @@ public abstract class Entity {
 	
 	protected boolean clickable;
 	
+	public Body body;
+	
+	public boolean bodyMade;
+	
 	public Entity(World world, float x, float y, int width, int height, String filename) {
 		this.x = x;
 		this.y = y;
@@ -79,6 +90,8 @@ public abstract class Entity {
 		layer = PERSON; //default layer
 		
 		clickable = true;
+		
+		bodyMade = false;
 	}
 	
 	public void update() {
@@ -174,9 +187,50 @@ public abstract class Entity {
 		}
 	}
 	
+	public void goToBodyPostion(){
+		if(body != null){
+			x = body.getPosition().x*Tile.PPM;
+			y = body.getPosition().y*Tile.PPM;
+			angle = (float) (body.getAngle()*180/Math.PI);
+		}
+	}
+	
 	public abstract void calc(); //called at the beginning of an update cycle
 	
 	public abstract void post(); //called at the end of an update cycle
+	
+	public void getBody(com.badlogic.gdx.physics.box2d.World world) {
+		// Create a polygon shape
+		PolygonShape shape = new PolygonShape();  
+		// Set the polygon shape as a box which is twice the size of our view port and 20 high
+		// (setAsBox takes half-width and half-height as arguments)
+		float[] verts = hitbox.getVertices().clone();
+		for(int i = 0; i < verts.length; i++){
+			if(i % 2 == 1)verts[i]-=originY;
+			else verts[i]-=originX;
+			verts[i]/=Tile.PPM;
+		}
+		shape.set(verts);
+		
+		
+		// Create a fixture from our polygon shape and add it to our ground body  
+		Fixture f = body.createFixture(shape, 0.0f);
+		Filter filter = new Filter();
+		filter.categoryBits = 0x0002;
+		if(solid){
+			filter.maskBits = -1;
+		}
+		else{
+			filter.maskBits = 0;
+		}
+		f.setFriction(0);
+		f.setFilterData(filter);
+		// Clean up after ourselves
+		shape.dispose();
+		body.setTransform(body.getPosition(), (float) (angle/180*Math.PI));
+		
+		bodyMade = true;
+	}
 	
 	
 }

@@ -18,8 +18,7 @@ public class Tangle extends Effect {
 	
 	public void calc(Character character){
 		character.move_angle = 361;
-		vines.x = character.x;
-		vines.y = character.y;
+		vines.body.setTransform(character.body.getPosition(), 0);
 	}
 	
 	public void begin(Character character) {

@@ -31,6 +31,8 @@ public abstract class Hand extends Equipable {
 	
 	public void equip(Character owner, boolean leftSide){
 		reset();
+		graphic.getBody(world.curFloor.box2dWorld);
+		graphic.bodyMade = true;
 		
 		this.owner = owner;
 		
@@ -52,7 +54,9 @@ public abstract class Hand extends Equipable {
 	
 	public void unequip(){
 		reset();
-		
+		world.curFloor.box2dWorld.destroyBody(graphic.body);
+		graphic.body = null;
+		graphic.bodyMade = false;
 
 		onUnequip();
 		

@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.dungeon.game.Camera;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
@@ -30,6 +32,7 @@ import com.dungeon.game.entity.particle.Ember;
 import com.dungeon.game.entity.particle.Poof;
 import com.dungeon.game.pathing.Node;
 
+import box2dLight.Light;
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
 
@@ -72,21 +75,28 @@ public class World {
 	
 	public ArrayList<float[]> tempPathingDebug;
 	
+	private Box2DDebugRenderer debugRenderer;
+	
 	public World(boolean generate) {
 		Poof.init();
 		Blood.init();
 		Ember.init();
 		BodyChunk.init();
-		
 		com.dungeon.game.textures.entity.particle.BodyChunk.init();
+		RayHandler.setGammaCorrection(false);
 		rayHandler = new RayHandler(null);
-		rayHandler.setBlurNum(15);
+		rayHandler.setBlurNum(5);
 		rayHandler.setAmbientLight(new Color(0,0,0,0));
 		RayHandler.useDiffuseLight(true);
+		Filter f = new Filter();
+		f.maskBits = 0x0001;
+		Light.setGlobalContactFilter(f);
 		hudBatch = new SpriteBatch();
 		cam = new Camera(this);
 		hudCam = new Camera(this);
 		player = new Player(this, 0, 0);
+		player.x = 50*Tile.TS-Tile.TS/2;
+		player.y = 50*Tile.TS-Tile.TS/2;
 		tempPathingDebug = new ArrayList<float[]>();
 		if(generate){
 			shapeRenderer = new ShapeRenderer();
@@ -94,12 +104,8 @@ public class World {
 			dungeons = new ArrayList<Dungeon>();
 			
 			dungeons.add(new Dungeon(this));
-			
 			curDungeon = dungeons.get(0);
 			curFloor = curDungeon.floors.get(0);
-			
-			player.x = curFloor.tm[0].length/2*Tile.TS-Tile.TS/2;
-			player.y = curFloor.tm.length/2*Tile.TS-Tile.TS/2;
 			
 			entities = new ArrayList<Entity>();
 			hudEntities = new ArrayList<Hud>();
@@ -137,6 +143,7 @@ public class World {
 			
 			drawEnts = new ArrayList<Entity>();
 		}
+		debugRenderer = new Box2DDebugRenderer();
 	}
 	
 	public void update() {
@@ -147,14 +154,19 @@ public class World {
 			player.update();
 		}else{
 			for(int i = 0; i < entities.size(); i++) {
+				if(!entities.get(i).bodyMade)entities.get(i).getBody(curFloor.box2dWorld);
 				entities.get(i).update();
 			}
 		}
+
+		curFloor.box2dWorld.step(1, 5, 5);
 		
 		for(int i = 0; i < entities.size(); i++) {
+			entities.get(i).goToBodyPostion();
 			if(entities.get(i).killMe) {
 				if(entities.get(i) instanceof Character)((Character)entities.get(i)).endEffects();
 				entities.get(i).dead();
+				if(entities.get(i).body != null)curFloor.box2dWorld.destroyBody(entities.get(i).body);
 				entities.remove(i);
 				i--;
 			}
@@ -213,10 +225,9 @@ public class World {
 			drawEnts.get(i).draw(batch);
 		}
 		if(drawEnts.size() > 0)drawEnts.get(drawEnts.size()-1).draw(batch);//have to draw player twice when using lights
-		
-
-		rayHandler.setCombinedMatrix(cam.cam);
+		rayHandler.setCombinedMatrix(cam.lightCam);
 		rayHandler.updateAndRender();
+		if(debug_hitbox)debugRenderer.render(curFloor.box2dWorld, cam.lightCam.combined);
 		
 		batch.end();
 		
@@ -241,19 +252,19 @@ public class World {
 			}
 			
 			for(Entity e: entities){
-				if(debug_hitbox && e.hitbox != null) {
-					if(e.solid) shapeRenderer.setColor(Color.RED);
-					else shapeRenderer.setColor(Color.GREEN);
-					
-					shapeRenderer.polygon(e.getVisbox().getVertices());
-
-					shapeRenderer.set(ShapeType.Filled);
-					shapeRenderer.setColor(Color.CYAN);
-					for(float[] p: tempPathingDebug){
-						shapeRenderer.rectLine(p[0], p[1], p[2], p[3], 3);
-					}
-					shapeRenderer.set(ShapeType.Line);
-				}
+//				if(debug_hitbox && e.hitbox != null) {
+//					if(e.solid) shapeRenderer.setColor(Color.RED);
+//					else shapeRenderer.setColor(Color.GREEN);
+//					
+//					shapeRenderer.polygon(e.getVisbox().getVertices());
+//
+//					shapeRenderer.set(ShapeType.Filled);
+//					shapeRenderer.setColor(Color.CYAN);
+//					for(float[] p: tempPathingDebug){
+//						shapeRenderer.rectLine(p[0], p[1], p[2], p[3], 3);
+//					}
+//					shapeRenderer.set(ShapeType.Line);
+//				}
 				
 				if(debug_pathing && e instanceof Character && ((Character)e).moveTo!=null&&((Character)e).path!=null){
 					shapeRenderer.setColor(Color.BLUE);
@@ -330,6 +341,8 @@ public class World {
 				}
 			}
 		}
+		curFloor.box2dWorld.destroyBody(player.body);
+		player.bodyMade = false;
 		entities.remove(player);
 		if(curDungeon.floors.size() <= floor) {
 			//generate new floor

@@ -1,9 +1,11 @@
 package com.dungeon.game.entity.weapon;
 
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.equipable.weapon.Ranged;
 import com.dungeon.game.item.equipable.weapon.Weapon;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class RangedGraphic extends HandheldGraphic {
@@ -21,7 +23,17 @@ public class RangedGraphic extends HandheldGraphic {
 		if(toFire) {
 			toFire = false;
 			Polygon projectileHitBox = new Polygon(new float[]{1,28,4,31,0,32});
-			world.entities.add(new WeaponProjectile(world, (Ranged) item, new Arrow(world), x, y, angle, power, projectileHitBox, 2, 30, 35));
+			WeaponProjectile w = new WeaponProjectile(world, (Ranged) item, new Arrow(world), x, y, angle, power, projectileHitBox, 2, 30, 35);
+			w.getBody(world.curFloor.box2dWorld);
+			w.bodyMade = true;
+			
+			Vector2 acelVec = new Vector2();
+			
+			acelVec.x = (float) Math.cos((angle+135)/180*Math.PI)*power/Tile.PPM;
+			acelVec.y = (float) Math.sin((angle+135)/180*Math.PI)*power/Tile.PPM;
+			w.acel(acelVec,false);
+			
+			world.entities.add(w);
 		}
 		super.calc();
 	}

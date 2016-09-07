@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.particle.Blood;
-import com.dungeon.game.entity.particle.Poof;
 import com.dungeon.game.item.equipable.weapon.Melee;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public abstract class Swing implements Cloneable{
@@ -175,9 +175,9 @@ public abstract class Swing implements Cloneable{
 		float xOwner = (float) (Math.cos((weaponangle)/180*Math.PI)*weapon.knockback); //x knockback away from the attacker
 		float yOwner = (float) (Math.sin((weaponangle)/180*Math.PI)*weapon.knockback); //y knockback away from the attacker
 		Vector2 knockVec = new Vector2(); //create a knockback vector
-		knockVec.x = (xSword*(1-knockRatio)+xOwner*(knockRatio))*knockMult; //set the x of the knockVec based on the knockRatio and the knockMult
-		knockVec.y = (ySword*(1-knockRatio)+yOwner*(knockRatio))*knockMult; //set the y of the knockVec based on the knockRatio and the knockMult
-		if(c.bleeds && makeBlood)for(int i = 0; i < weapon.damage*3; i++)world.entities.add(Blood.get(world, c.x, c.y, knockVec.angle(), knockVec.len()*1.3f));
+		knockVec.x = ((xSword*(1-knockRatio)+xOwner*(knockRatio))*knockMult)/Tile.PPM * 6; //set the x of the knockVec based on the knockRatio and the knockMult
+		knockVec.y = ((ySword*(1-knockRatio)+yOwner*(knockRatio))*knockMult)/Tile.PPM * 6; //set the y of the knockVec based on the knockRatio and the knockMult
+		if(c.bleeds && makeBlood)for(int i = 0; i < weapon.damage*3; i++)world.entities.add(Blood.get(world, c.x, c.y, knockVec.angle(), knockVec.len()*1.3f*Tile.PPM/6f));
 		c.acel(knockVec, false); //knock that ***** about!
 	}
 	

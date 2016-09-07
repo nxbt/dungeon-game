@@ -1,6 +1,8 @@
 package com.dungeon.game.entity.furniture;
 
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.dungeon.game.entity.Static;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -8,6 +10,8 @@ import com.dungeon.game.world.World;
 public class Door extends Static {
 	
 	private boolean open;
+	
+	private int rotation;
 	
 	public Door(World world, LockedDoor door){
 		super(world, door.x, door.y, 32, 32, "slot.png");
@@ -46,6 +50,8 @@ public class Door extends Static {
 		solid = true;
 		rotate = true;
 		
+		this.rotation = rotation;
+		
 		if(rotation == 0){
 			originX = 0;
 			originY = 4;
@@ -69,18 +75,37 @@ public class Door extends Static {
 		}
 		
 	}
-	
 	public void toggle(){
 		open = !open;
-		if(open) solid = false;
+		if(open){
+			solid = false;
+			Fixture f = body.getFixtureList().get(0);
+			Filter filter = f.getFilterData();
+			filter.categoryBits = 0x0001;
+			filter.maskBits = 0;
+			f.setFilterData(filter);
+		}
 	}
 
 	@Override
 	public void calc() {
-		if(open && angle < 90) angle+=10;
-		else if(!open && angle > 0) angle-=10;
+		if(open && body.getAngle() < Math.PI/2){
+			if(body.getAngle() > Math.PI/2 - 0.2f)body.setTransform(body.getPosition(), (float) (Math.PI/2f));
+			else body.setTransform(body.getPosition(), body.getAngle()+0.1f);
+		}
+		else if(!open && body.getAngle() > 0){
+			if(body.getAngle() < 0.2f)body.setTransform(body.getPosition(), 0);
+			else body.setTransform(body.getPosition(), body.getAngle()-0.1f);
+		}
 		
-		if(angle == 0) solid = true;
+		if(!solid && body.getAngle() == 0){
+			solid = true;
+			Fixture f = body.getFixtureList().get(0);
+			Filter filter = f.getFilterData();
+			filter.categoryBits = 0x0001;
+			filter.maskBits = -1;
+			f.setFilterData(filter);
+		}
 	}
 
 	@Override
@@ -90,6 +115,28 @@ public class Door extends Static {
 	
 	public void hovered(){
 		if(world.mouse.lb_pressed)toggle();
+	}
+	
+
+	
+	public void getBody(com.badlogic.gdx.physics.box2d.World world) {
+		super.getBody(world);
+		if(solid){
+			Fixture f = body.getFixtureList().get(0);
+			Filter filter = f.getFilterData();
+			filter.categoryBits = 0x0001;
+			filter.maskBits = -1;
+			f.setFilterData(filter);
+		}else {
+			Fixture f = body.getFixtureList().get(0);
+			Filter filter = f.getFilterData();
+			filter.categoryBits = 0x0002;
+			filter.maskBits = 0;
+			f.setFilterData(filter);
+		}
+		
+		if(rotation == 0 || rotation == 2) hitbox = new Polygon(new float[]{0,-12,32,-12,32,20,0,20});
+		else hitbox = new Polygon(new float[]{-12,0,20,0,20,32,-12,32});
 	}
 	
 }

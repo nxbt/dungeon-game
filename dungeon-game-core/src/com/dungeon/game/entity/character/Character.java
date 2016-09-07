@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Entity;
@@ -20,6 +23,7 @@ import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.weapon.Weapon;
+import com.dungeon.game.pathing.Path;
 import com.dungeon.game.utilities.Pool;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -111,6 +115,8 @@ public abstract class Character extends Dynamic {
 	
 	protected int printTime;
 	
+	protected int[] targetTile;
+	
 	public Character(World world, float x, float y, int width, int height, String filename) {
 		super(world, x, y, width, height, filename);
 
@@ -183,15 +189,12 @@ public abstract class Character extends Dynamic {
 	}
 
 	public void move() {
-		
 		Vector2 acelVec = new Vector2();
-		acelVec.x = (float) (Math.cos(move_angle*Math.PI/180)*acel);
-		acelVec.y = (float) (Math.sin(move_angle*Math.PI/180)*acel);
-		if(!stun && move_angle != 361)acel( acelVec, true );
+		acelVec.x = (float) (Math.cos(move_angle*Math.PI/180)*acel/Tile.PPM) * (attacking? 0.5f:1);
+		acelVec.y = (float) (Math.sin(move_angle*Math.PI/180)*acel/Tile.PPM) * (attacking? 0.5f:1);
+		if(!stun && move_angle != 361)acel(acelVec, true);
 		
 		boolean turnRight = true;
-		@SuppressWarnings("unused")
-		float originalAngle = angle;
 		if(angle != target_angle) {
 			float tempAngle = angle+180;
 			float tempTargetAngle = target_angle+180;
@@ -232,13 +235,18 @@ public abstract class Character extends Dynamic {
 			else {
 				difference = angleModifier2+Math.abs(angleModifier1-360);
 			}
+			body.setAngularVelocity(0);
 			
-			if(difference < torq) angle = target_angle;
-			else if(turnRight)angle+=torq;
-			else angle-=torq;
-				
-			if(angle > 180) angle -= 360;
-			if(angle < -180) angle += 360;
+			float tempTorq = torq * (attacking? 0.3f:1);
+			
+			if(difference < tempTorq) {
+				body.setTransform(body.getPosition(), (float) (target_angle*Math.PI/180f));
+				body.setAwake(true);
+			}
+			else if(turnRight)body.setAngularVelocity((float) (tempTorq*Math.PI/180));
+			else body.setAngularVelocity((float) (-tempTorq*Math.PI/180));
+			if(body.getAngle() > Math.PI)body.setTransform(body.getPosition(), (float) (body.getAngle() - Math.PI*2f));			
+			else if(body.getAngle() < -Math.PI)body.setTransform(body.getPosition(), (float) (body.getAngle() + Math.PI*2f));
 		}
 	}
 	
@@ -283,6 +291,9 @@ public abstract class Character extends Dynamic {
 				}
 				if(Math.sqrt((rays.get(i)[0] - endVertex.x)*(rays.get(i)[0] - endVertex.x) + (rays.get(i)[1] - endVertex.y)*(rays.get(i)[1] - endVertex.y)) + Tile.TS/2 > Math.sqrt((rays.get(i)[0] - rays.get(i)[4])*(rays.get(i)[0] - rays.get(i)[4]) + (rays.get(i)[1] - rays.get(i)[5])*(rays.get(i)[1] - rays.get(i)[5])))verticies.add(new float[]{endVertex.x, endVertex.y});
 			}
+			while(verticies.size() < 3){
+				verticies.add(new float[]{x, y});
+			}
 			
 			//calculate the angles of each vertex
 			float[] vertexAngles = new float[verticies.size()];
@@ -305,7 +316,6 @@ public abstract class Character extends Dynamic {
 			}
 			
 			//create the visPolygon
-	
 			visPolygon = new Polygon(finalVerticies);
 			ArrayList<Entity> preSeenEnts = new ArrayList<Entity>(seenEntities);
 			seenEntities = new ArrayList<Entity>();
@@ -361,6 +371,42 @@ public abstract class Character extends Dynamic {
 			}
 			
 		}
+		
+	}
+	
+	protected void findPath(ArrayList<Entity> entities, float[] target){
+		if(staggerTimer == 0){
+			Path p = world.curFloor.pathfinder.findPath(x, y, target[0], target[1]);
+			path = p.getPath();
+			if(path.size() > 0) targetTile = Path.getTargTile(world, path);
+		}
+	}
+	
+	protected void moveToTarg(){
+		float targetX = x;
+		float targetY = y;
+		if(targetTile!=null){
+			moveTo = targetTile;
+			targetX = targetTile[0]*Tile.TS+Tile.TS/2;
+			targetY = targetTile[1]*Tile.TS+Tile.TS/2;
+		}
+		boolean inp_rt = false;
+		boolean inp_lt = false;
+		boolean inp_up = false;
+		boolean inp_dn = false;
+		
+		if(x+4<targetX)inp_rt=true;
+		if(x-4>targetX)inp_lt=true;
+		if(y+4<targetY)inp_up=true;
+		if(y-4>targetY)inp_dn=true;
+		if(inp_up && inp_rt) move_angle = 45;
+		else if(inp_up && inp_lt) move_angle = 135;
+		else if(inp_dn && inp_rt) move_angle = -45;
+		else if(inp_dn && inp_lt) move_angle = -135;
+		else if(inp_up) move_angle = 90;
+		else if(inp_dn) move_angle = -90;
+		else if(inp_rt) move_angle = 0;
+		else if(inp_lt) move_angle = 180;
 		
 	}
 	
@@ -567,9 +613,35 @@ public abstract class Character extends Dynamic {
 	
 	public void dead(){
 		super.dead();
-		Particle[] chunks = BodyChunk.getChunks(world, x, y, sprite, moveVec.angleRad(), moveVec.len(), angle, bleeds);
+		Particle[] chunks = BodyChunk.getChunks(world, x, y, sprite, body.getLinearVelocity().angleRad(), body.getLinearVelocity().len()*Tile.PPM, angle, bleeds);
 		for(Particle c: chunks){
 			world.entities.add(c);
 		}
+	}
+	
+	public void getBody(com.badlogic.gdx.physics.box2d.World world) {
+		super.getBody(world);
+		
+		CircleShape shape = new CircleShape();
+		
+		shape.setRadius(0.9f);
+		
+		body.destroyFixture(body.getFixtureList().get(0));
+		
+		Fixture f = body.createFixture(shape, 0.0f);
+		Filter filter = new Filter();
+		filter.categoryBits = 0x0002;
+		if(solid){
+			filter.maskBits = -1;
+		}
+		else{
+			filter.maskBits = 0;
+		}
+		f.setFriction(0);
+		f.setFilterData(filter);
+		
+		f.setDensity(dens);
+		
+		body.resetMassData();
 	}
 }
