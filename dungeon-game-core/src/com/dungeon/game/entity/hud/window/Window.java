@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.KeyListener;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.hud.Hud;
 import com.dungeon.game.entity.hud.button.ExitButton;
@@ -71,7 +72,7 @@ public abstract class Window extends Hud {
 			world.hudEntities.add(world.hudEntities.indexOf(this), exitButton);
 		}
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE) && world.hudEntities.indexOf(this) == 1) {
+		if(KeyListener.keysJustPressed[Input.Keys.ESCAPE] && world.hudEntities.indexOf(this) == 1) {
 			close();
 		}
 		

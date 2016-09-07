@@ -69,7 +69,7 @@ public abstract class Dynamic extends Entity {
 		body.setLinearDamping(fric);
 		
 		body.getFixtureList().get(0).setDensity(dens);
-		
+			
 		body.resetMassData();
 	}
 }

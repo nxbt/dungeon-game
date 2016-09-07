@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dungeon.game.KeyListener;
 import com.dungeon.game.criteria.Criteria;
 import com.dungeon.game.criteria.True;
 import com.dungeon.game.world.World;
@@ -106,7 +108,7 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 		
 		if(inAnimation){
 			//progress the animation
-			if(animationFrames != 40 && (Gdx.input.isKeyJustPressed(Keys.ENTER) || Gdx.input.isKeyJustPressed(Keys.SPACE) || world.mouse.lb_pressed)){
+			if(animationFrames != 40 && (KeyListener.keysJustPressed[Input.Keys.ENTER] || KeyListener.keysJustPressed[Input.Keys.SPACE] || world.mouse.lb_pressed)){
 				animationFrames = 1;
 			}
 			animationFrames--;
@@ -119,18 +121,18 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 	public void hovered(){
 		hoveredCalled = true;
 		if(!inAnimation && delay == 0){
-			if(Gdx.input.isKeyJustPressed(Keys.W) || Gdx.input.isKeyJustPressed(Keys.UP)) {
+			if(KeyListener.keysJustPressed[Input.Keys.W] || KeyListener.keysJustPressed[Input.Keys.UP]) {
 				keyChoice++;
 				if(keyChoice > choiceShorts.length-1) keyChoice = 0;
 			}
-			else if(Gdx.input.isKeyJustPressed(Keys.S) || Gdx.input.isKeyJustPressed(Keys.DOWN)) {
+			else if(KeyListener.keysJustPressed[Input.Keys.S] || KeyListener.keysJustPressed[Input.Keys.DOWN]) {
 				keyChoice--;
 				if(keyChoice < 0) keyChoice = choiceShorts.length-1;
 			}
 			choice = keyChoice;
 			
 			for(int i = 0; i < choiceShorts.length; i++) {
-				if(Gdx.input.isKeyJustPressed(choiceShorts.length-1-i+8)) {
+				if(KeyListener.keysJustPressed[choiceShorts.length-1-i+8]) {
 					choice = i;
 					inAnimation = true;
 					animationFrames = 40;
@@ -161,7 +163,7 @@ public class SpeechChoice extends SpeechBubble implements Cloneable {
 				}
 			}
 			
-			if((Gdx.input.isKeyJustPressed(Keys.ENTER) || Gdx.input.isKeyJustPressed(Keys.SPACE)) && choice != -1) {
+			if((KeyListener.keysJustPressed[Input.Keys.ENTER] || KeyListener.keysJustPressed[Input.Keys.SPACE]) && choice != -1) {
 				inAnimation = true;
 				animationFrames = 40;
 				return;

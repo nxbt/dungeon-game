@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.dungeon.game.Camera;
+import com.dungeon.game.KeyListener;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.character.Player;
@@ -73,8 +74,6 @@ public class World {
 	
 	private ArrayList<Entity> drawEnts;
 	
-	public ArrayList<float[]> tempPathingDebug;
-	
 	private Box2DDebugRenderer debugRenderer;
 	
 	public World(boolean generate) {
@@ -97,7 +96,6 @@ public class World {
 		player = new Player(this, 0, 0);
 		player.x = 50*Tile.TS-Tile.TS/2;
 		player.y = 50*Tile.TS-Tile.TS/2;
-		tempPathingDebug = new ArrayList<float[]>();
 		if(generate){
 			shapeRenderer = new ShapeRenderer();
 			
@@ -147,6 +145,10 @@ public class World {
 	}
 	
 	public void update() {
+		KeyListener.update();
+		
+		descBox.text = "";
+		
 		cam.update();
 		mouse.update();
 		descBox.update();
@@ -176,14 +178,14 @@ public class World {
 			hudEntities.get(i).update();
 		}
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F9)) debug_frames = !debug_frames;
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F8)) debug_pathing = !debug_pathing;
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F7)) debug_hitbox = !debug_hitbox;
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F10)) debug_sight = !debug_sight;
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F6)) debug_pause = !debug_pause;
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F5)) debug_freeCam = !debug_freeCam;
+		if(KeyListener.keysJustPressed[Input.Keys.F10]) debug_sight = !debug_sight;
+		if(KeyListener.keysJustPressed[Input.Keys.F9]) debug_frames = !debug_frames;
+		if(KeyListener.keysJustPressed[Input.Keys.F8]) debug_pathing = !debug_pathing;
+		if(KeyListener.keysJustPressed[Input.Keys.F7]) debug_hitbox = !debug_hitbox;
+		if(KeyListener.keysJustPressed[Input.Keys.F6]) debug_pause = !debug_pause;
+		if(KeyListener.keysJustPressed[Input.Keys.F5]) debug_freeCam = !debug_freeCam;
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F11)) {
+		if(KeyListener.keysJustPressed[Input.Keys.F11]) {
 			debug_light = !debug_light;
 			if(debug_light) {
 				rayHandler.setWorld(emptyWorld);
@@ -209,7 +211,7 @@ public class World {
 		
 		drawEnts.clear();
 		
-		for(Entity e: entities) drawEnts.add(e);
+		for(int i = 0; i < entities.size(); i++) drawEnts.add(entities.get(i));
 
 		drawEnts.sort(new Comparator<Entity>(){
 

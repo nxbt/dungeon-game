@@ -89,8 +89,6 @@ public class DescBox extends Hud {
 			DESC_BOX.draw(batch, x, y, dWidth-dOffX, dHeight-dOffY);
 			
 			desc.draw(batch, text, x+6, y+dHeight-6);
-			
-			text = "";
 		}
 	}
 	

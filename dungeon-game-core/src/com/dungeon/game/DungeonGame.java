@@ -10,6 +10,10 @@ public class DungeonGame extends ApplicationAdapter {
 	
 	World world;
 	
+	private long lag;
+	
+	private long t;
+	
 	@Override
 	public void create() {
 		Gdx.graphics.setWindowedMode(1280, 720);
@@ -17,14 +21,20 @@ public class DungeonGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		
 		world = new World(true);
+		
+		t = System.nanoTime();
 	}
 
 	@Override
 	public void render () {
-//		long s = System.nanoTime();
-		world.update();
+		lag += System.nanoTime() - t;
+		t = System.nanoTime();
+		while(lag >= 16666666) {
+			world.update();
+			lag -= 16666666;
+		} 
+		
 		world.draw(batch);
-//		System.out.println("Frame in: " + (float)(System.nanoTime() - s)/16000000f + " frames");
 	}
 	
 	@Override
