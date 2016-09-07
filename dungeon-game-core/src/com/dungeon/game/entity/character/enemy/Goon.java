@@ -144,8 +144,9 @@ public class Goon extends Enemy {
 		if(knownEntities.contains(world.player)){
 			if(equipItems[0] instanceof Melee){
 				if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{world.player.x,world.player.y});
+				moveToTarg();
+				moveTo = targetTile;
 				target_angle = move_angle;
-				if(flipX)target_angle+=180;
 				if(target_angle > 360)target_angle-=360;
 			}else{
 				lineOfCover = new float[4];

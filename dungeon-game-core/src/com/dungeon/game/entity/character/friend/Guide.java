@@ -276,8 +276,8 @@ public class Guide extends Friend {
 			stage = 1;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			body.setTransform((30*Tile.TS) / Tile.PPM, (62*Tile.TS) / Tile.PPM, 0);
-			xPos = 30*Tile.TS;
-			yPos = 62*Tile.TS;
+			xPos = 30*Tile.TS + Tile.TS/2;
+			yPos = 62*Tile.TS + Tile.TS/2;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(1);
@@ -286,8 +286,8 @@ public class Guide extends Friend {
 			stage = 2;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			body.setTransform((30*Tile.TS) / Tile.PPM, (65*Tile.TS) / Tile.PPM, 0);
-			xPos = 30*Tile.TS;
-			yPos = 65*Tile.TS;
+			xPos = 30*Tile.TS + Tile.TS/2;
+			yPos = 65*Tile.TS + Tile.TS/2;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(2);
@@ -296,8 +296,8 @@ public class Guide extends Friend {
 			stage = 3;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			body.setTransform((56*Tile.TS) / Tile.PPM, (65*Tile.TS) / Tile.PPM, 0);
-			xPos = 56*Tile.TS;
-			yPos = 65*Tile.TS;
+			xPos = 56*Tile.TS + Tile.TS/2;
+			yPos = 65*Tile.TS + Tile.TS/2;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(3);
@@ -306,8 +306,8 @@ public class Guide extends Friend {
 			stage = 4;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			body.setTransform((58*Tile.TS) / Tile.PPM, (65*Tile.TS) / Tile.PPM, 0);
-			xPos = 58*Tile.TS;
-			yPos = 65*Tile.TS;
+			xPos = 58*Tile.TS + Tile.TS/2;
+			yPos = 65*Tile.TS + Tile.TS/2;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(4);
@@ -316,8 +316,8 @@ public class Guide extends Friend {
 			stage = 5;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			body.setTransform((64*Tile.TS) / Tile.PPM, (58*Tile.TS) / Tile.PPM, 0);
-			xPos = 64*Tile.TS;
-			yPos = 58*Tile.TS;
+			xPos = 64*Tile.TS + Tile.TS/2;
+			yPos = 58*Tile.TS + Tile.TS/2;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(5);
@@ -326,8 +326,8 @@ public class Guide extends Friend {
 			stage = 6;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			body.setTransform((66*Tile.TS) / Tile.PPM, (40*Tile.TS) / Tile.PPM, 0);
-			xPos = 66*Tile.TS;
-			yPos = 40*Tile.TS;
+			xPos = 66*Tile.TS + Tile.TS/2;
+			yPos = 40*Tile.TS + Tile.TS/2;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(6);
@@ -341,8 +341,8 @@ public class Guide extends Friend {
 				stage = 7;
 				for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 				body.setTransform((66*Tile.TS) / Tile.PPM, (20*Tile.TS) / Tile.PPM, 0);
-				xPos = 66*Tile.TS;
-				yPos = 20*Tile.TS;
+				xPos = 66*Tile.TS + Tile.TS/2;
+				yPos = 20*Tile.TS + Tile.TS/2;
 				for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 				speechBubble.dismissed = false;
 				dialogue = dialogues.get(7);
@@ -352,6 +352,10 @@ public class Guide extends Friend {
 		if(staggerTimer == 0){
 			findPath(world.entities, new float[]{xPos, yPos});
 		}
+		moveToTarg();
+		moveTo = targetTile;
+		target_angle = move_angle;
+		if(target_angle > 360)target_angle-=360;
 		
 		if(seenEntities.contains(world.player)) {
 			target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y, world.player.x-x));
