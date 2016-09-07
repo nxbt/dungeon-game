@@ -9,6 +9,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * relplace the booleans for flip with functions (so hitbox and visbox can be flipped)
 * move physics over to box2d
 * refactor speed and friction
+* make guide path to his location
 
 ##TODO low priority (within a month or two?):
 * continue adding procedural room decoration
