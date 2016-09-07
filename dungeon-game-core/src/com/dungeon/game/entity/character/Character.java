@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.dungeon.game.KeyListener;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.entity.Entity;
@@ -375,23 +376,23 @@ public abstract class Character extends Dynamic {
 		}
 		
 		if(equipItems[0] != null && fightMode) {
-			if(((Hand) inv.slot[30].item).isInUse())attacking = true;
-			((Hand) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
-			((Hand)inv.slot[30].item).graphic.calc();
-			if(inv.slot[30].item instanceof Medium) {
-				if(Gdx.input.isKeyJustPressed(Input.Keys.O))((Medium)inv.slot[30].item).preSpell();
-				if(Gdx.input.isKeyJustPressed(Input.Keys.P))((Medium)inv.slot[30].item).nextSpell();
-				if(((Medium)inv.slot[30].item).cooldown>0)((Medium)inv.slot[30].item).cooldown--;
+			if(((Hand) equipItems[0]).isInUse())attacking = true;
+			((Hand) equipItems[0]).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
+			((Hand)equipItems[0]).graphic.calc();
+			if(equipItems[0] instanceof Medium) {
+				if(KeyListener.keysJustPressed[Input.Keys.O])((Medium)equipItems[0]).preSpell();
+				if(KeyListener.keysJustPressed[Input.Keys.P])((Medium)equipItems[0]).nextSpell();
+				if(((Medium)equipItems[0]).cooldown>0)((Medium)equipItems[0]).cooldown--;
 			}
 		}
 		if(equipItems[1] != null && fightMode) {
-			if(((Hand) inv.slot[31].item).isInUse())attacking = true;
-			((Hand) inv.slot[31].item).getPos(world.mouse.rb_down, world.mouse.rb_pressed);
-			((Hand)inv.slot[31].item).graphic.calc();
-			if(inv.slot[31].item instanceof Medium) {
-				if(Gdx.input.isKeyJustPressed(Input.Keys.O))((Medium)inv.slot[31].item).preSpell();
-				if(Gdx.input.isKeyJustPressed(Input.Keys.P))((Medium)inv.slot[31].item).nextSpell();
-				if(((Medium)inv.slot[31].item).cooldown>0)((Medium)inv.slot[31].item).cooldown--;
+			if(((Hand) equipItems[1]).isInUse())attacking = true;
+			((Hand) equipItems[1]).getPos(world.mouse.rb_down, world.mouse.rb_pressed);
+			((Hand) equipItems[1]).graphic.calc();
+			if(equipItems[1] instanceof Medium) {
+				if(KeyListener.keysJustPressed[Input.Keys.O])((Medium)equipItems[1]).preSpell();
+				if(KeyListener.keysJustPressed[Input.Keys.P])((Medium)equipItems[1]).nextSpell();
+				if(((Medium)equipItems[1]).cooldown>0)((Medium)equipItems[1]).cooldown--;
 			}
 		}
 		

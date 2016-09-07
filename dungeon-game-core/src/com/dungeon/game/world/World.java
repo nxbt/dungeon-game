@@ -9,13 +9,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.dungeon.game.Camera;
+import com.dungeon.game.KeyListener;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.character.Player;
@@ -145,6 +145,8 @@ public class World {
 	}
 	
 	public void update() {
+		KeyListener.update();
+		
 		descBox.text = "";
 		
 		cam.update();
@@ -176,14 +178,14 @@ public class World {
 			hudEntities.get(i).update();
 		}
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F9)) debug_frames = !debug_frames;
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F8)) debug_pathing = !debug_pathing;
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F7)) debug_hitbox = !debug_hitbox;
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F10)) debug_sight = !debug_sight;
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F6)) debug_pause = !debug_pause;
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F5)) debug_freeCam = !debug_freeCam;
+		if(KeyListener.keysJustPressed[Input.Keys.F10]) debug_sight = !debug_sight;
+		if(KeyListener.keysJustPressed[Input.Keys.F9]) debug_frames = !debug_frames;
+		if(KeyListener.keysJustPressed[Input.Keys.F8]) debug_pathing = !debug_pathing;
+		if(KeyListener.keysJustPressed[Input.Keys.F7]) debug_hitbox = !debug_hitbox;
+		if(KeyListener.keysJustPressed[Input.Keys.F6]) debug_pause = !debug_pause;
+		if(KeyListener.keysJustPressed[Input.Keys.F5]) debug_freeCam = !debug_freeCam;
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.F11)) {
+		if(KeyListener.keysJustPressed[Input.Keys.F11]) {
 			debug_light = !debug_light;
 			if(debug_light) {
 				rayHandler.setWorld(emptyWorld);

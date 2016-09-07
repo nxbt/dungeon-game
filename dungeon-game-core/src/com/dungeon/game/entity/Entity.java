@@ -12,8 +12,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.dungeon.game.entity.weapon.HandheldGraphic;
-import com.dungeon.game.entity.weapon.MeleeGraphic;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.Tile;

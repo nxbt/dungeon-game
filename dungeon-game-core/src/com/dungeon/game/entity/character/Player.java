@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Polygon;
+import com.dungeon.game.KeyListener;
 import com.dungeon.game.effect.regen.StamRegen;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.hud.EffectGraphic;
@@ -22,9 +23,7 @@ import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.Lantern;
 import com.dungeon.game.item.equipable.weapon.Bow;
-import com.dungeon.game.item.equipable.weapon.Medium;
 import com.dungeon.game.item.equipable.weapon.Sword;
-import com.dungeon.game.item.equipable.weapon.Weapon;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.textures.entity.Person;
 import com.dungeon.game.world.Tile;
@@ -188,25 +187,25 @@ public class Player extends Character {
 		}
 		
 		if(!talking) {
-			if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1))inv.slot[0].consume(this);
-			if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2))inv.slot[1].consume(this);
-			if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3))inv.slot[2].consume(this);
-			if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4))inv.slot[3].consume(this);
-			if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5))inv.slot[4].consume(this);
+			if(KeyListener.keysJustPressed[Input.Keys.NUM_1])inv.slot[0].consume(this);
+			if(KeyListener.keysJustPressed[Input.Keys.NUM_2])inv.slot[1].consume(this);
+			if(KeyListener.keysJustPressed[Input.Keys.NUM_3])inv.slot[2].consume(this);
+			if(KeyListener.keysJustPressed[Input.Keys.NUM_4])inv.slot[3].consume(this);
+			if(KeyListener.keysJustPressed[Input.Keys.NUM_5])inv.slot[4].consume(this);
 		}
 		
 		if(actionState[2]) target_angle = (float) (body.getAngle()/Math.PI*180f);
 		else if(Hud.class.isInstance(focusedEntity)) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y+world.cam.y-world.cam.height/2-(y), focusedEntity.x+world.cam.x-world.cam.width/2-(x)));
 		else if(focusedEntity != null) target_angle = (float) (180/Math.PI*Math.atan2(focusedEntity.y-y, focusedEntity.x-x));
 		
-		if(!talking && Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !attacking && world.mouse.slot.item == null) {
+		if(!talking && KeyListener.keysJustPressed[Input.Keys.SPACE] && !attacking && world.mouse.slot.item == null) {
 			toggleFightMode();
 			actionState[0] = !actionState[0];
 		}
 		
 		if(inv.slot[35].item != null) ((Equipable) inv.slot[35].item).update(this);
 		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.E) && !fightMode) {
+		if(KeyListener.keysJustPressed[Input.Keys.E] && !fightMode) {
 			if(world.hudEntities.indexOf(inv.graphic) == -1) {
 				inv.graphic.open();
 			}
@@ -227,10 +226,10 @@ public class Player extends Character {
 		boolean inp_dn = false;
 		
 		if(!talking) {
-			if(Gdx.input.isKeyPressed(Input.Keys.LEFT)  || Gdx.input.isKeyPressed(Input.Keys.A)) inp_lt = true;
-			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) inp_rt = true;
-			if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) inp_up = true;
-			if(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) inp_dn = true;
+			if(KeyListener.keysPressed[Input.Keys.LEFT]  || KeyListener.keysPressed[Input.Keys.A]) inp_lt = true;
+			if(KeyListener.keysPressed[Input.Keys.RIGHT] || KeyListener.keysPressed[Input.Keys.D]) inp_rt = true;
+			if(KeyListener.keysPressed[Input.Keys.UP]    || KeyListener.keysPressed[Input.Keys.W]) inp_up = true;
+			if(KeyListener.keysPressed[Input.Keys.DOWN]  || KeyListener.keysPressed[Input.Keys.S]) inp_dn = true;
 		}
 		
 		if(inp_up && inp_rt) move_angle = 45;
