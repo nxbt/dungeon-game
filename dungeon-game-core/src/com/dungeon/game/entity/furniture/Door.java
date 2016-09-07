@@ -98,7 +98,7 @@ public class Door extends Static {
 			solid = true;
 			Fixture f = body.getFixtureList().get(0);
 			Filter filter = f.getFilterData();
-			filter.categoryBits = 0x0002;
+			filter.categoryBits = 0x0001;
 			filter.maskBits = -1;
 			f.setFilterData(filter);
 		}
@@ -121,6 +121,7 @@ public class Door extends Static {
 			Fixture f = body.getFixtureList().get(0);
 			Filter filter = f.getFilterData();
 			filter.categoryBits = 0x0001;
+			filter.maskBits = -1;
 			f.setFilterData(filter);
 		}else {
 			System.out.print("fucking working");
