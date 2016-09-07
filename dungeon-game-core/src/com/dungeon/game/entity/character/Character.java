@@ -190,8 +190,8 @@ public abstract class Character extends Dynamic {
 
 	public void move() {
 		Vector2 acelVec = new Vector2();
-		acelVec.x = (float) (Math.cos(move_angle*Math.PI/180)*acel/Tile.PPM);
-		acelVec.y = (float) (Math.sin(move_angle*Math.PI/180)*acel/Tile.PPM);
+		acelVec.x = (float) (Math.cos(move_angle*Math.PI/180)*acel/Tile.PPM) * (attacking? 0.5f:1);
+		acelVec.y = (float) (Math.sin(move_angle*Math.PI/180)*acel/Tile.PPM) * (attacking? 0.5f:1);
 		if(!stun && move_angle != 361)acel(acelVec, true);
 		
 		boolean turnRight = true;
@@ -237,12 +237,14 @@ public abstract class Character extends Dynamic {
 			}
 			body.setAngularVelocity(0);
 			
-			if(difference < torq) {
+			float tempTorq = torq * (attacking? 0.3f:1);
+			
+			if(difference < tempTorq) {
 				body.setTransform(body.getPosition(), (float) (target_angle*Math.PI/180f));
 				body.setAwake(true);
 			}
-			else if(turnRight)body.setAngularVelocity((float) (torq*Math.PI/180));
-			else body.setAngularVelocity((float) (-torq*Math.PI/180));
+			else if(turnRight)body.setAngularVelocity((float) (tempTorq*Math.PI/180));
+			else body.setAngularVelocity((float) (-tempTorq*Math.PI/180));
 			if(body.getAngle() > Math.PI)body.setTransform(body.getPosition(), (float) (body.getAngle() - Math.PI*2f));			
 			else if(body.getAngle() < -Math.PI)body.setTransform(body.getPosition(), (float) (body.getAngle() + Math.PI*2f));
 		}
@@ -637,5 +639,9 @@ public abstract class Character extends Dynamic {
 		}
 		f.setFriction(0);
 		f.setFilterData(filter);
+		
+		f.setDensity(dens);
+		
+		body.resetMassData();
 	}
 }

@@ -27,8 +27,7 @@ public class Dummy extends Enemy {
 		mana = maxMana;
 		
 		acel = 0;
-		mvel = 0;
-		fric = 0.7f;
+		fric = 0.4f;
 		torq = 0;
 		
 		angle = 180;

@@ -65,9 +65,8 @@ public class Guide extends Friend {
 		stam = maxStam;
 		mana = maxMana;
 		
-		acel = 1.5f;
-		mvel = 5;
-		fric = 0.5f;
+		acel = 4f;
+		fric = 0.4f;
 		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();

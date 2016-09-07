@@ -8,7 +8,6 @@ import com.dungeon.game.entity.character.PrintPools;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.light.Light;
-import com.dungeon.game.pathing.Path;
 import com.dungeon.game.textures.entity.Person;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -43,9 +42,8 @@ public class Villager extends Friend {
 		stam = maxStam;
 		mana = maxMana;
 		
-		acel = 0.5f;
-		mvel = 2;
-		fric = 0.1f;
+		acel = 4f;
+		fric = 0.4f;
 		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();

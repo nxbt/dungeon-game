@@ -34,9 +34,10 @@ public class TutorialGoon extends Enemy {
 		stam = maxStam;
 		mana = maxMana;
 		
-		acel = 0.5f;
-		mvel = 2;
-		fric = 0.1f;
+		torq = 10;
+		
+		acel = 3.5f;
+		fric = 0.3f;
 		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();
@@ -124,8 +125,9 @@ public class TutorialGoon extends Enemy {
 		entities.remove(this);
 		if(knownEntities.contains(world.player)){
 				if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{world.player.x,world.player.y});
+				moveToTarg();
+				moveTo = targetTile;
 				target_angle = move_angle;
-				if(flipX)target_angle+=180;
 				if(target_angle > 360)target_angle-=360;
 		}
 		attacking = false;
@@ -140,14 +142,6 @@ public class TutorialGoon extends Enemy {
 			((Weapon) inv.slot[30].item).getPos(down&&attack, click&&attack);
 			((Weapon)inv.slot[30].item).graphic.calc();
 			
-		}
-		if(attacking){
-			mvel = 2.5f;
-			torq = 3;
-		}
-		else{
-			mvel = 5;
-			torq = 10;
 		}
 	}
 	

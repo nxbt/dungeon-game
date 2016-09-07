@@ -65,11 +65,9 @@ public class Player extends Character {
 		stam = maxStam;
 		mana = maxMana;
 		
-		acel = 0.5f;
-		mvel = 2;
-		fric = 0.1f;
+		acel = 3.5f;
+		fric = 0.3f;
 		
-//		hitbox = new Polygon(new float[]{30,16,28,23,23,28,16,30,9,28,4,23,2,16,4,9,9,4,16,2,23,4,28,9});
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();
 		
@@ -265,15 +263,6 @@ public class Player extends Character {
 				if(Gdx.input.isKeyJustPressed(Input.Keys.P))((Medium)inv.slot[31].item).nextSpell();
 				if(((Medium)inv.slot[31].item).cooldown>0)((Medium)inv.slot[31].item).cooldown--;
 			}
-		}
-		
-		if(attacking){
-			mvel = 2.5f;
-			torq = 3;
-		}
-		else{
-			mvel = 5;
-			torq = 10;
 		}
 	}
 	

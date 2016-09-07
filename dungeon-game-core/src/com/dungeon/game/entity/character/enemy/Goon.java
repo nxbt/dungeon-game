@@ -40,11 +40,11 @@ public class Goon extends Enemy {
 		life = maxLife;
 		stam = maxStam;
 		mana = maxMana;
-
 		
-		acel = 0.5f;
-		mvel = 2;
-		fric = 0.1f;
+		torq = 10;
+		
+		acel = 3.5f;
+		fric = 0.3f;
 		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();
@@ -152,7 +152,9 @@ public class Goon extends Enemy {
 				lineOfCover = new float[4];
 				int[] coverPos = new int[4];
 				CoverFinder.findCover(world, this, world.player, coverPos, lineOfCover, true, 10);
-				if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{coverPos[0]*Tile.TS,coverPos[1]*Tile.TS});
+				if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{coverPos[0]*Tile.TS,coverPos[1]*Tile.TS});moveToTarg();
+				moveToTarg();
+				moveTo = targetTile;
 				target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
 				if(Intersector.distanceSegmentPoint(lineOfCover[0], lineOfCover[1], lineOfCover[2], lineOfCover[3], x, y) < 4){
 					if(((Bow)equipItems[0]).stageTimer < 45){
@@ -185,14 +187,6 @@ public class Goon extends Enemy {
 			((Weapon) inv.slot[30].item).getPos(down&&attack, click&&attack);
 			((Weapon)inv.slot[30].item).graphic.calc();
 			
-		}
-		if(attacking){
-			mvel = 2.5f;
-			torq = 3;
-		}
-		else{
-			mvel = 5;
-			torq = 10;
 		}
 	}
 	

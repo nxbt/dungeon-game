@@ -226,7 +226,6 @@ public abstract class Entity {
 		f.setFriction(0);
 		f.setFilterData(filter);
 		// Clean up after ourselves
-		body.setLinearDamping(0.1f);
 		shape.dispose();
 		body.setTransform(body.getPosition(), (float) (angle/180*Math.PI));
 		
