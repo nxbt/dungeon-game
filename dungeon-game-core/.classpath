@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry exported="true" kind="lib" path="libs/gdx-1.9.3.jar" sourcepath="libs/gdx-box2d-1.9.3-sources.jar"/>
 	<classpathentry kind="lib" path="libs/box2dlights-1.4.jar" sourcepath="libs/box2dlights-1.4-sources.jar"/>
 	<classpathentry kind="lib" path="libs/gdx-box2d-1.9.3.jar" sourcepath="libs/gdx-box2d-1.9.3-sources.jar"/>
