@@ -32,9 +32,16 @@ public class Guide extends Friend {
 	
 	private ArrayList<Dialogue> dialogues;
 	
+	private float xPos;
+	
+	private float yPos;
+	
 	public Guide(World world, float x, float y) {
 		super(world, x, y, 32, 32, "mentor.png");
 		sprite = new Person().texture;
+		
+		xPos = x;
+		yPos = y;
 		
 		speechColor = new Color(0.1f,0.5f,0.1f,1);
 		speechBubble.setColor();	
@@ -269,6 +276,8 @@ public class Guide extends Friend {
 			stage = 1;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			body.setTransform((30*Tile.TS) / Tile.PPM, (62*Tile.TS) / Tile.PPM, 0);
+			xPos = 30*Tile.TS;
+			yPos = 62*Tile.TS;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(1);
@@ -277,6 +286,8 @@ public class Guide extends Friend {
 			stage = 2;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			body.setTransform((30*Tile.TS) / Tile.PPM, (65*Tile.TS) / Tile.PPM, 0);
+			xPos = 30*Tile.TS;
+			yPos = 65*Tile.TS;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(2);
@@ -285,6 +296,8 @@ public class Guide extends Friend {
 			stage = 3;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			body.setTransform((56*Tile.TS) / Tile.PPM, (65*Tile.TS) / Tile.PPM, 0);
+			xPos = 56*Tile.TS;
+			yPos = 65*Tile.TS;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(3);
@@ -293,6 +306,8 @@ public class Guide extends Friend {
 			stage = 4;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			body.setTransform((58*Tile.TS) / Tile.PPM, (65*Tile.TS) / Tile.PPM, 0);
+			xPos = 58*Tile.TS;
+			yPos = 65*Tile.TS;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(4);
@@ -301,6 +316,8 @@ public class Guide extends Friend {
 			stage = 5;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			body.setTransform((64*Tile.TS) / Tile.PPM, (58*Tile.TS) / Tile.PPM, 0);
+			xPos = 64*Tile.TS;
+			yPos = 58*Tile.TS;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(5);
@@ -309,6 +326,8 @@ public class Guide extends Friend {
 			stage = 6;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			body.setTransform((66*Tile.TS) / Tile.PPM, (40*Tile.TS) / Tile.PPM, 0);
+			xPos = 66*Tile.TS;
+			yPos = 40*Tile.TS;
 			for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 			speechBubble.dismissed = false;
 			dialogue = dialogues.get(6);
@@ -322,10 +341,16 @@ public class Guide extends Friend {
 				stage = 7;
 				for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 				body.setTransform((66*Tile.TS) / Tile.PPM, (20*Tile.TS) / Tile.PPM, 0);
+				xPos = 66*Tile.TS;
+				yPos = 20*Tile.TS;
 				for(int i = 0; i < 200; i++)world.entities.add(Poof.get(world, x, y));
 				speechBubble.dismissed = false;
 				dialogue = dialogues.get(7);
 			}
+		}
+		
+		if(staggerTimer == 0){
+			findPath(world.entities, new float[]{xPos, yPos});
 		}
 		
 		if(seenEntities.contains(world.player)) {

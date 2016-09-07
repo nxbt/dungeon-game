@@ -15,8 +15,6 @@ import com.dungeon.game.world.World;
 
 public class Villager extends Friend {
 	
-	protected int[] targetTile;
-	
 	private int[] wanderTile;
 
 	public Villager(World world, float x, float y) {
