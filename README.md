@@ -2,14 +2,12 @@
 The is a top-down rougelike-like game written in Java. Currently being worked on by Brendan Thompson and Ethan  Bull-Vulpe.
 
 ##TODO high priority (within a week or two):
-* set up playtesting sessions
 * swap x and y in arrays
 * make doors open away from the player
 * add gold keys and doors
 * relplace the booleans for flip with functions (so hitbox and visbox can be flipped)
-* move physics over to box2d
+* make flip work in box2d
 * refactor speed and friction
-* make guide path to his location
 * implement deltaTime (tried to do this but there are some issues)
 * stationary characters path to where they're standing
 * player can't be pushed
