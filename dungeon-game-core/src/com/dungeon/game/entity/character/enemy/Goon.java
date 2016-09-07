@@ -169,7 +169,6 @@ public class Goon extends Enemy {
 				}
 			}
 		}
-		attacking = false;
 		if(equipItems[0] != null){
 			boolean attack = false;
 			boolean down = true;
@@ -184,9 +183,9 @@ public class Goon extends Enemy {
 			if(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat")){
 				attack = false;
 			}
-			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
-			((Weapon) inv.slot[30].item).getPos(down&&attack, click&&attack);
-			((Weapon)inv.slot[30].item).graphic.calc();
+//			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
+//			((Weapon) inv.slot[30].item).getPos(down&&attack, click&&attack);
+//			((Weapon)inv.slot[30].item).graphic.calc();
 			
 		}
 	}

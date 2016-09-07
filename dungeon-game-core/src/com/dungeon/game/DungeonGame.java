@@ -35,8 +35,6 @@ public class DungeonGame extends ApplicationAdapter {
 		} 
 		
 		world.draw(batch);
-		
-		System.out.println(lag);
 	}
 	
 	@Override

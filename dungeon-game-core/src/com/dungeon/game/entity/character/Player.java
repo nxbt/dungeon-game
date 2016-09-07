@@ -240,8 +240,6 @@ public class Player extends Character {
 		else if(inp_dn) move_angle = -90;
 		else if(inp_rt) move_angle = 0;
 		else if(inp_lt) move_angle = 180;
-		
-		attacking = false;
 	}
 	
 	public void calcLight(){

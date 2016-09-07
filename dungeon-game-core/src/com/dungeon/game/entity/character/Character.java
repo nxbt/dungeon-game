@@ -347,6 +347,7 @@ public abstract class Character extends Dynamic {
 	}
 	
 	public void handleEquips() {
+		attacking = false;
 		for(int i = 0; i < equipSlots.length; i++){
 			if(equipSlots[i].item == null){
 				if(equipItems[i] != null){

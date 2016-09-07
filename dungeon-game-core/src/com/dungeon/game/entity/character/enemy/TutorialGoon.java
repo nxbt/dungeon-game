@@ -131,7 +131,7 @@ public class TutorialGoon extends Enemy {
 			target_angle = move_angle;
 			if(target_angle > 360)target_angle-=360;
 		}
-		attacking = false;
+		
 		if(equipItems[0] != null){
 			boolean attack = false;
 			boolean down = true;
@@ -139,9 +139,9 @@ public class TutorialGoon extends Enemy {
 			if(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat")){
 				attack = false;
 			}
-			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
-			((Weapon) inv.slot[30].item).getPos(down&&attack, click&&attack);
-			((Weapon)inv.slot[30].item).graphic.calc();
+//			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
+//			((Weapon) inv.slot[30].item).getPos(down&&attack, click&&attack);
+//			((Weapon)inv.slot[30].item).graphic.calc();
 			
 		}
 	}
