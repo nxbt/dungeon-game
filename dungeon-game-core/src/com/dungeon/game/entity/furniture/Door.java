@@ -11,6 +11,8 @@ public class Door extends Static {
 	
 	private boolean open;
 	
+	private int rotation;
+	
 	public Door(World world, LockedDoor door){
 		super(world, door.x, door.y, 32, 32, "slot.png");
 		construct(door.tileX, door.tileY, door.rotation);
@@ -47,6 +49,8 @@ public class Door extends Static {
 		
 		solid = true;
 		rotate = true;
+		
+		this.rotation = rotation;
 		
 		if(rotation == 0){
 			originX = 0;
@@ -124,13 +128,15 @@ public class Door extends Static {
 			filter.maskBits = -1;
 			f.setFilterData(filter);
 		}else {
-			System.out.print("fucking working");
 			Fixture f = body.getFixtureList().get(0);
 			Filter filter = f.getFilterData();
 			filter.categoryBits = 0x0002;
 			filter.maskBits = 0;
 			f.setFilterData(filter);
 		}
+		
+		if(rotation == 0 || rotation == 2) hitbox = new Polygon(new float[]{0,-12,32,-12,32,20,0,20});
+		else hitbox = new Polygon(new float[]{-12,0,20,0,20,32,-12,32});
 	}
 	
 }
