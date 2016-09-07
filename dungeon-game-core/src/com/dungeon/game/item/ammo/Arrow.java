@@ -34,8 +34,8 @@ public class Arrow extends Ammo {
 			
 			Vector2 knockback = new Vector2();
 			
-			knockback.x = projectile.body.getLinearVelocity().x;
-			knockback.y = projectile.body.getLinearVelocity().y;
+			knockback.x = projectile.body.getLinearVelocity().x*6;
+			knockback.y = projectile.body.getLinearVelocity().y*6;
 			
 			character.acel(knockback, false);
 		}

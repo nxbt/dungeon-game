@@ -24,6 +24,9 @@ public class WeaponProjectile extends Projectile {
 		sprite = ammo.sprite;
 		
 		owner = weapon.owner;
+		
+		fric = 0.2f;
+		dens = 0;
 	}
 
 	@Override

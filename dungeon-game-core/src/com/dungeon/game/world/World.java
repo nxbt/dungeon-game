@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
@@ -73,8 +74,6 @@ public class World {
 	
 	private ArrayList<Entity> drawEnts;
 	
-	public ArrayList<float[]> tempPathingDebug;
-	
 	private Box2DDebugRenderer debugRenderer;
 	
 	public World(boolean generate) {
@@ -97,7 +96,6 @@ public class World {
 		player = new Player(this, 0, 0);
 		player.x = 50*Tile.TS-Tile.TS/2;
 		player.y = 50*Tile.TS-Tile.TS/2;
-		tempPathingDebug = new ArrayList<float[]>();
 		if(generate){
 			shapeRenderer = new ShapeRenderer();
 			
@@ -146,7 +144,7 @@ public class World {
 		debugRenderer = new Box2DDebugRenderer();
 	}
 	
-	public void update(long dTime) {
+	public void update() {
 		descBox.text = "";
 		
 		cam.update();

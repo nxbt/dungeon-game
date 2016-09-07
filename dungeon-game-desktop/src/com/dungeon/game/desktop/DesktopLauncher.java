@@ -7,7 +7,7 @@ import com.dungeon.game.GeneratorTest;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		boolean HYPERSPEED_ENGADGE = true;
+		boolean HYPERSPEED_ENGADGE = false;
 		boolean launchGenTest = false;
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		if(HYPERSPEED_ENGADGE)config.foregroundFPS = 1000;

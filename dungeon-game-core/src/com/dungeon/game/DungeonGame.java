@@ -10,7 +10,9 @@ public class DungeonGame extends ApplicationAdapter {
 	
 	World world;
 	
-	private long lastDraw, lastUpdate;
+	private long lag;
+	
+	private long t;
 	
 	@Override
 	public void create() {
@@ -20,19 +22,21 @@ public class DungeonGame extends ApplicationAdapter {
 		
 		world = new World(true);
 		
-		lastDraw = lastUpdate = System.nanoTime();
+		t = System.nanoTime();
 	}
 
 	@Override
 	public void render () {
-//		long s = System.nanoTime();
-		long elapseTime = - lastUpdate + (lastUpdate = System.nanoTime());
-		world.update(elapseTime);
-		if(System.nanoTime() - lastDraw > 16666666){
-			world.draw(batch);
-			lastDraw = System.nanoTime();
-		}
-//		System.out.println("Frame in: " + (float)(System.nanoTime() - s)/16000000f + " frames");
+		lag += System.nanoTime() - t;
+		t = System.nanoTime();
+		while(lag >= 16666666) {
+			world.update();
+			lag -= 16666666;
+		} 
+		
+		world.draw(batch);
+		
+		System.out.println(lag);
 	}
 	
 	@Override
