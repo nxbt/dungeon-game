@@ -17,8 +17,10 @@ import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
 import com.dungeon.game.entity.particle.Poof;
 import com.dungeon.game.inventory.Inventory;
+import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Key;
 import com.dungeon.game.item.consumable.LifePotion;
+import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Lantern;
 import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.light.Light;
@@ -73,6 +75,15 @@ public class Guide extends Friend {
 		
 		originX = 16;
 		originY = 16;
+		
+		inv = new Inventory(world, new int[][] {}, 10, 100);
+		
+		equipSlots = new Slot[]{
+				new Slot(world, new int[]{0, 0, 0}, inv),
+				new Slot(world, new int[]{0, 0, 0}, inv)
+		};
+		
+		equipItems = new Equipable[2];
 
 		dialogues = new ArrayList<Dialogue>();
 		

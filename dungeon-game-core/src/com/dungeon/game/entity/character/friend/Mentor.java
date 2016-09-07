@@ -12,8 +12,10 @@ import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.entity.hud.dialogue.SpeechChoice;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Shop;
+import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.ammo.Arrow;
 import com.dungeon.game.item.consumable.LifePotion;
+import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.textures.entity.Person;
@@ -55,6 +57,15 @@ public class Mentor extends Friend {
 		
 		originX = 16;
 		originY = 16;
+		
+		inv = new Inventory(world, new int[][] {}, 10, 100);
+		
+		equipSlots = new Slot[]{
+				new Slot(world, new int[]{0, 0, 0}, inv),
+				new Slot(world, new int[]{0, 0, 0}, inv)
+		};
+		
+		equipItems = new Equipable[2];
 
 		Shop shop = new Shop(world, new int[][]{new int[]{0,10,10},new int[]{0,10,60},new int[]{0,10,110}},new int[]{10,200,20}, this, 10, 10);
 		shop.slot[0].item = new Arrow(world);

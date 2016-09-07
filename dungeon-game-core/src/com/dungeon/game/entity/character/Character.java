@@ -3,6 +3,8 @@ package com.dungeon.game.entity.character;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
@@ -22,6 +24,7 @@ import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
+import com.dungeon.game.item.equipable.weapon.Medium;
 import com.dungeon.game.item.equipable.weapon.Weapon;
 import com.dungeon.game.pathing.Path;
 import com.dungeon.game.utilities.Pool;
@@ -369,7 +372,27 @@ public abstract class Character extends Dynamic {
 					}
 				}
 			}
-			
+		}
+		
+		if(equipItems[0] != null && fightMode) {
+			if(((Hand) inv.slot[30].item).isInUse())attacking = true;
+			((Hand) inv.slot[30].item).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
+			((Hand)inv.slot[30].item).graphic.calc();
+			if(inv.slot[30].item instanceof Medium) {
+				if(Gdx.input.isKeyJustPressed(Input.Keys.O))((Medium)inv.slot[30].item).preSpell();
+				if(Gdx.input.isKeyJustPressed(Input.Keys.P))((Medium)inv.slot[30].item).nextSpell();
+				if(((Medium)inv.slot[30].item).cooldown>0)((Medium)inv.slot[30].item).cooldown--;
+			}
+		}
+		if(equipItems[1] != null && fightMode) {
+			if(((Hand) inv.slot[31].item).isInUse())attacking = true;
+			((Hand) inv.slot[31].item).getPos(world.mouse.rb_down, world.mouse.rb_pressed);
+			((Hand)inv.slot[31].item).graphic.calc();
+			if(inv.slot[31].item instanceof Medium) {
+				if(Gdx.input.isKeyJustPressed(Input.Keys.O))((Medium)inv.slot[31].item).preSpell();
+				if(Gdx.input.isKeyJustPressed(Input.Keys.P))((Medium)inv.slot[31].item).nextSpell();
+				if(((Medium)inv.slot[31].item).cooldown>0)((Medium)inv.slot[31].item).cooldown--;
+			}
 		}
 		
 	}
@@ -643,5 +666,15 @@ public abstract class Character extends Dynamic {
 		f.setDensity(dens);
 		
 		body.resetMassData();
+	}
+	
+	public void goToBodyPostion(){
+		super.goToBodyPostion();
+		if(equipItems[0] != null && fightMode && equipItems[0] instanceof Weapon){
+			((Hand)equipItems[0]).graphic.updatePos(true);
+		}else if(equipItems[0] != null && !(equipItems[0] instanceof Weapon))((Hand)equipItems[0]).graphic.updatePos(true);
+		if(equipItems[1] != null && fightMode && equipItems[1] instanceof Weapon){
+			((Hand)equipItems[1]).graphic.updatePos(false);
+		}else if(equipItems[1] != null && !(equipItems[1] instanceof Weapon))((Hand)equipItems[1]).graphic.updatePos(true);
 	}
 }

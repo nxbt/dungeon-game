@@ -142,6 +142,7 @@ public class Goon extends Enemy {
 		entities.remove(world.player);
 		entities.remove(this);
 		if(knownEntities.contains(world.player)){
+			if(!fightMode)toggleFightMode();
 			if(equipItems[0] instanceof Melee){
 				if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{world.player.x,world.player.y});
 				moveToTarg();
@@ -202,34 +203,36 @@ public class Goon extends Enemy {
 			leftActivated = false;
 		}
 	}
-
-	public void post() {
-		if(equipItems[0] != null){
-			((Hand)equipItems[0]).graphic.updatePos(true);
-		}
-	}
 	
-	public void handleEquips() {
-		for(int i = 0; i < equipSlots.length; i++){
-			if(equipSlots[i].item == null){
-				if(equipItems[i] != null){
-					equipItems[i].unequip();
-					equipItems[i] = null;
-				}
-			}else{
-				if(equipItems[i] == null){
-					equipItems[i] = (Equipable) equipSlots[i].item;
-					equipItems[i].equip(this, true);
-				}else{
-					if(!equipSlots[i].item.equals(equipItems[i])){
-						equipItems[i].unequip();
-						equipItems[i] = (Equipable) equipSlots[i].item;
-						equipItems[i].equip(this, true);
-					}
-				}
-			}
-			
-		}
+//	public void handleEquips() {
+//		for(int i = 0; i < equipSlots.length; i++){
+//			if(equipSlots[i].item == null){
+//				if(equipItems[i] != null){
+//					equipItems[i].unequip();
+//					equipItems[i] = null;
+//				}
+//			}else{
+//				if(equipItems[i] == null){
+//					equipItems[i] = (Equipable) equipSlots[i].item;
+//					equipItems[i].equip(this, true);
+//				}else{
+//					if(!equipSlots[i].item.equals(equipItems[i])){
+//						equipItems[i].unequip();
+//						equipItems[i] = (Equipable) equipSlots[i].item;
+//						equipItems[i].equip(this, true);
+//					}
+//				}
+//			}
+//			
+//		}
+//		
+//	}
+
+	@Override
+	public void post() {
+		// TODO Auto-generated method stub
 		
 	}
+	
+	
 }

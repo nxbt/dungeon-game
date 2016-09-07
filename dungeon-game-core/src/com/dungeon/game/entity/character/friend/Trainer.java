@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.hud.dialogue.Dialogue;
 import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
+import com.dungeon.game.inventory.Inventory;
+import com.dungeon.game.inventory.Slot;
+import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.world.World;
 
@@ -44,6 +47,15 @@ public class Trainer extends Friend {
 		
 		originX = 16;
 		originY = 16;
+		
+		inv = new Inventory(world, new int[][] {}, 10, 100);
+		
+		equipSlots = new Slot[]{
+				new Slot(world, new int[]{0, 0, 0}, inv),
+				new Slot(world, new int[]{0, 0, 0}, inv)
+		};
+		
+		equipItems = new Equipable[2];
 		
 		// \u200B to create pause;
 		dialogue = new Dialogue(world, this);

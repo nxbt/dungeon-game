@@ -127,7 +127,6 @@ public abstract class Entity {
 	}
 	
 	public Polygon getVisbox() {
-		if(visHitbox == null)System.out.println(this.getClass().getName());
 		Polygon temp_hitbox = new Polygon(visHitbox.getVertices());
 		
 		temp_hitbox.setOrigin(originX, originY);
