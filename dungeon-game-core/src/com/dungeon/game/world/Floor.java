@@ -75,6 +75,9 @@ public class Floor {
 		
 		Pixmap tmPixmap = new Pixmap(width*Tile.TS, height*Tile.TS, Pixmap.Format.RGBA8888);
 		
+
+		Brick.floorColor = Brick.getColor(seed);
+		
 		//generates textures
 		for(int i = 0;i<tm.length;i++){
 			for(int k = 0;k<tm[i].length;k++){

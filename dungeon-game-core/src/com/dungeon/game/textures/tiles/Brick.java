@@ -18,6 +18,8 @@ public class Brick extends ProceduralTile {
 	public Brick(int seed, int x, int y, int sides, int corners) {
 		super(new Object[]{seed, x, y, sides, corners});
 	}
+	
+	public static Color floorColor;
 
 	@Override
 	public void generateTexture(Object[] args) { //have to find a fix for the 1 pixel mortar
@@ -33,7 +35,7 @@ public class Brick extends ProceduralTile {
 		int curX;
 		int curY;
 		
-		if((sides == 1 && (corners == 10 || corners == 9 || corners == 12 || corners == 4 || corners == 8 || corners == 5 || corners == 7 || corners == 11 || corners == 14 || corners == 13 || corners ==6)) || (sides == 0 && corners == 12)){
+		if((sides == 1 && (corners == 10 || corners == 9 || corners == 12 || corners == 4 || corners == 8 || corners == 5 || corners == 7 || corners == 11 || corners == 14 || corners == 13 || corners == 6)) || (sides == 0 && corners == 12)){
 			for(int i = 0; i < 32; i++){
 				for(int k = 0; k < 32; k++){
 					curX = x*32+i;
@@ -474,56 +476,60 @@ public class Brick extends ProceduralTile {
 	}
 	
 	private void verticalBrick(int x, int y, int curX, int curY, Pixmap texMap){
-		Color activeColor;
 		Random rand = MathUtils.getRandomFromSeedAndX(seed,(int)(curX/8));
 		int yOffset = rand.nextInt(16);
 		int barrierZone = (int)((8f+curY+yOffset)/16f);
 		int barrier = (int) (barrierZone*16f-4f+8f*MathUtils.getRandomFromSeedAndY(seed*(int)(curX/8),barrierZone).nextFloat());
-		if(curX%8 == 0 || (curX+1)%8 == 0 || curY+yOffset == barrier || curY+yOffset - 1 == barrier)activeColor = new Color(getColor(seed).r*0.8f, getColor(seed).g*0.8f, getColor(seed).b*0.8f, 1);
+		if(curX%8 == 0 || (curX+1)%8 == 0 || curY+yOffset == barrier || curY+yOffset - 1 == barrier){
+			ACTIVE_COLOR.set(floorColor.r*0.8f, floorColor.g*0.8f, floorColor.b*0.8f, 1);
+		}
 		else if(curY+yOffset > barrier){
 			Random rand1 = MathUtils.getRandomFromSeedAndCords(seed, (int)(curX/8), 1+barrierZone);
 			float num = rand1.nextFloat();
-			activeColor = new Color(getColor(seed).r*0.8f + num*0.2f, getColor(seed).g*0.8f + num*0.2f, getColor(seed).b*0.8f + num*0.2f, 1);
+			ACTIVE_COLOR.set(floorColor.r*0.8f + num*0.2f, floorColor.g*0.8f + num*0.2f, floorColor.b*0.8f + num*0.2f, 1);
 		}else{
 			Random rand1 = MathUtils.getRandomFromSeedAndCords(seed, (int)(curX/8), barrierZone);
 			float num = rand1.nextFloat();
-			activeColor = new Color(getColor(seed).r*0.8f + num*0.2f, getColor(seed).g*0.8f + num*0.2f, getColor(seed).b*0.8f + num*0.2f, 1);
+			ACTIVE_COLOR.set(floorColor.r*0.8f + num*0.2f, floorColor.g*0.8f + num*0.2f, floorColor.b*0.8f + num*0.2f, 1);
 		}
-		texMap.setColor(addNoise(activeColor, curX, curY));
+		addNoise(ACTIVE_COLOR, curX, curY);
+		texMap.setColor(ACTIVE_COLOR);
 		texMap.drawPixel(x, 31-y);
 	}
 	
 	private void horizonBrick(int x, int y, int curX, int curY, Pixmap texMap){
-		Color activeColor;
 		Random rand = MathUtils.getRandomFromSeedAndY(seed,(int)(curY/8));
 		int xOffset = rand.nextInt(16);
 		int barrierZone = (int)((8f+curX+xOffset)/16f);
 		int barrier = (int) (barrierZone*16f-4f+8f*MathUtils.getRandomFromSeedAndY(seed*(int)(curY/8),barrierZone).nextFloat());
-		if(curY%8 == 0 || (curY+1)%8 == 0 || curX+xOffset == barrier || curX+xOffset - 1 == barrier)activeColor = new Color(getColor(seed).r*0.8f, getColor(seed).g*0.8f, getColor(seed).b*0.8f, 1);
+		if(curY%8 == 0 || (curY+1)%8 == 0 || curX+xOffset == barrier || curX+xOffset - 1 == barrier){
+			ACTIVE_COLOR.set(floorColor.r*0.8f, floorColor.g*0.8f, floorColor.b*0.8f, 1);
+		}
 		else if(curX+xOffset > barrier){
 			Random rand1 = MathUtils.getRandomFromSeedAndCords(seed, (int)(curY/8), 1+barrierZone);
 			float num = rand1.nextFloat();
-			activeColor = new Color(getColor(seed).r*0.8f + num*0.2f, getColor(seed).g*0.8f + num*0.2f, getColor(seed).b*0.8f + num*0.2f, 1);
+			ACTIVE_COLOR.set(floorColor.r*0.8f + num*0.2f, floorColor.g*0.8f + num*0.2f, floorColor.b*0.8f + num*0.2f, 1);
 		}else{
 			Random rand1 = MathUtils.getRandomFromSeedAndCords(seed, (int)(curY/8), barrierZone);
 			float num = rand1.nextFloat();
-			activeColor = new Color(getColor(seed).r*0.8f + num*0.2f, getColor(seed).g*0.8f + num*0.2f, getColor(seed).b*0.8f + num*0.2f, 1);
+			ACTIVE_COLOR.set(floorColor.r*0.8f + num*0.2f, floorColor.g*0.8f + num*0.2f, floorColor.b*0.8f + num*0.2f, 1);
 		}
-		texMap.setColor(addNoise(activeColor, curX, curY));
+		addNoise(ACTIVE_COLOR, curX, curY);
+		texMap.setColor(ACTIVE_COLOR);
 		texMap.drawPixel(x, 31-y);
 	}
 	
 	private void mortar(int x, int y, int curX, int curY, Pixmap texMap){
-		Color activeColor;
-		activeColor = new Color(getColor(seed).r*0.8f, getColor(seed).g*0.8f, getColor(seed).b*0.8f, 1);
-		texMap.setColor(addNoise(activeColor, curX, curY));
+		ACTIVE_COLOR.set(floorColor.r*0.8f, floorColor.g*0.8f, floorColor.b*0.8f, 1);
+		addNoise(ACTIVE_COLOR, curX, curY);
+		texMap.setColor(ACTIVE_COLOR);
 		texMap.drawPixel(x, 31-y);
 	}
 	
 	
-	private Color addNoise(Color c, int x, int y) {
+	private void addNoise(Color c, int x, int y) {
 		float num = MathUtils.reductiveNoise2d(seed, x, y, new float[]{4,2,1}, new float[]{3,2,1});
-		return new Color(c.r * (0.8f + num*0.4f), c.g * (0.8f + num*0.4f), c.b * (0.8f + num*0.4f), 1);
+		ACTIVE_COLOR.set(c.r * (0.8f + num*0.4f), c.g * (0.8f + num*0.4f), c.b * (0.8f + num*0.4f), 1);
 	}
 	
 	public static final Color getColor(int seed){
