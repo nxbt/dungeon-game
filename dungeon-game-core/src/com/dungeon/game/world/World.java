@@ -146,7 +146,9 @@ public class World {
 		debugRenderer = new Box2DDebugRenderer();
 	}
 	
-	public void update() {
+	public void update(long dTime) {
+		descBox.text = "";
+		
 		cam.update();
 		mouse.update();
 		descBox.update();
@@ -209,7 +211,7 @@ public class World {
 		
 		drawEnts.clear();
 		
-		for(Entity e: entities) drawEnts.add(e);
+		for(int i = 0; i < entities.size(); i++) drawEnts.add(entities.get(i));
 
 		drawEnts.sort(new Comparator<Entity>(){
 
