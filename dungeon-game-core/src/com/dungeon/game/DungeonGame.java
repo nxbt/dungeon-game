@@ -10,9 +10,9 @@ public class DungeonGame extends ApplicationAdapter {
 	
 	World world;
 	
-	private long lag;
+	public static long lag;
 	
-	private long t;
+	public static long t;
 	
 	@Override
 	public void create() {

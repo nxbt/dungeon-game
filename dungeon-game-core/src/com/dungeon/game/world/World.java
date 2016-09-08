@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.dungeon.game.Camera;
+import com.dungeon.game.DungeonGame;
 import com.dungeon.game.KeyListener;
 import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
@@ -361,5 +362,9 @@ public class World {
 		}
 		rayHandler.setWorld(curFloor.box2dWorld);
 		if(debug_light)rayHandler.setWorld(emptyWorld);
+		
+		DungeonGame.lag = 0;
+		
+		DungeonGame.t = System.nanoTime();
 	}
 }
