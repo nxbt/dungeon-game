@@ -30,6 +30,7 @@ public abstract class Part extends Item implements Cloneable{
 	public static final int SWORD = 0;
 	public static final int AXE = 1;
 	public static final int BOW = 2;
+	public static final int CLAW = 3;
 	
 	//what part of the weapon does it go on?
 	public int part;
