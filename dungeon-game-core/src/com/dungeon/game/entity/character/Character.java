@@ -378,7 +378,7 @@ public abstract class Character extends Dynamic {
 		
 		if(equipItems[0] != null && fightMode) {
 			if(((Hand) equipItems[0]).isInUse())attacking = true;
-			((Hand) equipItems[0]).getPos(world.mouse.lb_down, world.mouse.lb_pressed);
+			((Hand) equipItems[0]).getPos(leftActivated, leftActivated);
 			((Hand)equipItems[0]).graphic.calc();
 			if(equipItems[0] instanceof Medium) {
 				if(KeyListener.keysJustPressed[Input.Keys.O])((Medium)equipItems[0]).preSpell();
@@ -388,7 +388,7 @@ public abstract class Character extends Dynamic {
 		}
 		if(equipItems[1] != null && fightMode) {
 			if(((Hand) equipItems[1]).isInUse())attacking = true;
-			((Hand) equipItems[1]).getPos(world.mouse.rb_down, world.mouse.rb_pressed);
+			((Hand) equipItems[1]).getPos(rightActivated, rightActivated);
 			((Hand) equipItems[1]).graphic.calc();
 			if(equipItems[1] instanceof Medium) {
 				if(KeyListener.keysJustPressed[Input.Keys.O])((Medium)equipItems[1]).preSpell();

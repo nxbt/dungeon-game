@@ -14,6 +14,7 @@ import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.weapon.Bow;
 import com.dungeon.game.item.equipable.weapon.Melee;
+import com.dungeon.game.item.equipable.weapon.Ranged;
 import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.item.equipable.weapon.Weapon;
 import com.dungeon.game.world.Tile;
@@ -153,11 +154,12 @@ public class Goon extends Enemy {
 				lineOfCover = new float[4];
 				int[] coverPos = new int[4];
 				CoverFinder.findCover(world, this, world.player, coverPos, lineOfCover, true, 10);
-				findPath(entities, new float[]{coverPos[0]*Tile.TS,coverPos[1]*Tile.TS});
+				findPath(entities, new float[]{coverPos[0]*Tile.TS + Tile.TS/2,coverPos[1]*Tile.TS + Tile.TS/2});
 				moveToTarg();
 				moveTo = targetTile;
 				target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
 				if(Intersector.distanceSegmentPoint(lineOfCover[0], lineOfCover[1], lineOfCover[2], lineOfCover[3], x, y) < 4){
+					System.out.println("called");
 					if(((Bow)equipItems[0]).stageTimer < 45){
 						//move into cover to hide from player
 						move_angle = (float) (Math.atan2(lineOfCover[3] - y, lineOfCover[2] - x)/Math.PI*180f);
@@ -169,63 +171,27 @@ public class Goon extends Enemy {
 				}
 			}
 		}
-		if(equipItems[0] != null){
-			boolean attack = false;
-			boolean down = true;
-			boolean click = false;
-			if(ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<300){
-				if(((Bow)equipItems[0]).stage == Bow.REST)click = true;
-				else click = false;
-				if(((Bow)equipItems[0]).stageTimer < 45 || !(Math.sqrt((x - lineOfCover[0])*(x - lineOfCover[0])+(y - lineOfCover[1])*(y - lineOfCover[1])) < 4))down = true;
-				else down = false;
-				attack = true;
-			}
-			if(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat")){
-				attack = false;
-			}
-//			if(((Weapon) inv.slot[30].item).isInUse())attacking = true;
-//			((Weapon) inv.slot[30].item).getPos(down&&attack, click&&attack);
-//			((Weapon)inv.slot[30].item).graphic.calc();
-			
-		}
 	}
 	
 	@Override
 	protected void activations() {
-		if(!ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<90 && stam > 20){
+		if(!ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<90 && stam > 50){ //stan check needs to change
 			if(Math.random() < 0.9)rightActivated = true;
 			else rightActivated = false;
 			if(Math.random() < 0.9)leftActivated = true;
 			else leftActivated = false;
 		}else{
-			rightActivated = false;
-			leftActivated = false;
+			if(equipItems[0] != null){
+				boolean down = true;
+				if(ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<300){
+
+					if(((Bow)equipItems[0]).stageTimer < 45 || !(Math.sqrt((x - lineOfCover[0])*(x - lineOfCover[0])+(y - lineOfCover[1])*(y - lineOfCover[1])) < 4))down = true;
+					else down = false;
+				}
+				leftActivated = down;
+			}
 		}
 	}
-	
-//	public void handleEquips() {
-//		for(int i = 0; i < equipSlots.length; i++){
-//			if(equipSlots[i].item == null){
-//				if(equipItems[i] != null){
-//					equipItems[i].unequip();
-//					equipItems[i] = null;
-//				}
-//			}else{
-//				if(equipItems[i] == null){
-//					equipItems[i] = (Equipable) equipSlots[i].item;
-//					equipItems[i].equip(this, true);
-//				}else{
-//					if(!equipSlots[i].item.equals(equipItems[i])){
-//						equipItems[i].unequip();
-//						equipItems[i] = (Equipable) equipSlots[i].item;
-//						equipItems[i].equip(this, true);
-//					}
-//				}
-//			}
-//			
-//		}
-//		
-//	}
 
 	@Override
 	public void post() {
