@@ -649,7 +649,7 @@ public abstract class Character extends Dynamic {
 		
 		CircleShape shape = new CircleShape();
 		
-		shape.setRadius(0.9f);
+		shape.setRadius(1.8f);
 		
 		body.destroyFixture(body.getFixtureList().get(0));
 		

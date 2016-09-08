@@ -220,7 +220,7 @@ public class Floor {
 					
 					groundBodyDef.type = BodyType.StaticBody;
 					// Set its world position
-					groundBodyDef.position.set(new Vector2(k*2+16/Tile.PPM, i*2+16/Tile.PPM));  
+					groundBodyDef.position.set(new Vector2(k*4+16/Tile.PPM, i*4+16/Tile.PPM));  
 
 					// Create a body from the defintion and add it to the world
 					Body groundBody = box2dWorld.createBody(groundBodyDef);  

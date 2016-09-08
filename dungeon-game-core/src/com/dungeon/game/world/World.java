@@ -85,7 +85,7 @@ public class World {
 		com.dungeon.game.textures.entity.particle.BodyChunk.init();
 		RayHandler.setGammaCorrection(false);
 		rayHandler = new RayHandler(null);
-		rayHandler.setBlurNum(5);
+		rayHandler.setBlurNum(10);
 		rayHandler.setAmbientLight(new Color(0,0,0,0));
 		RayHandler.useDiffuseLight(true);
 		Filter f = new Filter();

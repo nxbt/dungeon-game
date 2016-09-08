@@ -25,7 +25,7 @@ public abstract class Dynamic extends Entity {
 		moveVec = new Vector2(0,0);
 		
 		fric = 0.2f;
-		dens = 1;
+		dens = 0.25f;
 	}
 
 	//entity update function called on every frame before the draw phase.

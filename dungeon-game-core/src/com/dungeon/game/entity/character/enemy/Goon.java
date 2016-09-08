@@ -144,7 +144,7 @@ public class Goon extends Enemy {
 		if(knownEntities.contains(world.player)){
 			if(!fightMode)toggleFightMode();
 			if(equipItems[0] instanceof Melee){
-				if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{world.player.x,world.player.y});
+				findPath(entities, new float[]{world.player.x,world.player.y});
 				moveToTarg();
 				moveTo = targetTile;
 				target_angle = move_angle;
@@ -153,7 +153,7 @@ public class Goon extends Enemy {
 				lineOfCover = new float[4];
 				int[] coverPos = new int[4];
 				CoverFinder.findCover(world, this, world.player, coverPos, lineOfCover, true, 10);
-				if(!(world.player.inv.slot[35].item != null && world.player.inv.slot[35].item.name.equals("Inconspicuous Hat"))) findPath(entities, new float[]{coverPos[0]*Tile.TS,coverPos[1]*Tile.TS});moveToTarg();
+				findPath(entities, new float[]{coverPos[0]*Tile.TS,coverPos[1]*Tile.TS});
 				moveToTarg();
 				moveTo = targetTile;
 				target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));

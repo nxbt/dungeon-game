@@ -13,7 +13,7 @@ public class FlashLight extends Hand {
 		name = "Flash Light";
 		desc = "A small, hand held Flash Light.";
 		graphic = new HandheldGraphic(world,this, new Polygon(new float[]{0,0,32,0,32,32,0,32}), 26,6);
-		graphic.light = new Light(world, graphic.x, graphic.y, 27, 100, (int) graphic.angle, 20, 135, 0, graphic);
+		graphic.light = new Light(world, graphic.x, graphic.y, 50, 100, (int) graphic.angle, 20, 135, 0, graphic);
 	}
 
 	@Override
