@@ -52,6 +52,8 @@ public class SwingSet{
 		isInAttack = swings[curSwing].isInAttack;
 		weapon.hasHit = swings[curSwing].hasHit;
 		
+		if(swings[curSwing] instanceof Rest)System.out.println(isInUse);
+		
 		//if the swing is done, we need to figure out what to do!
 		if(swings[curSwing].done && ((curSwing != swings.length-1) || (swings[curSwing].counter > swings[curSwing].windupDuration + swings[curSwing].duration + Swing.PAUSE_DURATION*weapon.speed/10f) || repeatable)) { //if not repeatable and on the last swing, you can't force a return to the rest position (don't change it works trust me)
 			if(swings[curSwing].nextSwing){ //if nextSwing is true, then we progress to the next swing
@@ -75,8 +77,13 @@ public class SwingSet{
 					
 				}else if(!swings[curSwing].beginSwing()){ //reset variables for the new swing, and check if the owner has stanima to do so
 					swings[0].setPrevSwing(swings[curSwing-1]); //if the owner does not have enough stanima to swing, we go to the resting position, gotta update prevSwing!
-					curSwing = 0; // set the curSwing to rest
-					swings[curSwing].beginSwing(); //begin the resting position
+					if(swings[curSwing].prevSwing instanceof Rest){ //if we failed to swing out of rest dont reset the rest counter
+						curSwing = 0; // set the curSwing to rest
+						((Rest)swings[curSwing]).beginSwing(true); //begin the resting position dont reset counter
+					}else{
+						curSwing = 0; // set the curSwing to rest
+						swings[curSwing].beginSwing(); //begin the resting position
+					}
 				}
 			}else { //if nextSwing is false, we go back to the resting position
 				swings[0].setPrevSwing(swings[curSwing]); //set the prevSwing to the swing we just finished

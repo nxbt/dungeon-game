@@ -2,6 +2,7 @@ package com.dungeon.game.entity.weapon;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.Dynamic;
 import com.dungeon.game.item.Item;
@@ -21,6 +22,8 @@ public class HandheldGraphic extends Dynamic {
 	public boolean toFlip;
 	public boolean flipped;
 	
+	public boolean draw;
+	
 	public HandheldGraphic(World world, Hand item, Polygon hitbox, float originX, float originY) {
 		super(world, 0, 0, Item.SIZE, Item.SIZE, "slot.png"); // x and y don't matter, they are set every frame
 		layer = HANDHELD;
@@ -35,6 +38,8 @@ public class HandheldGraphic extends Dynamic {
 		this.originX = originX;
 		this.originY = originY;
 		clickable = false;
+		
+		draw = true;
 	}
 
 	@Override
@@ -82,6 +87,10 @@ public class HandheldGraphic extends Dynamic {
 			}
 		}
 		
+	}
+	
+	public void draw(SpriteBatch batch){
+		if(draw)super.draw(batch);
 	}
 
 }

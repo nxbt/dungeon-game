@@ -5,6 +5,7 @@ import com.dungeon.game.effect.regen.StamRegen;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.equipable.Equipable;
+import com.dungeon.game.item.equipable.weapon.Claw;
 import com.dungeon.game.world.World;
 
 public class Rat extends Enemy{
@@ -42,8 +43,9 @@ public class Rat extends Enemy{
 		hearing = 15;
 		
 		effects.add(new StamRegen(world, -1, 0.5f));
-		
-//		equipSlots[0].item = new Sword(world, 1, 0, 0, 0);
+
+		equipSlots[0].item = new Claw(world, 1);
+		equipSlots[1].item = new Claw(world, 1);
 	}
 
 	@Override

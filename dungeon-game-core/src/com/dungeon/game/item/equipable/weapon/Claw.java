@@ -7,6 +7,7 @@ import com.dungeon.game.entity.weapon.MeleeGraphic;
 import com.dungeon.game.item.equipable.weapon.part.Part;
 import com.dungeon.game.item.equipable.weapon.part.claw.main.ClawMain;
 import com.dungeon.game.item.equipable.weapon.swing.claw.ClawSwing;
+import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.World;
 
 public class Claw extends Melee {
@@ -38,6 +39,8 @@ public class Claw extends Melee {
 		Pixmap spr = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
 		spr.drawPixmap(clawMap, 0, 0);
 		sprite = new Texture(spr);
+		Pixmap p = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
+		p.dispose();
 		
 		name = ((ClawMain) claw).getName();
 		
@@ -56,6 +59,15 @@ public class Claw extends Melee {
 		swings = getStartSwings();
 		
 		hitEffects.add(new Stun(world, 30));
+		
+		graphic.draw = false;
+	}
+	
+	public float[] getPos(boolean mousedown, boolean mousepressed){
+		float[] toReturn =  super.getPos(mousedown, mousepressed);
+		if(swings.isInUse)graphic.draw = true;
+		else graphic.draw = false;
+		return toReturn;
 	}
 	
 	public String getDesc() {

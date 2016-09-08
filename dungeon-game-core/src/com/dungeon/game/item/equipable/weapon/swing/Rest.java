@@ -52,6 +52,12 @@ public class Rest extends Swing{
 		return true; //rest consumes no stanima so it always returns true
 	}
 	
+	public boolean beginSwing(boolean dontReset){
+		beginSwing();
+		counter = duration;
+		return true;
+	}
+	
 	public void hit(Character c){
 		System.out.println("ERROR: rest.hit should NEVER be called!");
 	}
