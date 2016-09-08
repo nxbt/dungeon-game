@@ -53,9 +53,9 @@ public class Bow extends Ranged {
 		if(!sprite.equals(textures[0])){
 			changeSprite(0);
 		}
-			if(mousedown && owner.inv.contains(new Arrow(world)) != null&&owner.use_stam(10)){
-				owner.inv.contains(new Arrow(world)).item.stack--;
-				if(owner.inv.contains(new Arrow(world)).item.stack==0)owner.inv.contains(new Arrow(world)).item = null;
+			if(mousedown && owner.inv.contains(ammoType) != null&&owner.use_stam(10)){
+				owner.inv.contains(ammoType).item.stack--;
+				if(owner.inv.contains(ammoType).item.stack==0)owner.inv.contains(ammoType).item = null;
 				stage=WINDUP;
 				stageTimer = 0;
 			}
