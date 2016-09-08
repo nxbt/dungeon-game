@@ -2,11 +2,13 @@ package com.dungeon.game.item.ammo;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.dungeon.game.effect.Effect;
 import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.weapon.WeaponProjectile;
+import com.dungeon.game.item.Item;
 import com.dungeon.game.item.equipable.weapon.Ranged;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -30,6 +32,7 @@ public class Arrow extends Ammo {
 		
 		ArrayList<Effect> effects = new ArrayList<Effect>();
 		effects.add(new Stun(world, 30));
+		
 		if(character.damage(damage, weapon.getEffects())>0){
 			
 			Vector2 knockback = new Vector2();
@@ -55,5 +58,19 @@ public class Arrow extends Ammo {
 				+ "for example, some enchanters and mages speculate that an enchantment directly on an arrow may be able to produce an arrow that magically returns to the owner after impact. "
 				+ "while many have sought after such an enchantment, little sucsess has been found, and many still doubt that such an enchantment would be possible, especially since the art of "
 				+ "arrow enchantment has been long lost.\n\n\"White fluff on one end, and black pain on the other.\" -Duryin, bow crafter";
+	}
+
+	@Override
+	public WeaponProjectile getProjectile(Item item, float x, float y, float angle, float power) {
+		WeaponProjectile w = new WeaponProjectile(world, (Ranged) item, new Arrow(world), x, y, angle, power, new Polygon(new float[]{1,28,4,31,0,32}), 2, 30, 35);
+		w.fric = 0.03f;
+		w.getBody(world.curFloor.box2dWorld);
+		w.bodyMade = true;
+		Vector2 acelVec = new Vector2();
+		acelVec.x = (float) Math.cos((angle+135)/180*Math.PI)*power/Tile.PPM;
+		acelVec.y = (float) Math.sin((angle+135)/180*Math.PI)*power/Tile.PPM;
+		w.body.setLinearVelocity(acelVec);
+		w.prevAngle = acelVec.angle();
+		return w;
 	}
 }

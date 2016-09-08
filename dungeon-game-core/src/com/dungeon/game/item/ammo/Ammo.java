@@ -16,6 +16,8 @@ public abstract class Ammo extends Item {
 		stack = 1;
 		maxStack = 10;
 	}
+	
+	public abstract WeaponProjectile getProjectile(Item item, float x, float y, float angle, float power);
 
 	public abstract void hit(Character character, Ranged weapon, WeaponProjectile projectile);
 }

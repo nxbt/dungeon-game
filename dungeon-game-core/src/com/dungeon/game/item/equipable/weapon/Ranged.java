@@ -3,6 +3,7 @@ package com.dungeon.game.item.equipable.weapon;
 import java.util.ArrayList;
 
 import com.dungeon.game.entity.weapon.Projectile;
+import com.dungeon.game.item.ammo.Ammo;
 import com.dungeon.game.world.World;
 
 public abstract class Ranged extends Weapon {
@@ -15,7 +16,7 @@ public abstract class Ranged extends Weapon {
 	public float speed;
 	public float knockstr;
 	public float windupTime;
-	public int ammoType;
+	public Ammo ammoType;
 	public float strength;
 	
 	public ArrayList<Projectile> projectiles;
