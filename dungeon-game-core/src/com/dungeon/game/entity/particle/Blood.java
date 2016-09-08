@@ -37,6 +37,8 @@ public class Blood extends Particle {
 		originX = 2;
 		originY = 2;
 		
+		layer = (Math.random() > 0.5)?FOOTPRINT:PARTICLE;
+		
 		sprite = new com.dungeon.game.textures.entity.particle.Blood().texture;
 	}
 	
