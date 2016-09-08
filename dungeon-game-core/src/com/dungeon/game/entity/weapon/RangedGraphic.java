@@ -24,9 +24,9 @@ public class RangedGraphic extends HandheldGraphic {
 			toFire = false;
 			Polygon projectileHitBox = new Polygon(new float[]{1,28,4,31,0,32});
 			WeaponProjectile w = new WeaponProjectile(world, (Ranged) item, new Arrow(world), x, y, angle, power, projectileHitBox, 2, 30, 35);
+			w.fric = 0.03f;
 			w.getBody(world.curFloor.box2dWorld);
 			w.bodyMade = true;
-			
 			Vector2 acelVec = new Vector2();
 			
 			acelVec.x = (float) Math.cos((angle+135)/180*Math.PI)*power/Tile.PPM;

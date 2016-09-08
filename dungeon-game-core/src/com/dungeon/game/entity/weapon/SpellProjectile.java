@@ -1,5 +1,6 @@
 package com.dungeon.game.entity.weapon;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.item.equipable.weapon.Medium;
@@ -18,7 +19,7 @@ public class SpellProjectile extends Projectile {
 		this.weapon = weapon;
 		this.spell = spell;
 		
-		sprite = spell.sprite;
+		sprite = new Texture(filename);
 		
 		dWidth = sprite.getWidth();
 		dHeight = sprite.getHeight();

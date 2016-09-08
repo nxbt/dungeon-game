@@ -13,6 +13,7 @@ import com.dungeon.game.entity.weapon.SpellProjectile;
 import com.dungeon.game.item.Item;
 import com.dungeon.game.item.equipable.weapon.Medium;
 import com.dungeon.game.light.Light;
+import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public class Fireball extends Spell {
@@ -35,6 +36,19 @@ public class Fireball extends Spell {
 		SpellProjectile fireball = new SpellProjectile(world, medium, this, (x+xOff), (y+yOff), angle, 6, new Polygon(new float[]{0,28,4,28,4,32,0,32}), 0, 32, 70, Item.SIZE, Item.SIZE, "fireball.png");
 		fireball.light = new Light(world, 0, 0, 4, 100, Light.ORANGE, 30, fireball);
 		fireball.light.load();
+		
+		fireball.fric = 0;
+		
+		fireball.getBody(world.curFloor.box2dWorld);
+		fireball.bodyMade = true;
+
+		
+		Vector2 acelVec = new Vector2();
+		
+		acelVec.x = (float) Math.cos((angle+135)/180*Math.PI)*6/Tile.PPM;
+		acelVec.y = (float) Math.sin((angle+135)/180*Math.PI)*6/Tile.PPM;
+		fireball.body.setLinearVelocity(acelVec);
+		fireball.prevAngle = acelVec.angle();
 		
 		world.entities.add(fireball);
 		

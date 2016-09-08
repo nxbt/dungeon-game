@@ -52,8 +52,6 @@ public class SwingSet{
 		isInAttack = swings[curSwing].isInAttack;
 		weapon.hasHit = swings[curSwing].hasHit;
 		
-		if(swings[curSwing] instanceof Rest)System.out.println(isInUse);
-		
 		//if the swing is done, we need to figure out what to do!
 		if(swings[curSwing].done && ((curSwing != swings.length-1) || (swings[curSwing].counter > swings[curSwing].windupDuration + swings[curSwing].duration + Swing.PAUSE_DURATION*weapon.speed/10f) || repeatable)) { //if not repeatable and on the last swing, you can't force a return to the rest position (don't change it works trust me)
 			if(swings[curSwing].nextSwing){ //if nextSwing is true, then we progress to the next swing

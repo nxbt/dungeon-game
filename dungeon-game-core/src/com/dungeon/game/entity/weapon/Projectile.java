@@ -72,6 +72,6 @@ public abstract class Projectile extends Dynamic {
 		Filter filter = f.getFilterData();
 		filter.maskBits = 0x0001;
 		f.setFilterData(filter);
-		body.setLinearDamping(0.03f);
+		body.setLinearDamping(fric);
 	}
 }

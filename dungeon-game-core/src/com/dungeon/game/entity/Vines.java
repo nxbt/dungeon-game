@@ -10,7 +10,8 @@ public class Vines extends Static {
 		
 		originX = 16;
 		originY = 16;
-		hitbox = new Polygon(new float[]{0,0,0,0,0,0});
+		hitbox = new Polygon(new float[]{0,0,32,0,32,32,0,32});
+		clickable = false;
 		genVisBox();
 		
 		layer = HANDHELD;
