@@ -9,6 +9,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * make flip work in box2d
 * stationary characters path to where they're standing
 * player can't be pushed (kinematic body does not work)
+* pathfinding around entities and coordinated group movement / pathfinding (fix "traffic jams")
 
 ##TODO low priority (within a month or two?):
 * continue adding procedural room decoration
