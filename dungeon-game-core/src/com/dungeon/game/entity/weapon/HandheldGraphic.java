@@ -56,8 +56,8 @@ public class HandheldGraphic extends Dynamic {
 	
 	public void updatePos(boolean left){
 		if(left){
-			float xMove = (float) (Math.cos((item.owner.angle+graphic_pAngle)/180*Math.PI)*graphic_dist);
-			float yMove = (float) (Math.sin((item.owner.angle+graphic_pAngle)/180*Math.PI)*graphic_dist);
+			float xMove = (float) (Math.cos((item.owner.angle+graphic_pAngle)/180*Math.PI)*graphic_dist*(item.owner.bodyRad/1.8f));
+			float yMove = (float) (Math.sin((item.owner.angle+graphic_pAngle)/180*Math.PI)*graphic_dist*(item.owner.bodyRad/1.8f));
 			if(body != null) body.setTransform(((float) (item.owner.x)+xMove)/Tile.PPM, ((float) (item.owner.y)+yMove)/Tile.PPM, (float) ((item.owner.angle-135+graphic_angle)*Math.PI/180));
 			if(toFlip && !flipped){ // it works don't ask questions
 				sprite = item.sprite;
