@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Drop;
 import com.dungeon.game.entity.Skeleton;
 import com.dungeon.game.entity.character.enemy.Dummy;
+import com.dungeon.game.entity.character.enemy.Rat;
 import com.dungeon.game.entity.character.enemy.TutorialGoon;
 import com.dungeon.game.entity.character.friend.Guide;
 import com.dungeon.game.entity.furniture.Bar;
@@ -352,6 +353,8 @@ public class TutorialGenerator extends Generation {
 		entities.add(new Torch(world, 59, 21, 0));
 		
 		makeWalls(10);
+		
+		entities.add(new Rat(world, 50*Tile.TS, 50*Tile.TS));
 	}
 	
 	private void removeNode(int x, int y){

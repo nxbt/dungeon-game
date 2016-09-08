@@ -3,7 +3,6 @@ package com.dungeon.game.entity.character;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -97,6 +96,8 @@ public abstract class Character extends Dynamic {
 	
 	public float hearing;
 	
+	public float bodyRad;
+	
 	public ArrayList<Entity> knownEntities;
 	public ArrayList<Entity> seenEntities;
 	
@@ -166,7 +167,15 @@ public abstract class Character extends Dynamic {
 		
 		printTime = 7;
 		
+		bodyRad = 1.8f;
+		
+		torq = 10;
+		acel = 3.5f;
+		fric = 0.3f;
+		
 		layer = PERSON;
+		
+		solid = true;
 	}
 
 	public void norm() {
@@ -399,7 +408,7 @@ public abstract class Character extends Dynamic {
 		
 	}
 	
-	protected void findPath(ArrayList<Entity> entities, float[] target){
+	protected void findPath(float[] target){
 		if(staggerTimer == 0){
 			Path p = world.curFloor.pathfinder.findPath(x, y, target[0], target[1]);
 			path = p.getPath();
@@ -649,7 +658,7 @@ public abstract class Character extends Dynamic {
 		
 		CircleShape shape = new CircleShape();
 		
-		shape.setRadius(1.8f);
+		shape.setRadius(bodyRad);
 		
 		body.destroyFixture(body.getFixtureList().get(0));
 		

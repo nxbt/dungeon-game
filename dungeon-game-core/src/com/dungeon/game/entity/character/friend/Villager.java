@@ -10,7 +10,6 @@ import com.dungeon.game.entity.hud.dialogue.SpeechBubble;
 import com.dungeon.game.inventory.Inventory;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.equipable.Equipable;
-import com.dungeon.game.light.Light;
 import com.dungeon.game.textures.entity.Person;
 import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
@@ -99,14 +98,10 @@ public class Villager extends Friend {
 			do{
 				wanderTile = new int[]{1+(int)(Math.random()*world.curFloor.tm[0].length-1),1+(int)(Math.random()*world.curFloor.tm.length-1)};
 			}while(Tile.isSolid(world.curFloor.tm[wanderTile[1]][wanderTile[0]]));
-//			Path p = world.curFloor.pathfinder.findPath(x, y, wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2);
-//			path = p.getPath();
-//			targetTile = Path.getTargTile(world, path);
 		}
 		
 		if(staggerTimer == 0){
-//			long s = System.nanoTime();
-			findPath(world.entities, new float[]{wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2});
+			findPath(new float[]{wanderTile[0]*Tile.TS + Tile.TS/2, wanderTile[1]*Tile.TS + Tile.TS/2});
 		}
 		moveToTarg();
 		moveTo = targetTile;

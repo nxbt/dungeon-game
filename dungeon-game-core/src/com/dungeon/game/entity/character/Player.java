@@ -2,7 +2,6 @@ package com.dungeon.game.entity.character;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -54,8 +53,6 @@ public class Player extends Character {
 		
 		name = "Player";
 		
-		torq = 10;
-		
 		maxLife = 100;
 		maxStam = 100;
 		maxMana = 100;
@@ -64,71 +61,13 @@ public class Player extends Character {
 		stam = maxStam;
 		mana = maxMana;
 		
-		acel = 3.5f;
-		fric = 0.3f;
-		
 		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
 		genVisBox();
 		
 		originX = 16;
 		originY = 16;
 		
-		dOffX = 0;
-		dOffY = 0;
-		
-		solid = true;
-		
-		int[][] invLayout = new int[][] {
-			//consumables
-			new int[] {1, 8, 8}, //1
-			new int[] {1, 48, 8}, //2
-			new int[] {1, 88, 8}, //3
-			new int[] {1, 128, 8}, //4
-			new int[] {1, 168, 8}, //5
-			//inventory
-			new int[] {0, 8, 48}, //6
-			new int[] {0, 48, 48}, //7
-			new int[] {0, 88, 48}, //8
-			new int[] {0, 128, 48}, //9
-			new int[] {0, 168, 48}, //10
-			new int[] {0, 8, 88}, //11
-			new int[] {0, 48, 88}, //12
-			new int[] {0, 88, 88}, //13
-			new int[] {0, 128, 88}, //14
-			new int[] {0, 168, 88}, //15
-			new int[] {0, 8, 128}, //16
-			new int[] {0, 48, 128}, //17
-			new int[] {0, 88, 128}, //18
-			new int[] {0, 128, 128}, //19
-			new int[] {0, 168, 128}, //20
-			new int[] {0, 8, 168}, //21
-			new int[] {0, 48, 168}, //22
-			new int[] {0, 88, 168}, //23
-			new int[] {0, 128, 168}, //24
-			new int[] {0, 168, 168}, //25
-			new int[] {0, 8, 208}, //26
-			new int[] {0, 48, 208}, //27
-			new int[] {0, 88, 208}, //28
-			new int[] {0, 128, 208}, //29
-			new int[] {0, 168, 208}, //30
-			//weapons
-			new int[] {2, 208, 8}, //31
-			new int[] {2, 248, 8}, //32
-			//Armor
-			new int[] {7, 208, 48}, //33
-			new int[] {6, 208, 88}, //34
-			new int[] {5, 208, 128}, //35
-			new int[] {4, 208, 168}, //36
-			new int[] {3, 208, 208}, //37
-			//Rings and Amulet
-			new int[] {9, 248, 48}, //38
-			new int[] {9, 248, 88}, //39
-			new int[] {9, 248, 128}, //40
-			new int[] {9, 248, 168}, //41
-			new int[] {8, 248, 208}, //42
-		};
-		
-		inv = new Inventory(world, invLayout, 10, 100);
+		inv = new Inventory(world, Inventory.DEFAULT_LAYOUT, 10, 100);
 		
 		inv.addItem(new Sword(world, 1));
 		inv.addItem(new Sword(world, 2));

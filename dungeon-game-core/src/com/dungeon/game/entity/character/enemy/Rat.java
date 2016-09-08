@@ -8,17 +8,21 @@ import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.world.World;
 
-public class TutorialGoon extends Enemy {
-	public float[] lineOfCover;
-
-	public TutorialGoon(World world, float x, float y) {
-		super(world, x, y, 32, 32, "goon.png");
+public class Rat extends Enemy{
+	
+	public Rat(World world, float x, float y) {
+		super(world, x, y, 16, 12, "rat.png");
 		
-		sprite = new com.dungeon.game.textures.entity.Goon().texture;
+		hitbox = new Polygon(new float[] {0,0,16,0,16,12,0,12});
 		
-		name = "Goon";
+		originX = 8;
+		originY = 6;
 		
-		maxLife = 15;
+		bodyRad = 1f;
+		
+		name = "Rat";
+		
+		maxLife = 20;
 		maxStam = 100;
 		maxMana = 0;
 		
@@ -26,30 +30,22 @@ public class TutorialGoon extends Enemy {
 		stam = maxStam;
 		mana = maxMana;
 		
-		torq = 10;
-		
-		acel = 3.5f;
+		acel = 4.5f;
 		fric = 0.3f;
-		
-		hitbox = new Polygon(new float[]{2,2,30,2,30,30,2,30});
-		genVisBox();
-		
-		originX = 16;
-		originY = 16;
 		
 		inv = new Inventory(world, Inventory.DEFAULT_LAYOUT, 10, 100);
 		
-		equipSlots = new Slot[]{inv.slot[30],inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41]};
+		equipSlots = new Slot[]{inv.slot[30],inv.slot[31]};
 		equipItems = new Equipable[equipSlots.length];
 		
+		vision = 5;
+		hearing = 15;
+		
+		effects.add(new StamRegen(world, -1, 0.5f));
+		
 		equipSlots[0].item = new Sword(world, 1, 0, 0, 0);
-		
-		vision = 10;
-		hearing = 10;
-		
-		effects.add(new StamRegen(world, -1, 0.1f));
 	}
-	
+
 	@Override
 	public void calc() {
 		if(knownEntities.contains(world.player)){
@@ -75,5 +71,6 @@ public class TutorialGoon extends Enemy {
 		}
 	}
 	
+	@Override
 	public void post() {}
 }
