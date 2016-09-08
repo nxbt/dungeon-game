@@ -31,7 +31,8 @@ public class RangedGraphic extends HandheldGraphic {
 			
 			acelVec.x = (float) Math.cos((angle+135)/180*Math.PI)*power/Tile.PPM;
 			acelVec.y = (float) Math.sin((angle+135)/180*Math.PI)*power/Tile.PPM;
-			w.acel(acelVec,false);
+			w.body.setLinearVelocity(acelVec);
+			w.prevAngle = acelVec.angle();
 			
 			world.entities.add(w);
 		}

@@ -36,8 +36,6 @@ public abstract class Projectile extends Dynamic {
 		this.originX = originX;
 		this.originY = originY;
 		clickable = false;
-		
-		prevAngle = Integer.MAX_VALUE;
 	}
 
 	@Override
@@ -56,11 +54,11 @@ public abstract class Projectile extends Dynamic {
 	
 	public void phys(){
 		range--;
-		if(range<0||(range + 1 != maxRange && body.getLinearVelocity().len()<=0.01) || (prevAngle != Integer.MAX_VALUE && Math.abs(prevAngle - body.getLinearVelocity().angle()) > 0.1)){
+		if(range<0||(range + 1 != maxRange && body.getLinearVelocity().len()<=0.01) || (Math.abs(prevAngle - body.getLinearVelocity().angle()) > 0.1)){
 			stop();
 			killMe = true;
 		}
-		if((range + 1 != maxRange))prevAngle = body.getLinearVelocity().angle();
+		prevAngle = body.getLinearVelocity().angle();
 	}
 	
 	protected abstract void hit(Character character);
