@@ -41,4 +41,3 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * Pathfinding crashes if no path is found
 * handhelds lagging 1 frame behind
 * pathfinding for ranged enemies seems to be kill
-* extra catch up frames when loading new floor
