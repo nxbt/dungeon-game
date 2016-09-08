@@ -7,7 +7,6 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * add gold keys and doors
 * relplace the booleans for flip with functions (so hitbox and visbox can be flipped)
 * make flip work in box2d
-* implement deltaTime (tried to do this but there are some issues)
 * stationary characters path to where they're standing
 * player can't be pushed (kinematic body does not work)
 
