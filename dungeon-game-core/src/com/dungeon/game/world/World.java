@@ -22,6 +22,7 @@ import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.entity.character.Player;
 import com.dungeon.game.entity.character.enemy.Enemy;
 import com.dungeon.game.entity.character.enemy.Goon;
+import com.dungeon.game.entity.character.enemy.Spider;
 import com.dungeon.game.entity.character.friend.Friend;
 import com.dungeon.game.entity.hud.DescBox;
 import com.dungeon.game.entity.hud.EffectHudBackground;
@@ -280,6 +281,11 @@ public class World {
 					if(e instanceof Goon && ((Goon)e).lineOfCover != null){
 						shapeRenderer.setColor(Color.CORAL);
 						shapeRenderer.line(((Goon)e).lineOfCover[0], ((Goon)e).lineOfCover[1], ((Goon)e).lineOfCover[2], ((Goon)e).lineOfCover[3]);
+					}
+					
+					if(e instanceof Spider && ((Spider)e).lineOfCover != null){
+						shapeRenderer.setColor(Color.CORAL);
+						shapeRenderer.line(((Spider)e).lineOfCover[0], ((Spider)e).lineOfCover[1], ((Spider)e).lineOfCover[2], ((Spider)e).lineOfCover[3]);
 					}
 				}
 				

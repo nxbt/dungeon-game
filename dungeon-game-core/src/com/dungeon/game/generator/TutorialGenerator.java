@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.dungeon.game.entity.Drop;
 import com.dungeon.game.entity.Skeleton;
 import com.dungeon.game.entity.character.enemy.Dummy;
-import com.dungeon.game.entity.character.enemy.Rat;
+import com.dungeon.game.entity.character.enemy.Spider;
 import com.dungeon.game.entity.character.enemy.TutorialGoon;
 import com.dungeon.game.entity.character.friend.Guide;
 import com.dungeon.game.entity.furniture.Bar;

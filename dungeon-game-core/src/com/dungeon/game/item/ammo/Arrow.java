@@ -62,7 +62,9 @@ public class Arrow extends Ammo {
 
 	@Override
 	public WeaponProjectile getProjectile(Item item, float x, float y, float angle, float power) {
-		WeaponProjectile w = new WeaponProjectile(world, (Ranged) item, new Arrow(world), x, y, angle, power, new Polygon(new float[]{1,28,4,31,0,32}), 2, 30, 35);
+		Arrow a = new Arrow(world);
+		a.dropChance = 0.5f;
+		WeaponProjectile w = new WeaponProjectile(world, (Ranged) item, a, x, y, angle, power, new Polygon(new float[]{1,28,4,31,0,32}), 2, 30, 35);
 		w.fric = 0.03f;
 		w.getBody(world.curFloor.box2dWorld);
 		w.bodyMade = true;

@@ -107,6 +107,8 @@ public class Goon extends Enemy {
 	
 	@Override
 	protected void activations() {
+		leftActivated = false;
+		rightActivated = false;
 		if(!ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<90 && stam > 50){ //stan check needs to change
 			if(Math.random() < 0.9)rightActivated = true;
 			else rightActivated = false;
@@ -114,12 +116,12 @@ public class Goon extends Enemy {
 			else leftActivated = false;
 		}else{
 			if(equipItems[0] != null){
-				boolean down = true;
-				if(ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<300){
+				if(ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<300 && stam > 10){
+					boolean down = true;
 					if(((Bow)equipItems[0]).stageTimer < 45 || !(Math.sqrt((x - lineOfCover[0])*(x - lineOfCover[0])+(y - lineOfCover[1])*(y - lineOfCover[1])) < 4))down = true;
 					else down = false;
+					leftActivated = down;
 				}
-				leftActivated = down;
 			}
 		}
 	}
