@@ -1,7 +1,7 @@
 package com.dungeon.game.generator.rooms.room;
 
 import com.badlogic.gdx.math.Rectangle;
-import com.dungeon.game.entity.character.enemy.Goon;
+import com.dungeon.game.entity.character.enemy.Rat;
 import com.dungeon.game.entity.furniture.Torch;
 import com.dungeon.game.generator.LootGenerator;
 import com.dungeon.game.world.Tile;
@@ -27,7 +27,7 @@ public class EnemyRoom extends Room {
 		x = 0;
 		for(int i = 0; i < room.length; i++){
 			y = i;
-			if(!checkOccupied(x, y) && Math.random() < 0.2){
+			if(!checkOccupied(x, y) && Math.random() < 0.3){
 				entities.add(new Torch(world, x, y,0));
 				addToOccupied(x, y);
 			}
@@ -35,7 +35,7 @@ public class EnemyRoom extends Room {
 		x = room[0].length-1;
 		for(int i = 0; i < room.length; i++){
 			y = i;
-			if(!checkOccupied(x, y) && Math.random() < 0.2){
+			if(!checkOccupied(x, y) && Math.random() < 0.3){
 				entities.add(new Torch(world, x, y,2));
 				addToOccupied(x, y);
 			}
@@ -43,7 +43,7 @@ public class EnemyRoom extends Room {
 		y = 0;
 		for(int i = 0; i < room[0].length; i++){
 			x = i;
-			if(checkOccupied(x, y) && Math.random() < 0.2){
+			if(checkOccupied(x, y) && Math.random() < 0.3){
 				entities.add(new Torch(world, x, y,3));
 				addToOccupied(x, y);
 			}
@@ -51,7 +51,7 @@ public class EnemyRoom extends Room {
 		y = room.length-1;
 		for(int i = 0; i < room[0].length; i++){
 			x = i;
-			if(checkOccupied(x, y) && Math.random() < 0.2){
+			if(checkOccupied(x, y) && Math.random() < 0.3){
 				entities.add(new Torch(world, x, y,1));
 				addToOccupied(x, y);
 			}
@@ -65,7 +65,7 @@ public class EnemyRoom extends Room {
 				x = (int)(room[0].length*Math.random());
 				y = (int)(room.length*Math.random());
 			}while(checkOccupied(x, y));
-			entities.add(new Goon(world, x*Tile.TS + Tile.TS/2, y*Tile.TS + Tile.TS/2));
+			entities.add(new Rat(world, x*Tile.TS + Tile.TS/2, y*Tile.TS + Tile.TS/2));
 			
 			addToOccupied(x, y);
 		}

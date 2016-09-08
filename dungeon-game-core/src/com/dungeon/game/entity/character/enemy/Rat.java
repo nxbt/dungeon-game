@@ -23,7 +23,7 @@ public class Rat extends Enemy{
 		
 		name = "Rat";
 		
-		maxLife = 20;
+		maxLife = 10;
 		maxStam = 100;
 		maxMana = 0;
 		
@@ -31,7 +31,7 @@ public class Rat extends Enemy{
 		stam = maxStam;
 		mana = maxMana;
 		
-		acel = 1.4f;
+		acel = 1f;
 		fric = 0.3f;
 		
 		inv = new Inventory(world, Inventory.DEFAULT_LAYOUT, 10, 100);

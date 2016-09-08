@@ -7,7 +7,6 @@ import com.dungeon.game.entity.weapon.MeleeGraphic;
 import com.dungeon.game.item.equipable.weapon.part.Part;
 import com.dungeon.game.item.equipable.weapon.part.claw.main.ClawMain;
 import com.dungeon.game.item.equipable.weapon.swing.claw.ClawSwing;
-import com.dungeon.game.utilities.Spritesheet;
 import com.dungeon.game.world.World;
 
 public class Claw extends Melee {
@@ -58,7 +57,7 @@ public class Claw extends Melee {
 		swingClass = ClawSwing.class;
 		swings = getStartSwings();
 		
-		hitEffects.add(new Stun(world, 30));
+		hitEffects.add(new Stun(world, 10));
 		
 		graphic.draw = false;
 	}

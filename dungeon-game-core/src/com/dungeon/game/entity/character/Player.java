@@ -43,6 +43,8 @@ public class Player extends Character {
 	public Player(World world, float x, float y) {
 		super(world, x, y, 32, 32, "person.png");
 		
+		team = FRIEND;
+		
 		Sprite spr = new Sprite(sprite);
 		spr.setColor(new Color(1, 0, 0, 1));
 		sprite = spr.getTexture();

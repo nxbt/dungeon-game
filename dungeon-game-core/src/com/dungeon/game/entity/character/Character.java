@@ -32,7 +32,8 @@ import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public abstract class Character extends Dynamic {
-	
+	public static final int FRIEND = 0;
+	public static final int ENEMY = 1;
 
 	public int[] moveTo;
 	public ArrayList<int[]> path;
@@ -121,6 +122,8 @@ public abstract class Character extends Dynamic {
 	protected int printTime;
 	
 	protected int[] targetTile;
+	
+	public int team;
 	
 	public Character(World world, float x, float y, int width, int height, String filename) {
 		super(world, x, y, width, height, filename);

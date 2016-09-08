@@ -21,6 +21,8 @@ public abstract class Friend extends Character {
 	public Friend(World world, float x, float y, int width, int height, String filename) {
 		super(world, x, y, width, height, filename);
 		
+		team = Character.FRIEND;
+		
 		speechBubble = new SpeechPopup(world,this);	
 		addEffect(new Immune(world, -1));
 	}

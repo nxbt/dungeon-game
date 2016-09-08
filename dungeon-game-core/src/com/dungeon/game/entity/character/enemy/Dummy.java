@@ -18,7 +18,7 @@ public class Dummy extends Enemy {
 		
 		name = "Dummy";
 		
-		maxLife = 60;
+		maxLife = 20;
 		maxStam = 0;
 		maxMana = 0;
 		

@@ -3,20 +3,17 @@ package com.dungeon.game.entity.character.enemy;
 import java.util.ArrayList;
 
 import com.dungeon.game.entity.Drop;
-import com.dungeon.game.entity.Entity;
 import com.dungeon.game.entity.character.Character;
 import com.dungeon.game.inventory.Slot;
 import com.dungeon.game.item.Gold;
 import com.dungeon.game.item.Item;
-import com.dungeon.game.pathing.Path;
-import com.dungeon.game.world.Tile;
 import com.dungeon.game.world.World;
 
 public abstract class Enemy extends Character {
-	
-	
 	public Enemy(World world, float x, float y, int width, int height, String filename) {
 		super(world, x, y, width, height, filename);
+		
+		team = Character.ENEMY;
 	}
 	
 	public void dead(){

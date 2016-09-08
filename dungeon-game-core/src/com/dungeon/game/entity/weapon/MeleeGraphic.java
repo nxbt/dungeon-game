@@ -21,7 +21,7 @@ public class MeleeGraphic extends HandheldGraphic {
 		Entity target = null;
 		if(((Melee) item).inAttack()) {
 			for(Entity e: world.entities){
-				if(!((Melee)item).hasHit&& !e.equals(this) && !e.equals(item.owner) && (e instanceof Character || e instanceof MeleeGraphic) && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
+				if(!((Melee)item).hasHit&& !e.equals(this) && !e.equals(item.owner) && ((e instanceof Character && item.owner.team != ((Character) e).team) || (e instanceof MeleeGraphic && item.owner.team != ((MeleeGraphic) e).item.owner.team)) && Intersector.overlapConvexPolygons(getHitbox(), e.getHitbox())){
 					if(e instanceof MeleeGraphic && ((Melee)((MeleeGraphic) e).item).owner != item.owner && ((Melee)((MeleeGraphic) e).item).inAttack()) {
 						target = e;
 						((Melee) item).hasHit = true;
