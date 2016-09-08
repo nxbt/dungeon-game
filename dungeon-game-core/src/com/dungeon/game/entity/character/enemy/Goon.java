@@ -78,8 +78,11 @@ public class Goon extends Enemy {
 				findPath(new float[]{world.player.x,world.player.y});
 				moveToTarg();
 				moveTo = targetTile;
-				target_angle = move_angle;
-				if(target_angle > 360)target_angle-=360;
+				if(findDist(world.player) < 90) target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
+				else {
+					target_angle = move_angle;
+					if(target_angle > 360)target_angle-=360;
+				}
 			}else{
 				lineOfCover = new float[4];
 				int[] coverPos = new int[4];
@@ -89,7 +92,6 @@ public class Goon extends Enemy {
 				moveTo = targetTile;
 				target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
 				if(Intersector.distanceSegmentPoint(lineOfCover[0], lineOfCover[1], lineOfCover[2], lineOfCover[3], x, y) < 4){
-					System.out.println("called");
 					if(((Bow)equipItems[0]).stageTimer < 45){
 						//move into cover to hide from player
 						move_angle = (float) (Math.atan2(lineOfCover[3] - y, lineOfCover[2] - x)/Math.PI*180f);

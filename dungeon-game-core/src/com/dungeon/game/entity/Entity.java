@@ -228,6 +228,11 @@ public abstract class Entity {
 		
 		bodyMade = true;
 	}
+	public float findDist(Entity e){
+		return findDist(e.x, e.y);
+	}
 	
-	
+	public float findDist(float x, float y){
+		return (float) Math.sqrt((x - this.x)*(x - this.x)+(y - this.y)*(y - this.y));
+	}
 }

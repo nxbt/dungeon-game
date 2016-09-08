@@ -340,7 +340,7 @@ public abstract class Character extends Dynamic {
 							seenEntities.add(e);
 						}
 					} catch(Exception error) {
-						System.out.println(error);
+						System.out.println("vis error: " + error);
 					}
 				}
 			}
@@ -424,24 +424,8 @@ public abstract class Character extends Dynamic {
 			targetX = targetTile[0]*Tile.TS+Tile.TS/2;
 			targetY = targetTile[1]*Tile.TS+Tile.TS/2;
 		}
-		boolean inp_rt = false;
-		boolean inp_lt = false;
-		boolean inp_up = false;
-		boolean inp_dn = false;
 		
-		if(x+4<targetX)inp_rt=true;
-		if(x-4>targetX)inp_lt=true;
-		if(y+4<targetY)inp_up=true;
-		if(y-4>targetY)inp_dn=true;
-		if(inp_up && inp_rt) move_angle = 45;
-		else if(inp_up && inp_lt) move_angle = 135;
-		else if(inp_dn && inp_rt) move_angle = -45;
-		else if(inp_dn && inp_lt) move_angle = -135;
-		else if(inp_up) move_angle = 90;
-		else if(inp_dn) move_angle = -90;
-		else if(inp_rt) move_angle = 0;
-		else if(inp_lt) move_angle = 180;
-		
+		if(findDist(targetX, targetY) > 5) move_angle = (float) (Math.atan2(targetY - y, targetX - x) * 180/Math.PI);
 	}
 	
 	protected void footPrints(){

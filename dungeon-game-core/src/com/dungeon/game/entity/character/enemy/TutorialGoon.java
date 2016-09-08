@@ -57,8 +57,11 @@ public class TutorialGoon extends Enemy {
 			findPath(new float[]{world.player.x,world.player.y});
 			moveToTarg();
 			moveTo = targetTile;
-			target_angle = move_angle;
-			if(target_angle > 360)target_angle-=360;
+			if(findDist(world.player) < 90) target_angle = (float) (180/Math.PI*Math.atan2(world.player.y-y,world.player.x-x));
+			else {
+				target_angle = move_angle;
+				if(target_angle > 360)target_angle-=360;
+			}
 		}
 	}
 	
