@@ -3,7 +3,12 @@ package com.dungeon.game.generator.rooms;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Intersector.MinimumTranslationVector;
 import com.badlogic.gdx.math.Rectangle;
+import com.dungeon.game.entity.Entity;
+import com.dungeon.game.entity.Static;
+import com.dungeon.game.entity.furniture.Bookshelf;
 import com.dungeon.game.generator.Generation;
 import com.dungeon.game.generator.rooms.room.EnemyRoom;
 import com.dungeon.game.generator.rooms.room.Room;
@@ -325,6 +330,30 @@ public class Castle extends Generation {
 			zoneNode.downNodes.add(node);
 			nodeArray[x][y] = node;
 			
+		}
+		
+		for(int x = 0; x < nodeArray.length; x++){
+			for(int y = 0; y < nodeArray.length; y++){
+				if(nodeArray[x][y] != null){
+					Node n = nodeArray[x][y];
+					for(Entity e: entities){
+						if(e instanceof Static && e.solid){
+							MinimumTranslationVector mtv = new MinimumTranslationVector();
+							if(Intersector.overlapConvexPolygons(n.getHitBox(), e.getHitbox(), mtv)){
+								if(e instanceof Bookshelf)System.out.println(mtv.depth);
+								if(mtv.depth > 0.9*Tile.TS){
+									nodeArray[x][y].upNode.downNodes.remove(nodeArray[x][y]);
+									nodeArray[x][y] = null;
+								}
+								else{
+									n.x+=Math.cos(mtv.normal.angleRad())*mtv.depth/Tile.TS;
+									n.y+=Math.sin(mtv.normal.angleRad())*mtv.depth/Tile.TS;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 		
 		for(int i = 0; i <  nodeArray.length; i++){

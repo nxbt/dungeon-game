@@ -2,6 +2,7 @@ package com.dungeon.game.pathing;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.math.Polygon;
 import com.dungeon.game.world.Tile;
 
 public class Node {
@@ -68,5 +69,9 @@ public class Node {
 			}
 		}
 		return false;
+	}
+	
+	public Polygon getHitBox(){
+		return new Polygon(new float[]{(x - 0.49f)*Tile.TS, (y - 0.49f)*Tile.TS, (x + 0.49f)*Tile.TS, (y - 0.49f)*Tile.TS, (x + 0.49f)*Tile.TS, (y + 0.49f)*Tile.TS, (x - 0.49f)*Tile.TS, (y + 0.49f)*Tile.TS});
 	}
 }

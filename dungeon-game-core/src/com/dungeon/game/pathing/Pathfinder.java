@@ -107,7 +107,7 @@ public class Pathfinder {
 					}
 				}
 			}
-			if(queue.size() == 0)searching = false;
+			if(queue.size() == 0)return new Path(level0StartNode); //we are kill and can't find a path
 		}
 		
 
@@ -204,7 +204,7 @@ public class Pathfinder {
 					}
 				}
 			}
-			if(queue.size() == 0)searching = false;
+			if(queue.size() == 0)return new Path(level0StartNode); //we are kill and can't find a path
 		}
 		//System.out.println("Queue iterations: "+iterations);
 //		b = System.nanoTime();

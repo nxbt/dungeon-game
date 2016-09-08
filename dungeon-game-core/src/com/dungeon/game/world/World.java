@@ -244,6 +244,7 @@ public class World {
 				for(Node n :curFloor.pathfinder.graph.graphLevels[0].nodes){
 					shapeRenderer.setColor(Color.PURPLE);
 					shapeRenderer.circle(n.x*Tile.TS, n.y*Tile.TS, 1);
+//					shapeRenderer.polygon(n.getHitBox().getVertices());
 					shapeRenderer.setColor(Color.BLACK);
 					for(Node n2: n.outNodes){
 						if(n2.outNodes.contains(n)){
@@ -255,27 +256,22 @@ public class World {
 			}
 			
 			for(Entity e: entities){
-//				if(debug_hitbox && e.hitbox != null) {
-//					if(e.solid) shapeRenderer.setColor(Color.RED);
-//					else shapeRenderer.setColor(Color.GREEN);
-//					
+				if(debug_hitbox && e.hitbox != null) {
+					if(e.solid) shapeRenderer.setColor(Color.RED);
+					else shapeRenderer.setColor(Color.GREEN);
+					
 //					shapeRenderer.polygon(e.getVisbox().getVertices());
-//
-//					shapeRenderer.set(ShapeType.Filled);
-//					shapeRenderer.setColor(Color.CYAN);
-//					for(float[] p: tempPathingDebug){
-//						shapeRenderer.rectLine(p[0], p[1], p[2], p[3], 3);
-//					}
-//					shapeRenderer.set(ShapeType.Line);
-//				}
+
+					shapeRenderer.set(ShapeType.Line);
+				}
 				
 				if(debug_pathing && e instanceof Character && ((Character)e).moveTo!=null&&((Character)e).path!=null){
 					shapeRenderer.setColor(Color.BLUE);
 					shapeRenderer.rect(((Character)e).moveTo[0]*Tile.TS, ((Character)e).moveTo[1]*Tile.TS, Tile.TS, Tile.TS);
 					shapeRenderer.line(e.x, e.y, ((Character)e).moveTo[0]*Tile.TS+Tile.TS/2, ((Character)e).moveTo[1]*Tile.TS+Tile.TS/2);
-					int[] prePoint = new int[]{0,0};
+					float[] prePoint = new float[]{0,0};
 					shapeRenderer.setColor(Color.YELLOW);
-					for(int[] point:((Character)e).path){
+					for(float[] point:((Character)e).path){
 						if(((Character)e).path.indexOf(point)>0){
 							shapeRenderer.line(prePoint[0]*Tile.TS+Tile.TS/2, prePoint[1]*Tile.TS+Tile.TS/2,point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
 						}
