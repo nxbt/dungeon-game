@@ -22,6 +22,7 @@ import com.dungeon.game.item.equipable.Equipable;
 import com.dungeon.game.item.equipable.Hand;
 import com.dungeon.game.item.equipable.Lantern;
 import com.dungeon.game.item.equipable.weapon.Bow;
+import com.dungeon.game.item.equipable.weapon.Claw;
 import com.dungeon.game.item.equipable.weapon.Sword;
 import com.dungeon.game.light.Light;
 import com.dungeon.game.textures.entity.Person;
@@ -83,6 +84,7 @@ public class Player extends Character {
 		inv.addItem(new Lantern(world));
 		inv.addItem(new Bow(world, 1, 10));
 		inv.addItem(new Arrow(world), 12);
+		inv.addItem(new Claw(world, 1));
 		equipSlots = new Slot[]{inv.slot[30],inv.slot[31],inv.slot[32],inv.slot[33],inv.slot[34],inv.slot[35],inv.slot[36],inv.slot[37],inv.slot[38],inv.slot[39],inv.slot[40],inv.slot[41]};
 		equipItems = new Equipable[equipSlots.length];
 		

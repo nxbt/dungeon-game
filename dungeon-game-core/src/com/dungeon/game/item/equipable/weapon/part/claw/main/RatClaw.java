@@ -8,7 +8,7 @@ public class RatClaw extends ClawMain {
 		super(world, "Rat Claw", SPRITES[0], level);
 		id = 0;
 		allowedSwings = new String[]{
-			"Slash"
+			"RatSwing"
 		};
 		bannedSwings = new String[]{};
 	}

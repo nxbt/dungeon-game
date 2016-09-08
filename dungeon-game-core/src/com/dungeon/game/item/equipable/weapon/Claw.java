@@ -6,8 +6,7 @@ import com.dungeon.game.effect.Stun;
 import com.dungeon.game.entity.weapon.MeleeGraphic;
 import com.dungeon.game.item.equipable.weapon.part.Part;
 import com.dungeon.game.item.equipable.weapon.part.claw.main.ClawMain;
-import com.dungeon.game.item.equipable.weapon.part.sword.blade.SwordBlade;
-import com.dungeon.game.item.equipable.weapon.swing.sword.SwordSwing;
+import com.dungeon.game.item.equipable.weapon.swing.claw.ClawSwing;
 import com.dungeon.game.world.World;
 
 public class Claw extends Melee {
@@ -16,12 +15,12 @@ public class Claw extends Melee {
 
 	public Claw(World world, int level) {
 		super(world, "sword.png");
-		
+		constructor(level, (int) (Math.random()*ClawMain.NUM));
 	}
 	
 	public Claw(World world, int level, int clawNum) {
 		super(world, "sword.png");
-		
+		constructor(level, clawNum);
 	}
 	
 	public void constructor(int level, int clawNum) {
@@ -40,7 +39,7 @@ public class Claw extends Melee {
 		spr.drawPixmap(clawMap, 0, 0);
 		sprite = new Texture(spr);
 		
-		name = ((SwordBlade) claw).getName();
+		name = ((ClawMain) claw).getName();
 		
 		hasHit = false;
 		
