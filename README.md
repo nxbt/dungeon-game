@@ -10,6 +10,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * stationary characters path to where they're standing
 * player can't be pushed (kinematic body does not work)
 * rework trapdoors
+* reword path smoothing to go around entities
 * pathfinding around entities and coordinated group movement / pathfinding (fix "traffic jams")
 * intelligent movement to prevent overshooting sharp turns or a destination
 * claw swings draw out claw marks
