@@ -112,6 +112,7 @@ public class Spider extends Enemy{
 	protected void activations() {
 		rightActivated = false;
 		leftActivated = false;
+		if(!fightMode)return;
 		if(!shootWeb&&knownEntities.contains(world.player)&&findDist(world.player)<90 && stam > 10){ //stan check needs to change
 			System.out.println("claw");
 			if(Math.random() < 0.9)leftActivated = true;

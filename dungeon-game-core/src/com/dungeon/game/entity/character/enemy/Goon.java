@@ -109,6 +109,7 @@ public class Goon extends Enemy {
 	protected void activations() {
 		leftActivated = false;
 		rightActivated = false;
+		if(!fightMode)return;
 		if(!ranged&&knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<90 && stam > 50){ //stan check needs to change
 			if(Math.random() < 0.9)rightActivated = true;
 			else rightActivated = false;

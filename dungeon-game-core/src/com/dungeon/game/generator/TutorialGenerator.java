@@ -353,6 +353,8 @@ public class TutorialGenerator extends Generation {
 		entities.add(new Torch(world, 59, 21, 0));
 		
 		makeWalls(10);
+		
+		entities.add(new Spider(world, 50*Tile.TS, 50*Tile.TS));
 	}
 	
 	private void removeNode(int x, int y){

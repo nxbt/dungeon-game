@@ -66,14 +66,14 @@ public class Rat extends Enemy{
 	
 	@Override
 	protected void activations() {
+		rightActivated = false;
+		leftActivated = false;
+		if(!fightMode)return;
 		if(knownEntities.contains(world.player)&&Math.sqrt((x-world.player.x)*(x-world.player.x)+(y-world.player.y)*(y-world.player.y))<90 && stam > 20){
 			if(Math.random() < 0.9)rightActivated = true;
 			else rightActivated = false;
 			if(Math.random() < 0.9)leftActivated = true;
 			else leftActivated = false;
-		}else{
-			rightActivated = false;
-			leftActivated = false;
 		}
 	}
 	
