@@ -45,7 +45,6 @@ public class Rat extends Enemy{
 		effects.add(new StamRegen(world, -1, 0.5f));
 
 		equipSlots[0].item = new Claw(world, 1);
-		equipSlots[1].item = new Claw(world, 1);
 	}
 
 	@Override
