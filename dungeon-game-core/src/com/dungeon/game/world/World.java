@@ -269,9 +269,9 @@ public class World {
 					shapeRenderer.setColor(Color.BLUE);
 					shapeRenderer.rect(((Character)e).moveTo[0]*Tile.TS, ((Character)e).moveTo[1]*Tile.TS, Tile.TS, Tile.TS);
 					shapeRenderer.line(e.x, e.y, ((Character)e).moveTo[0]*Tile.TS+Tile.TS/2, ((Character)e).moveTo[1]*Tile.TS+Tile.TS/2);
-					float[] prePoint = new float[]{0,0};
+					int[] prePoint = new int[]{0,0};
 					shapeRenderer.setColor(Color.YELLOW);
-					for(float[] point:((Character)e).path){
+					for(int[] point:((Character)e).path){
 						if(((Character)e).path.indexOf(point)>0){
 							shapeRenderer.line(prePoint[0]*Tile.TS+Tile.TS/2, prePoint[1]*Tile.TS+Tile.TS/2,point[0]*Tile.TS+Tile.TS/2,point[1]*Tile.TS+Tile.TS/2);
 						}
