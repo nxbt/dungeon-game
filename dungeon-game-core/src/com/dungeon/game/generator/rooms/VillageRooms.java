@@ -87,8 +87,8 @@ public class VillageRooms extends Rooms {
 				int dir = (int) (Math.random()*4);
 				try {
 					roomGenerators.methods[dir].invoke(roomGenerators, x, y, width, height, dir, room);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
+				} 
+				catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

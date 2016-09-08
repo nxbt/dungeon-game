@@ -1,7 +1,6 @@
 package com.dungeon.game.item.equipable.weapon.swing;
 
 import com.dungeon.game.entity.character.Character;
-import com.dungeon.game.entity.particle.Blood;
 import com.dungeon.game.item.equipable.weapon.Melee;
 import com.dungeon.game.world.World;
 
