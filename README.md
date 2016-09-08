@@ -12,6 +12,7 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * rework trapdoors
 * pathfinding around entities and coordinated group movement / pathfinding (fix "traffic jams")
 * intelligent movement to prevent overshooting sharp turns or a destination
+* claw swings draw out claw marks
 
 ##TODO low priority (within a month or two?):
 * continue adding procedural room decoration
