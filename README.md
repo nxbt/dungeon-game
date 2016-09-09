@@ -19,7 +19,6 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * continue adding procedural room decoration
 * continue proceedurally generated textures
 * make wood texture rotate to make more sense in small hallways
-* add logical pathfinding around entities and logical group movement
 * add different shops to towns
 * update wiki pages
 * implement caves generation
@@ -32,7 +31,6 @@ The is a top-down rougelike-like game written in Java. Currently being worked on
 * add "sounds" that characters can "hear"
 * add a story
 * add more friendlies
-* add pathing around entities
 * add more enemies
 * dungeons become more complex decending
 * final dungeon is culmination of all previous dungeons
